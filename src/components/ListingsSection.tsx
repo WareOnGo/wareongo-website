@@ -1,8 +1,9 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { MapPin, Ruler, Package } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import ContactFormDialog from "@/components/ContactFormDialog";
 
 const warehouseData = [
   {
@@ -38,6 +39,8 @@ const warehouseData = [
 ];
 
 const WarehouseCard = ({ warehouse }: { warehouse: typeof warehouseData[0] }) => {
+  const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
+  
   return (
     <Card className="h-full flex flex-col">
       <CardHeader className="pb-4">
@@ -74,7 +77,17 @@ const WarehouseCard = ({ warehouse }: { warehouse: typeof warehouseData[0] }) =>
         </div>
       </CardContent>
       <CardFooter className="pt-0">
-        <Button className="btn-secondary w-full">Raise Enquiry</Button>
+        <Button className="btn-secondary w-full" onClick={() => setIsContactDialogOpen(true)}>
+          Raise Enquiry
+        </Button>
+        
+        <ContactFormDialog
+          open={isContactDialogOpen}
+          onOpenChange={setIsContactDialogOpen}
+          title="Warehouse Enquiry"
+          description={`Enquire about "${warehouse.title}" in ${warehouse.location}`}
+          successMessage="Your enquiry has been raised. We will reach out to you within 2 hours."
+        />
       </CardFooter>
     </Card>
   );

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import Navbar from '@/components/Navbar';
-import HeroSection from '@/components/HeroSection';
+import BrandHero from '@/components/BrandHero';
 import FeaturesSection from '@/components/FeaturesSection';
 import HowItWorksSection from '@/components/HowItWorksSection';
 import ListingsSection from '@/components/ListingsSection';
@@ -12,7 +12,7 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <HeroSection />
+      <BrandHero />
       <FeaturesSection />
       <HowItWorksSection />
       <ListingsSection />

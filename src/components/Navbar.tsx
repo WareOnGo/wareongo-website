@@ -1,8 +1,11 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
+import ContactFormDialog from "@/components/ContactFormDialog";
 
 const Navbar = () => {
+  const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
+  
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -38,7 +41,7 @@ const Navbar = () => {
           </button>
           <Button 
             className="btn-primary"
-            onClick={() => scrollToSection('request')}
+            onClick={() => setIsContactDialogOpen(true)}
           >
             Contact Us
           </Button>
@@ -54,6 +57,14 @@ const Navbar = () => {
           </Button>
         </div>
       </div>
+      
+      <ContactFormDialog
+        open={isContactDialogOpen}
+        onOpenChange={setIsContactDialogOpen}
+        title="Contact Us"
+        description="Leave your details, and we'll get back to you soon."
+        successMessage="We will reach out within 2 hours."
+      />
     </nav>
   );
 };
