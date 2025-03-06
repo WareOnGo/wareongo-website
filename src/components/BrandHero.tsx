@@ -19,22 +19,6 @@ const BrandHero = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center text-center mb-12">
-          {/* Logo */}
-          <div className="mb-6 inline-flex items-center">
-            <div className="w-12 h-12 bg-wareongo-sienna rounded-lg flex items-center justify-center mr-3">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 8.5V13.5L12 17.5L4 13.5V8.5L12 4.5L20 8.5Z" fill="white" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M4 8.5L12 12.5L20 8.5" stroke="rgba(255,255,255,0.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M12 12.5V17.5" stroke="rgba(255,255,255,0.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <h1 className="text-3xl md:text-4xl font-bold">
-              <span className="text-wareongo-blue">Ware</span>
-              <span className="text-wareongo-sienna">On</span>
-              <span className="text-wareongo-blue">Go</span>
-            </h1>
-          </div>
-          
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-wareongo-blue mb-6 max-w-4xl">
             Find the Perfect Warehouse Space for Your Business
           </h2>
@@ -45,7 +29,7 @@ const BrandHero = () => {
           
           <div className="flex flex-col sm:flex-row gap-4">
             <Button 
-              className="bg-wareongo-sienna hover:bg-wareongo-sienna/90 text-white text-lg group"
+              className="bg-wareongo-blue hover:bg-wareongo-blue/90 text-white text-lg group"
               onClick={() => scrollToSection('request')}
             >
               <Search className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
@@ -81,7 +65,9 @@ const BrandHero = () => {
           <div className="bg-white/70 backdrop-blur-sm rounded-lg p-4 flex items-center shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
             <div className="bg-wareongo-sienna/10 p-2 rounded-full mr-3">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 5V19M12 5L6 11M12 5L18 11" stroke="#B3502D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="12" cy="12" r="10" stroke="#B3502D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                <path d="M8.5 12.5h7m-7 3h7" stroke="#B3502D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M12 7v10M9 9.5v5M15 9.5v5" stroke="#B3502D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
             <p className="text-wareongo-charcoal font-medium">Reduced Costs</p>
