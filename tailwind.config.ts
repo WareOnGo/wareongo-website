@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -14,6 +15,10 @@ export default {
 			center: true,
 			padding: '2rem',
 			screens: {
+				'sm': '640px',
+				'md': '768px',
+				'lg': '1024px',
+				'xl': '1280px',
 				'2xl': '1400px'
 			}
 		},
@@ -61,6 +66,16 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Custom WareOnGo Colors
+				wareongo: {
+					blue: '#0A2239',
+					green: '#3D5A4A',
+					sienna: '#B3502D',
+					purple: '#4A2E50',
+					ivory: '#F4F1EC',
+					slate: '#6C757D',
+					charcoal: '#343A40',
 				}
 			},
 			borderRadius: {
