@@ -3,6 +3,13 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav className="bg-white shadow-sm py-4 sticky top-0 z-50">
       <div className="container mx-auto px-4 flex justify-between items-center">
@@ -11,16 +18,28 @@ const Navbar = () => {
         </div>
         
         <div className="hidden md:flex items-center space-x-6">
-          <a href="#how-it-works" className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors">
+          <button 
+            onClick={() => scrollToSection('how-it-works')}
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors"
+          >
             How It Works
-          </a>
-          <a href="#listings" className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors">
+          </button>
+          <button 
+            onClick={() => scrollToSection('listings')}
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors"
+          >
             Listings
-          </a>
-          <a href="#request" className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors">
+          </button>
+          <button 
+            onClick={() => scrollToSection('request')}
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors"
+          >
             Request
-          </a>
-          <Button className="btn-primary">
+          </button>
+          <Button 
+            className="btn-primary"
+            onClick={() => scrollToSection('request')}
+          >
             Contact Us
           </Button>
         </div>

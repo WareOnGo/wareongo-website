@@ -12,7 +12,8 @@ const warehouseData = [
     size: "45,000 sq ft",
     ceiling: "32 ft",
     price: "$5.75 per sq ft",
-    features: ["Climate controlled", "10 loading docks", "24/7 security"]
+    features: ["Climate controlled", "10 loading docks", "24/7 security"],
+    image: "/warehouse-1.jpg"
   },
   {
     id: 2,
@@ -21,7 +22,8 @@ const warehouseData = [
     size: "25,000 sq ft",
     ceiling: "28 ft",
     price: "$4.25 per sq ft",
-    features: ["Divisible space", "Office included", "Sprinkler system"]
+    features: ["Divisible space", "Office included", "Sprinkler system"],
+    image: "/warehouse-2.jpg"
   },
   {
     id: 3,
@@ -30,7 +32,8 @@ const warehouseData = [
     size: "60,000 sq ft",
     ceiling: "36 ft",
     price: "$6.50 per sq ft",
-    features: ["Rail access", "Heavy power", "Fenced yard"]
+    features: ["Rail access", "Heavy power", "Fenced yard"],
+    image: "/warehouse-3.jpg"
   }
 ];
 
@@ -38,8 +41,10 @@ const WarehouseCard = ({ warehouse }: { warehouse: typeof warehouseData[0] }) =>
   return (
     <Card className="h-full flex flex-col">
       <CardHeader className="pb-4">
-        <div className="bg-wareongo-ivory h-48 rounded-md mb-4 flex items-center justify-center">
-          <Package className="h-16 w-16 text-wareongo-blue opacity-40" />
+        <div className="h-48 rounded-md mb-4 overflow-hidden">
+          <div className="h-full w-full bg-cover bg-center" 
+               style={{ backgroundImage: `url(${warehouse.image})` }}>
+          </div>
         </div>
         <h3 className="text-xl font-semibold text-wareongo-blue">{warehouse.title}</h3>
         <div className="flex items-center text-wareongo-slate">
@@ -69,7 +74,7 @@ const WarehouseCard = ({ warehouse }: { warehouse: typeof warehouseData[0] }) =>
         </div>
       </CardContent>
       <CardFooter className="pt-0">
-        <Button className="btn-secondary w-full">Contact About This Space</Button>
+        <Button className="btn-secondary w-full">Raise Enquiry</Button>
       </CardFooter>
     </Card>
   );
