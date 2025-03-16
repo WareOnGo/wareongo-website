@@ -5,6 +5,7 @@ import BrandHero from '@/components/BrandHero';
 import FeaturesSection from '@/components/FeaturesSection';
 import HowItWorksSection from '@/components/HowItWorksSection';
 import ListingsSection from '@/components/ListingsSection';
+import AboutUsSection from '@/components/AboutUsSection';
 import RequestFormSection from '@/components/RequestFormSection';
 import Footer from '@/components/Footer';
 
@@ -16,6 +17,7 @@ const Index = () => {
       <FeaturesSection />
       <HowItWorksSection />
       <ListingsSection />
+      <AboutUsSection />
       <RequestFormSection />
       <Footer />
     </div>

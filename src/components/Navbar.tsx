@@ -1,10 +1,27 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import ContactFormDialog from "@/components/ContactFormDialog";
 
 const Navbar = () => {
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      if (offset > 100) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -14,9 +31,9 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-sm py-4 sticky top-0 z-50">
+    <nav className={`bg-white shadow-sm py-3 sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'py-2' : 'py-3'}`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <div className="flex items-center">
+        <div className={`flex items-center transition-all duration-300 ${scrolled ? 'scale-100' : 'scale-100'}`}>
           <div className="w-10 h-10 bg-wareongo-sienna rounded-lg flex items-center justify-center mr-3">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M20 8.5V13.5L12 17.5L4 13.5V8.5L12 4.5L20 8.5Z" fill="white" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -24,30 +41,37 @@ const Navbar = () => {
               <path d="M12 12.5V17.5" stroke="rgba(255,255,255,0.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
-          <h1 className="text-wareongo-blue text-2xl font-bold">WareOnGo</h1>
+          <h1 className={`text-wareongo-blue font-bold transition-all duration-300 ${scrolled ? 'text-xl' : 'text-2xl'}`}>WareOnGo</h1>
         </div>
         
-        <div className="hidden md:flex items-center space-x-6">
+        <div className="hidden md:flex items-center space-x-4">
           <button 
             onClick={() => scrollToSection('how-it-works')}
-            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors"
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors px-2 py-1 text-sm"
           >
             How It Works
           </button>
           <button 
             onClick={() => scrollToSection('listings')}
-            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors"
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors px-2 py-1 text-sm"
           >
-            Listings
+            Featured Warehouses
           </button>
           <button 
             onClick={() => scrollToSection('request')}
-            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors"
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors px-2 py-1 text-sm"
           >
             Request
           </button>
+          <button 
+            onClick={() => scrollToSection('about-us')}
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors px-2 py-1 text-sm"
+          >
+            About Us
+          </button>
           <Button 
-            className="btn-primary"
+            size="sm"
+            className="btn-primary ml-2"
             onClick={() => setIsContactDialogOpen(true)}
           >
             Contact Us
