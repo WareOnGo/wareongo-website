@@ -29,10 +29,10 @@ const Navbar = () => {
         
         <div className="hidden md:flex items-center space-x-10 flex-grow justify-center">
           <button 
-            onClick={() => scrollToSection('about-us')}
+            onClick={() => scrollToSection('request')}
             className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors whitespace-nowrap text-sm"
           >
-            About Us
+            Request a Warehouse
           </button>
           <button 
             onClick={() => scrollToSection('how-it-works')}
@@ -44,13 +44,13 @@ const Navbar = () => {
             onClick={() => scrollToSection('listings')}
             className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors whitespace-nowrap text-sm"
           >
-            Featured Warehouses
+            Listings
           </button>
           <button 
-            onClick={() => scrollToSection('request')}
+            onClick={() => scrollToSection('about-us')}
             className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors whitespace-nowrap text-sm"
           >
-            Request
+            About Us
           </button>
         </div>
         
