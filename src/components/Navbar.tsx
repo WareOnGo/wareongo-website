@@ -16,7 +16,7 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-sm py-4 sticky top-0 z-50">
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <div className="flex items-center">
+        <div className="flex items-center mr-10">
           <div className="w-10 h-10 bg-wareongo-sienna rounded-lg flex items-center justify-center mr-3">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M20 8.5V13.5L12 17.5L4 13.5V8.5L12 4.5L20 8.5Z" fill="white" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -27,33 +27,36 @@ const Navbar = () => {
           <h1 className="text-wareongo-blue text-2xl font-bold">WareOnGo</h1>
         </div>
         
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden md:flex items-center space-x-10 flex-grow justify-center">
           <button 
             onClick={() => scrollToSection('about-us')}
-            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors whitespace-nowrap"
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors whitespace-nowrap text-sm"
           >
             About Us
           </button>
           <button 
             onClick={() => scrollToSection('how-it-works')}
-            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors whitespace-nowrap"
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors whitespace-nowrap text-sm"
           >
             How It Works
           </button>
           <button 
             onClick={() => scrollToSection('listings')}
-            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors whitespace-nowrap"
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors whitespace-nowrap text-sm"
           >
             Featured Warehouses
           </button>
           <button 
             onClick={() => scrollToSection('request')}
-            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors whitespace-nowrap"
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors whitespace-nowrap text-sm"
           >
             Request
           </button>
+        </div>
+        
+        <div className="hidden md:block">
           <Button 
-            className="btn-primary ml-2"
+            className="btn-primary"
             onClick={() => setIsContactDialogOpen(true)}
           >
             Contact Us
