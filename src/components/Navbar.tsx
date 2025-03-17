@@ -27,27 +27,33 @@ const Navbar = () => {
           <h1 className="text-wareongo-blue text-2xl font-bold">WareOnGo</h1>
         </div>
         
-        <div className="hidden md:flex items-center space-x-6">
+        <div className="hidden md:flex items-center space-x-8">
+          <button 
+            onClick={() => scrollToSection('about-us')}
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors whitespace-nowrap"
+          >
+            About Us
+          </button>
           <button 
             onClick={() => scrollToSection('how-it-works')}
-            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors"
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors whitespace-nowrap"
           >
             How It Works
           </button>
           <button 
             onClick={() => scrollToSection('listings')}
-            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors"
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors whitespace-nowrap"
           >
-            Listings
+            Featured Warehouses
           </button>
           <button 
             onClick={() => scrollToSection('request')}
-            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors"
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors whitespace-nowrap"
           >
             Request
           </button>
           <Button 
-            className="btn-primary"
+            className="btn-primary ml-2"
             onClick={() => setIsContactDialogOpen(true)}
           >
             Contact Us
