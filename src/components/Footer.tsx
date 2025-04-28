@@ -10,7 +10,7 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-4">WareOnGo</h3>
             <p className="mb-4 text-gray-300">
-              Finding the perfect warehouse space for your business needs, faster and more affordably.
+              Find the Right Warehouse, Faster.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-300 hover:text-white">
@@ -43,10 +43,10 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Services</h3>
             <ul className="space-y-2">
               <li><a href="#" className="text-gray-300 hover:text-white">Warehouse Search</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white">Logistics Consulting</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-white">Build-To-Suit</a></li>
               <li><a href="#" className="text-gray-300 hover:text-white">Lease Negotiation</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white">Warehouse Analysis</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white">Supply Chain Optimization</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-white">Compliance Procurement</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-white">Manpower Services</a></li>
             </ul>
           </div>
           
@@ -55,22 +55,22 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 mr-2 mt-0.5 flex-shrink-0" />
-                <span>123 Logistics Way, Suite 456<br />Chicago, IL 60601</span>
+                <span>502, SV Sai Srinivasam Apartments<br />Hyderabad, TS - 500018</span>
               </li>
               <li className="flex items-center">
                 <Phone className="h-5 w-5 mr-2 flex-shrink-0" />
-                <span>(555) 123-4567</span>
+                <span>(+91) 83188-25478</span>
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 mr-2 flex-shrink-0" />
-                <span>info@wareongo.com</span>
+                <span>sales@wareongo.com</span>
               </li>
             </ul>
           </div>
         </div>
         
         <div className="border-t border-gray-700 mt-12 pt-6 text-center text-gray-400 text-sm">
-          <p>&copy; {new Date().getFullYear()} WareOnGo. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Neuroware Technologies Private Limited. All rights reserved.</p>
         </div>
       </div>
     </footer>
