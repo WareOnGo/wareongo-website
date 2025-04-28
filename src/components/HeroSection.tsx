@@ -18,7 +18,8 @@ const HeroSection = () => {
             Find the Right Warehouse, Faster.
           </h1>
           <p className="text-lg md:text-xl text-wareongo-slate mb-10 max-w-2xl">
-            Verified warehouses tailored to your business needs. Save time, start operations in days.
+            Verified warehouses tailored to your business needs.<br/>
+            Save time, start operations in days.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Button 
