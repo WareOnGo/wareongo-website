@@ -15,10 +15,10 @@ const HeroSection = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-wareongo-blue mb-6">
-            Find the Perfect Warehouse Space for Your Business
+            Find the Right Warehouse, Faster.
           </h1>
           <p className="text-lg md:text-xl text-wareongo-slate mb-10 max-w-2xl">
-            WareOnGo connects businesses with the right warehouse space, faster and more affordably. Save time, reduce costs, and scale with confidence.
+            Verified warehouses tailored to your business needs. Save time, start operations in days.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Button 
