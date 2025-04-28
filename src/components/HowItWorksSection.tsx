@@ -16,13 +16,13 @@ const HowItWorksSection = () => {
     },
     {
       icon: Building,
-      title: "Review Options",
-      description: "Receive curated options with detailed information and virtual tours."
+      title: "Assess Option Suitability",
+      description: "We assist with virtual tours, site visits, document KYC and negotiations."
     },
     {
       icon: ThumbsUp,
-      title: "Move In",
-      description: "Select your ideal space, and we'll facilitate the entire process."
+      title: "Sign Agreement & Move In",
+      description: "Select your ideal space, and we'll facilitate the entire paperwork."
     }
   ];
 

@@ -18,7 +18,7 @@ const FeaturesSection = () => {
   const features = [
     {
       icon: Search,
-      title: "Verified Owner Network",
+      title: "Verified Owners",
       description: "Access to 6,000+ warehouse spaces pan-India, tailored to your needs."
     },
     {
