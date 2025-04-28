@@ -18,13 +18,13 @@ const FeaturesSection = () => {
   const features = [
     {
       icon: Search,
-      title: "Extensive Network",
-      description: "Access to thousands of warehouse spaces across the country, tailored to your needs."
+      title: "Verified Owner Network",
+      description: "Access to 6,000+ warehouse spaces pan-India, tailored to your needs."
     },
     {
       icon: Clock,
-      title: "Save Time",
-      description: "Find the perfect warehouse in days, not months, with our specialized search."
+      title: "Fast Response Time",
+      description: "Find suitable options within 3 hours of sharing requirement."
     },
     {
       icon: DollarSign,
@@ -33,7 +33,7 @@ const FeaturesSection = () => {
     },
     {
       icon: Star,
-      title: "Expert Guidance",
+      title: "Tailored Guidance",
       description: "Get personalized recommendations from warehousing specialists."
     }
   ];
