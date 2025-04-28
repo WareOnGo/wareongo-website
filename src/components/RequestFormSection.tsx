@@ -49,16 +49,15 @@ const RequestFormSection = () => {
                     <SelectValue placeholder="Select size" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="small">Small (Under 10,000 sq ft)</SelectItem>
-                    <SelectItem value="medium">Medium (10,000 - 50,000 sq ft)</SelectItem>
-                    <SelectItem value="large">Large (50,000 - 100,000 sq ft)</SelectItem>
-                    <SelectItem value="xlarge">Extra Large (Over 100,000 sq ft)</SelectItem>
+                    <SelectItem value="small">Under 10,000 sq ft</SelectItem>
+                    <SelectItem value="medium">10,000 - 50,000 sq ft</SelectItem>
+                    <SelectItem value="large">Over 50,000 sq ft</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="location">Preferred Location</Label>
-                <Input id="location" placeholder="City, State or ZIP" required />
+                <Input id="location" placeholder="City & Locality/ZIP" required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="timeline">Timeline</Label>
@@ -67,24 +66,23 @@ const RequestFormSection = () => {
                     <SelectValue placeholder="Select timeline" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="urgent">Urgent (Within 30 days)</SelectItem>
-                    <SelectItem value="soon">Soon (1-3 months)</SelectItem>
-                    <SelectItem value="planning">Planning (3-6 months)</SelectItem>
-                    <SelectItem value="future">Future (6+ months)</SelectItem>
+                    <SelectItem value="urgent">Within 30 days</SelectItem>
+                    <SelectItem value="soon">1-3 months</SelectItem>
+                    <SelectItem value="planning">3-6 months</SelectItem>
+                    <SelectItem value="future">6+ months</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="budget">Monthly Budget</Label>
+                <Label htmlFor="budget">Rental Budget</Label>
                 <Select>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select budget range" />
+                    <SelectValue placeholder="Select property type" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="under5k">Under $5,000</SelectItem>
-                    <SelectItem value="5-10k">$5,000 - $10,000</SelectItem>
-                    <SelectItem value="10-20k">$10,000 - $20,000</SelectItem>
-                    <SelectItem value="over20k">Over $20,000</SelectItem>
+                    <SelectItem value="under5k">Grade A</SelectItem>
+                    <SelectItem value="5-10k">Grade B</SelectItem>
+                    <SelectItem value="10-20k">Others</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -94,7 +92,7 @@ const RequestFormSection = () => {
               <Label htmlFor="requirements">Additional Requirements</Label>
               <Textarea
                 id="requirements"
-                placeholder="Tell us about any specific needs (loading docks, ceiling height, temperature control, etc.)"
+                placeholder="Tell us about any specific needs (loading docks, location radius, ceiling height, compliance, etc.)"
                 className="min-h-[120px]"
               />
             </div>
