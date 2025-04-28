@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Search, Clock, DollarSign, Star } from 'lucide-react';
+import { Search, Clock, IndianRupee, Star } from 'lucide-react';
 
 const FeatureCard = ({ icon: Icon, title, description }: { icon: any, title: string, description: string }) => {
   return (
@@ -27,7 +27,7 @@ const FeaturesSection = () => {
       description: "Find suitable options within 3 hours of sharing requirement."
     },
     {
-      icon: DollarSign,
+      icon: IndianRupee,
       title: "Reduce Costs",
       description: "Negotiate better rates and find spaces that maximize operational efficiency."
     },
