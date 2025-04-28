@@ -78,7 +78,7 @@ const Navbar = () => {
         open={isContactDialogOpen}
         onOpenChange={setIsContactDialogOpen}
         title="Contact Us"
-        description="Leave your details, and we'll get back to you soon."
+        description="Share your details, and we'll get back to you!"
         successMessage="We will reach out within 2 hours."
       />
     </nav>
