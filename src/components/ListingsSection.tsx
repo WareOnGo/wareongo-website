@@ -8,32 +8,32 @@ import ContactFormDialog from "@/components/ContactFormDialog";
 const warehouseData = [
   {
     id: 1,
-    title: "Modern Distribution Center",
-    location: "Chicago, IL",
-    size: "45,000 sq ft",
-    ceiling: "32 ft",
-    price: "$5.75 per sq ft",
-    features: ["Climate controlled", "10 loading docks", "24/7 security"],
+    title: "Bidadi Warehouse",
+    location: "Ramnagara, KA",
+    size: "54,500 sq ft",
+    ceiling: "36 ft",
+    price: "25 per sq ft",
+    features: ["Turbo Ventilated", "6 loading docks", "63HP Power"],
     image: "/warehouse-1.jpg"
   },
   {
     id: 2,
-    title: "Flexible Warehouse Space",
-    location: "Atlanta, GA",
-    size: "25,000 sq ft",
-    ceiling: "28 ft",
-    price: "$4.25 per sq ft",
-    features: ["Divisible space", "Office included", "Sprinkler system"],
+    title: "Dankuni Warehouse",
+    location: "Kolkata, WB",
+    size: "85,000 sq ft",
+    ceiling: "34 ft",
+    price: "24 per sq ft",
+    features: ["Mezzanine Office Floor", "12 loading docks", "Sprinkler system"],
     image: "/warehouse-2.jpg"
   },
   {
     id: 3,
-    title: "Industrial Storage Facility",
-    location: "Dallas, TX",
+    title: "Bhankrota Warehouse",
+    location: "Jaipur, RJ",
     size: "60,000 sq ft",
     ceiling: "36 ft",
-    price: "$6.50 per sq ft",
-    features: ["Rail access", "Heavy power", "Fenced yard"],
+    price: "22 per sq ft",
+    features: ["3 Acre Extension Availability", "12 loading docks", "Staff Residential Quarters"],
     image: "/warehouse-3.jpg"
   }
 ];
