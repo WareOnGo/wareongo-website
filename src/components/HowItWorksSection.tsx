@@ -11,8 +11,8 @@ const HowItWorksSection = () => {
     },
     {
       icon: Search,
-      title: "We Search For You",
-      description: "Our experts identify suitable warehouses from our extensive network."
+      title: "Get Warehouse Options",
+      description: "Our experts share suitable warehouses over mail/whatsapp."
     },
     {
       icon: Building,
