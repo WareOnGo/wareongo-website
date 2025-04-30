@@ -1,8 +1,13 @@
-import React from 'react';
+
+import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 const PrivacyPolicy = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -10,6 +15,8 @@ const PrivacyPolicy = () => {
         <h1 className="text-3xl font-bold mb-6 text-wareongo-blue">Privacy Policy</h1>
         
         <div className="prose max-w-none">
+          <p className="text-sm text-gray-500 mb-6">(Last updated: 29 Apr, 2025)</p>
+          
           <p>We, M/s Neuroware Technologies Private Limited, incorporated under the Companies Act, 2013, having its registered office at "B-21, Near Galleria Market, Gurgaon – 122022" represented by its members, hereinafter referred to as the "Company" (where such expression shall unless repugnant to the context thereof, be deemed to include its respective legal heirs, representatives, administrators, permitted successors and assigns.) The creator of this Privacy Policy ensures a steady commitment to Your privacy with regard to the protection of your invaluable information.</p>
           
           <p>This privacy policy contains information about the domain "WareOnGo" (hereinafter collectively referred to as the "Platform").</p>

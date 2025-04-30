@@ -94,6 +94,8 @@ const WarehouseCard = ({ warehouse }: { warehouse: typeof warehouseData[0] }) =>
 };
 
 const ListingsSection = () => {
+  const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
+  
   return (
     <section id="listings" className="section-container bg-gray-50">
       <h2 className="section-title">Featured Warehouse Spaces</h2>
@@ -103,7 +105,17 @@ const ListingsSection = () => {
         ))}
       </div>
       <div className="text-center mt-12">
-        <Button className="btn-primary">View All Listings</Button>
+        <Button className="btn-primary" onClick={() => setIsContactDialogOpen(true)}>
+          View All Listings
+        </Button>
+        
+        <ContactFormDialog
+          open={isContactDialogOpen}
+          onOpenChange={setIsContactDialogOpen}
+          title="Request Full Warehouse Listings"
+          description="Share your details to get access to our complete warehouse inventory"
+          successMessage="Thank you! Our team will send you the complete listings within 2 hours."
+        />
       </div>
     </section>
   );
