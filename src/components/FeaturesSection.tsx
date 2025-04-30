@@ -41,7 +41,7 @@ const FeaturesSection = () => {
   return (
     <section className="bg-gray-50 py-12 md:py-16">
       <div className="container mx-auto px-4">
-        <h2 className="section-title">Why Choose WareOnGo?</h2>
+        <h2 className="section-title">Why Choose Us?</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {features.map((feature, index) => (
             <FeatureCard 

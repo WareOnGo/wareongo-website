@@ -2,21 +2,36 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import ContactFormDialog from "@/components/ContactFormDialog";
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
+  const navigate = useNavigate();
   
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    // If not on homepage, navigate to homepage first
+    if (window.location.pathname !== '/') {
+      navigate('/');
+      // Add a small delay to ensure navigation happens before scrolling
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // If already on homepage, just scroll
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
   return (
     <nav className="bg-white shadow-sm py-4 sticky top-0 z-50">
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <div className="flex items-center mr-10">
+        <Link to="/" className="flex items-center mr-10">
           <div className="w-10 h-10 bg-wareongo-sienna rounded-lg flex items-center justify-center mr-3">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M20 8.5V13.5L12 17.5L4 13.5V8.5L12 4.5L20 8.5Z" fill="white" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -25,7 +40,7 @@ const Navbar = () => {
             </svg>
           </div>
           <h1 className="text-wareongo-blue text-2xl font-bold">WareOnGo</h1>
-        </div>
+        </Link>
         
         <div className="hidden md:flex items-center space-x-10 flex-grow justify-center">
           <button 
