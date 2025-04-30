@@ -56,7 +56,7 @@ const RequestFormSection = () => {
             <div className="text-center">
               <Button type="submit" className="btn-primary px-8">Submit Request</Button>
               <p className="text-sm text-wareongo-slate mt-4">
-                By submitting this form, you agree to our <a href="#" className="text-wareongo-blue hover:underline">Terms of Service</a> and <Link to="/privacy-policy" className="text-wareongo-blue hover:underline">Privacy Policy</Link>.
+                By submitting this form, you agree to our <Link to="/terms-of-service" className="text-wareongo-blue hover:underline">Terms of Service</Link> and <Link to="/privacy-policy" className="text-wareongo-blue hover:underline">Privacy Policy</Link>.
               </p>
             </div>
           </form>
