@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from '@/hooks/use-toast';
+import { Link } from 'react-router-dom';
 
 const RequestFormSection = () => {
   const { toast } = useToast();
@@ -55,7 +56,7 @@ const RequestFormSection = () => {
             <div className="text-center">
               <Button type="submit" className="btn-primary px-8">Submit Request</Button>
               <p className="text-sm text-wareongo-slate mt-4">
-                By submitting this form, you agree to our <a href="#" className="text-wareongo-blue hover:underline">Terms of Service</a> and <a href="#" className="text-wareongo-blue hover:underline">Privacy Policy</a>.
+                By submitting this form, you agree to our <a href="#" className="text-wareongo-blue hover:underline">Terms of Service</a> and <Link to="/privacy-policy" className="text-wareongo-blue hover:underline">Privacy Policy</Link>.
               </p>
             </div>
           </form>
