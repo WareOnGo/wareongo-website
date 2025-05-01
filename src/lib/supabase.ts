@@ -1,15 +1,10 @@
-
 import { createClient } from '@supabase/supabase-js';
+import { supabase as integrationSupabase } from '@/integrations/supabase/client';
 
-// Get Supabase URL and anon key from environment variables
-// These will be available after connecting to Supabase from Lovable
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
+// We're using the already configured Supabase client from the integration
+export const supabase = integrationSupabase;
 
-// Create Supabase client
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
-// Define types for our database tables
+// Define types for our database tables - keep these in sync with Supabase
 export type FormSubmission = {
   id?: number;
   created_at?: string;
@@ -30,7 +25,7 @@ export type WarehouseRequest = {
   requirements?: string | null;
 };
 
-// SQL queries for creating tables (to be run in Supabase SQL editor)
+// SQL queries kept for reference
 /*
 -- Create form_submissions table
 CREATE TABLE form_submissions (
