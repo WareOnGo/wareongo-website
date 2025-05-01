@@ -61,12 +61,12 @@ const Navbar = () => {
           >
             Listings
           </button>
-          <Link 
-            to="/about-us"
+          <a 
+            href="/about-us"
             className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors whitespace-nowrap text-sm"
           >
             About Us
-          </Link>
+          </a>
         </div>
         
         <div className="hidden md:block">
