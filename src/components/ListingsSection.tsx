@@ -35,7 +35,7 @@ const warehouseData = [
     ceiling: "36 ft",
     price: "22 per sq ft",
     features: ["3 Acre Extension Availability", "12 loading docks", "Staff Residential Quarters"],
-    image: "/warehouse-3.jpg"
+    image: "/lovable-uploads/d24d4a73-fa36-4aa9-9357-7cf182ccbd65.png"
   }
 ];
 
