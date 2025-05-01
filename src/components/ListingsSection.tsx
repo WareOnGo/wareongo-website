@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { MapPin, Ruler, Package } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import ContactFormDialog from "@/components/ContactFormDialog";
 
 const warehouseData = [
@@ -14,7 +15,7 @@ const warehouseData = [
     ceiling: "36 ft",
     price: "25 per sq ft",
     features: ["Turbo Ventilated", "6 loading docks", "63HP Power"],
-    image: "/warehouse-1.jpg"
+    image: "/lovable-uploads/a80e2fc8-6c6a-479a-88d0-9f01db40d62a.png"
   },
   {
     id: 2,
@@ -45,9 +46,13 @@ const WarehouseCard = ({ warehouse }: { warehouse: typeof warehouseData[0] }) =>
     <Card className="h-full flex flex-col">
       <CardHeader className="pb-4">
         <div className="h-48 rounded-md mb-4 overflow-hidden">
-          <div className="h-full w-full bg-cover bg-center" 
-               style={{ backgroundImage: `url(${warehouse.image})` }}>
-          </div>
+          <AspectRatio ratio={16/9} className="h-full">
+            <img 
+              src={warehouse.image} 
+              alt={warehouse.title} 
+              className="h-full w-full object-cover"
+            />
+          </AspectRatio>
         </div>
         <h3 className="text-xl font-semibold text-wareongo-blue">{warehouse.title}</h3>
         <div className="flex items-center text-wareongo-slate">
