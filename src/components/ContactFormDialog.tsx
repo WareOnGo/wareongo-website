@@ -13,7 +13,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
-import { Mail, Phone, User } from 'lucide-react';
+import { Mail, Phone, User, Loader } from 'lucide-react';
+import { submitContactForm } from '@/services/formSubmission';
 
 interface ContactFormDialogProps {
   open: boolean;
@@ -21,6 +22,7 @@ interface ContactFormDialogProps {
   title: string;
   description: string;
   successMessage: string;
+  source: string;
 }
 
 const ContactFormDialog = ({ 
@@ -28,14 +30,16 @@ const ContactFormDialog = ({
   onOpenChange, 
   title, 
   description,
-  successMessage 
+  successMessage,
+  source
 }: ContactFormDialogProps) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!name || !phone) {
@@ -48,9 +52,20 @@ const ContactFormDialog = ({
     }
 
     setIsSubmitting(true);
+    setError(null);
     
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      const result = await submitContactForm({
+        name,
+        phone,
+        email: email || null,
+        source
+      });
+      
+      if (!result.success) {
+        throw new Error(result.error);
+      }
+      
       toast({
         title: "Success",
         description: successMessage,
@@ -60,9 +75,17 @@ const ContactFormDialog = ({
       setName('');
       setPhone('');
       setEmail('');
-      setIsSubmitting(false);
       onOpenChange(false);
-    }, 1000);
+    } catch (err: any) {
+      setError(err.message || 'Something went wrong. Please try again.');
+      toast({
+        title: "Error",
+        description: err.message || 'Failed to submit form. Please try again.',
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -74,6 +97,12 @@ const ContactFormDialog = ({
         </DialogHeader>
         
         <form onSubmit={handleSubmit} className="space-y-4 py-4">
+          {error && (
+            <div className="p-3 text-sm bg-red-50 border border-red-200 text-red-600 rounded">
+              {error}
+            </div>
+          )}
+          
           <div className="space-y-2">
             <Label htmlFor="name" className="text-wareongo-charcoal">Name</Label>
             <div className="relative">
@@ -127,7 +156,14 @@ const ContactFormDialog = ({
           
           <DialogFooter className="pt-4">
             <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? 'Submitting...' : 'Submit'}
+              {isSubmitting ? (
+                <>
+                  <Loader className="h-4 w-4 mr-2 animate-spin" />
+                  Submitting...
+                </>
+              ) : (
+                'Submit'
+              )}
             </Button>
             <DialogClose asChild>
               <Button type="button" variant="outline">Cancel</Button>
