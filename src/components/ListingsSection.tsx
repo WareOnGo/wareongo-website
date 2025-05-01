@@ -25,7 +25,7 @@ const warehouseData = [
     ceiling: "34 ft",
     price: "24 per sq ft",
     features: ["Mezzanine Office Floor", "12 loading docks", "Sprinkler system"],
-    image: "/warehouse-2.jpg"
+    image: "/lovable-uploads/fc79915f-546e-49ab-81a7-5649717e13d4.png"
   },
   {
     id: 3,
