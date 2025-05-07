@@ -136,7 +136,7 @@ const Navbar = () => {
               scrollToSection('request');
               setIsMobileMenuOpen(false);
             }}
-            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors text-base font-medium py-2 border-b border-gray-100"
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors text-base font-medium py-2 border-b border-gray-100 text-center w-full"
           >
             Request a Warehouse
           </button>
@@ -145,7 +145,7 @@ const Navbar = () => {
               scrollToSection('how-it-works');
               setIsMobileMenuOpen(false);
             }}
-            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors text-base font-medium py-2 border-b border-gray-100"
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors text-base font-medium py-2 border-b border-gray-100 text-center w-full"
           >
             How It Works
           </button>
@@ -154,17 +154,19 @@ const Navbar = () => {
               scrollToSection('listings');
               setIsMobileMenuOpen(false);
             }}
-            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors text-base font-medium py-2 border-b border-gray-100"
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors text-base font-medium py-2 border-b border-gray-100 text-center w-full"
           >
             Listings
           </button>
-          <Link 
-            to="/about-us"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors text-base font-medium py-2 border-b border-gray-100"
-          >
-            About Us
-          </Link>
+          <div className="text-center w-full">
+            <Link 
+              to="/about-us"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors text-base font-medium py-2 border-b border-gray-100 inline-block w-full"
+            >
+              About Us
+            </Link>
+          </div>
           <Button 
             className="btn-primary w-full mt-4"
             onClick={() => {
