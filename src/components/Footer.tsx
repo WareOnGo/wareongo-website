@@ -1,10 +1,10 @@
-
 import React from 'react';
 import { MapPin, Phone, Mail, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const Footer = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const scrollToSection = (id: string) => {
     // If not on homepage, navigate to homepage first
@@ -23,6 +23,17 @@ const Footer = () => {
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
+    }
+  };
+
+  const handleAboutUsClick = (e: React.MouseEvent) => {
+    if (location.pathname === '/about-us') {
+      e.preventDefault();
+      // If already on About Us page, scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // Otherwise navigate to About Us page
+      navigate('/about-us');
     }
   };
 
@@ -87,9 +98,12 @@ const Footer = () => {
                 </button>
               </li>
               <li>
-                <Link to="/about-us" className="text-gray-300 hover:text-white transition-colors">
+                <button
+                  onClick={handleAboutUsClick}
+                  className="text-gray-300 hover:text-white transition-colors cursor-pointer"
+                >
                   About Us
-                </Link>
+                </button>
               </li>
             </ul>
           </div>
