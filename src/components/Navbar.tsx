@@ -1,12 +1,18 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import ContactFormDialog from "@/components/ContactFormDialog";
 import { Link, useNavigate } from 'react-router-dom';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const mobileButtonRef = useRef<HTMLButtonElement>(null);
   
   const scrollToSection = (id: string) => {
     // If not on homepage, navigate to homepage first
@@ -27,6 +33,25 @@ const Navbar = () => {
       }
     }
   };
+
+  // Handle clicks outside of mobile menu to close it
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        mobileMenuRef.current && 
+        !mobileMenuRef.current.contains(event.target as Node) &&
+        mobileButtonRef.current && 
+        !mobileButtonRef.current.contains(event.target as Node)
+      ) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className="bg-white shadow-sm py-4 sticky top-0 z-50">
@@ -79,12 +104,75 @@ const Navbar = () => {
         </div>
         
         <div className="md:hidden">
-          <Button variant="ghost" size="sm">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-menu">
-              <line x1="4" x2="20" y1="12" y2="12"></line>
-              <line x1="4" x2="20" y1="6" y2="6"></line>
-              <line x1="4" x2="20" y1="18" y2="18"></line>
-            </svg>
+          <Button 
+            variant="ghost" 
+            size="sm"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            ref={mobileButtonRef}
+            aria-expanded={isMobileMenuOpen}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? (
+              <X className="h-6 w-6 text-wareongo-blue" />
+            ) : (
+              <Menu className="h-6 w-6 text-wareongo-blue" />
+            )}
+          </Button>
+        </div>
+      </div>
+      
+      {/* Mobile menu */}
+      <div 
+        ref={mobileMenuRef}
+        className={`md:hidden absolute top-full left-0 right-0 bg-white shadow-md z-40 transition-all duration-300 transform ${
+          isMobileMenuOpen 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 -translate-y-4 pointer-events-none'
+        }`}
+      >
+        <div className="container mx-auto px-4 py-6 flex flex-col space-y-5">
+          <button 
+            onClick={() => {
+              scrollToSection('request');
+              setIsMobileMenuOpen(false);
+            }}
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors text-base font-medium py-2 border-b border-gray-100"
+          >
+            Request a Warehouse
+          </button>
+          <button 
+            onClick={() => {
+              scrollToSection('how-it-works');
+              setIsMobileMenuOpen(false);
+            }}
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors text-base font-medium py-2 border-b border-gray-100"
+          >
+            How It Works
+          </button>
+          <button 
+            onClick={() => {
+              scrollToSection('listings');
+              setIsMobileMenuOpen(false);
+            }}
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors text-base font-medium py-2 border-b border-gray-100"
+          >
+            Listings
+          </button>
+          <Link 
+            to="/about-us"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors text-base font-medium py-2 border-b border-gray-100"
+          >
+            About Us
+          </Link>
+          <Button 
+            className="btn-primary w-full mt-4"
+            onClick={() => {
+              setIsContactDialogOpen(true);
+              setIsMobileMenuOpen(false);
+            }}
+          >
+            Contact Us
           </Button>
         </div>
       </div>
