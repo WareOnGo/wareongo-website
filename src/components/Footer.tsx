@@ -26,14 +26,13 @@ const Footer = () => {
     }
   };
 
-  const handleAboutUsClick = (e: React.MouseEvent) => {
-    if (location.pathname === '/about-us') {
-      e.preventDefault();
-      // If already on About Us page, scroll to top
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      // Otherwise navigate to About Us page
+  const handleAboutUsClick = () => {
+    // Navigate to About Us page
+    if (location.pathname !== '/about-us') {
       navigate('/about-us');
+    } else {
+      // If already on About Us page, just scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
