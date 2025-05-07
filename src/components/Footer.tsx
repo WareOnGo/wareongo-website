@@ -1,8 +1,31 @@
 
 import React from 'react';
 import { MapPin, Phone, Mail, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Footer = () => {
+  const navigate = useNavigate();
+
+  const scrollToSection = (id: string) => {
+    // If not on homepage, navigate to homepage first
+    if (window.location.pathname !== '/') {
+      navigate('/');
+      // Add a small delay to ensure navigation happens before scrolling
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // If already on homepage, just scroll
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <footer className="bg-wareongo-blue text-white">
       <div className="container mx-auto px-4 py-12">
@@ -31,22 +54,54 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-white">Home</a></li>
-              <li><a href="#how-it-works" className="text-gray-300 hover:text-white">How It Works</a></li>
-              <li><a href="#listings" className="text-gray-300 hover:text-white">Listings</a></li>
-              <li><a href="#request" className="text-gray-300 hover:text-white">Request a Warehouse</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white">About Us</a></li>
+              <li>
+                <button 
+                  onClick={() => navigate('/')} 
+                  className="text-gray-300 hover:text-white transition-colors cursor-pointer"
+                >
+                  Home
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('how-it-works')} 
+                  className="text-gray-300 hover:text-white transition-colors cursor-pointer"
+                >
+                  How It Works
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('listings')} 
+                  className="text-gray-300 hover:text-white transition-colors cursor-pointer"
+                >
+                  Listings
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('request')} 
+                  className="text-gray-300 hover:text-white transition-colors cursor-pointer"
+                >
+                  Request a Warehouse
+                </button>
+              </li>
+              <li>
+                <Link to="/about-us" className="text-gray-300 hover:text-white transition-colors">
+                  About Us
+                </Link>
+              </li>
             </ul>
           </div>
           
           <div>
             <h3 className="text-lg font-semibold mb-4">Services</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-white">Warehouse Search</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white">Build-To-Suit</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white">Lease Negotiation</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white">Compliance Procurement</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white">Manpower Services</a></li>
+              <li className="text-gray-300">Warehouse Search</li>
+              <li className="text-gray-300">Build-To-Suit</li>
+              <li className="text-gray-300">Lease Negotiation</li>
+              <li className="text-gray-300">Compliance Procurement</li>
+              <li className="text-gray-300">Manpower Services</li>
             </ul>
           </div>
           
@@ -59,11 +114,21 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <Phone className="h-5 w-5 mr-2 flex-shrink-0" />
-                <span>(+91) 83188-25478</span>
+                <a 
+                  href="tel:+918318825478" 
+                  className="hover:text-wareongo-ivory transition-colors"
+                >
+                  (+91) 83188-25478
+                </a>
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 mr-2 flex-shrink-0" />
-                <span>sales@wareongo.com</span>
+                <a 
+                  href="mailto:sales@wareongo.com" 
+                  className="hover:text-wareongo-ivory transition-colors"
+                >
+                  sales@wareongo.com
+                </a>
               </li>
             </ul>
           </div>
