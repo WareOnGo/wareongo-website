@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import ContactFormDialog from "@/components/ContactFormDialog";
+import { Link } from 'react-router-dom';
 
 const warehouseData = [
   {
@@ -111,9 +112,11 @@ const ListingsSection = () => {
         ))}
       </div>
       <div className="text-center mt-12">
-        <Button className="btn-primary" onClick={() => setIsContactDialogOpen(true)}>
-          View All Listings
-        </Button>
+        <Link to="/listings">
+          <Button className="btn-primary">
+            View All Listings
+          </Button>
+        </Link>
         
         <ContactFormDialog
           open={isContactDialogOpen}
