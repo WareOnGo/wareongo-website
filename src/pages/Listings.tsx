@@ -10,6 +10,7 @@ const Listings = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
+  const [selectedWarehouseId, setSelectedWarehouseId] = useState<number | null>(null);
   const [pagination, setPagination] = useState({
     currentPage: 1,
     totalPages: 1,
@@ -50,8 +51,9 @@ const Listings = () => {
   };
 
   const handleWarehouseClick = (warehouseId: number) => {
-    // Open contact dialog instead of logging
+    // Open contact dialog with the warehouse ID
     console.log(`Clicked warehouse ${warehouseId}`);
+    setSelectedWarehouseId(warehouseId);
     setIsContactDialogOpen(true);
   };
 
@@ -204,7 +206,7 @@ const Listings = () => {
         title="Request Full Warehouse Listings"
         description="Share your details to get access to our complete warehouse inventory"
         successMessage="Thank you! Our team will send you the complete listings within 2 hours."
-        source="warehouse_card_click"
+        source={selectedWarehouseId ? `${selectedWarehouseId}` : "listings"}
       />
     </div>
   );

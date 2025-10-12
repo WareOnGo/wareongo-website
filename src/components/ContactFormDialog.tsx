@@ -42,7 +42,12 @@ const ContactFormDialog = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!name || !phone) {
+    // Trim values
+    const trimmedName = name.trim();
+    const trimmedPhone = phone.trim();
+    const trimmedEmail = email.trim();
+    
+    if (!trimmedName || !trimmedPhone) {
       toast({
         title: "Validation Error",
         description: "Name and phone number are required",
@@ -51,14 +56,21 @@ const ContactFormDialog = ({
       return;
     }
 
+    console.log('Form values before submit:', { 
+      name: trimmedName, 
+      phone: trimmedPhone, 
+      email: trimmedEmail || null, 
+      source 
+    });
+
     setIsSubmitting(true);
     setError(null);
     
     try {
       const result = await submitContactForm({
-        name,
-        phone,
-        email: email || null,
+        name: trimmedName,
+        phone: trimmedPhone,
+        email: trimmedEmail || null,
         source
       });
       

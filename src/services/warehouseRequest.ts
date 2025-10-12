@@ -1,31 +1,55 @@
 
-import { supabase } from '@/lib/supabase';
-import type { WarehouseRequest } from '@/lib/supabase';
+interface WarehouseRequestData {
+  name: string;
+  phone: string;
+  company: string;
+  location: string;
+  requirements: string | null;
+  email: string | null;
+}
 
 /**
- * Submit warehouse request form data to the warehouse_requests table
+ * Submit warehouse request form data to the backend API
  */
-export const submitWarehouseRequest = async (formData: Omit<WarehouseRequest, 'id' | 'created_at'>): Promise<{ success: boolean; error?: string }> => {
+export const submitWarehouseRequest = async (formData: WarehouseRequestData): Promise<{ success: boolean; error?: string }> => {
   try {
-    const { error } = await supabase
-      .from('warehouse_enquiries')  // Updated to match the actual table name in Supabase
-      .insert([{
-        person_name: formData.name,  // Updated to match column name in Supabase
-        phone_number: formData.phone,  // Updated to match column name in Supabase
-        company_name: formData.company,  // Updated to match column name in Supabase
-        city_location: formData.location,  // Updated to match column name in Supabase
-        additional_requirements: formData.requirements,  // Updated to match column name in Supabase
-        // Note: email field isn't used in this form
-      }]);
+    const payload = {
+      full_name: formData.name.trim(),
+      phone_number: formData.phone.trim(),
+      company_name: formData.company.trim(),
+      preferred_location: formData.location.trim(),
+      additional_requirements: formData.requirements ? formData.requirements.trim() : '',
+    };
     
-    if (error) throw error;
+    console.log('Submitting warehouse request:', payload);
     
+    const response = await fetch('https://wareongo-website-backend.onrender.com/customer-requests', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+    
+    console.log('Response status:', response.status);
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('Error response:', errorData);
+      return { 
+        success: false, 
+        error: errorData.error || 'Failed to submit request' 
+      };
+    }
+    
+    const responseData = await response.json();
+    console.log('Success response:', responseData);
     return { success: true };
   } catch (error: any) {
     console.error('Error submitting warehouse request:', error);
     return { 
       success: false, 
-      error: error?.message || 'Failed to submit request. Please try again.' 
+      error: 'Network error. Please check your connection and try again.' 
     };
   }
 };

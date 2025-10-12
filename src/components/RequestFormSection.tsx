@@ -33,7 +33,7 @@ const RequestFormSection = () => {
     e.preventDefault();
     
     // Validation
-    if (!formData.fullName || !formData.phone || !formData.company || !formData.location) {
+    if (!formData.fullName || !formData.phone || !formData.company || !formData.location || !formData.requirements) {
       toast({
         title: "Validation Error",
         description: "Please fill in all required fields",
@@ -51,7 +51,7 @@ const RequestFormSection = () => {
         phone: formData.phone,
         company: formData.company,
         location: formData.location,
-        requirements: formData.requirements || null,
+        requirements: formData.requirements,
         email: null // No email field in this form
       });
       
@@ -147,6 +147,7 @@ const RequestFormSection = () => {
                 className="min-h-[120px]"
                 value={formData.requirements}
                 onChange={handleChange}
+                required
               />
             </div>
             
