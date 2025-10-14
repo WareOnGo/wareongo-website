@@ -62,9 +62,19 @@ export const warehouseAPI = new WarehouseAPI();
  * Filters out PDFs and non-image files
  */
 export const getFirstImageUrl = (photosData: string | string[] | null): string | null => {
+  const allImages = getAllImageUrls(photosData);
+  return allImages.length > 0 ? allImages[0] : null;
+};
+
+/**
+ * Extracts all valid image URLs from a photos string or array
+ * Handles JSON arrays, regular arrays, and comma-separated strings
+ * Filters out PDFs and non-image files
+ */
+export const getAllImageUrls = (photosData: string | string[] | null): string[] => {
   if (!photosData) {
     console.log('No photos data provided');
-    return null;
+    return [];
   }
 
   try {
@@ -89,7 +99,7 @@ export const getFirstImageUrl = (photosData: string | string[] | null): string |
       }
     } else {
       console.log('Unknown photos data type:', typeof photosData);
-      return null;
+      return [];
     }
 
     // If we have an array with a single string containing comma-separated URLs, split it
@@ -100,17 +110,29 @@ export const getFirstImageUrl = (photosData: string | string[] | null): string |
 
     // Filter for valid image URLs (exclude PDFs and other non-image formats)
     const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.svg'];
+    const excludedExtensions = ['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.txt', '.zip', '.rar', '.7z'];
+    
     const imageUrls = photoUrls.filter(url => {
       if (!url || typeof url !== 'string') {
         console.log('Invalid URL type:', url);
         return false;
       }
       
+      // Trim whitespace
+      url = url.trim();
+      
+      // Must start with http or https
+      if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        console.log('Invalid URL protocol:', url);
+        return false;
+      }
+      
       const lowercaseUrl = url.toLowerCase();
       
-      // Check if it's a PDF
-      if (lowercaseUrl.includes('.pdf')) {
-        console.log('Skipping PDF:', url);
+      // Exclude non-image file types
+      const hasExcludedExtension = excludedExtensions.some(ext => lowercaseUrl.includes(ext));
+      if (hasExcludedExtension) {
+        console.log('Skipping non-image file:', url);
         return false;
       }
       
@@ -122,28 +144,26 @@ export const getFirstImageUrl = (photosData: string | string[] | null): string |
                             lowercaseUrl.includes('cloudinary.com') ||
                             lowercaseUrl.includes('imgur.com') ||
                             lowercaseUrl.includes('amazonaws.com') ||
-                            lowercaseUrl.includes('r2.dev'); // Added for your Cloudflare R2 URLs
+                            lowercaseUrl.includes('r2.dev') ||
+                            lowercaseUrl.includes('googleusercontent.com') ||
+                            lowercaseUrl.includes('imagekit.io');
       
-      // More flexible: accept if it looks like a valid URL and doesn't have obvious non-image indicators
-      const looksLikeImage = hasImageExtension || 
-                            isImageService || 
-                            (url.startsWith('http') && !lowercaseUrl.includes('.pdf') && !lowercaseUrl.includes('.doc'));
+      // Accept if it looks like a valid image URL
+      const looksLikeImage = hasImageExtension || isImageService;
       
-      console.log(`URL: ${url}, hasImageExtension: ${hasImageExtension}, isImageService: ${isImageService}, looksLikeImage: ${looksLikeImage}`);
+      if (!looksLikeImage) {
+        console.log(`Filtering out URL (no image indicators): ${url}`);
+      }
       
       return looksLikeImage;
     });
 
-    console.log('Filtered image URLs:', imageUrls);
+    console.log(`Filtered ${photoUrls.length} URLs down to ${imageUrls.length} image URLs`);
     
-    // Return the first valid image URL
-    const firstImage = imageUrls.length > 0 ? imageUrls[0] : null;
-    console.log('Selected first image:', firstImage);
-    
-    return firstImage;
+    return imageUrls;
   } catch (error) {
     console.error('Error parsing photos data:', error);
-    return null;
+    return [];
   }
 };
 
@@ -191,14 +211,15 @@ export const transformWarehouseData = (warehouse: Warehouse) => {
     : 35;
 
   // Get image URL
-  const apiImage = getFirstImageUrl(warehouse.photos);
-  const finalImage = apiImage; // Don't use picsum fallback, let component handle grey placeholder
+  const apiImages = getAllImageUrls(warehouse.photos);
+  const finalImages = apiImages.length > 0 ? apiImages : []; // Empty array if no images
   
-  console.log(`Warehouse ${warehouse.id}: API image = ${apiImage}, Final image = ${finalImage || 'null (will use grey placeholder)'}`);
+  console.log(`Warehouse ${warehouse.id}: Found ${apiImages.length} images`);
 
   return {
     id: warehouse.id,
-    image: finalImage,
+    image: finalImages.length > 0 ? finalImages[0] : null,
+    images: finalImages,
     address: warehouse.address,
     location: {
       city: warehouse.city,

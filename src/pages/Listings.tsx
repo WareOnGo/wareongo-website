@@ -104,6 +104,7 @@ const Listings = () => {
                   key={warehouse.id}
                   id={warehouse.id}
                   image={warehouse.image}
+                  images={warehouse.images}
                   address={warehouse.address}
                   location={warehouse.location}
                   size={warehouse.size}
