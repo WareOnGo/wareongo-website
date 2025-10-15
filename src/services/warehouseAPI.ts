@@ -31,8 +31,8 @@ export interface WarehouseAPIResponse {
 class WarehouseAPI {
   private baseURL: string;
 
-  constructor(baseURL: string = ' http://localhost:3000') {
-    this.baseURL = baseURL;
+  constructor(baseURL: string = 'https://wareongo-website-backend.onrender.com') {
+        this.baseURL = baseURL;
   }
 
   async getWarehouses(
