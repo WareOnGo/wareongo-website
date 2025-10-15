@@ -31,14 +31,51 @@ export interface WarehouseAPIResponse {
 class WarehouseAPI {
   private baseURL: string;
 
-  constructor(baseURL: string = 'https://wareongo-website-backend.onrender.com') {
+  constructor(baseURL: string = ' http://localhost:3000') {
     this.baseURL = baseURL;
   }
 
-  async getWarehouses(page: number = 1, pageSize: number = 10): Promise<WarehouseAPIResponse> {
+  async getWarehouses(
+    page: number = 1, 
+    pageSize: number = 10,
+    filters?: {
+      city?: string;
+      state?: string;
+      warehouseType?: string;
+      fireNocAvailable?: boolean;
+      minSpace?: number;
+      maxSpace?: number;
+    }
+  ): Promise<WarehouseAPIResponse> {
     try {
+      const params = new URLSearchParams();
+      params.append('page', page.toString());
+      params.append('pageSize', pageSize.toString());
+
+      // Add filters if provided
+      if (filters) {
+        if (filters.city) {
+          params.append('city', filters.city);
+        }
+        if (filters.state) {
+          params.append('state', filters.state);
+        }
+        if (filters.warehouseType) {
+          params.append('warehouseType', filters.warehouseType);
+        }
+        if (filters.fireNocAvailable !== undefined) {
+          params.append('fireNocAvailable', filters.fireNocAvailable.toString());
+        }
+        if (filters.minSpace !== undefined && filters.minSpace > 0) {
+          params.append('minSpace', filters.minSpace.toString());
+        }
+        if (filters.maxSpace !== undefined && filters.maxSpace < 100000) {
+          params.append('maxSpace', filters.maxSpace.toString());
+        }
+      }
+
       const response = await fetch(
-        `${this.baseURL}/warehouses?page=${page}&pageSize=${pageSize}`
+        `${this.baseURL}/warehouses?${params.toString()}`
       );
       
       if (!response.ok) {
