@@ -2,13 +2,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import ContactFormDialog from "@/components/ContactFormDialog";
+import LoginButton from "@/components/LoginButton";
+import { useAuth } from '@/context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, LogOut, User } from 'lucide-react';
 
 const Navbar = () => {
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user, logout, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const isMobile = useIsMobile();
   const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -90,9 +93,53 @@ const Navbar = () => {
           >
             About Us
           </a>
+          
+          {/* Role-based navigation */}
+          {user?.role === 'admin' && (
+            <Link 
+              to="/admin-panel"
+              className="text-wareongo-blue hover:text-wareongo-blue/80 transition-colors whitespace-nowrap text-sm"
+            >
+              Admin Panel
+            </Link>
+          )}
+          {user?.role === 'user' && (
+            <Link 
+              to="/user-dashboard"
+              className="text-wareongo-blue hover:text-wareongo-blue/80 transition-colors whitespace-nowrap text-sm"
+            >
+              Dashboard
+            </Link>
+          )}
         </div>
         
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-3">
+          {isAuthenticated && user ? (
+            <>
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-wareongo-ivory rounded-md">
+                <User className="h-4 w-4 text-wareongo-blue" />
+                <span className="text-sm font-medium text-wareongo-charcoal">
+                  {user.name || user.email}
+                </span>
+                {user.role && (
+                  <span className="text-xs px-2 py-0.5 bg-wareongo-blue/10 text-wareongo-blue rounded-full">
+                    {user.role}
+                  </span>
+                )}
+              </div>
+              <Button 
+                variant="outline"
+                size="sm"
+                onClick={logout}
+                className="flex items-center gap-2"
+              >
+                <LogOut className="h-4 w-4" />
+                Logout
+              </Button>
+            </>
+          ) : (
+            <LoginButton />
+          )}
           <Button 
             className="btn-primary"
             onClick={() => setIsContactDialogOpen(true)}
@@ -163,6 +210,63 @@ const Navbar = () => {
               About Us
             </Link>
           </div>
+          
+          {/* Role-based navigation for mobile */}
+          {user?.role === 'admin' && (
+            <Link 
+              to="/admin-panel"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-wareongo-blue hover:text-wareongo-blue/80 transition-colors text-base font-medium py-2 border-b border-gray-100 text-center w-full inline-block"
+            >
+              Admin Panel
+            </Link>
+          )}
+          {user?.role === 'user' && (
+            <Link 
+              to="/user-dashboard"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-wareongo-blue hover:text-wareongo-blue/80 transition-colors text-base font-medium py-2 border-b border-gray-100 text-center w-full inline-block"
+            >
+              Dashboard
+            </Link>
+          )}
+          
+          {/* Login/User section in mobile menu */}
+          <div className="pt-3 border-t border-gray-200">
+            {isAuthenticated && user ? (
+              <>
+                <div className="flex flex-col items-center gap-2 mb-3 p-3 bg-wareongo-ivory rounded-md">
+                  <div className="flex items-center gap-2">
+                    <User className="h-5 w-5 text-wareongo-blue" />
+                    <span className="text-sm font-medium text-wareongo-charcoal">
+                      {user.name || user.email}
+                    </span>
+                  </div>
+                  {user.role && (
+                    <span className="text-xs px-3 py-1 bg-wareongo-blue/10 text-wareongo-blue rounded-full">
+                      {user.role}
+                    </span>
+                  )}
+                </div>
+                <Button 
+                  variant="outline"
+                  className="w-full mb-3 flex items-center justify-center gap-2"
+                  onClick={() => {
+                    logout();
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  <LogOut className="h-4 w-4" />
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <div className="mb-3 flex justify-center">
+                <LoginButton />
+              </div>
+            )}
+          </div>
+          
           <Button 
             className="btn-primary w-full mt-4"
             onClick={() => {

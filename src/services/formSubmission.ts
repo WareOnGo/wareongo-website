@@ -1,3 +1,5 @@
+import { getApiUrl, config } from '@/config/config';
+
 interface ContactFormData {
   name: string;
   phone: string;
@@ -19,7 +21,7 @@ export const submitContactForm = async (formData: ContactFormData): Promise<{ su
     
     console.log('Submitting form data:', payload);
     
-    const response = await fetch('https://wareongo-website-backend.onrender.com/enquiries', {
+    const response = await fetch(getApiUrl(config.api.enquiries), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

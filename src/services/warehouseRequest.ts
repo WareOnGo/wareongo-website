@@ -1,3 +1,4 @@
+import { getApiUrl, config } from '@/config/config';
 
 interface WarehouseRequestData {
   name: string;
@@ -23,7 +24,7 @@ export const submitWarehouseRequest = async (formData: WarehouseRequestData): Pr
     
     console.log('Submitting warehouse request:', payload);
     
-    const response = await fetch('https://wareongo-website-backend.onrender.com/customer-requests', {
+    const response = await fetch(getApiUrl(config.api.customerRequests), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

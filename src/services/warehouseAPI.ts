@@ -2,6 +2,8 @@
  * Warehouse API service for fetching warehouse data from backend
  */
 
+import { config, getApiUrl } from '@/config/config';
+
 // Type definitions for the API response
 export interface Warehouse {
   id: number;
@@ -31,7 +33,7 @@ export interface WarehouseAPIResponse {
 class WarehouseAPI {
   private baseURL: string;
 
-  constructor(baseURL: string = 'https://wareongo-website-backend.onrender.com') {
+  constructor(baseURL: string = config.apiBaseUrl) {
         this.baseURL = baseURL;
   }
 
