@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MapPin, Ruler, Package } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
@@ -9,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 const warehouseData = [
   {
-    id: 1,
+    id: 420, // Using real warehouse ID from API
     title: "Bidadi Warehouse",
     location: "Ramnagara, KA",
     size: "54,500 sq ft",
@@ -19,7 +20,7 @@ const warehouseData = [
     image: "/lovable-uploads/a80e2fc8-6c6a-479a-88d0-9f01db40d62a.png"
   },
   {
-    id: 2,
+    id: 421, // Using sequential IDs that should exist
     title: "Dankuni Warehouse",
     location: "Kolkata, WB",
     size: "85,000 sq ft",
@@ -29,7 +30,7 @@ const warehouseData = [
     image: "/lovable-uploads/fc79915f-546e-49ab-81a7-5649717e13d4.png"
   },
   {
-    id: 3,
+    id: 422, // Using sequential IDs that should exist
     title: "Bhankrota Warehouse",
     location: "Jaipur, RJ",
     size: "60,000 sq ft",
@@ -41,10 +42,15 @@ const warehouseData = [
 ];
 
 const WarehouseCard = ({ warehouse }: { warehouse: typeof warehouseData[0] }) => {
+  const navigate = useNavigate();
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
   
+  const handleCardClick = () => {
+    navigate(`/warehouse/${warehouse.id}`);
+  };
+  
   return (
-    <Card className="h-full flex flex-col">
+    <Card className="h-full flex flex-col cursor-pointer hover:shadow-lg transition-shadow duration-300" onClick={handleCardClick}>
       <CardHeader className="pb-4">
         <div className="h-48 rounded-md mb-4 overflow-hidden">
           <AspectRatio ratio={16/9} className="h-full">
@@ -83,7 +89,13 @@ const WarehouseCard = ({ warehouse }: { warehouse: typeof warehouseData[0] }) =>
         </div>
       </CardContent>
       <CardFooter className="pt-0">
-        <Button className="btn-secondary w-full" onClick={() => setIsContactDialogOpen(true)}>
+        <Button 
+          className="btn-secondary w-full" 
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsContactDialogOpen(true);
+          }}
+        >
           Raise Enquiry
         </Button>
         

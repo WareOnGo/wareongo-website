@@ -20,6 +20,13 @@ export interface Warehouse {
   fireSafetyMeasures: string | null;
 }
 
+// Extended interface for warehouse detail page with additional fields
+export interface WarehouseDetail extends Warehouse {
+  numberOfDocks?: string;
+  warehouseType?: string;
+  zone?: string;
+}
+
 export interface WarehouseAPIResponse {
   data: Warehouse[];
   pagination: {
@@ -28,6 +35,25 @@ export interface WarehouseAPIResponse {
     currentPage: number;
     pageSize: number;
   };
+}
+
+// Response interface for individual warehouse detail
+export interface WarehouseDetailResponse {
+  data?: WarehouseDetail;
+  error?: string;
+  message?: string;
+}
+
+// Custom error class for warehouse API errors
+export class WarehouseAPIError extends Error {
+  constructor(
+    message: string,
+    public status?: number,
+    public code?: string
+  ) {
+    super(message);
+    this.name = 'WarehouseAPIError';
+  }
 }
 
 class WarehouseAPI {
@@ -90,6 +116,178 @@ class WarehouseAPI {
       console.error('Error fetching warehouses:', error);
       throw error;
     }
+  }
+
+  /**
+   * Fetch individual warehouse by ID
+   * @param id - Warehouse ID
+   * @returns Promise<WarehouseDetail> - Individual warehouse data
+   * @throws WarehouseAPIError - For API errors including 404, network failures, etc.
+   */
+  async getWarehouseById(id: number | string): Promise<WarehouseDetail> {
+    try {
+      // Validate warehouse ID
+      const warehouseId = typeof id === 'string' ? parseInt(id, 10) : id;
+      
+      if (!warehouseId || isNaN(warehouseId) || warehouseId <= 0) {
+        throw new WarehouseAPIError(
+          'Invalid warehouse ID provided',
+          400,
+          'INVALID_ID'
+        );
+      }
+
+      console.log(`Fetching warehouse details for ID: ${warehouseId}`);
+
+      const response = await fetch(
+        `${this.baseURL}/warehouses/${warehouseId}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      // Handle different HTTP status codes
+      if (!response.ok) {
+        let errorMessage = 'Failed to fetch warehouse details';
+        let errorCode = 'FETCH_ERROR';
+
+        switch (response.status) {
+          case 404:
+            errorMessage = 'Warehouse not found';
+            errorCode = 'WAREHOUSE_NOT_FOUND';
+            break;
+          case 400:
+            errorMessage = 'Invalid warehouse ID';
+            errorCode = 'INVALID_REQUEST';
+            break;
+          case 500:
+            errorMessage = 'Server error occurred';
+            errorCode = 'SERVER_ERROR';
+            break;
+          case 503:
+            errorMessage = 'Service temporarily unavailable';
+            errorCode = 'SERVICE_UNAVAILABLE';
+            break;
+          default:
+            errorMessage = `HTTP error! status: ${response.status}`;
+            errorCode = 'HTTP_ERROR';
+        }
+
+        throw new WarehouseAPIError(errorMessage, response.status, errorCode);
+      }
+
+      const result: WarehouseDetailResponse = await response.json();
+
+      // Handle API response structure
+      if (result.error) {
+        throw new WarehouseAPIError(
+          result.error || 'API returned an error',
+          response.status,
+          'API_ERROR'
+        );
+      }
+
+      if (!result.data) {
+        // Handle case where response doesn't have expected structure
+        // Some APIs might return the warehouse data directly
+        const warehouseData = result as unknown as WarehouseDetail;
+        if (warehouseData && typeof warehouseData === 'object' && 'id' in warehouseData) {
+          return this.transformWarehouseDetailData(warehouseData);
+        }
+        
+        throw new WarehouseAPIError(
+          'Invalid response format from API',
+          200,
+          'INVALID_RESPONSE'
+        );
+      }
+
+      // Extract warehouse data from response
+      const warehouseData = result.data || (result as unknown as WarehouseDetail);
+      
+      return this.transformWarehouseDetailData(warehouseData);
+
+    } catch (error) {
+      console.error('Error fetching warehouse by ID:', error);
+      
+      // Re-throw WarehouseAPIError as-is
+      if (error instanceof WarehouseAPIError) {
+        throw error;
+      }
+
+      // Handle network errors
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        throw new WarehouseAPIError(
+          'Network error: Unable to connect to the server',
+          0,
+          'NETWORK_ERROR'
+        );
+      }
+
+      // Handle JSON parsing errors
+      if (error instanceof SyntaxError) {
+        throw new WarehouseAPIError(
+          'Invalid response format from server',
+          200,
+          'PARSE_ERROR'
+        );
+      }
+
+      // Handle any other unexpected errors
+      throw new WarehouseAPIError(
+        error instanceof Error ? error.message : 'Unknown error occurred',
+        500,
+        'UNKNOWN_ERROR'
+      );
+    }
+  }
+
+  /**
+   * Transform and validate warehouse detail data for the detail page
+   * @param warehouse - Raw warehouse data from API
+   * @returns WarehouseDetail - Transformed warehouse data
+   */
+  private transformWarehouseDetailData(warehouse: WarehouseDetail): WarehouseDetail {
+    // Validate required fields
+    if (!warehouse.id) {
+      throw new WarehouseAPIError(
+        'Warehouse data missing required ID field',
+        200,
+        'INVALID_DATA'
+      );
+    }
+
+    // Ensure photos is properly formatted
+    let processedPhotos: string[] = [];
+    if (warehouse.photos) {
+      processedPhotos = getAllImageUrls(warehouse.photos);
+    }
+
+    // Return transformed warehouse data with defaults for missing fields
+    return {
+      ...warehouse,
+      address: warehouse.address || 'Address not available',
+      city: warehouse.city || 'City not specified',
+      state: warehouse.state || 'State not specified',
+      totalSpaceSqft: Array.isArray(warehouse.totalSpaceSqft) 
+        ? warehouse.totalSpaceSqft 
+        : warehouse.totalSpaceSqft 
+          ? [warehouse.totalSpaceSqft as unknown as number]
+          : [0],
+      clearHeightFt: warehouse.clearHeightFt || 'Not specified',
+      compliances: warehouse.compliances || 'Compliance information not available',
+      otherSpecifications: warehouse.otherSpecifications || null,
+      ratePerSqft: warehouse.ratePerSqft || 'Price on request',
+      photos: processedPhotos,
+      fireNocAvailable: warehouse.fireNocAvailable ?? null,
+      fireSafetyMeasures: warehouse.fireSafetyMeasures || null,
+      numberOfDocks: warehouse.numberOfDocks || 'Not specified',
+      warehouseType: warehouse.warehouseType || 'Standard',
+      zone: warehouse.zone || 'Not specified',
+    };
   }
 }
 
@@ -204,6 +402,66 @@ export const getAllImageUrls = (photosData: string | string[] | null): string[] 
     console.error('Error parsing photos data:', error);
     return [];
   }
+};
+
+/**
+ * Transform warehouse detail data for the detail page component
+ * @param warehouse - WarehouseDetail data from API
+ * @returns Transformed data optimized for detail page display
+ */
+export const transformWarehouseDetailData = (warehouse: WarehouseDetail) => {
+  console.log('Transforming warehouse detail data:', warehouse);
+  
+  // Get all image URLs
+  const imageUrls = getAllImageUrls(warehouse.photos);
+  
+  // Parse space information
+  const totalSpaces = Array.isArray(warehouse.totalSpaceSqft) 
+    ? warehouse.totalSpaceSqft 
+    : [warehouse.totalSpaceSqft as unknown as number];
+  
+  const mainSpace = totalSpaces[0] || 0;
+  const availableSpaces = totalSpaces.length > 1 ? totalSpaces.slice(1) : [];
+  
+  // Parse pricing
+  const ratePerSqft = warehouse.ratePerSqft 
+    ? parseInt(warehouse.ratePerSqft.replace(/[^\d]/g, '')) || 0
+    : 0;
+  
+  // Parse specifications
+  const specifications = {
+    infrastructure: {
+      type: warehouse.warehouseType || 'Standard',
+      numberOfDocks: warehouse.numberOfDocks || 'Not specified',
+      clearHeight: warehouse.clearHeightFt || 'Not specified',
+    },
+    space: {
+      totalSpace: mainSpace,
+      availableSpaces: availableSpaces,
+      ratePerSqft: ratePerSqft,
+    },
+    location: {
+      address: warehouse.address,
+      city: warehouse.city,
+      state: warehouse.state,
+      zone: warehouse.zone || 'Not specified',
+    },
+    compliance: {
+      fireNocAvailable: warehouse.fireNocAvailable,
+      fireSafetyMeasures: warehouse.fireSafetyMeasures,
+      compliances: warehouse.compliances,
+    },
+    features: warehouse.otherSpecifications 
+      ? warehouse.otherSpecifications.split(',').map(f => f.trim()).filter(f => f)
+      : [],
+  };
+
+  return {
+    id: warehouse.id,
+    images: imageUrls,
+    specifications,
+    rawData: warehouse, // Keep original data for any edge cases
+  };
 };
 
 /**

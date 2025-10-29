@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WarehouseCard from '@/components/WarehouseCard';
@@ -21,6 +22,7 @@ interface WarehouseFilters {
 }
 
 const Listings = () => {
+  const navigate = useNavigate();
   const [warehouses, setWarehouses] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -149,10 +151,9 @@ const Listings = () => {
   };
 
   const handleWarehouseClick = (warehouseId: number) => {
-    // Open contact dialog with the warehouse ID
-    console.log(`Clicked warehouse ${warehouseId}`);
-    setSelectedWarehouseId(warehouseId);
-    setIsContactDialogOpen(true);
+    // Navigate to warehouse detail page
+    console.log(`Navigating to warehouse ${warehouseId}`);
+    navigate(`/warehouse/${warehouseId}`);
   };
 
   return (
