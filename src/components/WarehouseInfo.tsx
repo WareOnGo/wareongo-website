@@ -3,8 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { 
   Building2, 
-  Ruler, 
-  IndianRupee, 
   Shield, 
   CheckCircle, 
   XCircle,
@@ -41,7 +39,7 @@ interface WarehouseInfoProps {
 }
 
 const WarehouseInfo: React.FC<WarehouseInfoProps> = ({ specifications }) => {
-  const { infrastructure, space, compliance, features } = specifications;
+  const { infrastructure, compliance, features } = specifications;
 
   // Helper function to format compliance status
   const getComplianceIcon = (status: boolean | null) => {
@@ -77,94 +75,31 @@ const WarehouseInfo: React.FC<WarehouseInfoProps> = ({ specifications }) => {
             Infrastructure Details
           </CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="bg-gray-50 p-4 rounded-lg text-center">
-              <Warehouse className="w-6 h-6 text-wareongo-blue mx-auto mb-2" aria-hidden="true" />
-              <p className="text-xs text-gray-600 mb-1">Warehouse Type</p>
-              <p className="font-semibold text-wareongo-charcoal text-sm break-words">{infrastructure.type}</p>
-            </div>
-            <div className="bg-gray-50 p-4 rounded-lg text-center">
-              <Layers className="w-6 h-6 text-wareongo-blue mx-auto mb-2" aria-hidden="true" />
-              <p className="text-xs text-gray-600 mb-1">Loading Docks</p>
-              <p className="font-semibold text-wareongo-charcoal text-sm break-words">{infrastructure.numberOfDocks}</p>
-            </div>
-            <div className="bg-gray-50 p-4 rounded-lg text-center">
-              <Ruler className="w-6 h-6 text-wareongo-blue mx-auto mb-2" aria-hidden="true" />
-              <p className="text-xs text-gray-600 mb-1">Clear Height</p>
-              <p className="font-semibold text-wareongo-charcoal text-sm break-words">{infrastructure.clearHeight}</p>
+        <CardContent className="space-y-4">
+          <div className="space-y-4">
+            <div className="grid grid-cols-1 gap-4">
+              <div className="p-4 bg-gray-50 rounded-lg">
+                <Warehouse className="w-4 h-4 text-wareongo-blue inline mr-2" aria-hidden="true" />
+                <span className="text-sm font-medium text-gray-700">Warehouse Type: </span>
+                <span className="text-sm font-semibold text-wareongo-charcoal">{infrastructure.type}</span>
+              </div>
+              
+              <div className="p-4 bg-gray-50 rounded-lg">
+                <Layers className="w-4 h-4 text-wareongo-blue inline mr-2" aria-hidden="true" />
+                <span className="text-sm font-medium text-gray-700">Number of Docks: </span>
+                <span className="text-sm font-semibold text-wareongo-charcoal">{infrastructure.numberOfDocks}</span>
+              </div>
+              
+              <div className="p-4 bg-gray-50 rounded-lg">
+                <Building2 className="w-4 h-4 text-wareongo-blue inline mr-2" aria-hidden="true" />
+                <span className="text-sm font-medium text-gray-700">Clear Height: </span>
+                <span className="text-sm font-semibold text-wareongo-charcoal">{infrastructure.clearHeight}</span>
+              </div>
             </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Space Information */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-wareongo-charcoal text-lg sm:text-xl">
-            <Ruler className="w-5 h-5 text-wareongo-blue" aria-hidden="true" />
-            Space & Pricing
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          {/* Main Space and Pricing */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
-              <div className="flex items-center gap-3 mb-2">
-                <Building2 className="w-5 h-5 text-wareongo-blue" aria-hidden="true" />
-                <p className="text-sm font-medium text-gray-700">Total Space</p>
-              </div>
-              <p className="text-2xl font-bold text-wareongo-blue">
-                {space.totalSpace.toLocaleString()} sqft
-              </p>
-            </div>
-            
-            <div className="bg-green-50 p-4 rounded-lg border border-green-100">
-              <div className="flex items-center gap-3 mb-2">
-                <IndianRupee className="w-5 h-5 text-green-600" aria-hidden="true" />
-                <p className="text-sm font-medium text-gray-700">Rate per sqft</p>
-              </div>
-              <p className="text-2xl font-bold text-green-600">
-                ₹{space.ratePerSqft}
-              </p>
-            </div>
-          </div>
-          
-          {/* Estimated Cost */}
-          {space.totalSpace > 0 && space.ratePerSqft > 0 && (
-            <div className="bg-gray-50 p-4 rounded-lg border">
-              <div className="text-center">
-                <p className="text-sm text-gray-600 mb-1">Estimated Monthly Cost</p>
-                <p className="text-xl font-bold text-wareongo-charcoal">
-                  ₹{(space.totalSpace * space.ratePerSqft).toLocaleString()}
-                </p>
-                <p className="text-xs text-gray-500 mt-1">
-                  Based on {space.totalSpace.toLocaleString()} sqft × ₹{space.ratePerSqft}
-                </p>
-              </div>
-            </div>
-          )}
-          
-          {/* Additional Spaces */}
-          {space.availableSpaces.length > 0 && (
-            <div>
-              <p className="text-sm font-medium text-gray-700 mb-3">Additional Space Options</p>
-              <div className="flex flex-wrap gap-2">
-                {space.availableSpaces.map((spaceSize, index) => (
-                  <Badge 
-                    key={index} 
-                    variant="outline" 
-                    className="text-xs px-3 py-1"
-                    aria-label={`Additional space option: ${spaceSize.toLocaleString()} square feet`}
-                  >
-                    {spaceSize.toLocaleString()} sqft
-                  </Badge>
-                ))}
-              </div>
-            </div>
-          )}
-        </CardContent>
-      </Card>
 
 
 

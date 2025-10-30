@@ -33,7 +33,7 @@ const Listings = () => {
     currentPage: 1,
     totalPages: 1,
     totalItems: 0,
-    pageSize: 20
+    pageSize: 21
   });
 
   // Filter state
@@ -401,7 +401,7 @@ const Listings = () => {
                     className="px-3 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-wareongo-blue"
                   >
                     <option value={10}>10</option>
-                    <option value={20}>20</option>
+                    <option value={21}>21</option>
                     <option value={30}>30</option>
                     <option value={50}>50</option>
                   </select>
