@@ -10,6 +10,7 @@ export interface Warehouse {
   address: string;
   city: string;
   state: string;
+  postalCode: string | null;
   totalSpaceSqft: number[];
   clearHeightFt: string | null;
   compliances: string;
@@ -272,6 +273,7 @@ class WarehouseAPI {
       address: warehouse.address || 'Address not available',
       city: warehouse.city || 'City not specified',
       state: warehouse.state || 'State not specified',
+      postalCode: warehouse.postalCode || null,
       totalSpaceSqft: Array.isArray(warehouse.totalSpaceSqft) 
         ? warehouse.totalSpaceSqft 
         : warehouse.totalSpaceSqft 
@@ -444,6 +446,7 @@ export const transformWarehouseDetailData = (warehouse: WarehouseDetail) => {
       address: warehouse.address,
       city: warehouse.city,
       state: warehouse.state,
+      postalCode: warehouse.postalCode,
       zone: warehouse.zone || 'Not specified',
     },
     compliance: {

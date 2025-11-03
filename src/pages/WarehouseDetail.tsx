@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WarehouseImageCarousel from '@/components/WarehouseImageCarousel';
 import WarehouseInfo from '@/components/WarehouseInfo';
+import WarehouseLocationMap from '@/components/WarehouseLocationMap';
 import ContactFormDialog from '@/components/ContactFormDialog';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -174,18 +175,18 @@ const WarehouseDetail = () => {
             </Button>
           </div>
 
-          {/* Main Content */}
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8 mb-6 lg:mb-8">
-            {/* Image Carousel */}
-            <div className="space-y-4 order-1">
+          {/* Main Content - Responsive Grid Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-6 lg:mb-8">
+            {/* Image Carousel - Mobile: order-1, Desktop: spans 2 rows */}
+            <div className="space-y-4 order-1 lg:row-span-2">
               <WarehouseImageCarousel 
                 images={warehouseData.images}
                 warehouseId={warehouseData.id}
               />
             </div>
 
-            {/* Warehouse Information */}
-            <div className="space-y-4 sm:space-y-6 order-2">
+            {/* Warehouse Information - Mobile: order-2, Desktop: top right */}
+            <div className="space-y-4 sm:space-y-6 order-2 lg:order-2">
               {/* Header */}
               <header>
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
@@ -246,6 +247,23 @@ const WarehouseDetail = () => {
                 <span id="request-callback-desc" className="sr-only">
                   Opens a form to request a callback from our team about this warehouse
                 </span>
+              </section>
+            </div>
+
+            {/* Location Map - Mobile: order-3 (below info), Desktop: bottom right */}
+            <div className="order-3 lg:order-3">
+              <section aria-labelledby="location-map-title">
+                <h2 id="location-map-title" className="text-lg font-semibold text-wareongo-charcoal mb-3">
+                  Location
+                </h2>
+                <WarehouseLocationMap
+                  address={warehouseData.specifications.location.address}
+                  city={warehouseData.specifications.location.city}
+                  state={warehouseData.specifications.location.state}
+                  postalCode={warehouseData.specifications.location.postalCode}
+                  warehouseId={warehouseData.id}
+                  className="w-full h-48 sm:h-56 lg:h-60"
+                />
               </section>
             </div>
           </div>
