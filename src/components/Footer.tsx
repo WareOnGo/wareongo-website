@@ -148,6 +148,21 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-gray-700 mt-12 pt-6 text-center text-gray-400 text-sm">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-4">
+            <Link 
+              to="/privacy-policy" 
+              className="hover:text-white transition-colors"
+            >
+              Privacy Policy
+            </Link>
+            <span className="hidden sm:inline">•</span>
+            <Link 
+              to="/terms-of-service" 
+              className="hover:text-white transition-colors"
+            >
+              Terms of Service
+            </Link>
+          </div>
           <p>&copy; {new Date().getFullYear()} Neuroware Technologies Private Limited. All rights reserved.</p>
         </div>
       </div>
