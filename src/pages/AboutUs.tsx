@@ -2,9 +2,6 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { ExternalLink } from 'lucide-react';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Card, CardContent } from '@/components/ui/card';
 
 const AboutUs = () => {
   return (
@@ -27,63 +24,7 @@ const AboutUs = () => {
             </div>
           </div>
           
-          <div className="mt-24 mb-16">
-            <h2 className="text-3xl font-bold text-wareongo-blue text-center mb-16">Founders</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-              {/* Founder 1 */}
-              <Card className="bg-white rounded-lg shadow-lg overflow-hidden border-0 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                <CardContent className="p-0">
-                  <div className="flex flex-col items-center p-8">
-                    <div className="mb-6">
-                      <Avatar className="w-40 h-40 border-4 border-wareongo-blue">
-                        <AvatarImage src="/lovable-uploads/62bd98f3-a5c6-450d-9480-ce6b1f89d3d7.png" alt="Jayanth Chunduru" />
-                        <AvatarFallback className="bg-wareongo-blue text-white text-2xl font-bold">JC</AvatarFallback>
-                      </Avatar>
-                    </div>
-                    <h3 className="text-2xl font-bold text-wareongo-blue mb-1">Jayanth Chunduru</h3>
-                    <p className="text-wareongo-slate text-lg mb-4">Founder & CEO</p>
-                    <a 
-                      href="https://in.linkedin.com/in/jayanth-chunduru-85150a191" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center text-wareongo-blue hover:text-wareongo-sienna transition-colors font-medium"
-                    >
-                      LinkedIn Profile
-                      <ExternalLink size={16} className="ml-1" />
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
-              
-              {/* Founder 2 */}
-              <Card className="bg-white rounded-lg shadow-lg overflow-hidden border-0 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                <CardContent className="p-0">
-                  <div className="flex flex-col items-center p-8">
-                    <div className="mb-6">
-                      <Avatar className="w-40 h-40 border-4 border-wareongo-green">
-                        <AvatarImage src="/lovable-uploads/6ade9b1e-ee38-4568-bfb6-68ec3b0ecb2f.png" alt="Dhaval Gupta" />
-                        <AvatarFallback className="bg-wareongo-green text-white text-2xl font-bold">DG</AvatarFallback>
-                      </Avatar>
-                    </div>
-                    <h3 className="text-2xl font-bold text-wareongo-blue mb-1">Dhaval Gupta</h3>
-                    <p className="text-wareongo-slate text-lg mb-4">Co-Founder & CPO</p>
-                    <a 
-                      href="https://in.linkedin.com/in/dhaval-gupta-7b6009128" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center text-wareongo-blue hover:text-wareongo-sienna transition-colors font-medium"
-                    >
-                      LinkedIn Profile
-                      <ExternalLink size={16} className="ml-1" />
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-          
-          <div className="text-center text-xl bg-wareongo-blue text-white py-10 px-6 rounded-lg max-w-2xl mx-auto shadow-lg">
+          <div className="text-center text-xl bg-wareongo-blue text-white py-10 px-6 rounded-lg max-w-2xl mx-auto shadow-lg mt-16">
             <p>Reach out to us at <a href="mailto:sales@wareongo.com" className="font-bold underline hover:text-wareongo-ivory transition-colors">sales@wareongo.com</a></p>
           </div>
         </div>

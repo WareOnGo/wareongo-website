@@ -42,12 +42,15 @@ const PrivacyPolicy = () => {
             
             <div className="text-sm text-gray-600 mb-8">
               <p><strong>Effective Date:</strong> 1st November 2025</p>
-              <p><strong>Last Updated:</strong> 1st November 2025</p>
+              <p><strong>Last Updated:</strong> 22nd November 2025</p>
             </div>
 
             <div className="prose prose-gray max-w-none space-y-6">
               <p className="text-gray-700 leading-relaxed">
-                This Privacy Policy describes how Neuroware Technologies Private Limited ("we," "our," "us") collect, use, and disclose personal information when you use the OAuth consent screen provided by Google to log in to our application using your email address. By logging in with your email address, you consent to the practices described in this policy.
+                This Privacy Policy describes how Neuroware Technologies Private Limited ("we," "our," "us") & its domain and brand "WareOnGo" (hereinafter collectively referred to as the "Platform") This policy covers the use of personal data across the Platform's website and services. While it outlines our general data handling practices, certain products or services may have additional data usage details, which will be shared with you through specific notices or supplementary policies at the time of data collection.
+              </p>
+              <p className="text-gray-700 leading-relaxed">
+                Additionally, it includes how we collect, use, and disclose personal information when you use the OAuth consent screen provided by Google to log in to our application using your email address. By logging in with your email address, you consent to the practices described in this policy.
               </p>
 
               <section>
@@ -55,7 +58,7 @@ const PrivacyPolicy = () => {
                   Information We Collect
                 </h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  When you use the OAuth consent screen to log in to our application using your email address, we may collect the following types of personal information:
+                  During the use of our website, we may collect the following types of personal information:
                 </p>
                 <ul className="list-disc pl-6 space-y-2 text-gray-700">
                   <li>
@@ -63,6 +66,9 @@ const PrivacyPolicy = () => {
                   </li>
                   <li>
                     <strong>OAuth Permissions:</strong> We may collect and store the permissions you grant to our application during the OAuth consent process. These permissions allow us to access certain information from your email account, as authorized by you.
+                  </li>
+                  <li>
+                    <strong>Embedded Content from other websites:</strong> Articles on this site may include embedded content (e.g. videos, images, articles, etc.). Embedded content from other websites behaves in the exact same way as if the visitor has visited the other website. These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracking your interaction with the embedded content if you have an account and are logged in to that website.
                   </li>
                 </ul>
               </section>
@@ -72,7 +78,7 @@ const PrivacyPolicy = () => {
                   Use of Information
                 </h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  We use the information collected through the OAuth consent screen for the following purposes:
+                  We use the information collected on our website for the following purposes:
                 </p>
                 <ul className="list-disc pl-6 space-y-2 text-gray-700">
                   <li>
@@ -148,6 +154,21 @@ const PrivacyPolicy = () => {
 
               <section>
                 <h2 className="text-2xl font-semibold text-wareongo-charcoal mt-8 mb-4">
+                  Disclaimer
+                </h2>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  All content, services, images, names, advertisements, and other materials available on this website are provided on an "as is" basis. Neuroware Technologies Pvt. Ltd. makes no guarantees or warranties—express or implied—including but not limited to warranties of merchantability, fitness for a particular purpose, or non-infringement. Users are encouraged to independently evaluate whether the information provided meets their specific needs before relying on it.
+                </p>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  We may collect information voluntarily shared by users to enhance and personalize their browsing experience or to improve future content. However, the information presented on this site should not be interpreted as legal, financial, or professional advice. WareOnGo is a trademark-applied brand. All other product names, logos, or trademarks mentioned on the site remain the property of their respective owners.
+                </p>
+                <p className="text-gray-700 leading-relaxed">
+                  Neuroware Technologies Pvt. Ltd. shall not be liable for any form of loss or damage—whether direct, indirect, incidental, or consequential—that may result from the use of, or reliance on, content provided on this site. This includes, but is not limited to, data loss, system damage, or lost business opportunities.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-semibold text-wareongo-charcoal mt-8 mb-4">
                   Contact Us
                 </h2>
                 <p className="text-gray-700 leading-relaxed">
@@ -160,7 +181,7 @@ const PrivacyPolicy = () => {
 
               <section className="mt-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
                 <p className="text-gray-700 leading-relaxed text-sm">
-                  By using the OAuth consent screen provided by Google and logging in with your email address, you acknowledge that you have read and understood this Privacy Policy and agree to the collection, use, and disclosure of your personal information as described herein.
+                  By using this website (www.wareongo.com) or the OAuth consent screen provided by Google and logging in with your email address, you acknowledge that you have read and understood this Privacy Policy and agree to the collection, use, and disclosure of your personal information as described herein.
                 </p>
               </section>
             </div>
