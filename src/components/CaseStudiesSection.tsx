@@ -9,7 +9,7 @@ const studies = [
     title: 'Headline placeholder for the first case study',
     description:
       'Short summary of the client, the challenge, and the outcome WareOnGo delivered.',
-    href: '#',
+    href: '/case-study-1',
   },
   {
     image:
@@ -18,7 +18,7 @@ const studies = [
     title: 'Headline placeholder for the second case study',
     description:
       'Short summary of the client, the challenge, and the outcome WareOnGo delivered.',
-    href: '#',
+    href: '/case-study-2',
   },
 ];
 

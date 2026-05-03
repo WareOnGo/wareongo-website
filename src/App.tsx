@@ -18,6 +18,8 @@ import UserDashboard from "./pages/UserDashboard";
 import Unauthorized from "./pages/Unauthorized";
 import Login from "./pages/Login";
 import AdminRoute from "./components/AdminRoute";
+import CaseStudy1 from "./pages/CaseStudy1";
+import CaseStudy2 from "./pages/CaseStudy2";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +35,8 @@ const App = () => (
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />
               <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/case-study-1" element={<CaseStudy1 />} />
+              <Route path="/case-study-2" element={<CaseStudy2 />} />
               <Route path="/listings" element={<Listings />} />
               <Route path="/warehouse/:id" element={<WarehouseDetail />} />
               <Route path="/user-dashboard" element={<UserDashboard />} />

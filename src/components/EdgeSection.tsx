@@ -12,7 +12,7 @@ const EdgeSection = () => {
   };
 
   return (
-    <section className="bg-wareongo-ivory">
+    <section>
       <SpotlightCard
         className="edge-spotlight"
         spotlightColor="rgba(56, 140, 224, 0.25)"
@@ -63,10 +63,13 @@ const EdgeSection = () => {
 
       <style>{`
         .edge-spotlight {
-          background-color: #0A2239;
-          border: none;
+          background: linear-gradient(45deg, #0e2d4a 0%, #0A2239 55%, #081c2e 100%) !important;
+          background-color: transparent !important;
+          border: none !important;
           border-radius: 0;
           padding: 4rem 0;
+          position: relative;
+          overflow: hidden;
         }
         @media (min-width: 768px) {
           .edge-spotlight {
