@@ -24,7 +24,7 @@ const featuredListings = [
   },
   {
     id: 3,
-    image: "https://images.unsplash.com/photo-1565890885233-0bb6b7e5eab6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     address: "Modern Grade-A Facility",
     location: { city: "Delhi", state: "Delhi" },
     size: 75000,
