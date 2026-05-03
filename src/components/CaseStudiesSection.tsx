@@ -40,7 +40,7 @@ const CaseStudiesSection = () => {
             <a
               key={s.eyebrow}
               href={s.href}
-              className="case-card group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md flex flex-col"
+              className="case-card group bg-transparent border border-wareongo-blue rounded-2xl overflow-hidden flex flex-col hover:bg-wareongo-blue/5"
             >
               <div className="aspect-[16/10] overflow-hidden bg-wareongo-ivory">
                 <img
@@ -72,7 +72,7 @@ const CaseStudiesSection = () => {
         <style>{`
           .case-card {
             transform: perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0);
-            transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 400ms;
+            transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1), background-color 400ms;
             will-change: transform;
           }
           .case-card:hover {

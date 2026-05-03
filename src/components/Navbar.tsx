@@ -58,7 +58,7 @@ const Navbar = () => {
         {/* Logo pill */}
         <Link
           to="/"
-          className="flex items-center justify-center bg-wareongo-ivory/80 backdrop-blur-md shadow-sm rounded-xl px-5 py-3"
+          className="flex items-center justify-center bg-wareongo-ivory border border-black/10 rounded-xl px-5 py-3"
         >
           <img
             src="/logo_transparent.png"
@@ -68,7 +68,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop nav pill */}
-        <div className="hidden md:flex items-center bg-wareongo-ivory/80 backdrop-blur-md shadow-sm rounded-xl p-2 gap-1">
+        <div className="hidden md:flex items-center bg-wareongo-ivory border border-black/10 rounded-xl p-2 gap-1">
           <button onClick={() => scrollToSection('request')} className={navLinkClass}>
             Request a Warehouse
           </button>
@@ -118,7 +118,7 @@ const Navbar = () => {
             ref={mobileButtonRef}
             aria-expanded={isMobileMenuOpen}
             aria-label="Toggle menu"
-            className="bg-wareongo-ivory/80 backdrop-blur-md shadow-sm rounded-xl p-3 flex items-center justify-center"
+            className="bg-wareongo-ivory border border-black/10 rounded-xl p-3 flex items-center justify-center"
           >
             {isMobileMenuOpen ? (
               <X className="h-5 w-5 text-wareongo-blue" />
@@ -132,7 +132,7 @@ const Navbar = () => {
       {/* Mobile menu */}
       <div
         ref={mobileMenuRef}
-        className={`md:hidden absolute top-full left-4 right-4 mt-2 bg-white/95 backdrop-blur-md rounded-xl shadow-lg z-40 transition-all duration-300 transform ${
+        className={`md:hidden absolute top-full left-4 right-4 mt-2 bg-wareongo-ivory border border-black/10 rounded-xl z-40 transition-all duration-300 transform ${
           isMobileMenuOpen
             ? 'opacity-100 translate-y-0'
             : 'opacity-0 -translate-y-4 pointer-events-none'

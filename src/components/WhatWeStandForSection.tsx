@@ -41,11 +41,11 @@ const WhatWeStandForSection = () => {
           {VALUES.map((item, i) => (
             <div
               key={i}
-              className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-md transition-all duration-300 group flex flex-col items-center text-center"
+              className="bg-transparent border border-wareongo-blue rounded-2xl p-6 sm:p-8 transition-all duration-300 group flex flex-col items-center text-center hover:bg-wareongo-blue/5"
             >
               {/* Icon */}
-              <div className="w-12 h-12 rounded-xl bg-wareongo-ivory flex items-center justify-center mb-6 group-hover:bg-wareongo-blue transition-colors duration-300">
-                <item.icon className="w-6 h-6 text-wareongo-blue group-hover:text-white transition-colors duration-300" strokeWidth={1.5} />
+              <div className="w-12 h-12 rounded-xl bg-sky-100/50 border border-wareongo-blue/20 flex items-center justify-center mb-6 transition-colors duration-300">
+                <item.icon className="w-6 h-6 text-wareongo-blue transition-colors duration-300" strokeWidth={1.5} />
               </div>
 
               {/* Content */}

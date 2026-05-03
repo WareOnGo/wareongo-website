@@ -15,11 +15,11 @@ const BentoSection = () => {
 
         <div className="grid grid-cols-2 md:grid-cols-3 md:grid-rows-2 gap-3 sm:gap-4 md:gap-5 auto-rows-[10rem] sm:auto-rows-[12rem] md:auto-rows-[14rem]">
           {/* Featured — full-width on mobile, 2x2 on md+ */}
-          <div className="col-span-2 md:col-span-2 md:row-span-2 bg-wareongo-blue text-white rounded-2xl p-5 sm:p-6 md:p-8 flex flex-col justify-between shadow-sm">
-            <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] opacity-70">Featured</span>
+          <div className="col-span-2 md:col-span-2 md:row-span-2 bg-transparent border border-wareongo-blue rounded-2xl p-5 sm:p-6 md:p-8 flex flex-col justify-between hover:bg-wareongo-blue/5 transition-colors group">
+            <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate">Featured</span>
             <div>
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2">Headline placeholder</h3>
-              <p className="text-white/75 text-sm md:text-base max-w-md">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-wareongo-blue mb-1 sm:mb-2">Headline placeholder</h3>
+              <p className="text-wareongo-slate text-sm md:text-base max-w-md">
                 A short sentence about the flagship benefit goes here.
               </p>
             </div>
@@ -28,7 +28,7 @@ const BentoSection = () => {
           {[2, 3, 4, 5, 6].map((n) => (
             <div
               key={n}
-              className="bg-white rounded-2xl p-4 sm:p-5 md:p-6 flex flex-col justify-between shadow-sm"
+              className="bg-transparent border border-wareongo-blue rounded-2xl p-4 sm:p-5 md:p-6 flex flex-col justify-between hover:bg-wareongo-blue/5 transition-colors"
             >
               <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate">
                 Card {String(n).padStart(2, '0')}
