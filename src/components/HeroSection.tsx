@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import ContactFormDialog from '@/components/ContactFormDialog';
 
 const HeroSection = () => {
@@ -31,12 +32,12 @@ const HeroSection = () => {
           <p className="text-base sm:text-lg md:text-xl text-wareongo-slate mb-8 sm:mb-10 max-w-2xl leading-relaxed">
             Verified inventory and expert advisory pan-India. From proposal to possession - with the speed of technology.
           </p>
-          <button
-            onClick={() => setIsContactDialogOpen(true)}
-            className="w-full sm:w-auto bg-wareongo-blue text-white text-base font-medium px-7 py-4 rounded-lg hover:opacity-90 transition-opacity"
+          <Link
+            to="/request-warehouse"
+            className="inline-block text-center w-full sm:w-auto bg-wareongo-blue text-white text-base font-medium px-7 py-4 rounded-lg hover:opacity-90 transition-opacity"
           >
             Request a Warehouse
-          </button>
+          </Link>
         </div>
       </div>
 

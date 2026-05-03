@@ -8,7 +8,8 @@ import BentoSection from '@/components/BentoSection';
 import StatsSection from '@/components/StatsSection';
 import EdgeSection from '@/components/EdgeSection';
 import CaseStudiesSection from '@/components/CaseStudiesSection';
-import RequestFormSection from '@/components/RequestFormSection';
+import FeaturedListingsSection from '@/components/FeaturedListingsSection';
+import AboutUsSection from '@/components/AboutUsSection';
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -26,7 +27,8 @@ const Index = () => {
       <StatsSection />
       <EdgeSection />
       <CaseStudiesSection />
-      <RequestFormSection />
+      <FeaturedListingsSection />
+      <AboutUsSection />
       <Footer />
     </div>
   );

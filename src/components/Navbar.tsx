@@ -9,6 +9,7 @@ import { Menu, X, LogOut, User } from 'lucide-react';
 const Navbar = () => {
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isOverEdge, setIsOverEdge] = useState(false);
   const { user, logout, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -44,10 +45,32 @@ const Navbar = () => {
     };
 
     document.addEventListener('mousedown', handleClickOutside);
+
+    const handleScroll = () => {
+      const edgeSection = document.getElementById('edge-section');
+      if (edgeSection) {
+        const rect = edgeSection.getBoundingClientRect();
+        // The navbar is roughly 80px tall. Check if it overlaps the edge section.
+        if (rect.top <= 80 && rect.bottom >= 80) {
+          setIsOverEdge(true);
+        } else {
+          setIsOverEdge(false);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial position
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const pillBgClass = isOverEdge 
+    ? "bg-sky-50 border-wareongo-blue/20" 
+    : "bg-wareongo-ivory border-black/10";
 
   const navLinkClass =
     "text-wareongo-charcoal hover:text-wareongo-blue hover:bg-wareongo-ivory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wareongo-blue/40 transition-colors duration-200 whitespace-nowrap text-sm font-medium px-4 py-3 rounded-lg";
@@ -58,20 +81,23 @@ const Navbar = () => {
         {/* Logo pill */}
         <Link
           to="/"
-          className="flex items-center justify-center bg-wareongo-ivory border border-black/10 rounded-xl px-5 py-3"
+          className={`flex items-center justify-center gap-2.5 border rounded-xl px-5 py-3 transition-all duration-300 hover:opacity-90 ${pillBgClass}`}
         >
           <img
             src="/logo_transparent.png"
             alt="WareOnGo Logo"
-            className="h-7 w-auto"
+            className="h-6 w-auto"
           />
+          <span className="text-wareongo-blue font-bold tracking-widest text-sm md:text-base">
+            WAREONGO
+          </span>
         </Link>
 
         {/* Desktop nav pill */}
-        <div className="hidden md:flex items-center bg-wareongo-ivory border border-black/10 rounded-xl p-2 gap-1">
-          <button onClick={() => scrollToSection('request')} className={navLinkClass}>
+        <div className={`hidden md:flex items-center border rounded-xl p-2 gap-1 transition-all duration-300 ${pillBgClass}`}>
+          <Link to="/request-warehouse" className={navLinkClass}>
             Request a Warehouse
-          </button>
+          </Link>
           <Link to="/listings" className={navLinkClass}>
             Listings
           </Link>
@@ -118,7 +144,7 @@ const Navbar = () => {
             ref={mobileButtonRef}
             aria-expanded={isMobileMenuOpen}
             aria-label="Toggle menu"
-            className="bg-wareongo-ivory border border-black/10 rounded-xl p-3 flex items-center justify-center"
+            className={`border rounded-xl p-3 flex items-center justify-center transition-all duration-300 ${pillBgClass}`}
           >
             {isMobileMenuOpen ? (
               <X className="h-5 w-5 text-wareongo-blue" />
@@ -139,15 +165,13 @@ const Navbar = () => {
         }`}
       >
         <div className="px-4 py-5 flex flex-col space-y-3">
-          <button
-            onClick={() => {
-              scrollToSection('request');
-              setIsMobileMenuOpen(false);
-            }}
-            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors text-base font-medium py-2 text-center w-full"
+          <Link
+            to="/request-warehouse"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors text-base font-medium py-2 text-center w-full block"
           >
             Request a Warehouse
-          </button>
+          </Link>
           <Link
             to="/listings"
             onClick={() => setIsMobileMenuOpen(false)}
