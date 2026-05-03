@@ -10,6 +10,7 @@ import EdgeSection from '@/components/EdgeSection';
 import CaseStudiesSection from '@/components/CaseStudiesSection';
 import FeaturedListingsSection from '@/components/FeaturedListingsSection';
 import AboutUsSection from '@/components/AboutUsSection';
+import RequestCTASection from '@/components/RequestCTASection';
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -29,6 +30,7 @@ const Index = () => {
       <CaseStudiesSection />
       <FeaturedListingsSection />
       <AboutUsSection />
+      <RequestCTASection />
       <Footer />
     </div>
   );

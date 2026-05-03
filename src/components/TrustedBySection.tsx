@@ -1,24 +1,38 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-const LOGO_SRC = '/logo_transparent.png';
-const LOGO_COUNT = 8;
 const SCROLL_SECONDS = 35;
 const BG = 'transparent';
 const FADE_COLOR = '#F5F1EB';
 
+const COMPANY_LOGOS = [
+  { src: '/company_logos/reliance_digital.png', alt: 'Reliance Digital' },
+  { src: '/company_logos/hero_motorcorp.png', alt: 'Hero MotoCorp' },
+  { src: '/company_logos/cadbury.png', alt: 'Cadbury' },
+  { src: '/company_logos/mars.png', alt: 'Mars' },
+  { src: '/company_logos/mumbai_pav_company.png', alt: 'Mumbai Pav Company', grayscaleOnly: true },
+  { src: '/company_logos/increff.png', alt: 'Increff' },
+  { src: '/company_logos/renew_power.png', alt: 'ReNew Power' },
+  { src: '/company_logos/rentomojo.png', alt: 'Rentomojo' },
+  { src: '/company_logos/pioneer.png', alt: 'Pioneer', grayscaleOnly: true },
+  { src: '/company_logos/symphony.png', alt: 'Symphony', grayscaleOnly: true },
+  { src: '/company_logos/holisol.png', alt: 'Holisol' },
+  { src: '/company_logos/alienkind.png', alt: 'Alienkind' },
+  { src: '/company_logos/slikk_logo.png', alt: 'Slikk' },
+  { src: '/company_logos/Mamaearth-Logo-Vector.svg-.png', alt: 'Mamaearth' },
+];
+
 const TrustedBySection = () => {
-  const items = Array.from({ length: LOGO_COUNT });
-
-  useEffect(() => {
-    const img = new Image();
-    img.src = LOGO_SRC;
-  }, []);
-
   const Track = ({ ariaHidden }: { ariaHidden?: boolean }) => (
     <div className="trusted-track" aria-hidden={ariaHidden}>
-      {items.map((_, i) => (
-        <div className="trusted-item" key={i}>
-          <img src={LOGO_SRC} alt="WareOnGo" loading="eager" decoding="async" />
+      {COMPANY_LOGOS.map((logo) => (
+        <div className="trusted-item" key={logo.src}>
+          <img
+            src={logo.src}
+            alt={ariaHidden ? '' : logo.alt}
+            loading="eager"
+            decoding="async"
+            className={logo.grayscaleOnly ? "grayscale" : "brightness-0"}
+          />
         </div>
       ))}
     </div>
@@ -63,24 +77,33 @@ const TrustedBySection = () => {
         }
         .trusted-item {
           flex-shrink: 0;
-          padding: 0 2.5rem;
+          width: 9.5rem;
+          height: 3.25rem;
+          padding: 0 1.5rem;
           display: flex;
           align-items: center;
           justify-content: center;
         }
         @media (min-width: 768px) {
-          .trusted-item { padding: 0 5rem; }
+          .trusted-item {
+            width: 13rem;
+            height: 4rem;
+            padding: 0 2.25rem;
+          }
         }
         .trusted-item img {
-          height: 1.5rem;
+          display: block;
+          max-width: 100%;
+          max-height: 100%;
           width: auto;
+          height: auto;
           object-fit: contain;
-          filter: brightness(0);
-          opacity: 0.6;
-          transition: opacity 0.3s;
+          opacity: 0.72;
+          transition: opacity 0.3s, transform 0.3s;
         }
         .trusted-item img:hover {
           opacity: 1;
+          transform: translateY(-1px);
         }
         .trusted-fade {
           position: absolute;
