@@ -23,6 +23,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				sans: ['Montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				display: ['"Instrument Serif"', 'ui-serif', 'Georgia', 'serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -73,7 +77,7 @@ export default {
 					green: '#3D5A4A',
 					sienna: '#B3502D',
 					purple: '#4A2E50',
-					ivory: '#F4F1EC',
+					ivory: '#F8F6F1',
 					slate: '#6C757D',
 					charcoal: '#343A40',
 				}
@@ -99,11 +103,16 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'marquee': {
+					from: { transform: 'translateX(0)' },
+					to: { transform: 'translateX(-50%)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'marquee': 'marquee 30s linear infinite'
 			}
 		}
 	},

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Phone, Mail } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const Footer = () => {
@@ -45,20 +45,6 @@ const Footer = () => {
             <p className="mb-4 text-gray-300">
               Find the Right Warehouse, Faster.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-gray-300 hover:text-white">
-                <Facebook size={20} />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white">
-                <Twitter size={20} />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white">
-                <Linkedin size={20} />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white">
-                <Instagram size={20} />
-              </a>
-            </div>
           </div>
           
           <div>
@@ -152,11 +138,18 @@ const Footer = () => {
               Privacy Policy
             </Link>
             <span className="hidden sm:inline">•</span>
-            <Link 
-              to="/terms-of-service" 
+            <Link
+              to="/terms-of-service"
               className="hover:text-white transition-colors"
             >
               Terms of Service
+            </Link>
+            <span className="hidden sm:inline">•</span>
+            <Link
+              to="/login"
+              className="text-gray-500 hover:text-white transition-colors text-xs"
+            >
+              Login
             </Link>
           </div>
           <p>&copy; {new Date().getFullYear()} Neuroware Technologies Private Limited. All rights reserved.</p>

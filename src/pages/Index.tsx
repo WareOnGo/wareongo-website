@@ -2,9 +2,11 @@
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
-import FeaturesSection from '@/components/FeaturesSection';
-import HowItWorksSection from '@/components/HowItWorksSection';
-import ListingsSection from '@/components/ListingsSection';
+import TrustedBySection from '@/components/TrustedBySection';
+import BentoSection from '@/components/BentoSection';
+import StatsSection from '@/components/StatsSection';
+import EdgeSection from '@/components/EdgeSection';
+import CaseStudiesSection from '@/components/CaseStudiesSection';
 import RequestFormSection from '@/components/RequestFormSection';
 import Footer from '@/components/Footer';
 
@@ -12,14 +14,16 @@ const Index = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-wareongo-ivory">
       <Navbar />
       <HeroSection />
-      <FeaturesSection />
-      <HowItWorksSection />
-      <ListingsSection />
+      <TrustedBySection />
+      <BentoSection />
+      <StatsSection />
+      <EdgeSection />
+      <CaseStudiesSection />
       <RequestFormSection />
       <Footer />
     </div>

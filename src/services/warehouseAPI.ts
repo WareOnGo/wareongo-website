@@ -295,22 +295,7 @@ class WarehouseAPI {
 
 export const warehouseAPI = new WarehouseAPI();
 
-/**
- * Extracts the first valid image URL from a photos string or array
- * Handles JSON arrays, regular arrays, and comma-separated strings
- * Filters out PDFs and non-image files
- */
-export const getFirstImageUrl = (photosData: string | string[] | null): string | null => {
-  const allImages = getAllImageUrls(photosData);
-  return allImages.length > 0 ? allImages[0] : null;
-};
-
-/**
- * Extracts all valid image URLs from a photos string or array
- * Handles JSON arrays, regular arrays, and comma-separated strings
- * Filters out PDFs and non-image files
- */
-export const getAllImageUrls = (photosData: string | string[] | null): string[] => {
+const getAllImageUrls = (photosData: string | string[] | null): string[] => {
   if (!photosData) {
     console.log('No photos data provided');
     return [];

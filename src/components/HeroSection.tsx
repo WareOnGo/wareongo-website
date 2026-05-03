@@ -1,42 +1,50 @@
-
-import React from 'react';
-import { Button } from "@/components/ui/button";
+import React, { useState } from 'react';
+import ContactFormDialog from '@/components/ContactFormDialog';
 
 const HeroSection = () => {
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
 
   return (
-    <section className="bg-gradient-to-br from-wareongo-ivory to-white py-16 md:py-28">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-wareongo-blue mb-6">
+    <section className="relative bg-wareongo-ivory overflow-hidden -mt-20 pt-20 min-h-screen flex items-center">
+      {/* Background video (grayscale baked in) */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover opacity-15 pointer-events-none"
+        src="/hero.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+        aria-hidden="true"
+      />
+
+      {/* Soft fade for legibility */}
+      <div className="absolute inset-0 bg-gradient-to-b from-wareongo-ivory/40 via-transparent to-wareongo-ivory pointer-events-none" />
+
+      <div className="relative container mx-auto px-4 sm:px-6">
+        <div className="max-w-3xl">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-wareongo-blue leading-tight mb-4 sm:mb-6">
             Find the Right Warehouse, Faster.
           </h1>
-          <p className="text-lg md:text-xl text-wareongo-slate mb-10 max-w-2xl">
+          <p className="text-base sm:text-lg md:text-xl text-wareongo-slate mb-8 sm:mb-10 max-w-2xl">
             Verified warehouses tailored to your business needs. Save time, start operations in days.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Button 
-              className="btn-primary text-lg"
-              onClick={() => scrollToSection('request')}
-            >
-              Request a Warehouse
-            </Button>
-            <Button 
-              variant="outline" 
-              className="text-wareongo-blue border-wareongo-blue text-lg"
-              onClick={() => scrollToSection('how-it-works')}
-            >
-              How It Works
-            </Button>
-          </div>
+          <button
+            onClick={() => setIsContactDialogOpen(true)}
+            className="w-full sm:w-auto bg-wareongo-blue text-white text-base font-medium px-7 py-4 rounded-lg hover:opacity-90 transition-opacity"
+          >
+            Request a Warehouse
+          </button>
         </div>
       </div>
+
+      <ContactFormDialog
+        open={isContactDialogOpen}
+        onOpenChange={setIsContactDialogOpen}
+        title="Request a Warehouse"
+        description="Share your details, and we'll get back to you!"
+        successMessage="We will reach out within 2 hours."
+        source="hero"
+      />
     </section>
   );
 };

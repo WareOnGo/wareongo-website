@@ -16,6 +16,7 @@ import WarehouseDetail from "./pages/WarehouseDetail";
 import AdminPanel from "./pages/AdminPanel";
 import UserDashboard from "./pages/UserDashboard";
 import Unauthorized from "./pages/Unauthorized";
+import Login from "./pages/Login";
 import AdminRoute from "./components/AdminRoute";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => (
               <Route path="/warehouse/:id" element={<WarehouseDetail />} />
               <Route path="/user-dashboard" element={<UserDashboard />} />
               <Route path="/unauthorized" element={<Unauthorized />} />
+              <Route path="/login" element={<Login />} />
               
               {/* Protected Admin Routes */}
               <Route element={<AdminRoute />}>
