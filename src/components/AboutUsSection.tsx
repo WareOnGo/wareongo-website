@@ -5,13 +5,17 @@ import CircularCursor from './CircularCursor';
 
 const AboutUsSection = () => {
   const [isHovering, setIsHovering] = useState(false);
+  const [entryPos, setEntryPos] = useState<{ x: number; y: number } | null>(null);
 
   return (
     <section className="bg-wareongo-ivory py-16 md:py-24">
       <div className="container mx-auto px-4 max-w-5xl [perspective:1200px]">
         <Link
           to="/about-us"
-          onMouseEnter={() => setIsHovering(true)}
+          onMouseEnter={(e) => {
+            setEntryPos({ x: e.clientX, y: e.clientY });
+            setIsHovering(true);
+          }}
           onMouseLeave={() => setIsHovering(false)}
           className="about-card group block bg-transparent border border-wareongo-blue rounded-2xl overflow-hidden hover:bg-wareongo-blue/5 transition-colors"
         >
@@ -65,7 +69,7 @@ const AboutUsSection = () => {
           }
         `}</style>
       </div>
-      <CircularCursor visible={isHovering} text=" READ NOW ---★--- READ NOW --★-- " />
+      <CircularCursor visible={isHovering} initialPos={entryPos} text=" READ NOW ---★--- READ NOW --★-- " />
     </section>
   );
 };

@@ -36,6 +36,7 @@ const featuredListings = [
 const FeaturedListingsSection = () => {
   const navigate = useNavigate();
   const [isHovering, setIsHovering] = useState(false);
+  const [entryPos, setEntryPos] = useState<{ x: number; y: number } | null>(null);
 
   return (
     <section className="bg-wareongo-ivory py-16 md:py-24 border-t border-black/5">
@@ -58,14 +59,18 @@ const FeaturedListingsSection = () => {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 [perspective:1200px]">
+        <div className="listings-scroller -mx-4 pl-5 pr-5 flex gap-5 overflow-x-auto snap-x snap-mandatory pb-2 md:mx-0 md:pl-0 md:pr-0 md:pb-0 md:overflow-visible md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 [perspective:1200px]">
           {featuredListings.map((listing) => (
             <button
               key={listing.id}
               onClick={() => navigate(`/warehouse/${listing.id}`)}
-              onMouseEnter={() => setIsHovering(true)}
+              onMouseEnter={(e) => {
+                if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+                setEntryPos({ x: e.clientX, y: e.clientY });
+                setIsHovering(true);
+              }}
               onMouseLeave={() => setIsHovering(false)}
-              className="listing-card text-left group bg-transparent border border-wareongo-blue rounded-2xl overflow-hidden flex flex-col hover:bg-wareongo-blue/5 transition-colors"
+              className="listing-card text-left group bg-transparent border border-wareongo-blue rounded-2xl overflow-hidden flex flex-col hover:bg-wareongo-blue/5 transition-colors shrink-0 w-[78%] min-[400px]:w-[70%] snap-start md:w-auto md:shrink"
             >
               <div className="aspect-[16/10] overflow-hidden w-full relative">
                 <img
@@ -112,6 +117,21 @@ const FeaturedListingsSection = () => {
         </div>
 
         <style>{`
+          .listings-scroller {
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            scroll-padding-left: 1.25rem;
+          }
+          @media (min-width: 768px) {
+            .listings-scroller { scroll-padding-left: 0; }
+          }
+          .listings-scroller::-webkit-scrollbar { display: none; }
+          .listings-scroller > :last-child {
+            margin-right: 1rem;
+          }
+          @media (min-width: 768px) {
+            .listings-scroller > :last-child { margin-right: 0; }
+          }
           .listing-card,
           .listing-card * {
             cursor: none !important;
@@ -121,14 +141,16 @@ const FeaturedListingsSection = () => {
             transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1), background-color 400ms;
             will-change: transform;
           }
-          .listing-card:hover {
-            transform: perspective(1200px) rotateX(3deg) rotateY(-4deg) translateY(-4px);
-          }
-          .listing-card:nth-child(2):hover {
-            transform: perspective(1200px) rotateX(3deg) rotateY(0deg) translateY(-4px);
-          }
-          .listing-card:nth-child(3):hover {
-            transform: perspective(1200px) rotateX(3deg) rotateY(4deg) translateY(-4px);
+          @media (hover: hover) and (pointer: fine) {
+            .listing-card:hover {
+              transform: perspective(1200px) rotateX(3deg) rotateY(-4deg) translateY(-4px);
+            }
+            .listing-card:nth-child(2):hover {
+              transform: perspective(1200px) rotateX(3deg) rotateY(0deg) translateY(-4px);
+            }
+            .listing-card:nth-child(3):hover {
+              transform: perspective(1200px) rotateX(3deg) rotateY(4deg) translateY(-4px);
+            }
           }
           @media (prefers-reduced-motion: reduce) {
             .listing-card, .listing-card:hover { transform: none; transition: none; }
@@ -136,7 +158,7 @@ const FeaturedListingsSection = () => {
         `}</style>
       </div>
 
-      <CircularCursor visible={isHovering} text="EXPLORE ★ EXPLORE ★ EXPLORE ★" />
+      <CircularCursor visible={isHovering} initialPos={entryPos} text="EXPLORE ★ EXPLORE ★ EXPLORE ★" />
     </section>
   );
 };

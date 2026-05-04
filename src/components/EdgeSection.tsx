@@ -34,7 +34,6 @@ const EdgeSection = () => {
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
   const [showCardsMobile, setShowCardsMobile] = useState(false);
 
-
   return (
     <section id="edge-section">
       <SpotlightCard
@@ -105,8 +104,19 @@ const EdgeSection = () => {
       />
 
       <style>{`
+        #edge-section,
+        #edge-section * {
+          cursor: url('/cursor_ivory.png'), auto !important;
+        }
+        #edge-section a, 
+        #edge-section button, 
+        #edge-section [role="button"] {
+          cursor: url('/cursor_ivory.png'), pointer !important;
+        }
         .edge-spotlight {
-          background: linear-gradient(45deg, #0e2d4a 0%, #0A2239 55%, #081c2e 100%) !important;
+          background:
+            radial-gradient(ellipse 70% 55% at 30% 35%, rgba(56, 140, 224, 0.18) 0%, rgba(56, 140, 224, 0.08) 40%, rgba(56, 140, 224, 0) 70%),
+            linear-gradient(45deg, #0e2d4a 0%, #0A2239 55%, #081c2e 100%) !important;
           background-color: transparent !important;
           border: none !important;
           border-radius: 0;

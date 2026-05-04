@@ -25,6 +25,7 @@ const studies = [
 
 const CaseStudiesSection = () => {
   const [isHovering, setIsHovering] = useState(false);
+  const [entryPos, setEntryPos] = useState<{ x: number; y: number } | null>(null);
 
   return (
     <section className="bg-wareongo-ivory py-12 md:py-24">
@@ -43,7 +44,10 @@ const CaseStudiesSection = () => {
             <a
               key={s.eyebrow}
               href={s.href}
-              onMouseEnter={() => setIsHovering(true)}
+              onMouseEnter={(e) => {
+                setEntryPos({ x: e.clientX, y: e.clientY });
+                setIsHovering(true);
+              }}
               onMouseLeave={() => setIsHovering(false)}
               className="case-card group bg-transparent border border-wareongo-blue rounded-2xl overflow-hidden flex flex-col hover:bg-wareongo-blue/5"
             >
@@ -95,7 +99,7 @@ const CaseStudiesSection = () => {
           }
         `}</style>
       </div>
-      <CircularCursor visible={isHovering} text=" READ ARTICLE -★-  READ ARTICLE   -★-   " />
+      <CircularCursor visible={isHovering} initialPos={entryPos} text=" READ ARTICLE -★-  READ ARTICLE   -★-   " />
     </section>
   );
 };
