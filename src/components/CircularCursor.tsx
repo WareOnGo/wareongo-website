@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHasHover } from '@/hooks/use-has-hover';
 
 interface CircularCursorProps {
   visible: boolean;
@@ -16,6 +17,7 @@ const CircularCursor: React.FC<CircularCursorProps> = ({
   initialPos = null
 }) => {
   const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 });
+  const hasHover = useHasHover();
 
   useEffect(() => {
     if (!visible) return;
@@ -29,7 +31,7 @@ const CircularCursor: React.FC<CircularCursorProps> = ({
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [visible, initialPos]);
 
-  if (!visible) return null;
+  if (!visible || !hasHover) return null;
 
   return (
     <div 

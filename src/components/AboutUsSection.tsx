@@ -52,17 +52,19 @@ const AboutUsSection = () => {
           </div>
         </Link>
         <style>{`
-          .about-card,
-          .about-card * {
-            cursor: none !important;
-          }
-          .about-card {
-            transform: perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0);
-            transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1), background-color 400ms;
-            will-change: transform;
-          }
-          .about-card:hover {
-            transform: perspective(1200px) rotateX(2deg) rotateY(-2deg) translateY(-4px);
+          @media (hover: hover) and (pointer: fine) {
+            .about-card,
+            .about-card * {
+              cursor: none !important;
+            }
+            .about-card {
+              transform: perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0);
+              transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1), background-color 400ms;
+              will-change: transform;
+            }
+            .about-card:hover {
+              transform: perspective(1200px) rotateX(2deg) rotateY(-2deg) translateY(-4px);
+            }
           }
           @media (prefers-reduced-motion: reduce) {
             .about-card, .about-card:hover { transform: none; transition: none; }

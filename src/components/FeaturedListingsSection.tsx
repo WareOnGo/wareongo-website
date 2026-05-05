@@ -132,16 +132,16 @@ const FeaturedListingsSection = () => {
           @media (min-width: 768px) {
             .listings-scroller > :last-child { margin-right: 0; }
           }
-          .listing-card,
-          .listing-card * {
-            cursor: none !important;
-          }
           .listing-card {
             transform: perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0);
             transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1), background-color 400ms;
             will-change: transform;
           }
           @media (hover: hover) and (pointer: fine) {
+            .listing-card,
+            .listing-card * {
+              cursor: none !important;
+            }
             .listing-card:hover {
               transform: perspective(1200px) rotateX(3deg) rotateY(-4deg) translateY(-4px);
             }

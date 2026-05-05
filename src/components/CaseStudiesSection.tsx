@@ -79,20 +79,22 @@ const CaseStudiesSection = () => {
         </div>
 
         <style>{`
-          .case-card,
-          .case-card * {
-            cursor: none !important;
-          }
-          .case-card {
-            transform: perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0);
-            transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1), background-color 400ms;
-            will-change: transform;
-          }
-          .case-card:hover {
-            transform: perspective(1200px) rotateX(3deg) rotateY(-4deg) translateY(-4px);
-          }
-          .case-card:nth-child(2):hover {
-            transform: perspective(1200px) rotateX(3deg) rotateY(4deg) translateY(-4px);
+          @media (hover: hover) and (pointer: fine) {
+            .case-card,
+            .case-card * {
+              cursor: none !important;
+            }
+            .case-card {
+              transform: perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0);
+              transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1), background-color 400ms;
+              will-change: transform;
+            }
+            .case-card:hover {
+              transform: perspective(1200px) rotateX(3deg) rotateY(-4deg) translateY(-4px);
+            }
+            .case-card:nth-child(2):hover {
+              transform: perspective(1200px) rotateX(3deg) rotateY(4deg) translateY(-4px);
+            }
           }
           @media (prefers-reduced-motion: reduce) {
             .case-card, .case-card:hover { transform: none; transition: none; }
