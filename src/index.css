@@ -220,10 +220,43 @@
     .border {
       border-width: 2px;
     }
-    
+
     .focus\:ring-2:focus {
       outline: 3px solid;
       outline-offset: 2px;
     }
   }
+}
+
+/* Leaflet popup — match neubrutal stroked theme */
+.leaflet-popup.warehouse-popup .leaflet-popup-content-wrapper {
+  background-color: #F8F6F1;
+  color: #0A2239;
+  border: 1px solid #0A2239;
+  border-radius: 1rem;
+  box-shadow: none;
+  padding: 4px;
+}
+
+.leaflet-popup.warehouse-popup .leaflet-popup-content {
+  margin: 12px 14px;
+  font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+  line-height: 1.4;
+}
+
+.leaflet-popup.warehouse-popup .leaflet-popup-tip {
+  background: #F8F6F1;
+  border: 1px solid #0A2239;
+  box-shadow: none;
+}
+
+.leaflet-popup.warehouse-popup a.leaflet-popup-close-button {
+  color: #0A2239;
+  font-weight: 400;
+  padding: 6px 8px 0 0;
+}
+
+.leaflet-popup.warehouse-popup a.leaflet-popup-close-button:hover {
+  color: #0A2239;
+  background: transparent;
 }

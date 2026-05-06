@@ -1,17 +1,14 @@
 
 import React, { useState } from 'react';
-import { 
-  Dialog, 
-  DialogContent, 
-  DialogDescription, 
-  DialogHeader, 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
   DialogTitle,
   DialogFooter,
   DialogClose
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import { Mail, Phone, User, Loader } from 'lucide-react';
 import { submitContactForm } from '@/services/formSubmission';
@@ -25,10 +22,10 @@ interface ContactFormDialogProps {
   source: string;
 }
 
-const ContactFormDialog = ({ 
-  open, 
-  onOpenChange, 
-  title, 
+const ContactFormDialog = ({
+  open,
+  onOpenChange,
+  title,
   description,
   successMessage,
   source
@@ -41,12 +38,11 @@ const ContactFormDialog = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Trim values
+
     const trimmedName = name.trim();
     const trimmedPhone = phone.trim();
     const trimmedEmail = email.trim();
-    
+
     if (!trimmedName || !trimmedPhone) {
       toast({
         title: "Validation Error",
@@ -56,16 +52,9 @@ const ContactFormDialog = ({
       return;
     }
 
-    console.log('Form values before submit:', { 
-      name: trimmedName, 
-      phone: trimmedPhone, 
-      email: trimmedEmail || null, 
-      source 
-    });
-
     setIsSubmitting(true);
     setError(null);
-    
+
     try {
       const result = await submitContactForm({
         name: trimmedName,
@@ -73,17 +62,16 @@ const ContactFormDialog = ({
         email: trimmedEmail || null,
         source
       });
-      
+
       if (!result.success) {
         throw new Error(result.error);
       }
-      
+
       toast({
         title: "Success",
         description: successMessage,
       });
-      
-      // Reset form
+
       setName('');
       setPhone('');
       setEmail('');
@@ -102,72 +90,97 @@ const ContactFormDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>{description}</DialogDescription>
+      <DialogContent className="font-sans bg-wareongo-ivory border border-wareongo-blue rounded-2xl sm:max-w-[460px] p-6 sm:p-8 shadow-none gap-0">
+        <DialogHeader className="mb-5">
+          <p className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-wareongo-slate font-medium mb-2 text-left">
+            Get in touch
+          </p>
+          <DialogTitle className="text-2xl sm:text-3xl font-bold text-wareongo-blue text-left">
+            {title}
+          </DialogTitle>
+          <DialogDescription className="text-sm text-wareongo-slate text-left pt-1">
+            {description}
+          </DialogDescription>
         </DialogHeader>
-        
-        <form onSubmit={handleSubmit} className="space-y-4 py-4">
+
+        <form onSubmit={handleSubmit} className="space-y-4">
           {error && (
-            <div className="p-3 text-sm bg-red-50 border border-red-200 text-red-600 rounded">
+            <div className="p-3 text-sm bg-wareongo-sienna/10 border border-wareongo-sienna text-wareongo-sienna rounded-xl">
               {error}
             </div>
           )}
-          
-          <div className="space-y-2">
-            <Label htmlFor="name" className="text-wareongo-charcoal">Name</Label>
+
+          <div className="space-y-1.5">
+            <label htmlFor="name" className="text-xs uppercase tracking-[0.18em] font-medium text-wareongo-slate block">
+              Name
+            </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-wareongo-slate">
-                <User className="h-4 w-4" />
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-wareongo-blue/70">
+                <User className="h-4 w-4" strokeWidth={1.5} />
               </div>
-              <Input 
-                id="name" 
-                className="pl-10" 
-                placeholder="Enter your name" 
-                value={name} 
-                onChange={(e) => setName(e.target.value)} 
-                required 
+              <input
+                id="name"
+                className="w-full h-11 pl-10 pr-3.5 bg-transparent border border-wareongo-blue rounded-xl text-sm text-wareongo-blue placeholder:text-wareongo-slate/60 focus:outline-none focus:ring-2 focus:ring-wareongo-blue/20 focus:border-wareongo-blue transition-colors"
+                placeholder="Enter your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
               />
             </div>
           </div>
-          
-          <div className="space-y-2">
-            <Label htmlFor="phone" className="text-wareongo-charcoal">Phone Number</Label>
+
+          <div className="space-y-1.5">
+            <label htmlFor="phone" className="text-xs uppercase tracking-[0.18em] font-medium text-wareongo-slate block">
+              Phone Number
+            </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-wareongo-slate">
-                <Phone className="h-4 w-4" />
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-wareongo-blue/70">
+                <Phone className="h-4 w-4" strokeWidth={1.5} />
               </div>
-              <Input 
-                id="phone" 
-                className="pl-10" 
-                placeholder="Enter your phone number" 
-                value={phone} 
-                onChange={(e) => setPhone(e.target.value)} 
-                required 
+              <input
+                id="phone"
+                className="w-full h-11 pl-10 pr-3.5 bg-transparent border border-wareongo-blue rounded-xl text-sm text-wareongo-blue placeholder:text-wareongo-slate/60 focus:outline-none focus:ring-2 focus:ring-wareongo-blue/20 focus:border-wareongo-blue transition-colors"
+                placeholder="Enter your phone number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
               />
             </div>
           </div>
-          
-          <div className="space-y-2">
-            <Label htmlFor="email" className="text-wareongo-charcoal">Email (Optional)</Label>
+
+          <div className="space-y-1.5">
+            <label htmlFor="email" className="text-xs uppercase tracking-[0.18em] font-medium text-wareongo-slate block">
+              Email <span className="lowercase tracking-normal text-wareongo-slate/70 normal-case">(optional)</span>
+            </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-wareongo-slate">
-                <Mail className="h-4 w-4" />
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-wareongo-blue/70">
+                <Mail className="h-4 w-4" strokeWidth={1.5} />
               </div>
-              <Input 
-                id="email" 
-                type="email" 
-                className="pl-10" 
-                placeholder="Enter your email (optional)" 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)} 
+              <input
+                id="email"
+                type="email"
+                className="w-full h-11 pl-10 pr-3.5 bg-transparent border border-wareongo-blue rounded-xl text-sm text-wareongo-blue placeholder:text-wareongo-slate/60 focus:outline-none focus:ring-2 focus:ring-wareongo-blue/20 focus:border-wareongo-blue transition-colors"
+                placeholder="Enter your email (optional)"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
           </div>
-          
-          <DialogFooter className="pt-4">
-            <Button type="submit" disabled={isSubmitting}>
+
+          <DialogFooter className="pt-4 flex flex-col-reverse sm:flex-row sm:justify-end gap-2 sm:gap-3 sm:space-x-0">
+            <DialogClose asChild>
+              <button
+                type="button"
+                className="h-11 px-5 bg-transparent border border-wareongo-blue rounded-xl text-sm font-semibold text-wareongo-blue hover:bg-wareongo-blue/5 transition-colors"
+              >
+                Cancel
+              </button>
+            </DialogClose>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="h-11 px-5 bg-wareongo-blue border border-wareongo-blue rounded-xl text-sm font-semibold text-wareongo-ivory hover:bg-wareongo-blue/90 transition-colors disabled:opacity-60 disabled:cursor-not-allowed inline-flex items-center justify-center"
+            >
               {isSubmitting ? (
                 <>
                   <Loader className="h-4 w-4 mr-2 animate-spin" />
@@ -176,10 +189,7 @@ const ContactFormDialog = ({
               ) : (
                 'Submit'
               )}
-            </Button>
-            <DialogClose asChild>
-              <Button type="button" variant="outline">Cancel</Button>
-            </DialogClose>
+            </button>
           </DialogFooter>
         </form>
       </DialogContent>

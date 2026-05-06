@@ -1,24 +1,42 @@
 import React from 'react';
-import { Zap, Handshake, ShieldCheck } from 'lucide-react';
+import { Clock, TrendingUp, MapPin, ShieldCheck } from 'lucide-react';
 
 const VALUES = [
   {
-    icon: Zap,
-    title: 'Propose Faster',
-    description:
-      'Custom detailed proposals delivered within 3 hours. We move quickly to ensure you can make fast, informed decisions.',
+    icon: Clock,
+    title: 'Relevant Warehouse Options in 6 Hours',
+    points: [
+      'We evaluate 50 warehouses. You see 5',
+      'Scale expansion without building internal teams',
+      'RFQ to site visit in 24–48 hrs',
+    ],
   },
   {
-    icon: Handshake,
-    title: 'Negotiate Better',
-    description:
-      'Expert lease advisory and deal structuring support. We help you secure the most favorable commercial terms for your business.',
+    icon: TrendingUp,
+    title: 'Get 10–15% Better Commercials',
+    points: [
+      '₹2-4/sq ft monthly savings',
+      'Lakhs of rupees saved per lease',
+      'Deals based on real benchmarks',
+    ],
+  },
+  {
+    icon: MapPin,
+    title: 'One SPOC. 75+ Cities. Real Market Access',
+    points: [
+      '10,000+ warehouses across India',
+      'Tier 1, 2 + emerging hubs',
+      'Same speed, whether its 1 or 10 cities',
+    ],
   },
   {
     icon: ShieldCheck,
-    title: 'Verified Intelligence',
-    description:
-      'What you see is what you lease. We conduct strong due diligence and physical inspections to guarantee complete listing accuracy.',
+    title: 'Avoid Costly Mistakes Before You Sign',
+    points: [
+      '100% legal + compliance checked upfront',
+      'No delays or hidden risks',
+      '30–50% faster deal closure',
+    ],
   },
 ];
 
@@ -37,24 +55,29 @@ const WhatWeStandForSection = () => {
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6 max-w-5xl mx-auto">
           {VALUES.map((item, i) => (
             <div
               key={i}
-              className="bg-transparent border border-wareongo-blue rounded-2xl p-6 sm:p-8 transition-all duration-300 group flex flex-col items-center text-center hover:bg-wareongo-blue/5"
+              className="bg-transparent border border-wareongo-blue rounded-2xl p-6 sm:p-8 transition-all duration-300 group flex flex-col items-start text-left hover:bg-wareongo-blue/5"
             >
               {/* Icon */}
-              <div className="w-12 h-12 rounded-xl bg-sky-100/50 border border-wareongo-blue/20 flex items-center justify-center mb-6 transition-colors duration-300">
+              <div className="w-12 h-12 rounded-xl bg-sky-100/50 border border-wareongo-blue/20 flex items-center justify-center mb-5 transition-colors duration-300">
                 <item.icon className="w-6 h-6 text-wareongo-blue transition-colors duration-300" strokeWidth={1.5} />
               </div>
 
               {/* Content */}
-              <h3 className="text-xl font-semibold text-wareongo-blue mb-3">
+              <h3 className="text-lg sm:text-xl font-semibold text-wareongo-blue mb-4">
                 {item.title}
               </h3>
-              <p className="text-wareongo-slate leading-relaxed">
-                {item.description}
-              </p>
+              <ul className="text-wareongo-slate leading-relaxed space-y-2 text-sm sm:text-base w-full">
+                {item.points.map((point, j) => (
+                  <li key={j} className="flex items-start gap-2">
+                    <span className="text-wareongo-blue mt-1.5 w-1.5 h-1.5 rounded-full bg-wareongo-blue flex-shrink-0" />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>

@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { Icon, LatLngExpression } from 'leaflet';
 import { Loader2, MapPin, AlertCircle } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
 import { geocodingService, LocationCoordinates, GeocodingError } from '@/services/geocodingService';
 
 // Fix for default markers in react-leaflet
@@ -47,11 +46,11 @@ const MapLoadingState: React.FC<{ stage: 'geocoding' | 'map' | 'complete' }> = (
   const message = getLoadingMessage();
 
   return (
-    <div className="flex items-center justify-center h-full bg-gray-50 rounded-lg">
+    <div className="flex items-center justify-center h-full bg-wareongo-blue/5 border border-wareongo-blue/20 rounded-2xl">
       <div className="text-center">
-        <Loader2 className="w-8 h-8 text-blue-600 animate-spin mx-auto mb-2" />
-        <p className="text-sm text-gray-600">{message.primary}</p>
-        <p className="text-xs text-gray-500 mt-1">{message.secondary}</p>
+        <Loader2 className="w-8 h-8 text-wareongo-blue animate-spin mx-auto mb-2" />
+        <p className="text-sm text-wareongo-blue font-medium">{message.primary}</p>
+        <p className="text-xs text-wareongo-slate mt-1">{message.secondary}</p>
       </div>
     </div>
   );
@@ -63,14 +62,14 @@ const MapErrorState: React.FC<{
   onRetry?: () => void; 
   showRetry?: boolean;
 }> = ({ error, onRetry, showRetry = false }) => (
-  <div className="flex items-center justify-center h-full bg-gray-50 rounded-lg p-4">
+  <div className="flex items-center justify-center h-full bg-wareongo-blue/5 border border-wareongo-blue/20 rounded-2xl p-4">
     <div className="text-center max-w-sm">
-      <AlertCircle className="w-8 h-8 text-red-500 mx-auto mb-2" />
-      <p className="text-sm text-gray-600 mb-2">{error}</p>
+      <AlertCircle className="w-8 h-8 text-wareongo-blue/60 mx-auto mb-2" />
+      <p className="text-sm text-wareongo-slate mb-2">{error}</p>
       {showRetry && onRetry && (
         <button
           onClick={onRetry}
-          className="text-xs text-blue-600 hover:text-blue-800 underline"
+          className="text-xs text-wareongo-blue hover:underline font-medium"
         >
           Try again
         </button>
@@ -164,37 +163,37 @@ const WarehouseLocationMap: React.FC<WarehouseLocationMapProps> = ({
   // Render loading state
   if (isLoading) {
     return (
-      <Card className={className}>
-        <CardContent className="p-0 h-full">
+      <div className={`border border-wareongo-blue rounded-2xl overflow-hidden bg-transparent ${className}`}>
+        <div className="p-0 h-full">
           <MapLoadingState stage={loadingStage} />
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     );
   }
 
   // Render error state
   if (error && !coordinates) {
     return (
-      <Card className={className}>
-        <CardContent className="p-0 h-full">
-          <MapErrorState 
-            error={error} 
+      <div className={`border border-wareongo-blue rounded-2xl overflow-hidden bg-transparent ${className}`}>
+        <div className="p-0 h-full">
+          <MapErrorState
+            error={error}
             onRetry={handleRetry}
             showRetry={retryCount < 3}
           />
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     );
   }
 
   // Render map if coordinates are available
   if (!coordinates) {
     return (
-      <Card className={className}>
-        <CardContent className="p-0 h-full">
+      <div className={`border border-wareongo-blue rounded-2xl overflow-hidden bg-transparent ${className}`}>
+        <div className="p-0 h-full">
           <MapErrorState error="Location data not available" />
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     );
   }
 
@@ -236,15 +235,15 @@ const WarehouseLocationMap: React.FC<WarehouseLocationMapProps> = ({
   const mapOptions = getMapOptions(coordinates);
 
   return (
-    <Card className={className}>
-      <CardContent className="p-0 h-full">
-        <div className="relative h-full rounded-lg overflow-hidden">
+    <div className={`border border-wareongo-blue rounded-2xl overflow-hidden bg-transparent ${className}`}>
+      <div className="p-0 h-full">
+        <div className="relative h-full rounded-2xl overflow-hidden">
           {/* Loading overlay for map initialization */}
           {!isMapReady && (
-            <div className="absolute inset-0 bg-gray-50 bg-opacity-90 z-10 flex items-center justify-center">
+            <div className="absolute inset-0 bg-wareongo-blue/5 bg-opacity-90 z-10 flex items-center justify-center">
               <div className="text-center">
-                <Loader2 className="w-6 h-6 text-blue-600 animate-spin mx-auto mb-1" />
-                <p className="text-xs text-gray-600">Initializing map...</p>
+                <Loader2 className="w-6 h-6 text-wareongo-blue animate-spin mx-auto mb-1" />
+                <p className="text-xs text-wareongo-slate">Initializing map…</p>
               </div>
             </div>
           )}
@@ -296,31 +295,31 @@ const WarehouseLocationMap: React.FC<WarehouseLocationMapProps> = ({
                 maxWidth={280}
                 minWidth={200}
               >
-                <div className="text-sm">
-                  <div className="font-semibold mb-2 flex items-center text-blue-700">
-                    <MapPin className="w-4 h-4 mr-1 flex-shrink-0" />
+                <div className="text-sm font-sans">
+                  <div className="text-[10px] uppercase tracking-[0.2em] text-wareongo-slate mb-2 flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-wareongo-blue flex-shrink-0" />
                     <span className="truncate">Warehouse #{warehouseId}</span>
                   </div>
                   <div className="space-y-1">
-                    <div className="text-gray-700 font-medium break-words">
+                    <div className="text-wareongo-blue font-semibold break-words leading-relaxed">
                       {address}
                     </div>
-                    <div className="text-gray-600">
+                    <div className="text-wareongo-slate">
                       {city}, {state}
                     </div>
                     {postalCode && (
-                      <div className="text-gray-600 text-xs">
+                      <div className="text-wareongo-slate text-xs">
                         Postal Code: {postalCode}
                       </div>
                     )}
                   </div>
                   {coordinates.accuracy !== 'postal' && (
-                    <div className="text-xs text-orange-600 mt-2 p-1 bg-orange-50 rounded">
-                      📍 Approximate location ({coordinates.accuracy} level accuracy)
+                    <div className="text-xs text-wareongo-blue mt-2 px-2 py-1 border border-wareongo-blue/20 bg-wareongo-blue/5 rounded-md">
+                      Approximate location ({coordinates.accuracy} level)
                     </div>
                   )}
                   {coordinates.displayName && coordinates.displayName !== `${city}, ${state}, India` && (
-                    <div className="text-xs text-gray-500 mt-1 border-t pt-1 break-words">
+                    <div className="text-xs text-wareongo-slate mt-2 border-t border-wareongo-blue/20 pt-2 break-words">
                       Geocoded: {coordinates.displayName}
                     </div>
                   )}
@@ -331,13 +330,13 @@ const WarehouseLocationMap: React.FC<WarehouseLocationMapProps> = ({
           
           {/* Accuracy indicator */}
           {coordinates.accuracy !== 'postal' && (
-            <div className="absolute top-2 right-2 bg-white bg-opacity-90 px-2 py-1 rounded text-xs text-gray-600 shadow-sm z-10">
+            <div className="absolute top-2 right-2 bg-wareongo-ivory/95 border border-wareongo-blue/20 backdrop-blur-sm px-2 py-1 rounded-md text-xs text-wareongo-blue font-medium z-10">
               Approximate location
             </div>
           )}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };
 

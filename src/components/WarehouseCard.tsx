@@ -213,23 +213,23 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
 
   return (
     <Card
-      className="cursor-pointer hover:shadow-2xl transition-shadow duration-300 overflow-hidden group border border-gray-200 rounded-xl bg-white"
+      className="cursor-pointer transition-colors duration-300 overflow-hidden group border border-wareongo-blue rounded-2xl bg-transparent hover:bg-wareongo-blue/5 shadow-none"
       onClick={onClick}
     >
-      <div className="relative overflow-hidden rounded-t-xl group/image">
+      <div className="relative overflow-hidden rounded-t-2xl group/image border-b border-wareongo-blue">
         {imageError || validImages.length === 0 ? (
-          <div className="w-full h-48 bg-gray-200 flex flex-col items-center justify-center group-hover:bg-gray-300 transition-colors duration-300">
-            <ImageIcon className="w-8 h-8 text-gray-400 mb-2" />
-            <span className="text-xs text-gray-500 text-center px-2">
+          <div className="w-full h-48 bg-wareongo-blue/5 flex flex-col items-center justify-center transition-colors duration-300">
+            <ImageIcon className="w-8 h-8 text-wareongo-blue/40 mb-2" />
+            <span className="text-xs text-wareongo-slate text-center px-2">
               Images available on request
             </span>
           </div>
         ) : (
           <>
-            <div className="relative w-full h-48 overflow-hidden bg-gray-100">
+            <div className="relative w-full h-48 overflow-hidden bg-wareongo-blue/5">
               {/* Loading spinner */}
               {imageLoading && (
-                <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-20">
+                <div className="absolute inset-0 flex items-center justify-center bg-wareongo-blue/5 z-20">
                   <Loader2 className="w-8 h-8 text-wareongo-blue animate-spin" />
                 </div>
               )}
@@ -280,14 +280,14 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
                   <>
                     <button
                       onClick={handlePrevImage}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/95 hover:bg-white text-gray-800 p-1.5 rounded-full shadow-xl transition-all duration-200 z-50 hover:scale-110 backdrop-blur-sm"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 bg-wareongo-ivory/95 hover:bg-wareongo-ivory text-wareongo-blue p-1.5 rounded-full border border-wareongo-blue/20 transition-all duration-200 z-50 hover:scale-110 backdrop-blur-sm"
                       aria-label="Previous image"
                     >
                       <ChevronLeft className="w-4 h-4" />
                     </button>
                     <button
                       onClick={handleNextImage}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/95 hover:bg-white text-gray-800 p-1.5 rounded-full shadow-xl transition-all duration-200 z-50 hover:scale-110 backdrop-blur-sm"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 bg-wareongo-ivory/95 hover:bg-wareongo-ivory text-wareongo-blue p-1.5 rounded-full border border-wareongo-blue/20 transition-all duration-200 z-50 hover:scale-110 backdrop-blur-sm"
                       aria-label="Next image"
                     >
                       <ChevronRight className="w-4 h-4" />
@@ -326,52 +326,54 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
             )}
           </>
         )}
-        <div className="absolute top-3 right-3 bg-wareongo-blue text-white px-2 py-1 rounded text-xs font-semibold shadow z-10">
+        <div className="absolute top-3 right-3 bg-wareongo-ivory/90 backdrop-blur-sm text-wareongo-blue px-2.5 py-1 rounded-md text-xs font-semibold border border-wareongo-blue/20 z-10">
           ID: {id}
         </div>
       </div>
 
-      <CardContent className="p-5">
+      <CardContent className="p-5 sm:p-6">
         {/* Title & Address */}
-        <div className="mb-2">
-          <h2 className="text-lg font-semibold text-gray-900 mb-1 truncate" title={address}>
+        <div className="mb-4">
+          <h2 className="text-lg font-semibold text-wareongo-blue mb-1.5 truncate" title={address}>
             {truncate(address, 36)}
           </h2>
-          <div className="flex items-center text-gray-500 text-sm">
-            <MapPin className="w-4 h-4 mr-1 text-wareongo-blue" />
+          <div className="flex items-center text-wareongo-slate text-sm">
+            <MapPin className="w-4 h-4 mr-1" />
             <span>{location.city}, {location.state}</span>
           </div>
         </div>
 
         {/* Key Details */}
-        <div className="grid grid-cols-2 gap-2 mb-3">
-          <div className="flex items-center text-gray-600 text-xs">
-            <Ruler className="w-4 h-4 mr-1 text-wareongo-blue" />
+        <div className="grid grid-cols-2 gap-3 mb-4">
+          <div className="flex items-center text-wareongo-slate text-xs sm:text-sm">
+            <Ruler className="w-4 h-4 mr-1.5 text-wareongo-blue/70" />
             <span>{size.toLocaleString()} sqft</span>
           </div>
-          <div className="flex items-center text-gray-600 text-xs">
-            <Building2 className="w-4 h-4 mr-1 text-wareongo-blue" />
+          <div className="flex items-center text-wareongo-slate text-xs sm:text-sm">
+            <Building2 className="w-4 h-4 mr-1.5 text-wareongo-blue/70" />
             <span>{ceilingHeight}m height</span>
           </div>
-          <div className="flex items-center text-gray-600 text-xs">
-            <ShieldCheck className="w-4 h-4 mr-1 text-wareongo-blue" />
-            <span>Fire Compliance: {fireCompliance ? 'Yes' : 'No'}</span>
+          <div className="flex items-center text-wareongo-slate text-xs sm:text-sm">
+            <ShieldCheck className="w-4 h-4 mr-1.5 text-wareongo-blue/70" />
+            <span>Fire: {fireCompliance ? 'Yes' : 'No'}</span>
           </div>
-          <div className="flex items-center text-wareongo-blue font-semibold text-xs">
-            <IndianRupee className="w-4 h-4 mr-1" />
-            <span>{price} per sqft</span>
+          <div className="flex items-center text-wareongo-blue font-semibold text-xs sm:text-sm">
+            <IndianRupee className="w-4 h-4 mr-0.5" />
+            <span>{price} / sqft</span>
           </div>
         </div>
 
         {/* Features as bullet points */}
-        <div className="pt-2 border-t border-gray-100">
-          <h4 className="text-xs font-medium text-gray-800 mb-1">Key Features</h4>
-          <ul className="list-disc pl-5 space-y-1 text-xs text-gray-600">
-            {features.map((feature, idx) => (
-              <li key={idx}>{feature}</li>
-            ))}
-          </ul>
-        </div>
+        {features.length > 0 && (
+          <div className="pt-4 border-t border-wareongo-blue/10">
+            <span className="text-[10px] sm:text-xs uppercase tracking-[0.18em] font-medium text-wareongo-slate block mb-2">Key features</span>
+            <ul className="list-disc pl-5 space-y-1 text-xs text-wareongo-slate">
+              {features.map((feature, idx) => (
+                <li key={idx}>{feature}</li>
+              ))}
+            </ul>
+          </div>
+        )}
       </CardContent>
     </Card>
   );

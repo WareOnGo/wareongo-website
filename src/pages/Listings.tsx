@@ -157,143 +157,141 @@ const Listings = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-wareongo-ivory">
       <Navbar />
       
-      <main className="flex-grow bg-wareongo-ivory bg-opacity-50">
+      <main className="flex-grow bg-wareongo-ivory">
         <div className="section-container">
-          <div className="text-center mb-8">
-            <h1 className="section-title text-4xl md:text-5xl mb-4">Warehouse Listings</h1>
-            <p className="text-lg text-wareongo-charcoal max-w-2xl mx-auto">
-              Discover premium warehouse spaces across India. Find the perfect storage solution for your business needs.
+          <div className="max-w-2xl mb-8 md:mb-12">
+            <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate block mb-3">
+              Inventory
+            </span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-wareongo-blue mb-3 leading-tight">
+              Warehouse Listings
+            </h1>
+            <p className="text-wareongo-slate text-sm sm:text-base md:text-lg">
+              Premium warehouse spaces across India. Find the perfect storage solution for your business.
             </p>
           </div>
 
           {/* Filter Toggle Button */}
-          <div className="mb-6 flex justify-between items-center">
-            <Button
+          <div className="mb-6 flex justify-between items-center gap-3">
+            <button
               onClick={() => setShowFilters(!showFilters)}
-              variant="outline"
-              className="flex items-center gap-2"
+              className="inline-flex items-center gap-2 px-4 h-10 rounded-xl border border-wareongo-blue text-wareongo-blue text-sm font-medium bg-transparent hover:bg-wareongo-blue/5 transition-colors"
             >
               <Filter className="w-4 h-4" />
-              {showFilters ? 'Hide Filters' : 'Show Filters'}
+              {showFilters ? 'Hide filters' : 'Show filters'}
               {hasActiveFilters() && (
-                <span className="ml-1 bg-wareongo-blue text-white text-xs px-2 py-0.5 rounded-full">
+                <span className="ml-1 bg-wareongo-blue text-white text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full">
                   Active
                 </span>
               )}
-            </Button>
+            </button>
             {hasActiveFilters() && (
-              <Button
+              <button
                 onClick={clearFilters}
-                variant="ghost"
-                size="sm"
-                className="flex items-center gap-1"
+                className="inline-flex items-center gap-1 text-sm text-wareongo-slate hover:text-wareongo-blue transition-colors"
               >
                 <X className="w-4 h-4" />
-                Clear All Filters
-              </Button>
+                Clear all
+              </button>
             )}
           </div>
 
           {/* Filter Panel */}
           {showFilters && (
-            <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-              <h2 className="text-xl font-semibold mb-4 text-wareongo-blue">Filter Warehouses</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* City Filter */}
-                <div className="space-y-2">
-                  <Label htmlFor="city">City</Label>
+            <div className="bg-transparent border border-wareongo-blue rounded-2xl p-6 sm:p-8 mb-8">
+              <div className="mb-6">
+                <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate block mb-1.5">
+                  Refine
+                </span>
+                <h2 className="text-lg sm:text-xl font-semibold text-wareongo-blue">Filter warehouses</h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div className="space-y-1.5">
+                  <Label htmlFor="city" className="text-[13px]">City</Label>
                   <Select
                     value={filters.city}
                     onValueChange={(value) => handleFilterChange('city', value)}
                   >
-                    <SelectTrigger id="city">
+                    <SelectTrigger id="city" className="bg-wareongo-ivory border-wareongo-blue/20 focus:ring-wareongo-blue/30">
                       <SelectValue placeholder="Select city" />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Cities</SelectItem>
+                    <SelectContent className="bg-wareongo-ivory border-wareongo-blue/20">
+                      <SelectItem value="all" className="focus:bg-wareongo-blue/10 focus:text-black cursor-pointer">All cities</SelectItem>
                       {cityOptions.map(city => (
-                        <SelectItem key={city} value={city}>{city}</SelectItem>
+                        <SelectItem key={city} value={city} className="focus:bg-wareongo-blue/10 focus:text-black cursor-pointer">{city}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </div>
 
-                {/* State Filter */}
-                <div className="space-y-2">
-                  <Label htmlFor="state">State</Label>
+                <div className="space-y-1.5">
+                  <Label htmlFor="state" className="text-[13px]">State</Label>
                   <Select
                     value={filters.state}
                     onValueChange={(value) => handleFilterChange('state', value)}
                   >
-                    <SelectTrigger id="state">
+                    <SelectTrigger id="state" className="bg-wareongo-ivory border-wareongo-blue/20 focus:ring-wareongo-blue/30">
                       <SelectValue placeholder="Select state" />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All States</SelectItem>
+                    <SelectContent className="bg-wareongo-ivory border-wareongo-blue/20">
+                      <SelectItem value="all" className="focus:bg-wareongo-blue/10 focus:text-black cursor-pointer">All states</SelectItem>
                       {stateOptions.map(state => (
-                        <SelectItem key={state} value={state}>{state}</SelectItem>
+                        <SelectItem key={state} value={state} className="focus:bg-wareongo-blue/10 focus:text-black cursor-pointer">{state}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </div>
 
-                {/* Fire Compliance Filter */}
-                <div className="space-y-2">
-                  <Label htmlFor="fireCompliance">Fire Compliance</Label>
+                <div className="space-y-1.5">
+                  <Label htmlFor="fireCompliance" className="text-[13px]">Fire compliance</Label>
                   <Select
                     value={filters.fireCompliance}
                     onValueChange={(value) => handleFilterChange('fireCompliance', value)}
                   >
-                    <SelectTrigger id="fireCompliance">
+                    <SelectTrigger id="fireCompliance" className="bg-wareongo-ivory border-wareongo-blue/20 focus:ring-wareongo-blue/30">
                       <SelectValue placeholder="Select compliance" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-wareongo-ivory border-wareongo-blue/20">
                       {fireComplianceOptions.map(option => (
-                        <SelectItem key={option} value={option.toLowerCase()}>{option}</SelectItem>
+                        <SelectItem key={option} value={option.toLowerCase()} className="focus:bg-wareongo-blue/10 focus:text-black cursor-pointer">{option}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </div>
 
-                {/* Warehouse Type Filter */}
-                <div className="space-y-2">
-                  <Label htmlFor="warehouseType">Warehouse Type</Label>
+                <div className="space-y-1.5">
+                  <Label htmlFor="warehouseType" className="text-[13px]">Warehouse type</Label>
                   <Select
                     value={filters.warehouseType}
                     onValueChange={(value) => handleFilterChange('warehouseType', value)}
                   >
-                    <SelectTrigger id="warehouseType">
+                    <SelectTrigger id="warehouseType" className="bg-wareongo-ivory border-wareongo-blue/20 focus:ring-wareongo-blue/30">
                       <SelectValue placeholder="Select type" />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Types</SelectItem>
+                    <SelectContent className="bg-wareongo-ivory border-wareongo-blue/20">
+                      <SelectItem value="all" className="focus:bg-wareongo-blue/10 focus:text-black cursor-pointer">All types</SelectItem>
                       {warehouseTypeOptions.map(type => (
-                        <SelectItem key={type} value={type}>{type}</SelectItem>
+                        <SelectItem key={type} value={type} className="focus:bg-wareongo-blue/10 focus:text-black cursor-pointer">{type}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </div>
 
-                {/* Area Range Filter */}
-                <div className="space-y-2 md:col-span-2">
-                  <Label>Total Area Range (sqft)</Label>
+                <div className="space-y-1.5 md:col-span-2">
+                  <Label className="text-[13px]">Total area range (sqft)</Label>
                   <div className="pt-2">
-                    <div className="flex justify-between text-xs text-gray-500 mb-1">
-                      <span>Min</span>
-                      <span>Max</span>
-                    </div>
                     <Slider
                       min={0}
                       max={100000}
                       step={1000}
                       value={[filters.minSqft, filters.maxSqft]}
                       onValueChange={handleSqftRangeChange}
-                      className="mb-2"
+                      className="mb-3"
                     />
-                    <div className="flex justify-between text-sm text-gray-600 font-medium">
+                    <div className="flex justify-between text-xs text-wareongo-slate font-medium">
                       <span>{filters.minSqft.toLocaleString()} sqft</span>
                       <span>{filters.maxSqft.toLocaleString()} sqft</span>
                     </div>
@@ -301,14 +299,19 @@ const Listings = () => {
                 </div>
               </div>
 
-              {/* Apply Filters Button */}
               <div className="mt-6 flex justify-end gap-3">
-                <Button onClick={clearFilters} variant="outline">
+                <button
+                  onClick={clearFilters}
+                  className="px-4 h-10 rounded-xl border border-wareongo-blue/30 text-wareongo-blue text-sm font-medium hover:bg-wareongo-blue/5 transition-colors"
+                >
                   Reset
-                </Button>
-                <Button onClick={applyFilters} className="bg-wareongo-blue hover:bg-blue-700">
-                  Apply Filters
-                </Button>
+                </button>
+                <button
+                  onClick={applyFilters}
+                  className="px-5 h-10 rounded-xl bg-wareongo-blue text-white text-sm font-medium hover:bg-wareongo-blue/90 transition-colors"
+                >
+                  Apply filters
+                </button>
               </div>
             </div>
           )}
@@ -319,7 +322,7 @@ const Listings = () => {
               <div className="animate-pulse">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                   {[...Array(6)].map((_, i) => (
-                    <div key={i} className="bg-gray-200 rounded-xl h-80"></div>
+                    <div key={i} className="bg-wareongo-blue/5 border border-wareongo-blue/20 rounded-2xl h-80"></div>
                   ))}
                 </div>
               </div>
@@ -330,11 +333,11 @@ const Listings = () => {
           {error && !loading && (
             <div className="text-center py-12">
               <p className="text-red-600 mb-4">{error}</p>
-              <button 
+              <button
                 onClick={() => fetchWarehouses(pagination.currentPage)}
-                className="bg-wareongo-blue text-white px-6 py-2 rounded hover:bg-blue-700"
+                className="px-5 h-10 rounded-xl bg-wareongo-blue text-white text-sm font-medium hover:bg-wareongo-blue/90 transition-colors"
               >
-                Try Again
+                Try again
               </button>
             </div>
           )}
@@ -363,17 +366,17 @@ const Listings = () => {
 
           {/* No Results Message */}
           {!loading && !error && warehouses.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-xl text-wareongo-charcoal mb-4">No warehouses found</p>
-              <p className="text-gray-600 mb-6">
+            <div className="text-center py-16 border border-wareongo-blue/30 rounded-2xl">
+              <p className="text-lg sm:text-xl text-wareongo-blue font-semibold mb-2">No warehouses found</p>
+              <p className="text-wareongo-slate text-sm mb-6">
                 Try adjusting your filters to see more results.
               </p>
               {hasActiveFilters() && (
                 <button
                   onClick={clearFilters}
-                  className="px-6 py-2 bg-wareongo-blue text-white rounded hover:bg-opacity-90 transition-colors"
+                  className="px-5 h-10 rounded-xl bg-wareongo-blue text-white text-sm font-medium hover:bg-wareongo-blue/90 transition-colors"
                 >
-                  Clear All Filters
+                  Clear all filters
                 </button>
               )}
             </div>
@@ -381,24 +384,22 @@ const Listings = () => {
 
           {/* Pagination Info and Controls */}
           {!loading && !error && warehouses.length > 0 && (
-            <div className="text-center space-y-4">
-              {/* Show info only if there are results */}
-              <p className="text-wareongo-charcoal text-sm">
-                Showing {warehouses.length} of {pagination.totalItems} warehouses 
-                {pagination.totalPages > 1 && ` (Page ${pagination.currentPage} of ${pagination.totalPages})`}
+            <div className="text-center space-y-5">
+              <p className="text-wareongo-slate text-sm">
+                Showing {warehouses.length} of {pagination.totalItems} warehouses
+                {pagination.totalPages > 1 && ` · Page ${pagination.currentPage} of ${pagination.totalPages}`}
               </p>
-              
-              {/* Page Size Selector - only show if there are multiple pages or enough items */}
+
               {pagination.totalItems > 10 && (
-                <div className="flex justify-center items-center gap-3 mb-4">
-                  <label htmlFor="pageSize" className="text-sm text-gray-600">
-                    Listings per page:
+                <div className="flex justify-center items-center gap-3">
+                  <label htmlFor="pageSize" className="text-xs uppercase tracking-[0.18em] text-wareongo-slate">
+                    Per page
                   </label>
                   <select
                     id="pageSize"
                     value={pagination.pageSize}
                     onChange={(e) => handlePageSizeChange(Number(e.target.value))}
-                    className="px-3 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-wareongo-blue"
+                    className="px-3 h-9 bg-transparent border border-wareongo-blue/30 rounded-lg text-sm text-wareongo-blue focus:outline-none focus:ring-2 focus:ring-wareongo-blue/30"
                   >
                     <option value={10}>10</option>
                     <option value={21}>21</option>
@@ -407,20 +408,18 @@ const Listings = () => {
                   </select>
                 </div>
               )}
-              
-              {/* Pagination buttons */}
+
               {pagination.totalPages > 1 && (
                 <div className="flex justify-center gap-2">
-                  <button 
+                  <button
                     onClick={() => fetchWarehouses(pagination.currentPage - 1)}
                     disabled={pagination.currentPage === 1}
-                    className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                    className="px-4 h-9 rounded-lg border border-wareongo-blue/30 text-wareongo-blue text-sm font-medium hover:bg-wareongo-blue/5 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                   >
                     Previous
                   </button>
-                  
-                  {/* Page numbers */}
-                  <div className="flex gap-1">
+
+                  <div className="flex gap-1.5">
                     {Array.from({ length: Math.min(pagination.totalPages, 5) }, (_, i) => {
                       let pageNum;
                       if (pagination.totalPages <= 5) {
@@ -432,15 +431,16 @@ const Listings = () => {
                       } else {
                         pageNum = pagination.currentPage - 2 + i;
                       }
-                      
+
+                      const isActive = pageNum === pagination.currentPage;
                       return (
                         <button
                           key={pageNum}
                           onClick={() => fetchWarehouses(pageNum)}
-                          className={`px-3 py-2 rounded text-sm ${
-                            pageNum === pagination.currentPage
-                              ? 'bg-wareongo-blue text-white'
-                              : 'bg-gray-200 hover:bg-gray-300'
+                          className={`w-9 h-9 rounded-lg text-sm font-medium transition-colors border ${
+                            isActive
+                              ? 'bg-wareongo-blue text-white border-wareongo-blue'
+                              : 'bg-transparent text-wareongo-blue border-wareongo-blue/30 hover:bg-wareongo-blue/5'
                           }`}
                         >
                           {pageNum}
@@ -448,11 +448,11 @@ const Listings = () => {
                       );
                     })}
                   </div>
-                  
-                  <button 
+
+                  <button
                     onClick={() => fetchWarehouses(pagination.currentPage + 1)}
                     disabled={pagination.currentPage === pagination.totalPages}
-                    className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                    className="px-4 h-9 rounded-lg border border-wareongo-blue/30 text-wareongo-blue text-sm font-medium hover:bg-wareongo-blue/5 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                   >
                     Next
                   </button>

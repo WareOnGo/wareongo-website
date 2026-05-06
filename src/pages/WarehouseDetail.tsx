@@ -8,8 +8,6 @@ import WarehouseImageCarousel from '@/components/WarehouseImageCarousel';
 import WarehouseInfo from '@/components/WarehouseInfo';
 import WarehouseLocationMap from '@/components/WarehouseLocationMap';
 import ContactFormDialog from '@/components/ContactFormDialog';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import { warehouseAPI, WarehouseAPIError, transformWarehouseDetailData } from '@/services/warehouseAPI';
 
 const WarehouseDetail = () => {
@@ -59,18 +57,18 @@ const WarehouseDetail = () => {
   // Loading state
   if (isLoading) {
     return (
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-wareongo-ivory">
         <Navbar />
-        <main className="flex-grow bg-wareongo-ivory bg-opacity-50">
+        <main className="flex-grow bg-wareongo-ivory">
           <div className="section-container">
             <div className="flex items-center justify-center min-h-[60vh]">
               <div className="text-center">
-                <Loader2 className="w-12 h-12 text-wareongo-blue animate-spin mx-auto mb-4" />
-                <h2 className="text-xl font-semibold text-wareongo-charcoal mb-2">
-                  Loading warehouse details...
+                <Loader2 className="w-10 h-10 text-wareongo-blue animate-spin mx-auto mb-4" />
+                <h2 className="text-lg sm:text-xl font-semibold text-wareongo-blue mb-1">
+                  Loading warehouse details
                 </h2>
-                <p className="text-gray-600">
-                  Please wait while we fetch the warehouse information.
+                <p className="text-wareongo-slate text-sm">
+                  Please wait while we fetch the information.
                 </p>
               </div>
             </div>
@@ -87,31 +85,37 @@ const WarehouseDetail = () => {
     const isNotFound = apiError.code === 'WAREHOUSE_NOT_FOUND' || apiError.code === 'INVALID_ID';
     
     return (
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-wareongo-ivory">
         <Navbar />
-        <main className="flex-grow bg-wareongo-ivory bg-opacity-50">
+        <main className="flex-grow bg-wareongo-ivory">
           <div className="section-container">
             <div className="flex items-center justify-center min-h-[60vh]">
-              <div className="text-center max-w-md">
-                <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
-                <h2 className="text-2xl font-semibold text-wareongo-charcoal mb-2">
-                  {isNotFound ? 'Warehouse Not Found' : 'Error Loading Warehouse'}
+              <div className="text-center max-w-md border border-wareongo-blue/30 rounded-2xl p-8">
+                <AlertCircle className="w-12 h-12 text-wareongo-blue mx-auto mb-4" />
+                <h2 className="text-xl sm:text-2xl font-semibold text-wareongo-blue mb-2">
+                  {isNotFound ? 'Warehouse not found' : 'Error loading warehouse'}
                 </h2>
-                <p className="text-gray-600 mb-6">
-                  {isNotFound 
+                <p className="text-wareongo-slate text-sm mb-6">
+                  {isNotFound
                     ? 'The warehouse you are looking for does not exist or has been removed.'
                     : apiError.message || 'Something went wrong while loading the warehouse details.'
                   }
                 </p>
                 <div className="flex gap-3 justify-center">
-                  <Button onClick={handleBackClick} variant="outline">
+                  <button
+                    onClick={handleBackClick}
+                    className="inline-flex items-center px-4 h-10 rounded-xl border border-wareongo-blue/30 text-wareongo-blue text-sm font-medium hover:bg-wareongo-blue/5 transition-colors"
+                  >
                     <ArrowLeft className="w-4 h-4 mr-2" />
-                    Back to Listings
-                  </Button>
+                    Back to listings
+                  </button>
                   {!isNotFound && (
-                    <Button onClick={() => refetch()} className="bg-wareongo-blue hover:bg-blue-700">
-                      Try Again
-                    </Button>
+                    <button
+                      onClick={() => refetch()}
+                      className="px-5 h-10 rounded-xl bg-wareongo-blue text-white text-sm font-medium hover:bg-wareongo-blue/90 transition-colors"
+                    >
+                      Try again
+                    </button>
                   )}
                 </div>
               </div>
@@ -126,23 +130,26 @@ const WarehouseDetail = () => {
   // Main content
   if (!warehouseData) {
     return (
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-wareongo-ivory">
         <Navbar />
-        <main className="flex-grow bg-wareongo-ivory bg-opacity-50">
+        <main className="flex-grow bg-wareongo-ivory">
           <div className="section-container">
             <div className="flex items-center justify-center min-h-[60vh]">
-              <div className="text-center">
-                <AlertCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <h2 className="text-xl font-semibold text-wareongo-charcoal mb-2">
-                  No Data Available
+              <div className="text-center border border-wareongo-blue/30 rounded-2xl p-8">
+                <AlertCircle className="w-10 h-10 text-wareongo-blue/50 mx-auto mb-4" />
+                <h2 className="text-lg sm:text-xl font-semibold text-wareongo-blue mb-2">
+                  No data available
                 </h2>
-                <p className="text-gray-600 mb-4">
+                <p className="text-wareongo-slate text-sm mb-5">
                   Unable to load warehouse information.
                 </p>
-                <Button onClick={handleBackClick} variant="outline">
+                <button
+                  onClick={handleBackClick}
+                  className="inline-flex items-center px-4 h-10 rounded-xl border border-wareongo-blue/30 text-wareongo-blue text-sm font-medium hover:bg-wareongo-blue/5 transition-colors"
+                >
                   <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Listings
-                </Button>
+                  Back to listings
+                </button>
               </div>
             </div>
           </div>
@@ -153,7 +160,7 @@ const WarehouseDetail = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-wareongo-ivory">
       <Navbar />
       
       <main 
@@ -164,15 +171,14 @@ const WarehouseDetail = () => {
         <div className="section-container px-4 sm:px-6 lg:px-8">
           {/* Back Navigation */}
           <div className="mb-4 sm:mb-6">
-            <Button 
-              onClick={handleBackClick} 
-              variant="ghost" 
-              className="text-wareongo-blue hover:text-blue-700 focus:ring-2 focus:ring-wareongo-blue focus:ring-offset-2"
+            <button
+              onClick={handleBackClick}
+              className="inline-flex items-center text-sm font-medium text-wareongo-slate hover:text-wareongo-blue focus:outline-none focus:ring-2 focus:ring-wareongo-blue/40 focus:ring-offset-2 rounded-md px-1 -ml-1 transition-colors"
               aria-label="Go back to warehouse listings"
             >
-              <ArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" />
-              Back to Listings
-            </Button>
+              <ArrowLeft className="w-4 h-4 mr-1.5" aria-hidden="true" />
+              Back to listings
+            </button>
           </div>
 
           {/* Main Content - Responsive Grid Layout */}
@@ -189,23 +195,26 @@ const WarehouseDetail = () => {
             <div className="space-y-4 sm:space-y-6 order-2 lg:order-2">
               {/* Header */}
               <header>
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
-                  <h1 
-                    id="warehouse-title"
-                    className="text-2xl sm:text-3xl font-bold text-wareongo-charcoal leading-tight"
-                  >
-                    Warehouse Details
-                  </h1>
-                  <span 
-                    className="bg-wareongo-blue text-white px-3 py-1 rounded text-sm font-semibold self-start"
+                <div className="flex items-start justify-between gap-3 mb-2">
+                  <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate">
+                    Warehouse
+                  </span>
+                  <span
+                    className="bg-wareongo-ivory border border-wareongo-blue/20 text-wareongo-blue px-2.5 py-1 rounded-md text-xs font-semibold"
                     aria-label={`Warehouse ID ${warehouseData.id}`}
                   >
                     ID: {warehouseData.id}
                   </span>
                 </div>
+                <h1
+                  id="warehouse-title"
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-wareongo-blue leading-tight mb-3"
+                >
+                  {warehouseData.specifications.location.city}, {warehouseData.specifications.location.state}
+                </h1>
                 <address className="not-italic">
-                  <p className="text-base sm:text-lg text-gray-600">
-                    {warehouseData.specifications.location.address}, {warehouseData.specifications.location.city}, {warehouseData.specifications.location.state}
+                  <p className="text-sm sm:text-base text-wareongo-slate leading-relaxed">
+                    {warehouseData.specifications.location.address}
                   </p>
                 </address>
               </header>
@@ -213,37 +222,38 @@ const WarehouseDetail = () => {
               {/* Quick Stats */}
               <section aria-labelledby="quick-stats-title">
                 <h2 id="quick-stats-title" className="sr-only">Quick Statistics</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                  <Card>
-                    <CardContent className="p-3 sm:p-4 text-center">
-                      <div className="text-xl sm:text-2xl font-bold text-wareongo-blue">
-                        {warehouseData.specifications.space.totalSpace.toLocaleString()}
-                      </div>
-                      <div className="text-xs sm:text-sm text-gray-600">Total Space (sqft)</div>
-                    </CardContent>
-                  </Card>
-                  <Card>
-                    <CardContent className="p-3 sm:p-4 text-center">
-                      <div className="text-xl sm:text-2xl font-bold text-wareongo-blue">
-                        ₹{warehouseData.specifications.space.ratePerSqft}
-                      </div>
-                      <div className="text-xs sm:text-sm text-gray-600">Per sqft</div>
-                    </CardContent>
-                  </Card>
+                <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                  <div className="border border-wareongo-blue/30 rounded-xl p-4 sm:p-5">
+                    <div className="text-[10px] sm:text-xs uppercase tracking-[0.18em] text-wareongo-slate mb-1.5">
+                      Total area
+                    </div>
+                    <div className="text-xl sm:text-2xl font-bold text-wareongo-blue">
+                      {warehouseData.specifications.space.totalSpace.toLocaleString()}
+                      <span className="text-sm font-medium text-wareongo-slate ml-1">sqft</span>
+                    </div>
+                  </div>
+                  <div className="border border-wareongo-blue/30 rounded-xl p-4 sm:p-5">
+                    <div className="text-[10px] sm:text-xs uppercase tracking-[0.18em] text-wareongo-slate mb-1.5">
+                      Rate
+                    </div>
+                    <div className="text-xl sm:text-2xl font-bold text-wareongo-blue">
+                      ₹{warehouseData.specifications.space.ratePerSqft}
+                      <span className="text-sm font-medium text-wareongo-slate ml-1">/ sqft</span>
+                    </div>
+                  </div>
                 </div>
               </section>
 
               {/* Contact Button */}
               <section aria-labelledby="contact-actions-title">
                 <h2 id="contact-actions-title" className="sr-only">Contact Actions</h2>
-                <Button 
+                <button
                   onClick={handleRequestCallback}
-                  className="w-full bg-wareongo-blue hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-white py-3"
-                  size="lg"
+                  className="w-full h-12 rounded-xl bg-wareongo-blue text-white text-sm font-medium tracking-wide hover:bg-wareongo-blue/90 focus:outline-none focus:ring-2 focus:ring-wareongo-blue/40 focus:ring-offset-2 transition-colors"
                   aria-describedby="request-callback-desc"
                 >
-                  Request a Callback
-                </Button>
+                  Request a callback
+                </button>
                 <span id="request-callback-desc" className="sr-only">
                   Opens a form to request a callback from our team about this warehouse
                 </span>
@@ -253,9 +263,10 @@ const WarehouseDetail = () => {
             {/* Location Map - Mobile: order-3 (below info), Desktop: bottom right */}
             <div className="order-3 lg:order-3">
               <section aria-labelledby="location-map-title">
-                <h2 id="location-map-title" className="text-lg font-semibold text-wareongo-charcoal mb-3">
+                <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate block mb-2">
                   Location
-                </h2>
+                </span>
+                <h2 id="location-map-title" className="sr-only">Location</h2>
                 <WarehouseLocationMap
                   address={warehouseData.specifications.location.address}
                   city={warehouseData.specifications.location.city}

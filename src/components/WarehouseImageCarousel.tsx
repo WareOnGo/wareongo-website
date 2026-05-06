@@ -299,9 +299,9 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
 
   if (validImages.length === 0) {
     return (
-      <div className={`relative w-full h-96 md:h-[600px] bg-gray-200 flex flex-col items-center justify-center rounded-lg ${className}`}>
-        <ImageIcon className="w-16 h-16 text-gray-400 mb-4" />
-        <span className="text-lg text-gray-500 text-center px-4">
+      <div className={`relative w-full h-96 md:h-[600px] bg-wareongo-blue/5 border border-wareongo-blue/20 flex flex-col items-center justify-center rounded-2xl ${className}`}>
+        <ImageIcon className="w-12 h-12 text-wareongo-blue/40 mb-3" />
+        <span className="text-sm text-wareongo-slate text-center px-4">
           Images available on request
         </span>
       </div>
@@ -311,7 +311,7 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
   return (
     <div 
       ref={carouselRef}
-      className={`relative w-full h-64 sm:h-80 md:h-96 lg:h-[500px] xl:h-[600px] bg-gray-100 rounded-lg overflow-hidden group ${className}`}
+      className={`relative w-full h-64 sm:h-80 md:h-96 lg:h-[500px] xl:h-[600px] bg-wareongo-blue/5 border border-wareongo-blue rounded-2xl overflow-hidden group ${className}`}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -336,8 +336,8 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
     >
       {/* Loading spinner - only show on initial load, not during navigation */}
       {imageLoading && currentImageIndex === 0 && !isTransitioning && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-20">
-          <Loader2 className="w-12 h-12 text-blue-600 animate-spin" />
+        <div className="absolute inset-0 flex items-center justify-center bg-wareongo-blue/5 z-20">
+          <Loader2 className="w-10 h-10 text-wareongo-blue animate-spin" />
         </div>
       )}
       
@@ -392,22 +392,22 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
         <>
           <button
             onClick={handlePrevImage}
-            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/95 hover:bg-white active:bg-white text-gray-800 h-10 w-10 sm:h-12 sm:w-12 rounded-full shadow-xl transition-opacity duration-200 z-30 focus:ring-2 focus:ring-wareongo-blue focus:ring-offset-2 backdrop-blur-sm opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 flex items-center justify-center border border-gray-200"
+            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-wareongo-ivory/95 hover:bg-wareongo-ivory active:bg-wareongo-ivory text-wareongo-blue h-10 w-10 sm:h-11 sm:w-11 rounded-full transition-opacity duration-200 z-30 focus:ring-2 focus:ring-wareongo-blue/40 focus:ring-offset-2 backdrop-blur-sm opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 flex items-center justify-center border border-wareongo-blue/20"
             aria-label={`Previous image. Currently showing image ${validImages.findIndex((_, i) => availableImages[currentImageIndex] === validImages[i]) + 1} of ${validImages.length}`}
             type="button"
             disabled={isTransitioning}
           >
-            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700" aria-hidden="true" />
+            <ChevronLeft className="w-5 h-5 text-wareongo-blue" aria-hidden="true" />
           </button>
-          
+
           <button
             onClick={handleNextImage}
-            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/95 hover:bg-white active:bg-white text-gray-800 h-10 w-10 sm:h-12 sm:w-12 rounded-full shadow-xl transition-opacity duration-200 z-30 focus:ring-2 focus:ring-wareongo-blue focus:ring-offset-2 backdrop-blur-sm opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 flex items-center justify-center border border-gray-200"
+            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-wareongo-ivory/95 hover:bg-wareongo-ivory active:bg-wareongo-ivory text-wareongo-blue h-10 w-10 sm:h-11 sm:w-11 rounded-full transition-opacity duration-200 z-30 focus:ring-2 focus:ring-wareongo-blue/40 focus:ring-offset-2 backdrop-blur-sm opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 flex items-center justify-center border border-wareongo-blue/20"
             aria-label={`Next image. Currently showing image ${validImages.findIndex((_, i) => availableImages[currentImageIndex] === validImages[i]) + 1} of ${validImages.length}`}
             type="button"
             disabled={isTransitioning}
           >
-            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700" aria-hidden="true" />
+            <ChevronRight className="w-5 h-5 text-wareongo-blue" aria-hidden="true" />
           </button>
         </>
       )}
@@ -448,8 +448,8 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
 
       {/* Image counter */}
       {hasMultipleImages && (
-        <div 
-          className="absolute top-2 sm:top-4 right-2 sm:right-4 bg-black/50 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium z-30"
+        <div
+          className="absolute top-3 right-3 bg-wareongo-ivory/90 backdrop-blur-sm border border-wareongo-blue/20 text-wareongo-blue px-2.5 py-1 rounded-md text-xs font-semibold z-30"
           aria-live="polite"
           aria-atomic="true"
         >

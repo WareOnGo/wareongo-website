@@ -5,31 +5,31 @@ import CircularCursor from './CircularCursor';
 
 const featuredListings = [
   {
-    id: 1,
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    address: "Prime Logistics Park, NH-44",
-    location: { city: "Bangalore", state: "Karnataka" },
-    size: 45000,
-    price: 22,
-    ceilingHeight: 12
-  },
-  {
-    id: 2,
-    image: "https://images.unsplash.com/photo-1553413077-190dd305871c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    address: "Industrial Estate Phase II",
+    id: 776,
+    image: "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/media_1765620707915.jpeg",
+    address: "Munirabad, Medchal",
     location: { city: "Hyderabad", state: "Telangana" },
-    size: 32000,
-    price: 18,
-    ceilingHeight: 10
+    size: 90000,
+    price: 21,
+    ceilingHeight: 40
   },
   {
-    id: 3,
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    address: "Modern Grade-A Facility",
-    location: { city: "Delhi", state: "Delhi" },
-    size: 75000,
-    price: 26,
-    ceilingHeight: 14
+    id: 995,
+    image: "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/media_1770224907258.jpeg",
+    address: "Attibele-Anekal Road, near Jigani",
+    location: { city: "Bangalore", state: "Karnataka" },
+    size: 77530,
+    price: 29,
+    ceilingHeight: 40
+  },
+  {
+    id: 1088,
+    image: "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/media_1771237298929.jpeg",
+    address: "Pudur, Medchal",
+    location: { city: "Hyderabad", state: "Telangana" },
+    size: 125000,
+    price: 23,
+    ceilingHeight: 36
   }
 ];
 
