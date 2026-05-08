@@ -12,7 +12,7 @@ const SEGMENTS = [
   },
   {
     icon: Factory,
-    title: 'Industry Owners',
+    title: 'Industries / Manufacturers',
   },
   {
     icon: Building2,
