@@ -5,6 +5,7 @@ import HeroSection from '@/components/HeroSection';
 import TrustedBySection from '@/components/TrustedBySection';
 import WhatWeStandForSection from '@/components/WhatWeStandForSection';
 import BentoSection from '@/components/BentoSection';
+import WhoWeServeSection from '@/components/WhoWeServeSection';
 import StatsSection from '@/components/StatsSection';
 import EdgeSection from '@/components/EdgeSection';
 import CaseStudiesSection from '@/components/CaseStudiesSection';
@@ -24,10 +25,11 @@ const Index = () => {
       <HeroSection />
       <TrustedBySection />
       <WhatWeStandForSection />
-      <BentoSection />
+      {/* <BentoSection /> */}
+      <WhoWeServeSection />
       <StatsSection />
       <EdgeSection />
-      <CaseStudiesSection />
+      {/* <CaseStudiesSection /> */}
       <FeaturedListingsSection />
       <AboutUsSection />
       <RequestCTASection />

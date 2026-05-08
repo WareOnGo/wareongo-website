@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowDown } from 'lucide-react';
-import ContactFormDialog from '@/components/ContactFormDialog';
+import EdgeContactFormDialog from '@/components/EdgeContactFormDialog';
 import SpotlightCard from '@/components/SpotlightCard';
 
 const edgeFeatures = [
@@ -94,12 +94,9 @@ const EdgeSection = () => {
         </div>
       </SpotlightCard>
 
-      <ContactFormDialog
+      <EdgeContactFormDialog
         open={isContactDialogOpen}
         onOpenChange={setIsContactDialogOpen}
-        title="Request Beta Access"
-        description="Share your details, and we'll get back to you!"
-        successMessage="We will reach out within 2 hours."
         source="edge-beta"
       />
 

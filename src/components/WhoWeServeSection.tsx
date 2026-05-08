@@ -1,42 +1,42 @@
 import React from 'react';
-import { Clock, TrendingUp, MapPin, ShieldCheck } from 'lucide-react';
+import { Truck, Users, Factory, Building2 } from 'lucide-react';
 
-const VALUES = [
+const SEGMENTS = [
   {
-    icon: Clock,
-    title: 'Relevant Options in Hours',
+    icon: Truck,
+    title: '3PLs',
   },
   {
-    icon: TrendingUp,
-    title: 'Better Commercials',
+    icon: Users,
+    title: 'End Users',
   },
   {
-    icon: MapPin,
-    title: 'One SPOC. 75+ Cities. Real Market Access',
+    icon: Factory,
+    title: 'Industry Owners',
   },
   {
-    icon: ShieldCheck,
-    title: 'End to End Compliance Support',
+    icon: Building2,
+    title: 'Developers & Owners',
   },
 ];
 
-const WhatWeStandForSection = () => {
+const WhoWeServeSection = () => {
   return (
     <section className="bg-wareongo-ivory pt-16 pb-4 md:pt-24 md:pb-8">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-10 md:mb-14">
           <p className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-wareongo-slate font-medium mb-3">
-            Our Core Values
+            Our Customers
           </p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-wareongo-blue">
-            What We Stand For
+            Who We Serve
           </h2>
         </div>
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6 max-w-5xl mx-auto">
-          {VALUES.map((item, i) => (
+          {SEGMENTS.map((item, i) => (
             <div
               key={i}
               className="bg-transparent border border-wareongo-blue rounded-2xl p-6 sm:p-8 transition-all duration-300 group flex flex-col items-start text-left hover:bg-wareongo-blue/5"
@@ -58,4 +58,4 @@ const WhatWeStandForSection = () => {
   );
 };
 
-export default WhatWeStandForSection;
+export default WhoWeServeSection;

@@ -11,8 +11,8 @@ type Stat = {
 const stats: Stat[] = [
   { value: 1.3, decimals: 1, suffix: ' mn', label: 'sqft leased in FY 25–26' },
   { value: 1500, suffix: '+', label: 'verified spaces' },
-  { value: 250, suffix: '+', label: 'transactions advised' },
-  { value: 40, suffix: '+', label: 'cities covered' },
+  { value: 250, suffix: '+', label: 'cities covered' },
+  { value: 40, suffix: '+', label: 'transactions advised' },
 ];
 
 const DURATION_MS = 1600;
