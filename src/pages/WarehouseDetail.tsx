@@ -47,9 +47,14 @@ const WarehouseDetail = () => {
 
   useEffect(() => {
     if (!warehouseData) return;
+    const city = warehouseData.specifications?.location?.city;
+    const address = warehouseData.specifications?.location?.address;
+    if (address || city) {
+      document.title = `${address || `Warehouse ${warehouseData.id}`}${city ? `, ${city}` : ''} | WareOnGo`;
+    }
     trackEvent('view_listing', {
       warehouse_id: warehouseData.id,
-      city: warehouseData.specifications?.location?.city,
+      city,
       state: warehouseData.specifications?.location?.state,
       size_sqft: warehouseData.specifications?.space?.totalSpace,
       price_per_sqft: warehouseData.specifications?.space?.ratePerSqft,

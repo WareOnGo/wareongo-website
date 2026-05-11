@@ -27,9 +27,33 @@ import RequestWarehouse from "./pages/RequestWarehouse";
 
 const queryClient = new QueryClient();
 
+const DEFAULT_TITLE = "WareOnGo - Find Warehouse Space Fast";
+
+const titleForPath = (pathname: string): string => {
+  if (pathname === '/') return DEFAULT_TITLE;
+  if (pathname === '/listings') return 'Warehouse Listings | WareOnGo';
+  if (pathname.startsWith('/warehouse/')) {
+    const id = pathname.split('/')[2];
+    return `Warehouse ${id} | WareOnGo`;
+  }
+  if (pathname === '/request-warehouse') return 'Request a Warehouse | WareOnGo';
+  if (pathname === '/about-us') return 'About Us | WareOnGo';
+  if (pathname === '/casestudies') return 'Case Studies | WareOnGo';
+  if (pathname === '/case-study-1') return 'Case Study | WareOnGo';
+  if (pathname === '/case-study-2') return 'Case Study | WareOnGo';
+  if (pathname === '/privacy-policy') return 'Privacy Policy | WareOnGo';
+  if (pathname === '/terms-of-service') return 'Terms of Service | WareOnGo';
+  if (pathname === '/login') return 'Login | WareOnGo';
+  if (pathname === '/user-dashboard') return 'Dashboard | WareOnGo';
+  if (pathname === '/admin-panel') return 'Admin Panel | WareOnGo';
+  if (pathname === '/unauthorized') return 'Unauthorized | WareOnGo';
+  return DEFAULT_TITLE;
+};
+
 const RouteTracker = () => {
   const location = useLocation();
   useEffect(() => {
+    document.title = titleForPath(location.pathname);
     trackEvent('page_view', {
       page_path: location.pathname + location.search,
       page_location: window.location.href,
