@@ -20,6 +20,7 @@ import Login from "./pages/Login";
 import AdminRoute from "./components/AdminRoute";
 import CaseStudy1 from "./pages/CaseStudy1";
 import CaseStudy2 from "./pages/CaseStudy2";
+import CaseStudies from "./pages/CaseStudies";
 import RequestWarehouse from "./pages/RequestWarehouse";
 
 const queryClient = new QueryClient();
@@ -39,6 +40,7 @@ const App = () => (
               <Route path="/request-warehouse" element={<RequestWarehouse />} />
               <Route path="/case-study-1" element={<CaseStudy1 />} />
               <Route path="/case-study-2" element={<CaseStudy2 />} />
+              <Route path="/casestudies" element={<CaseStudies />} />
               <Route path="/listings" element={<Listings />} />
               <Route path="/warehouse/:id" element={<WarehouseDetail />} />
               <Route path="/user-dashboard" element={<UserDashboard />} />
