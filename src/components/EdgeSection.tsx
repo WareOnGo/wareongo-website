@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ArrowDown } from 'lucide-react';
 import EdgeContactFormDialog from '@/components/EdgeContactFormDialog';
 import SpotlightCard from '@/components/SpotlightCard';
+import { trackEvent } from '@/lib/analytics';
 
 const edgeFeatures = [
   {
@@ -60,7 +61,10 @@ const EdgeSection = () => {
               
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <button
-                  onClick={() => setIsContactDialogOpen(true)}
+                  onClick={() => {
+                    trackEvent('cta_click', { label: 'Request Beta Access', cta_location: 'edge_section' });
+                    setIsContactDialogOpen(true);
+                  }}
                   className="bg-white text-wareongo-blue text-base font-medium px-7 py-4 rounded-lg hover:opacity-90 transition-opacity"
                 >
                   Request Beta Access

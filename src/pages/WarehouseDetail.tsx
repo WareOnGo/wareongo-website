@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft, Loader2, AlertCircle } from 'lucide-react';
@@ -9,6 +9,7 @@ import WarehouseInfo from '@/components/WarehouseInfo';
 import WarehouseLocationMap from '@/components/WarehouseLocationMap';
 import ContactFormDialog from '@/components/ContactFormDialog';
 import { warehouseAPI, WarehouseAPIError, transformWarehouseDetailData } from '@/services/warehouseAPI';
+import { trackEvent } from '@/lib/analytics';
 
 const WarehouseDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -44,6 +45,17 @@ const WarehouseDetail = () => {
     gcTime: 10 * 60 * 1000, // 10 minutes
   });
 
+  useEffect(() => {
+    if (!warehouseData) return;
+    trackEvent('view_listing', {
+      warehouse_id: warehouseData.id,
+      city: warehouseData.specifications?.location?.city,
+      state: warehouseData.specifications?.location?.state,
+      size_sqft: warehouseData.specifications?.space?.totalSpace,
+      price_per_sqft: warehouseData.specifications?.space?.ratePerSqft,
+    });
+  }, [warehouseData]);
+
   // Handle back navigation
   const handleBackClick = () => {
     navigate('/listings');
@@ -51,6 +63,11 @@ const WarehouseDetail = () => {
 
   // Handle contact form opening
   const handleRequestCallback = () => {
+    trackEvent('cta_click', {
+      label: 'Request a callback',
+      cta_location: 'warehouse_detail',
+      warehouse_id: id ? Number(id) : undefined,
+    });
     setIsContactDialogOpen(true);
   };
 

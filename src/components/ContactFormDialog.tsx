@@ -12,6 +12,7 @@ import {
 import { toast } from "@/hooks/use-toast";
 import { Mail, Phone, User, Loader } from 'lucide-react';
 import { submitContactForm } from '@/services/formSubmission';
+import { trackEvent } from '@/lib/analytics';
 
 interface ContactFormDialogProps {
   open: boolean;
@@ -67,6 +68,8 @@ const ContactFormDialog = ({
         throw new Error(result.error);
       }
 
+      trackEvent('form_submit', { form_type: 'contact', source });
+
       toast({
         title: "Success",
         description: successMessage,
@@ -77,6 +80,7 @@ const ContactFormDialog = ({
       setEmail('');
       onOpenChange(false);
     } catch (err: any) {
+      trackEvent('form_error', { form_type: 'contact', source, error_message: err?.message || 'unknown' });
       setError(err.message || 'Something went wrong. Please try again.');
       toast({
         title: "Error",

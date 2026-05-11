@@ -11,6 +11,7 @@ import {
 import { toast } from "@/hooks/use-toast";
 import { Mail, Phone, User, Building, Briefcase, Loader } from 'lucide-react';
 import { submitContactForm } from '@/services/formSubmission';
+import { trackEvent } from '@/lib/analytics';
 
 interface EdgeContactFormDialogProps {
   open: boolean;
@@ -67,6 +68,8 @@ const EdgeContactFormDialog = ({ open, onOpenChange, source }: EdgeContactFormDi
         throw new Error(result.error);
       }
 
+      trackEvent('form_submit', { form_type: 'edge_beta_access', source });
+
       toast({
         title: "Success",
         description: "We'll get back to you soon.",
@@ -79,6 +82,7 @@ const EdgeContactFormDialog = ({ open, onOpenChange, source }: EdgeContactFormDi
       setPhone('');
       onOpenChange(false);
     } catch (err: any) {
+      trackEvent('form_error', { form_type: 'edge_beta_access', source, error_message: err?.message || 'unknown' });
       setError(err.message || 'Something went wrong. Please try again.');
       toast({
         title: "Error",

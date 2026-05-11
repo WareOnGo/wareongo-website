@@ -8,6 +8,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
 import { Loader, Mail, MessageCircle } from 'lucide-react';
 import { submitWarehouseRequest } from '@/services/warehouseRequest';
+import { trackEvent } from '@/lib/analytics';
 
 const RequestWarehouse = () => {
   const { toast } = useToast();
@@ -75,12 +76,15 @@ const RequestWarehouse = () => {
         throw new Error(result.error);
       }
 
+      trackEvent('form_submit', { form_type: 'warehouse_request', source: 'request_warehouse_page' });
+
       setSubmitted(true);
       toast({
         title: "Request Submitted",
         description: "We'll be in touch with warehouse options shortly!",
       });
     } catch (err: any) {
+      trackEvent('form_error', { form_type: 'warehouse_request', source: 'request_warehouse_page', error_message: err?.message || 'unknown' });
       setError(err.message || 'Something went wrong. Please try again.');
       toast({
         title: "Error",
@@ -104,13 +108,23 @@ const RequestWarehouse = () => {
             <div className="space-y-3">
               <p className="text-sm text-wareongo-slate">Prefer to reach out directly? Contact us at:</p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <a href="mailto:Sales@wareongo.com" className="flex items-center gap-3 group">
+                <a
+                  href="mailto:Sales@wareongo.com"
+                  onClick={() => trackEvent('contact_click', { contact_type: 'email', value: 'Sales@wareongo.com', location: 'request_warehouse_page' })}
+                  className="flex items-center gap-3 group"
+                >
                   <div className="w-9 h-9 rounded-lg bg-sky-50 border border-wareongo-blue/20 flex items-center justify-center transition-colors group-hover:bg-wareongo-blue/5">
                     <Mail className="w-4 h-4 text-wareongo-blue" />
                   </div>
                   <p className="text-sm font-medium text-wareongo-blue group-hover:underline">Sales@wareongo.com</p>
                 </a>
-                <a href="https://wa.me/917400184225" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group">
+                <a
+                  href="https://wa.me/917400184225"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackEvent('contact_click', { contact_type: 'whatsapp', value: '+917400184225', location: 'request_warehouse_page' })}
+                  className="flex items-center gap-3 group"
+                >
                   <div className="w-9 h-9 rounded-lg bg-sky-50 border border-wareongo-blue/20 flex items-center justify-center transition-colors group-hover:bg-wareongo-blue/5">
                     <MessageCircle className="w-4 h-4 text-wareongo-blue" />
                   </div>

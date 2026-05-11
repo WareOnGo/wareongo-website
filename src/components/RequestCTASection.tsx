@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { trackEvent } from '@/lib/analytics';
 
 const RequestCTASection = () => {
   return (
@@ -20,6 +21,7 @@ const RequestCTASection = () => {
             </p>
             <Link
               to="/request-warehouse"
+              onClick={() => trackEvent('cta_click', { label: 'Request a Warehouse', cta_location: 'request_cta_section', destination: '/request-warehouse' })}
               className="inline-flex items-center justify-center w-full sm:w-auto bg-white text-wareongo-blue text-base sm:text-lg font-bold px-8 py-4 rounded-xl hover:scale-105 hover:bg-wareongo-ivory hover:shadow-xl transition-all duration-300 group"
             >
               Request a Warehouse

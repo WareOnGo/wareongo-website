@@ -8,6 +8,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
 import { Loader } from 'lucide-react';
 import { submitWarehouseRequest } from '@/services/warehouseRequest';
+import { trackEvent } from '@/lib/analytics';
 
 const RequestFormSection = () => {
   const { toast } = useToast();
@@ -59,6 +60,8 @@ const RequestFormSection = () => {
         throw new Error(result.error);
       }
       
+      trackEvent('form_submit', { form_type: 'warehouse_request', source: 'homepage_form_section' });
+
       toast({
         title: "Request Submitted",
         description: "We'll be in touch with warehouse options shortly!",
@@ -73,6 +76,7 @@ const RequestFormSection = () => {
         requirements: ''
       });
     } catch (err: any) {
+      trackEvent('form_error', { form_type: 'warehouse_request', source: 'homepage_form_section', error_message: err?.message || 'unknown' });
       setError(err.message || 'Something went wrong. Please try again.');
       toast({
         title: "Error",

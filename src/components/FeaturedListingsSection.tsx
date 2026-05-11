@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { MapPin, Ruler, Building2, IndianRupee, ArrowRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import CircularCursor from './CircularCursor';
+import { trackEvent } from '@/lib/analytics';
 
 const featuredListings = [
   {
@@ -50,8 +51,9 @@ const FeaturedListingsSection = () => {
               Explore some of our top verified properties ready for immediate possession.
             </p>
           </div>
-          <Link 
-            to="/listings" 
+          <Link
+            to="/listings"
+            onClick={() => trackEvent('nav_click', { label: 'View all listings', destination: '/listings', position: 'featured_listings_section' })}
             className="inline-flex items-center gap-2 text-wareongo-blue font-medium hover:underline whitespace-nowrap"
           >
             View all listings
@@ -60,10 +62,22 @@ const FeaturedListingsSection = () => {
         </div>
 
         <div className="listings-scroller -mx-4 pl-5 pr-5 flex gap-5 overflow-x-auto snap-x snap-mandatory pb-2 md:mx-0 md:pl-0 md:pr-0 md:pb-0 md:overflow-visible md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 [perspective:1200px]">
-          {featuredListings.map((listing) => (
+          {featuredListings.map((listing, idx) => (
             <button
               key={listing.id}
-              onClick={() => navigate(`/warehouse/${listing.id}`)}
+              onClick={() => {
+                trackEvent('listing_open', {
+                  warehouse_id: listing.id,
+                  source: 'featured_listings',
+                  position: idx + 1,
+                  address: listing.address,
+                  city: listing.location.city,
+                  state: listing.location.state,
+                  size_sqft: listing.size,
+                  price_per_sqft: listing.price,
+                });
+                navigate(`/warehouse/${listing.id}`);
+              }}
               onMouseEnter={(e) => {
                 if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
                 setEntryPos({ x: e.clientX, y: e.clientY });

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import ContactFormDialog from '@/components/ContactFormDialog';
+import { trackEvent } from '@/lib/analytics';
 
 const HeroSection = () => {
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
@@ -39,6 +40,7 @@ const HeroSection = () => {
           </p>
           <Link
             to="/request-warehouse"
+            onClick={() => trackEvent('cta_click', { label: 'Request a Warehouse', cta_location: 'hero', destination: '/request-warehouse' })}
             className="hero-cta hero-fade-up hero-fade-up-4 group inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-wareongo-blue text-white text-base font-medium px-8 py-4 rounded-lg hover:opacity-90 transition-opacity"
           >
             Request a Warehouse

@@ -2,7 +2,9 @@
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { trackEvent } from "@/lib/analytics";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AuthProvider } from "@/context/AuthContext";
 import { config } from "@/config/config";
@@ -25,6 +27,18 @@ import RequestWarehouse from "./pages/RequestWarehouse";
 
 const queryClient = new QueryClient();
 
+const RouteTracker = () => {
+  const location = useLocation();
+  useEffect(() => {
+    trackEvent('page_view', {
+      page_path: location.pathname + location.search,
+      page_location: window.location.href,
+      page_title: document.title,
+    });
+  }, [location.pathname, location.search]);
+  return null;
+};
+
 const App = () => (
   <GoogleOAuthProvider clientId={config.googleClientId}>
     <AuthProvider>
@@ -32,6 +46,7 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <BrowserRouter>
+            <RouteTracker />
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />

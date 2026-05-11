@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Slider } from '@/components/ui/slider';
 import { Filter, X } from 'lucide-react';
 import { warehouseAPI, transformWarehouseData, type Warehouse } from '@/services/warehouseAPI';
+import { trackEvent } from '@/lib/analytics';
 
 // Filter interface
 interface WarehouseFilters {
@@ -122,13 +123,20 @@ const Listings = () => {
   };
 
   const applyFilters = () => {
-    console.log('Applying filters:', filters);
-    // Reset to page 1 and fetch with filters
+    trackEvent('filter_apply', {
+      city: filters.city || undefined,
+      state: filters.state || undefined,
+      fire_compliance: filters.fireCompliance || undefined,
+      warehouse_type: filters.warehouseType || undefined,
+      min_sqft: filters.minSqft,
+      max_sqft: filters.maxSqft,
+    });
     setPagination(prev => ({ ...prev, currentPage: 1 }));
     fetchWarehouses(1);
   };
 
   const clearFilters = () => {
+    trackEvent('filter_clear', {});
     setFilters({
       city: '',
       state: '',
@@ -345,7 +353,7 @@ const Listings = () => {
           {/* Warehouse Grid */}
           {!loading && !error && warehouses.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-              {warehouses.map((warehouse) => (
+              {warehouses.map((warehouse, idx) => (
                 <WarehouseCard
                   key={warehouse.id}
                   id={warehouse.id}
@@ -358,7 +366,20 @@ const Listings = () => {
                   price={warehouse.price}
                   fireCompliance={warehouse.fireCompliance}
                   features={warehouse.features}
-                  onClick={() => handleWarehouseClick(warehouse.id)}
+                  onClick={() => {
+                    trackEvent('listing_open', {
+                      warehouse_id: warehouse.id,
+                      source: 'listings_page',
+                      position: (pagination.currentPage - 1) * pagination.pageSize + idx + 1,
+                      page: pagination.currentPage,
+                      address: warehouse.address,
+                      city: warehouse.location?.city,
+                      state: warehouse.location?.state,
+                      size_sqft: warehouse.size,
+                      price_per_sqft: warehouse.price,
+                    });
+                    handleWarehouseClick(warehouse.id);
+                  }}
                 />
               ))}
             </div>
@@ -412,7 +433,11 @@ const Listings = () => {
               {pagination.totalPages > 1 && (
                 <div className="flex justify-center gap-2">
                   <button
-                    onClick={() => fetchWarehouses(pagination.currentPage - 1)}
+                    onClick={() => {
+                      const next = pagination.currentPage - 1;
+                      trackEvent('listings_paginate', { from_page: pagination.currentPage, to_page: next, direction: 'prev' });
+                      fetchWarehouses(next);
+                    }}
                     disabled={pagination.currentPage === 1}
                     className="px-4 h-9 rounded-lg border border-wareongo-blue/30 text-wareongo-blue text-sm font-medium hover:bg-wareongo-blue/5 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                   >
@@ -436,7 +461,10 @@ const Listings = () => {
                       return (
                         <button
                           key={pageNum}
-                          onClick={() => fetchWarehouses(pageNum)}
+                          onClick={() => {
+                            trackEvent('listings_paginate', { from_page: pagination.currentPage, to_page: pageNum, direction: 'jump' });
+                            fetchWarehouses(pageNum);
+                          }}
                           className={`w-9 h-9 rounded-lg text-sm font-medium transition-colors border ${
                             isActive
                               ? 'bg-wareongo-blue text-white border-wareongo-blue'
@@ -450,7 +478,11 @@ const Listings = () => {
                   </div>
 
                   <button
-                    onClick={() => fetchWarehouses(pagination.currentPage + 1)}
+                    onClick={() => {
+                      const next = pagination.currentPage + 1;
+                      trackEvent('listings_paginate', { from_page: pagination.currentPage, to_page: next, direction: 'next' });
+                      fetchWarehouses(next);
+                    }}
                     disabled={pagination.currentPage === pagination.totalPages}
                     className="px-4 h-9 rounded-lg border border-wareongo-blue/30 text-wareongo-blue text-sm font-medium hover:bg-wareongo-blue/5 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                   >

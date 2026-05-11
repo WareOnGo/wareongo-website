@@ -5,6 +5,7 @@ import ContactFormDialog from "@/components/ContactFormDialog";
 import { useAuth } from '@/context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X, LogOut, User } from 'lucide-react';
+import { trackEvent } from '@/lib/analytics';
 
 const Navbar = () => {
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
@@ -95,13 +96,25 @@ const Navbar = () => {
 
         {/* Desktop nav pill */}
         <div className={`hidden md:flex items-center border rounded-xl p-2 gap-1 transition-all duration-300 ${pillBgClass}`}>
-          <Link to="/request-warehouse" className={navLinkClass}>
+          <Link
+            to="/request-warehouse"
+            className={navLinkClass}
+            onClick={() => trackEvent('nav_click', { label: 'Request a Warehouse', destination: '/request-warehouse', position: 'header_desktop' })}
+          >
             Request a Warehouse
           </Link>
-          <Link to="/listings" className={navLinkClass}>
+          <Link
+            to="/listings"
+            className={navLinkClass}
+            onClick={() => trackEvent('nav_click', { label: 'Listings', destination: '/listings', position: 'header_desktop' })}
+          >
             Listings
           </Link>
-          <Link to="/about-us" className={navLinkClass}>
+          <Link
+            to="/about-us"
+            className={navLinkClass}
+            onClick={() => trackEvent('nav_click', { label: 'About Us', destination: '/about-us', position: 'header_desktop' })}
+          >
             About Us
           </Link>
 
@@ -130,7 +143,10 @@ const Navbar = () => {
 
           {/* Highlighted CTA */}
           <button
-            onClick={() => setIsContactDialogOpen(true)}
+            onClick={() => {
+              trackEvent('cta_click', { label: 'Contact Us', cta_location: 'header_desktop' });
+              setIsContactDialogOpen(true);
+            }}
             className="ml-1 bg-wareongo-blue text-white text-sm font-medium px-6 py-3 rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap"
           >
             Contact Us
@@ -167,21 +183,30 @@ const Navbar = () => {
         <div className="px-4 py-5 flex flex-col space-y-3">
           <Link
             to="/request-warehouse"
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={() => {
+              trackEvent('nav_click', { label: 'Request a Warehouse', destination: '/request-warehouse', position: 'header_mobile' });
+              setIsMobileMenuOpen(false);
+            }}
             className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors text-base font-medium py-2 text-center w-full block"
           >
             Request a Warehouse
           </Link>
           <Link
             to="/listings"
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={() => {
+              trackEvent('nav_click', { label: 'Listings', destination: '/listings', position: 'header_mobile' });
+              setIsMobileMenuOpen(false);
+            }}
             className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors text-base font-medium py-2 text-center w-full"
           >
             Listings
           </Link>
           <Link
             to="/about-us"
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={() => {
+              trackEvent('nav_click', { label: 'About Us', destination: '/about-us', position: 'header_mobile' });
+              setIsMobileMenuOpen(false);
+            }}
             className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors text-base font-medium py-2 text-center w-full"
           >
             About Us
@@ -237,6 +262,7 @@ const Navbar = () => {
 
           <button
             onClick={() => {
+              trackEvent('cta_click', { label: 'Contact Us', cta_location: 'header_mobile' });
               setIsContactDialogOpen(true);
               setIsMobileMenuOpen(false);
             }}
