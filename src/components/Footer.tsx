@@ -1,7 +1,106 @@
-import React from 'react';
-import { Phone, Mail } from 'lucide-react';
+import React, { useState } from 'react';
+import { Phone, Mail, ChevronDown } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { trackEvent } from '@/lib/analytics';
+import { CITIES, STATES, CITIES_BY_TYPE, STATES_BY_TYPE, type LocationSummary } from '@/data/locations.generated';
+
+interface LocationLinkGridProps {
+  heading: string;
+  basePath: string;
+  items: LocationSummary[];
+  /** Appended to each link's href (e.g. "/peb"). Leading slash required. */
+  pathSuffix?: string;
+  /** Prepended to each visible label (e.g. "PEB "). Trailing space if needed. */
+  labelPrefix?: string;
+}
+
+const LocationLinkGrid = ({
+  heading,
+  basePath,
+  items,
+  pathSuffix = '',
+  labelPrefix = '',
+}: LocationLinkGridProps) => {
+  if (items.length === 0) return null;
+  return (
+    <div>
+      <h4 className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-3">{heading}</h4>
+      <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-2 text-sm">
+        {items.map((loc) => {
+          const href = `${basePath}/${loc.slug}${pathSuffix}`;
+          const label = `${labelPrefix}Spaces in ${loc.canonical}`;
+          return (
+            <li key={`${loc.slug}${pathSuffix}`} className="min-w-0">
+              <Link
+                to={href}
+                title={label}
+                onClick={() =>
+                  trackEvent('nav_click', { label, destination: href, position: 'footer' })
+                }
+                className="block truncate text-gray-300 hover:text-white transition-colors"
+              >
+                {label}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
+
+const ExploreSpacesSection = () => {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border-t border-white/10 pt-6">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        className="flex items-center justify-between w-full text-left text-lg font-semibold mb-3 hover:text-wareongo-ivory transition-colors"
+      >
+        <span>Explore our spaces</span>
+        <ChevronDown
+          className={`h-4 w-4 transition-transform ${open ? 'rotate-180' : ''}`}
+          aria-hidden="true"
+        />
+      </button>
+      {/* Always rendered to DOM so crawlers can follow links — visually toggled via display class. */}
+      <div aria-hidden={!open} className={open ? 'space-y-6' : 'hidden'}>
+        <LocationLinkGrid heading="By City" basePath="/listings/city" items={CITIES} />
+        <LocationLinkGrid heading="By State" basePath="/listings/state" items={STATES} />
+        <LocationLinkGrid
+          heading="PEB · By City"
+          basePath="/listings/city"
+          items={CITIES_BY_TYPE.PEB}
+          pathSuffix="/peb"
+          labelPrefix="PEB "
+        />
+        <LocationLinkGrid
+          heading="RCC · By City"
+          basePath="/listings/city"
+          items={CITIES_BY_TYPE.RCC}
+          pathSuffix="/rcc"
+          labelPrefix="RCC "
+        />
+        <LocationLinkGrid
+          heading="PEB · By State"
+          basePath="/listings/state"
+          items={STATES_BY_TYPE.PEB}
+          pathSuffix="/peb"
+          labelPrefix="PEB "
+        />
+        <LocationLinkGrid
+          heading="RCC · By State"
+          basePath="/listings/state"
+          items={STATES_BY_TYPE.RCC}
+          pathSuffix="/rcc"
+          labelPrefix="RCC "
+        />
+      </div>
+    </div>
+  );
+};
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -137,6 +236,10 @@ const Footer = () => {
           </div>
         </div>
         
+        <div className="mt-10">
+          <ExploreSpacesSection />
+        </div>
+
         <div className="border-t border-gray-700 mt-12 pt-6 text-center text-gray-400 text-sm">
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-4">
             <Link

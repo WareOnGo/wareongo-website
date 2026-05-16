@@ -2,15 +2,18 @@ import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { useNavigate, useLoaderData } from 'react-router-dom';
 import { ArrowLeft, AlertCircle } from 'lucide-react';
 import { ClientOnly } from 'vite-react-ssg';
+import { Link } from 'react-router-dom';
 import PageHead from '@/components/PageHead';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WarehouseImageCarousel from '@/components/WarehouseImageCarousel';
 import WarehouseInfo from '@/components/WarehouseInfo';
+import WarehouseCard from '@/components/WarehouseCard';
 import ContactFormDialog from '@/components/ContactFormDialog';
 import { SITE_URL } from '@/config/config';
 import { trackEvent } from '@/lib/analytics';
+import { warehousePath } from '@/lib/warehouseSlug';
 import type { WarehouseLoaderData } from '@/loaders/warehouseLoader';
 
 // Leaflet touches `window` at module import time — lazy-load behind ClientOnly so SSG never resolves it.
@@ -19,14 +22,20 @@ const WarehouseLocationMap = lazy(() => import('@/components/WarehouseLocationMa
 const buildJsonLd = (data: NonNullable<WarehouseLoaderData>) => {
   const loc = data.specifications.location;
   const space = data.specifications.space;
+  const path = warehousePath({
+    id: data.id,
+    size: space.totalSpace,
+    warehouseType: data.specifications.infrastructure.type,
+    city: loc.city,
+  });
   // RealEstateListing is in schema.org's pending namespace; pairing with Place keeps
   // compatibility with crawlers that haven't adopted the pending vocab yet.
   return {
     '@context': 'https://schema.org',
     '@type': ['RealEstateListing', 'Place'],
-    '@id': `${SITE_URL}/warehouse/${data.id}`,
+    '@id': `${SITE_URL}${path}`,
     name: `Warehouse ${data.id} — ${loc.city}, ${loc.state}`,
-    url: `${SITE_URL}/warehouse/${data.id}`,
+    url: `${SITE_URL}${path}`,
     image: data.images && data.images.length > 0 ? data.images : undefined,
     address: {
       '@type': 'PostalAddress',
@@ -123,6 +132,12 @@ const WarehouseDetail = () => {
 
   const loc = warehouseData.specifications.location;
   const space = warehouseData.specifications.space;
+  const selfPath = warehousePath({
+    id: warehouseData.id,
+    size: space.totalSpace,
+    warehouseType: warehouseData.specifications.infrastructure.type,
+    city: loc.city,
+  });
   const seoTitle = `Warehouse ${warehouseData.id} — ${space.totalSpace ? space.totalSpace.toLocaleString() + ' sqft' : 'space'} in ${loc.city}, ${loc.state} | WareOnGo`;
   const seoDescription = `${space.totalSpace ? space.totalSpace.toLocaleString() + ' sqft warehouse' : 'Warehouse space'} for rent at ${loc.address}, ${loc.city}, ${loc.state}${space.ratePerSqft ? ` — ₹${space.ratePerSqft}/sqft` : ''}. ${warehouseData.specifications.infrastructure.type !== 'Standard' ? warehouseData.specifications.infrastructure.type + ' construction. ' : ''}List with WareOnGo.`;
   const ogImage = warehouseData.images && warehouseData.images.length > 0 ? warehouseData.images[0] : undefined;
@@ -133,7 +148,7 @@ const WarehouseDetail = () => {
       <PageHead
         title={seoTitle}
         description={seoDescription}
-        path={`/warehouse/${warehouseData.id}`}
+        path={selfPath}
         image={ogImage}
       >
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
@@ -152,7 +167,7 @@ const WarehouseDetail = () => {
             items={[
               { label: 'Home', path: '/' },
               { label: 'Listings', path: '/listings' },
-              { label: `Warehouse #${warehouseData.id} — ${loc.city}, ${loc.state}` },
+              { label: `Warehouse #${warehouseData.id} — ${loc.city}, ${loc.state}`, path: selfPath },
             ]}
           />
 
@@ -268,6 +283,78 @@ const WarehouseDetail = () => {
             <h2 id="detailed-info-title" className="sr-only">Detailed Warehouse Information</h2>
             <WarehouseInfo specifications={warehouseData.specifications} />
           </section>
+
+          {/* Auto-generated descriptive paragraph — boosts thin-content signals for crawlers. */}
+          <section aria-labelledby="about-this-warehouse-title" className="mt-10 sm:mt-12 max-w-3xl">
+            <h2
+              id="about-this-warehouse-title"
+              className="text-xl sm:text-2xl font-bold text-wareongo-blue mb-4"
+            >
+              About this warehouse
+            </h2>
+            <p className="text-sm sm:text-base text-wareongo-slate leading-relaxed">
+              This{' '}
+              {space.totalSpace ? <strong className="text-wareongo-charcoal">{space.totalSpace.toLocaleString()} sqft </strong> : null}
+              {warehouseData.specifications.infrastructure.type !== 'Standard'
+                ? `${warehouseData.specifications.infrastructure.type} `
+                : ''}
+              warehouse is located at {loc.address}, {loc.city}, {loc.state}
+              {loc.postalCode ? ` (${loc.postalCode})` : ''}.
+              {warehouseData.specifications.infrastructure.clearHeight !== 'Not specified'
+                ? ` It offers a clear height of ${warehouseData.specifications.infrastructure.clearHeight}, suitable for stacked storage and palletised operations.`
+                : ''}
+              {space.ratePerSqft ? ` Available for rent at ₹${space.ratePerSqft} per sqft.` : ''}
+              {warehouseData.specifications.compliance.compliances &&
+              warehouseData.specifications.compliance.compliances !== 'Compliance information not available'
+                ? ` Compliances on record: ${warehouseData.specifications.compliance.compliances}.`
+                : ''}{' '}
+              Browse more <Link to={`/listings/city/${loc.city.toLowerCase().replace(/\s+/g, '-')}`} className="text-wareongo-blue underline-offset-2 hover:underline">warehouses in {loc.city}</Link>{' '}
+              or <Link to="/request-warehouse" className="text-wareongo-blue underline-offset-2 hover:underline">request a custom space</Link> if this doesn't fit your requirements.
+            </p>
+          </section>
+
+          {/* Related warehouses in the same city — internal linking for crawl + bounce reduction. */}
+          {warehouseData.related && warehouseData.related.length > 0 && (
+            <section aria-labelledby="related-warehouses-title" className="mt-12 sm:mt-16">
+              <h2
+                id="related-warehouses-title"
+                className="text-xl sm:text-2xl font-bold text-wareongo-blue mb-2"
+              >
+                More warehouses in {loc.city}
+              </h2>
+              <p className="text-sm text-wareongo-slate mb-6">
+                Other verified listings nearby.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {warehouseData.related.map((w, idx) => (
+                  <WarehouseCard
+                    key={w.id}
+                    id={w.id}
+                    index={idx}
+                    image={w.image}
+                    images={w.images}
+                    address={w.address}
+                    location={w.location}
+                    size={w.size}
+                    ceilingHeight={w.ceilingHeight}
+                    price={w.price}
+                    fireCompliance={w.fireCompliance}
+                    features={w.features}
+                    onClick={() =>
+                      navigate(
+                        warehousePath({
+                          id: w.id,
+                          size: w.size,
+                          warehouseType: w.warehouseType,
+                          city: w.location.city,
+                        }),
+                      )
+                    }
+                  />
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </main>
 

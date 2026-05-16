@@ -45,14 +45,33 @@ const CaseStudyDetail: React.FC = () => {
 
   const csTitle = `${cs.previewTitle.split('—')[0].trim()} — Case Study ${cs.number} | WareOnGo`;
   const csDescription = cs.previewSub || `Warehouse case study: ${cs.previewTitle}`;
+  const csPath = `/casestudies/${cs.slug}`;
+  const articleLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: cs.previewTitle,
+    description: csDescription,
+    url: `https://wareongo.com${csPath}`,
+    author: { '@type': 'Organization', name: 'WareOnGo' },
+    publisher: {
+      '@type': 'Organization',
+      name: 'WareOnGo',
+      logo: { '@type': 'ImageObject', url: 'https://wareongo.com/WOG_Logo_light.png' },
+    },
+    inLanguage: 'en',
+    isAccessibleForFree: true,
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
       <PageHead
         title={csTitle}
         description={csDescription}
-        path={`/casestudies/${cs.slug}`}
-      />
+        path={csPath}
+        ogType="article"
+      >
+        <script type="application/ld+json">{JSON.stringify(articleLd)}</script>
+      </PageHead>
       <Navbar />
 
       <main className="flex-1 pt-24 pb-16">

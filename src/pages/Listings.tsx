@@ -12,6 +12,7 @@ import { Slider } from '@/components/ui/slider';
 import { Filter, X } from 'lucide-react';
 import { warehouseAPI, transformWarehouseData, type Warehouse } from '@/services/warehouseAPI';
 import { trackEvent } from '@/lib/analytics';
+import { warehousePath } from '@/lib/warehouseSlug';
 import type { ListingsLoaderData } from '@/loaders/warehouseLoader';
 
 // Filter interface
@@ -72,7 +73,7 @@ const Listings = () => {
     currentPage: initialData?.pagination?.currentPage ?? 1,
     totalPages: initialData?.pagination?.totalPages ?? 1,
     totalItems: initialData?.pagination?.totalItems ?? 0,
-    pageSize: initialData?.pagination?.pageSize ?? 20,
+    pageSize: initialData?.pagination?.pageSize ?? 21,
   });
 
   // Filter state — seeded from URL params so deep links like /listings?city=Bangalore work.
@@ -189,10 +190,15 @@ const Listings = () => {
     fetchWarehouses(1, newPageSize);
   };
 
-  const handleWarehouseClick = (warehouseId: number) => {
-    // Navigate to warehouse detail page
-    console.log(`Navigating to warehouse ${warehouseId}`);
-    navigate(`/warehouse/${warehouseId}`);
+  const handleWarehouseClick = (warehouse: { id: number; size?: number; warehouseType?: string | null; location?: { city?: string } }) => {
+    navigate(
+      warehousePath({
+        id: warehouse.id,
+        size: warehouse.size,
+        warehouseType: warehouse.warehouseType,
+        city: warehouse.location?.city,
+      }),
+    );
   };
 
   return (
@@ -415,7 +421,7 @@ const Listings = () => {
                       size_sqft: warehouse.size,
                       price_per_sqft: warehouse.price,
                     });
-                    handleWarehouseClick(warehouse.id);
+                    handleWarehouseClick(warehouse);
                   }}
                 />
               ))}

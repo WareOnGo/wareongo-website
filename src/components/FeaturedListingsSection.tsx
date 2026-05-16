@@ -3,6 +3,7 @@ import { MapPin, Ruler, Building2, IndianRupee, ArrowRight } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom';
 import CircularCursor from './CircularCursor';
 import { trackEvent } from '@/lib/analytics';
+import { warehousePath } from '@/lib/warehouseSlug';
 
 const featuredListings = [
   {
@@ -76,7 +77,13 @@ const FeaturedListingsSection = () => {
                   size_sqft: listing.size,
                   price_per_sqft: listing.price,
                 });
-                navigate(`/warehouse/${listing.id}`);
+                navigate(
+                  warehousePath({
+                    id: listing.id,
+                    size: listing.size,
+                    city: listing.location.city,
+                  }),
+                );
               }}
               onMouseEnter={(e) => {
                 if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;

@@ -15,8 +15,19 @@ import AdminRoute from "./components/AdminRoute";
 import CaseStudies from "./pages/CaseStudies";
 import CaseStudyDetail from "./pages/CaseStudyDetail";
 import RequestWarehouse from "./pages/RequestWarehouse";
+import LocationListings from "./pages/LocationListings";
 import { caseStudies } from "./data/caseStudies";
 import { warehouseLoader, warehouseStaticPaths, listingsLoader } from "./loaders/warehouseLoader";
+import {
+  cityListingsLoader,
+  stateListingsLoader,
+  cityStaticPaths,
+  stateStaticPaths,
+  cityTypeListingsLoader,
+  stateTypeListingsLoader,
+  cityTypeStaticPaths,
+  stateTypeStaticPaths,
+} from "./loaders/locationLoader";
 
 export const routes: RouteRecord[] = [
   {
@@ -36,7 +47,33 @@ export const routes: RouteRecord[] = [
       },
       { path: "listings", element: <Listings />, loader: listingsLoader },
       {
-        path: "warehouse/:id",
+        path: "listings/city/:city",
+        element: <LocationListings />,
+        loader: cityListingsLoader,
+        getStaticPaths: cityStaticPaths,
+      },
+      {
+        path: "listings/city/:city/:type",
+        element: <LocationListings />,
+        loader: cityTypeListingsLoader,
+        getStaticPaths: cityTypeStaticPaths,
+      },
+      {
+        path: "listings/state/:state",
+        element: <LocationListings />,
+        loader: stateListingsLoader,
+        getStaticPaths: stateStaticPaths,
+      },
+      {
+        path: "listings/state/:state/:type",
+        element: <LocationListings />,
+        loader: stateTypeListingsLoader,
+        getStaticPaths: stateTypeStaticPaths,
+      },
+      {
+        // :slug carries the descriptive SEO slug with the warehouse ID at the end.
+        // The loader parses the trailing number to do the actual lookup.
+        path: "warehouse/:slug",
         element: <WarehouseDetail />,
         loader: warehouseLoader,
         getStaticPaths: warehouseStaticPaths,

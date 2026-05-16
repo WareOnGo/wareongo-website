@@ -19,6 +19,9 @@ export interface Warehouse {
   photos: string[] | string | null;
   fireNocAvailable: boolean | null;
   fireSafetyMeasures: string | null;
+  // The listings endpoint includes warehouseType too, even though it's not in
+  // the original spec. Optional so legacy callers stay compatible.
+  warehouseType?: string | null;
 }
 
 // Extended interface for warehouse detail page with additional fields
@@ -514,6 +517,7 @@ export const transformWarehouseData = (warehouse: Warehouse) => {
     ceilingHeight,
     price,
     fireCompliance: warehouse.fireNocAvailable || false,
-    features: features.slice(0, 3) // Limit to 3 features
+    features: features.slice(0, 3), // Limit to 3 features
+    warehouseType: warehouse.warehouseType ?? null,
   };
 };

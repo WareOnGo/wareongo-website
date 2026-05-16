@@ -1,7 +1,14 @@
 import type { LoaderFunctionArgs } from 'react-router-dom';
 import { warehouseAPI, transformWarehouseData, transformWarehouseDetailData, WarehouseAPIError } from '@/services/warehouseAPI';
+import { warehouseSlug, parseIdFromWarehouseSlug } from '@/lib/warehouseSlug';
+import { getAllWarehouses } from './locationLoader';
 
-export type WarehouseLoaderData = ReturnType<typeof transformWarehouseDetailData>;
+type DetailData = ReturnType<typeof transformWarehouseDetailData>;
+type CardData = ReturnType<typeof transformWarehouseData>;
+
+export interface WarehouseLoaderData extends DetailData {
+  related: CardData[];
+}
 export type ListingsLoaderData = {
   warehouses: ReturnType<typeof transformWarehouseData>[];
   pagination: {
@@ -13,8 +20,8 @@ export type ListingsLoaderData = {
 };
 
 // Default page-1 fetch baked into /listings at SSG time so crawlers see real cards
-// (and users get faster first paint). Filter/pagination changes still re-fetch client-side.
-const LISTINGS_DEFAULT_PAGE_SIZE = 20;
+// (and users get faster first paint). 21 = full 7 rows on the 3-col grid.
+const LISTINGS_DEFAULT_PAGE_SIZE = 21;
 
 export async function listingsLoader(): Promise<ListingsLoaderData | null> {
   try {
@@ -31,12 +38,30 @@ export async function listingsLoader(): Promise<ListingsLoaderData | null> {
   }
 }
 
+async function findRelated(currentId: number, city: string | null | undefined, count = 6): Promise<CardData[]> {
+  if (!city) return [];
+  try {
+    const all = await getAllWarehouses();
+    const target = city.trim().toLowerCase();
+    return all
+      .filter((w) => w.id !== currentId && (w.city ?? '').trim().toLowerCase() === target)
+      .slice(0, count)
+      .map(transformWarehouseData);
+  } catch {
+    return [];
+  }
+}
+
 export async function warehouseLoader({ params }: LoaderFunctionArgs): Promise<WarehouseLoaderData | null> {
-  const id = params.id;
-  if (!id) return null;
+  const slug = params.slug;
+  if (!slug) return null;
+  const id = parseIdFromWarehouseSlug(slug);
+  if (id == null) return null;
   try {
     const warehouse = await warehouseAPI.getWarehouseById(id);
-    return transformWarehouseDetailData(warehouse);
+    const detail = transformWarehouseDetailData(warehouse);
+    const related = await findRelated(detail.id, detail.specifications.location.city);
+    return { ...detail, related };
   } catch (err) {
     if (err instanceof WarehouseAPIError && (err.code === 'WAREHOUSE_NOT_FOUND' || err.code === 'INVALID_ID')) {
       return null;
@@ -45,8 +70,7 @@ export async function warehouseLoader({ params }: LoaderFunctionArgs): Promise<W
   }
 }
 
-// Enumerate every warehouse id by paginating the public listings endpoint.
-// Runs once per build; failures here abort the build deliberately so we never ship a stale URL set.
+// Enumerate every warehouse as a SEO-friendly slug path. Runs once per build.
 export async function warehouseStaticPaths(): Promise<string[]> {
   const pageSize = 50;
   const paths: string[] = [];
@@ -55,7 +79,15 @@ export async function warehouseStaticPaths(): Promise<string[]> {
   while (true) {
     const resp = await warehouseAPI.getWarehouses(page, pageSize);
     for (const w of resp.data) {
-      paths.push(`/warehouse/${w.id}`);
+      const sizes = w.totalSpaceSqft;
+      const size = Array.isArray(sizes) ? sizes[0] : sizes;
+      const slug = warehouseSlug({
+        id: w.id,
+        size: typeof size === 'number' ? size : null,
+        warehouseType: w.warehouseType,
+        city: w.city,
+      });
+      paths.push(`/warehouse/${slug}`);
     }
     if (page >= resp.pagination.totalPages || resp.data.length === 0) break;
     page += 1;

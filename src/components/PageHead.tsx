@@ -7,10 +7,12 @@ interface PageHeadProps {
   path: string;
   image?: string;
   noindex?: boolean;
+  /** OG type — defaults to "website". Use "article" for case studies / blog-style pages. */
+  ogType?: 'website' | 'article';
   children?: React.ReactNode;
 }
 
-const PageHead = ({ title, description, path, image, noindex, children }: PageHeadProps) => {
+const PageHead = ({ title, description, path, image, noindex, ogType = 'website', children }: PageHeadProps) => {
   const url = `${SITE_URL}${path}`;
   const ogImage = image ?? `${SITE_URL}/og-image.png`;
   return (
@@ -19,7 +21,7 @@ const PageHead = ({ title, description, path, image, noindex, children }: PageHe
       <meta name="description" content={description} />
       <link rel="canonical" href={url} />
       {noindex && <meta name="robots" content="noindex,follow" />}
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content={ogType} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={url} />
