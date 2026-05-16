@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import PageHead from '@/components/PageHead';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WarehouseCard from '@/components/WarehouseCard';
@@ -166,8 +167,13 @@ const Listings = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
+      <PageHead
+        title="Warehouse Listings Across India | WareOnGo"
+        description="Browse 1,500+ verified warehouse listings across India. Filter by city, size, compliance, and warehouse type. Direct contact, transparent pricing."
+        path="/listings"
+      />
       <Navbar />
-      
+
       <main className="flex-grow bg-wareongo-ivory">
         <div className="section-container">
           <div className="max-w-2xl mb-8 md:mb-12">

@@ -17,7 +17,8 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(() => {
-    // Initialize token from localStorage
+    // Initialize token from localStorage (guarded for SSG / server-side render)
+    if (typeof window === 'undefined') return null;
     return localStorage.getItem('authToken') || null;
   });
 

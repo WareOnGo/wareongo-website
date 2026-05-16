@@ -1,5 +1,6 @@
 
 import React, { useEffect } from 'react';
+import PageHead from '@/components/PageHead';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import TrustedBySection from '@/components/TrustedBySection';
@@ -21,6 +22,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
+      <PageHead
+        title="WareOnGo — Find Warehouse Space Fast Across India"
+        description="WareOnGo connects businesses with the right warehouse space across India — faster discovery, transparent listings, and verified compliance. 1,500+ warehouses listed."
+        path="/"
+      />
       <Navbar />
       <HeroSection />
       <TrustedBySection />

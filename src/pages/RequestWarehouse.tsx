@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PageHead from '@/components/PageHead';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from "@/components/ui/button";
@@ -38,6 +39,7 @@ const RequestWarehouse = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
 
     if (!formData.fullName || !formData.phone || !formData.email || !formData.company || !formData.location) {
       toast({
@@ -98,6 +100,11 @@ const RequestWarehouse = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
+      <PageHead
+        title="Request a Warehouse | WareOnGo"
+        description="Can't find what you need? Tell us your requirements and our team will match you with warehouse space across India."
+        path="/request-warehouse"
+      />
       <Navbar />
 
       <main className="flex-1 py-6 md:py-12 lg:py-16">

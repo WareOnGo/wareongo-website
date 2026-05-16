@@ -1,113 +1,95 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { ArrowLeft, Loader2, AlertCircle } from 'lucide-react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
+import { useNavigate, useLoaderData } from 'react-router-dom';
+import { ArrowLeft, AlertCircle } from 'lucide-react';
+import { ClientOnly } from 'vite-react-ssg';
+import PageHead from '@/components/PageHead';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WarehouseImageCarousel from '@/components/WarehouseImageCarousel';
 import WarehouseInfo from '@/components/WarehouseInfo';
-import WarehouseLocationMap from '@/components/WarehouseLocationMap';
 import ContactFormDialog from '@/components/ContactFormDialog';
-import { warehouseAPI, WarehouseAPIError, transformWarehouseDetailData } from '@/services/warehouseAPI';
+import { SITE_URL } from '@/config/config';
 import { trackEvent } from '@/lib/analytics';
+import type { WarehouseLoaderData } from '@/loaders/warehouseLoader';
+
+// Leaflet touches `window` at module import time — lazy-load behind ClientOnly so SSG never resolves it.
+const WarehouseLocationMap = lazy(() => import('@/components/WarehouseLocationMap'));
+
+const buildJsonLd = (data: NonNullable<WarehouseLoaderData>) => {
+  const loc = data.specifications.location;
+  const space = data.specifications.space;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Place',
+    '@id': `${SITE_URL}/warehouse/${data.id}`,
+    name: `Warehouse ${data.id} — ${loc.city}, ${loc.state}`,
+    url: `${SITE_URL}/warehouse/${data.id}`,
+    image: data.images && data.images.length > 0 ? data.images : undefined,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: loc.address,
+      addressLocality: loc.city,
+      addressRegion: loc.state,
+      postalCode: loc.postalCode ?? undefined,
+      addressCountry: 'IN',
+    },
+    additionalProperty: [
+      space.totalSpace
+        ? { '@type': 'PropertyValue', name: 'Total area (sqft)', value: space.totalSpace }
+        : null,
+      space.ratePerSqft
+        ? { '@type': 'PropertyValue', name: 'Rate (INR per sqft)', value: space.ratePerSqft }
+        : null,
+      data.specifications.infrastructure.type
+        ? { '@type': 'PropertyValue', name: 'Warehouse type', value: data.specifications.infrastructure.type }
+        : null,
+      data.specifications.infrastructure.clearHeight
+        ? { '@type': 'PropertyValue', name: 'Clear height', value: data.specifications.infrastructure.clearHeight }
+        : null,
+    ].filter(Boolean),
+  };
+};
 
 const WarehouseDetail = () => {
-  const { id } = useParams<{ id: string }>();
+  const warehouseData = useLoaderData() as WarehouseLoaderData;
   const navigate = useNavigate();
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
-  // Fetch warehouse data using React Query
-  const {
-    data: warehouseData,
-    isLoading,
-    error,
-    refetch
-  } = useQuery({
-    queryKey: ['warehouse', id],
-    queryFn: async () => {
-      if (!id) {
-        throw new WarehouseAPIError('No warehouse ID provided', 400, 'MISSING_ID');
-      }
-      
-      const warehouse = await warehouseAPI.getWarehouseById(id);
-      return transformWarehouseDetailData(warehouse);
-    },
-    enabled: !!id,
-    retry: (failureCount, error) => {
-      // Don't retry for 404 errors or invalid IDs
-      if (error instanceof WarehouseAPIError && 
-          (error.code === 'WAREHOUSE_NOT_FOUND' || error.code === 'INVALID_ID')) {
-        return false;
-      }
-      // Retry up to 2 times for other errors
-      return failureCount < 2;
-    },
-    staleTime: 5 * 60 * 1000, // 5 minutes
-    gcTime: 10 * 60 * 1000, // 10 minutes
-  });
 
   useEffect(() => {
     if (!warehouseData) return;
-    const city = warehouseData.specifications?.location?.city;
-    const address = warehouseData.specifications?.location?.address;
-    if (address || city) {
-      document.title = `${address || `Warehouse ${warehouseData.id}`}${city ? `, ${city}` : ''} | WareOnGo`;
-    }
     trackEvent('view_listing', {
       warehouse_id: warehouseData.id,
-      city,
+      city: warehouseData.specifications?.location?.city,
       state: warehouseData.specifications?.location?.state,
       size_sqft: warehouseData.specifications?.space?.totalSpace,
       price_per_sqft: warehouseData.specifications?.space?.ratePerSqft,
     });
   }, [warehouseData]);
 
-  // Handle back navigation
   const handleBackClick = () => {
     navigate('/listings');
   };
 
-  // Handle contact form opening
   const handleRequestCallback = () => {
+    if (!warehouseData) return;
     trackEvent('cta_click', {
       label: 'Request a callback',
       cta_location: 'warehouse_detail',
-      warehouse_id: id ? Number(id) : undefined,
+      warehouse_id: warehouseData.id,
     });
     setIsContactDialogOpen(true);
   };
 
-  // Loading state
-  if (isLoading) {
+  // Loader returned null — warehouse not found / invalid id.
+  if (!warehouseData) {
     return (
       <div className="min-h-screen flex flex-col bg-wareongo-ivory">
-        <Navbar />
-        <main className="flex-grow bg-wareongo-ivory">
-          <div className="section-container">
-            <div className="flex items-center justify-center min-h-[60vh]">
-              <div className="text-center">
-                <Loader2 className="w-10 h-10 text-wareongo-blue animate-spin mx-auto mb-4" />
-                <h2 className="text-lg sm:text-xl font-semibold text-wareongo-blue mb-1">
-                  Loading warehouse details
-                </h2>
-                <p className="text-wareongo-slate text-sm">
-                  Please wait while we fetch the information.
-                </p>
-              </div>
-            </div>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
-
-  // Error state
-  if (error) {
-    const apiError = error as WarehouseAPIError;
-    const isNotFound = apiError.code === 'WAREHOUSE_NOT_FOUND' || apiError.code === 'INVALID_ID';
-    
-    return (
-      <div className="min-h-screen flex flex-col bg-wareongo-ivory">
+        <PageHead
+          title="Warehouse not found | WareOnGo"
+          description="This warehouse listing is no longer available."
+          path="/warehouse/not-found"
+          noindex
+        />
         <Navbar />
         <main className="flex-grow bg-wareongo-ivory">
           <div className="section-container">
@@ -115,55 +97,10 @@ const WarehouseDetail = () => {
               <div className="text-center max-w-md border border-wareongo-blue/30 rounded-2xl p-8">
                 <AlertCircle className="w-12 h-12 text-wareongo-blue mx-auto mb-4" />
                 <h2 className="text-xl sm:text-2xl font-semibold text-wareongo-blue mb-2">
-                  {isNotFound ? 'Warehouse not found' : 'Error loading warehouse'}
+                  Warehouse not found
                 </h2>
                 <p className="text-wareongo-slate text-sm mb-6">
-                  {isNotFound
-                    ? 'The warehouse you are looking for does not exist or has been removed.'
-                    : apiError.message || 'Something went wrong while loading the warehouse details.'
-                  }
-                </p>
-                <div className="flex gap-3 justify-center">
-                  <button
-                    onClick={handleBackClick}
-                    className="inline-flex items-center px-4 h-10 rounded-xl border border-wareongo-blue/30 text-wareongo-blue text-sm font-medium hover:bg-wareongo-blue/5 transition-colors"
-                  >
-                    <ArrowLeft className="w-4 h-4 mr-2" />
-                    Back to listings
-                  </button>
-                  {!isNotFound && (
-                    <button
-                      onClick={() => refetch()}
-                      className="px-5 h-10 rounded-xl bg-wareongo-blue text-white text-sm font-medium hover:bg-wareongo-blue/90 transition-colors"
-                    >
-                      Try again
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
-
-  // Main content
-  if (!warehouseData) {
-    return (
-      <div className="min-h-screen flex flex-col bg-wareongo-ivory">
-        <Navbar />
-        <main className="flex-grow bg-wareongo-ivory">
-          <div className="section-container">
-            <div className="flex items-center justify-center min-h-[60vh]">
-              <div className="text-center border border-wareongo-blue/30 rounded-2xl p-8">
-                <AlertCircle className="w-10 h-10 text-wareongo-blue/50 mx-auto mb-4" />
-                <h2 className="text-lg sm:text-xl font-semibold text-wareongo-blue mb-2">
-                  No data available
-                </h2>
-                <p className="text-wareongo-slate text-sm mb-5">
-                  Unable to load warehouse information.
+                  The warehouse you are looking for does not exist or has been removed.
                 </p>
                 <button
                   onClick={handleBackClick}
@@ -181,11 +118,26 @@ const WarehouseDetail = () => {
     );
   }
 
+  const loc = warehouseData.specifications.location;
+  const space = warehouseData.specifications.space;
+  const seoTitle = `Warehouse ${warehouseData.id} — ${space.totalSpace ? space.totalSpace.toLocaleString() + ' sqft' : 'space'} in ${loc.city}, ${loc.state} | WareOnGo`;
+  const seoDescription = `${space.totalSpace ? space.totalSpace.toLocaleString() + ' sqft warehouse' : 'Warehouse space'} for rent at ${loc.address}, ${loc.city}, ${loc.state}${space.ratePerSqft ? ` — ₹${space.ratePerSqft}/sqft` : ''}. ${warehouseData.specifications.infrastructure.type !== 'Standard' ? warehouseData.specifications.infrastructure.type + ' construction. ' : ''}List with WareOnGo.`;
+  const ogImage = warehouseData.images && warehouseData.images.length > 0 ? warehouseData.images[0] : undefined;
+  const jsonLd = buildJsonLd(warehouseData);
+
   return (
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
+      <PageHead
+        title={seoTitle}
+        description={seoDescription}
+        path={`/warehouse/${warehouseData.id}`}
+        image={ogImage}
+      >
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      </PageHead>
       <Navbar />
-      
-      <main 
+
+      <main
         className="flex-grow bg-wareongo-ivory bg-opacity-50"
         role="main"
         aria-labelledby="warehouse-title"
@@ -207,7 +159,7 @@ const WarehouseDetail = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-6 lg:mb-8">
             {/* Image Carousel - Mobile: order-1, Desktop: spans 2 rows */}
             <div className="space-y-4 order-1 lg:row-span-2">
-              <WarehouseImageCarousel 
+              <WarehouseImageCarousel
                 images={warehouseData.images}
                 warehouseId={warehouseData.id}
               />
@@ -232,11 +184,11 @@ const WarehouseDetail = () => {
                   id="warehouse-title"
                   className="text-2xl sm:text-3xl md:text-4xl font-bold text-wareongo-blue leading-tight mb-3"
                 >
-                  {warehouseData.specifications.location.city}, {warehouseData.specifications.location.state}
+                  {loc.city}, {loc.state}
                 </h1>
                 <address className="not-italic">
                   <p className="text-sm sm:text-base text-wareongo-slate leading-relaxed">
-                    {warehouseData.specifications.location.address}
+                    {loc.address}
                   </p>
                 </address>
               </header>
@@ -250,7 +202,7 @@ const WarehouseDetail = () => {
                       Total area
                     </div>
                     <div className="text-xl sm:text-2xl font-bold text-wareongo-blue">
-                      {warehouseData.specifications.space.totalSpace.toLocaleString()}
+                      {space.totalSpace.toLocaleString()}
                       <span className="text-sm font-medium text-wareongo-slate ml-1">sqft</span>
                     </div>
                   </div>
@@ -259,7 +211,7 @@ const WarehouseDetail = () => {
                       Rate
                     </div>
                     <div className="text-xl sm:text-2xl font-bold text-wareongo-blue">
-                      ₹{warehouseData.specifications.space.ratePerSqft}
+                      ₹{space.ratePerSqft}
                       <span className="text-sm font-medium text-wareongo-slate ml-1">/ sqft</span>
                     </div>
                   </div>
@@ -289,14 +241,20 @@ const WarehouseDetail = () => {
                   Location
                 </span>
                 <h2 id="location-map-title" className="sr-only">Location</h2>
-                <WarehouseLocationMap
-                  address={warehouseData.specifications.location.address}
-                  city={warehouseData.specifications.location.city}
-                  state={warehouseData.specifications.location.state}
-                  postalCode={warehouseData.specifications.location.postalCode}
-                  warehouseId={warehouseData.id}
-                  className="w-full h-48 sm:h-56 lg:h-60"
-                />
+                <ClientOnly fallback={<div className="w-full h-48 sm:h-56 lg:h-60 bg-muted animate-pulse rounded" />}>
+                  {() => (
+                    <Suspense fallback={<div className="w-full h-48 sm:h-56 lg:h-60 bg-muted animate-pulse rounded" />}>
+                      <WarehouseLocationMap
+                        address={loc.address}
+                        city={loc.city}
+                        state={loc.state}
+                        postalCode={loc.postalCode}
+                        warehouseId={warehouseData.id}
+                        className="w-full h-48 sm:h-56 lg:h-60"
+                      />
+                    </Suspense>
+                  )}
+                </ClientOnly>
               </section>
             </div>
           </div>
@@ -316,7 +274,7 @@ const WarehouseDetail = () => {
         open={isContactDialogOpen}
         onOpenChange={setIsContactDialogOpen}
         title="Request Callback"
-        description={`Request a callback from our team to discuss this warehouse opportunity. Warehouse ID: ${warehouseData.id} located at ${warehouseData.specifications.location.address}, ${warehouseData.specifications.location.city}, ${warehouseData.specifications.location.state}.`}
+        description={`Request a callback from our team to discuss this warehouse opportunity. Warehouse ID: ${warehouseData.id} located at ${loc.address}, ${loc.city}, ${loc.state}.`}
         successMessage="Callback requested successfully! Our team will contact you soon."
         source={`warehouse-detail-${warehouseData.id}-callback`}
       />

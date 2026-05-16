@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import PageHead from '@/components/PageHead';
 import LoginButton from '@/components/LoginButton';
 import { useAuth } from '@/context/AuthContext';
 
@@ -15,6 +16,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-wareongo-ivory px-4">
+      <PageHead title="Login | WareOnGo" description="Sign in to WareOnGo." path="/login" noindex />
       <div className="bg-white shadow-sm rounded-xl p-8 max-w-sm w-full text-center">
         <h1 className="text-2xl font-bold text-wareongo-blue mb-2">Login</h1>
         <p className="text-sm text-wareongo-slate mb-6">

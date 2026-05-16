@@ -38,4 +38,7 @@ export const getApiUrl = (endpoint: string): string => {
   return `${config.apiBaseUrl}${endpoint}`;
 };
 
+// Canonical public site origin — used for canonical/OG URLs and sitemap entries.
+export const SITE_URL = 'https://wareongo.com';
+
 export default config;

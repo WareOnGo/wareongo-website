@@ -1,5 +1,6 @@
 
 import React, { useEffect } from 'react';
+import PageHead from '@/components/PageHead';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -7,9 +8,14 @@ const TermsOfService = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   return (
     <div className="min-h-screen flex flex-col">
+      <PageHead
+        title="Terms of Service | WareOnGo"
+        description="WareOnGo terms of service — rules and conditions for using our warehouse discovery platform."
+        path="/terms-of-service"
+      />
       <Navbar />
       <div className="container mx-auto px-4 py-12 flex-grow">
         <h1 className="text-3xl font-bold mb-6 text-wareongo-blue">WareOnGo Terms of Service</h1>

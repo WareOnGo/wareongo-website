@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import PageHead from '@/components/PageHead';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -18,8 +19,13 @@ const PrivacyPolicy = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <PageHead
+        title="Privacy Policy | WareOnGo"
+        description="WareOnGo privacy policy — how we collect, use, and protect your information."
+        path="/privacy-policy"
+      />
       <Navbar />
-      
+
       <main className="flex-grow bg-wareongo-ivory bg-opacity-50">
         <div className="section-container px-4 sm:px-6 lg:px-8 py-8">
           {/* Back Navigation */}

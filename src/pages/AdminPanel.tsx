@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PageHead from '@/components/PageHead';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useAuth } from '@/context/AuthContext';
@@ -56,8 +57,9 @@ const AdminPanel = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <PageHead title="Admin Panel | WareOnGo" description="WareOnGo admin tools." path="/admin-panel" noindex />
       <Navbar />
-      
+
       <main className="flex-grow bg-wareongo-ivory bg-opacity-50 py-12">
         <div className="container mx-auto px-4 max-w-7xl">
           {/* Header */}

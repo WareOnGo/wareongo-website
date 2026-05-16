@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PageHead from '@/components/PageHead';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { ShieldX } from 'lucide-react';
@@ -8,6 +9,7 @@ import { Button } from '@/components/ui/button';
 const Unauthorized = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <PageHead title="Access Denied | WareOnGo" description="You don't have permission to access this page." path="/unauthorized" noindex />
       <Navbar />
       
       <main className="flex-grow bg-wareongo-ivory bg-opacity-50 flex items-center justify-center py-12">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, BookOpen, LayoutGrid } from 'lucide-react';
+import PageHead from '@/components/PageHead';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import StoryView from '@/components/CaseStudyStoryView';
@@ -42,8 +43,16 @@ const CaseStudyDetail: React.FC = () => {
   const prev = idx > 0 ? caseStudies[idx - 1] : null;
   const next = idx < caseStudies.length - 1 ? caseStudies[idx + 1] : null;
 
+  const csTitle = `${cs.previewTitle.split('—')[0].trim()} — Case Study ${cs.number} | WareOnGo`;
+  const csDescription = cs.previewSub || `Warehouse case study: ${cs.previewTitle}`;
+
   return (
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
+      <PageHead
+        title={csTitle}
+        description={csDescription}
+        path={`/casestudies/${cs.slug}`}
+      />
       <Navbar />
 
       <main className="flex-1 pt-24 pb-16">

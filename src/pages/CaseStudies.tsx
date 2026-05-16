@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
+import PageHead from '@/components/PageHead';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { caseStudies } from '@/data/caseStudies';
@@ -12,6 +13,11 @@ const CaseStudies = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
+      <PageHead
+        title="Warehouse Case Studies | WareOnGo Deals & Outcomes"
+        description="Real warehouse deals across India — from Hosur 3PL to Hyderabad fire-compliant facilities. See how WareOnGo handled complexity and delivered results."
+        path="/casestudies"
+      />
       <Navbar />
 
       <main className="flex-1 pt-24 pb-16">

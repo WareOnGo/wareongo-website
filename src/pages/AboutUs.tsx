@@ -1,11 +1,17 @@
 
 import React from 'react';
+import PageHead from '@/components/PageHead';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 const AboutUs = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <PageHead
+        title="About WareOnGo | Warehousing Discovery Platform for India"
+        description="WareOnGo is building India's most trusted warehousing intelligence platform — bringing transparency, speed, and intelligence to warehouse discovery."
+        path="/about-us"
+      />
       <Navbar />
       
       <main className="flex-grow bg-wareongo-ivory bg-opacity-50">
