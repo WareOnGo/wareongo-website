@@ -7,14 +7,24 @@ interface WarehouseImageCarouselProps {
   warehouseId: number;
   className?: string;
   onImageError?: (imageUrl: string, error: Event) => void;
+  // Used to build descriptive alt text (e.g. "45,000 sqft warehouse in Bengaluru, Karnataka").
+  city?: string;
+  state?: string;
+  sizeSqft?: number;
 }
 
 const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
   images = [],
   warehouseId,
   className = '',
-  onImageError
+  onImageError,
+  city,
+  state,
+  sizeSqft,
 }) => {
+  const locationPart = city && state ? `in ${city}, ${state}` : city ? `in ${city}` : '';
+  const sizePart = sizeSqft ? `${sizeSqft.toLocaleString()} sqft ` : '';
+  const baseAlt = `${sizePart}warehouse ${locationPart}`.trim() || `Warehouse ${warehouseId}`;
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [prevImageIndex, setPrevImageIndex] = useState(0);
   const [failedImages, setFailedImages] = useState<Set<number>>(new Set());
@@ -341,14 +351,15 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
         </div>
       )}
       
-      {/* Previous image - slides out */}
+      {/* Previous image - sliding out, decorative duplicate of current */}
       {slideDirection && prevImageIndex !== currentImageIndex && availableImages[prevImageIndex] && (
         <img
           src={availableImages[prevImageIndex]}
-          alt={`Warehouse ${warehouseId} - Previous`}
+          alt=""
+          aria-hidden="true"
           className={`absolute inset-0 w-full h-full object-cover ${
-            slideDirection === 'left' 
-              ? 'animate-slide-out-left' 
+            slideDirection === 'left'
+              ? 'animate-slide-out-left'
               : 'animate-slide-out-right'
           }`}
           onError={(e) => {
@@ -357,17 +368,17 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
           }}
         />
       )}
-      
-      {/* Current image - slides in */}
+
+      {/* Current image - slides in. First image stays eager (LCP); others lazy. */}
       <img
         key={`${warehouseId}-${currentImageIndex}-${availableImages[currentImageIndex]}`}
         src={availableImages[currentImageIndex]}
-        alt={`Warehouse ${warehouseId} - Image ${currentImageIndex + 1} of ${validImages.length}`}
+        alt={validImages.length > 1 ? `${baseAlt} — photo ${currentImageIndex + 1} of ${validImages.length}` : baseAlt}
         className={`absolute inset-0 w-full h-full object-cover ${
-          slideDirection === 'left' 
-            ? 'animate-slide-in-left' 
-            : slideDirection === 'right' 
-            ? 'animate-slide-in-right' 
+          slideDirection === 'left'
+            ? 'animate-slide-in-left'
+            : slideDirection === 'right'
+            ? 'animate-slide-in-right'
             : ''
         }`}
         onLoad={() => {
@@ -384,7 +395,9 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
           });
         }}
         onError={handleImageError}
-        loading={isVisible ? "eager" : "lazy"}
+        loading={currentImageIndex === 0 ? 'eager' : 'lazy'}
+        decoding="async"
+        fetchPriority={currentImageIndex === 0 ? 'high' : 'auto'}
       />
 
       {/* Navigation buttons - only show if multiple images */}

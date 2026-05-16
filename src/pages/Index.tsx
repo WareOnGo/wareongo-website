@@ -1,6 +1,7 @@
 
 import React, { useEffect } from 'react';
 import PageHead from '@/components/PageHead';
+import { SITE_URL } from '@/config/config';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import TrustedBySection from '@/components/TrustedBySection';
@@ -20,13 +21,25 @@ const Index = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const organizationLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'WareOnGo',
+    legalName: 'Neuroware Technologies Private Limited',
+    url: SITE_URL,
+    logo: `${SITE_URL}/WOG_Logo_light.png`,
+    description: 'WareOnGo connects businesses with warehouse space across India — transparent listings, verified compliance, faster discovery.',
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
       <PageHead
         title="WareOnGo — Find Warehouse Space Fast Across India"
         description="WareOnGo connects businesses with the right warehouse space across India — faster discovery, transparent listings, and verified compliance. 1,500+ warehouses listed."
         path="/"
-      />
+      >
+        <script type="application/ld+json">{JSON.stringify(organizationLd)}</script>
+      </PageHead>
       <Navbar />
       <HeroSection />
       <TrustedBySection />

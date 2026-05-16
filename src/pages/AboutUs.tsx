@@ -1,17 +1,36 @@
 
 import React from 'react';
 import PageHead from '@/components/PageHead';
+import { SITE_URL } from '@/config/config';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 const AboutUs = () => {
+  const organizationLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'WareOnGo',
+    legalName: 'Neuroware Technologies Private Limited',
+    url: SITE_URL,
+    logo: `${SITE_URL}/WOG_Logo_light.png`,
+    description: "India's warehousing intelligence platform — discover, compare, and finalise warehousing spaces with confidence.",
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Ib-21, Ridgewood Estate, DLF Phase 4',
+      addressLocality: 'Gurgaon',
+      addressCountry: 'IN',
+    },
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <PageHead
         title="About WareOnGo | Warehousing Discovery Platform for India"
         description="WareOnGo is building India's most trusted warehousing intelligence platform — bringing transparency, speed, and intelligence to warehouse discovery."
         path="/about-us"
-      />
+      >
+        <script type="application/ld+json">{JSON.stringify(organizationLd)}</script>
+      </PageHead>
       <Navbar />
       
       <main className="flex-grow bg-wareongo-ivory bg-opacity-50">

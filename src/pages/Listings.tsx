@@ -363,6 +363,7 @@ const Listings = () => {
                 <WarehouseCard
                   key={warehouse.id}
                   id={warehouse.id}
+                  index={idx}
                   image={warehouse.image}
                   images={warehouse.images}
                   address={warehouse.address}

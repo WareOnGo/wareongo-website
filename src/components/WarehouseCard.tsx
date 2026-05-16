@@ -17,6 +17,8 @@ interface WarehouseCardProps {
   fireCompliance: boolean;
   features: string[];
   onClick?: () => void;
+  // Position in the grid — first 2 cards stay eager for LCP, the rest lazy-load.
+  index?: number;
 }
 
 const WarehouseCard: React.FC<WarehouseCardProps> = ({
@@ -30,8 +32,12 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
   price,
   fireCompliance,
   features,
-  onClick
+  onClick,
+  index = 0,
 }) => {
+  // 3-col desktop grid → first row is 3 cards; keep them eager for LCP.
+  const isAboveFold = index < 3;
+  const altText = `${size ? size.toLocaleString() + ' sqft ' : ''}warehouse in ${location.city}, ${location.state}`;
   const [imageError, setImageError] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [prevImageIndex, setPrevImageIndex] = useState(0);
@@ -238,10 +244,11 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
               {slideDirection && prevImageIndex !== currentImageIndex && availableImages[prevImageIndex] && (
                 <img
                   src={availableImages[prevImageIndex]}
-                  alt={`Warehouse ${id} - Previous`}
+                  alt=""
+                  aria-hidden="true"
                   className={`absolute inset-0 w-full h-48 object-cover object-center ${
-                    slideDirection === 'left' 
-                      ? 'animate-slide-out-left' 
+                    slideDirection === 'left'
+                      ? 'animate-slide-out-left'
                       : 'animate-slide-out-right'
                   }`}
                   onError={(e) => {
@@ -255,12 +262,12 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
               <img
                 key={`${id}-${currentImageIndex}-${availableImages[currentImageIndex]}`}
                 src={availableImages[currentImageIndex]}
-                alt={`Warehouse ${id} - Image ${currentImageIndex + 1}`}
+                alt={altText}
                 className={`absolute inset-0 w-full h-48 object-cover object-center ${
-                  slideDirection === 'left' 
-                    ? 'animate-slide-in-left' 
-                    : slideDirection === 'right' 
-                    ? 'animate-slide-in-right' 
+                  slideDirection === 'left'
+                    ? 'animate-slide-in-left'
+                    : slideDirection === 'right'
+                    ? 'animate-slide-in-right'
                     : ''
                 }`}
                 onLoad={() => {
@@ -268,7 +275,9 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
                   setImageLoading(false);
                 }}
                 onError={handleImageError}
-                loading="eager"
+                loading={isAboveFold ? 'eager' : 'lazy'}
+                decoding="async"
+                fetchPriority={isAboveFold ? 'high' : 'auto'}
               />
             </div>
             

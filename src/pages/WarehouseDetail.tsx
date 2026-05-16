@@ -162,6 +162,9 @@ const WarehouseDetail = () => {
               <WarehouseImageCarousel
                 images={warehouseData.images}
                 warehouseId={warehouseData.id}
+                city={loc.city}
+                state={loc.state}
+                sizeSqft={space.totalSpace}
               />
             </div>
 
