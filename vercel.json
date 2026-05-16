@@ -5,7 +5,7 @@
   "trailingSlash": false,
   "headers": [
     {
-      "source": "/(.*)\\.(?:js|css|woff2?|jpg|jpeg|png|webp|avif|svg|ico|mp4)",
+      "source": "/(.*).(js|css|woff|woff2|jpg|jpeg|png|webp|avif|svg|ico|mp4)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
