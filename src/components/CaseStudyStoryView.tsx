@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { Story } from '@/pages/caseStudyStories';
+import type { Story } from '@/data/caseStudies';
 
 const StoryView: React.FC<{ story: Story }> = ({ story }) => {
   const navigate = useNavigate();

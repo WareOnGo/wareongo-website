@@ -20,9 +20,9 @@ import UserDashboard from "./pages/UserDashboard";
 import Unauthorized from "./pages/Unauthorized";
 import Login from "./pages/Login";
 import AdminRoute from "./components/AdminRoute";
-import CaseStudy1 from "./pages/CaseStudy1";
-import CaseStudy2 from "./pages/CaseStudy2";
 import CaseStudies from "./pages/CaseStudies";
+import CaseStudyDetail from "./pages/CaseStudyDetail";
+import { getCaseStudyBySlug } from "./data/caseStudies";
 import RequestWarehouse from "./pages/RequestWarehouse";
 
 const queryClient = new QueryClient();
@@ -39,8 +39,12 @@ const titleForPath = (pathname: string): string => {
   if (pathname === '/request-warehouse') return 'Request a Warehouse | WareOnGo';
   if (pathname === '/about-us') return 'About Us | WareOnGo';
   if (pathname === '/casestudies') return 'Case Studies | WareOnGo';
-  if (pathname === '/case-study-1') return 'Case Study | WareOnGo';
-  if (pathname === '/case-study-2') return 'Case Study | WareOnGo';
+  if (pathname.startsWith('/casestudies/')) {
+    const slug = pathname.split('/')[2];
+    const cs = getCaseStudyBySlug(slug);
+    if (cs) return `Case Study ${cs.number} · ${cs.previewTitle.split('—')[0].trim()} | WareOnGo`;
+    return 'Case Study | WareOnGo';
+  }
   if (pathname === '/privacy-policy') return 'Privacy Policy | WareOnGo';
   if (pathname === '/terms-of-service') return 'Terms of Service | WareOnGo';
   if (pathname === '/login') return 'Login | WareOnGo';
@@ -77,9 +81,8 @@ const App = () => (
               <Route path="/terms-of-service" element={<TermsOfService />} />
               <Route path="/about-us" element={<AboutUs />} />
               <Route path="/request-warehouse" element={<RequestWarehouse />} />
-              <Route path="/case-study-1" element={<CaseStudy1 />} />
-              <Route path="/case-study-2" element={<CaseStudy2 />} />
               <Route path="/casestudies" element={<CaseStudies />} />
+              <Route path="/casestudies/:slug" element={<CaseStudyDetail />} />
               <Route path="/listings" element={<Listings />} />
               <Route path="/warehouse/:id" element={<WarehouseDetail />} />
               <Route path="/user-dashboard" element={<UserDashboard />} />

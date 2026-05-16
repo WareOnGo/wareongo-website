@@ -28,19 +28,37 @@
     <loc>https://wareongo.com/casestudies</loc>
     <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wareongo.com/casestudies/kochi-3pl-warehouse</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wareongo.com/case-study-1</loc>
+    <loc>https://wareongo.com/casestudies/hyderabad-fire-compliant-warehouse</loc>
     <lastmod>2026-05-16</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wareongo.com/case-study-2</loc>
+    <loc>https://wareongo.com/casestudies/devanahalli-fssai-warehouse</loc>
     <lastmod>2026-05-16</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://wareongo.com/casestudies/hyderabad-automobile-warehouse</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://wareongo.com/casestudies/hoskote-royal-enfield-warehouse</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://wareongo.com/privacy-policy</loc>

@@ -6,20 +6,20 @@ const studies = [
   {
     image:
       'https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1200&q=80',
-    eyebrow: 'Case Study 01',
-    title: 'Headline placeholder for the first case study',
+    eyebrow: 'Case Study 01 · Kochi, Kerala',
+    title: "India's hardest warehouse market. Cracked at ₹22/sqft.",
     description:
-      'Short summary of the client, the challenge, and the outcome WareOnGo delivered.',
-    href: '/case-study-1',
+      '3PL Company · Electrical & Appliances Logistics · Closed ₹2.5–3/sqft below market with 5 follow-on mandates.',
+    href: '/casestudies/kochi-3pl-warehouse',
   },
   {
     image:
       'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80',
-    eyebrow: 'Case Study 02',
-    title: 'Headline placeholder for the second case study',
+    eyebrow: 'Case Study 02 · Hyderabad',
+    title: 'Fire-compliant warehouse. 2 months of failure. Then us.',
     description:
-      'Short summary of the client, the challenge, and the outcome WareOnGo delivered.',
-    href: '/case-study-2',
+      'Manufacturer · 22 properties screened · Closed at ₹18.5/sqft for 50,000 sqft fire-compliant. ~₹90L saved.',
+    href: '/casestudies/hyderabad-fire-compliant-warehouse',
   },
 ];
 
