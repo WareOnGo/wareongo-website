@@ -3,6 +3,7 @@ import { useNavigate, useLoaderData } from 'react-router-dom';
 import { ArrowLeft, AlertCircle } from 'lucide-react';
 import { ClientOnly } from 'vite-react-ssg';
 import PageHead from '@/components/PageHead';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WarehouseImageCarousel from '@/components/WarehouseImageCarousel';
@@ -18,9 +19,11 @@ const WarehouseLocationMap = lazy(() => import('@/components/WarehouseLocationMa
 const buildJsonLd = (data: NonNullable<WarehouseLoaderData>) => {
   const loc = data.specifications.location;
   const space = data.specifications.space;
+  // RealEstateListing is in schema.org's pending namespace; pairing with Place keeps
+  // compatibility with crawlers that haven't adopted the pending vocab yet.
   return {
     '@context': 'https://schema.org',
-    '@type': 'Place',
+    '@type': ['RealEstateListing', 'Place'],
     '@id': `${SITE_URL}/warehouse/${data.id}`,
     name: `Warehouse ${data.id} — ${loc.city}, ${loc.state}`,
     url: `${SITE_URL}/warehouse/${data.id}`,
@@ -143,17 +146,16 @@ const WarehouseDetail = () => {
         aria-labelledby="warehouse-title"
       >
         <div className="section-container px-4 sm:px-6 lg:px-8">
-          {/* Back Navigation */}
-          <div className="mb-4 sm:mb-6">
-            <button
-              onClick={handleBackClick}
-              className="inline-flex items-center text-sm font-medium text-wareongo-slate hover:text-wareongo-blue focus:outline-none focus:ring-2 focus:ring-wareongo-blue/40 focus:ring-offset-2 rounded-md px-1 -ml-1 transition-colors"
-              aria-label="Go back to warehouse listings"
-            >
-              <ArrowLeft className="w-4 h-4 mr-1.5" aria-hidden="true" />
-              Back to listings
-            </button>
-          </div>
+          {/* Breadcrumbs */}
+          <Breadcrumbs
+            className="mb-4 sm:mb-6"
+            items={[
+              { label: 'Home', path: '/' },
+              { label: 'Listings', path: '/listings' },
+              { label: `${loc.city}, ${loc.state}` },
+              { label: `Warehouse #${warehouseData.id}` },
+            ]}
+          />
 
           {/* Main Content - Responsive Grid Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-6 lg:mb-8">

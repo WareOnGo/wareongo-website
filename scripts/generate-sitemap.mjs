@@ -49,7 +49,21 @@ function urlEntry(loc, changefreq, priority) {
   </url>`;
 }
 
+async function flatten404() {
+  // Vercel auto-serves dist/404.html with HTTP 404 for unmatched paths.
+  // vite-react-ssg writes nested dist/404/index.html — copy to a flat file too.
+  const nested = path.join('dist', '404', 'index.html');
+  const flat = path.join('dist', '404.html');
+  try {
+    await fs.copyFile(nested, flat);
+    console.log(`[404] copied ${nested} → ${flat}`);
+  } catch (err) {
+    console.warn('[404] nested 404 page not found; skipping flatten:', err?.message ?? err);
+  }
+}
+
 async function main() {
+  await flatten404();
   const warehouseIds = await fetchAllWarehouseIds();
   const entries = [
     ...STATIC_PATHS.map((p) => urlEntry(p.path, p.changefreq, p.priority)),

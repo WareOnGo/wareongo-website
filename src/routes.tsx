@@ -45,6 +45,9 @@ export const routes: RouteRecord[] = [
       { path: "user-dashboard", element: <UserDashboard /> },
       { path: "unauthorized", element: <Unauthorized /> },
       { path: "login", element: <Login /> },
+      // Static /404 page — emitted as dist/404/index.html then flattened to dist/404.html
+      // by scripts/generate-sitemap.mjs so Vercel auto-serves it with HTTP 404 status.
+      { path: "404", element: <NotFound /> },
       {
         element: <AdminRoute />,
         children: [{ path: "admin-panel", element: <AdminPanel /> }],

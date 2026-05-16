@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import ContactFormDialog from '@/components/ContactFormDialog';
@@ -6,19 +6,33 @@ import { trackEvent } from '@/lib/analytics';
 
 const HeroSection = () => {
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
+  // Decorative background video is skipped on mobile (and during SSG) to protect LCP.
+  const [showVideo, setShowVideo] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia('(min-width: 768px)');
+    const update = () => setShowVideo(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
 
   return (
     <section className="relative bg-wareongo-ivory overflow-hidden -mt-20 pt-20 min-h-screen flex items-center">
-      {/* Background video (grayscale baked in) */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover opacity-15 pointer-events-none"
-        src="/hero.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-        aria-hidden="true"
-      />
+      {/* Background video (grayscale baked in) — desktop only, lazily mounted post-hydration */}
+      {showVideo && (
+        <video
+          className="absolute inset-0 w-full h-full object-cover opacity-15 pointer-events-none"
+          src="/hero.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+        />
+      )}
 
       {/* Soft fade for legibility */}
       <div className="absolute inset-0 bg-gradient-to-b from-wareongo-ivory/40 via-transparent to-wareongo-ivory pointer-events-none" />
