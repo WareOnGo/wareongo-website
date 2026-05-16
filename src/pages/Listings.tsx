@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useLoaderData } from 'react-router-dom';
+import { useNavigate, useLoaderData, useSearchParams } from 'react-router-dom';
 import PageHead from '@/components/PageHead';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -24,10 +24,44 @@ interface WarehouseFilters {
   maxSqft: number;
 }
 
+const DEFAULT_FILTERS: WarehouseFilters = {
+  city: '',
+  state: '',
+  fireCompliance: '',
+  warehouseType: '',
+  minSqft: 0,
+  maxSqft: 100000,
+};
+
+// URL <-> filter mapping. Keep params short and lowercase for shareable URLs.
+const filtersFromSearchParams = (sp: URLSearchParams): WarehouseFilters => ({
+  city: sp.get('city') ?? '',
+  state: sp.get('state') ?? '',
+  fireCompliance: sp.get('fire') ?? '',
+  warehouseType: sp.get('type') ?? '',
+  minSqft: sp.get('minSqft') ? Math.max(0, parseInt(sp.get('minSqft')!, 10) || 0) : 0,
+  maxSqft: sp.get('maxSqft') ? Math.min(100000, parseInt(sp.get('maxSqft')!, 10) || 100000) : 100000,
+});
+
+const filtersToSearchParams = (f: WarehouseFilters): Record<string, string> => {
+  const out: Record<string, string> = {};
+  if (f.city && f.city !== 'all') out.city = f.city;
+  if (f.state && f.state !== 'all') out.state = f.state;
+  if (f.fireCompliance) out.fire = f.fireCompliance;
+  if (f.warehouseType && f.warehouseType !== 'all') out.type = f.warehouseType;
+  if (f.minSqft > 0) out.minSqft = String(f.minSqft);
+  if (f.maxSqft < 100000) out.maxSqft = String(f.maxSqft);
+  return out;
+};
+
+const hasAnyFilter = (sp: URLSearchParams) =>
+  ['city', 'state', 'fire', 'type', 'minSqft', 'maxSqft'].some((k) => sp.has(k));
+
 const Listings = () => {
   const navigate = useNavigate();
   // Loader baked in at SSG time (page 1, default page size). null if backend was unreachable.
   const initialData = useLoaderData() as ListingsLoaderData | null;
+  const [searchParams, setSearchParams] = useSearchParams();
   const [warehouses, setWarehouses] = useState<any[]>(initialData?.warehouses ?? []);
   const [loading, setLoading] = useState(!initialData);
   const [error, setError] = useState<string | null>(null);
@@ -41,15 +75,8 @@ const Listings = () => {
     pageSize: initialData?.pagination?.pageSize ?? 20,
   });
 
-  // Filter state
-  const [filters, setFilters] = useState<WarehouseFilters>({
-    city: '',
-    state: '',
-    fireCompliance: '',
-    warehouseType: '',
-    minSqft: 0,
-    maxSqft: 100000,
-  });
+  // Filter state — seeded from URL params so deep links like /listings?city=Bangalore work.
+  const [filters, setFilters] = useState<WarehouseFilters>(() => filtersFromSearchParams(searchParams));
 
   // Options for dropdowns (will be populated from API or hardcoded)
   const cityOptions = ['Bangalore', 'Hosur', 'Kolkata', 'Delhi', 'Hyderabad'];
@@ -60,10 +87,12 @@ const Listings = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    // Only fetch on mount if the loader didn't seed us (build-time failure / fresh client nav).
-    if (!initialData) {
+    // If the URL carries filter params, fetch with them (SSG'd data was the unfiltered default).
+    // Otherwise only fetch when the loader didn't seed us (build-time failure / fresh client nav).
+    if (hasAnyFilter(searchParams) || !initialData) {
       fetchWarehouses();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchWarehouses = async (page: number = 1, pageSize?: number) => {
@@ -139,19 +168,14 @@ const Listings = () => {
       max_sqft: filters.maxSqft,
     });
     setPagination(prev => ({ ...prev, currentPage: 1 }));
+    setSearchParams(filtersToSearchParams(filters), { replace: false });
     fetchWarehouses(1);
   };
 
   const clearFilters = () => {
     trackEvent('filter_clear', {});
-    setFilters({
-      city: '',
-      state: '',
-      fireCompliance: '',
-      warehouseType: '',
-      minSqft: 0,
-      maxSqft: 100000,
-    });
+    setFilters(DEFAULT_FILTERS);
+    setSearchParams({}, { replace: false });
     fetchWarehouses(1);
   };
 
