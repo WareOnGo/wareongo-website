@@ -152,8 +152,7 @@ const WarehouseDetail = () => {
             items={[
               { label: 'Home', path: '/' },
               { label: 'Listings', path: '/listings' },
-              { label: `${loc.city}, ${loc.state}` },
-              { label: `Warehouse #${warehouseData.id}` },
+              { label: `Warehouse #${warehouseData.id} — ${loc.city}, ${loc.state}` },
             ]}
           />
 
