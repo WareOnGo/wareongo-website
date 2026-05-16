@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLoaderData } from 'react-router-dom';
 import PageHead from '@/components/PageHead';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -12,6 +12,7 @@ import { Slider } from '@/components/ui/slider';
 import { Filter, X } from 'lucide-react';
 import { warehouseAPI, transformWarehouseData, type Warehouse } from '@/services/warehouseAPI';
 import { trackEvent } from '@/lib/analytics';
+import type { ListingsLoaderData } from '@/loaders/warehouseLoader';
 
 // Filter interface
 interface WarehouseFilters {
@@ -25,17 +26,19 @@ interface WarehouseFilters {
 
 const Listings = () => {
   const navigate = useNavigate();
-  const [warehouses, setWarehouses] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  // Loader baked in at SSG time (page 1, default page size). null if backend was unreachable.
+  const initialData = useLoaderData() as ListingsLoaderData | null;
+  const [warehouses, setWarehouses] = useState<any[]>(initialData?.warehouses ?? []);
+  const [loading, setLoading] = useState(!initialData);
   const [error, setError] = useState<string | null>(null);
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
   const [selectedWarehouseId, setSelectedWarehouseId] = useState<number | null>(null);
   const [showFilters, setShowFilters] = useState(false);
   const [pagination, setPagination] = useState({
-    currentPage: 1,
-    totalPages: 1,
-    totalItems: 0,
-    pageSize: 21
+    currentPage: initialData?.pagination?.currentPage ?? 1,
+    totalPages: initialData?.pagination?.totalPages ?? 1,
+    totalItems: initialData?.pagination?.totalItems ?? 0,
+    pageSize: initialData?.pagination?.pageSize ?? 20,
   });
 
   // Filter state
@@ -57,7 +60,10 @@ const Listings = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchWarehouses();
+    // Only fetch on mount if the loader didn't seed us (build-time failure / fresh client nav).
+    if (!initialData) {
+      fetchWarehouses();
+    }
   }, []);
 
   const fetchWarehouses = async (page: number = 1, pageSize?: number) => {

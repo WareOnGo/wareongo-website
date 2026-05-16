@@ -16,7 +16,7 @@ import CaseStudies from "./pages/CaseStudies";
 import CaseStudyDetail from "./pages/CaseStudyDetail";
 import RequestWarehouse from "./pages/RequestWarehouse";
 import { caseStudies } from "./data/caseStudies";
-import { warehouseLoader, warehouseStaticPaths } from "./loaders/warehouseLoader";
+import { warehouseLoader, warehouseStaticPaths, listingsLoader } from "./loaders/warehouseLoader";
 
 export const routes: RouteRecord[] = [
   {
@@ -34,7 +34,7 @@ export const routes: RouteRecord[] = [
         element: <CaseStudyDetail />,
         getStaticPaths: () => caseStudies.map((cs) => `/casestudies/${cs.slug}`),
       },
-      { path: "listings", element: <Listings /> },
+      { path: "listings", element: <Listings />, loader: listingsLoader },
       {
         path: "warehouse/:id",
         element: <WarehouseDetail />,
