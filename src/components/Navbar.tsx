@@ -87,6 +87,8 @@ const Navbar = () => {
           <img
             src="/logo_transparent.webp"
             alt="WareOnGo Logo"
+            width={120}
+            height={85}
             className="h-6 w-auto"
           />
           <span className="text-wareongo-blue font-bold tracking-widest text-sm md:text-base">

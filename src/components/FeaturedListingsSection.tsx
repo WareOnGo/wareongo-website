@@ -8,7 +8,9 @@ import { warehousePath } from '@/lib/warehouseSlug';
 const featuredListings = [
   {
     id: 776,
-    image: "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/media_1765620707915.jpeg",
+    image: "/featured/media_1765620707915_md.webp",
+    imageWidth: 675,
+    imageHeight: 900,
     address: "Munirabad, Medchal",
     location: { city: "Hyderabad", state: "Telangana" },
     size: 90000,
@@ -17,7 +19,9 @@ const featuredListings = [
   },
   {
     id: 995,
-    image: "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/media_1770224907258.jpeg",
+    image: "/featured/media_1770224907258_md.webp",
+    imageWidth: 900,
+    imageHeight: 675,
     address: "Attibele-Anekal Road, near Jigani",
     location: { city: "Bangalore", state: "Karnataka" },
     size: 77530,
@@ -26,7 +30,9 @@ const featuredListings = [
   },
   {
     id: 1088,
-    image: "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/media_1771237298929.jpeg",
+    image: "/featured/media_1771237298929_md.webp",
+    imageWidth: 900,
+    imageHeight: 404,
     address: "Pudur, Medchal",
     location: { city: "Hyderabad", state: "Telangana" },
     size: 125000,
@@ -97,6 +103,10 @@ const FeaturedListingsSection = () => {
                 <img
                   src={listing.image}
                   alt={listing.address}
+                  width={listing.imageWidth}
+                  height={listing.imageHeight}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transition-transform duration-500"
                 />
                 <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-wareongo-blue px-2.5 py-1 rounded-md text-xs font-semibold shadow-sm border border-wareongo-blue/20">

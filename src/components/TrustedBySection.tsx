@@ -5,20 +5,20 @@ const BG = 'transparent';
 const FADE_COLOR = '#F5F1EB';
 
 const COMPANY_LOGOS = [
-  { src: '/company_logos/reliance_digital.webp', alt: 'Reliance Digital' },
-  { src: '/company_logos/hero_motorcorp.webp', alt: 'Hero MotoCorp' },
-  { src: '/company_logos/cadbury.webp', alt: 'Cadbury' },
-  { src: '/company_logos/mars.webp', alt: 'Mars' },
-  { src: '/company_logos/mumbai_pav_company.webp', alt: 'Mumbai Pav Company', grayscaleOnly: true },
-  { src: '/company_logos/increff.webp', alt: 'Increff' },
-  { src: '/company_logos/renew_power.webp', alt: 'ReNew Power' },
-  { src: '/company_logos/rentomojo.webp', alt: 'Rentomojo' },
-  { src: '/company_logos/pioneer.webp', alt: 'Pioneer', grayscaleOnly: true },
-  { src: '/company_logos/symphony.webp', alt: 'Symphony', grayscaleOnly: true },
-  { src: '/company_logos/holisol.webp', alt: 'Holisol' },
-  { src: '/company_logos/alienkind.webp', alt: 'Alienkind' },
-  { src: '/company_logos/slikk_logo.webp', alt: 'Slikk' },
-  { src: '/company_logos/Mamaearth-Logo-Vector.svg-.webp', alt: 'Mamaearth' },
+  { src: '/company_logos/reliance_digital.webp', alt: 'Reliance Digital', width: 480, height: 132 },
+  { src: '/company_logos/hero_motorcorp.webp', alt: 'Hero MotoCorp', width: 160, height: 180 },
+  { src: '/company_logos/cadbury.webp', alt: 'Cadbury', width: 480, height: 179 },
+  { src: '/company_logos/mars.webp', alt: 'Mars', width: 480, height: 170 },
+  { src: '/company_logos/mumbai_pav_company.webp', alt: 'Mumbai Pav Company', grayscaleOnly: true, width: 222, height: 180 },
+  { src: '/company_logos/increff.webp', alt: 'Increff', width: 480, height: 144 },
+  { src: '/company_logos/renew_power.webp', alt: 'ReNew Power', width: 480, height: 156 },
+  { src: '/company_logos/rentomojo.webp', alt: 'Rentomojo', width: 180, height: 180 },
+  { src: '/company_logos/pioneer.webp', alt: 'Pioneer', grayscaleOnly: true, width: 480, height: 146 },
+  { src: '/company_logos/symphony.webp', alt: 'Symphony', grayscaleOnly: true, width: 431, height: 180 },
+  { src: '/company_logos/holisol.webp', alt: 'Holisol', width: 200, height: 71 },
+  { src: '/company_logos/alienkind.webp', alt: 'Alienkind', width: 480, height: 121 },
+  { src: '/company_logos/slikk_logo.webp', alt: 'Slikk', width: 320, height: 180 },
+  { src: '/company_logos/Mamaearth-Logo-Vector.svg-.webp', alt: 'Mamaearth', width: 480, height: 63 },
 ];
 
 const TrustedBySection = () => {
@@ -29,6 +29,8 @@ const TrustedBySection = () => {
           <img
             src={logo.src}
             alt={ariaHidden ? '' : logo.alt}
+            width={logo.width}
+            height={logo.height}
             loading="eager"
             decoding="async"
             className={logo.grayscaleOnly ? "grayscale" : "brightness-0"}
