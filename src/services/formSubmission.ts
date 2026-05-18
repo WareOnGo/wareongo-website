@@ -18,9 +18,7 @@ export const submitContactForm = async (formData: ContactFormData): Promise<{ su
       email: formData.email ? formData.email.trim() : null,
       source: formData.source.trim(),
     };
-    
-    console.log('Submitting form data:', payload);
-    
+
     const response = await fetch(getApiUrl(config.api.enquiries), {
       method: 'POST',
       headers: {
@@ -29,21 +27,18 @@ export const submitContactForm = async (formData: ContactFormData): Promise<{ su
       body: JSON.stringify(payload),
     });
 
-    console.log('Response status:', response.status);
-    
     if (!response.ok) {
       const errorData = await response.json();
-      console.error('Error response:', errorData);
+      console.error('Form submission error response:', errorData);
       return {
         success: false,
         error: errorData.error || 'Failed to submit form',
       };
     }
 
-    const responseData = await response.json();
-    console.log('Success response:', responseData);
+    await response.json();
     return { success: true };
-  } catch (error: any) {
+  } catch (error) {
     console.error('Form submission error:', error);
     return {
       success: false,

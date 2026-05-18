@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useLoaderData, useSearchParams } from 'react-router-dom';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import PageHead from '@/components/PageHead';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WarehouseCard from '@/components/WarehouseCard';
 import ContactFormDialog from '@/components/ContactFormDialog';
-import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
 import { Filter, X } from 'lucide-react';
-import { warehouseAPI, transformWarehouseData, type Warehouse } from '@/services/warehouseAPI';
+import { warehouseAPI, transformWarehouseData } from '@/services/warehouseAPI';
 import { trackEvent } from '@/lib/analytics';
 import { warehousePath } from '@/lib/warehouseSlug';
 import type { ListingsLoaderData } from '@/loaders/warehouseLoader';
 
-// Filter interface
 interface WarehouseFilters {
   city: string;
   state: string;
@@ -34,7 +33,14 @@ const DEFAULT_FILTERS: WarehouseFilters = {
   maxSqft: 100000,
 };
 
-// URL <-> filter mapping. Keep params short and lowercase for shareable URLs.
+const DEFAULT_PAGE_SIZE = 21;
+
+// Module-level — these arrays never change, so don't realloc them every render.
+const CITY_OPTIONS = ['Bangalore', 'Hosur', 'Kolkata', 'Delhi', 'Hyderabad'];
+const STATE_OPTIONS = ['Maharashtra', 'Delhi', 'Karnataka', 'Tamil Nadu', 'West Bengal', 'Telangana'];
+const WAREHOUSE_TYPE_OPTIONS = ['RCC', 'PEB'];
+const FIRE_COMPLIANCE_OPTIONS = ['Yes', 'No'];
+
 const filtersFromSearchParams = (sp: URLSearchParams): WarehouseFilters => ({
   city: sp.get('city') ?? '',
   state: sp.get('state') ?? '',
@@ -58,105 +64,77 @@ const filtersToSearchParams = (f: WarehouseFilters): Record<string, string> => {
 const hasAnyFilter = (sp: URLSearchParams) =>
   ['city', 'state', 'fire', 'type', 'minSqft', 'maxSqft'].some((k) => sp.has(k));
 
+// Frontend filter object → backend API params. Pure, so it can sit outside the component.
+const toApiFilters = (filters: WarehouseFilters) => {
+  let cityFilter = filters.city && filters.city !== 'all' ? filters.city : undefined;
+  if (cityFilter && cityFilter.toLowerCase() === 'bangalore') {
+    cityFilter = 'Bangalore,Bengaluru';
+  }
+  const apiFilters = {
+    city: cityFilter,
+    state: filters.state && filters.state !== 'all' ? filters.state : undefined,
+    warehouseType: filters.warehouseType && filters.warehouseType !== 'all' ? filters.warehouseType : undefined,
+    fireNocAvailable: filters.fireCompliance ? filters.fireCompliance === 'yes' : undefined,
+    minSpace: filters.minSqft > 0 ? filters.minSqft : undefined,
+    maxSpace: filters.maxSqft < 100000 ? filters.maxSqft : undefined,
+  };
+  return Object.fromEntries(
+    Object.entries(apiFilters).filter(([, v]) => v !== undefined),
+  ) as Record<string, string | number | boolean>;
+};
+
 const Listings = () => {
   const navigate = useNavigate();
   // Loader baked in at SSG time (page 1, default page size). null if backend was unreachable.
   const initialData = useLoaderData() as ListingsLoaderData | null;
   const [searchParams, setSearchParams] = useSearchParams();
-  const [warehouses, setWarehouses] = useState<any[]>(initialData?.warehouses ?? []);
-  const [loading, setLoading] = useState(!initialData);
-  const [error, setError] = useState<string | null>(null);
-  const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
-  const [selectedWarehouseId, setSelectedWarehouseId] = useState<number | null>(null);
+
+  // UI state — filters being edited (not yet applied) and page navigation.
+  const [filters, setFilters] = useState<WarehouseFilters>(() => filtersFromSearchParams(searchParams));
+  const [appliedFilters, setAppliedFilters] = useState<WarehouseFilters>(() => filtersFromSearchParams(searchParams));
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(initialData?.pagination?.pageSize ?? DEFAULT_PAGE_SIZE);
   const [showFilters, setShowFilters] = useState(false);
-  const [pagination, setPagination] = useState({
-    currentPage: initialData?.pagination?.currentPage ?? 1,
-    totalPages: initialData?.pagination?.totalPages ?? 1,
-    totalItems: initialData?.pagination?.totalItems ?? 0,
-    pageSize: initialData?.pagination?.pageSize ?? 21,
+  const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
+  const [selectedWarehouseId] = useState<number | null>(null);
+
+  const apiFilters = toApiFilters(appliedFilters);
+  // Use the SSG-baked data only when the user hasn't filtered or paged.
+  const isInitialQuery = !hasAnyFilter(searchParams) && currentPage === 1 && pageSize === DEFAULT_PAGE_SIZE;
+
+  const { data, isLoading, isError, refetch } = useQuery({
+    queryKey: ['warehouses', apiFilters, currentPage, pageSize] as const,
+    queryFn: async () => {
+      const resp = await warehouseAPI.getWarehouses(currentPage, pageSize, apiFilters);
+      return {
+        warehouses: resp.data.map(transformWarehouseData),
+        pagination: resp.pagination,
+      };
+    },
+    initialData: isInitialQuery && initialData
+      ? {
+          warehouses: initialData.warehouses,
+          pagination: initialData.pagination,
+        }
+      : undefined,
+    placeholderData: keepPreviousData,
+    staleTime: 60_000,
   });
 
-  // Filter state — seeded from URL params so deep links like /listings?city=Bangalore work.
-  const [filters, setFilters] = useState<WarehouseFilters>(() => filtersFromSearchParams(searchParams));
-
-  // Options for dropdowns (will be populated from API or hardcoded)
-  const cityOptions = ['Bangalore', 'Hosur', 'Kolkata', 'Delhi', 'Hyderabad'];
-  const stateOptions = ['Maharashtra', 'Delhi', 'Karnataka', 'Tamil Nadu', 'West Bengal', 'Telangana'];
-  const warehouseTypeOptions = ['RCC', 'PEB'];
-  const fireComplianceOptions = ['Yes', 'No'];
-
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    // If the URL carries filter params, fetch with them (SSG'd data was the unfiltered default).
-    // Otherwise only fetch when the loader didn't seed us (build-time failure / fresh client nav).
-    if (hasAnyFilter(searchParams) || !initialData) {
-      fetchWarehouses();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const fetchWarehouses = async (page: number = 1, pageSize?: number) => {
-    try {
-      setLoading(true);
-      setError(null);
-      
-      const currentPageSize = pageSize || pagination.pageSize;
-      
-      // Map Bangalore to query both "Bangalore" and "Bengaluru"
-      let cityFilter = filters.city && filters.city !== 'all' ? filters.city : undefined;
-      if (cityFilter && cityFilter.toLowerCase() === 'bangalore') {
-        cityFilter = 'Bangalore,Bengaluru';
-      }
-      
-      // Map frontend filters to backend API parameters
-      const apiFilters = {
-        city: cityFilter,
-        state: filters.state && filters.state !== 'all' ? filters.state : undefined,
-        warehouseType: filters.warehouseType && filters.warehouseType !== 'all' ? filters.warehouseType : undefined,
-        fireNocAvailable: filters.fireCompliance 
-          ? filters.fireCompliance === 'yes' 
-          : undefined,
-        minSpace: filters.minSqft > 0 ? filters.minSqft : undefined,
-        maxSpace: filters.maxSqft < 100000 ? filters.maxSqft : undefined,
-      };
-      
-      // Remove undefined values
-      const cleanFilters = Object.fromEntries(
-        Object.entries(apiFilters).filter(([_, v]) => v !== undefined)
-      ) as any;
-      
-      console.log('Sending filters to API:', cleanFilters);
-      
-      const response = await warehouseAPI.getWarehouses(page, currentPageSize, cleanFilters);
-      
-      // Transform API data to component format
-      const transformedWarehouses = response.data.map(transformWarehouseData);
-      
-      setWarehouses(transformedWarehouses);
-      setPagination(response.pagination);
-    } catch (err) {
-      console.error('Failed to fetch warehouses:', err);
-      setError('Failed to load warehouses. Please try again later.');
-      setWarehouses([]); // Set empty array if API fails
-    } finally {
-      setLoading(false);
-    }
+  const warehouses = data?.warehouses ?? [];
+  const pagination = data?.pagination ?? {
+    currentPage: 1,
+    totalPages: 1,
+    totalItems: 0,
+    pageSize,
   };
 
   const handleFilterChange = (key: keyof WarehouseFilters, value: string | number) => {
-    setFilters(prev => ({
-      ...prev,
-      [key]: value
-    }));
+    setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleSqftRangeChange = (values: number[]) => {
-    setFilters(prev => ({
-      ...prev,
-      minSqft: values[0],
-      maxSqft: values[1]
-    }));
+    setFilters((prev) => ({ ...prev, minSqft: values[0], maxSqft: values[1] }));
   };
 
   const applyFilters = () => {
@@ -168,26 +146,33 @@ const Listings = () => {
       min_sqft: filters.minSqft,
       max_sqft: filters.maxSqft,
     });
-    setPagination(prev => ({ ...prev, currentPage: 1 }));
+    setCurrentPage(1);
+    setAppliedFilters(filters);
     setSearchParams(filtersToSearchParams(filters), { replace: false });
-    fetchWarehouses(1);
   };
 
   const clearFilters = () => {
     trackEvent('filter_clear', {});
     setFilters(DEFAULT_FILTERS);
+    setAppliedFilters(DEFAULT_FILTERS);
+    setCurrentPage(1);
     setSearchParams({}, { replace: false });
-    fetchWarehouses(1);
   };
 
   const hasActiveFilters = () => {
-    return filters.city || filters.state || filters.fireCompliance || filters.warehouseType || 
-           filters.minSqft > 0 || filters.maxSqft < 100000;
+    return Boolean(
+      appliedFilters.city ||
+        appliedFilters.state ||
+        appliedFilters.fireCompliance ||
+        appliedFilters.warehouseType ||
+        appliedFilters.minSqft > 0 ||
+        appliedFilters.maxSqft < 100000,
+    );
   };
 
   const handlePageSizeChange = (newPageSize: number) => {
-    setPagination(prev => ({ ...prev, pageSize: newPageSize, currentPage: 1 }));
-    fetchWarehouses(1, newPageSize);
+    setPageSize(newPageSize);
+    setCurrentPage(1);
   };
 
   const handleWarehouseClick = (warehouse: { id: number; size?: number; warehouseType?: string | null; location?: { city?: string } }) => {
@@ -270,7 +255,7 @@ const Listings = () => {
                     </SelectTrigger>
                     <SelectContent className="bg-wareongo-ivory border-wareongo-blue/20">
                       <SelectItem value="all" className="focus:bg-wareongo-blue/10 focus:text-black cursor-pointer">All cities</SelectItem>
-                      {cityOptions.map(city => (
+                      {CITY_OPTIONS.map((city) => (
                         <SelectItem key={city} value={city} className="focus:bg-wareongo-blue/10 focus:text-black cursor-pointer">{city}</SelectItem>
                       ))}
                     </SelectContent>
@@ -288,7 +273,7 @@ const Listings = () => {
                     </SelectTrigger>
                     <SelectContent className="bg-wareongo-ivory border-wareongo-blue/20">
                       <SelectItem value="all" className="focus:bg-wareongo-blue/10 focus:text-black cursor-pointer">All states</SelectItem>
-                      {stateOptions.map(state => (
+                      {STATE_OPTIONS.map((state) => (
                         <SelectItem key={state} value={state} className="focus:bg-wareongo-blue/10 focus:text-black cursor-pointer">{state}</SelectItem>
                       ))}
                     </SelectContent>
@@ -305,7 +290,7 @@ const Listings = () => {
                       <SelectValue placeholder="Select compliance" />
                     </SelectTrigger>
                     <SelectContent className="bg-wareongo-ivory border-wareongo-blue/20">
-                      {fireComplianceOptions.map(option => (
+                      {FIRE_COMPLIANCE_OPTIONS.map((option) => (
                         <SelectItem key={option} value={option.toLowerCase()} className="focus:bg-wareongo-blue/10 focus:text-black cursor-pointer">{option}</SelectItem>
                       ))}
                     </SelectContent>
@@ -323,7 +308,7 @@ const Listings = () => {
                     </SelectTrigger>
                     <SelectContent className="bg-wareongo-ivory border-wareongo-blue/20">
                       <SelectItem value="all" className="focus:bg-wareongo-blue/10 focus:text-black cursor-pointer">All types</SelectItem>
-                      {warehouseTypeOptions.map(type => (
+                      {WAREHOUSE_TYPE_OPTIONS.map((type) => (
                         <SelectItem key={type} value={type} className="focus:bg-wareongo-blue/10 focus:text-black cursor-pointer">{type}</SelectItem>
                       ))}
                     </SelectContent>
@@ -367,7 +352,7 @@ const Listings = () => {
           )}
 
           {/* Loading State */}
-          {loading && (
+          {isLoading && (
             <div className="text-center py-12">
               <div className="animate-pulse">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
@@ -380,11 +365,11 @@ const Listings = () => {
           )}
 
           {/* Error State */}
-          {error && !loading && (
+          {isError && !isLoading && (
             <div className="text-center py-12">
-              <p className="text-red-600 mb-4">{error}</p>
+              <p className="text-red-600 mb-4">Failed to load warehouses. Please try again later.</p>
               <button
-                onClick={() => fetchWarehouses(pagination.currentPage)}
+                onClick={() => refetch()}
                 className="px-5 h-10 rounded-xl bg-wareongo-blue text-white text-sm font-medium hover:bg-wareongo-blue/90 transition-colors"
               >
                 Try again
@@ -393,7 +378,7 @@ const Listings = () => {
           )}
 
           {/* Warehouse Grid */}
-          {!loading && !error && warehouses.length > 0 && (
+          {!isLoading && !isError && warehouses.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               {warehouses.map((warehouse, idx) => (
                 <WarehouseCard
@@ -429,7 +414,7 @@ const Listings = () => {
           )}
 
           {/* No Results Message */}
-          {!loading && !error && warehouses.length === 0 && (
+          {!isLoading && !isError && warehouses.length === 0 && (
             <div className="text-center py-16 border border-wareongo-blue/30 rounded-2xl">
               <p className="text-lg sm:text-xl text-wareongo-blue font-semibold mb-2">No warehouses found</p>
               <p className="text-wareongo-slate text-sm mb-6">
@@ -447,7 +432,7 @@ const Listings = () => {
           )}
 
           {/* Pagination Info and Controls */}
-          {!loading && !error && warehouses.length > 0 && (
+          {!isLoading && !isError && warehouses.length > 0 && (
             <div className="text-center space-y-5">
               <p className="text-wareongo-slate text-sm">
                 Showing {warehouses.length} of {pagination.totalItems} warehouses
@@ -461,7 +446,7 @@ const Listings = () => {
                   </label>
                   <select
                     id="pageSize"
-                    value={pagination.pageSize}
+                    value={pageSize}
                     onChange={(e) => handlePageSizeChange(Number(e.target.value))}
                     className="px-3 h-9 bg-transparent border border-wareongo-blue/30 rounded-lg text-sm text-wareongo-blue focus:outline-none focus:ring-2 focus:ring-wareongo-blue/30"
                   >
@@ -479,7 +464,8 @@ const Listings = () => {
                     onClick={() => {
                       const next = pagination.currentPage - 1;
                       trackEvent('listings_paginate', { from_page: pagination.currentPage, to_page: next, direction: 'prev' });
-                      fetchWarehouses(next);
+                      setCurrentPage(next);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
                     disabled={pagination.currentPage === 1}
                     className="px-4 h-9 rounded-lg border border-wareongo-blue/30 text-wareongo-blue text-sm font-medium hover:bg-wareongo-blue/5 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
@@ -506,7 +492,8 @@ const Listings = () => {
                           key={pageNum}
                           onClick={() => {
                             trackEvent('listings_paginate', { from_page: pagination.currentPage, to_page: pageNum, direction: 'jump' });
-                            fetchWarehouses(pageNum);
+                            setCurrentPage(pageNum);
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
                           }}
                           className={`w-9 h-9 rounded-lg text-sm font-medium transition-colors border ${
                             isActive
@@ -524,7 +511,8 @@ const Listings = () => {
                     onClick={() => {
                       const next = pagination.currentPage + 1;
                       trackEvent('listings_paginate', { from_page: pagination.currentPage, to_page: next, direction: 'next' });
-                      fetchWarehouses(next);
+                      setCurrentPage(next);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
                     disabled={pagination.currentPage === pagination.totalPages}
                     className="px-4 h-9 rounded-lg border border-wareongo-blue/30 text-wareongo-blue text-sm font-medium hover:bg-wareongo-blue/5 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
@@ -537,16 +525,16 @@ const Listings = () => {
           )}
         </div>
       </main>
-      
+
       <Footer />
-      
+
       <ContactFormDialog
         open={isContactDialogOpen}
         onOpenChange={setIsContactDialogOpen}
         title="Request Full Warehouse Listings"
         description="Share your details to get access to our complete warehouse inventory"
         successMessage="Thank you! Our team will send you the complete listings within 2 hours."
-        source={selectedWarehouseId ? `${selectedWarehouseId}` : "listings"}
+        source={selectedWarehouseId ? `${selectedWarehouseId}` : 'listings'}
       />
     </div>
   );

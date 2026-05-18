@@ -102,8 +102,6 @@ const WarehouseLocationMap: React.FC<WarehouseLocationMapProps> = ({
       setLoadingStage('geocoding');
       setError(null);
 
-      console.log('Geocoding warehouse location:', { address, city, state, postalCode });
-
       const result = await geocodingService.geocodeLocation({
         postalCode,
         city,
@@ -111,7 +109,6 @@ const WarehouseLocationMap: React.FC<WarehouseLocationMapProps> = ({
         country: 'India'
       });
 
-      console.log('Geocoding result:', result);
       setCoordinates(result);
       setLoadingStage('map');
       // Set loading to false after successful geocoding
@@ -276,9 +273,6 @@ const WarehouseLocationMap: React.FC<WarehouseLocationMapProps> = ({
               position={position} 
               icon={defaultIcon}
               eventHandlers={{
-                click: () => {
-                  console.log('Warehouse marker clicked');
-                },
                 mouseover: (e) => {
                   // Only auto-open popup on desktop (non-touch devices)
                   if (!('ontouchstart' in window)) {

@@ -1,6 +1,22 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { ChevronLeft, ChevronRight, ImageIcon, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+
+const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.svg'];
+const DOC_EXTENSIONS = ['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.txt', '.zip', '.rar'];
+const IMAGE_HOSTS = ['r2.dev', 'cloudinary.com', 'imgur.com', 'amazonaws.com', 'googleusercontent.com', 'imagekit.io'];
+
+const filterImageUrls = (urls: string[]): string[] => {
+  return urls.filter(url => {
+    if (!url || typeof url !== 'string') return false;
+    const lowerUrl = url.toLowerCase().trim();
+    if (!lowerUrl.startsWith('http://') && !lowerUrl.startsWith('https://')) return false;
+    if (DOC_EXTENSIONS.some(ext => lowerUrl.includes(ext))) return false;
+    const hasImageExtension = IMAGE_EXTENSIONS.some(ext => lowerUrl.includes(ext));
+    const isImageService = IMAGE_HOSTS.some(host => lowerUrl.includes(host));
+    return hasImageExtension || isImageService;
+  });
+};
 
 interface WarehouseImageCarouselProps {
   images: string[];
@@ -37,53 +53,11 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
   const [isVisible, setIsVisible] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
 
-  // Filter out non-image URLs (PDFs, docs, etc.) and invalid URLs
-  const filterImageUrls = useCallback((urls: string[]): string[] => {
-    return urls.filter(url => {
-      if (!url || typeof url !== 'string') return false;
-      
-      const lowerUrl = url.toLowerCase().trim();
-      
-      // Must be a valid URL
-      if (!lowerUrl.startsWith('http://') && !lowerUrl.startsWith('https://')) {
-        console.log(`Filtering out invalid URL: ${url}`);
-        return false;
-      }
-      
-      // Exclude PDFs and document files
-      if (lowerUrl.includes('.pdf') || 
-          lowerUrl.includes('.doc') || 
-          lowerUrl.includes('.docx') ||
-          lowerUrl.includes('.xls') ||
-          lowerUrl.includes('.xlsx') ||
-          lowerUrl.includes('.txt') ||
-          lowerUrl.includes('.zip') ||
-          lowerUrl.includes('.rar')) {
-        console.log(`Filtering out non-image URL: ${url}`);
-        return false;
-      }
-      
-      // Check for valid image extensions or known image services
-      const hasImageExtension = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.svg'].some(ext => lowerUrl.includes(ext));
-      const isImageService = lowerUrl.includes('r2.dev') || 
-                            lowerUrl.includes('cloudinary.com') ||
-                            lowerUrl.includes('imgur.com') ||
-                            lowerUrl.includes('amazonaws.com') ||
-                            lowerUrl.includes('googleusercontent.com') ||
-                            lowerUrl.includes('imagekit.io');
-      
-      // Only accept if it looks like an image
-      if (!hasImageExtension && !isImageService) {
-        console.log(`Filtering out URL without image indicators: ${url}`);
-        return false;
-      }
-      
-      return true;
-    });
-  }, []);
-
-  const availableImages = filterImageUrls(images);
-  const validImages = availableImages.filter((_, index) => !failedImages.has(index));
+  const availableImages = useMemo(() => filterImageUrls(images), [images]);
+  const validImages = useMemo(
+    () => availableImages.filter((_, idx) => !failedImages.has(idx)),
+    [availableImages, failedImages],
+  );
   const hasMultipleImages = validImages.length > 1;
 
   // Preload adjacent images for smooth transitions
@@ -111,73 +85,55 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
     const failedUrl = availableImages[currentImageIndex];
     const currentRetries = retryCount.get(currentImageIndex) || 0;
     const maxRetries = 2;
-    
-    console.log(`Image ${currentImageIndex} failed to load for warehouse ${warehouseId}:`, failedUrl, `(attempt ${currentRetries + 1})`);
-    
-    // Call optional error callback
+
     if (onImageError) {
       onImageError(failedUrl, event.nativeEvent);
     }
-    
-    // Retry logic for network failures
+
     if (currentRetries < maxRetries) {
-      console.log(`Retrying image load (${currentRetries + 1}/${maxRetries})`);
       setRetryCount(prev => {
         const newMap = new Map(prev);
         newMap.set(currentImageIndex, currentRetries + 1);
         return newMap;
       });
-      
-      // Force reload by updating the image src with a cache-busting parameter
       const img = event.currentTarget;
-      const originalSrc = img.src.split('?')[0]; // Remove existing query params
+      const originalSrc = img.src.split('?')[0];
       img.src = `${originalSrc}?retry=${currentRetries + 1}&t=${Date.now()}`;
       return;
     }
-    
-    // Max retries reached, mark as failed
+
     setFailedImages(prev => {
       const newSet = new Set(prev);
       newSet.add(currentImageIndex);
       return newSet;
     });
-    
-    // Find next valid image
-    const remainingValidImages = availableImages.filter((_, idx) => 
+
+    const remainingValidImages = availableImages.filter((_, idx) =>
       idx !== currentImageIndex && !failedImages.has(idx)
     );
-    
-    console.log(`Remaining valid images: ${remainingValidImages.length}`);
-    
-    // If no valid images remain, stop loading and let the component show placeholder
+
     if (remainingValidImages.length === 0) {
-      console.log('No valid images remaining, showing placeholder');
       setImageLoading(false);
       return;
     }
-    
-    // Try to navigate to next valid image
-    const nextValidIndex = availableImages.findIndex((img, idx) => 
+
+    const nextValidIndex = availableImages.findIndex((img, idx) =>
       idx > currentImageIndex && !failedImages.has(idx)
     );
-    
+
     if (nextValidIndex !== -1) {
-      console.log(`Navigating to next valid image at index ${nextValidIndex}`);
       setCurrentImageIndex(nextValidIndex);
-      setImageLoading(true); // Reset loading state for new image
+      setImageLoading(true);
     } else {
-      // Loop back to first valid image
       const firstValidIndex = availableImages.findIndex((img, idx) => !failedImages.has(idx));
       if (firstValidIndex !== -1 && firstValidIndex !== currentImageIndex) {
-        console.log(`Looping back to first valid image at index ${firstValidIndex}`);
         setCurrentImageIndex(firstValidIndex);
-        setImageLoading(true); // Reset loading state for new image
+        setImageLoading(true);
       } else {
-        // No valid images found
         setImageLoading(false);
       }
     }
-  }, [availableImages, currentImageIndex, failedImages, warehouseId, retryCount, onImageError]);
+  }, [availableImages, currentImageIndex, failedImages, retryCount, onImageError]);
 
   const navigateToImage = useCallback((direction: 'prev' | 'next') => {
     if (isTransitioning || validImages.length <= 1) return;
@@ -363,7 +319,6 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
               : 'animate-slide-out-right'
           }`}
           onError={(e) => {
-            console.log('Previous image failed to load, hiding it');
             e.currentTarget.style.display = 'none';
           }}
         />
@@ -382,12 +337,9 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
             : ''
         }`}
         onLoad={() => {
-          console.log('Image loaded successfully');
-          // Only hide loading spinner if this is the initial load
           if (currentImageIndex === 0 && imageLoading) {
             setImageLoading(false);
           }
-          // Reset retry count for successful loads
           setRetryCount(prev => {
             const newMap = new Map(prev);
             newMap.delete(currentImageIndex);

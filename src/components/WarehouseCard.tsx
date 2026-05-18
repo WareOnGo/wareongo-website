@@ -1,6 +1,22 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { MapPin, Ruler, Building2, IndianRupee, ImageIcon, ShieldCheck, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
+
+const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.svg'];
+const DOC_EXTENSIONS = ['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.txt', '.zip', '.rar'];
+const IMAGE_HOSTS = ['r2.dev', 'cloudinary.com', 'imgur.com', 'amazonaws.com', 'googleusercontent.com', 'imagekit.io'];
+
+const filterImageUrls = (urls: string[]): string[] => {
+  return urls.filter(url => {
+    if (!url || typeof url !== 'string') return false;
+    const lowerUrl = url.toLowerCase().trim();
+    if (!lowerUrl.startsWith('http://') && !lowerUrl.startsWith('https://')) return false;
+    if (DOC_EXTENSIONS.some(ext => lowerUrl.includes(ext))) return false;
+    const hasImageExtension = IMAGE_EXTENSIONS.some(ext => lowerUrl.includes(ext));
+    const isImageService = IMAGE_HOSTS.some(host => lowerUrl.includes(host));
+    return hasImageExtension || isImageService;
+  });
+};
 
 interface WarehouseCardProps {
   id: number;
@@ -46,66 +62,17 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
 
-  // Filter out non-image URLs (PDFs, docs, etc.) and invalid URLs
-  const filterImageUrls = (urls: string[]): string[] => {
-    return urls.filter(url => {
-      if (!url || typeof url !== 'string') return false;
-      
-      const lowerUrl = url.toLowerCase().trim();
-      
-      // Must be a valid URL
-      if (!lowerUrl.startsWith('http://') && !lowerUrl.startsWith('https://')) {
-        console.log(`Filtering out invalid URL: ${url}`);
-        return false;
-      }
-      
-      // Exclude PDFs and document files
-      if (lowerUrl.includes('.pdf') || 
-          lowerUrl.includes('.doc') || 
-          lowerUrl.includes('.docx') ||
-          lowerUrl.includes('.xls') ||
-          lowerUrl.includes('.xlsx') ||
-          lowerUrl.includes('.txt') ||
-          lowerUrl.includes('.zip') ||
-          lowerUrl.includes('.rar')) {
-        console.log(`Filtering out non-image URL: ${url}`);
-        return false;
-      }
-      
-      // Check for valid image extensions or known image services
-      const hasImageExtension = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.svg'].some(ext => lowerUrl.includes(ext));
-      const isImageService = lowerUrl.includes('r2.dev') || 
-                            lowerUrl.includes('cloudinary.com') ||
-                            lowerUrl.includes('imgur.com') ||
-                            lowerUrl.includes('amazonaws.com') ||
-                            lowerUrl.includes('googleusercontent.com') ||
-                            lowerUrl.includes('imagekit.io');
-      
-      // Only accept if it looks like an image
-      if (!hasImageExtension && !isImageService) {
-        console.log(`Filtering out URL without image indicators: ${url}`);
-        return false;
-      }
-      
-      return true;
-    });
-  };
+  // Use images array if available, otherwise fall back to single image.
+  // Memoize so the URL filter doesn't run on every render of every card in the listings grid.
+  const availableImages = useMemo(() => {
+    const raw = images.length > 0 ? images : (image ? [image] : []);
+    return filterImageUrls(raw);
+  }, [images, image]);
 
-  // Use images array if available, otherwise fall back to single image
-  const rawImages = images.length > 0 ? images : (image ? [image] : []);
-  const availableImages = filterImageUrls(rawImages);
-  
-  // Filter out images that have failed to load
-  const validImages = availableImages.filter((_, index) => !failedImages.has(index));
-  const hasMultipleImages = validImages.length > 1;
-
-  console.log(`Warehouse ${id}:`, {
-    rawImages: rawImages.length,
-    afterFiltering: availableImages.length,
-    failedImages: failedImages.size,
-    validImages: validImages.length,
-    currentIndex: currentImageIndex
-  });
+  const validImages = useMemo(
+    () => availableImages.filter((_, idx) => !failedImages.has(idx)),
+    [availableImages, failedImages],
+  );
 
   // Preload adjacent images for smooth transitions
   React.useEffect(() => {
@@ -132,41 +99,28 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
   const truncate = (str: string, n: number) => (str.length > n ? str.slice(0, n - 1) + '…' : str);
 
   const handleImageError = () => {
-    const failedUrl = availableImages[currentImageIndex];
-    console.log(`Image ${currentImageIndex} failed to load for warehouse ${id}:`, failedUrl);
-    
-    // Add to failed images set
     setFailedImages(prev => {
       const newSet = new Set(prev);
       newSet.add(currentImageIndex);
       return newSet;
     });
-    
-    // Find next valid image
-    const remainingValidImages = availableImages.filter((_, idx) => 
+
+    const remainingValidImages = availableImages.filter((_, idx) =>
       idx !== currentImageIndex && !failedImages.has(idx)
     );
-    
-    console.log(`Remaining valid images: ${remainingValidImages.length}`);
-    
-    // If no valid images remain, show placeholder
+
     if (remainingValidImages.length === 0) {
-      console.log('No valid images remaining, showing placeholder');
       setImageError(true);
     } else {
-      // Try to navigate to next valid image
-      const nextValidIndex = availableImages.findIndex((img, idx) => 
+      const nextValidIndex = availableImages.findIndex((img, idx) =>
         idx > currentImageIndex && !failedImages.has(idx)
       );
-      
+
       if (nextValidIndex !== -1) {
-        console.log(`Navigating to next valid image at index ${nextValidIndex}`);
         setCurrentImageIndex(nextValidIndex);
       } else {
-        // Loop back to first valid image
         const firstValidIndex = availableImages.findIndex((img, idx) => !failedImages.has(idx));
         if (firstValidIndex !== -1 && firstValidIndex !== currentImageIndex) {
-          console.log(`Looping back to first valid image at index ${firstValidIndex}`);
           setCurrentImageIndex(firstValidIndex);
         } else {
           setImageError(true);
@@ -183,7 +137,6 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
     const newValidIndex = currentValidIndex === 0 ? validImages.length - 1 : currentValidIndex - 1;
     const newActualIndex = availableImages.indexOf(validImages[newValidIndex]);
     
-    console.log('Prev button clicked - setting slideDirection to RIGHT');
     setPrevImageIndex(currentImageIndex);
     setSlideDirection('right');
     setIsTransitioning(true);
@@ -204,7 +157,6 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
     const newValidIndex = currentValidIndex === validImages.length - 1 ? 0 : currentValidIndex + 1;
     const newActualIndex = availableImages.indexOf(validImages[newValidIndex]);
     
-    console.log('Next button clicked - setting slideDirection to LEFT');
     setPrevImageIndex(currentImageIndex);
     setSlideDirection('left');
     setIsTransitioning(true);
@@ -252,7 +204,6 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
                       : 'animate-slide-out-right'
                   }`}
                   onError={(e) => {
-                    console.log('Previous image failed to load, hiding it');
                     e.currentTarget.style.display = 'none';
                   }}
                 />
@@ -270,10 +221,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
                     ? 'animate-slide-in-right'
                     : ''
                 }`}
-                onLoad={() => {
-                  console.log('Image loaded successfully');
-                  setImageLoading(false);
-                }}
+                onLoad={() => setImageLoading(false)}
                 onError={handleImageError}
                 loading={isAboveFold ? 'eager' : 'lazy'}
                 decoding="async"

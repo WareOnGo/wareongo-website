@@ -14,6 +14,7 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  esbuild: mode === "production" ? { drop: ["console", "debugger"] } : undefined,
   ssgOptions: {
     script: "async",
     dirStyle: "nested",

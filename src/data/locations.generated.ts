@@ -81,7 +81,7 @@ export const CITIES: LocationSummary[] = [
   {
     "canonical": "Bengaluru",
     "slug": "bengaluru",
-    "count": 398
+    "count": 400
   },
   {
     "canonical": "Bhadua",
@@ -504,7 +504,7 @@ export const STATES: LocationSummary[] = [
   {
     "canonical": "Karnataka",
     "slug": "karnataka",
-    "count": 407
+    "count": 409
   },
   {
     "canonical": "Kolkata",
@@ -593,7 +593,7 @@ export const CITIES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Bengaluru",
       "slug": "bengaluru",
-      "count": 267
+      "count": 268
     },
     {
       "canonical": "Bhadua",
@@ -870,7 +870,7 @@ export const CITIES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Bengaluru",
       "slug": "bengaluru",
-      "count": 50
+      "count": 51
     },
     {
       "canonical": "Delhi",
@@ -1055,7 +1055,7 @@ export const STATES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Karnataka",
       "slug": "karnataka",
-      "count": 271
+      "count": 272
     },
     {
       "canonical": "Kolkata",
@@ -1142,7 +1142,7 @@ export const STATES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Karnataka",
       "slug": "karnataka",
-      "count": 53
+      "count": 54
     },
     {
       "canonical": "Kolkata",

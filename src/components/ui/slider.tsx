@@ -8,9 +8,7 @@ const Slider = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>
 >(({ className, ...props }, ref) => {
   const values = Array.isArray(props.value) ? props.value : [props.value || props.defaultValue?.[0] || 0];
-  
-  console.log('Slider values:', values, 'min:', props.min, 'max:', props.max);
-  
+
   return (
     <SliderPrimitive.Root
       ref={ref}
