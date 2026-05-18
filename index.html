@@ -9,15 +9,33 @@
     <!-- title / description / og tags injected per-page via PageHead (react-helmet-async) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="preload" as="image" href="/logo_transparent.png" />
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X1FJP93CV6"></script>
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    </noscript>
+    <link rel="preload" as="image" href="/logo_transparent.webp" />
+    <!-- Google tag (gtag.js) — loaded after window load to free the main thread for LCP -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-X1FJP93CV6', { send_page_view: false });
+      function loadGtag() {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-X1FJP93CV6';
+        document.head.appendChild(s);
+      }
+      if (document.readyState === 'complete') {
+        setTimeout(loadGtag, 0);
+      } else {
+        window.addEventListener('load', function () { setTimeout(loadGtag, 0); });
+      }
     </script>
   </head>
 

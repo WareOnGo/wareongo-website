@@ -23,8 +23,12 @@ const AboutUsSection = () => {
             {/* Image Side */}
             <div className="md:w-2/5 aspect-[16/10] md:aspect-auto relative overflow-hidden bg-wareongo-ivory border-b md:border-b-0 md:border-r border-wareongo-blue">
               <img
-                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=720&q=70"
                 alt="WareOnGo Team"
+                width={720}
+                height={447}
+                loading="lazy"
+                decoding="async"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500"
               />
               <div className="absolute inset-0 flex items-center justify-center bg-wareongo-blue/10 group-hover:bg-transparent transition-colors duration-500">
