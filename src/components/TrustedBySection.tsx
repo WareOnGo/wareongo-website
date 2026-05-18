@@ -31,7 +31,7 @@ const TrustedBySection = () => {
             alt={ariaHidden ? '' : logo.alt}
             width={logo.width}
             height={logo.height}
-            loading="eager"
+            loading="lazy"
             decoding="async"
             className={logo.grayscaleOnly ? "grayscale" : "brightness-0"}
           />

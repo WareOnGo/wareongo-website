@@ -9,6 +9,14 @@
     <!-- title / description / og tags injected per-page via PageHead (react-helmet-async) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Preload the hero H1 font weight directly so its bytes start arriving before the Google Fonts CSS is parsed. -->
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="https://fonts.gstatic.com/s/montserrat/v31/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCuM73w5aXp-p7K4KLg.woff2"
+      crossorigin
+    />
     <link
       rel="preload"
       as="style"
