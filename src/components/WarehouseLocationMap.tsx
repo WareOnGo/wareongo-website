@@ -4,6 +4,9 @@ import { Icon, LatLngExpression } from 'leaflet';
 import { Loader2, MapPin, AlertCircle } from 'lucide-react';
 import { geocodingService, LocationCoordinates, GeocodingError } from '@/services/geocodingService';
 
+// Co-located CSS — pulled in only when the map chunk loads, not on the home/listings bundle.
+import 'leaflet/dist/leaflet.css';
+
 // Fix for default markers in react-leaflet
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';

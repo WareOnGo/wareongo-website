@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import PageHead from '@/components/PageHead';
 import LoginButton from '@/components/LoginButton';
 import { useAuth } from '@/context/AuthContext';
+import { config } from '@/config/config';
 
 const Login = () => {
   const { isAuthenticated } = useAuth();
@@ -15,18 +17,20 @@ const Login = () => {
   }, [isAuthenticated, navigate]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-wareongo-ivory px-4">
-      <PageHead title="Login | WareOnGo" description="Sign in to WareOnGo." path="/login" noindex />
-      <div className="bg-white shadow-sm rounded-xl p-8 max-w-sm w-full text-center">
-        <h1 className="text-2xl font-bold text-wareongo-blue mb-2">Login</h1>
-        <p className="text-sm text-wareongo-slate mb-6">
-          Sign in to your WareOnGo account.
-        </p>
-        <div className="flex justify-center">
-          <LoginButton />
+    <GoogleOAuthProvider clientId={config.googleClientId}>
+      <div className="min-h-screen flex items-center justify-center bg-wareongo-ivory px-4">
+        <PageHead title="Login | WareOnGo" description="Sign in to WareOnGo." path="/login" noindex />
+        <div className="bg-white shadow-sm rounded-xl p-8 max-w-sm w-full text-center">
+          <h1 className="text-2xl font-bold text-wareongo-blue mb-2">Login</h1>
+          <p className="text-sm text-wareongo-slate mb-6">
+            Sign in to your WareOnGo account.
+          </p>
+          <div className="flex justify-center">
+            <LoginButton />
+          </div>
         </div>
       </div>
-    </div>
+    </GoogleOAuthProvider>
   );
 };
 

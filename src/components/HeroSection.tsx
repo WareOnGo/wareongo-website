@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import ContactFormDialog from '@/components/ContactFormDialog';
 import { trackEvent } from '@/lib/analytics';
 
 const HeroSection = () => {
-  const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
   // Decorative background video is skipped on mobile (and during SSG) to protect LCP.
   const [showVideo, setShowVideo] = useState(false);
 
@@ -20,18 +18,21 @@ const HeroSection = () => {
 
   return (
     <section className="relative bg-wareongo-ivory overflow-hidden -mt-20 pt-20 min-h-screen flex items-center">
-      {/* Background video (grayscale baked in) — desktop only, lazily mounted post-hydration */}
+      {/* Background video (grayscale baked in) — desktop only, lazily mounted post-hydration.
+          Modern browsers pick AV1 (~500 KB); older Safari falls back to H.264 (~570 KB). */}
       {showVideo && (
         <video
           className="absolute inset-0 w-full h-full object-cover opacity-15 pointer-events-none"
-          src="/hero.mp4"
           autoPlay
           muted
           loop
           playsInline
           preload="metadata"
           aria-hidden="true"
-        />
+        >
+          <source src="/hero.av1.mp4" type="video/mp4; codecs=av01.0.05M.08" />
+          <source src="/hero.h264.mp4" type="video/mp4" />
+        </video>
       )}
 
       {/* Soft fade for legibility */}
@@ -80,14 +81,6 @@ const HeroSection = () => {
         }
       `}</style>
 
-      <ContactFormDialog
-        open={isContactDialogOpen}
-        onOpenChange={setIsContactDialogOpen}
-        title="Request a Warehouse"
-        description="Share your details, and we'll get back to you!"
-        successMessage="We will reach out within 2 hours."
-        source="hero"
-      />
     </section>
   );
 };

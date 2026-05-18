@@ -5,20 +5,20 @@ const BG = 'transparent';
 const FADE_COLOR = '#F5F1EB';
 
 const COMPANY_LOGOS = [
-  { src: '/company_logos/reliance_digital.png', alt: 'Reliance Digital' },
-  { src: '/company_logos/hero_motorcorp.png', alt: 'Hero MotoCorp' },
-  { src: '/company_logos/cadbury.png', alt: 'Cadbury' },
-  { src: '/company_logos/mars.png', alt: 'Mars' },
-  { src: '/company_logos/mumbai_pav_company.png', alt: 'Mumbai Pav Company', grayscaleOnly: true },
-  { src: '/company_logos/increff.png', alt: 'Increff' },
-  { src: '/company_logos/renew_power.png', alt: 'ReNew Power' },
-  { src: '/company_logos/rentomojo.png', alt: 'Rentomojo' },
-  { src: '/company_logos/pioneer.png', alt: 'Pioneer', grayscaleOnly: true },
-  { src: '/company_logos/symphony.png', alt: 'Symphony', grayscaleOnly: true },
-  { src: '/company_logos/holisol.png', alt: 'Holisol' },
-  { src: '/company_logos/alienkind.png', alt: 'Alienkind' },
-  { src: '/company_logos/slikk_logo.png', alt: 'Slikk' },
-  { src: '/company_logos/Mamaearth-Logo-Vector.svg-.png', alt: 'Mamaearth' },
+  { src: '/company_logos/reliance_digital.webp', alt: 'Reliance Digital' },
+  { src: '/company_logos/hero_motorcorp.webp', alt: 'Hero MotoCorp' },
+  { src: '/company_logos/cadbury.webp', alt: 'Cadbury' },
+  { src: '/company_logos/mars.webp', alt: 'Mars' },
+  { src: '/company_logos/mumbai_pav_company.webp', alt: 'Mumbai Pav Company', grayscaleOnly: true },
+  { src: '/company_logos/increff.webp', alt: 'Increff' },
+  { src: '/company_logos/renew_power.webp', alt: 'ReNew Power' },
+  { src: '/company_logos/rentomojo.webp', alt: 'Rentomojo' },
+  { src: '/company_logos/pioneer.webp', alt: 'Pioneer', grayscaleOnly: true },
+  { src: '/company_logos/symphony.webp', alt: 'Symphony', grayscaleOnly: true },
+  { src: '/company_logos/holisol.webp', alt: 'Holisol' },
+  { src: '/company_logos/alienkind.webp', alt: 'Alienkind' },
+  { src: '/company_logos/slikk_logo.webp', alt: 'Slikk' },
+  { src: '/company_logos/Mamaearth-Logo-Vector.svg-.webp', alt: 'Mamaearth' },
 ];
 
 const TrustedBySection = () => {

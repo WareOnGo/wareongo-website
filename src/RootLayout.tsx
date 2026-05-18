@@ -1,11 +1,7 @@
 import { Outlet, useLocation, useNavigation } from "react-router-dom";
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/context/AuthContext";
-import { config } from "@/config/config";
 import { trackEvent } from "@/lib/analytics";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -13,6 +9,10 @@ import {
   ListingsSkeleton,
   WarehouseDetailSkeleton,
 } from "@/components/PageSkeletons";
+
+// Toaster pulls in @radix-ui/react-toast (~14 KB gz). Only mounted forms ever fire it,
+// so defer the chunk until after the initial paint.
+const Toaster = lazy(() => import("@/components/ui/toaster").then((m) => ({ default: m.Toaster })));
 
 const queryClient = new QueryClient();
 
@@ -63,19 +63,17 @@ const NavigationSkeleton = () => {
 };
 
 const RootLayout = () => (
-  <GoogleOAuthProvider clientId={config.googleClientId}>
-    <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Toaster />
-          <ScrollToTop />
-          <RouteTracker />
-          <Outlet />
-          <NavigationSkeleton />
-        </TooltipProvider>
-      </QueryClientProvider>
-    </AuthProvider>
-  </GoogleOAuthProvider>
+  <AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <Suspense fallback={null}>
+        <Toaster />
+      </Suspense>
+      <ScrollToTop />
+      <RouteTracker />
+      <Outlet />
+      <NavigationSkeleton />
+    </QueryClientProvider>
+  </AuthProvider>
 );
 
 export default RootLayout;

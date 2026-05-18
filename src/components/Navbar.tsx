@@ -85,7 +85,7 @@ const Navbar = () => {
           className={`flex items-center justify-center gap-2.5 border rounded-xl px-5 py-3 transition-all duration-300 hover:opacity-90 ${pillBgClass}`}
         >
           <img
-            src="/logo_transparent.png"
+            src="/logo_transparent.webp"
             alt="WareOnGo Logo"
             className="h-6 w-auto"
           />
