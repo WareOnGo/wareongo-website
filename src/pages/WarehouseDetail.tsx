@@ -232,6 +232,7 @@ const WarehouseDetail = () => {
             <div className="space-y-4 order-1 lg:row-span-2">
               <WarehouseImageCarousel
                 images={warehouseData.images}
+                imageFallbacks={warehouseData.imageFallbacks}
                 warehouseId={warehouseData.id}
                 city={loc.city}
                 state={loc.state}
@@ -388,6 +389,7 @@ const WarehouseDetail = () => {
                     index={idx}
                     image={w.image}
                     images={w.images}
+                    imageFallbacks={w.imageFallbacks}
                     address={w.address}
                     location={w.location}
                     size={w.size}

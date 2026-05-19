@@ -150,6 +150,7 @@ const LocationListings = () => {
                   index={idx}
                   image={warehouse.image}
                   images={warehouse.images}
+                  imageFallbacks={warehouse.imageFallbacks}
                   address={warehouse.address}
                   location={warehouse.location}
                   size={warehouse.size}

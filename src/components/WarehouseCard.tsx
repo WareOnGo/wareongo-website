@@ -22,6 +22,10 @@ interface WarehouseCardProps {
   id: number;
   image?: string | null;
   images?: string[];
+  // Per-index fallback URL for images[i]. When a primary image (typically a
+  // WebP) fails to load, the <img> swaps once to this URL before being marked
+  // failed. null entries mean no fallback available.
+  imageFallbacks?: (string | null)[];
   address: string;
   location: {
     city: string;
@@ -41,6 +45,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
   id,
   image,
   images = [],
+  imageFallbacks = [],
   address,
   location,
   size,
@@ -64,10 +69,16 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
 
   // Use images array if available, otherwise fall back to single image.
   // Memoize so the URL filter doesn't run on every render of every card in the listings grid.
-  const availableImages = useMemo(() => {
+  // We filter images + fallbacks together so per-index alignment survives the
+  // URL filter dropping invalid entries.
+  const { availableImages, availableFallbacks } = useMemo(() => {
     const raw = images.length > 0 ? images : (image ? [image] : []);
-    return filterImageUrls(raw);
-  }, [images, image]);
+    const rawFallbacks = images.length > 0 ? imageFallbacks : [];
+    const filtered = filterImageUrls(raw);
+    const indexMap = filtered.map(url => raw.indexOf(url));
+    const fbs = indexMap.map(idx => (idx >= 0 ? rawFallbacks[idx] ?? null : null));
+    return { availableImages: filtered, availableFallbacks: fbs };
+  }, [images, image, imageFallbacks]);
 
   const validImages = useMemo(
     () => availableImages.filter((_, idx) => !failedImages.has(idx)),
@@ -98,7 +109,19 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
   // Truncate address if too long
   const truncate = (str: string, n: number) => (str.length > n ? str.slice(0, n - 1) + '…' : str);
 
-  const handleImageError = () => {
+  const handleImageError = (event?: React.SyntheticEvent<HTMLImageElement>) => {
+    // Try the per-index fallback (original URL when current src is a WebP)
+    // before treating this image as failed.
+    if (event?.currentTarget) {
+      const img = event.currentTarget;
+      const fallback = img.dataset.fallback;
+      if (fallback && img.src !== fallback) {
+        img.dataset.fallback = '';
+        img.src = fallback;
+        return;
+      }
+    }
+
     setFailedImages(prev => {
       const newSet = new Set(prev);
       newSet.add(currentImageIndex);
@@ -213,6 +236,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
               <img
                 key={`${id}-${currentImageIndex}-${availableImages[currentImageIndex]}`}
                 src={availableImages[currentImageIndex]}
+                data-fallback={availableFallbacks[currentImageIndex] || ''}
                 alt={altText}
                 className={`absolute inset-0 w-full h-48 object-cover object-center ${
                   slideDirection === 'left'

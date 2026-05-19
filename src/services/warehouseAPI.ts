@@ -17,6 +17,7 @@ export interface Warehouse {
   otherSpecifications: string | null;
   ratePerSqft: string;
   photos: string[] | string | null;
+  photosWebp?: string[] | string | null;
   fireNocAvailable: boolean | null;
   fireSafetyMeasures: string | null;
   // The listings endpoint includes warehouseType too, even though it's not in
@@ -269,10 +270,12 @@ class WarehouseAPI {
     if (warehouse.photos) {
       processedPhotos = getAllImageUrls(warehouse.photos);
     }
+    const processedWebp = warehouse.photosWebp ? getAllImageUrls(warehouse.photosWebp) : [];
 
     // Return transformed warehouse data with defaults for missing fields
     return {
       ...warehouse,
+      photosWebp: processedWebp,
       address: warehouse.address || 'Address not available',
       city: warehouse.city || 'City not specified',
       state: warehouse.state || 'State not specified',
@@ -399,11 +402,43 @@ const getAllImageUrls = (photosData: string | string[] | null): string[] => {
  * @param warehouse - WarehouseDetail data from API
  * @returns Transformed data optimized for detail page display
  */
+/**
+ * Build a parallel pair of arrays for image rendering:
+ *   - images:   WebP URL if available for that index, otherwise the original.
+ *   - fallbacks: original URL when `images[i]` is a WebP (so the UI can swap
+ *                back if the WebP fails to load); null otherwise.
+ * WebP URLs aren't filtered by source-index — instead we match by stripping
+ * the webp/ prefix and .webp extension so reordered/edited arrays still pair.
+ */
+const buildPreferredImages = (
+  rawPhotos: string | string[] | null | undefined,
+  rawWebp: string | string[] | null | undefined,
+): { images: string[]; fallbacks: (string | null)[] } => {
+  const originals = getAllImageUrls(rawPhotos ?? null);
+  const webps = rawWebp ? getAllImageUrls(rawWebp) : [];
+  const images: string[] = [];
+  const fallbacks: (string | null)[] = [];
+  for (let i = 0; i < originals.length; i++) {
+    const webp = webps[i];
+    if (webp) {
+      images.push(webp);
+      fallbacks.push(originals[i]);
+    } else {
+      images.push(originals[i]);
+      fallbacks.push(null);
+    }
+  }
+  return { images, fallbacks };
+};
+
 export const transformWarehouseDetailData = (warehouse: WarehouseDetail) => {
   console.log('Transforming warehouse detail data:', warehouse);
-  
-  // Get all image URLs
-  const imageUrls = getAllImageUrls(warehouse.photos);
+
+  // Get all image URLs (WebP preferred, original kept as per-index fallback)
+  const { images: imageUrls, fallbacks: imageFallbacks } = buildPreferredImages(
+    warehouse.photos,
+    warehouse.photosWebp,
+  );
   
   // Parse space information
   const totalSpaces = Array.isArray(warehouse.totalSpaceSqft) 
@@ -450,6 +485,7 @@ export const transformWarehouseDetailData = (warehouse: WarehouseDetail) => {
   return {
     id: warehouse.id,
     images: imageUrls,
+    imageFallbacks,
     specifications,
     rawData: warehouse, // Keep original data for any edge cases
   };
@@ -498,16 +534,19 @@ export const transformWarehouseData = (warehouse: Warehouse) => {
     ? parseInt(warehouse.ratePerSqft.replace(/[^\d]/g, '')) || 35
     : 35;
 
-  // Get image URL
-  const apiImages = getAllImageUrls(warehouse.photos);
-  const finalImages = apiImages.length > 0 ? apiImages : []; // Empty array if no images
-  
-  console.log(`Warehouse ${warehouse.id}: Found ${apiImages.length} images`);
+  // Get image URL (WebP preferred, with parallel original-URL fallback)
+  const { images: finalImages, fallbacks: finalFallbacks } = buildPreferredImages(
+    warehouse.photos,
+    warehouse.photosWebp,
+  );
+
+  console.log(`Warehouse ${warehouse.id}: Found ${finalImages.length} images`);
 
   return {
     id: warehouse.id,
     image: finalImages.length > 0 ? finalImages[0] : null,
     images: finalImages,
+    imageFallbacks: finalFallbacks,
     address: warehouse.address,
     location: {
       city: warehouse.city,

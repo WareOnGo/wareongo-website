@@ -20,6 +20,9 @@ const filterImageUrls = (urls: string[]): string[] => {
 
 interface WarehouseImageCarouselProps {
   images: string[];
+  // Per-index fallback URL (typically the original when images[i] is a WebP).
+  // The carousel swaps src to this once before counting an image as failed.
+  imageFallbacks?: (string | null)[];
   warehouseId: number;
   className?: string;
   onImageError?: (imageUrl: string, error: Event) => void;
@@ -31,6 +34,7 @@ interface WarehouseImageCarouselProps {
 
 const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
   images = [],
+  imageFallbacks = [],
   warehouseId,
   className = '',
   onImageError,
@@ -53,7 +57,12 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
   const [isVisible, setIsVisible] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
 
-  const availableImages = useMemo(() => filterImageUrls(images), [images]);
+  const { availableImages, availableFallbacks } = useMemo(() => {
+    const filtered = filterImageUrls(images);
+    const indexMap = filtered.map(url => images.indexOf(url));
+    const fbs = indexMap.map(idx => (idx >= 0 ? imageFallbacks[idx] ?? null : null));
+    return { availableImages: filtered, availableFallbacks: fbs };
+  }, [images, imageFallbacks]);
   const validImages = useMemo(
     () => availableImages.filter((_, idx) => !failedImages.has(idx)),
     [availableImages, failedImages],
@@ -82,6 +91,16 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
   }, [currentImageIndex, availableImages, validImages]);
 
   const handleImageError = useCallback((event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    // One-shot fallback: if the failing image has a fallback URL (the
+    // original-format photo behind a WebP), swap once before counting retries.
+    const img = event.currentTarget;
+    const fallback = img.dataset.fallback;
+    if (fallback && img.src.split('?')[0] !== fallback) {
+      img.dataset.fallback = '';
+      img.src = fallback;
+      return;
+    }
+
     const failedUrl = availableImages[currentImageIndex];
     const currentRetries = retryCount.get(currentImageIndex) || 0;
     const maxRetries = 2;
@@ -328,6 +347,7 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
       <img
         key={`${warehouseId}-${currentImageIndex}-${availableImages[currentImageIndex]}`}
         src={availableImages[currentImageIndex]}
+        data-fallback={availableFallbacks[currentImageIndex] || ''}
         alt={validImages.length > 1 ? `${baseAlt} — photo ${currentImageIndex + 1} of ${validImages.length}` : baseAlt}
         className={`absolute inset-0 w-full h-full object-cover ${
           slideDirection === 'left'
