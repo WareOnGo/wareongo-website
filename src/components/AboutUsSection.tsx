@@ -1,22 +1,12 @@
-import React, { useState } from 'react';
 import { ArrowRight, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import CircularCursor from './CircularCursor';
 
 const AboutUsSection = () => {
-  const [isHovering, setIsHovering] = useState(false);
-  const [entryPos, setEntryPos] = useState<{ x: number; y: number } | null>(null);
-
   return (
     <section className="bg-wareongo-ivory py-16 md:py-24">
       <div className="container mx-auto px-4 max-w-5xl [perspective:1200px]">
         <Link
           to="/about-us"
-          onMouseEnter={(e) => {
-            setEntryPos({ x: e.clientX, y: e.clientY });
-            setIsHovering(true);
-          }}
-          onMouseLeave={() => setIsHovering(false)}
           className="about-card group block bg-transparent border border-wareongo-blue rounded-2xl overflow-hidden hover:bg-wareongo-blue/5 transition-colors"
         >
           <div className="flex flex-col md:flex-row">
@@ -57,10 +47,6 @@ const AboutUsSection = () => {
         </Link>
         <style>{`
           @media (hover: hover) and (pointer: fine) {
-            .about-card,
-            .about-card * {
-              cursor: none !important;
-            }
             .about-card {
               transform: perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0);
               transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1), background-color 400ms;
@@ -75,7 +61,6 @@ const AboutUsSection = () => {
           }
         `}</style>
       </div>
-      <CircularCursor visible={isHovering} initialPos={entryPos} text=" READ NOW ---★--- READ NOW --★-- " />
     </section>
   );
 };

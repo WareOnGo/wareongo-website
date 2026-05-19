@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
 import { MapPin, Ruler, Building2, IndianRupee, ArrowRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import CircularCursor from './CircularCursor';
 import { trackEvent } from '@/lib/analytics';
 import { warehousePath } from '@/lib/warehouseSlug';
 
@@ -14,6 +12,7 @@ const featuredListings = [
     address: "Munirabad, Medchal",
     location: { city: "Hyderabad", state: "Telangana" },
     size: 90000,
+    warehouseType: "PEB",
     price: 21,
     ceilingHeight: 40
   },
@@ -25,6 +24,7 @@ const featuredListings = [
     address: "Attibele-Anekal Road, near Jigani",
     location: { city: "Bangalore", state: "Karnataka" },
     size: 77530,
+    warehouseType: "PEB",
     price: 29,
     ceilingHeight: 40
   },
@@ -36,6 +36,7 @@ const featuredListings = [
     address: "Pudur, Medchal",
     location: { city: "Hyderabad", state: "Telangana" },
     size: 125000,
+    warehouseType: "PEB",
     price: 23,
     ceilingHeight: 36
   }
@@ -43,8 +44,6 @@ const featuredListings = [
 
 const FeaturedListingsSection = () => {
   const navigate = useNavigate();
-  const [isHovering, setIsHovering] = useState(false);
-  const [entryPos, setEntryPos] = useState<{ x: number; y: number } | null>(null);
 
   return (
     <section className="bg-wareongo-ivory py-16 md:py-24 border-t border-black/5">
@@ -87,16 +86,11 @@ const FeaturedListingsSection = () => {
                   warehousePath({
                     id: listing.id,
                     size: listing.size,
+                    warehouseType: listing.warehouseType,
                     city: listing.location.city,
                   }),
                 );
               }}
-              onMouseEnter={(e) => {
-                if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-                setEntryPos({ x: e.clientX, y: e.clientY });
-                setIsHovering(true);
-              }}
-              onMouseLeave={() => setIsHovering(false)}
               className="listing-card text-left group bg-transparent border border-wareongo-blue rounded-2xl overflow-hidden flex flex-col hover:bg-wareongo-blue/5 transition-colors shrink-0 w-[78%] min-[400px]:w-[70%] snap-start md:w-auto md:shrink"
             >
               <div className="aspect-[16/10] overflow-hidden w-full relative">
@@ -169,10 +163,6 @@ const FeaturedListingsSection = () => {
             will-change: transform;
           }
           @media (hover: hover) and (pointer: fine) {
-            .listing-card,
-            .listing-card * {
-              cursor: none !important;
-            }
             .listing-card:hover {
               transform: perspective(1200px) rotateX(3deg) rotateY(-4deg) translateY(-4px);
             }
@@ -188,8 +178,6 @@ const FeaturedListingsSection = () => {
           }
         `}</style>
       </div>
-
-      <CircularCursor visible={isHovering} initialPos={entryPos} text="EXPLORE ★ EXPLORE ★ EXPLORE ★" />
     </section>
   );
 };

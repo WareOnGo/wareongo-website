@@ -91,18 +91,6 @@
   body {
     @apply bg-background text-foreground font-sans;
   }
-
-  @media (hover: hover) and (pointer: fine) {
-    * {
-      cursor: url('/cursor_brand.png'), auto;
-    }
-    body {
-      cursor: url('/cursor_brand.png'), auto;
-    }
-    a, button, [role="button"], input[type="submit"], input[type="button"] {
-      cursor: url('/cursor_brand.png'), pointer;
-    }
-  }
 }
 
 @layer components {

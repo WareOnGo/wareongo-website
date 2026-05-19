@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
-import CircularCursor from './CircularCursor';
 
 const studies = [
   {
@@ -24,9 +22,6 @@ const studies = [
 ];
 
 const CaseStudiesSection = () => {
-  const [isHovering, setIsHovering] = useState(false);
-  const [entryPos, setEntryPos] = useState<{ x: number; y: number } | null>(null);
-
   return (
     <section className="bg-wareongo-ivory py-12 md:py-24">
       <div className="container mx-auto px-4">
@@ -44,11 +39,6 @@ const CaseStudiesSection = () => {
             <a
               key={s.eyebrow}
               href={s.href}
-              onMouseEnter={(e) => {
-                setEntryPos({ x: e.clientX, y: e.clientY });
-                setIsHovering(true);
-              }}
-              onMouseLeave={() => setIsHovering(false)}
               className="case-card group bg-transparent border border-wareongo-blue rounded-2xl overflow-hidden flex flex-col hover:bg-wareongo-blue/5"
             >
               <div className="aspect-[16/10] overflow-hidden bg-wareongo-ivory">
@@ -80,10 +70,6 @@ const CaseStudiesSection = () => {
 
         <style>{`
           @media (hover: hover) and (pointer: fine) {
-            .case-card,
-            .case-card * {
-              cursor: none !important;
-            }
             .case-card {
               transform: perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0);
               transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1), background-color 400ms;
@@ -101,7 +87,6 @@ const CaseStudiesSection = () => {
           }
         `}</style>
       </div>
-      <CircularCursor visible={isHovering} initialPos={entryPos} text=" READ ARTICLE -★-  READ ARTICLE   -★-   " />
     </section>
   );
 };

@@ -105,15 +105,6 @@ const EdgeSection = () => {
       />
 
       <style>{`
-        #edge-section,
-        #edge-section * {
-          cursor: url('/cursor_ivory.png'), auto !important;
-        }
-        #edge-section a, 
-        #edge-section button, 
-        #edge-section [role="button"] {
-          cursor: url('/cursor_ivory.png'), pointer !important;
-        }
         .edge-spotlight {
           background:
             radial-gradient(ellipse 70% 55% at 30% 35%, rgba(56, 140, 224, 0.18) 0%, rgba(56, 140, 224, 0.08) 40%, rgba(56, 140, 224, 0) 70%),
