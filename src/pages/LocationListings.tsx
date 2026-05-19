@@ -26,9 +26,8 @@ const LocationListings = () => {
   const headingPrefix = warehouseType ? `${typeLabel} Warehouses` : 'Warehouses';
   const seoTitle = `${headingPrefix} for Rent in ${canonical} | WareOnGo`;
   const heading = `${headingPrefix} for Rent in ${canonical}`;
-  const seoDescription = warehouseType
-    ? `Browse ${warehouses.length} ${typeLabel} warehouse${warehouses.length === 1 ? '' : 's'} for rent in ${noun}, India. Verified listings, transparent pricing, direct contact through WareOnGo.`
-    : `Browse ${warehouses.length} warehouse${warehouses.length === 1 ? '' : 's'} for rent in ${noun}, India. Verified listings, transparent pricing, direct contact through WareOnGo.`;
+  const descSubject = warehouseType ? `${typeLabel} warehouses` : 'Warehouses';
+  const seoDescription = `${descSubject} for rent in ${canonical}. Verified listings with transparent pricing. Get custom options, expert guidance & site visit within 48 hours.`;
 
   const collectionLd = {
     '@context': 'https://schema.org',

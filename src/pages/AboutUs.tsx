@@ -25,8 +25,8 @@ const AboutUs = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <PageHead
-        title="About WareOnGo | Warehousing Discovery Platform for India"
-        description="WareOnGo is building India's most trusted warehousing intelligence platform — bringing transparency, speed, and intelligence to warehouse discovery."
+        title="About WareOnGo | India's Warehouse Discovery Platform"
+        description="WareOnGo is India's warehouse intelligence platform — transparent listings, verified compliance, and faster discovery for businesses across India."
         path="/about-us"
       >
         <script type="application/ld+json">{JSON.stringify(organizationLd)}</script>

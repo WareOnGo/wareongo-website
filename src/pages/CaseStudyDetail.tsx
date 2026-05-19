@@ -43,7 +43,7 @@ const CaseStudyDetail: React.FC = () => {
   const prev = idx > 0 ? caseStudies[idx - 1] : null;
   const next = idx < caseStudies.length - 1 ? caseStudies[idx + 1] : null;
 
-  const csTitle = `${cs.previewTitle.split('—')[0].trim()} — Case Study ${cs.number} | WareOnGo`;
+  const csTitle = `${cs.previewTitle.split('—')[0].trim()} | Warehouse Case Study | WareOnGo`;
   const csDescription = cs.previewSub || `Warehouse case study: ${cs.previewTitle}`;
   const csPath = `/casestudies/${cs.slug}`;
   const articleLd = {

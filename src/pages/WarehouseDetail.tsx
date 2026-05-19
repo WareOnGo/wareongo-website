@@ -132,14 +132,69 @@ const WarehouseDetail = () => {
 
   const loc = warehouseData.specifications.location;
   const space = warehouseData.specifications.space;
+  const infra = warehouseData.specifications.infrastructure;
   const selfPath = warehousePath({
     id: warehouseData.id,
     size: space.totalSpace,
-    warehouseType: warehouseData.specifications.infrastructure.type,
+    warehouseType: infra.type,
     city: loc.city,
   });
-  const seoTitle = `Warehouse ${warehouseData.id} — ${space.totalSpace ? space.totalSpace.toLocaleString() + ' sqft' : 'space'} in ${loc.city}, ${loc.state} | WareOnGo`;
-  const seoDescription = `${space.totalSpace ? space.totalSpace.toLocaleString() + ' sqft warehouse' : 'Warehouse space'} for rent at ${loc.address}, ${loc.city}, ${loc.state}${space.ratePerSqft ? ` — ₹${space.ratePerSqft}/sqft` : ''}. ${warehouseData.specifications.infrastructure.type !== 'Standard' ? warehouseData.specifications.infrastructure.type + ' construction. ' : ''}List with WareOnGo.`;
+
+  const sizeLabel = space.totalSpace ? `${space.totalSpace.toLocaleString()} sqft` : '';
+  const typeLabel = infra.type && infra.type !== 'Standard' ? infra.type : '';
+  // Derive a locality from the comma-separated address: locate the city in
+  // the segments and take the nearest preceding segment that isn't a pincode,
+  // state, or country. If the city isn't found, bail rather than guess —
+  // single-blob addresses would otherwise dump the whole string into the title.
+  const localityFromAddress = (() => {
+    if (!loc.address) return '';
+    const cityLc = (loc.city ?? '').trim().toLowerCase();
+    const stateLc = (loc.state ?? '').trim().toLowerCase();
+    const COUNTRIES = new Set(['india', 'bharat']);
+    const MAX_LEN = 40;
+    // Strip trailing pincode patterns like " - 201301" or ", 560100" so segments
+    // like "Uttar Pradesh - 201301" normalize to "Uttar Pradesh".
+    const stripTrailingPin = (s: string) => s.replace(/[\s,-]*\d{5,6}\s*$/, '').trim();
+
+    const segments = loc.address
+      .split(',')
+      .map((s) => stripTrailingPin(s.trim()))
+      .filter(Boolean);
+
+    const cityIdx = segments.findIndex((s) => s.toLowerCase() === cityLc);
+    if (cityIdx < 0) return '';
+
+    const candidates = segments.slice(0, cityIdx).filter((s) => {
+      const lc = s.toLowerCase();
+      if (lc === cityLc || lc === stateLc) return false;
+      if (COUNTRIES.has(lc)) return false;
+      if (/^\d{5,6}$/.test(s)) return false;
+      if (s.length > MAX_LEN) return false;
+      return true;
+    });
+
+    return candidates.length > 0 ? candidates[candidates.length - 1] : '';
+  })();
+  const localePart = localityFromAddress
+    ? `${localityFromAddress}, ${loc.city}`
+    : loc.city;
+
+  const titleParts = [sizeLabel, typeLabel, 'Warehouse for Rent in', `${localePart}, ${loc.state}`]
+    .filter(Boolean)
+    .join(' ');
+  const seoTitle = `${titleParts} | WareOnGo`;
+
+  const features: string[] = [];
+  if (typeLabel) features.push(`${typeLabel} construction`);
+  if (infra.clearHeight && infra.clearHeight !== 'Not specified') {
+    features.push(`${infra.clearHeight} clear height`);
+  }
+  const featureSentence = features.length > 0 ? `${features.join(', ')}. ` : '';
+
+  const descLead = [sizeLabel, typeLabel, 'warehouse available for rent in', `${localePart}, ${loc.state}.`]
+    .filter(Boolean)
+    .join(' ');
+  const seoDescription = `${descLead} ${featureSentence}Get custom options, expert guidance & site visit within 48 hours.`;
   const ogImage = warehouseData.images && warehouseData.images.length > 0 ? warehouseData.images[0] : undefined;
   const jsonLd = buildJsonLd(warehouseData);
 

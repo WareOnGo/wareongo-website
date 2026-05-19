@@ -101,8 +101,8 @@ const RequestWarehouse = () => {
   return (
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
       <PageHead
-        title="Request a Warehouse | WareOnGo"
-        description="Can't find what you need? Tell us your requirements and our team will match you with warehouse space across India."
+        title="Request Warehouse Space in India | WareOnGo"
+        description="Tell us your warehouse requirements and our team will match you with verified options across India. Get custom shortlist & site visit within 48 hours."
         path="/request-warehouse"
       />
       <Navbar />

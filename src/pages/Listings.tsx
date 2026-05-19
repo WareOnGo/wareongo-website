@@ -189,8 +189,8 @@ const Listings = () => {
   return (
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
       <PageHead
-        title="Warehouse Listings Across India | WareOnGo"
-        description="Browse 1,500+ verified warehouse listings across India. Filter by city, size, compliance, and warehouse type. Direct contact, transparent pricing."
+        title="Warehouse for Rent in India | Verified Listings | WareOnGo"
+        description="Find warehouse space for rent across India — 1,500+ verified listings with transparent pricing. Get custom options, expert guidance & site visit within 48 hours."
         path="/listings"
       />
       <Navbar />

@@ -34,8 +34,8 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
       <PageHead
-        title="WareOnGo — Find Warehouse Space Fast Across India"
-        description="WareOnGo connects businesses with the right warehouse space across India — faster discovery, transparent listings, and verified compliance. 1,500+ warehouses listed."
+        title="Warehouse for Rent in India | WareOnGo"
+        description="Find verified warehouse space for rent across India — 1,500+ listings with transparent pricing. Get custom options, expert guidance & site visit within 48 hours."
         path="/"
       >
         <script type="application/ld+json">{JSON.stringify(organizationLd)}</script>

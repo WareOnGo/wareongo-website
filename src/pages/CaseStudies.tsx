@@ -14,8 +14,8 @@ const CaseStudies = () => {
   return (
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
       <PageHead
-        title="Warehouse Case Studies | WareOnGo Deals & Outcomes"
-        description="Real warehouse deals across India — from Hosur 3PL to Hyderabad fire-compliant facilities. See how WareOnGo handled complexity and delivered results."
+        title="Warehouse Case Studies | WareOnGo"
+        description="Real warehouse deals across India — fire compliance, Vastu mandates, 3PL setups and more. See how WareOnGo handles complex briefs and delivers results."
         path="/casestudies"
       />
       <Navbar />
