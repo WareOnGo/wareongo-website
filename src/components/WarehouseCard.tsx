@@ -283,9 +283,6 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
             )}
           </>
         )}
-        <div className="absolute top-3 right-3 bg-wareongo-ivory/90 backdrop-blur-sm text-wareongo-blue px-2.5 py-1 rounded-md text-xs font-semibold border border-wareongo-blue/20 z-10">
-          ID: {id}
-        </div>
       </div>
 
       <CardContent className="p-5 sm:p-6">
