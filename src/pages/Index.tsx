@@ -35,6 +35,13 @@ const Index = () => {
       '@type': 'Country',
       name: 'India',
     },
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Ib-21, Ridgewood Estate, DLF Phase 4',
+      addressLocality: 'Gurugram',
+      addressRegion: 'Haryana',
+      addressCountry: 'IN',
+    },
     knowsAbout: [
       'Warehouse leasing',
       'Industrial real estate',
@@ -54,8 +61,9 @@ const Index = () => {
         availableLanguage: ['en', 'hi'],
       },
     ],
-    // TODO: add social profile URLs (LinkedIn / Instagram / X) here for stronger entity attribution.
-    sameAs: [],
+    // Social profiles — strengthen entity attribution for Google + AI engines.
+    // Add Instagram / X here when those accounts exist.
+    sameAs: ['https://www.linkedin.com/company/wareongo'],
   };
 
   const webSiteLd = {

@@ -45,8 +45,8 @@ type-segmented location pages + warehouse slug URL migration.
 
 | Page | Schemas |
 |---|---|
-| `/` | Organization |
-| `/about-us` | Organization (with full registered address) |
+| `/` | Organization (canonical node, `@id`=`ORG_ID`, with registered address) |
+| `/about-us` | Organization (references same `@id`=`ORG_ID` — one merged entity, not a duplicate) |
 | `/warehouse/:slug` (×671) | `RealEstateListing` + `Place` (array `@type`) + `BreadcrumbList` |
 | `/listings/city/:city` (×85) | `CollectionPage` + `ItemList` + `BreadcrumbList` |
 | `/listings/state/:state` (×23) | `CollectionPage` + `ItemList` + `BreadcrumbList` |
@@ -97,6 +97,7 @@ type-segmented location pages + warehouse slug URL migration.
 | **Submit to Bing Webmaster Tools** | Bing + Yahoo combined ≈ 5% of search traffic | bing.com/webmasters |
 | **Request indexing** for homepage + 5–10 representative pages in GSC | Seeds the initial crawl faster | GSC URL inspection tool |
 | **Backend data cleanup** | Typos like `Banglore`, `Karanataka` split ranking signal across duplicate pages; postal codes are leaking into the state field | Backend |
+| **Social profile URLs for `sameAs`** | LinkedIn added (`linkedin.com/company/wareongo`). Add Instagram / X to `organizationLd.sameAs` in `src/pages/Index.tsx` once those accounts exist. | Index.tsx |
 
 ### Code, ordered by ROI
 
@@ -104,7 +105,7 @@ type-segmented location pages + warehouse slug URL migration.
 |---|---|---|---|
 | 1 | **Image optimization (WebP/AVIF, srcset)** | Medium | Listings R2 images are served raw (likely 1–3 MB each). Pipe through Vercel Image Optimization. Big LCP win. |
 | 2 | **PageSpeed Insights audit** | Manual | Measure actual LCP / CLS / INP. Often uncovers quick fixes. |
-| 3 | **Image sitemap** (separate XML) | Small | Helps Google Image Search index warehouse photos. |
+| ~~3~~ | ~~**Image sitemap**~~ ✅ DONE | — | Google image-sitemap extension now embedded in `sitemap.xml` (warehouse photos, ≤10/listing). |
 | 4 | **`lastmod` from real data** | Small | Sitemap currently uses today's date for every URL. Wire the backend's `updatedAt` (if exposed) so freshness signal is honest. |
 | 5 | **Footer curation to top 20 cities** | Tiny | Concentrates link equity. Currently ~315 links in "Explore our spaces" — quality diluted across long tail (sitemap still covers everything). |
 | 6 | **`WebSite` + `SearchAction` JSON-LD on `/`** | Medium | Unlocks Google's sitelinks search box. Requires `?q=` full-text param on `/listings` first (we already have `?city=`, `?state=`, etc. — full-text is the gap). |

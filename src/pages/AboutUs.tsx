@@ -1,14 +1,18 @@
 
 import React from 'react';
 import PageHead from '@/components/PageHead';
-import { SITE_URL } from '@/config/config';
+import { SITE_URL, ORG_ID } from '@/config/config';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 const AboutUs = () => {
+  // Reference the canonical Organization node defined on the homepage (same @id)
+  // so crawlers/AI engines merge this into one entity instead of treating it as
+  // a second, competing Organization.
   const organizationLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': ORG_ID,
     name: 'WareOnGo',
     legalName: 'Neuroware Technologies Private Limited',
     url: SITE_URL,
@@ -17,7 +21,8 @@ const AboutUs = () => {
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'Ib-21, Ridgewood Estate, DLF Phase 4',
-      addressLocality: 'Gurgaon',
+      addressLocality: 'Gurugram',
+      addressRegion: 'Haryana',
       addressCountry: 'IN',
     },
   };
