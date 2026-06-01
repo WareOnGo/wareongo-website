@@ -11,7 +11,7 @@ import WarehouseImageCarousel from '@/components/WarehouseImageCarousel';
 import WarehouseInfo from '@/components/WarehouseInfo';
 import WarehouseCard from '@/components/WarehouseCard';
 import ContactFormDialog from '@/components/ContactFormDialog';
-import { SITE_URL } from '@/config/config';
+import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
 import { trackEvent } from '@/lib/analytics';
 import { warehousePath } from '@/lib/warehouseSlug';
 import type { WarehouseLoaderData } from '@/loaders/warehouseLoader';
@@ -36,6 +36,8 @@ const buildJsonLd = (data: NonNullable<WarehouseLoaderData>) => {
     '@id': `${SITE_URL}${path}`,
     name: `Warehouse ${data.id} — ${loc.city}, ${loc.state}`,
     url: `${SITE_URL}${path}`,
+    isPartOf: { '@id': WEBSITE_ID },
+    provider: { '@id': ORG_ID },
     image: data.images && data.images.length > 0 ? data.images : undefined,
     address: {
       '@type': 'PostalAddress',

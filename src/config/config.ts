@@ -41,4 +41,10 @@ export const getApiUrl = (endpoint: string): string => {
 // Canonical public site origin — used for canonical/OG URLs and sitemap entries.
 export const SITE_URL = 'https://wareongo.com';
 
+// Stable JSON-LD entity @ids. Defined once (on the homepage) and referenced by
+// @id from every other page's schema so crawlers/AI engines attribute all
+// content to a single WareOnGo entity graph.
+export const ORG_ID = `${SITE_URL}/#organization`;
+export const WEBSITE_ID = `${SITE_URL}/#website`;
+
 export default config;

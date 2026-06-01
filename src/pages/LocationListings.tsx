@@ -4,7 +4,7 @@ import Breadcrumbs, { type BreadcrumbItem } from '@/components/Breadcrumbs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WarehouseCard from '@/components/WarehouseCard';
-import { SITE_URL } from '@/config/config';
+import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
 import { trackEvent } from '@/lib/analytics';
 import { warehousePath } from '@/lib/warehouseSlug';
 import type { LocationListingsLoaderData } from '@/loaders/locationLoader';
@@ -35,6 +35,8 @@ const LocationListings = () => {
     name: heading,
     description: seoDescription,
     url: `${SITE_URL}${path}`,
+    isPartOf: { '@id': WEBSITE_ID },
+    provider: { '@id': ORG_ID },
     mainEntity: {
       '@type': 'ItemList',
       numberOfItems: warehouses.length,

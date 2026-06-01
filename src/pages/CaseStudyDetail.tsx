@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import StoryView from '@/components/CaseStudyStoryView';
 import { caseStudies, getCaseStudyIndex, type Bullet } from '@/data/caseStudies';
+import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
 
 const BulletList: React.FC<{ items: Bullet[] }> = ({ items }) => (
   <ul className="divide-y divide-wareongo-blue/10">
@@ -51,13 +52,10 @@ const CaseStudyDetail: React.FC = () => {
     '@type': 'Article',
     headline: cs.previewTitle,
     description: csDescription,
-    url: `https://wareongo.com${csPath}`,
-    author: { '@type': 'Organization', name: 'WareOnGo' },
-    publisher: {
-      '@type': 'Organization',
-      name: 'WareOnGo',
-      logo: { '@type': 'ImageObject', url: 'https://wareongo.com/WOG_Logo_light.png' },
-    },
+    url: `${SITE_URL}${csPath}`,
+    isPartOf: { '@id': WEBSITE_ID },
+    author: { '@id': ORG_ID },
+    publisher: { '@id': ORG_ID },
     inLanguage: 'en',
     isAccessibleForFree: true,
   };

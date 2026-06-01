@@ -9,10 +9,10 @@ type Stat = {
 };
 
 const stats: Stat[] = [
-  { value: 1.3, decimals: 1, suffix: ' mn', label: 'sqft leased in FY 25–26' },
-  { value: 1500, suffix: '+', label: 'verified spaces' },
-  { value: 250, suffix: '+', label: 'cities covered' },
-  { value: 40, suffix: '+', label: 'transactions advised' },
+  { value: 1500, suffix: '+', label: 'verified warehouses' },
+  { value: 1.3, decimals: 1, suffix: 'M+', label: 'sqft transacted' },
+  { value: 90, suffix: '+', label: 'cities covered' },
+  { value: 8, suffix: '-hour', label: 'shortlist' },
 ];
 
 const DURATION_MS = 1600;
@@ -42,7 +42,7 @@ const StatTile = ({ stat, start }: { stat: Stat; start: boolean }) => {
   const display = useCountUp(stat.value, start, stat.decimals ?? 0);
   return (
     <div className="flex flex-col items-center text-center">
-      <div className="text-4xl sm:text-5xl md:text-6xl font-bold text-wareongo-blue leading-none tabular-nums">
+      <div className="text-4xl sm:text-5xl md:text-6xl font-bold text-wareongo-blue leading-none tabular-nums whitespace-nowrap">
         {stat.prefix}
         {display}
         {stat.suffix}
@@ -77,15 +77,14 @@ const StatsSection = () => {
   }, []);
 
   return (
-    <section className="bg-wareongo-ivory pb-12 md:pb-24">
-      <div ref={ref} className="container mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 border-t border-wareongo-blue/10 pt-12 md:pt-16">
-          {stats.map((s) => (
-            <StatTile key={s.label} stat={s} start={start} />
-          ))}
-        </div>
-      </div>
-    </section>
+    <div
+      ref={ref}
+      className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 w-full"
+    >
+      {stats.map((s) => (
+        <StatTile key={s.label} stat={s} start={start} />
+      ))}
+    </div>
   );
 };
 

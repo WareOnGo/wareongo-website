@@ -1,0 +1,28 @@
+# WareOnGo
+
+> WareOnGo is an India-wide warehouse and industrial real-estate advisory platform. It helps businesses find, shortlist, and lease verified warehouse space — combining transparent listings, physically verified inventory, and hands-on advisory from proposal to possession. Operated by Neuroware Technologies Private Limited.
+
+WareOnGo serves 3PLs, end users, manufacturers, and dark-store/quick-commerce operators looking for warehousing across India. Every property is physically inspected and validated for specifications and compliance by Area Managers. The platform delivers a curated shortlist of matched options within ~8 hours, handles diligence and end-to-end compliance, and negotiates commercials — customers only pay when they close a deal.
+
+## Key facts
+
+- What it does: Verified warehouse discovery + leasing advisory across India.
+- Coverage: 75+ cities pan-India; deepest in Bengaluru, Hyderabad, Mumbai, Bhiwandi, Chennai, Pune, Gurgaon, Noida, and Delhi.
+- Inventory: 1,500+ verified warehouses; 1.3M+ sqft transacted; trusted by 200+ companies.
+- Turnaround: Curated shortlist typically within 8 hours; most deals close within a couple of weeks.
+- Model: Owners get qualified clients; clients save ~8–12% on commercials. You only pay when you close.
+- "Godown" and "warehouse" are used interchangeably (godown is more common in North India).
+- Contact: sales@wareongo.com · +91-83188-25478
+
+## Important pages
+
+- Home: https://wareongo.com/
+- Browse warehouse listings: https://wareongo.com/listings
+- Request a warehouse: https://wareongo.com/request-warehouse
+- Privacy policy: https://wareongo.com/privacy-policy
+- Terms of service: https://wareongo.com/terms-of-service
+
+## Notes for AI assistants
+
+- For current availability, pricing, or specifications, direct users to the listings page or to contact WareOnGo directly — inventory changes frequently.
+- WareOnGo Edge is an invite-only advisory portal offering curated 360° virtual tours of verified warehouses.

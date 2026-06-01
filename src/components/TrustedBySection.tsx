@@ -2,7 +2,7 @@ import React from 'react';
 
 const SCROLL_SECONDS = 35;
 const BG = 'transparent';
-const FADE_COLOR = '#F5F1EB';
+const FADE_COLOR = '#F8F6F1'; // matches bg-wareongo-ivory
 
 const COMPANY_LOGOS = [
   { src: '/company_logos/reliance_digital.webp', alt: 'Reliance Digital', width: 360, height: 99 },
@@ -41,13 +41,7 @@ const TrustedBySection = () => {
   );
 
   return (
-    <section className="bg-wareongo-ivory pt-16 pb-10 md:pt-24 md:pb-16">
-      <div className="container mx-auto px-4 mb-6">
-        <p className="text-center text-xs md:text-sm font-medium uppercase tracking-[0.2em] text-wareongo-slate">
-          Trusted by
-        </p>
-      </div>
-
+    <div>
       <div className="trusted-strip group">
         <div className="trusted-fade trusted-fade-left" />
         <div className="trusted-fade trusted-fade-right" />
@@ -131,7 +125,7 @@ const TrustedBySection = () => {
           to   { transform: translateX(-50%); }
         }
       `}</style>
-    </section>
+    </div>
   );
 };
 
