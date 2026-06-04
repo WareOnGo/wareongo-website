@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/generate-locations.mjs && vite-react-ssg build && node scripts/generate-sitemap.mjs",
+    "build": "node scripts/generate-locations.mjs && vite-react-ssg build && node scripts/generate-sitemap.mjs && node scripts/indexnow-ping.mjs",
     "build:dev": "node scripts/generate-locations.mjs && vite-react-ssg build --mode development && node scripts/generate-sitemap.mjs",
     "build:spa": "vite build",
     "lint": "eslint .",
