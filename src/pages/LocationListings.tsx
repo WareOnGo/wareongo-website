@@ -5,6 +5,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WarehouseCard from '@/components/WarehouseCard';
 import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
+import { CITY_HUBS } from '@/data/cityHubs';
+import { STATE_HUBS } from '@/data/stateHubs';
 import { trackEvent } from '@/lib/analytics';
 import { warehousePath } from '@/lib/warehouseSlug';
 import type { LocationListingsLoaderData } from '@/loaders/locationLoader';
@@ -24,15 +26,75 @@ const LocationListings = () => {
   const path = warehouseType ? `${basePath}/${warehouseType.toLowerCase()}` : basePath;
   const typeLabel = warehouseType === 'PEB' ? 'PEB' : warehouseType === 'RCC' ? 'RCC' : '';
   const headingPrefix = warehouseType ? `${typeLabel} Warehouses` : 'Warehouses';
-  const seoTitle = `${headingPrefix} for Rent in ${canonical} | WareOnGo`;
+  // "Godowns" on base pages only — Search Console shows "godown for rent in {city}"
+  // queries; type pages keep tighter titles (those queries say "PEB"/"RCC warehouse").
+  const seoTitle = warehouseType
+    ? `${headingPrefix} for Rent in ${canonical} | WareOnGo`
+    : `Warehouses & Godowns for Rent in ${canonical} | WareOnGo`;
   const heading = `${headingPrefix} for Rent in ${canonical}`;
   const descSubject = warehouseType ? `${typeLabel} warehouses` : 'Warehouses';
-  const seoDescription = `${descSubject} for rent in ${canonical}. Verified listings with transparent pricing. Get custom options, expert guidance & site visit within 48 hours.`;
+
+  // Build-time stats baked into the meta description + lead copy — concrete,
+  // extractable numbers (count, size range) anchored to the location name.
+  // Rates are deliberately excluded: missing ratePerSqft defaults to 35 in
+  // transformWarehouseData, so a computed range would be unreliable.
+  const sizes = warehouses.map((w) => w.size).filter((s) => typeof s === 'number' && s > 0);
+  const fmtSqft = (n: number) => n.toLocaleString('en-IN');
+  const minSize = sizes.length > 0 ? Math.min(...sizes) : null;
+  const maxSize = sizes.length > 0 ? Math.max(...sizes) : null;
+  const sizeRange =
+    minSize !== null && maxSize !== null
+      ? minSize === maxSize
+        ? `${fmtSqft(minSize)} sqft`
+        : `${fmtSqft(minSize)} to ${fmtSqft(maxSize)} sqft`
+      : null;
+  // ", ranging from 5,000 to 120,000 sqft" / " of 24,000 sqft" (single listing)
+  const sizeLead = sizeRange ? (minSize === maxSize ? ` of ${sizeRange}` : `, ranging from ${sizeRange}`) : '';
+  const countNoun = `${warehouses.length} verified ${warehouseType ? `${typeLabel} ` : ''}warehouse${warehouses.length === 1 ? '' : 's'}`;
+
+  // "godown" synonym on base pages only — exact-match for "godown for rent in {city}"
+  // queries (Search Console shows them); Google bolds the matching phrase in the snippet.
+  const godownClause = warehouseType ? '' : ` Also listed as godowns for rent in ${canonical}.`;
+  const seoDescription =
+    warehouses.length > 0
+      ? `${countNoun} for rent in ${canonical}${sizeRange ? ` — ${sizeRange}` : ''}. Transparent pricing, curated shortlist in 4 hours.${godownClause}`
+      : `${descSubject} for rent in ${canonical}. Verified listings with transparent pricing. Get custom options, expert guidance & site visit within 48 hours.`;
+
+  // Machine-readable synonyms + micro-markets. "Godown" matches North-Indian query
+  // phrasing; hub localities (curated in cityHubs.ts / stateHubs.ts) associate
+  // locality-level queries ("warehouse in okhla") with the parent location page.
+  // State pages additionally carry the cities that actually have inventory there,
+  // derived live from the loader data (so they stay current as listings change).
+  const hubs = warehouseType ? [] : ((type === 'city' ? CITY_HUBS[slug] : STATE_HUBS[slug]) ?? []);
+  const titleCase = (s: string) =>
+    s.toLowerCase().split(/\s+/).filter(Boolean).map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  const stateCities =
+    type === 'state' && !warehouseType
+      ? [...new Set(
+          warehouses
+            .map((w) => w.location.city?.trim() ?? '')
+            // Skip junk/locality-grade values: too short, or comma-containing
+            // ("Sector 78, Badshahpur") which would also corrupt the
+            // comma-separated keywords string.
+            .filter((c) => c.length > 2 && !c.includes(','))
+            .map(titleCase),
+        )].slice(0, 15)
+      : [];
+  const keywordPlaces = [...new Set([...stateCities, ...hubs])];
+  const ldKeywords = warehouseType
+    ? undefined
+    : [
+        `warehouse for rent in ${canonical}`,
+        `godown for rent in ${canonical}`,
+        ...keywordPlaces.map((p) => `warehouse for rent in ${p}`),
+      ].join(', ');
 
   const collectionLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: heading,
+    ...(warehouseType ? {} : { alternateName: `Godowns for Rent in ${canonical}` }),
+    ...(ldKeywords ? { keywords: ldKeywords } : {}),
     description: seoDescription,
     url: `${SITE_URL}${path}`,
     isPartOf: { '@id': WEBSITE_ID },
@@ -102,8 +164,12 @@ const LocationListings = () => {
               {heading}
             </h1>
             <p className="text-base sm:text-lg text-wareongo-slate leading-relaxed">
-              {warehouses.length} verified {warehouseType ? `${typeLabel} ` : ''}warehouse{warehouses.length === 1 ? '' : 's'} available in {canonical}.
-              Transparent pricing, direct contact, no middlemen.
+              {countNoun} available for rent in {canonical}
+              {sizeLead}
+              {!warehouseType && typeCounts && typeCounts.PEB > 0 && typeCounts.RCC > 0
+                ? ` across ${typeCounts.PEB} PEB and ${typeCounts.RCC} RCC options`
+                : ''}
+              . Transparent pricing, direct contact, no middlemen.
             </p>
 
             {/* Type filter chips on base location pages — internal linking to PEB / RCC variants */}

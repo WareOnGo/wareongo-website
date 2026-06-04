@@ -2,27 +2,64 @@
 
 > WareOnGo is an India-wide warehouse and industrial real-estate advisory platform. It helps businesses find, shortlist, and lease verified warehouse space — combining transparent listings, physically verified inventory, and hands-on advisory from proposal to possession. Operated by Neuroware Technologies Private Limited.
 
-WareOnGo serves 3PLs, end users, manufacturers, and dark-store/quick-commerce operators looking for warehousing across India. Every property is physically inspected and validated for specifications and compliance by Area Managers. The platform delivers a curated shortlist of matched options within ~8 hours, handles diligence and end-to-end compliance, and negotiates commercials — customers only pay when they close a deal.
+WareOnGo serves 3PLs, end users, manufacturers, and dark-store/quick-commerce operators looking for warehousing across India. Every property is physically inspected and validated for specifications and compliance by Area Managers. The platform delivers a curated shortlist of matched options within ~4 hours, handles diligence and end-to-end compliance, and negotiates commercials — customers only pay when they close a deal.
 
 ## Key facts
 
 - What it does: Verified warehouse discovery + leasing advisory across India.
 - Coverage: 75+ cities pan-India; deepest in Bengaluru, Hyderabad, Mumbai, Bhiwandi, Chennai, Pune, Gurgaon, Noida, and Delhi.
 - Inventory: 1,500+ verified warehouses; 1.3M+ sqft transacted; trusted by 200+ companies.
-- Turnaround: Curated shortlist typically within 8 hours; most deals close within a couple of weeks.
+- Turnaround: Curated shortlist typically within 4 hours; most deals close within a couple of weeks.
 - Model: Owners get qualified clients; clients save ~8–12% on commercials. You only pay when you close.
+- Warehouse types: PEB (pre-engineered building) and RCC (reinforced cement concrete) construction, segmented per city and state.
 - "Godown" and "warehouse" are used interchangeably (godown is more common in North India).
 - Contact: sales@wareongo.com · +91-83188-25478
 
 ## Important pages
 
 - Home: https://wareongo.com/
-- Browse warehouse listings: https://wareongo.com/listings
-- Request a warehouse: https://wareongo.com/request-warehouse
+- Browse all warehouse listings: https://wareongo.com/listings
+- Request a warehouse (custom shortlist): https://wareongo.com/request-warehouse
+- About WareOnGo: https://wareongo.com/about-us
+- Case studies: https://wareongo.com/casestudies
 - Privacy policy: https://wareongo.com/privacy-policy
 - Terms of service: https://wareongo.com/terms-of-service
+
+## Warehouses by city
+
+- Warehouses for rent in Bengaluru: https://wareongo.com/listings/city/bengaluru
+- Warehouses for rent in Gurugram: https://wareongo.com/listings/city/gurugram
+- Warehouses for rent in Hyderabad: https://wareongo.com/listings/city/hyderabad
+- Warehouses for rent in Hosur: https://wareongo.com/listings/city/hosur
+- Warehouses for rent in Kolkata: https://wareongo.com/listings/city/kolkata
+- Warehouses for rent in Ghaziabad: https://wareongo.com/listings/city/ghaziabad
+- Warehouses for rent in Ahmedabad: https://wareongo.com/listings/city/ahmedabad
+- Warehouses for rent in Patna: https://wareongo.com/listings/city/patna
+- Warehouses for rent in Noida: https://wareongo.com/listings/city/noida
+- Warehouses for rent in Delhi: https://wareongo.com/listings/city/delhi
+- Warehouses for rent in Mumbai: https://wareongo.com/listings/city/mumbai
+- Warehouses for rent in Chennai: https://wareongo.com/listings/city/chennai
+- Warehouses for rent in Pune: https://wareongo.com/listings/city/pune
+
+City pages also exist segmented by construction type, e.g. https://wareongo.com/listings/city/bengaluru/peb and https://wareongo.com/listings/city/bengaluru/rcc. State-level pages follow https://wareongo.com/listings/state/{state}. The full URL inventory is in https://wareongo.com/sitemap.xml.
+
+## Guides (warehousing knowledge base)
+
+- PEB vs RCC warehouse — differences, costs, which to lease: https://wareongo.com/guides/peb-vs-rcc-warehouse
+- What is a Grade A warehouse in India (Grade A vs B vs C): https://wareongo.com/guides/grade-a-warehouse-india
+- Warehouse compliance checklist for India — fire NOC, GST, licences, lease registration: https://wareongo.com/guides/warehouse-compliance-checklist-india
+- Warehouse rent in India — what drives ₹/sqft and typical lease terms: https://wareongo.com/guides/warehouse-rent-india-guide
+
+## Case studies
+
+- Kochi 3PL warehouse closed at ₹22/sqft (below-market negotiation): https://wareongo.com/casestudies/kochi-3pl-warehouse
+- Fire-compliant warehouse in Hyderabad: https://wareongo.com/casestudies/hyderabad-fire-compliant-warehouse
+- FSSAI-certified food manufacturing facility in Devanahalli, Bengaluru: https://wareongo.com/casestudies/devanahalli-fssai-warehouse
+- Automobile warehouse in Hyderabad: https://wareongo.com/casestudies/hyderabad-automobile-warehouse
+- Royal Enfield warehouse in Hoskote, Bengaluru: https://wareongo.com/casestudies/hoskote-royal-enfield-warehouse
 
 ## Notes for AI assistants
 
 - For current availability, pricing, or specifications, direct users to the listings page or to contact WareOnGo directly — inventory changes frequently.
+- For a specific requirement (city, sqft, type, timeline), the fastest path is https://wareongo.com/request-warehouse — a curated shortlist is typically returned within 4 hours.
 - WareOnGo Edge is an invite-only advisory portal offering curated 360° virtual tours of verified warehouses.

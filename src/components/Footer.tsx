@@ -4,6 +4,21 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { trackEvent } from '@/lib/analytics';
 import { CITIES, STATES, CITIES_BY_TYPE, STATES_BY_TYPE, type LocationSummary } from '@/data/locations.generated';
 
+// Footer link curation — concentrate link equity on (a) cities already surfacing
+// in Search Console impressions and (b) deepest-inventory markets, instead of
+// diluting ~300 links across the long tail. The sitemap still covers every page.
+const FOOTER_CITY_SLUGS = new Set([
+  // Deepest inventory
+  'bengaluru', 'gurugram', 'hyderabad', 'hosur', 'kolkata', 'ghaziabad',
+  'ahmedabad', 'patna', 'noida', 'greater-noida', 'delhi',
+  // Surfacing in Search Console impressions (as of June 2026).
+  // Faridabad/Nashik also get impressions but are excluded until inventory
+  // grows past 1–2 listings — footer-linking near-empty pages helps nobody.
+  'mumbai', 'pune', 'chennai', 'goa', 'indore', 'okhla', 'kanpur',
+  'jaipur', 'surat', 'aurangabad', 'guwahati', 'raipur', 'varanasi', 'kochi',
+]);
+const curateCities = (items: LocationSummary[]) => items.filter((c) => FOOTER_CITY_SLUGS.has(c.slug));
+
 interface LocationLinkGridProps {
   heading: string;
   basePath: string;
@@ -67,19 +82,19 @@ const ExploreSpacesSection = () => {
       </button>
       {/* Always rendered to DOM so crawlers can follow links — visually toggled via display class. */}
       <div aria-hidden={!open} className={open ? 'space-y-6' : 'hidden'}>
-        <LocationLinkGrid heading="By City" basePath="/listings/city" items={CITIES} />
+        <LocationLinkGrid heading="By City" basePath="/listings/city" items={curateCities(CITIES)} />
         <LocationLinkGrid heading="By State" basePath="/listings/state" items={STATES} />
         <LocationLinkGrid
           heading="PEB · By City"
           basePath="/listings/city"
-          items={CITIES_BY_TYPE.PEB}
+          items={curateCities(CITIES_BY_TYPE.PEB)}
           pathSuffix="/peb"
           labelPrefix="PEB "
         />
         <LocationLinkGrid
           heading="RCC · By City"
           basePath="/listings/city"
-          items={CITIES_BY_TYPE.RCC}
+          items={curateCities(CITIES_BY_TYPE.RCC)}
           pathSuffix="/rcc"
           labelPrefix="RCC "
         />

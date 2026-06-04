@@ -2,6 +2,7 @@ import type { RouteRecord } from "vite-react-ssg";
 import RootLayout from "./RootLayout";
 import Index from "./pages/Index";
 import { caseStudies } from "./data/caseStudies";
+import { guides } from "./data/guides";
 import { warehouseLoader, warehouseStaticPaths, listingsLoader } from "./loaders/warehouseLoader";
 import {
   cityListingsLoader,
@@ -34,6 +35,14 @@ export const routes: RouteRecord[] = [
         path: "casestudies/:slug",
         lazy: lazyDefault(() => import("./pages/CaseStudyDetail")),
         getStaticPaths: () => caseStudies.map((cs) => `/casestudies/${cs.slug}`),
+      },
+      // Informational guides — intentionally unlinked from nav/footer ("hidden"),
+      // but in sitemap.xml + llms.txt so search engines and AI assistants find them.
+      { path: "guides", lazy: lazyDefault(() => import("./pages/Guides")) },
+      {
+        path: "guides/:slug",
+        lazy: lazyDefault(() => import("./pages/GuideDetail")),
+        getStaticPaths: () => guides.map((g) => `/guides/${g.slug}`),
       },
       {
         path: "listings",

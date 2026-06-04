@@ -24,6 +24,14 @@ const CASE_STUDY_SLUGS = [
   'kochi-3pl-warehouse',
 ];
 
+// Keep in sync with src/data/guides.ts.
+const GUIDE_SLUGS = [
+  'peb-vs-rcc-warehouse',
+  'grade-a-warehouse-india',
+  'warehouse-compliance-checklist-india',
+  'warehouse-rent-india-guide',
+];
+
 
 const xmlEscape = (s) =>
   String(s)
@@ -99,6 +107,8 @@ async function main() {
   const entries = [
     ...STATIC_PATHS.map((p) => urlEntry(p.path, p.changefreq, p.priority)),
     ...CASE_STUDY_SLUGS.map((slug) => urlEntry(`/casestudies/${slug}`, 'monthly', '0.7')),
+    urlEntry('/guides', 'monthly', '0.6'),
+    ...GUIDE_SLUGS.map((slug) => urlEntry(`/guides/${slug}`, 'monthly', '0.6')),
     ...cities.map((c) => urlEntry(`/listings/city/${c.slug}`, 'weekly', '0.8')),
     ...states.map((s) => urlEntry(`/listings/state/${s.slug}`, 'weekly', '0.7')),
     ...cityTypeCombos.map((c) =>

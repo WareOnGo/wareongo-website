@@ -10,7 +10,7 @@ type FAQ = {
 const FAQS: FAQ[] = [
   {
     question: 'How long does it take to find a warehouse on WareOnGo?',
-    answer: 'Curated shortlist within 36 hours. Most deals are finalized within a couple of weeks.',
+    answer: 'Curated shortlist within 4 hours. Most deals are finalized within a couple of weeks.',
   },
   {
     question: 'How are listings verified?',

@@ -48,6 +48,10 @@ export type Story = {
 export type CaseStudy = {
   slug: string;
   number: string;
+  /** ISO date the case study went live — feeds Article datePublished. */
+  published: string;
+  /** ISO date of the last content revision — feeds Article dateModified. Defaults to `published`. */
+  updated?: string;
   previewTitle: string;
   previewSub: string;
   card: CardData;
@@ -62,6 +66,8 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'kochi-3pl-warehouse',
     number: '01',
+    // Deal closed November 2024 (possession/handover per the story timeline).
+    published: '2024-12-01',
     previewTitle: "Kochi, Kerala — India's hardest warehouse market. Cracked.",
     previewSub:
       '3PL Company · Electrical & Appliances Logistics · Closed at ₹22/sqft in a ₹24.5+ market.',
@@ -183,6 +189,9 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'hyderabad-fire-compliant-warehouse',
     number: '02',
+    // ESTIMATE — story carries no dates. Sequenced between Deal 01 (Nov 2024)
+    // and Deal 04 (Oct 2025). Correct this if the real close date is known.
+    published: '2025-06-01',
     previewTitle: 'Devarayamjal, Hyderabad — Fire-compliant warehouse. 2 months of failure. Then us.',
     previewSub:
       'Manufacturer · 22 properties screened · Closed at ₹18.5/sqft for 50,000 sqft fire-compliant.',
@@ -293,6 +302,8 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'devanahalli-fssai-warehouse',
     number: '03',
+    // Signed January 2026; full operations April 2026 per the story timeline.
+    published: '2026-05-01',
     previewTitle: 'Devanahalli, Bangalore — Vastu. 250KW. FSSAI. Hormuz.',
     previewSub:
       'Premium food manufacturer · 6 months on-ground · ₹27/sqft incl. 250KW power · 3.5 months rent-free.',
@@ -401,6 +412,8 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'hyderabad-automobile-warehouse',
     number: '04',
+    // Requirement floated July 2025, open three months → closed ~October 2025.
+    published: '2025-11-01',
     previewTitle: "Hyderabad — India's largest two-wheeler brand mandated the big 4. Then chose us.",
     previewSub:
       "Automobile Manufacturer · 25 options filtered to 1 · 100m from highway · 1 acre truck parking secured.",
@@ -510,6 +523,8 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'hoskote-royal-enfield-warehouse',
     number: '05',
+    // Deal closed first week of May 2026 per the story timeline.
+    published: '2026-06-01',
     previewTitle: 'Hoskote, Bangalore — A 20,000 sqft deal in a 24-rupee market. Closed at 19.',
     previewSub:
       "Royal Enfield's Logistics Partner · 25,000 sqft warehouse, charged for 20,000 · Gate demolished & rebuilt.",

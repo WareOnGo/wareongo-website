@@ -16,7 +16,7 @@ const STEPS: Step[] = [
   {
     n: 2,
     title: 'Get a curated shortlist',
-    description: '3–5 matched options within 36 hours.',
+    description: '3–5 matched options within 4 hours.',
   },
   {
     n: 3,

@@ -53,6 +53,8 @@ const CaseStudyDetail: React.FC = () => {
     headline: cs.previewTitle,
     description: csDescription,
     url: `${SITE_URL}${csPath}`,
+    datePublished: cs.published,
+    dateModified: cs.updated ?? cs.published,
     isPartOf: { '@id': WEBSITE_ID },
     author: { '@id': ORG_ID },
     publisher: { '@id': ORG_ID },

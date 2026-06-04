@@ -6,4 +6,52 @@ Disallow: /user-dashboard
 Disallow: /login
 Disallow: /unauthorized
 
+# --- AI search / assistant crawlers: explicitly welcome ---
+# (a named group replaces the * group for that bot, so disallows are repeated)
+
+# OpenAI — search index, ChatGPT browsing
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: GPTBot
+Allow: /
+Disallow: /admin-panel
+Disallow: /user-dashboard
+Disallow: /login
+Disallow: /unauthorized
+
+# Anthropic — Claude search and browsing
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+Allow: /
+Disallow: /admin-panel
+Disallow: /user-dashboard
+Disallow: /login
+Disallow: /unauthorized
+
+# Perplexity
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+Allow: /
+Disallow: /admin-panel
+Disallow: /user-dashboard
+Disallow: /login
+Disallow: /unauthorized
+
+# Google — Gemini / AI Overviews grounding
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin-panel
+Disallow: /user-dashboard
+Disallow: /login
+Disallow: /unauthorized
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+Disallow: /admin-panel
+Disallow: /user-dashboard
+Disallow: /login
+Disallow: /unauthorized
+
 Sitemap: https://wareongo.com/sitemap.xml
