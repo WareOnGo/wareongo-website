@@ -6,8 +6,84 @@ import {
   XCircle,
   AlertTriangle,
   Warehouse,
-  Layers
+  Layers,
+  Route,
+  Truck,
+  Zap
 } from 'lucide-react';
+import type { WarehouseSpecifications } from '@/services/warehouseAPI';
+
+// A spec value counts as "present" only when it's a real value — nulls, empty
+// strings and the usual not-available markers are filtered out before display.
+const NA_MARKERS = new Set(['n/a', 'na', 'nil', 'none', '-', '--', 'not specified', 'not available', 'null']);
+export const specPresent = (v: unknown): boolean => {
+  if (v === null || v === undefined) return false;
+  if (typeof v === 'boolean') return v;
+  const s = String(v).trim();
+  return s.length > 0 && !NA_MARKERS.has(s.toLowerCase());
+};
+
+// Curated label map, grouped into bento sections. Only whitelisted keys render —
+// unknown fields the API may add later stay hidden until given a label here.
+const SPEC_GROUPS: { title: string; icon: React.ElementType; fields: { key: string; label: string }[] }[] = [
+  {
+    title: 'Site & access',
+    icon: Route,
+    fields: [
+      { key: 'land_parcel_size', label: 'Land parcel' },
+      { key: 'builtup_area', label: 'Built-up area (sqft)' },
+      { key: 'carpet_area', label: 'Carpet area (sqft)' },
+      { key: 'setbackArea', label: 'Setback area' },
+      { key: 'dimensions', label: 'Plot dimensions' },
+      { key: 'landType', label: 'Land type' },
+      { key: 'pollutionZone', label: 'Pollution zone' },
+      { key: 'distance_from_highway', label: 'Distance from highway' },
+      { key: 'approachRoadWidth', label: 'Approach road width' },
+      { key: 'nearest_transport', label: 'Nearest transport hub' },
+      { key: 'ccRoads', label: 'CC roads' },
+      { key: 'wallAndSecurityRoom', label: 'Boundary wall & security room' },
+    ],
+  },
+  {
+    title: 'Structure',
+    icon: Building2,
+    fields: [
+      { key: 'plinthHeightFt', label: 'Plinth height (ft)' },
+      { key: 'centreHeight', label: 'Centre height (ft)' },
+      { key: 'flooringType', label: 'Flooring' },
+      { key: 'floorStrengthPerSqm', label: 'Floor strength (per sqm)' },
+    ],
+  },
+  {
+    title: 'Docking & parking',
+    icon: Truck,
+    fields: [
+      { key: 'gateSizeFt', label: 'Gate size (ft)' },
+      { key: 'dockApronLengthFt', label: 'Dock apron length (ft)' },
+      { key: 'dockDimension', label: 'Dock dimensions' },
+      { key: 'dockPlatformType', label: 'Dock platform' },
+      { key: 'canopyType', label: 'Canopy' },
+      { key: 'parkingDockingSpace', label: 'Parking & docking space' },
+      { key: 'otherDockingSpecs', label: 'Other docking specs' },
+    ],
+  },
+  {
+    title: 'Utilities & interiors',
+    icon: Zap,
+    fields: [
+      { key: 'powerKva', label: 'Power (kVA)' },
+      { key: 'lightingDetails', label: 'Lighting' },
+      { key: 'ventilationType', label: 'Ventilation' },
+      { key: 'ventilationAirChangesPerDay', label: 'Air changes per day' },
+      { key: 'insulationPresent', label: 'Insulation' },
+      { key: 'insulationType', label: 'Insulation type' },
+      { key: 'washroom_count', label: 'Washrooms' },
+      { key: 'fire_exits', label: 'Fire exits' },
+      { key: 'fire_compliance_cert_type', label: 'Fire compliance certificate' },
+      { key: 'vaastuCompliance', label: 'Vaastu compliance' },
+    ],
+  },
+];
 
 interface WarehouseInfoProps {
   specifications: {
@@ -34,10 +110,21 @@ interface WarehouseInfoProps {
     };
     features: string[];
   };
+  /** Extended spec sheet from /warehouses/:id/specifications — null when unavailable. */
+  specs?: WarehouseSpecifications | null;
 }
 
-const WarehouseInfo: React.FC<WarehouseInfoProps> = ({ specifications }) => {
+const WarehouseInfo: React.FC<WarehouseInfoProps> = ({ specifications, specs }) => {
   const { infrastructure, compliance, features } = specifications;
+
+  // Bento groups with at least one real value; tiles with null/"N/A" never render.
+  const fmtSpec = (v: unknown): string => (typeof v === 'boolean' ? 'Yes' : String(v).trim());
+  const specGroups = SPEC_GROUPS.map((group) => ({
+    ...group,
+    fields: group.fields
+      .filter(({ key }) => specPresent(specs?.[key]))
+      .map(({ key, label }) => ({ key, label, value: fmtSpec(specs![key]) })),
+  })).filter((group) => group.fields.length > 0);
 
   const getComplianceIcon = (status: boolean | null) => {
     if (status === true) return <CheckCircle className="w-4 h-4 text-wareongo-blue" aria-hidden="true" />;
@@ -85,6 +172,38 @@ const WarehouseInfo: React.FC<WarehouseInfoProps> = ({ specifications }) => {
           </div>
         </dl>
       </section>
+
+      {/* Extended specification sheet — one card, borderless label/value pairs
+          under subtle group headings. Only fields with real values render
+          (nulls and "N/A" markers are filtered above). */}
+      {specGroups.length > 0 && (
+        <section className="border border-wareongo-blue rounded-2xl p-6 sm:p-8 bg-transparent">
+          <div className="flex items-center gap-2 mb-6">
+            <Layers className="w-4 h-4 text-wareongo-blue" aria-hidden="true" />
+            <h3 className="text-[10px] sm:text-xs uppercase tracking-[0.2em] font-medium text-wareongo-slate">
+              Specifications
+            </h3>
+          </div>
+          <div className="space-y-7">
+            {specGroups.map((group) => (
+              <div key={group.title}>
+                <p className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] text-wareongo-slate/70 mb-3">
+                  <group.icon className="w-3.5 h-3.5 text-wareongo-blue/60" aria-hidden="true" />
+                  {group.title}
+                </p>
+                <dl className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-4">
+                  {group.fields.map(({ key, label, value }) => (
+                    <div key={key}>
+                      <dt className="text-xs text-wareongo-slate mb-0.5">{label}</dt>
+                      <dd className="text-sm font-semibold text-wareongo-blue break-words">{value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Compliance & Safety */}
       <section className="border border-wareongo-blue rounded-2xl p-6 sm:p-8 bg-transparent">

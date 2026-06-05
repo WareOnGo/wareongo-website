@@ -8,9 +8,10 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WarehouseImageCarousel from '@/components/WarehouseImageCarousel';
-import WarehouseInfo from '@/components/WarehouseInfo';
+import WarehouseInfo, { specPresent } from '@/components/WarehouseInfo';
 import WarehouseCard from '@/components/WarehouseCard';
 import ContactFormDialog from '@/components/ContactFormDialog';
+import FAQAccordion, { type FAQEntry } from '@/components/FAQAccordion';
 import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
 import { trackEvent } from '@/lib/analytics';
 import { warehousePath } from '@/lib/warehouseSlug';
@@ -28,6 +29,9 @@ const buildJsonLd = (data: NonNullable<WarehouseLoaderData>) => {
     warehouseType: data.specifications.infrastructure.type,
     city: loc.city,
   });
+  // Honest freshness signal — the backend's @updatedAt, exposed as `updatedAt`
+  // on the detail endpoint. Omitted entirely until the API ships it.
+  const updatedAt = (data.rawData as { updatedAt?: string | null } | undefined)?.updatedAt;
   // RealEstateListing is in schema.org's pending namespace; pairing with Place keeps
   // compatibility with crawlers that haven't adopted the pending vocab yet.
   return {
@@ -36,6 +40,7 @@ const buildJsonLd = (data: NonNullable<WarehouseLoaderData>) => {
     '@id': `${SITE_URL}${path}`,
     name: `Warehouse ${data.id} — ${loc.city}, ${loc.state}`,
     url: `${SITE_URL}${path}`,
+    ...(updatedAt ? { dateModified: String(updatedAt).slice(0, 10) } : {}),
     isPartOf: { '@id': WEBSITE_ID },
     provider: { '@id': ORG_ID },
     image: data.images && data.images.length > 0 ? data.images : undefined,
@@ -200,6 +205,120 @@ const WarehouseDetail = () => {
   const ogImage = warehouseData.images && warehouseData.images.length > 0 ? warehouseData.images[0] : undefined;
   const jsonLd = buildJsonLd(warehouseData);
 
+  // Per-listing FAQs — each entry renders only when the underlying field is
+  // genuinely present (the API layer substitutes sentinel strings/defaults for
+  // missing data, filtered here; never publish a fabricated answer). The
+  // FAQPage JSON-LD is generated from this same array, so the schema text
+  // always matches the rendered answers. Rent is deliberately excluded until
+  // the backend exposes raw nullable rates.
+  const clearHeight =
+    infra.clearHeight && infra.clearHeight !== 'Not specified' ? infra.clearHeight : null;
+  const compliancesText =
+    warehouseData.specifications.compliance.compliances &&
+    warehouseData.specifications.compliance.compliances !== 'Compliance information not available'
+      ? warehouseData.specifications.compliance.compliances
+      : null;
+  const fireNocAvailable = warehouseData.specifications.compliance.fireNocAvailable === true;
+
+  const faqs: FAQEntry[] = [];
+  if (space.totalSpace) {
+    faqs.push({
+      q: 'How big is this warehouse?',
+      a: `This${typeLabel ? ` ${typeLabel}` : ''} warehouse offers ${space.totalSpace.toLocaleString()} sqft of space in ${localePart}, ${loc.state}. Like every listing on WareOnGo, it has been physically inspected by our Area Managers, who validate the specifications and compliance documents before it goes live.`,
+    });
+  }
+  if (typeLabel === 'PEB') {
+    faqs.push({
+      q: 'What type of construction is this warehouse?',
+      a: 'This is a PEB (pre-engineered building) warehouse — a factory-fabricated steel structure bolted together on a concrete plinth. PEB sheds offer wide column-free spans and higher eaves than concrete construction, typically supporting 4–6 racking levels, and are the construction style behind most modern Grade A logistics space in India.',
+      link: { to: '/guides/peb-vs-rcc-warehouse', label: 'PEB vs RCC: which should you lease? →' },
+    });
+  } else if (typeLabel === 'RCC') {
+    faqs.push({
+      q: 'What type of construction is this warehouse?',
+      a: 'This is an RCC (reinforced cement concrete) warehouse — cast-in-place concrete construction. RCC buildings carry high inherent fire resistance and stay cooler inside thanks to thermal mass, and they are the standard choice for in-city godowns, multi-storey storage and heavy point loads such as machinery.',
+      link: { to: '/guides/peb-vs-rcc-warehouse', label: 'PEB vs RCC: which should you lease? →' },
+    });
+  }
+  if (clearHeight) {
+    faqs.push({
+      q: 'What is the clear height of this warehouse?',
+      a: `The clear height is ${clearHeight}, measured to the lowest obstruction such as sprinkler lines or ducting. As a rule of thumb, each pallet-racking level needs roughly 1.8–2 m, so clear height decides how far you can stack vertically — and with it, your effective cost per pallet position.`,
+    });
+  }
+  if (fireNocAvailable) {
+    faqs.push({
+      q: 'Is this warehouse fire compliant?',
+      a: 'Yes — a fire NOC is available for this warehouse, verified during physical inspection. A current fire NOC from the state fire department is mandatory for warehouses above state-specific size thresholds, and insurers generally require it before covering stock, so this materially de-risks the lease.',
+    });
+  }
+  if (compliancesText) {
+    faqs.push({
+      q: 'What compliances does this warehouse have?',
+      a: `Compliances on record: ${compliancesText}. These are validated by WareOnGo's Area Managers during physical verification. Note that tenants typically need their own registrations on top — GST additional place of business, trade licence, and sector-specific licences such as FSSAI for food storage.`,
+      link: { to: '/guides/warehouse-compliance-checklist-india', label: 'Full compliance checklist →' },
+    });
+  }
+
+  // Spec-sheet FAQs — sourced from /warehouses/:id/specifications; each renders
+  // only when the underlying field carries a real value (specPresent filters
+  // nulls and "N/A" markers).
+  const specs = warehouseData.specs;
+  const spec = (key: string): string | null =>
+    specs && specPresent(specs[key]) ? String(specs[key]).trim() : null;
+
+  const numberOfDocks =
+    infra.numberOfDocks && infra.numberOfDocks !== 'Not specified' ? infra.numberOfDocks : null;
+  if (numberOfDocks) {
+    const apron = spec('dockApronLengthFt');
+    faqs.push({
+      q: 'How many loading docks does this warehouse have?',
+      a: `This warehouse has ${numberOfDocks} dock${/^1$/.test(numberOfDocks.trim()) ? '' : 's'}${apron ? `, with a ${apron} ft dock apron` : ''}. Dock count drives loading throughput — as a benchmark, modern Grade A facilities provision roughly one dock per 10,000 sqft.`,
+    });
+  }
+  const powerKva = spec('powerKva');
+  if (powerKva) {
+    faqs.push({
+      q: 'What is the power supply at this warehouse?',
+      a: `The warehouse has ${powerKva}${/kva/i.test(powerKva) ? '' : ' kVA'} of power on record. Sanctioned power determines how much material-handling equipment, lighting and machinery the facility can run simultaneously.`,
+    });
+  }
+  const flooringType = spec('flooringType');
+  if (flooringType) {
+    const floorStrength = spec('floorStrengthPerSqm');
+    faqs.push({
+      q: 'What flooring does this warehouse have?',
+      a: `The warehouse has ${flooringType} flooring${floorStrength ? ` rated at ${floorStrength} per sqm` : ''}. Flooring quality and load rating govern the racking heights and forklift operations a facility can support.`,
+    });
+  }
+  const highwayDistance = spec('distance_from_highway');
+  const approachRoad = spec('approachRoadWidth');
+  if (highwayDistance || approachRoad) {
+    const parts = [
+      highwayDistance ? `the warehouse is ${highwayDistance} from the highway` : '',
+      approachRoad ? `the approach road is ${approachRoad} wide` : '',
+    ].filter(Boolean);
+    const sentence = parts.join(' and ');
+    faqs.push({
+      q: 'How is the road access to this warehouse?',
+      a: `${sentence.charAt(0).toUpperCase()}${sentence.slice(1)}. Highway proximity and approach-road width decide which container sizes can reach the gate and how fast trucks turn around.`,
+    });
+  }
+  faqs.push({
+    q: 'How do I visit or book this warehouse?',
+    a: 'Send an enquiry through WareOnGo and our team will arrange a site visit within 48 hours — for custom requirements, a curated shortlist is typically delivered within 4 hours. Every property is physically inspected before listing, and we handle negotiations, compliance and paperwork end-to-end. You only pay when you close.',
+  });
+
+  const faqLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
       <PageHead
@@ -209,6 +328,7 @@ const WarehouseDetail = () => {
         image={ogImage}
       >
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+        <script type="application/ld+json">{JSON.stringify(faqLd)}</script>
       </PageHead>
       <Navbar />
 
@@ -339,7 +459,7 @@ const WarehouseDetail = () => {
           {/* Detailed Information */}
           <section aria-labelledby="detailed-info-title">
             <h2 id="detailed-info-title" className="sr-only">Detailed Warehouse Information</h2>
-            <WarehouseInfo specifications={warehouseData.specifications} />
+            <WarehouseInfo specifications={warehouseData.specifications} specs={warehouseData.specs} />
           </section>
 
           {/* Auto-generated descriptive paragraph — boosts thin-content signals for crawlers. */}
@@ -369,6 +489,18 @@ const WarehouseDetail = () => {
               Browse more <Link to={`/listings/city/${loc.city.toLowerCase().replace(/\s+/g, '-')}`} className="text-wareongo-blue underline-offset-2 hover:underline">warehouses in {loc.city}</Link>{' '}
               or <Link to="/request-warehouse" className="text-wareongo-blue underline-offset-2 hover:underline">request a custom space</Link> if this doesn't fit your requirements.
             </p>
+          </section>
+
+          {/* Per-listing FAQs — accordion answers stay in the DOM when collapsed
+              (see FAQAccordion), so the SSG HTML matches the FAQPage JSON-LD. */}
+          <section aria-labelledby="warehouse-faq-title" className="mt-10 sm:mt-12 max-w-3xl">
+            <h2
+              id="warehouse-faq-title"
+              className="text-xl sm:text-2xl font-bold text-wareongo-blue mb-4"
+            >
+              Frequently asked questions
+            </h2>
+            <FAQAccordion items={faqs} />
           </section>
 
           {/* Related warehouses in the same city — internal linking for crawl + bounce reduction. */}

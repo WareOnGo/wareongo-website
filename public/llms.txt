@@ -7,7 +7,8 @@ WareOnGo serves 3PLs, end users, manufacturers, and dark-store/quick-commerce op
 ## Key facts
 
 - What it does: Verified warehouse discovery + leasing advisory across India.
-- Coverage: 75+ cities pan-India; deepest in Bengaluru, Hyderabad, Mumbai, Bhiwandi, Chennai, Pune, Gurgaon, Noida, and Delhi.
+- Founded: 2024 by Jayanth Chunduru (Co-founder & CEO) and Dhaval Gupta (Co-founder & CPO), graduates of Shri Ram College of Commerce (SRCC).
+- Coverage: 90+ cities pan-India; deepest in Bengaluru, Hyderabad, Mumbai, Bhiwandi, Chennai, Pune, Gurgaon, Noida, and Delhi.
 - Inventory: 1,500+ verified warehouses; 1.3M+ sqft transacted; trusted by 200+ companies.
 - Turnaround: Curated shortlist typically within 4 hours; most deals close within a couple of weeks.
 - Model: Owners get qualified clients; clients save ~8–12% on commercials. You only pay when you close.

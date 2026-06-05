@@ -1,5 +1,5 @@
 import type { LoaderFunctionArgs } from 'react-router-dom';
-import { warehouseAPI, transformWarehouseData, transformWarehouseDetailData, WarehouseAPIError } from '@/services/warehouseAPI';
+import { warehouseAPI, transformWarehouseData, transformWarehouseDetailData, WarehouseAPIError, type WarehouseSpecifications } from '@/services/warehouseAPI';
 import { warehouseSlug, parseIdFromWarehouseSlug } from '@/lib/warehouseSlug';
 import { getAllWarehouses } from './locationLoader';
 
@@ -8,6 +8,8 @@ type CardData = ReturnType<typeof transformWarehouseData>;
 
 export interface WarehouseLoaderData extends DetailData {
   related: CardData[];
+  // Extended spec sheet (nullable free-text fields) — null when unavailable.
+  specs: WarehouseSpecifications | null;
 }
 export type ListingsLoaderData = {
   warehouses: ReturnType<typeof transformWarehouseData>[];
@@ -60,8 +62,11 @@ export async function warehouseLoader({ params }: LoaderFunctionArgs): Promise<W
   try {
     const warehouse = await warehouseAPI.getWarehouseById(id);
     const detail = transformWarehouseDetailData(warehouse);
-    const related = await findRelated(detail.id, detail.specifications.location.city);
-    return { ...detail, related };
+    const [related, specs] = await Promise.all([
+      findRelated(detail.id, detail.specifications.location.city),
+      warehouseAPI.getWarehouseSpecifications(detail.id),
+    ]);
+    return { ...detail, related, specs };
   } catch (err) {
     if (err instanceof WarehouseAPIError && (err.code === 'WAREHOUSE_NOT_FOUND' || err.code === 'INVALID_ID')) {
       return null;

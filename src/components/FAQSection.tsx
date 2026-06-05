@@ -26,7 +26,7 @@ const FAQS: FAQ[] = [
   },
   {
     question: 'Which cities do you cover?',
-    answer: '75+ cities pan-India, with deepest coverage in Bengaluru, Hyderabad, Mumbai, Bhiwandi, Chennai, Pune, Gurgaon, Noida and Delhi.',
+    answer: '90+ cities pan-India, with deepest coverage in Bengaluru, Hyderabad, Mumbai, Bhiwandi, Chennai, Pune, Gurgaon, Noida and Delhi.',
   },
   {
     question: 'Do you handle compliance and legal?',

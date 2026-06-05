@@ -21,7 +21,7 @@ const RequestCTASection = () => {
               Tell us your requirements — we'll find it for you.
             </p>
             <p className="text-white/70 text-sm sm:text-base mb-8 sm:mb-10 max-w-2xl mx-auto">
-              Pan-India inventory&nbsp;&middot;&nbsp;36-hour shortlist&nbsp;&middot;&nbsp;You only pay when you close.
+              Pan-India inventory&nbsp;&middot;&nbsp;4-hour shortlist&nbsp;&middot;&nbsp;You only pay when you close.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
               <Link

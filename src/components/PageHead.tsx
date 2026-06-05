@@ -14,7 +14,7 @@ interface PageHeadProps {
 
 const PageHead = ({ title, description, path, image, noindex, ogType = 'website', children }: PageHeadProps) => {
   const url = `${SITE_URL}${path}`;
-  const ogImage = image ?? `${SITE_URL}/og-image.png`;
+  const ogImage = image ?? `${SITE_URL}/og-image.jpg`;
   return (
     <Head>
       <title>{title}</title>

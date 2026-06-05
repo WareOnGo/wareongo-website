@@ -43,6 +43,13 @@ export interface WarehouseAPIResponse {
 }
 
 // Response interface for individual warehouse detail
+/**
+ * Extended spec sheet from GET /warehouses/:id/specifications. All fields are
+ * nullable free-text from the backend; consumers must filter empty/"N/A"
+ * values before display.
+ */
+export type WarehouseSpecifications = Record<string, string | number | boolean | null>;
+
 export interface WarehouseDetailResponse {
   data?: WarehouseDetail;
   error?: string;
@@ -247,6 +254,25 @@ class WarehouseAPI {
         500,
         'UNKNOWN_ERROR'
       );
+    }
+  }
+
+  /**
+   * Fetch the extended specification sheet for a warehouse
+   * (GET /warehouses/:id/specifications — public, whitelisted fields only).
+   * Returns null on any failure: specs are an enhancement, never page-blocking.
+   */
+  async getWarehouseSpecifications(id: number): Promise<WarehouseSpecifications | null> {
+    try {
+      const response = await fetch(`${this.baseURL}/warehouses/${id}/specifications`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (!response.ok) return null;
+      const data = await response.json();
+      return data && typeof data === 'object' ? (data as WarehouseSpecifications) : null;
+    } catch {
+      return null;
     }
   }
 

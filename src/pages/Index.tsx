@@ -28,9 +28,14 @@ const Index = () => {
     legalName: 'Neuroware Technologies Private Limited',
     url: SITE_URL,
     logo: `${SITE_URL}/WOG_Logo_light.png`,
-    image: `${SITE_URL}/og-image.png`,
+    image: `${SITE_URL}/og-image.jpg`,
     description: 'WareOnGo connects businesses with warehouse space across India — transparent listings, verified compliance, faster discovery.',
     slogan: 'A better warehouse, on better terms.',
+    foundingDate: '2024',
+    founder: [
+      { '@type': 'Person', name: 'Jayanth Chunduru', jobTitle: 'Co-founder & CEO' },
+      { '@type': 'Person', name: 'Dhaval Gupta', jobTitle: 'Co-founder & CPO' },
+    ],
     areaServed: {
       '@type': 'Country',
       name: 'India',

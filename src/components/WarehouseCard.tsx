@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { MapPin, Ruler, Building2, IndianRupee, ImageIcon, ShieldCheck, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
+import { optimizedSrc, optimizedSrcSet, CARD_WIDTHS, CARD_SIZES } from '@/lib/imageOpt';
 
 const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.svg'];
 const DOC_EXTENSIONS = ['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.txt', '.zip', '.rar'];
@@ -114,6 +115,18 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
     // before treating this image as failed.
     if (event?.currentTarget) {
       const img = event.currentTarget;
+
+      // Step 0: if we're showing a Vercel-optimized variant, drop srcset and
+      // retry the raw source URL once before any other fallback.
+      const raw = img.dataset.raw;
+      if (raw && img.src !== raw) {
+        img.removeAttribute('srcset');
+        img.removeAttribute('sizes');
+        img.dataset.raw = '';
+        img.src = raw;
+        return;
+      }
+
       const fallback = img.dataset.fallback;
       if (fallback && img.src !== fallback) {
         img.dataset.fallback = '';
@@ -218,9 +231,11 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
               {/* Previous image - slides out */}
               {slideDirection && prevImageIndex !== currentImageIndex && availableImages[prevImageIndex] && (
                 <img
-                  src={availableImages[prevImageIndex]}
+                  src={optimizedSrc(availableImages[prevImageIndex], 640)}
                   alt=""
                   aria-hidden="true"
+                  width={640}
+                  height={480}
                   className={`absolute inset-0 w-full h-48 object-cover object-center ${
                     slideDirection === 'left'
                       ? 'animate-slide-out-left'
@@ -235,9 +250,14 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
               {/* New image - slides in */}
               <img
                 key={`${id}-${currentImageIndex}-${availableImages[currentImageIndex]}`}
-                src={availableImages[currentImageIndex]}
+                src={optimizedSrc(availableImages[currentImageIndex], 640)}
+                srcSet={optimizedSrcSet(availableImages[currentImageIndex], CARD_WIDTHS)}
+                sizes={CARD_SIZES}
+                data-raw={availableImages[currentImageIndex]}
                 data-fallback={availableFallbacks[currentImageIndex] || ''}
                 alt={altText}
+                width={640}
+                height={480}
                 className={`absolute inset-0 w-full h-48 object-cover object-center ${
                   slideDirection === 'left'
                     ? 'animate-slide-in-left'

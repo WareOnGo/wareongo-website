@@ -67,13 +67,16 @@ function warehousePhotos(w, max = 10) {
 
 // Warehouse URL entry with the Google image-sitemap extension so listing
 // photos get indexed by Google Image Search.
-function warehouseUrlEntry(loc, photos) {
+function warehouseUrlEntry(loc, photos, updatedAt) {
   const images = photos
     .map((u) => `    <image:image>\n      <image:loc>${xmlEscape(u)}</image:loc>\n    </image:image>`)
     .join('\n');
+  // Honest freshness: the backend's @updatedAt (status_updated_at), exposed as
+  // `updatedAt` on the list endpoint. Falls back to today until the API ships it.
+  const lastmod = updatedAt ? String(updatedAt).slice(0, 10) : today;
   return `  <url>
     <loc>${SITE_URL}${loc}</loc>
-    <lastmod>${today}</lastmod>
+    <lastmod>${lastmod}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>${images ? `\n${images}` : ''}
   </url>`;
@@ -96,7 +99,7 @@ async function main() {
   await flatten404();
   const warehouses = await fetchAllWarehouses();
   const warehouseEntries = warehouses.map((w) =>
-    warehouseUrlEntry(`/warehouse/${warehouseSlug(w)}`, warehousePhotos(w)),
+    warehouseUrlEntry(`/warehouse/${warehouseSlug(w)}`, warehousePhotos(w), w.updatedAt),
   );
   const totalImages = warehouses.reduce((n, w) => n + warehousePhotos(w).length, 0);
   const cities = summarize(warehouses, 'city');

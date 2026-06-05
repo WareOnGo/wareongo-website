@@ -46,6 +46,8 @@ const CaseStudiesSection = () => {
                   src={s.image}
                   alt={s.title}
                   loading="lazy"
+                  width={720}
+                  height={450}
                   className="w-full h-full object-cover"
                 />
               </div>

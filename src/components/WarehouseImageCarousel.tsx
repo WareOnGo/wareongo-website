@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { ChevronLeft, ChevronRight, ImageIcon, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { optimizedSrc, optimizedSrcSet, DETAIL_WIDTHS, DETAIL_SIZES } from '@/lib/imageOpt';
 
 const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.svg'];
 const DOC_EXTENSIONS = ['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.txt', '.zip', '.rar'];
@@ -86,14 +87,28 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
     const prevActualIndex = availableImages.indexOf(validImages[prevValidIndex]);
     const nextActualIndex = availableImages.indexOf(validImages[nextValidIndex]);
 
-    if (availableImages[prevActualIndex]) preloadImage(availableImages[prevActualIndex]);
-    if (availableImages[nextActualIndex]) preloadImage(availableImages[nextActualIndex]);
+    // Preload the optimized variant — it's what the <img> will actually request.
+    if (availableImages[prevActualIndex]) preloadImage(optimizedSrc(availableImages[prevActualIndex], 1080));
+    if (availableImages[nextActualIndex]) preloadImage(optimizedSrc(availableImages[nextActualIndex], 1080));
   }, [currentImageIndex, availableImages, validImages]);
 
   const handleImageError = useCallback((event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const img = event.currentTarget;
+
+    // Step 0: if we're showing a Vercel-optimized variant, drop srcset and
+    // retry the raw source URL before the fallback/retry chain (which assumes
+    // plain photo URLs — its `split('?')` logic would mangle /_vercel/image).
+    const raw = img.dataset.raw;
+    if (raw && img.src !== raw) {
+      img.removeAttribute('srcset');
+      img.removeAttribute('sizes');
+      img.dataset.raw = '';
+      img.src = raw;
+      return;
+    }
+
     // One-shot fallback: if the failing image has a fallback URL (the
     // original-format photo behind a WebP), swap once before counting retries.
-    const img = event.currentTarget;
     const fallback = img.dataset.fallback;
     if (fallback && img.src.split('?')[0] !== fallback) {
       img.dataset.fallback = '';
@@ -329,9 +344,11 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
       {/* Previous image - sliding out, decorative duplicate of current */}
       {slideDirection && prevImageIndex !== currentImageIndex && availableImages[prevImageIndex] && (
         <img
-          src={availableImages[prevImageIndex]}
+          src={optimizedSrc(availableImages[prevImageIndex], 1080)}
           alt=""
           aria-hidden="true"
+          width={1080}
+          height={720}
           className={`absolute inset-0 w-full h-full object-cover ${
             slideDirection === 'left'
               ? 'animate-slide-out-left'
@@ -346,9 +363,14 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
       {/* Current image - slides in. First image stays eager (LCP); others lazy. */}
       <img
         key={`${warehouseId}-${currentImageIndex}-${availableImages[currentImageIndex]}`}
-        src={availableImages[currentImageIndex]}
+        src={optimizedSrc(availableImages[currentImageIndex], 1080)}
+        srcSet={optimizedSrcSet(availableImages[currentImageIndex], DETAIL_WIDTHS)}
+        sizes={DETAIL_SIZES}
+        data-raw={availableImages[currentImageIndex]}
         data-fallback={availableFallbacks[currentImageIndex] || ''}
         alt={validImages.length > 1 ? `${baseAlt} — photo ${currentImageIndex + 1} of ${validImages.length}` : baseAlt}
+        width={1080}
+        height={720}
         className={`absolute inset-0 w-full h-full object-cover ${
           slideDirection === 'left'
             ? 'animate-slide-in-left'

@@ -3,6 +3,12 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
+  "images": {
+    "sizes": [384, 640, 960, 1080, 1600],
+    "remotePatterns": [{ "protocol": "https", "hostname": "*.r2.dev" }],
+    "formats": ["image/avif", "image/webp"],
+    "minimumCacheTTL": 2678400
+  },
   "headers": [
     {
       "source": "/(.*).(js|css|woff|woff2|jpg|jpeg|png|webp|avif|svg|ico|mp4)",
