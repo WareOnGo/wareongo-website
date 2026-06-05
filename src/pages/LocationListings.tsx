@@ -38,6 +38,12 @@ const LocationListings = () => {
   // extractable numbers (count, size range) anchored to the location name.
   // Rates are deliberately excluded: missing ratePerSqft defaults to 35 in
   // transformWarehouseData, so a computed range would be unreliable.
+  //
+  // Thin-market threshold: below this count, the copy drops the count and
+  // size range — "1 verified warehouse in Pune" advertises weakness, not
+  // inventory. The grid itself still shows whatever exists.
+  const STATS_MIN_LISTINGS = 5;
+  const showStats = warehouses.length >= STATS_MIN_LISTINGS;
   const sizes = warehouses.map((w) => w.size).filter((s) => typeof s === 'number' && s > 0);
   const fmtSqft = (n: number) => n.toLocaleString('en-IN');
   const minSize = sizes.length > 0 ? Math.min(...sizes) : null;
@@ -55,10 +61,9 @@ const LocationListings = () => {
   // "godown" synonym on base pages only — exact-match for "godown for rent in {city}"
   // queries (Search Console shows them); Google bolds the matching phrase in the snippet.
   const godownClause = warehouseType ? '' : ` Also listed as godowns for rent in ${canonical}.`;
-  const seoDescription =
-    warehouses.length > 0
-      ? `${countNoun} for rent in ${canonical}${sizeRange ? ` — ${sizeRange}` : ''}. Transparent pricing, curated shortlist in 4 hours.${godownClause}`
-      : `${descSubject} for rent in ${canonical}. Verified listings with transparent pricing. Get custom options, expert guidance & site visit within 48 hours.`;
+  const seoDescription = showStats
+    ? `${countNoun} for rent in ${canonical}${sizeRange ? ` — ${sizeRange}` : ''}. Transparent pricing, curated shortlist in 4 hours.${godownClause}`
+    : `${descSubject} for rent in ${canonical}. Verified listings with transparent pricing. Get custom options, expert guidance & site visit within 48 hours.${godownClause}`;
 
   // Machine-readable synonyms + micro-markets. "Godown" matches North-Indian query
   // phrasing; hub localities (curated in cityHubs.ts / stateHubs.ts) associate
@@ -164,12 +169,21 @@ const LocationListings = () => {
               {heading}
             </h1>
             <p className="text-base sm:text-lg text-wareongo-slate leading-relaxed">
-              {countNoun} available for rent in {canonical}
-              {sizeLead}
-              {!warehouseType && typeCounts && typeCounts.PEB > 0 && typeCounts.RCC > 0
-                ? ` across ${typeCounts.PEB} PEB and ${typeCounts.RCC} RCC options`
-                : ''}
-              . Transparent pricing, direct contact, no middlemen.
+              {showStats ? (
+                <>
+                  {countNoun} available for rent in {canonical}
+                  {sizeLead}
+                  {!warehouseType && typeCounts && typeCounts.PEB > 0 && typeCounts.RCC > 0
+                    ? ` across ${typeCounts.PEB} PEB and ${typeCounts.RCC} RCC options`
+                    : ''}
+                  . Transparent pricing, direct contact, no middlemen.
+                </>
+              ) : (
+                <>
+                  Verified {warehouseType ? `${typeLabel} ` : ''}warehouses for rent in {canonical}.
+                  Transparent pricing, direct contact, no middlemen.
+                </>
+              )}
             </p>
 
             {/* Type filter chips on base location pages — internal linking to PEB / RCC variants */}

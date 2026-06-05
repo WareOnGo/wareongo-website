@@ -255,6 +255,17 @@ const CaseStudyDetail: React.FC = () => {
               <div />
             )}
           </div>
+
+          {/* Internal link to the city this deal happened in */}
+          <div className="mt-6 text-center">
+            <Link
+              to={`/listings/city/${cs.citySlug}`}
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-wareongo-blue hover:underline underline-offset-2"
+            >
+              Explore verified warehouses for rent in {cs.cityLabel}
+              <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+            </Link>
+          </div>
         </div>
 
         {/* Bottom CTA */}
@@ -271,7 +282,7 @@ const CaseStudyDetail: React.FC = () => {
               href="/request-warehouse"
               className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-wareongo-ivory text-wareongo-blue text-sm font-semibold hover:bg-white transition-colors border border-wareongo-ivory"
             >
-              Get My Shortlist in 6 Hours →
+              Get My Shortlist in 4 Hours →
             </a>
             <div className="flex flex-wrap justify-center gap-5 mt-6">
               {['No broker spam', '100% legal checks', '₹2–4/sqft savings', 'Hard markets covered'].map(t => (

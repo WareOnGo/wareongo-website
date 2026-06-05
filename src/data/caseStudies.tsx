@@ -48,6 +48,9 @@ export type Story = {
 export type CaseStudy = {
   slug: string;
   number: string;
+  /** City listings page this deal happened in — rendered as an internal link. */
+  citySlug: string;
+  cityLabel: string;
   /** ISO date the case study went live — feeds Article datePublished. */
   published: string;
   /** ISO date of the last content revision — feeds Article dateModified. Defaults to `published`. */
@@ -65,6 +68,8 @@ export type CaseStudy = {
 export const caseStudies: CaseStudy[] = [
   {
     slug: 'kochi-3pl-warehouse',
+    citySlug: 'kochi',
+    cityLabel: 'Kochi',
     number: '01',
     // Deal closed November 2024 (possession/handover per the story timeline).
     published: '2024-12-01',
@@ -188,6 +193,8 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'hyderabad-fire-compliant-warehouse',
+    citySlug: 'hyderabad',
+    cityLabel: 'Hyderabad',
     number: '02',
     // ESTIMATE — story carries no dates. Sequenced between Deal 01 (Nov 2024)
     // and Deal 04 (Oct 2025). Correct this if the real close date is known.
@@ -301,6 +308,8 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'devanahalli-fssai-warehouse',
+    citySlug: 'bengaluru',
+    cityLabel: 'Bengaluru',
     number: '03',
     // Signed January 2026; full operations April 2026 per the story timeline.
     published: '2026-05-01',
@@ -411,6 +420,8 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'hyderabad-automobile-warehouse',
+    citySlug: 'hyderabad',
+    cityLabel: 'Hyderabad',
     number: '04',
     // Requirement floated July 2025, open three months → closed ~October 2025.
     published: '2025-11-01',
@@ -522,6 +533,8 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'hoskote-royal-enfield-warehouse',
+    citySlug: 'bengaluru',
+    cityLabel: 'Bengaluru',
     number: '05',
     // Deal closed first week of May 2026 per the story timeline.
     published: '2026-06-01',

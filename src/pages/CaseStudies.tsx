@@ -125,7 +125,7 @@ const CaseStudies = () => {
               href="/request-warehouse"
               className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-wareongo-ivory text-wareongo-blue text-sm font-semibold hover:bg-white transition-colors border border-wareongo-ivory"
             >
-              Get My Shortlist in 6 Hours →
+              Get My Shortlist in 4 Hours →
             </a>
             <div className="flex flex-wrap justify-center gap-5 mt-6">
               {['No broker spam', '100% legal checks', '₹2–4/sqft savings', 'Hard markets covered'].map(t => (
