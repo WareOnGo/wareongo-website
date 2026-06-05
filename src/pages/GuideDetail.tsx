@@ -3,8 +3,21 @@ import PageHead from '@/components/PageHead';
 import Breadcrumbs, { type BreadcrumbItem } from '@/components/Breadcrumbs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import FAQAccordion from '@/components/FAQAccordion';
 import { getGuideBySlug, guides, type GuideBlock } from '@/data/guides';
 import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
+
+// Plain-text length of a guide (summary + blocks) for the Article wordCount.
+const countWords = (guide: NonNullable<ReturnType<typeof getGuideBySlug>>): number => {
+  const texts: string[] = [guide.summary];
+  for (const b of guide.blocks) {
+    if (b.kind === 'p' || b.kind === 'h2' || b.kind === 'h3') texts.push(b.text);
+    else if (b.kind === 'ul' || b.kind === 'ol') texts.push(...b.items);
+    else if (b.kind === 'table') texts.push(...b.table.headers, ...b.table.rows.flat());
+  }
+  for (const f of guide.faqs) texts.push(f.q, f.a);
+  return texts.join(' ').split(/\s+/).filter(Boolean).length;
+};
 
 // Simple prose renderer for the structured guide blocks. Deliberately plain —
 // these pages exist to be read (by people and by AI engines), not to dazzle.
@@ -37,26 +50,33 @@ const Block = ({ block }: { block: GuideBlock }) => {
         </ol>
       );
     case 'table':
+      // Flat full-strength borders + transparent background, matching the
+      // listing-card / accordion idiom.
       return (
-        <div className="overflow-x-auto mb-6 -mx-1 px-1">
-          <table className="w-full text-left text-[13px] sm:text-sm border border-wareongo-blue/15 rounded-lg">
-            <thead>
-              <tr className="bg-wareongo-blue/5">
-                {block.table.headers.map((h, i) => (
-                  <th key={i} className="px-3 py-2 font-semibold text-wareongo-charcoal border-b border-wareongo-blue/15">{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {block.table.rows.map((row, ri) => (
-                <tr key={ri} className={ri % 2 === 1 ? 'bg-wareongo-blue/[0.02]' : ''}>
-                  {row.map((cell, ci) => (
-                    <td key={ci} className="px-3 py-2 align-top text-wareongo-slate border-b border-wareongo-blue/10">{cell}</td>
+        <div className="overflow-x-auto mb-6">
+          <div className="border border-wareongo-blue rounded-2xl overflow-hidden min-w-fit">
+            <table className="w-full text-left text-[13px] sm:text-sm bg-transparent">
+              <thead>
+                <tr className="border-b border-wareongo-blue bg-wareongo-blue/5">
+                  {block.table.headers.map((h, i) => (
+                    <th key={i} className="px-4 py-3 font-semibold text-wareongo-blue text-[11px] sm:text-xs uppercase tracking-[0.12em]">{h}</th>
                   ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {block.table.rows.map((row, ri) => (
+                  <tr
+                    key={ri}
+                    className={`transition-colors hover:bg-wareongo-blue/5 ${ri < block.table.rows.length - 1 ? 'border-b border-wareongo-blue/30' : ''}`}
+                  >
+                    {row.map((cell, ci) => (
+                      <td key={ci} className={`px-4 py-3 align-top ${ci === 0 ? 'font-medium text-wareongo-charcoal' : 'text-wareongo-slate'}`}>{cell}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       );
   }
@@ -81,7 +101,18 @@ const GuideDetail = () => {
     headline: guide.title,
     description: guide.description,
     url: `${SITE_URL}${path}`,
+    mainEntityOfPage: `${SITE_URL}${path}`,
+    datePublished: guide.published ?? guide.updated,
     dateModified: guide.updated,
+    articleSection: 'Warehousing Guides',
+    wordCount: countWords(guide),
+    image: `${SITE_URL}/og-image.jpg`,
+    ...(guide.keywords && guide.keywords.length > 0 ? { keywords: guide.keywords.join(', ') } : {}),
+    // GEO marking: points answer engines at the direct-answer summary block.
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['#guide-summary'],
+    },
     isPartOf: { '@id': WEBSITE_ID },
     author: { '@id': ORG_ID },
     publisher: { '@id': ORG_ID },
@@ -135,8 +166,9 @@ const GuideDetail = () => {
               </p>
             </header>
 
-            {/* Direct-answer summary — the first thing answer engines extract */}
-            <div className="border-l-4 border-wareongo-blue/40 bg-wareongo-blue/5 rounded-r-xl px-4 py-3 mb-8">
+            {/* Direct-answer summary — the first thing answer engines extract.
+                The id is referenced by the Article LD's speakable cssSelector. */}
+            <div id="guide-summary" className="border-l-4 border-wareongo-blue/40 bg-wareongo-blue/5 rounded-r-xl px-4 py-3 mb-8">
               <p className="text-sm font-semibold text-wareongo-charcoal mb-1">In short</p>
               <p className="text-[15px] sm:text-base text-wareongo-slate leading-relaxed">{guide.summary}</p>
             </div>
@@ -145,18 +177,13 @@ const GuideDetail = () => {
               <Block key={i} block={block} />
             ))}
 
+            {/* Accordion answers stay in the DOM when collapsed (see FAQAccordion),
+                so the SSG HTML always matches the FAQPage JSON-LD. */}
             <section aria-labelledby="guide-faq" className="mt-10">
               <h2 id="guide-faq" className="text-xl sm:text-2xl font-bold text-wareongo-blue mb-4">
                 Frequently asked questions
               </h2>
-              <dl className="space-y-5">
-                {guide.faqs.map(({ q, a }, i) => (
-                  <div key={i}>
-                    <dt className="font-semibold text-wareongo-charcoal mb-1">{q}</dt>
-                    <dd className="text-[15px] sm:text-base text-wareongo-slate leading-relaxed">{a}</dd>
-                  </div>
-                ))}
-              </dl>
+              <FAQAccordion items={guide.faqs.map(({ q, a }) => ({ q, a }))} />
             </section>
 
             {relatedGuides.length > 0 && (

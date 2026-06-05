@@ -36,6 +36,10 @@ export interface Guide {
   summary: string;
   /** ISO date — rendered on page and used as Article dateModified. */
   updated: string;
+  /** ISO date first published — defaults to `updated` in the Article LD when absent. */
+  published?: string;
+  /** Keyword phrases for the Article JSON-LD (joined comma-separated). */
+  keywords?: string[];
   blocks: GuideBlock[];
   faqs: GuideFaq[];
   /** Slugs of related guides, rendered as cross-links. */
@@ -52,7 +56,8 @@ export const guides: Guide[] = [
       'PEB (pre-engineered building) vs RCC warehouse compared: construction, clear height, cost, fire safety, and which suits 3PL, e-commerce, manufacturing or cold storage.',
     summary:
       'PEB (pre-engineered building) warehouses are steel structures — faster to build, cheaper per sqft at scale, with higher clear heights and wider column-free spans, making them the default for modern Grade A logistics. RCC (reinforced cement concrete) warehouses are concrete structures — slower and costlier to build but better suited to multi-storey use, heavy point loads, and in-city locations. For most leasing decisions: large single-storey distribution → PEB; small in-city godown or multi-floor use → RCC.',
-    updated: '2026-06-04',
+    published: '2026-06-04',
+    updated: '2026-06-05',
     blocks: [
       {
         kind: 'p',
@@ -132,6 +137,42 @@ export const guides: Guide[] = [
         kind: 'p',
         text: 'In practice the decision is usually made by the micro-market: highway logistics corridors offer PEB, urban godown clusters offer RCC, and the right answer is the building that puts you closest to your demand at a workable rent. Listing pages on WareOnGo are segmented by construction type per city, so you can compare actual PEB and RCC availability side by side before deciding.',
       },
+      { kind: 'h2', text: 'Lifecycle and cost comparison' },
+      {
+        kind: 'p',
+        text: 'Tenants rarely pay construction costs directly, but the economics of the building flow through to rent, maintenance recoveries and exit flexibility. The broad lifecycle picture:',
+      },
+      {
+        kind: 'table',
+        table: {
+          headers: ['Lifecycle factor', 'PEB', 'RCC'],
+          rows: [
+            ['Shell construction cost', 'Lower per sqft for large single-storey boxes', 'Higher for the same covered area'],
+            ['Construction time', '4–6 months', '12–18 months'],
+            ['Design lifespan', '~30–50 years with maintained coatings', '~50+ years'],
+            ['Maintenance pattern', 'Periodic repainting/sheeting care; bolt-torque checks', 'Lower routine upkeep; concrete repairs are lumpier'],
+            ['Modification & expansion', 'Bays added lengthwise; openings cut easily', 'Structural changes are slow and costly'],
+            ['Insurance view', 'Accepted with sprinklers/fire design in place', 'Favourable due to inherent fire rating'],
+            ['Resale/re-let flexibility', 'High in logistics corridors', 'High in urban locations'],
+          ],
+        },
+      },
+      { kind: 'h2', text: 'Which construction suits which industry?' },
+      {
+        kind: 'table',
+        table: {
+          headers: ['Use case', 'Usual pick', 'Why'],
+          rows: [
+            ['3PL / multi-client logistics', 'PEB', 'High cube, flexible racking layouts, dock-led operations'],
+            ['E-commerce fulfilment', 'PEB', 'Mezzanine-friendly spans, 10 m+ clear heights for pick towers'],
+            ['Dark stores / quick commerce', 'RCC', 'In-city locations dominate; small footprints; proximity beats spec'],
+            ['Food & FMCG storage', 'Either', 'Insulated PEB for ambient control, or RCC for thermal mass — FSSAI compliance matters more than frame'],
+            ['Pharma & cold chain', 'RCC shell or insulated PEB', 'Temperature stability and validated envelopes drive the choice'],
+            ['Light manufacturing', 'PEB', 'Wide spans for lines, easy utility routing, faster possession'],
+            ['Heavy machinery / point loads', 'RCC', 'Floor and frame tolerate concentrated structural loads'],
+          ],
+        },
+      },
     ],
     faqs: [
       {
@@ -150,6 +191,22 @@ export const guides: Guide[] = [
         q: 'What clear height do I need for pallet racking?',
         a: 'As a rule of thumb, each pallet racking level needs roughly 1.8–2 m. A 6 m RCC godown fits about 3 levels; a 12 m PEB fits 5–6. If your storage plan is vertical, the PEB premium usually pays for itself in cube utilisation.',
       },
+      {
+        q: 'Can a PEB warehouse be expanded later?',
+        a: 'Yes — expandability is one of PEB\'s structural advantages. Bays can be added lengthwise and wall openings cut with relative ease, which is why build-to-suit campuses are almost always PEB. RCC structures can be extended too, but modifications are slower, costlier and structurally more invasive.',
+      },
+      {
+        q: 'How long does a PEB warehouse last compared to RCC?',
+        a: 'A well-maintained PEB structure is typically designed for 30–50 years, with lifespan hinging on coating and sheeting upkeep. RCC structures generally last 50+ years with less routine maintenance. For a tenant on a 3–9 year lease, building age and maintenance condition matter more than the theoretical lifespan.',
+      },
+    ],
+    keywords: [
+      'PEB warehouse',
+      'RCC warehouse',
+      'PEB vs RCC',
+      'pre-engineered building warehouse India',
+      'warehouse construction types India',
+      'Grade A warehouse construction',
     ],
     related: ['grade-a-warehouse-india', 'warehouse-rent-india-guide'],
   },
@@ -163,7 +220,8 @@ export const guides: Guide[] = [
       'What qualifies as a Grade A warehouse in India: clear height, FM2 flooring, docks, fire systems. Grade A vs Grade B vs Grade C compared, with typical rent impact.',
     summary:
       'A Grade A warehouse in India is a modern, institutionally built facility with roughly 10–12 m clear height, FM2-grade flat flooring rated around 5–7 tonnes/sqm, dock levellers (about one per 10,000 sqft), sprinkler and hydrant fire systems, a 30 m+ truck court, insulated roofing with skylights, and full statutory compliance. Grade B is functional but misses several of these specs; Grade C is basic godown stock. Grade A commands a rent premium of roughly 20–40% over Grade B in the same micro-market, which efficient cube utilisation and lower operating risk often offset.',
-    updated: '2026-06-04',
+    published: '2026-06-04',
+    updated: '2026-06-05',
     blocks: [
       {
         kind: 'p',
@@ -225,6 +283,42 @@ export const guides: Guide[] = [
         kind: 'p',
         text: 'Every listing on WareOnGo is physically inspected and its specifications and compliances validated before it goes live, so grade claims are verified rather than self-declared.',
       },
+      { kind: 'h2', text: 'Where Grade A supply is concentrated in India' },
+      {
+        kind: 'p',
+        text: 'Grade A development clusters along highway corridors at the edges of major consumption markets. If your requirement is Grade A, these are the micro-markets where supply actually exists:',
+      },
+      {
+        kind: 'table',
+        table: {
+          headers: ['Market', 'Key Grade A corridors'],
+          rows: [
+            ['Delhi NCR', 'Farukhnagar, Pataudi Road, Bilaspur Chowk (Gurugram); Kundli–Sonipat; Dadri & Greater Noida'],
+            ['Mumbai MMR', 'Bhiwandi, Panvel, Taloja, JNPT influence zone'],
+            ['Bengaluru', 'Nelamangala, Dabaspete, Hoskote, Bommasandra, Attibele'],
+            ['Chennai', 'Oragadam, Sriperumbudur, Gummidipoondi, Red Hills'],
+            ['Pune', 'Chakan, Ranjangaon, Talegaon'],
+            ['Hyderabad', 'Medchal, Patancheru, Shamshabad, Shadnagar'],
+            ['Kolkata', 'Dankuni, Dhulagarh, NH-16/NH-19 corridors'],
+            ['Ahmedabad', 'Aslali, Changodar, Sanand, Bavla'],
+          ],
+        },
+      },
+      { kind: 'h2', text: 'Site-visit checklist: question by question' },
+      {
+        kind: 'table',
+        table: {
+          headers: ['Spec', 'What to ask / measure', 'Red flag'],
+          rows: [
+            ['Clear height', 'Measure to the lowest obstruction (sprinkler runs, ducts)', 'Height quoted at the ridge, not the obstruction'],
+            ['Flooring', 'Flatness category and load rating in writing', '"Heavy duty" with no number behind it'],
+            ['Docks', 'Leveller count vs your truck mix; apron depth for 40-ft containers', 'Raised platform only, levellers "planned"'],
+            ['Fire systems', 'Sprinkler coverage map, water tank capacity, NOC validity date', 'Hardware present but NOC expired or pending'],
+            ['Power', 'Sanctioned load on the bill, not the transformer rating', 'Sanction application "in process"'],
+            ['Paperwork', 'Building approval, occupancy certificate, land-use conversion', 'Any one of the three missing'],
+          ],
+        },
+      },
     ],
     faqs: [
       {
@@ -243,6 +337,22 @@ export const guides: Guide[] = [
         q: 'What is FM2 flooring?',
         a: 'FM2 is a floor-flatness category (from the UK TR34 standard, widely referenced in India) indicating a high-tolerance flat floor. It matters because high racking and VNA forklifts need flat, jointed concrete to operate safely at height.',
       },
+      {
+        q: 'Is Grade A worth it for small and mid-size businesses?',
+        a: 'Often yes, via shared occupancy: most Grade A parks lease compartments from roughly 20,000 sqft, and 3PLs sub-offer even smaller dedicated areas inside Grade A boxes. SMEs get institutional infrastructure and compliance without leasing an entire building.',
+      },
+      {
+        q: 'Where do I find Grade A warehouses in India?',
+        a: 'Along highway corridors at the edge of major markets — Bhiwandi and Panvel around Mumbai, Farukhnagar and Kundli in NCR, Nelamangala and Hoskote around Bengaluru, Oragadam and Sriperumbudur near Chennai, Chakan near Pune, and Medchal and Shamshabad around Hyderabad.',
+      },
+    ],
+    keywords: [
+      'Grade A warehouse India',
+      'Grade A warehouse meaning',
+      'Grade A vs Grade B warehouse',
+      'warehouse grading India',
+      'FM2 flooring warehouse',
+      'Grade A warehouse specifications',
     ],
     related: ['peb-vs-rcc-warehouse', 'warehouse-rent-india-guide'],
   },
@@ -256,7 +366,8 @@ export const guides: Guide[] = [
       'Every licence and document needed to lease and operate a warehouse in India: fire NOC, building OC, land-use conversion, GST additional place of business, FSSAI, pollution consents, lease registration.',
     summary:
       'To lease and operate a warehouse in India you need to verify the landlord\'s papers (clean title, approved building plan, occupancy certificate, industrial/warehouse land-use, fire NOC) and then obtain your own registrations: GST additional place of business, trade licence, shops & establishments registration, plus sector-specific licences such as FSSAI for food, drug licence for pharma, or pollution-board consents for chemicals. Leases longer than 11 months must be stamped and registered. Missing any one of these can stall operations, invalidate insurance, or block input-tax credit.',
-    updated: '2026-06-04',
+    published: '2026-06-04',
+    updated: '2026-06-05',
     blocks: [
       {
         kind: 'p',
@@ -322,6 +433,39 @@ export const guides: Guide[] = [
           'Schedule fire NOC renewal and licence renewals into your compliance calendar; lapses void insurance positions.',
         ],
       },
+      { kind: 'h2', text: 'Indicative licence timelines and issuing authorities' },
+      {
+        kind: 'p',
+        text: 'Timelines vary by state and by how complete the application is — treat these as planning ranges, not commitments:',
+      },
+      {
+        kind: 'table',
+        table: {
+          headers: ['Registration / licence', 'Issuing authority', 'Indicative timeline'],
+          rows: [
+            ['GST additional place of business', 'GST portal (state jurisdiction)', '1–2 weeks'],
+            ['Fire NOC (new)', 'State fire department', '4–12 weeks'],
+            ['FSSAI licence (storage)', 'FSSAI (state/central by turnover)', '4–8 weeks'],
+            ['Trade licence', 'Municipal corporation', '2–6 weeks'],
+            ['Shops & establishments registration', 'State labour department', '1–3 weeks'],
+            ['SPCB consent to operate', 'State pollution control board', '4–16 weeks'],
+            ['Drug licence (wholesale/storage)', 'State drug control authority', '6–12 weeks'],
+            ['Lease registration', 'Sub-registrar office', 'Same day to 1 week after stamping'],
+          ],
+        },
+      },
+      { kind: 'h2', text: 'Common compliance mistakes' },
+      {
+        kind: 'ul',
+        items: [
+          'Signing before verifying land-use conversion — the single most common deal-breaker, and it invalidates everything downstream.',
+          'Stocking goods before the GST additional-place-of-business amendment is approved, creating e-way bill mismatches that surface at audit.',
+          'Treating an expired fire NOC as a formality — insurers treat it as a coverage gap, not paperwork.',
+          'Leaving the lease unregistered to save stamp duty — in a dispute, a multi-year lease gets read down to month-to-month.',
+          'Assuming the landlord\'s compliances cover tenant operations — they don\'t; the two layers are separate.',
+          'Forgetting renewal calendars — fire NOCs, FSSAI and SPCB consents all lapse, and lapses are usually discovered during claims or inspections.',
+        ],
+      },
       {
         kind: 'p',
         text: 'WareOnGo validates compliance documentation on every listed warehouse during physical verification and coordinates the diligence-to-possession paperwork end-to-end, which is how most transactions on the platform close within a couple of weeks.',
@@ -348,6 +492,22 @@ export const guides: Guide[] = [
         q: 'Who is responsible for compliance — landlord or tenant?',
         a: 'Both, for different layers. The landlord must hold title, building approvals, land-use conversion and the fire NOC; the tenant must obtain GST, trade and sector-specific licences for their operations. A well-drafted lease records each side\'s obligations explicitly.',
       },
+      {
+        q: 'How long does it take to get a fire NOC for a warehouse?',
+        a: 'Typically 4–12 weeks for a new NOC from the state fire department, depending on the state, the building\'s readiness and inspection scheduling. Renewals are faster. Leasing a warehouse that already holds a current fire NOC removes this from your critical path entirely.',
+      },
+      {
+        q: 'Can I start operations while licences are pending?',
+        a: 'Legally risky and usually a false economy. The GST amendment must precede stocking; storing food before FSSAI or regulated goods before SPCB consent exposes you to penalties and seizure. The practical play is sequencing — file everything the day the registered lease exists, and use the fit-out window as licence lead time.',
+      },
+    ],
+    keywords: [
+      'warehouse compliance checklist India',
+      'fire NOC warehouse',
+      'GST additional place of business warehouse',
+      'warehouse licence India',
+      'FSSAI warehouse storage licence',
+      'warehouse lease registration India',
     ],
     related: ['warehouse-rent-india-guide', 'grade-a-warehouse-india'],
   },
@@ -360,8 +520,9 @@ export const guides: Guide[] = [
     description:
       'What determines warehouse rent per sqft in India: micro-market, grade, size, compliance. Typical lease terms — security deposit, lock-in, escalation, CAM — and how to negotiate.',
     summary:
-      'Warehouse rent in India is quoted in rupees per square foot per month and is driven mostly by micro-market, building grade and deal size. Indicative gross ranges in major markets run from the mid-teens per sqft for Grade B stock in supply-heavy corridors like Bhiwandi to the mid-₹30s and above for Grade A in tight urban-adjacent markets. On top of rent, budget for a 3–6 month security deposit, CAM charges, and roughly 5% annual escalation; lock-ins of around 3 years are standard on Grade A leases. Rates vary sharply within a single city, so compare at the micro-market level, never the city average.',
-    updated: '2026-06-04',
+      'Warehouse rent in India is quoted in rupees per square foot per month and is driven mostly by micro-market, building grade and deal size. Supply-heavy corridors like Bhiwandi sit at the value end of the spectrum, while tight urban-adjacent markets like Bengaluru command the premium end. On top of rent, budget for a 3–6 month security deposit, CAM charges, and roughly 5% annual escalation; lock-ins of around 3 years are standard on Grade A leases. Rates vary sharply within a single city, so compare at the micro-market level, never the city average.',
+    published: '2026-06-04',
+    updated: '2026-06-05',
     blocks: [
       {
         kind: 'p',
@@ -416,6 +577,47 @@ export const guides: Guide[] = [
           'Under-construction inventory: committing before completion routinely prices below ready stock — this is how deals close under the prevailing market rate.',
         ],
       },
+      { kind: 'h2', text: 'How major markets compare on Grade A rent' },
+      {
+        kind: 'p',
+        text: 'Relative positioning of the major markets — the spread within a city routinely exceeds the spread between cities, and Grade B stock typically sits 20–40% below Grade A in the same corridor. For current asking rates, check live listings in the specific micro-market:',
+      },
+      {
+        kind: 'table',
+        table: {
+          headers: ['Market', 'Relative Grade A rent positioning'],
+          rows: [
+            ['Bengaluru (Nelamangala, Hoskote, Attibele)', 'Premium end of the major markets — tight urban-adjacent supply'],
+            ['Delhi NCR (Farukhnagar, Kundli, Dadri)', 'Upper band, with a wide spread between corridors'],
+            ['Pune (Chakan, Ranjangaon)', 'Upper-mid band, supported by auto and manufacturing demand'],
+            ['Chennai (Oragadam, Sriperumbudur)', 'Mid band — steady industrial supply keeps rates competitive'],
+            ['Hyderabad (Medchal, Shamshabad)', 'Mid band with a healthy new-supply pipeline'],
+            ['Mumbai MMR (Bhiwandi, Panvel)', 'Widest range — Bhiwandi anchors the value end, Panvel prices higher'],
+            ['Kolkata (Dankuni, Dhulagarh)', 'Value end among the metros'],
+            ['Ahmedabad (Aslali, Sanand, Bavla)', 'Value end — abundant land supply keeps rents soft'],
+          ],
+        },
+      },
+      { kind: 'h2', text: 'Total cost of occupancy — beyond the headline rent' },
+      {
+        kind: 'p',
+        text: 'Compare options on total occupancy cost over the full tenure, not the quoted rate. The components that move the number:',
+      },
+      {
+        kind: 'table',
+        table: {
+          headers: ['Component', 'Typical shape', 'Watch for'],
+          rows: [
+            ['Base rent', '₹/sqft/month on built-up area', 'Carpet vs built-up basis (~10–15% swing)'],
+            ['Escalation', '~5%/yr or 15% every 3 years', 'Compounding over a 9-year term'],
+            ['CAM', 'A few ₹/sqft in organised parks', 'Scope creep — get the inclusion list in writing'],
+            ['Security deposit', '3–6 months, interest-free', 'Opportunity cost of capital locked up'],
+            ['GST on rent', '18%, input credit usually available', 'Cash-flow timing even when creditable'],
+            ['Power & DG', 'Per-unit charges outside rent', 'Sanctioned load adequacy for MHE'],
+            ['Fit-out & reinstatement', 'One-time, amortise over lock-in', 'Exit clauses on racking and electrical works'],
+          ],
+        },
+      },
       {
         kind: 'p',
         text: 'Clients transacting through WareOnGo typically save around 8–12% on commercials, primarily through micro-market comparables and negotiating the full term sheet rather than the headline rent alone. For live availability and current asking rates in a specific city, the per-city listing pages carry verified, inspected inventory with transparent pricing.',
@@ -442,6 +644,22 @@ export const guides: Guide[] = [
         q: 'Is GST charged on warehouse rent?',
         a: 'Yes — commercial property rent attracts GST at the prevailing rate (18%). GST-registered tenants can generally claim input tax credit, subject to their output profile.',
       },
+      {
+        q: 'What are CAM charges in a warehouse lease?',
+        a: 'Common Area Maintenance — the charge for shared infrastructure in organised parks: security, roads, drainage, landscaping, fire-system upkeep and common lighting. Typically a few rupees per sqft per month, billed alongside rent. Always get the scope itemised in writing; CAM definitions vary widely between parks.',
+      },
+      {
+        q: 'Can warehouse rent be negotiated below the quoted rate?',
+        a: 'Usually, yes. Asking rates carry negotiation headroom, and the levers are comparables in the same micro-market, tenure and lock-in trade-offs, escalation structure, rent-free fit-out periods and under-construction inventory. Negotiating the full term sheet rather than the headline number is how WareOnGo clients typically save 8–12% on commercials.',
+      },
+    ],
+    keywords: [
+      'warehouse rent India',
+      'warehouse rent per sqft',
+      'warehouse lease terms India',
+      'warehouse security deposit lock-in',
+      'CAM charges warehouse',
+      'Grade A warehouse rent India',
     ],
     related: ['grade-a-warehouse-india', 'warehouse-compliance-checklist-india'],
   },
