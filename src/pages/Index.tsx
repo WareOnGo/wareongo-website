@@ -80,6 +80,16 @@ const Index = () => {
     description: 'Verified warehouse space for rent across India — transparent listings, expert advisory, faster discovery.',
     publisher: { '@id': ORG_ID },
     inLanguage: 'en-IN',
+    // Sitelinks search box — targets the city filter on /listings, which applies
+    // the query on load (see filtersFromSearchParams in Listings.tsx).
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE_URL}/listings?city={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
   };
 
   return (
