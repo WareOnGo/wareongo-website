@@ -210,6 +210,26 @@ const Footer = () => {
                   About Us
                 </button>
               </li>
+              <li>
+                <Link
+                  to="/casestudies"
+                  title="Real warehouse deals we closed — costs, compliance and timelines"
+                  onClick={() => trackEvent('nav_click', { label: 'Case Studies', destination: '/casestudies', position: 'footer' })}
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  Case Studies
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/guides"
+                  title="Guides on leasing, compliance and warehouse rent in India"
+                  onClick={() => trackEvent('nav_click', { label: 'Guides', destination: '/guides', position: 'footer' })}
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  Warehousing Guides
+                </Link>
+              </li>
             </ul>
           </div>
           
