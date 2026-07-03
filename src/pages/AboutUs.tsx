@@ -247,18 +247,18 @@ const AboutUs = () => {
                   </a>
                   {' · '}
                   <a
-                    href="tel:+918318825478"
-                    onClick={() => trackEvent('contact_click', { contact_type: 'phone', value: '+918318825478', location: 'about_page' })}
+                    href="tel:+917400184225"
+                    onClick={() => trackEvent('contact_click', { contact_type: 'phone', value: '+917400184225', location: 'about_page' })}
                     className="hover:text-white transition-colors"
                   >
-                    (+91) 83188-25478
+                    (+91) 74001-84225
                   </a>
                   {' · '}
                   <a
-                    href="https://wa.me/918318825478"
+                    href="https://wa.me/917400184225"
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() => trackEvent('contact_click', { contact_type: 'whatsapp', value: '+918318825478', location: 'about_page' })}
+                    onClick={() => trackEvent('contact_click', { contact_type: 'whatsapp', value: '+917400184225', location: 'about_page' })}
                     className="hover:text-white transition-colors"
                   >
                     WhatsApp

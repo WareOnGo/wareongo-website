@@ -250,11 +250,11 @@ const Footer = () => {
               <li className="flex items-center">
                 <Phone className="h-5 w-5 mr-2 flex-shrink-0" />
                 <a
-                  href="tel:+918318825478"
-                  onClick={() => trackEvent('contact_click', { contact_type: 'phone', value: '+918318825478', location: 'footer' })}
+                  href="tel:+917400184225"
+                  onClick={() => trackEvent('contact_click', { contact_type: 'phone', value: '+917400184225', location: 'footer' })}
                   className="hover:text-wareongo-ivory transition-colors"
                 >
-                  (+91) 83188-25478
+                  (+91) 74001-84225
                 </a>
               </li>
               <li className="flex items-center">

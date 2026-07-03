@@ -59,7 +59,7 @@ const Index = () => {
     contactPoint: [
       {
         '@type': 'ContactPoint',
-        telephone: '+91-83188-25478',
+        telephone: '+91-74001-84225',
         email: 'sales@wareongo.com',
         contactType: 'sales',
         areaServed: 'IN',

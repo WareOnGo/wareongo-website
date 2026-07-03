@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Phone } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 
-const PHONE = '+918318825478';
+const PHONE = '+917400184225';
 
 const RequestCTASection = () => {
   return (
