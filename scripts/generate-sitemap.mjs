@@ -30,6 +30,7 @@ const GUIDE_SLUGS = [
   'grade-a-warehouse-india',
   'warehouse-compliance-checklist-india',
   'warehouse-rent-india-guide',
+  'carpet-area-vs-built-up-area-warehouse',
 ];
 
 

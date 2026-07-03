@@ -661,7 +661,145 @@ export const guides: Guide[] = [
       'CAM charges warehouse',
       'Grade A warehouse rent India',
     ],
-    related: ['grade-a-warehouse-india', 'warehouse-compliance-checklist-india'],
+    related: ['grade-a-warehouse-india', 'warehouse-compliance-checklist-india', 'carpet-area-vs-built-up-area-warehouse'],
+  },
+
+  // ---------------------------------------------------------------------------
+  {
+    slug: 'carpet-area-vs-built-up-area-warehouse',
+    title: 'Carpet Area vs Built-Up Area in a Warehouse: Which One Are You Paying Rent On?',
+    seoTitle: 'Carpet Area vs Built-Up Area in a Warehouse - Which One You Pay Rent On | WareOnGo',
+    description:
+      'Carpet, built-up and super built-up area in warehouse leases: what each includes, the loading factor, why RERA\'s carpet-area rule doesn\'t apply, and how to compare quotes on effective rate per usable sqft.',
+    summary:
+      'Carpet area is the floor you can actually use. Built-up area adds walls, columns and built-in rooms - this is what most warehouse owners quote. Super built-up area further adds your share of common areas; the addition on top of carpet area is the loading factor. There is no RERA-style rule for warehouse leases, so the "chargeable area" is whatever the lease says it is. Ask which area the ₹/sqft applies to, measure the carpet area yourself, and compare quotes on the effective rate per usable sqft, not the headline rate.',
+    published: '2026-07-03',
+    updated: '2026-07-03',
+    blocks: [
+      {
+        kind: 'p',
+        text: 'Lease a 50,000 sqft warehouse and you will not get 50,000 sqft of storage. Somewhere between the number on the term sheet and the floor you can actually rack, a few thousand square feet quietly disappear. Rent, deposit, and escalation are all calculated on the bigger number. Your racking plan runs on the smaller one.',
+      },
+      {
+        kind: 'p',
+        text: 'This is one of the most common ways occupiers overpay - not because anyone lied, but because nobody asked which area the ₹/sqft applies to. Here\'s how the three areas work, why warehousing is looser about them than housing, and how to compare quotes so a cheaper-looking warehouse doesn\'t turn out to be the expensive one.',
+      },
+      { kind: 'h2', text: 'The three terms used to define warehouse area:' },
+      {
+        kind: 'p',
+        text: 'Carpet area is the floor you can actually use - measured wall to wall, inside the building. If you could lay carpet on it (or in our world, put a pallet on it), it counts. Columns, walls, and built-in rooms don\'t.',
+      },
+      {
+        kind: 'p',
+        text: 'Built-up area is the carpet area plus everything the structure itself takes up: external and internal walls, columns, the office block, toilets, staircases, electrical and pump rooms. This is the area most warehouse owners quote.',
+      },
+      {
+        kind: 'p',
+        text: 'Super built-up area adds your proportionate share of common areas. In a warehousing park, that can mean internal roads, common truck aprons, the security cabin, and shared facilities. The addition on top of carpet area is what the market calls the loading factor.',
+      },
+      {
+        kind: 'p',
+        text: 'Same warehouse, three different numbers. And the rate per sqft means nothing until you know which of the three it\'s multiplied by.',
+      },
+      { kind: 'h2', text: 'Why this matters more in warehousing than in residential real estate:' },
+      {
+        kind: 'p',
+        text: 'Home buyers have protection here: RERA forced residential developers to quote carpet area, with a legal definition behind it. A warehouse lease gets no such rule. It\'s a private contract between you and the owner, and the "chargeable area" is whatever the lease says it is.',
+      },
+      {
+        kind: 'p',
+        text: 'So two quotes can both say ₹20/sqft and cost very different money. One owner quotes on carpet. Another quotes on super built-up with the truck apron factored in. On paper they\'re identical. On your balance sheet they\'re not.',
+      },
+      { kind: 'h2', text: 'How you might get conned by owners, with an example:' },
+      {
+        kind: 'p',
+        text: 'Say you\'re comparing two options for a 3PL operation:',
+      },
+      {
+        kind: 'p',
+        text: 'Warehouse A: quoted 50,000 sqft (built-up) at ₹20/sqft = ₹10,00,000/month. You measure the carpet area: 43,000 sqft. Your effective rate on usable floor is ₹23.3/sqft.',
+      },
+      {
+        kind: 'p',
+        text: 'Warehouse B: quoted 45,000 sqft (carpet) at ₹22/sqft = ₹9,90,000/month. Effective rate on usable floor: ₹22/sqft - for more usable space than Warehouse A.',
+      },
+      {
+        kind: 'p',
+        text: 'Warehouse B looked more expensive. It\'s cheaper, and bigger where it counts.',
+      },
+      {
+        kind: 'p',
+        text: 'The gap doesn\'t stop at rent. The deposit is a multiple of monthly rent, so it\'s inflated by the same factor. Escalation is a percentage of rent, so the gap widens every escalation cycle. Over a five-year lock-in, a few rupees of hidden loading per sqft adds up to a number worth negotiating hard for.',
+      },
+      { kind: 'h2', text: 'Where the area is used up in a warehouse:' },
+      {
+        kind: 'p',
+        text: 'Worth knowing before a site visit, so you can see it with your own eyes:',
+      },
+      {
+        kind: 'ul',
+        items: [
+          'Structure. Walls and columns. This is where construction type matters: a PEB warehouse gives you wide column-free spans of 20-30 metres or more, while an older RCC godown has a forest of columns eating into carpet area and breaking up your racking grid. (More in our PEB vs RCC guide.)',
+          'Built-in rooms. The office block, toilets, guard room, electrical room, pump room. Useful - but ask whether you\'re paying warehouse rates for office space you don\'t need.',
+          'Common-area loading. In parks, your share of roads, aprons, and shared facilities. Ask for the loading percentage in writing and what it covers.',
+        ],
+      },
+      {
+        kind: 'p',
+        text: 'And one thing area never captures: height. A 12-metre Grade A warehouse racked five pallets high holds roughly twice as much as a 6-metre shed with the same footprint. Which is why the sharpest occupiers compare cost per pallet position, not cost per sqft - a warehouse with less carpet area can still be the cheaper building per pallet stored. (More in our Grade A vs B guide.)',
+      },
+      { kind: 'h2', text: 'Five things to do before you sign' },
+      {
+        kind: 'ol',
+        items: [
+          'Ask which area the rate applies to. Carpet, built-up, or super built-up. If the answer is vague, get it clarified and consider that in your evaluation of the property.',
+          'Get "chargeable area" defined in the lease. The number, the basis, and how it was measured. Not just the brochure figure.',
+          'Measure the carpet area yourself. Physically, on site. While you\'re at it, measure clear height at the lowest obstruction - beam, duct, or sprinkler - not the ridge. Space blocked is space you cannot use.',
+          'Recompute every quote on usable area before comparing. Rank options on effective rate, not headline rate.',
+          'Check if the deposit and escalation are calculated on the same defined area. The lease should use one number everywhere.',
+        ],
+      },
+      { kind: 'h2', text: 'How we handle this at WareOnGo' },
+      {
+        kind: 'p',
+        text: 'Every warehouse we share is verified physically for specs before it reaches you - including what the usable floor actually measures. Then we negotiate the full term sheet on that basis: rent, deposit, escalation, lock-in. Our clients typically save 8-12% on commercials.',
+      },
+      {
+        kind: 'p',
+        text: 'Chargeable area itself is negotiable more often than people think. In Hoskote, a client of ours needed exactly 20,000 sqft. The right warehouse was 25,000. We got the owner to charge for only 20,000 - because he trusted us, and because we committed to finding a tenant for the remaining 5,000 sqft. The area on the invoice is a term like any other. It can be negotiated.',
+      },
+      {
+        kind: 'p',
+        text: 'Looking for space? Browse verified options - warehouse for rent in Bangalore, Hyderabad, Mumbai and Bhiwandi - or write to sales@wareongo.com / +91 7400184225. You get a curated shortlist, and you only pay when you close.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'What is the difference between carpet area and built-up area?',
+        a: 'Carpet area is the usable floor measured inside the walls. Built-up area adds the walls, columns, and built-in rooms (office, toilets, staircases). Super built-up area further adds your share of common areas like roads and aprons in a park.',
+      },
+      {
+        q: 'Is warehouse rent charged on carpet area or built-up area?',
+        a: 'There\'s no fixed rule. It\'s whatever the lease defines as chargeable area - most owners quote on built-up or super built-up. Always ask, and get the basis written into the lease.',
+      },
+      {
+        q: 'What is a loading factor?',
+        a: 'The percentage added on top of the carpet area to arrive at the chargeable area. It covers structure and common areas. A higher loading means less usable floor per rupee of rent.',
+      },
+      {
+        q: 'Does RERA\'s carpet-area rule apply to warehouse leases?',
+        a: 'No. RERA\'s carpet-area protections were built for property buyers. A warehouse lease is a private contract - the lease document decides which area you pay on, so the definition has to be negotiated in.',
+      },
+    ],
+    keywords: [
+      'carpet area vs built-up area warehouse',
+      'warehouse carpet area',
+      'super built-up area warehouse',
+      'loading factor warehouse',
+      'chargeable area warehouse lease',
+      'warehouse rent per sqft basis',
+    ],
+    related: ['warehouse-rent-india-guide', 'peb-vs-rcc-warehouse', 'grade-a-warehouse-india'],
   },
 ];
 
