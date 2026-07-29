@@ -4,9 +4,28 @@ import { ArrowLeft, ArrowRight, BookOpen, LayoutGrid } from 'lucide-react';
 import PageHead from '@/components/PageHead';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import FAQAccordion from '@/components/FAQAccordion';
 import StoryView from '@/components/CaseStudyStoryView';
-import { caseStudies, getCaseStudyIndex, type Bullet } from '@/data/caseStudies';
+import { caseStudies, getCaseStudyIndex, type Bullet, type CaseStudy } from '@/data/caseStudies';
 import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
+
+// Plain-text length of the story (summary + sections + FAQs) for the Article wordCount.
+const countWords = (cs: CaseStudy): number => {
+  const texts: string[] = [cs.story.title, cs.story.summary];
+  for (const sec of cs.story.sections) {
+    if (sec.heading) texts.push(sec.heading);
+    if (sec.prose) texts.push(...sec.prose);
+    if (sec.proseAfter) texts.push(...sec.proseAfter);
+    if (sec.bullets) texts.push(...sec.bullets);
+    if (sec.steps) texts.push(...sec.steps.flatMap((s) => [s.title, s.text]));
+    if (sec.table) {
+      if (sec.table.headers) texts.push(...sec.table.headers);
+      texts.push(...sec.table.rows.flatMap((r) => [r.label, r.value]));
+    }
+  }
+  for (const f of cs.story.faqs) texts.push(f.q, f.a);
+  return texts.join(' ').split(/\s+/).filter(Boolean).length;
+};
 
 const BulletList: React.FC<{ items: Bullet[] }> = ({ items }) => (
   <ul className="divide-y divide-wareongo-blue/10">
@@ -44,22 +63,44 @@ const CaseStudyDetail: React.FC = () => {
   const prev = idx > 0 ? caseStudies[idx - 1] : null;
   const next = idx < caseStudies.length - 1 ? caseStudies[idx + 1] : null;
 
-  const csTitle = `${cs.previewTitle.split('—')[0].trim()} | Warehouse Case Study | WareOnGo`;
-  const csDescription = cs.previewSub || `Warehouse case study: ${cs.previewTitle}`;
+  const csTitle = cs.seoTitle;
+  const csDescription = cs.metaDescription;
   const csPath = `/casestudies/${cs.slug}`;
   const articleLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: cs.previewTitle,
+    headline: cs.story.title,
     description: csDescription,
     url: `${SITE_URL}${csPath}`,
+    mainEntityOfPage: `${SITE_URL}${csPath}`,
     datePublished: cs.published,
     dateModified: cs.updated ?? cs.published,
+    articleSection: 'Warehouse Case Studies',
+    wordCount: countWords(cs),
+    image: `${SITE_URL}/og-image.jpg`,
+    keywords: cs.story.tags.join(', '),
+    // GEO marking: points answer engines at the "In short" direct-answer block.
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['#case-study-summary'],
+    },
     isPartOf: { '@id': WEBSITE_ID },
     author: { '@id': ORG_ID },
     publisher: { '@id': ORG_ID },
     inLanguage: 'en',
     isAccessibleForFree: true,
+  };
+
+  // Answers stay in the DOM when the accordion is collapsed (see FAQAccordion),
+  // so the SSG'd HTML always matches this FAQPage JSON-LD.
+  const faqLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: cs.story.faqs.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
   };
 
   return (
@@ -71,6 +112,7 @@ const CaseStudyDetail: React.FC = () => {
         ogType="article"
       >
         <script type="application/ld+json">{JSON.stringify(articleLd)}</script>
+        <script type="application/ld+json">{JSON.stringify(faqLd)}</script>
       </PageHead>
       <Navbar />
 
@@ -216,6 +258,18 @@ const CaseStudyDetail: React.FC = () => {
             </>
           )}
 
+          {/* FAQs — rendered in both views so the FAQPage JSON-LD always matches
+              the page, and kept in the DOM when collapsed. */}
+          <section aria-labelledby="case-study-faq" className="mt-12">
+            <h2
+              id="case-study-faq"
+              className="text-xl sm:text-2xl font-bold text-wareongo-blue mb-4"
+            >
+              FAQs
+            </h2>
+            <FAQAccordion items={cs.story.faqs.map(({ q, a }) => ({ q, a }))} />
+          </section>
+
           {/* Prev / Next navigation */}
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-3">
             {prev ? (
@@ -256,16 +310,23 @@ const CaseStudyDetail: React.FC = () => {
             )}
           </div>
 
-          {/* Internal link to the city this deal happened in */}
-          <div className="mt-6 text-center">
-            <Link
-              to={`/listings/city/${cs.citySlug}`}
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-wareongo-blue hover:underline underline-offset-2"
-            >
-              Explore verified warehouses for rent in {cs.cityLabel}
-              <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
-            </Link>
-          </div>
+          {/* Internal links — city listings, related guides, adjacent case studies */}
+          <section aria-label="Related links" className="mt-8">
+            <h2 className="text-base font-semibold text-wareongo-charcoal mb-3">Internal links</h2>
+            <ul className="space-y-2">
+              {cs.story.internalLinks.map((l) => (
+                <li key={l.to + l.label}>
+                  <Link
+                    to={l.to}
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-wareongo-blue hover:underline underline-offset-2"
+                  >
+                    {l.label}
+                    <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
         </div>
 
         {/* Bottom CTA */}
@@ -275,17 +336,26 @@ const CaseStudyDetail: React.FC = () => {
               The hard ones are<br />
               <span className="italic font-normal text-white/50">our speciality.</span>
             </h2>
-            <p className="text-sm sm:text-base text-white/45 leading-relaxed mb-7 max-w-md mx-auto">
-              Fire compliance. Vastu mandates. Labour unions. Strait of Hormuz delays. Gates that needed demolishing. If your brief is complex — we're exactly who you need.
+            <p className="text-sm sm:text-base text-white/45 leading-relaxed mb-7 max-w-xl mx-auto">
+              {cs.story.cta.text}
             </p>
-            <a
-              href="/request-warehouse"
-              className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-wareongo-ivory text-wareongo-blue text-sm font-semibold hover:bg-white transition-colors border border-wareongo-ivory"
-            >
-              Get My Shortlist in 4 Hours →
-            </a>
+            <div className="flex flex-wrap justify-center gap-3">
+              {cs.story.cta.links.map((l, i) => (
+                <Link
+                  key={l.to}
+                  to={l.to}
+                  className={`inline-flex items-center gap-2 px-7 py-3 rounded-xl text-sm font-semibold transition-colors border ${
+                    i === 0
+                      ? 'bg-wareongo-ivory text-wareongo-blue hover:bg-white border-wareongo-ivory'
+                      : 'text-wareongo-ivory border-wareongo-ivory/40 hover:bg-white/10'
+                  }`}
+                >
+                  {l.label} →
+                </Link>
+              ))}
+            </div>
             <div className="flex flex-wrap justify-center gap-5 mt-6">
-              {['No broker spam', '100% legal checks', '₹2–4/sqft savings', 'Hard markets covered'].map(t => (
+              {['No broker spam', '100% legal checks', '₹2 to 4/sqft savings', 'Hard markets covered'].map(t => (
                 <span key={t} className="text-[11.5px] text-white/35 flex items-center gap-1.5">
                   <span className="text-wareongo-ivory text-[10.5px]">✓</span> {t}
                 </span>

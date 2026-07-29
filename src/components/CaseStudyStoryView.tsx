@@ -1,10 +1,48 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import type { Story } from '@/data/caseStudies';
+import type { Story, StoryTable } from '@/data/caseStudies';
+
+// Two-column key/value table. Renders a header row only when the section
+// supplies one — the "At a Glance" block is deliberately headerless.
+const Table: React.FC<{ table: StoryTable }> = ({ table }) => (
+  <div className="mt-3 overflow-x-auto">
+    <div className="border border-wareongo-blue rounded-xl overflow-hidden">
+      <table className="w-full text-left text-[13px] bg-transparent">
+        {table.headers && (
+          <thead>
+            <tr className="bg-wareongo-blue text-wareongo-ivory text-[10px] font-semibold tracking-[0.12em] uppercase">
+              <th scope="col" className="px-4 py-2.5 w-[42%] border-r border-wareongo-ivory/20">
+                {table.headers[0]}
+              </th>
+              <th scope="col" className="px-4 py-2.5">
+                {table.headers[1]}
+              </th>
+            </tr>
+          </thead>
+        )}
+        <tbody>
+          {table.rows.map((row, ri) => (
+            <tr
+              key={ri}
+              className={`${ri > 0 || table.headers ? 'border-t border-wareongo-blue/20' : ''} ${
+                ri % 2 === 0 ? 'bg-wareongo-blue/[0.03]' : 'bg-transparent'
+              }`}
+            >
+              <th
+                scope="row"
+                className="px-4 py-2.5 w-[42%] align-top font-medium text-wareongo-slate border-r border-wareongo-blue/20"
+              >
+                {row.label}
+              </th>
+              <td className="px-4 py-2.5 align-top text-wareongo-blue font-medium">{row.value}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+);
 
 const StoryView: React.FC<{ story: Story }> = ({ story }) => {
-  const navigate = useNavigate();
-
   return (
     <div className="space-y-6">
       {/* Story Header */}
@@ -13,9 +51,9 @@ const StoryView: React.FC<{ story: Story }> = ({ story }) => {
           <span className="text-[10px] font-medium tracking-[0.18em] uppercase text-white/50 mb-3 block">
             {story.badge}
           </span>
-          <h2 className="text-xl sm:text-2xl md:text-[28px] font-bold text-white leading-[1.15] mb-2">
+          <h1 className="text-xl sm:text-2xl md:text-[28px] font-bold text-white leading-[1.15] mb-2">
             {story.title}
-          </h2>
+          </h1>
           <p className="text-sm text-white/60 leading-relaxed">{story.meta}</p>
         </div>
 
@@ -37,6 +75,16 @@ const StoryView: React.FC<{ story: Story }> = ({ story }) => {
         </div>
       </div>
 
+      {/* Direct-answer summary — the first thing answer engines extract. The id is
+          referenced by the Article LD's speakable cssSelector. */}
+      <div
+        id="case-study-summary"
+        className="border-l-4 border-wareongo-blue/40 bg-wareongo-blue/5 rounded-r-xl px-5 py-4"
+      >
+        <p className="text-sm font-semibold text-wareongo-charcoal mb-1">In short</p>
+        <p className="text-[14.5px] text-wareongo-slate leading-relaxed">{story.summary}</p>
+      </div>
+
       {/* Story Body */}
       <div className="border border-wareongo-blue rounded-2xl bg-transparent overflow-hidden">
         {story.sections.map((sec, si) => (
@@ -53,9 +101,9 @@ const StoryView: React.FC<{ story: Story }> = ({ story }) => {
 
             {/* Heading */}
             {sec.heading && (
-              <h3 className="text-lg sm:text-xl font-bold text-wareongo-blue leading-snug mb-4">
+              <h2 className="text-lg sm:text-xl font-bold text-wareongo-blue leading-snug mb-4">
                 {sec.heading}
-              </h3>
+              </h2>
             )}
 
             {/* Prose paragraphs */}
@@ -68,15 +116,19 @@ const StoryView: React.FC<{ story: Story }> = ({ story }) => {
               </p>
             ))}
 
-            {/* Quote */}
-            {sec.quote && (
-              <div className="border border-wareongo-blue rounded-xl px-5 py-4 my-4 text-sm text-wareongo-slate leading-[1.7] bg-wareongo-blue/[0.03]">
-                <span className="text-wareongo-blue font-bold text-base mr-1">"</span>
-                {sec.quote}
-              </div>
+            {/* Bullet list */}
+            {sec.bullets && (
+              <ul className="mt-1 space-y-2.5">
+                {sec.bullets.map((b, bi) => (
+                  <li key={bi} className="flex items-start gap-2.5 text-sm text-wareongo-slate leading-[1.75]">
+                    <span className="mt-[9px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-wareongo-blue/40" />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
             )}
 
-            {/* Steps */}
+            {/* Numbered steps with a bold lead-in */}
             {sec.steps && (
               <div className="mt-2 divide-y divide-wareongo-blue/20">
                 {sec.steps.map((step, idx) => (
@@ -98,44 +150,14 @@ const StoryView: React.FC<{ story: Story }> = ({ story }) => {
             )}
 
             {/* Table */}
-            {sec.table && (
-              <div className="mt-3 border border-wareongo-blue rounded-xl overflow-hidden">
-                <div className="grid grid-cols-[45%_1fr] bg-wareongo-blue text-wareongo-ivory text-[10px] font-semibold tracking-[0.12em] uppercase">
-                  <div className="px-4 py-2.5 border-r border-wareongo-ivory/20">Metric</div>
-                  <div className="px-4 py-2.5">Result</div>
-                </div>
-                {sec.table.map((row, ri) => (
-                  <div
-                    key={ri}
-                    className={`grid grid-cols-[45%_1fr] text-[13px] border-t border-wareongo-blue/20 ${
-                      ri % 2 === 0 ? 'bg-wareongo-blue/[0.03]' : 'bg-transparent'
-                    }`}
-                  >
-                    <div className="px-4 py-2.5 text-wareongo-slate border-r border-wareongo-blue/20">
-                      {row.metric}
-                    </div>
-                    <div className="px-4 py-2.5 text-wareongo-blue font-medium">{row.result}</div>
-                  </div>
-                ))}
-              </div>
-            )}
+            {sec.table && <Table table={sec.table} />}
 
-            {/* Outcomes */}
-            {sec.outcomes && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
-                {sec.outcomes.map((o, oi) => (
-                  <div
-                    key={oi}
-                    className="border border-wareongo-blue rounded-xl px-4 py-3 bg-transparent hover:bg-wareongo-blue/5 transition-colors"
-                  >
-                    <div className="text-base font-bold text-wareongo-blue leading-tight mb-1">
-                      {o.n}
-                    </div>
-                    <div className="text-[12px] text-wareongo-slate leading-snug">{o.l}</div>
-                  </div>
-                ))}
-              </div>
-            )}
+            {/* Closing prose, after steps or table */}
+            {sec.proseAfter?.map((p, pi) => (
+              <p key={pi} className="text-sm text-wareongo-slate leading-[1.8] mt-4 mb-3 last:mb-0">
+                {p}
+              </p>
+            ))}
           </div>
         ))}
       </div>
