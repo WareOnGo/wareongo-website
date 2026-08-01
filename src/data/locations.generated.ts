@@ -14,19 +14,19 @@ export interface LocationsByType {
 
 export const CITIES: LocationSummary[] = [
   {
-    "canonical": "Ahmedabad",
-    "slug": "ahmedabad",
-    "count": 17
+    "canonical": "Ahilyanagar",
+    "slug": "ahilyanagar",
+    "count": 1
   },
   {
-    "canonical": "Ahmedadbad",
-    "slug": "ahmedadbad",
-    "count": 1
+    "canonical": "Ahmedabad",
+    "slug": "ahmedabad",
+    "count": 44
   },
   {
     "canonical": "Ahmednagar",
     "slug": "ahmednagar",
-    "count": 1
+    "count": 2
   },
   {
     "canonical": "Aligarh",
@@ -36,22 +36,22 @@ export const CITIES: LocationSummary[] = [
   {
     "canonical": "Alipur",
     "slug": "alipur",
-    "count": 3
+    "count": 4
+  },
+  {
+    "canonical": "Aslali",
+    "slug": "aslali",
+    "count": 1
   },
   {
     "canonical": "Aurangabad",
     "slug": "aurangabad",
-    "count": 1
+    "count": 6
   },
   {
     "canonical": "Bamnoli",
     "slug": "bamnoli",
-    "count": 3
-  },
-  {
-    "canonical": "Banglore",
-    "slug": "banglore",
-    "count": 1
+    "count": 7
   },
   {
     "canonical": "Barabanki",
@@ -59,14 +59,49 @@ export const CITIES: LocationSummary[] = [
     "count": 1
   },
   {
+    "canonical": "Belagavi",
+    "slug": "belagavi",
+    "count": 1
+  },
+  {
     "canonical": "Bengaluru",
     "slug": "bengaluru",
-    "count": 414
+    "count": 496
+  },
+  {
+    "canonical": "Bengaluru Rural",
+    "slug": "bengaluru-rural",
+    "count": 4
+  },
+  {
+    "canonical": "Bengaluru Urban",
+    "slug": "bengaluru-urban",
+    "count": 4
+  },
+  {
+    "canonical": "Bhavnagar",
+    "slug": "bhavnagar",
+    "count": 1
+  },
+  {
+    "canonical": "Bhiwadi",
+    "slug": "bhiwadi",
+    "count": 8
+  },
+  {
+    "canonical": "Bhiwandi",
+    "slug": "bhiwandi",
+    "count": 39
+  },
+  {
+    "canonical": "Bhopal",
+    "slug": "bhopal",
+    "count": 6
   },
   {
     "canonical": "Bhubaneswar",
     "slug": "bhubaneswar",
-    "count": 5
+    "count": 10
   },
   {
     "canonical": "Bijwasan",
@@ -74,24 +109,69 @@ export const CITIES: LocationSummary[] = [
     "count": 1
   },
   {
+    "canonical": "Bilaspur",
+    "slug": "bilaspur",
+    "count": 1
+  },
+  {
+    "canonical": "Bilaspur Taurus Road",
+    "slug": "bilaspur-taurus-road",
+    "count": 1
+  },
+  {
     "canonical": "Chennai",
     "slug": "chennai",
-    "count": 15
+    "count": 45
+  },
+  {
+    "canonical": "Coimbatore",
+    "slug": "coimbatore",
+    "count": 13
+  },
+  {
+    "canonical": "Cuttack",
+    "slug": "cuttack",
+    "count": 6
   },
   {
     "canonical": "Dadri",
     "slug": "dadri",
-    "count": 2
+    "count": 9
+  },
+  {
+    "canonical": "Dahej",
+    "slug": "dahej",
+    "count": 3
   },
   {
     "canonical": "Delhi",
     "slug": "delhi",
-    "count": 9
+    "count": 26
+  },
+  {
+    "canonical": "Dharuhera",
+    "slug": "dharuhera",
+    "count": 5
+  },
+  {
+    "canonical": "Dulapally Medchal",
+    "slug": "dulapally-medchal",
+    "count": 1
+  },
+  {
+    "canonical": "Dwarka",
+    "slug": "dwarka",
+    "count": 4
   },
   {
     "canonical": "Ecotech 11",
     "slug": "ecotech-11",
     "count": 1
+  },
+  {
+    "canonical": "Ernakulam",
+    "slug": "ernakulam",
+    "count": 10
   },
   {
     "canonical": "Faridabad",
@@ -101,12 +181,22 @@ export const CITIES: LocationSummary[] = [
   {
     "canonical": "Farukhnagar",
     "slug": "farukhnagar",
+    "count": 29
+  },
+  {
+    "canonical": "Gandhidham",
+    "slug": "gandhidham",
+    "count": 1
+  },
+  {
+    "canonical": "Gandhinagar",
+    "slug": "gandhinagar",
     "count": 1
   },
   {
     "canonical": "Ghaziabad",
     "slug": "ghaziabad",
-    "count": 15
+    "count": 45
   },
   {
     "canonical": "Goa",
@@ -116,47 +206,72 @@ export const CITIES: LocationSummary[] = [
   {
     "canonical": "Greater Noida",
     "slug": "greater-noida",
-    "count": 6
+    "count": 10
   },
   {
     "canonical": "Guntur",
     "slug": "guntur",
-    "count": 5
+    "count": 9
   },
   {
     "canonical": "Gurugram",
     "slug": "gurugram",
-    "count": 30
+    "count": 90
   },
   {
     "canonical": "Guwahati",
     "slug": "guwahati",
-    "count": 6
+    "count": 13
+  },
+  {
+    "canonical": "Gwalior",
+    "slug": "gwalior",
+    "count": 2
+  },
+  {
+    "canonical": "Hapur",
+    "slug": "hapur",
+    "count": 1
+  },
+  {
+    "canonical": "Hoskote",
+    "slug": "hoskote",
+    "count": 2
   },
   {
     "canonical": "Hosur",
     "slug": "hosur",
-    "count": 16
+    "count": 28
   },
   {
     "canonical": "Hubli",
     "slug": "hubli",
-    "count": 5
+    "count": 7
   },
   {
     "canonical": "Hyderabad",
     "slug": "hyderabad",
-    "count": 30
+    "count": 125
   },
   {
     "canonical": "Indore",
     "slug": "indore",
-    "count": 3
+    "count": 22
+  },
+  {
+    "canonical": "Jabalpur",
+    "slug": "jabalpur",
+    "count": 1
   },
   {
     "canonical": "Jaipur",
     "slug": "jaipur",
-    "count": 3
+    "count": 29
+  },
+  {
+    "canonical": "Jalandhar",
+    "slug": "jalandhar",
+    "count": 1
   },
   {
     "canonical": "Jalgaon",
@@ -164,69 +279,154 @@ export const CITIES: LocationSummary[] = [
     "count": 1
   },
   {
+    "canonical": "Jamnagar",
+    "slug": "jamnagar",
+    "count": 1
+  },
+  {
+    "canonical": "Jodhpur",
+    "slug": "jodhpur",
+    "count": 6
+  },
+  {
+    "canonical": "Jorhat",
+    "slug": "jorhat",
+    "count": 2
+  },
+  {
+    "canonical": "Kajipura",
+    "slug": "kajipura",
+    "count": 1
+  },
+  {
+    "canonical": "Kalapatti",
+    "slug": "kalapatti",
+    "count": 1
+  },
+  {
     "canonical": "Kanpur",
     "slug": "kanpur",
-    "count": 2
+    "count": 4
+  },
+  {
+    "canonical": "Karnal",
+    "slug": "karnal",
+    "count": 5
   },
   {
     "canonical": "Kochi",
     "slug": "kochi",
-    "count": 6
+    "count": 10
   },
   {
     "canonical": "Kolar",
     "slug": "kolar",
-    "count": 2
+    "count": 15
   },
   {
     "canonical": "Kolkata",
     "slug": "kolkata",
-    "count": 20
+    "count": 45
   },
   {
-    "canonical": "Kompally",
-    "slug": "kompally",
-    "count": 2
+    "canonical": "Krishnagiri",
+    "slug": "krishnagiri",
+    "count": 1
+  },
+  {
+    "canonical": "Kumta",
+    "slug": "kumta",
+    "count": 1
   },
   {
     "canonical": "Lucknow",
     "slug": "lucknow",
-    "count": 4
+    "count": 61
   },
   {
-    "canonical": "Mangalore",
-    "slug": "mangalore",
+    "canonical": "Ludhiana",
+    "slug": "ludhiana",
+    "count": 8
+  },
+  {
+    "canonical": "Madurai",
+    "slug": "madurai",
+    "count": 1
+  },
+  {
+    "canonical": "Manesar",
+    "slug": "manesar",
+    "count": 2
+  },
+  {
+    "canonical": "Mangaluru",
+    "slug": "mangaluru",
+    "count": 19
+  },
+  {
+    "canonical": "Mapusa",
+    "slug": "mapusa",
+    "count": 2
+  },
+  {
+    "canonical": "Margao",
+    "slug": "margao",
+    "count": 1
+  },
+  {
+    "canonical": "Medchal",
+    "slug": "medchal",
+    "count": 1
+  },
+  {
+    "canonical": "Mehsana",
+    "slug": "mehsana",
+    "count": 1
+  },
+  {
+    "canonical": "Morbi",
+    "slug": "morbi",
     "count": 1
   },
   {
     "canonical": "Mumbai",
     "slug": "mumbai",
-    "count": 1
+    "count": 14
   },
   {
     "canonical": "Mundka",
     "slug": "mundka",
-    "count": 1
+    "count": 7
   },
   {
-    "canonical": "Nacharam",
-    "slug": "nacharam",
-    "count": 1
+    "canonical": "Mundra",
+    "slug": "mundra",
+    "count": 2
+  },
+  {
+    "canonical": "Mysuru",
+    "slug": "mysuru",
+    "count": 9
   },
   {
     "canonical": "Nadiad",
     "slug": "nadiad",
-    "count": 2
+    "count": 1
   },
   {
     "canonical": "Nagpur",
     "slug": "nagpur",
-    "count": 5
+    "count": 10
   },
   {
-    "canonical": "Nashik",
-    "slug": "nashik",
+    "canonical": "Narmadapuram",
+    "slug": "narmadapuram",
     "count": 1
+  },
+  {
+    "canonical": "Navi Mumbai",
+    "slug": "navi-mumbai",
+    "count": 31
   },
   {
     "canonical": "Nellore",
@@ -234,9 +434,24 @@ export const CITIES: LocationSummary[] = [
     "count": 1
   },
   {
+    "canonical": "New Delhi",
+    "slug": "new-delhi",
+    "count": 6
+  },
+  {
     "canonical": "Noida",
     "slug": "noida",
-    "count": 8
+    "count": 11
+  },
+  {
+    "canonical": "Noida Extension",
+    "slug": "noida-extension",
+    "count": 1
+  },
+  {
+    "canonical": "North Goa",
+    "slug": "north-goa",
+    "count": 9
   },
   {
     "canonical": "Okhla",
@@ -244,29 +459,54 @@ export const CITIES: LocationSummary[] = [
     "count": 2
   },
   {
+    "canonical": "Palwal",
+    "slug": "palwal",
+    "count": 2
+  },
+  {
+    "canonical": "Panvel",
+    "slug": "panvel",
+    "count": 1
+  },
+  {
     "canonical": "Patna",
     "slug": "patna",
-    "count": 9
+    "count": 38
+  },
+  {
+    "canonical": "Pattanam",
+    "slug": "pattanam",
+    "count": 1
+  },
+  {
+    "canonical": "Puducherry",
+    "slug": "puducherry",
+    "count": 5
   },
   {
     "canonical": "Pune",
     "slug": "pune",
-    "count": 1
+    "count": 41
   },
   {
     "canonical": "Raipur",
     "slug": "raipur",
-    "count": 2
+    "count": 18
   },
   {
     "canonical": "Rajkot",
     "slug": "rajkot",
-    "count": 6
+    "count": 27
   },
   {
-    "canonical": "Rajoukri",
-    "slug": "rajoukri",
-    "count": 1
+    "canonical": "Rajokri",
+    "slug": "rajokri",
+    "count": 2
+  },
+  {
+    "canonical": "Rajpura",
+    "slug": "rajpura",
+    "count": 2
   },
   {
     "canonical": "Ramnagara",
@@ -274,13 +514,48 @@ export const CITIES: LocationSummary[] = [
     "count": 1
   },
   {
-    "canonical": "Salem",
-    "slug": "salem",
-    "count": 4
+    "canonical": "Ranchi",
+    "slug": "ranchi",
+    "count": 7
   },
   {
-    "canonical": "Sector 77, Gurugram",
-    "slug": "sector-77-gurugram",
+    "canonical": "Rewari",
+    "slug": "rewari",
+    "count": 1
+  },
+  {
+    "canonical": "Rudrapur",
+    "slug": "rudrapur",
+    "count": 2
+  },
+  {
+    "canonical": "Ruiya",
+    "slug": "ruiya",
+    "count": 1
+  },
+  {
+    "canonical": "Sagar",
+    "slug": "sagar",
+    "count": 1
+  },
+  {
+    "canonical": "Salem",
+    "slug": "salem",
+    "count": 3
+  },
+  {
+    "canonical": "Sampla",
+    "slug": "sampla",
+    "count": 1
+  },
+  {
+    "canonical": "Sanand",
+    "slug": "sanand",
+    "count": 1
+  },
+  {
+    "canonical": "Satna",
+    "slug": "satna",
     "count": 1
   },
   {
@@ -289,44 +564,89 @@ export const CITIES: LocationSummary[] = [
     "count": 1
   },
   {
-    "canonical": "Shamshabad",
-    "slug": "shamshabad",
+    "canonical": "Silvassa",
+    "slug": "silvassa",
     "count": 1
   },
   {
     "canonical": "Solapur",
     "slug": "solapur",
-    "count": 2
+    "count": 4
+  },
+  {
+    "canonical": "Sonipat",
+    "slug": "sonipat",
+    "count": 7
   },
   {
     "canonical": "Surat",
     "slug": "surat",
-    "count": 6
+    "count": 15
+  },
+  {
+    "canonical": "Tepla",
+    "slug": "tepla",
+    "count": 4
   },
   {
     "canonical": "Thane",
     "slug": "thane",
+    "count": 6
+  },
+  {
+    "canonical": "Tirupati",
+    "slug": "tirupati",
+    "count": 3
+  },
+  {
+    "canonical": "Tumakuru",
+    "slug": "tumakuru",
+    "count": 1
+  },
+  {
+    "canonical": "Tumkur",
+    "slug": "tumkur",
+    "count": 2
+  },
+  {
+    "canonical": "Uncha Majra",
+    "slug": "uncha-majra",
+    "count": 1
+  },
+  {
+    "canonical": "Vadodara",
+    "slug": "vadodara",
+    "count": 3
+  },
+  {
+    "canonical": "Valsad",
+    "slug": "valsad",
     "count": 3
   },
   {
     "canonical": "Varanasi",
     "slug": "varanasi",
-    "count": 1
+    "count": 3
   },
   {
     "canonical": "Vijayawada",
     "slug": "vijayawada",
-    "count": 3
+    "count": 49
   },
   {
-    "canonical": "Vishakapatnam",
-    "slug": "vishakapatnam",
+    "canonical": "Villupuram",
+    "slug": "villupuram",
     "count": 1
   },
   {
-    "canonical": "Vizag",
-    "slug": "vizag",
-    "count": 3
+    "canonical": "Visakhapatnam",
+    "slug": "visakhapatnam",
+    "count": 16
+  },
+  {
+    "canonical": "Yelahanka",
+    "slug": "yelahanka",
+    "count": 2
   }
 ];
 
@@ -334,107 +654,117 @@ export const STATES: LocationSummary[] = [
   {
     "canonical": "Andhra Pradesh",
     "slug": "andhra-pradesh",
-    "count": 13
+    "count": 78
   },
   {
     "canonical": "Assam",
     "slug": "assam",
-    "count": 6
+    "count": 15
   },
   {
     "canonical": "Bihar",
     "slug": "bihar",
-    "count": 9
-  },
-  {
-    "canonical": "Chattisgarh",
-    "slug": "chattisgarh",
-    "count": 1
+    "count": 38
   },
   {
     "canonical": "Chhattisgarh",
     "slug": "chhattisgarh",
+    "count": 18
+  },
+  {
+    "canonical": "Dadra And Nagar Haveli",
+    "slug": "dadra-and-nagar-haveli",
     "count": 1
   },
   {
     "canonical": "Delhi",
     "slug": "delhi",
-    "count": 20
+    "count": 59
   },
   {
     "canonical": "Goa",
     "slug": "goa",
-    "count": 2
+    "count": 14
   },
   {
     "canonical": "Gujarat",
     "slug": "gujarat",
-    "count": 32
+    "count": 107
   },
   {
     "canonical": "Haryana",
     "slug": "haryana",
-    "count": 35
+    "count": 148
   },
   {
-    "canonical": "Karnatak",
-    "slug": "karnatak",
-    "count": 2
+    "canonical": "Jharkhand",
+    "slug": "jharkhand",
+    "count": 7
   },
   {
     "canonical": "Karnataka",
     "slug": "karnataka",
-    "count": 422
+    "count": 564
   },
   {
     "canonical": "Kerala",
     "slug": "kerala",
-    "count": 6
+    "count": 20
   },
   {
     "canonical": "Madhya Pradesh",
     "slug": "madhya-pradesh",
-    "count": 3
+    "count": 34
   },
   {
     "canonical": "Maharashtra",
     "slug": "maharashtra",
-    "count": 16
+    "count": 156
   },
   {
     "canonical": "Odisha",
     "slug": "odisha",
+    "count": 16
+  },
+  {
+    "canonical": "Puducherry",
+    "slug": "puducherry",
     "count": 5
+  },
+  {
+    "canonical": "Punjab",
+    "slug": "punjab",
+    "count": 15
   },
   {
     "canonical": "Rajasthan",
     "slug": "rajasthan",
-    "count": 3
+    "count": 43
   },
   {
     "canonical": "Tamil Nadu",
     "slug": "tamil-nadu",
-    "count": 31
-  },
-  {
-    "canonical": "Tamilnadu",
-    "slug": "tamilnadu",
-    "count": 4
+    "count": 94
   },
   {
     "canonical": "Telangana",
     "slug": "telangana",
-    "count": 34
+    "count": 127
   },
   {
     "canonical": "Uttar Pradesh",
     "slug": "uttar-pradesh",
-    "count": 42
+    "count": 149
+  },
+  {
+    "canonical": "Uttarakhand",
+    "slug": "uttarakhand",
+    "count": 2
   },
   {
     "canonical": "West Bengal",
     "slug": "west-bengal",
-    "count": 20
+    "count": 46
   }
 ];
 
@@ -443,21 +773,31 @@ export const CITIES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Ahmedabad",
       "slug": "ahmedabad",
-      "count": 9
-    },
-    {
-      "canonical": "Ahmedadbad",
-      "slug": "ahmedadbad",
-      "count": 1
+      "count": 28
     },
     {
       "canonical": "Ahmednagar",
       "slug": "ahmednagar",
-      "count": 1
+      "count": 2
     },
     {
       "canonical": "Alipur",
       "slug": "alipur",
+      "count": 4
+    },
+    {
+      "canonical": "Aslali",
+      "slug": "aslali",
+      "count": 1
+    },
+    {
+      "canonical": "Aurangabad",
+      "slug": "aurangabad",
+      "count": 6
+    },
+    {
+      "canonical": "Bamnoli",
+      "slug": "bamnoli",
       "count": 3
     },
     {
@@ -466,29 +806,94 @@ export const CITIES_BY_TYPE: LocationsByType = {
       "count": 1
     },
     {
+      "canonical": "Belagavi",
+      "slug": "belagavi",
+      "count": 1
+    },
+    {
       "canonical": "Bengaluru",
       "slug": "bengaluru",
-      "count": 278
+      "count": 311
+    },
+    {
+      "canonical": "Bengaluru Rural",
+      "slug": "bengaluru-rural",
+      "count": 3
+    },
+    {
+      "canonical": "Bengaluru Urban",
+      "slug": "bengaluru-urban",
+      "count": 2
+    },
+    {
+      "canonical": "Bhiwadi",
+      "slug": "bhiwadi",
+      "count": 8
+    },
+    {
+      "canonical": "Bhiwandi",
+      "slug": "bhiwandi",
+      "count": 30
+    },
+    {
+      "canonical": "Bhopal",
+      "slug": "bhopal",
+      "count": 6
     },
     {
       "canonical": "Bhubaneswar",
       "slug": "bhubaneswar",
-      "count": 1
+      "count": 3
     },
     {
       "canonical": "Chennai",
       "slug": "chennai",
-      "count": 7
+      "count": 27
+    },
+    {
+      "canonical": "Coimbatore",
+      "slug": "coimbatore",
+      "count": 10
+    },
+    {
+      "canonical": "Cuttack",
+      "slug": "cuttack",
+      "count": 6
     },
     {
       "canonical": "Dadri",
       "slug": "dadri",
-      "count": 2
+      "count": 9
+    },
+    {
+      "canonical": "Dahej",
+      "slug": "dahej",
+      "count": 3
     },
     {
       "canonical": "Delhi",
       "slug": "delhi",
+      "count": 9
+    },
+    {
+      "canonical": "Dharuhera",
+      "slug": "dharuhera",
+      "count": 4
+    },
+    {
+      "canonical": "Dulapally Medchal",
+      "slug": "dulapally-medchal",
+      "count": 1
+    },
+    {
+      "canonical": "Dwarka",
+      "slug": "dwarka",
       "count": 3
+    },
+    {
+      "canonical": "Ernakulam",
+      "slug": "ernakulam",
+      "count": 8
     },
     {
       "canonical": "Faridabad",
@@ -496,9 +901,14 @@ export const CITIES_BY_TYPE: LocationsByType = {
       "count": 1
     },
     {
+      "canonical": "Farukhnagar",
+      "slug": "farukhnagar",
+      "count": 27
+    },
+    {
       "canonical": "Ghaziabad",
       "slug": "ghaziabad",
-      "count": 7
+      "count": 37
     },
     {
       "canonical": "Goa",
@@ -508,27 +918,42 @@ export const CITIES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Greater Noida",
       "slug": "greater-noida",
-      "count": 4
+      "count": 8
     },
     {
       "canonical": "Guntur",
       "slug": "guntur",
-      "count": 3
+      "count": 5
     },
     {
       "canonical": "Gurugram",
       "slug": "gurugram",
-      "count": 25
+      "count": 75
     },
     {
       "canonical": "Guwahati",
       "slug": "guwahati",
-      "count": 6
+      "count": 13
+    },
+    {
+      "canonical": "Gwalior",
+      "slug": "gwalior",
+      "count": 2
+    },
+    {
+      "canonical": "Hapur",
+      "slug": "hapur",
+      "count": 1
+    },
+    {
+      "canonical": "Hoskote",
+      "slug": "hoskote",
+      "count": 1
     },
     {
       "canonical": "Hosur",
       "slug": "hosur",
-      "count": 13
+      "count": 20
     },
     {
       "canonical": "Hubli",
@@ -538,17 +963,22 @@ export const CITIES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Hyderabad",
       "slug": "hyderabad",
-      "count": 14
+      "count": 110
     },
     {
       "canonical": "Indore",
       "slug": "indore",
-      "count": 2
+      "count": 15
+    },
+    {
+      "canonical": "Jabalpur",
+      "slug": "jabalpur",
+      "count": 1
     },
     {
       "canonical": "Jaipur",
       "slug": "jaipur",
-      "count": 3
+      "count": 26
     },
     {
       "canonical": "Jalgaon",
@@ -556,49 +986,109 @@ export const CITIES_BY_TYPE: LocationsByType = {
       "count": 1
     },
     {
+      "canonical": "Jodhpur",
+      "slug": "jodhpur",
+      "count": 6
+    },
+    {
+      "canonical": "Jorhat",
+      "slug": "jorhat",
+      "count": 2
+    },
+    {
+      "canonical": "Kajipura",
+      "slug": "kajipura",
+      "count": 1
+    },
+    {
+      "canonical": "Kalapatti",
+      "slug": "kalapatti",
+      "count": 1
+    },
+    {
       "canonical": "Kanpur",
       "slug": "kanpur",
-      "count": 1
+      "count": 3
+    },
+    {
+      "canonical": "Karnal",
+      "slug": "karnal",
+      "count": 3
     },
     {
       "canonical": "Kochi",
       "slug": "kochi",
-      "count": 6
+      "count": 10
     },
     {
       "canonical": "Kolar",
       "slug": "kolar",
-      "count": 2
+      "count": 9
     },
     {
       "canonical": "Kolkata",
       "slug": "kolkata",
-      "count": 15
+      "count": 38
     },
     {
       "canonical": "Lucknow",
       "slug": "lucknow",
+      "count": 46
+    },
+    {
+      "canonical": "Ludhiana",
+      "slug": "ludhiana",
+      "count": 8
+    },
+    {
+      "canonical": "Manesar",
+      "slug": "manesar",
+      "count": 2
+    },
+    {
+      "canonical": "Mangaluru",
+      "slug": "mangaluru",
+      "count": 12
+    },
+    {
+      "canonical": "Medchal",
+      "slug": "medchal",
       "count": 1
     },
     {
       "canonical": "Mumbai",
       "slug": "mumbai",
-      "count": 1
+      "count": 2
     },
     {
-      "canonical": "Nacharam",
-      "slug": "nacharam",
-      "count": 1
+      "canonical": "Mundka",
+      "slug": "mundka",
+      "count": 3
     },
     {
-      "canonical": "Nadiad",
-      "slug": "nadiad",
-      "count": 1
+      "canonical": "Mundra",
+      "slug": "mundra",
+      "count": 2
+    },
+    {
+      "canonical": "Mysuru",
+      "slug": "mysuru",
+      "count": 6
     },
     {
       "canonical": "Nagpur",
       "slug": "nagpur",
-      "count": 2
+      "count": 6
+    },
+    {
+      "canonical": "Narmadapuram",
+      "slug": "narmadapuram",
+      "count": 1
+    },
+    {
+      "canonical": "Navi Mumbai",
+      "slug": "navi-mumbai",
+      "count": 19
     },
     {
       "canonical": "Nellore",
@@ -608,12 +1098,374 @@ export const CITIES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Noida",
       "slug": "noida",
-      "count": 7
+      "count": 9
+    },
+    {
+      "canonical": "Noida Extension",
+      "slug": "noida-extension",
+      "count": 1
+    },
+    {
+      "canonical": "Palwal",
+      "slug": "palwal",
+      "count": 2
+    },
+    {
+      "canonical": "Panvel",
+      "slug": "panvel",
+      "count": 1
     },
     {
       "canonical": "Patna",
       "slug": "patna",
+      "count": 27
+    },
+    {
+      "canonical": "Pattanam",
+      "slug": "pattanam",
+      "count": 1
+    },
+    {
+      "canonical": "Pune",
+      "slug": "pune",
+      "count": 28
+    },
+    {
+      "canonical": "Raipur",
+      "slug": "raipur",
+      "count": 16
+    },
+    {
+      "canonical": "Rajkot",
+      "slug": "rajkot",
+      "count": 11
+    },
+    {
+      "canonical": "Rajokri",
+      "slug": "rajokri",
+      "count": 2
+    },
+    {
+      "canonical": "Rajpura",
+      "slug": "rajpura",
+      "count": 2
+    },
+    {
+      "canonical": "Ramnagara",
+      "slug": "ramnagara",
+      "count": 1
+    },
+    {
+      "canonical": "Ranchi",
+      "slug": "ranchi",
+      "count": 7
+    },
+    {
+      "canonical": "Rewari",
+      "slug": "rewari",
+      "count": 1
+    },
+    {
+      "canonical": "Rudrapur",
+      "slug": "rudrapur",
+      "count": 1
+    },
+    {
+      "canonical": "Ruiya",
+      "slug": "ruiya",
+      "count": 1
+    },
+    {
+      "canonical": "Sagar",
+      "slug": "sagar",
+      "count": 1
+    },
+    {
+      "canonical": "Salem",
+      "slug": "salem",
+      "count": 2
+    },
+    {
+      "canonical": "Sampla",
+      "slug": "sampla",
+      "count": 1
+    },
+    {
+      "canonical": "Sanand",
+      "slug": "sanand",
+      "count": 1
+    },
+    {
+      "canonical": "Satna",
+      "slug": "satna",
+      "count": 1
+    },
+    {
+      "canonical": "Sector 78, Badshahpur",
+      "slug": "sector-78-badshahpur",
+      "count": 1
+    },
+    {
+      "canonical": "Solapur",
+      "slug": "solapur",
+      "count": 4
+    },
+    {
+      "canonical": "Sonipat",
+      "slug": "sonipat",
+      "count": 7
+    },
+    {
+      "canonical": "Surat",
+      "slug": "surat",
+      "count": 5
+    },
+    {
+      "canonical": "Tepla",
+      "slug": "tepla",
+      "count": 4
+    },
+    {
+      "canonical": "Thane",
+      "slug": "thane",
+      "count": 6
+    },
+    {
+      "canonical": "Tirupati",
+      "slug": "tirupati",
+      "count": 1
+    },
+    {
+      "canonical": "Tumakuru",
+      "slug": "tumakuru",
+      "count": 1
+    },
+    {
+      "canonical": "Tumkur",
+      "slug": "tumkur",
+      "count": 2
+    },
+    {
+      "canonical": "Uncha Majra",
+      "slug": "uncha-majra",
+      "count": 1
+    },
+    {
+      "canonical": "Vadodara",
+      "slug": "vadodara",
+      "count": 2
+    },
+    {
+      "canonical": "Valsad",
+      "slug": "valsad",
+      "count": 3
+    },
+    {
+      "canonical": "Varanasi",
+      "slug": "varanasi",
+      "count": 3
+    },
+    {
+      "canonical": "Vijayawada",
+      "slug": "vijayawada",
+      "count": 16
+    },
+    {
+      "canonical": "Visakhapatnam",
+      "slug": "visakhapatnam",
       "count": 8
+    }
+  ],
+  "RCC": [
+    {
+      "canonical": "Ahmedabad",
+      "slug": "ahmedabad",
+      "count": 5
+    },
+    {
+      "canonical": "Aligarh",
+      "slug": "aligarh",
+      "count": 2
+    },
+    {
+      "canonical": "Bamnoli",
+      "slug": "bamnoli",
+      "count": 2
+    },
+    {
+      "canonical": "Bengaluru",
+      "slug": "bengaluru",
+      "count": 128
+    },
+    {
+      "canonical": "Bengaluru Urban",
+      "slug": "bengaluru-urban",
+      "count": 2
+    },
+    {
+      "canonical": "Bhiwandi",
+      "slug": "bhiwandi",
+      "count": 7
+    },
+    {
+      "canonical": "Bhubaneswar",
+      "slug": "bhubaneswar",
+      "count": 2
+    },
+    {
+      "canonical": "Chennai",
+      "slug": "chennai",
+      "count": 3
+    },
+    {
+      "canonical": "Coimbatore",
+      "slug": "coimbatore",
+      "count": 2
+    },
+    {
+      "canonical": "Delhi",
+      "slug": "delhi",
+      "count": 10
+    },
+    {
+      "canonical": "Faridabad",
+      "slug": "faridabad",
+      "count": 1
+    },
+    {
+      "canonical": "Ghaziabad",
+      "slug": "ghaziabad",
+      "count": 4
+    },
+    {
+      "canonical": "Goa",
+      "slug": "goa",
+      "count": 1
+    },
+    {
+      "canonical": "Guntur",
+      "slug": "guntur",
+      "count": 1
+    },
+    {
+      "canonical": "Gurugram",
+      "slug": "gurugram",
+      "count": 12
+    },
+    {
+      "canonical": "Hosur",
+      "slug": "hosur",
+      "count": 1
+    },
+    {
+      "canonical": "Hubli",
+      "slug": "hubli",
+      "count": 2
+    },
+    {
+      "canonical": "Hyderabad",
+      "slug": "hyderabad",
+      "count": 7
+    },
+    {
+      "canonical": "Indore",
+      "slug": "indore",
+      "count": 4
+    },
+    {
+      "canonical": "Jaipur",
+      "slug": "jaipur",
+      "count": 3
+    },
+    {
+      "canonical": "Jalandhar",
+      "slug": "jalandhar",
+      "count": 1
+    },
+    {
+      "canonical": "Kanpur",
+      "slug": "kanpur",
+      "count": 1
+    },
+    {
+      "canonical": "Karnal",
+      "slug": "karnal",
+      "count": 2
+    },
+    {
+      "canonical": "Kolar",
+      "slug": "kolar",
+      "count": 2
+    },
+    {
+      "canonical": "Kolkata",
+      "slug": "kolkata",
+      "count": 3
+    },
+    {
+      "canonical": "Krishnagiri",
+      "slug": "krishnagiri",
+      "count": 1
+    },
+    {
+      "canonical": "Kumta",
+      "slug": "kumta",
+      "count": 1
+    },
+    {
+      "canonical": "Lucknow",
+      "slug": "lucknow",
+      "count": 10
+    },
+    {
+      "canonical": "Madurai",
+      "slug": "madurai",
+      "count": 1
+    },
+    {
+      "canonical": "Mangaluru",
+      "slug": "mangaluru",
+      "count": 3
+    },
+    {
+      "canonical": "Mapusa",
+      "slug": "mapusa",
+      "count": 2
+    },
+    {
+      "canonical": "Mumbai",
+      "slug": "mumbai",
+      "count": 6
+    },
+    {
+      "canonical": "Navi Mumbai",
+      "slug": "navi-mumbai",
+      "count": 4
+    },
+    {
+      "canonical": "Noida",
+      "slug": "noida",
+      "count": 2
+    },
+    {
+      "canonical": "North Goa",
+      "slug": "north-goa",
+      "count": 9
+    },
+    {
+      "canonical": "Okhla",
+      "slug": "okhla",
+      "count": 2
+    },
+    {
+      "canonical": "Patna",
+      "slug": "patna",
+      "count": 3
+    },
+    {
+      "canonical": "Puducherry",
+      "slug": "puducherry",
+      "count": 5
     },
     {
       "canonical": "Pune",
@@ -628,219 +1480,32 @@ export const CITIES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Rajkot",
       "slug": "rajkot",
-      "count": 4
-    },
-    {
-      "canonical": "Rajoukri",
-      "slug": "rajoukri",
-      "count": 1
-    },
-    {
-      "canonical": "Ramnagara",
-      "slug": "ramnagara",
-      "count": 1
-    },
-    {
-      "canonical": "Salem",
-      "slug": "salem",
-      "count": 2
-    },
-    {
-      "canonical": "Sector 77, Gurugram",
-      "slug": "sector-77-gurugram",
-      "count": 1
-    },
-    {
-      "canonical": "Sector 78, Badshahpur",
-      "slug": "sector-78-badshahpur",
-      "count": 1
-    },
-    {
-      "canonical": "Shamshabad",
-      "slug": "shamshabad",
-      "count": 1
-    },
-    {
-      "canonical": "Solapur",
-      "slug": "solapur",
-      "count": 2
+      "count": 12
     },
     {
       "canonical": "Surat",
       "slug": "surat",
+      "count": 6
+    },
+    {
+      "canonical": "Tirupati",
+      "slug": "tirupati",
       "count": 2
-    },
-    {
-      "canonical": "Thane",
-      "slug": "thane",
-      "count": 3
-    },
-    {
-      "canonical": "Varanasi",
-      "slug": "varanasi",
-      "count": 1
     },
     {
       "canonical": "Vijayawada",
       "slug": "vijayawada",
+      "count": 21
+    },
+    {
+      "canonical": "Visakhapatnam",
+      "slug": "visakhapatnam",
+      "count": 1
+    },
+    {
+      "canonical": "Yelahanka",
+      "slug": "yelahanka",
       "count": 2
-    },
-    {
-      "canonical": "Vishakapatnam",
-      "slug": "vishakapatnam",
-      "count": 1
-    },
-    {
-      "canonical": "Vizag",
-      "slug": "vizag",
-      "count": 2
-    }
-  ],
-  "RCC": [
-    {
-      "canonical": "Aligarh",
-      "slug": "aligarh",
-      "count": 2
-    },
-    {
-      "canonical": "Aurangabad",
-      "slug": "aurangabad",
-      "count": 1
-    },
-    {
-      "canonical": "Bamnoli",
-      "slug": "bamnoli",
-      "count": 1
-    },
-    {
-      "canonical": "Banglore",
-      "slug": "banglore",
-      "count": 1
-    },
-    {
-      "canonical": "Bengaluru",
-      "slug": "bengaluru",
-      "count": 53
-    },
-    {
-      "canonical": "Chennai",
-      "slug": "chennai",
-      "count": 2
-    },
-    {
-      "canonical": "Delhi",
-      "slug": "delhi",
-      "count": 3
-    },
-    {
-      "canonical": "Faridabad",
-      "slug": "faridabad",
-      "count": 1
-    },
-    {
-      "canonical": "Ghaziabad",
-      "slug": "ghaziabad",
-      "count": 4
-    },
-    {
-      "canonical": "Goa",
-      "slug": "goa",
-      "count": 1
-    },
-    {
-      "canonical": "Guntur",
-      "slug": "guntur",
-      "count": 1
-    },
-    {
-      "canonical": "Gurugram",
-      "slug": "gurugram",
-      "count": 3
-    },
-    {
-      "canonical": "Hubli",
-      "slug": "hubli",
-      "count": 1
-    },
-    {
-      "canonical": "Hyderabad",
-      "slug": "hyderabad",
-      "count": 10
-    },
-    {
-      "canonical": "Indore",
-      "slug": "indore",
-      "count": 1
-    },
-    {
-      "canonical": "Kanpur",
-      "slug": "kanpur",
-      "count": 1
-    },
-    {
-      "canonical": "Kolkata",
-      "slug": "kolkata",
-      "count": 2
-    },
-    {
-      "canonical": "Kompally",
-      "slug": "kompally",
-      "count": 2
-    },
-    {
-      "canonical": "Lucknow",
-      "slug": "lucknow",
-      "count": 2
-    },
-    {
-      "canonical": "Mangalore",
-      "slug": "mangalore",
-      "count": 1
-    },
-    {
-      "canonical": "Nadiad",
-      "slug": "nadiad",
-      "count": 1
-    },
-    {
-      "canonical": "Nashik",
-      "slug": "nashik",
-      "count": 1
-    },
-    {
-      "canonical": "Noida",
-      "slug": "noida",
-      "count": 1
-    },
-    {
-      "canonical": "Okhla",
-      "slug": "okhla",
-      "count": 2
-    },
-    {
-      "canonical": "Raipur",
-      "slug": "raipur",
-      "count": 1
-    },
-    {
-      "canonical": "Rajkot",
-      "slug": "rajkot",
-      "count": 1
-    },
-    {
-      "canonical": "Surat",
-      "slug": "surat",
-      "count": 4
-    },
-    {
-      "canonical": "Vijayawada",
-      "slug": "vijayawada",
-      "count": 1
-    },
-    {
-      "canonical": "Vizag",
-      "slug": "vizag",
-      "count": 1
     }
   ]
 };
@@ -850,27 +1515,27 @@ export const STATES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Andhra Pradesh",
       "slug": "andhra-pradesh",
-      "count": 9
+      "count": 31
     },
     {
       "canonical": "Assam",
       "slug": "assam",
-      "count": 6
+      "count": 15
     },
     {
       "canonical": "Bihar",
       "slug": "bihar",
-      "count": 8
+      "count": 27
     },
     {
       "canonical": "Chhattisgarh",
       "slug": "chhattisgarh",
-      "count": 1
+      "count": 16
     },
     {
       "canonical": "Delhi",
       "slug": "delhi",
-      "count": 7
+      "count": 24
     },
     {
       "canonical": "Goa",
@@ -880,36 +1545,143 @@ export const STATES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Gujarat",
       "slug": "gujarat",
-      "count": 17
+      "count": 57
     },
     {
       "canonical": "Haryana",
       "slug": "haryana",
-      "count": 28
+      "count": 125
+    },
+    {
+      "canonical": "Jharkhand",
+      "slug": "jharkhand",
+      "count": 7
     },
     {
       "canonical": "Karnataka",
       "slug": "karnataka",
-      "count": 285
+      "count": 353
     },
     {
       "canonical": "Kerala",
       "slug": "kerala",
-      "count": 6
+      "count": 18
     },
     {
       "canonical": "Madhya Pradesh",
       "slug": "madhya-pradesh",
-      "count": 2
+      "count": 27
     },
     {
       "canonical": "Maharashtra",
       "slug": "maharashtra",
-      "count": 11
+      "count": 105
     },
     {
       "canonical": "Odisha",
       "slug": "odisha",
+      "count": 9
+    },
+    {
+      "canonical": "Punjab",
+      "slug": "punjab",
+      "count": 14
+    },
+    {
+      "canonical": "Rajasthan",
+      "slug": "rajasthan",
+      "count": 40
+    },
+    {
+      "canonical": "Tamil Nadu",
+      "slug": "tamil-nadu",
+      "count": 61
+    },
+    {
+      "canonical": "Telangana",
+      "slug": "telangana",
+      "count": 112
+    },
+    {
+      "canonical": "Uttar Pradesh",
+      "slug": "uttar-pradesh",
+      "count": 118
+    },
+    {
+      "canonical": "Uttarakhand",
+      "slug": "uttarakhand",
+      "count": 1
+    },
+    {
+      "canonical": "West Bengal",
+      "slug": "west-bengal",
+      "count": 39
+    }
+  ],
+  "RCC": [
+    {
+      "canonical": "Andhra Pradesh",
+      "slug": "andhra-pradesh",
+      "count": 25
+    },
+    {
+      "canonical": "Bihar",
+      "slug": "bihar",
+      "count": 3
+    },
+    {
+      "canonical": "Chhattisgarh",
+      "slug": "chhattisgarh",
+      "count": 1
+    },
+    {
+      "canonical": "Delhi",
+      "slug": "delhi",
+      "count": 14
+    },
+    {
+      "canonical": "Goa",
+      "slug": "goa",
+      "count": 12
+    },
+    {
+      "canonical": "Gujarat",
+      "slug": "gujarat",
+      "count": 23
+    },
+    {
+      "canonical": "Haryana",
+      "slug": "haryana",
+      "count": 15
+    },
+    {
+      "canonical": "Karnataka",
+      "slug": "karnataka",
+      "count": 140
+    },
+    {
+      "canonical": "Madhya Pradesh",
+      "slug": "madhya-pradesh",
+      "count": 4
+    },
+    {
+      "canonical": "Maharashtra",
+      "slug": "maharashtra",
+      "count": 18
+    },
+    {
+      "canonical": "Odisha",
+      "slug": "odisha",
+      "count": 2
+    },
+    {
+      "canonical": "Puducherry",
+      "slug": "puducherry",
+      "count": 5
+    },
+    {
+      "canonical": "Punjab",
+      "slug": "punjab",
       "count": 1
     },
     {
@@ -920,94 +1692,22 @@ export const STATES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Tamil Nadu",
       "slug": "tamil-nadu",
-      "count": 21
-    },
-    {
-      "canonical": "Tamilnadu",
-      "slug": "tamilnadu",
-      "count": 1
+      "count": 8
     },
     {
       "canonical": "Telangana",
       "slug": "telangana",
-      "count": 16
+      "count": 7
     },
     {
       "canonical": "Uttar Pradesh",
       "slug": "uttar-pradesh",
-      "count": 24
+      "count": 19
     },
     {
       "canonical": "West Bengal",
       "slug": "west-bengal",
-      "count": 15
-    }
-  ],
-  "RCC": [
-    {
-      "canonical": "Andhra Pradesh",
-      "slug": "andhra-pradesh",
       "count": 3
-    },
-    {
-      "canonical": "Chattisgarh",
-      "slug": "chattisgarh",
-      "count": 1
-    },
-    {
-      "canonical": "Delhi",
-      "slug": "delhi",
-      "count": 6
-    },
-    {
-      "canonical": "Goa",
-      "slug": "goa",
-      "count": 1
-    },
-    {
-      "canonical": "Gujarat",
-      "slug": "gujarat",
-      "count": 6
-    },
-    {
-      "canonical": "Haryana",
-      "slug": "haryana",
-      "count": 4
-    },
-    {
-      "canonical": "Karnataka",
-      "slug": "karnataka",
-      "count": 56
-    },
-    {
-      "canonical": "Madhya Pradesh",
-      "slug": "madhya-pradesh",
-      "count": 1
-    },
-    {
-      "canonical": "Maharashtra",
-      "slug": "maharashtra",
-      "count": 2
-    },
-    {
-      "canonical": "Tamil Nadu",
-      "slug": "tamil-nadu",
-      "count": 2
-    },
-    {
-      "canonical": "Telangana",
-      "slug": "telangana",
-      "count": 12
-    },
-    {
-      "canonical": "Uttar Pradesh",
-      "slug": "uttar-pradesh",
-      "count": 10
-    },
-    {
-      "canonical": "West Bengal",
-      "slug": "west-bengal",
-      "count": 2
     }
   ]
 };

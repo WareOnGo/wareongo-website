@@ -9,6 +9,12 @@
     "formats": ["image/avif", "image/webp"],
     "minimumCacheTTL": 2678400
   },
+  "rewrites": [
+    {
+      "source": "/static-loader-data-manifest-(.*).json",
+      "destination": "/static-loader-data-manifest-stable.json"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*).(js|css|woff|woff2|jpg|jpeg|png|webp|avif|svg|ico|mp4)",
