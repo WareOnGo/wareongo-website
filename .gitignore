@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# vite-react-ssg's intermediate build output. Written to a random-hashed subdir
+# during `vite-react-ssg build` and deleted when it finishes, so a `git add .`
+# that races the build otherwise sweeps in the whole thing.
+.vite-react-ssg-temp/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

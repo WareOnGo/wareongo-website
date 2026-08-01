@@ -1,6 +1,26 @@
 import { ViteReactSSG } from "vite-react-ssg";
 import { routes } from "./routes";
+import { claimReloadAttempt } from "./lib/staleDeployReload";
 import "./index.css";
+
+// Lazy route chunks are content-hashed per build, and Vercel only serves the
+// current deployment's files. A document that outlived its deploy asks for a
+// chunk that's now a 404 — "error loading dynamically imported module" — which
+// on initial hydration is thrown by vite-react-ssg outside React entirely, so no
+// error boundary can catch it. Vite fires this event for exactly that case.
+if (typeof window !== "undefined") {
+  window.addEventListener("vite:preloadError", (event) => {
+    // Only swallow the error if we're actually reloading. Suppressing it after
+    // the guard has been spent would leave the page hanging with nothing
+    // rendered and nothing thrown; better to let it surface.
+    if (!claimReloadAttempt(`preload:${window.location.pathname}`)) {
+      console.error("Chunk load failed again after a reload; surfacing the error.");
+      return;
+    }
+    event.preventDefault();
+    window.location.reload();
+  });
+}
 
 // On client-side navigation, vite-react-ssg fetches
 // `/static-loader-data-manifest-${window.__VITE_REACT_SSG_HASH__}.json` and calls

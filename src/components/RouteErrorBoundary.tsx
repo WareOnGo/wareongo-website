@@ -4,6 +4,7 @@ import PageHead from '@/components/PageHead';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
+import { claimReloadAttempt } from '@/lib/staleDeployReload';
 
 // Reloading is a real fix here, not a shrug: prerendered pages inline their loader
 // payload as window.__staticRouterHydrationData, so a fresh load of one of these
@@ -15,28 +16,13 @@ import { Button } from '@/components/ui/button';
 // exactly, so reloading just costs the user a page load to reach the same screen.
 const shouldAutoReload = (error: unknown): boolean => !isRouteErrorResponse(error);
 
-const RELOAD_KEY = 'wog:route-error-reload';
-
-// sessionStorage throws in some privacy modes. Failing closed matters: if we
-// can't record the attempt, we must not reload, or the page loops forever.
-const claimReloadAttempt = (pathname: string): boolean => {
-  try {
-    const key = `${RELOAD_KEY}:${pathname}`;
-    if (sessionStorage.getItem(key)) return false;
-    sessionStorage.setItem(key, '1');
-    return true;
-  } catch {
-    return false;
-  }
-};
-
 const RouteErrorBoundary = () => {
   const error = useRouteError();
 
   useEffect(() => {
     console.error('Route error:', error);
     if (typeof window === 'undefined' || !shouldAutoReload(error)) return;
-    if (!claimReloadAttempt(window.location.pathname)) {
+    if (!claimReloadAttempt(`route:${window.location.pathname}`)) {
       // Already burned this path's one reload — the failure is sticking around.
       console.error('Route error persisted across a reload; not retrying again.');
       return;
