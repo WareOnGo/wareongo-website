@@ -88,8 +88,11 @@ const typeSlugToCanonical = (slug: string): WarehouseType | null => {
   return null;
 };
 
+/** Micromarket pages reuse the city/state page component, so they share its scope union. */
+export type LocationScope = 'city' | 'state' | 'micromarket';
+
 export interface LocationListingsLoaderData {
-  type: 'city' | 'state';
+  type: LocationScope;
   canonical: string;
   slug: string;
   // Present only on /listings/.../:type pages; absent on base location pages.
@@ -97,7 +100,21 @@ export interface LocationListingsLoaderData {
   warehouses: ReturnType<typeof transformWarehouseData>[];
   // Counts for the link block on base location pages (e.g. "12 PEB / 47 RCC").
   typeCounts?: { PEB: number; RCC: number };
+  // Micromarket pages only: the city its listings actually sit in, for the
+  // "…, Bengaluru" context in the heading plus a breadcrumb/link up to it.
+  parentCity?: { canonical: string; slug: string } | null;
 }
+
+const countTypes = (scoped: Warehouse[]) =>
+  scoped.reduce(
+    (acc, w) => {
+      const t = canonicalType(w.warehouseType);
+      if (t === 'PEB') acc.PEB += 1;
+      else if (t === 'RCC') acc.RCC += 1;
+      return acc;
+    },
+    { PEB: 0, RCC: 0 },
+  );
 
 async function summariesFor(type: 'city' | 'state'): Promise<LocationSummary[]> {
   const all = await getAllWarehouses();
@@ -134,15 +151,7 @@ async function loaderFor(
   });
 
   // Count PEB/RCC inside this scope before any type filter (used by link block on base pages).
-  const typeCounts = scoped.reduce(
-    (acc, w) => {
-      const t = canonicalType(w.warehouseType);
-      if (t === 'PEB') acc.PEB += 1;
-      else if (t === 'RCC') acc.RCC += 1;
-      return acc;
-    },
-    { PEB: 0, RCC: 0 },
-  );
+  const typeCounts = countTypes(scoped);
 
   let warehouseType: WarehouseType | undefined;
   if (typeSlug) {
@@ -170,8 +179,15 @@ export async function stateListingsLoader({ params }: LoaderFunctionArgs) {
   return loaderFor('state', params.state ?? '');
 }
 
+// /listings/city/:city/:sub is a shared slot: "peb"/"rcc" are construction-type
+// pages, anything else is tried as a micromarket nested under that city.
+// Construction types win the slot, so a locality named "PEB" could never
+// shadow them.
 export async function cityTypeListingsLoader({ params }: LoaderFunctionArgs) {
-  return loaderFor('city', params.city ?? '', params.type ?? '');
+  const citySlug = params.city ?? '';
+  const sub = params.type ?? '';
+  if (typeSlugToCanonical(sub)) return loaderFor('city', citySlug, sub);
+  return micromarketLoader(citySlug, sub);
 }
 
 export async function stateTypeListingsLoader({ params }: LoaderFunctionArgs) {
@@ -207,5 +223,153 @@ async function locationTypeStaticPaths(type: 'city' | 'state'): Promise<string[]
   return paths;
 }
 
-export const cityTypeStaticPaths = () => locationTypeStaticPaths('city');
+// The city :sub slot serves both, so its static paths are the union.
+export const cityTypeStaticPaths = async (): Promise<string[]> => {
+  const [types, micromarkets] = await Promise.all([
+    locationTypeStaticPaths('city'),
+    micromarketStaticPaths(),
+  ]);
+  return [...types, ...micromarkets];
+};
 export const stateTypeStaticPaths = () => locationTypeStaticPaths('state');
+
+// ----- micromarkets ---------------------------------------------------------
+// Warehouse.micromarket is a String[] of locality tags ("Nelamangala",
+// "Hosur Road"). One listing can carry several, and one micromarket can span
+// cities (Bidadi shows up under both Bengaluru and Ramnagara), so these pages
+// are built by tag rather than nested under a city.
+//
+// Anything here must stay in sync with scripts/lib/locations.mjs, which builds
+// the same pages' sitemap entries and the generated footer link data.
+
+/**
+ * A micromarket needs this many listings before it gets its own page. Below the
+ * threshold the page is thinner than the city page it would compete with in
+ * search, so we don't generate one at all.
+ */
+export const MICROMARKET_MIN_LISTINGS = 5;
+
+/**
+ * A micromarket's parent city has to carry its own weight: it supplies the
+ * {city} URL segment and is the breadcrumb/link target, so nesting under a
+ * near-empty city page helps nobody.
+ */
+export const PARENT_CITY_MIN_LISTINGS = 6;
+
+// The city column carries locality fragments as well as cities ("Sector 78,
+// Badshahpur"). Same test the state pages use to skip them.
+const isRealCityName = (name: string): boolean => name.length > 2 && !name.includes(',');
+
+// Some rows carry an unresolved micro_market row id (a 32-char base62 token)
+// where a name should be, because the tagging tool wrote the FK through. Those
+// aren't places and must never become pages.
+const MICROMARKET_ID_RE = /^[A-Za-z0-9]{32}$/;
+
+const isNamedMicromarket = (raw: string | null | undefined): boolean => {
+  const v = raw?.trim() ?? '';
+  return v.length > 2 && !MICROMARKET_ID_RE.test(v);
+};
+
+// Keeps '/' readable as a separator: "Alipur/Budhpur" -> "alipur-budhpur".
+export const slugifyMicromarket = (name: string): string =>
+  name
+    .toLowerCase()
+    .replace(/[\s/]+/g, '-')
+    .replace(/[^a-z0-9-]/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+
+// Deduped so a listing tagged with the same locality twice counts once.
+const micromarketsOf = (w: Warehouse): string[] => [
+  ...new Set(
+    (Array.isArray(w.micromarket) ? w.micromarket : [])
+      .map((m) => String(m).trim())
+      .filter(isNamedMicromarket),
+  ),
+];
+
+export interface MicromarketSummary extends LocationSummary {
+  /** Most common city among this micromarket's listings — the city it nests under. */
+  parentCity: string;
+  /** Slug of parentCity, i.e. the {city} in /listings/city/{city}/{slug}. */
+  citySlug: string;
+}
+
+async function micromarketSummaries(): Promise<MicromarketSummary[]> {
+  const all = await getAllWarehouses();
+  // Cities allowed to host a micromarket page, mapped to their page slug.
+  const hostCities = new Map(
+    (await summariesFor('city'))
+      .filter((c) => isRealCityName(c.canonical) && c.count >= PARENT_CITY_MIN_LISTINGS)
+      .map((c) => [c.canonical, c.slug] as const),
+  );
+  const acc = new Map<string, { canonical: string; count: number; cities: Map<string, number> }>();
+  for (const w of all) {
+    const city = canonicalize(w.city, 'city');
+    for (const name of micromarketsOf(w)) {
+      const slug = slugifyMicromarket(name);
+      if (!slug) continue;
+      // First spelling seen wins as the display name — the DB values are already
+      // properly cased, so they're used verbatim rather than title-cased (which
+      // would mangle "Alipur/Budhpur" and "Harohalli/Kanakapura Road").
+      const entry = acc.get(slug) ?? { canonical: name, count: 0, cities: new Map() };
+      entry.count += 1;
+      if (city) entry.cities.set(city, (entry.cities.get(city) ?? 0) + 1);
+      acc.set(slug, entry);
+    }
+  }
+  return Array.from(acc.entries())
+    .map(([slug, e]) => {
+      // Most listings wins, but only among cities that can host a page — a
+      // micromarket whose top city is a junk value still nests under its
+      // next-best real one instead of losing its page.
+      const parent = Array.from(e.cities.entries())
+        .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+        .find(([city]) => hostCities.has(city));
+      return { canonical: e.canonical, slug, count: e.count, parentCity: parent?.[0] ?? null };
+    })
+    .filter(
+      // A parent city is required, not optional: it *is* the {city} segment of
+      // the URL, so a micromarket with no eligible city has nowhere to live.
+      (e): e is Omit<MicromarketSummary, 'citySlug'> =>
+        e.count >= MICROMARKET_MIN_LISTINGS && e.parentCity !== null,
+    )
+    // Slug comes from the city summary, so it always matches a real city page.
+    .map((e) => ({ ...e, citySlug: hostCities.get(e.parentCity) as string }))
+    .sort((a, b) => a.canonical.localeCompare(b.canonical));
+}
+
+/**
+ * Resolves the micromarket half of /listings/city/:city/:sub. Only the parent
+ * city's URL resolves — the same tag reached via a different city 404s rather
+ * than serving duplicate content on two paths.
+ */
+async function micromarketLoader(
+  citySlug: string,
+  micromarketSlug: string,
+): Promise<LocationListingsLoaderData | null> {
+  const summaries = await micromarketSummaries();
+  const match = summaries.find((s) => s.slug === micromarketSlug && s.citySlug === citySlug);
+  if (!match) return null;
+
+  // Every listing carrying the tag, including the few sitting in a neighbouring
+  // city — the tag is the market, the city segment is just where it hangs.
+  const all = await getAllWarehouses();
+  const scoped = all.filter((w) =>
+    micromarketsOf(w).some((m) => slugifyMicromarket(m) === match.slug),
+  );
+
+  return {
+    type: 'micromarket',
+    canonical: match.canonical,
+    slug: match.slug,
+    parentCity: { canonical: match.parentCity, slug: match.citySlug },
+    typeCounts: countTypes(scoped),
+    warehouses: scoped.map(transformWarehouseData),
+  };
+}
+
+export async function micromarketStaticPaths(): Promise<string[]> {
+  const micromarkets = await micromarketSummaries();
+  return micromarkets.map((m) => `/listings/city/${m.citySlug}/${m.slug}`);
+}

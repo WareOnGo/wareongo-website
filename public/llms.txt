@@ -44,6 +44,29 @@ WareOnGo serves 3PLs, end users, manufacturers, and dark-store/quick-commerce op
 
 City pages also exist segmented by construction type, e.g. https://wareongo.com/listings/city/bengaluru/peb and https://wareongo.com/listings/city/bengaluru/rcc. State-level pages follow https://wareongo.com/listings/state/{state}. The full URL inventory is in https://wareongo.com/sitemap.xml.
 
+## Warehouses by micro-market (locality)
+
+- Warehouses for rent in Nelamangala, Bengaluru: https://wareongo.com/listings/city/bengaluru/nelamangala
+- Warehouses for rent in Hosur Road, Bengaluru: https://wareongo.com/listings/city/bengaluru/hosur-road
+- Warehouses for rent in Hoskote, Bengaluru: https://wareongo.com/listings/city/bengaluru/hoskote
+- Warehouses for rent in Whitefield, Bengaluru: https://wareongo.com/listings/city/bengaluru/whitefield
+- Warehouses for rent in Devanahalli, Bengaluru: https://wareongo.com/listings/city/bengaluru/devanahalli
+- Warehouses for rent in Dobbaspet, Bengaluru: https://wareongo.com/listings/city/bengaluru/dobbaspet
+- Warehouses for rent in Jigani, Bengaluru: https://wareongo.com/listings/city/bengaluru/jigani
+- Warehouses for rent in Makali, Bengaluru: https://wareongo.com/listings/city/bengaluru/makali
+- Warehouses for rent in Narsapura, Kolar: https://wareongo.com/listings/city/kolar/narsapura
+- Warehouses for rent in Bommasandra, Bengaluru: https://wareongo.com/listings/city/bengaluru/bommasandra
+- Warehouses for rent in Soukya Road, Bengaluru: https://wareongo.com/listings/city/bengaluru/soukya-road
+- Warehouses for rent in Attibele, Bengaluru: https://wareongo.com/listings/city/bengaluru/attibele
+- Warehouses for rent in Kumbalgodu, Bengaluru: https://wareongo.com/listings/city/bengaluru/kumbalgodu
+- Warehouses for rent in Bannerghatta, Bengaluru: https://wareongo.com/listings/city/bengaluru/bannerghatta
+- Warehouses for rent in Bamnoli/Bharthal, Delhi: https://wareongo.com/listings/city/delhi/bamnoli-bharthal
+- Warehouses for rent in Harohalli/Kanakapura Road, Bengaluru: https://wareongo.com/listings/city/bengaluru/harohalli-kanakapura-road
+- Warehouses for rent in Vazhakkulam, Ernakulam: https://wareongo.com/listings/city/ernakulam/vazhakkulam
+- Warehouses for rent in Medchal, Hyderabad: https://wareongo.com/listings/city/hyderabad/medchal
+
+Micro-market pages exist only for localities with enough live inventory to be useful, so this list changes as listings turn over. https://wareongo.com/sitemap.xml is authoritative.
+
 ## Guides (warehousing knowledge base)
 
 - PEB vs RCC warehouse — differences, costs, which to lease: https://wareongo.com/guides/peb-vs-rcc-warehouse

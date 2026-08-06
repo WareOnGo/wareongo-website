@@ -20,18 +20,30 @@ const LocationListings = () => {
     return <Navigate to="/listings" replace />;
   }
 
-  const { type, canonical, slug, warehouses, warehouseType, typeCounts } = data;
-  const noun = type === 'city' ? canonical : `${canonical} state`;
-  const basePath = `/listings/${type}/${slug}`;
+  const { type, canonical, slug, warehouses, warehouseType, typeCounts, parentCity } = data;
+  const isMicromarket = type === 'micromarket';
+  const scopeLabel = type === 'city' ? 'City' : type === 'state' ? 'State' : 'Micro-market';
+  const noun = type === 'state' ? `${canonical} state` : canonical;
+  // Micromarkets nest under their parent city: /listings/city/{city}/{locality}.
+  const basePath =
+    isMicromarket && parentCity
+      ? `/listings/city/${parentCity.slug}/${slug}`
+      : `/listings/${type}/${slug}`;
   const path = warehouseType ? `${basePath}/${warehouseType.toLowerCase()}` : basePath;
   const typeLabel = warehouseType === 'PEB' ? 'PEB' : warehouseType === 'RCC' ? 'RCC' : '';
   const headingPrefix = warehouseType ? `${typeLabel} Warehouses` : 'Warehouses';
+  // A bare locality name is ambiguous on its own ("Ernakulam" is also a city
+  // name elsewhere in the data), so micromarket titles carry the parent city.
+  const titlePlace =
+    isMicromarket && parentCity && parentCity.canonical !== canonical
+      ? `${canonical}, ${parentCity.canonical}`
+      : canonical;
   // "Godowns" on base pages only — Search Console shows "godown for rent in {city}"
   // queries; type pages keep tighter titles (those queries say "PEB"/"RCC warehouse").
   const seoTitle = warehouseType
-    ? `${headingPrefix} for Rent in ${canonical} | WareOnGo`
-    : `Warehouses & Godowns for Rent in ${canonical} | WareOnGo`;
-  const heading = `${headingPrefix} for Rent in ${canonical}`;
+    ? `${headingPrefix} for Rent in ${titlePlace} | WareOnGo`
+    : `Warehouses & Godowns for Rent in ${titlePlace} | WareOnGo`;
+  const heading = `${headingPrefix} for Rent in ${titlePlace}`;
   const descSubject = warehouseType ? `${typeLabel} warehouses` : 'Warehouses';
 
   // Build-time stats baked into the meta description + lead copy — concrete,
@@ -62,15 +74,20 @@ const LocationListings = () => {
   // queries (Search Console shows them); Google bolds the matching phrase in the snippet.
   const godownClause = warehouseType ? '' : ` Also listed as godowns for rent in ${canonical}.`;
   const seoDescription = showStats
-    ? `${countNoun} for rent in ${canonical}${sizeRange ? ` — ${sizeRange}` : ''}. Transparent pricing, curated shortlist in 4 hours.${godownClause}`
-    : `${descSubject} for rent in ${canonical}. Verified listings with transparent pricing. Get custom options, expert guidance & site visit within 48 hours.${godownClause}`;
+    ? `${countNoun} for rent in ${titlePlace}${sizeRange ? ` — ${sizeRange}` : ''}. Transparent pricing, curated shortlist in 4 hours.${godownClause}`
+    : `${descSubject} for rent in ${titlePlace}. Verified listings with transparent pricing. Get custom options, expert guidance & site visit within 48 hours.${godownClause}`;
 
   // Machine-readable synonyms + micro-markets. "Godown" matches North-Indian query
   // phrasing; hub localities (curated in cityHubs.ts / stateHubs.ts) associate
   // locality-level queries ("warehouse in okhla") with the parent location page.
   // State pages additionally carry the cities that actually have inventory there,
   // derived live from the loader data (so they stay current as listings change).
-  const hubs = warehouseType ? [] : ((type === 'city' ? CITY_HUBS[slug] : STATE_HUBS[slug]) ?? []);
+  // Micromarket pages are themselves a locality, so they get no hub list — the
+  // parent-city keyword below is the association that matters for them.
+  const hubs =
+    warehouseType || isMicromarket
+      ? []
+      : ((type === 'city' ? CITY_HUBS[slug] : STATE_HUBS[slug]) ?? []);
   const titleCase = (s: string) =>
     s.toLowerCase().split(/\s+/).filter(Boolean).map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
   const stateCities =
@@ -91,6 +108,14 @@ const LocationListings = () => {
     : [
         `warehouse for rent in ${canonical}`,
         `godown for rent in ${canonical}`,
+        // "warehouse in nelamangala bangalore" — the qualified phrasing people
+        // actually search for a locality.
+        ...(isMicromarket && parentCity && parentCity.canonical !== canonical
+          ? [
+              `warehouse for rent in ${canonical} ${parentCity.canonical}`,
+              `godown for rent in ${canonical} ${parentCity.canonical}`,
+            ]
+          : []),
         ...keywordPlaces.map((p) => `warehouse for rent in ${p}`),
       ].join(', ');
 
@@ -153,6 +178,16 @@ const LocationListings = () => {
                 : ([
                     { label: 'Home', path: '/' },
                     { label: 'Listings', path: '/listings' },
+                    // Micromarkets nest under their parent city so the trail
+                    // matches the hierarchy users expect.
+                    ...(isMicromarket && parentCity && parentCity.canonical !== canonical
+                      ? [
+                          {
+                            label: parentCity.canonical,
+                            path: `/listings/city/${parentCity.slug}`,
+                          },
+                        ]
+                      : []),
                     { label: canonical },
                   ] satisfies BreadcrumbItem[])
             }
@@ -160,7 +195,7 @@ const LocationListings = () => {
 
           <header className="mb-8 sm:mb-10 max-w-3xl">
             <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate block mb-3">
-              {warehouseType ? `${typeLabel} · ${type === 'city' ? 'City' : 'State'}` : type === 'city' ? 'City' : 'State'}
+              {warehouseType ? `${typeLabel} · ${scopeLabel}` : scopeLabel}
             </span>
             <h1
               id="location-title"
@@ -186,8 +221,20 @@ const LocationListings = () => {
               )}
             </p>
 
+            {/* Micromarkets have no PEB/RCC variants — they link up to their city instead. */}
+            {isMicromarket && parentCity && parentCity.canonical !== canonical && (
+              <div className="mt-5 flex flex-wrap gap-2">
+                <Link
+                  to={`/listings/city/${parentCity.slug}`}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-wareongo-blue/30 text-sm text-wareongo-blue hover:bg-wareongo-blue/5 transition-colors"
+                >
+                  All warehouses in {parentCity.canonical}
+                </Link>
+              </div>
+            )}
+
             {/* Type filter chips on base location pages — internal linking to PEB / RCC variants */}
-            {!warehouseType && typeCounts && (typeCounts.PEB > 0 || typeCounts.RCC > 0) && (
+            {!warehouseType && !isMicromarket && typeCounts && (typeCounts.PEB > 0 || typeCounts.RCC > 0) && (
               <div className="mt-5 flex flex-wrap gap-2">
                 {typeCounts.PEB > 0 && (
                   <Link

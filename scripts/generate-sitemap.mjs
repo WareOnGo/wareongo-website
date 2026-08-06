@@ -1,6 +1,13 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { fetchAllWarehouses, summarize, locationTypeCombos, warehouseSlug } from './lib/locations.mjs';
+import {
+  fetchAllWarehouses,
+  summarize,
+  locationTypeCombos,
+  summarizeMicromarkets,
+  micromarketPath,
+  warehouseSlug,
+} from './lib/locations.mjs';
 
 const SITE_URL = 'https://wareongo.com';
 const today = new Date().toISOString().slice(0, 10);
@@ -107,6 +114,7 @@ async function main() {
   const states = summarize(warehouses, 'state');
   const cityTypeCombos = locationTypeCombos(warehouses, 'city');
   const stateTypeCombos = locationTypeCombos(warehouses, 'state');
+  const micromarkets = summarizeMicromarkets(warehouses);
 
   const entries = [
     ...STATIC_PATHS.map((p) => urlEntry(p.path, p.changefreq, p.priority)),
@@ -114,6 +122,7 @@ async function main() {
     urlEntry('/guides', 'monthly', '0.6'),
     ...GUIDE_SLUGS.map((slug) => urlEntry(`/guides/${slug}`, 'monthly', '0.6')),
     ...cities.map((c) => urlEntry(`/listings/city/${c.slug}`, 'weekly', '0.8')),
+    ...micromarkets.map((m) => urlEntry(micromarketPath(m), 'weekly', '0.8')),
     ...states.map((s) => urlEntry(`/listings/state/${s.slug}`, 'weekly', '0.7')),
     ...cityTypeCombos.map((c) =>
       urlEntry(`/listings/city/${c.location.slug}/${c.warehouseType.toLowerCase()}`, 'weekly', '0.7'),
@@ -131,7 +140,7 @@ ${entries.join('\n')}
   const outPath = path.join('dist', 'sitemap.xml');
   await fs.writeFile(outPath, xml, 'utf8');
   console.log(
-    `[sitemap] wrote ${outPath} — ${entries.length} URLs (${warehouseEntries.length} warehouses w/ ${totalImages} images, ${cities.length} cities, ${states.length} states, ${cityTypeCombos.length} city×type, ${stateTypeCombos.length} state×type)`,
+    `[sitemap] wrote ${outPath} — ${entries.length} URLs (${warehouseEntries.length} warehouses w/ ${totalImages} images, ${cities.length} cities, ${states.length} states, ${cityTypeCombos.length} city×type, ${stateTypeCombos.length} state×type, ${micromarkets.length} micromarkets)`,
   );
 }
 

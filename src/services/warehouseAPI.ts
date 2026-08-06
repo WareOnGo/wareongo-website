@@ -23,6 +23,9 @@ export interface Warehouse {
   // The listings endpoint includes warehouseType too, even though it's not in
   // the original spec. Optional so legacy callers stay compatible.
   warehouseType?: string | null;
+  // Locality tags (e.g. ["Nelamangala"]). A listing can carry several. Optional
+  // so a backend deploy that predates the field doesn't break typing.
+  micromarket?: string[] | null;
 }
 
 // Extended interface for warehouse detail page with additional fields

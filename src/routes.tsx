@@ -65,6 +65,8 @@ export const routes: RouteRecord[] = [
             getStaticPaths: cityStaticPaths,
           },
           {
+            // Shared slot: "peb"/"rcc" plus the micromarket (locality) pages
+            // that nest under a city — cityTypeListingsLoader resolves both.
             path: "listings/city/:city/:type",
             lazy: lazyDefault(() => import("./pages/LocationListings")),
             loader: cityTypeListingsLoader,

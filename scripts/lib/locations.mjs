@@ -3,7 +3,9 @@
 // and generate-sitemap.mjs (emits per-location sitemap URLs).
 // Must stay in sync with src/loaders/locationLoader.ts.
 
-const API_BASE = 'https://wareongo-website-backend.onrender.com';
+// Override to generate against a local backend (e.g. when a new field hasn't
+// shipped to production yet): WAREONGO_API_BASE=http://localhost:3000 npm run build
+const API_BASE = process.env.WAREONGO_API_BASE || 'https://wareongo-website-backend.onrender.com';
 
 const CITY_ALIASES = {
   bangalore: 'Bengaluru',
@@ -109,6 +111,80 @@ const canonicalWarehouseType = (raw) => {
   if (upper === 'PEB' || upper === 'RCC') return upper;
   return null;
 };
+
+// ----- micromarkets ---------------------------------------------------------
+// Mirror of the micromarket section in src/loaders/locationLoader.ts — keep in
+// sync. Both decide which localities are page-worthy, so a divergence would put
+// URLs in the sitemap that the build never prerenders (or vice versa).
+
+export const MICROMARKET_MIN_LISTINGS = 5;
+
+// The parent city supplies the {city} URL segment, so it must be a real city
+// name (the column also holds locality fragments like "Sector 78, Badshahpur")
+// with enough inventory of its own.
+export const PARENT_CITY_MIN_LISTINGS = 6;
+
+const isRealCityName = (name) => name.length > 2 && !name.includes(',');
+
+const MICROMARKET_ID_RE = /^[A-Za-z0-9]{32}$/;
+
+const isNamedMicromarket = (raw) => {
+  const v = String(raw ?? '').trim();
+  return v.length > 2 && !MICROMARKET_ID_RE.test(v);
+};
+
+export const slugifyMicromarket = (name) =>
+  String(name)
+    .toLowerCase()
+    .replace(/[\s/]+/g, '-')
+    .replace(/[^a-z0-9-]/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+
+const micromarketsOf = (w) => [
+  ...new Set(
+    (Array.isArray(w.micromarket) ? w.micromarket : [])
+      .map((m) => String(m).trim())
+      .filter(isNamedMicromarket),
+  ),
+];
+
+export function summarizeMicromarkets(warehouses) {
+  // Cities allowed to host a micromarket page, mapped to their page slug.
+  const hostCities = new Map(
+    summarize(warehouses, 'city')
+      .filter((c) => isRealCityName(c.canonical) && c.count >= PARENT_CITY_MIN_LISTINGS)
+      .map((c) => [c.canonical, c.slug]),
+  );
+  const acc = new Map();
+  for (const w of warehouses) {
+    const city = canonicalize(w.city, 'city');
+    for (const name of micromarketsOf(w)) {
+      const slug = slugifyMicromarket(name);
+      if (!slug) continue;
+      const entry = acc.get(slug) ?? { canonical: name, count: 0, cities: new Map() };
+      entry.count += 1;
+      if (city) entry.cities.set(city, (entry.cities.get(city) ?? 0) + 1);
+      acc.set(slug, entry);
+    }
+  }
+  return Array.from(acc.entries())
+    .map(([slug, e]) => {
+      // Most listings wins, but only among cities that can host a page.
+      const parent = Array.from(e.cities.entries())
+        .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+        .find(([city]) => hostCities.has(city));
+      return { canonical: e.canonical, slug, count: e.count, parentCity: parent?.[0] ?? null };
+    })
+    // parentCity is the {city} segment of the URL, so a micromarket without an
+    // eligible one has nowhere to live.
+    .filter((e) => e.count >= MICROMARKET_MIN_LISTINGS && e.parentCity !== null)
+    .map((e) => ({ ...e, citySlug: hostCities.get(e.parentCity) }))
+    .sort((a, b) => a.canonical.localeCompare(b.canonical));
+}
+
+/** Canonical page path — micromarkets nest under their parent city. */
+export const micromarketPath = (m) => `/listings/city/${m.citySlug}/${m.slug}`;
 
 // For each city/state, list which warehouse types have ≥1 listing.
 export function locationTypeCombos(warehouses, type) {

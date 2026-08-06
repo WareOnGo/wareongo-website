@@ -2,7 +2,14 @@ import React, { useState } from 'react';
 import { Phone, Mail, ChevronDown } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { trackEvent } from '@/lib/analytics';
-import { CITIES, STATES, CITIES_BY_TYPE, STATES_BY_TYPE, type LocationSummary } from '@/data/locations.generated';
+import {
+  CITIES,
+  STATES,
+  CITIES_BY_TYPE,
+  STATES_BY_TYPE,
+  MICROMARKETS,
+  type LocationSummary,
+} from '@/data/locations.generated';
 
 // Footer link curation — concentrate link equity on (a) cities already surfacing
 // in Search Console impressions and (b) deepest-inventory markets, instead of
@@ -19,30 +26,33 @@ const FOOTER_CITY_SLUGS = new Set([
 ]);
 const curateCities = (items: LocationSummary[]) => items.filter((c) => FOOTER_CITY_SLUGS.has(c.slug));
 
-interface LocationLinkGridProps {
+interface LocationLinkGridProps<T extends LocationSummary = LocationSummary> {
   heading: string;
-  basePath: string;
-  items: LocationSummary[];
+  basePath?: string;
+  items: T[];
   /** Appended to each link's href (e.g. "/peb"). Leading slash required. */
   pathSuffix?: string;
   /** Prepended to each visible label (e.g. "PEB "). Trailing space if needed. */
   labelPrefix?: string;
+  /** Overrides the basePath/pathSuffix href, for items that don't share one base. */
+  hrefFor?: (loc: T) => string;
 }
 
-const LocationLinkGrid = ({
+const LocationLinkGrid = <T extends LocationSummary>({
   heading,
-  basePath,
+  basePath = '',
   items,
   pathSuffix = '',
   labelPrefix = '',
-}: LocationLinkGridProps) => {
+  hrefFor,
+}: LocationLinkGridProps<T>) => {
   if (items.length === 0) return null;
   return (
     <div>
       <h4 className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-3">{heading}</h4>
       <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-2 text-sm">
         {items.map((loc) => {
-          const href = `${basePath}/${loc.slug}${pathSuffix}`;
+          const href = hrefFor ? hrefFor(loc) : `${basePath}/${loc.slug}${pathSuffix}`;
           const label = `${labelPrefix}Spaces in ${loc.canonical}`;
           return (
             <li key={`${loc.slug}${pathSuffix}`} className="min-w-0">
@@ -83,6 +93,14 @@ const ExploreSpacesSection = () => {
       {/* Always rendered to DOM so crawlers can follow links — visually toggled via display class. */}
       <div aria-hidden={!open} className={open ? 'space-y-6' : 'hidden'}>
         <LocationLinkGrid heading="By City" basePath="/listings/city" items={curateCities(CITIES)} />
+        {/* No curation needed — MICROMARKETS is already gated on a minimum
+            listing count, so every entry is a page worth linking. Each nests
+            under its own parent city, hence hrefFor rather than a shared base. */}
+        <LocationLinkGrid
+          heading="By Micro-market"
+          items={MICROMARKETS}
+          hrefFor={(m) => `/listings/city/${m.citySlug}/${m.slug}`}
+        />
         <LocationLinkGrid heading="By State" basePath="/listings/state" items={STATES} />
         <LocationLinkGrid
           heading="PEB · By City"
