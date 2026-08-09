@@ -18,6 +18,11 @@ export interface MicromarketSummary extends LocationSummary {
   citySlug: string;
 }
 
+// Listings a city needs before its page is advertised in the footer or the
+// sitemap. Mirrors CITY_MIN_LISTINGS in scripts/lib/locations.mjs, so the two
+// surfaces can't drift apart.
+export const CITY_MIN_LISTINGS = 3;
+
 export const CITIES: LocationSummary[] = [
   {
     "canonical": "Ahilyanagar",
@@ -27,7 +32,7 @@ export const CITIES: LocationSummary[] = [
   {
     "canonical": "Ahmedabad",
     "slug": "ahmedabad",
-    "count": 46
+    "count": 48
   },
   {
     "canonical": "Ahmednagar",
@@ -72,17 +77,17 @@ export const CITIES: LocationSummary[] = [
   {
     "canonical": "Bengaluru",
     "slug": "bengaluru",
-    "count": 504
+    "count": 510
   },
   {
     "canonical": "Bengaluru Rural",
     "slug": "bengaluru-rural",
-    "count": 4
+    "count": 5
   },
   {
     "canonical": "Bengaluru Urban",
     "slug": "bengaluru-urban",
-    "count": 4
+    "count": 5
   },
   {
     "canonical": "Bhavnagar",
@@ -97,7 +102,7 @@ export const CITIES: LocationSummary[] = [
   {
     "canonical": "Bhiwandi",
     "slug": "bhiwandi",
-    "count": 39
+    "count": 41
   },
   {
     "canonical": "Bhopal",
@@ -128,6 +133,11 @@ export const CITIES: LocationSummary[] = [
     "canonical": "Chennai",
     "slug": "chennai",
     "count": 45
+  },
+  {
+    "canonical": "Chhatrapati Sambhajinagar / Aurangabad",
+    "slug": "chhatrapati-sambhajinagar--aurangabad",
+    "count": 3
   },
   {
     "canonical": "Coimbatore",
@@ -327,7 +337,7 @@ export const CITIES: LocationSummary[] = [
   {
     "canonical": "Kolar",
     "slug": "kolar",
-    "count": 15
+    "count": 16
   },
   {
     "canonical": "Kolkata",
@@ -412,7 +422,7 @@ export const CITIES: LocationSummary[] = [
   {
     "canonical": "Mysuru",
     "slug": "mysuru",
-    "count": 9
+    "count": 10
   },
   {
     "canonical": "Nadiad",
@@ -695,7 +705,7 @@ export const STATES: LocationSummary[] = [
   {
     "canonical": "Gujarat",
     "slug": "gujarat",
-    "count": 109
+    "count": 111
   },
   {
     "canonical": "Haryana",
@@ -710,7 +720,7 @@ export const STATES: LocationSummary[] = [
   {
     "canonical": "Karnataka",
     "slug": "karnataka",
-    "count": 572
+    "count": 582
   },
   {
     "canonical": "Kerala",
@@ -725,7 +735,7 @@ export const STATES: LocationSummary[] = [
   {
     "canonical": "Maharashtra",
     "slug": "maharashtra",
-    "count": 158
+    "count": 163
   },
   {
     "canonical": "Odisha",
@@ -779,7 +789,7 @@ export const CITIES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Ahmedabad",
       "slug": "ahmedabad",
-      "count": 29
+      "count": 30
     },
     {
       "canonical": "Ahmednagar",
@@ -819,12 +829,12 @@ export const CITIES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Bengaluru",
       "slug": "bengaluru",
-      "count": 312
+      "count": 316
     },
     {
       "canonical": "Bengaluru Rural",
       "slug": "bengaluru-rural",
-      "count": 3
+      "count": 4
     },
     {
       "canonical": "Bengaluru Urban",
@@ -839,7 +849,7 @@ export const CITIES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Bhiwandi",
       "slug": "bhiwandi",
-      "count": 30
+      "count": 31
     },
     {
       "canonical": "Bhopal",
@@ -855,6 +865,11 @@ export const CITIES_BY_TYPE: LocationsByType = {
       "canonical": "Chennai",
       "slug": "chennai",
       "count": 27
+    },
+    {
+      "canonical": "Chhatrapati Sambhajinagar / Aurangabad",
+      "slug": "chhatrapati-sambhajinagar--aurangabad",
+      "count": 1
     },
     {
       "canonical": "Coimbatore",
@@ -1029,7 +1044,7 @@ export const CITIES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Kolar",
       "slug": "kolar",
-      "count": 9
+      "count": 10
     },
     {
       "canonical": "Kolkata",
@@ -1286,7 +1301,7 @@ export const CITIES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Ahmedabad",
       "slug": "ahmedabad",
-      "count": 5
+      "count": 6
     },
     {
       "canonical": "Aligarh",
@@ -1301,17 +1316,17 @@ export const CITIES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Bengaluru",
       "slug": "bengaluru",
-      "count": 133
+      "count": 134
     },
     {
       "canonical": "Bengaluru Urban",
       "slug": "bengaluru-urban",
-      "count": 2
+      "count": 3
     },
     {
       "canonical": "Bhiwandi",
       "slug": "bhiwandi",
-      "count": 7
+      "count": 8
     },
     {
       "canonical": "Bhubaneswar",
@@ -1444,6 +1459,11 @@ export const CITIES_BY_TYPE: LocationsByType = {
       "count": 6
     },
     {
+      "canonical": "Mysuru",
+      "slug": "mysuru",
+      "count": 1
+    },
+    {
       "canonical": "Navi Mumbai",
       "slug": "navi-mumbai",
       "count": 4
@@ -1551,7 +1571,7 @@ export const STATES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Gujarat",
       "slug": "gujarat",
-      "count": 58
+      "count": 59
     },
     {
       "canonical": "Haryana",
@@ -1566,7 +1586,7 @@ export const STATES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Karnataka",
       "slug": "karnataka",
-      "count": 354
+      "count": 360
     },
     {
       "canonical": "Kerala",
@@ -1581,7 +1601,7 @@ export const STATES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Maharashtra",
       "slug": "maharashtra",
-      "count": 106
+      "count": 108
     },
     {
       "canonical": "Odisha",
@@ -1653,7 +1673,7 @@ export const STATES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Gujarat",
       "slug": "gujarat",
-      "count": 23
+      "count": 24
     },
     {
       "canonical": "Haryana",
@@ -1663,7 +1683,7 @@ export const STATES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Karnataka",
       "slug": "karnataka",
-      "count": 145
+      "count": 148
     },
     {
       "canonical": "Madhya Pradesh",
@@ -1673,7 +1693,7 @@ export const STATES_BY_TYPE: LocationsByType = {
     {
       "canonical": "Maharashtra",
       "slug": "maharashtra",
-      "count": 18
+      "count": 19
     },
     {
       "canonical": "Odisha",
@@ -1765,21 +1785,21 @@ export const MICROMARKETS: MicromarketSummary[] = [
   {
     "canonical": "Harohalli/Kanakapura Road",
     "slug": "harohalli-kanakapura-road",
-    "count": 7,
+    "count": 8,
     "parentCity": "Bengaluru",
     "citySlug": "bengaluru"
   },
   {
     "canonical": "Hoskote",
     "slug": "hoskote",
-    "count": 67,
+    "count": 71,
     "parentCity": "Bengaluru",
     "citySlug": "bengaluru"
   },
   {
     "canonical": "Hosur Road",
     "slug": "hosur-road",
-    "count": 72,
+    "count": 73,
     "parentCity": "Bengaluru",
     "citySlug": "bengaluru"
   },
@@ -1814,7 +1834,7 @@ export const MICROMARKETS: MicromarketSummary[] = [
   {
     "canonical": "Narsapura",
     "slug": "narsapura",
-    "count": 19,
+    "count": 20,
     "parentCity": "Kolar",
     "citySlug": "kolar"
   },
@@ -1828,7 +1848,7 @@ export const MICROMARKETS: MicromarketSummary[] = [
   {
     "canonical": "Soukya Road",
     "slug": "soukya-road",
-    "count": 16,
+    "count": 17,
     "parentCity": "Bengaluru",
     "citySlug": "bengaluru"
   },
@@ -1842,7 +1862,7 @@ export const MICROMARKETS: MicromarketSummary[] = [
   {
     "canonical": "Whitefield",
     "slug": "whitefield",
-    "count": 58,
+    "count": 60,
     "parentCity": "Bengaluru",
     "citySlug": "bengaluru"
   }

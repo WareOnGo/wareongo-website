@@ -7,6 +7,20 @@
 // shipped to production yet): WAREONGO_API_BASE=http://localhost:3000 npm run build
 const API_BASE = process.env.WAREONGO_API_BASE || 'https://wareongo-website-backend.onrender.com';
 
+/**
+ * A city needs this many listings before its page is advertised to search —
+ * sitemap.xml and the footer link block both gate on it. Below the threshold
+ * the page is thinner than the state page it competes with, and the delisting
+ * audit (WareOnGo_Cities_To_Be_Delisted.csv) found those pages taking zero
+ * clicks and zero impressions over 77 days.
+ *
+ * Delisted, not removed: the pages still build and return 200, so existing
+ * links and cached URLs keep working. They're just not advertised.
+ */
+export const CITY_MIN_LISTINGS = 3;
+
+export const isListedCity = (city) => city.count >= CITY_MIN_LISTINGS;
+
 const CITY_ALIASES = {
   bangalore: 'Bengaluru',
   bombay: 'Mumbai',

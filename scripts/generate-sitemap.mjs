@@ -7,6 +7,8 @@ import {
   summarizeMicromarkets,
   micromarketPath,
   warehouseSlug,
+  isListedCity,
+  CITY_MIN_LISTINGS,
 } from './lib/locations.mjs';
 
 const SITE_URL = 'https://wareongo.com';
@@ -110,10 +112,17 @@ async function main() {
     warehouseUrlEntry(`/warehouse/${warehouseSlug(w)}`, warehousePhotos(w), w.updatedAt),
   );
   const totalImages = warehouses.reduce((n, w) => n + warehousePhotos(w).length, 0);
-  const cities = summarize(warehouses, 'city');
+  const allCities = summarize(warehouses, 'city');
+  // Thin city pages are delisted, not removed — they still build and return
+  // 200, they're just kept out of the sitemap (and the footer). Their /peb and
+  // /rcc variants go with them; a city too thin to advertise can't have a
+  // type split worth advertising either.
+  const cities = allCities.filter(isListedCity);
   const states = summarize(warehouses, 'state');
-  const cityTypeCombos = locationTypeCombos(warehouses, 'city');
+  const cityTypeCombos = locationTypeCombos(warehouses, 'city').filter((c) => isListedCity(c.location));
   const stateTypeCombos = locationTypeCombos(warehouses, 'state');
+  // Micromarkets are unaffected: PARENT_CITY_MIN_LISTINGS (6) already exceeds
+  // the city threshold, so every parent city here is a listed one.
   const micromarkets = summarizeMicromarkets(warehouses);
 
   const entries = [
@@ -141,6 +150,12 @@ ${entries.join('\n')}
   await fs.writeFile(outPath, xml, 'utf8');
   console.log(
     `[sitemap] wrote ${outPath} — ${entries.length} URLs (${warehouseEntries.length} warehouses w/ ${totalImages} images, ${cities.length} cities, ${states.length} states, ${cityTypeCombos.length} city×type, ${stateTypeCombos.length} state×type, ${micromarkets.length} micromarkets)`,
+  );
+  console.log(
+    `[sitemap] delisted ${allCities.length - cities.length} of ${allCities.length} cities with <${CITY_MIN_LISTINGS} listings (pages still build and return 200): ${allCities
+      .filter((c) => !isListedCity(c))
+      .map((c) => `${c.slug}(${c.count})`)
+      .join(', ')}`,
   );
 }
 

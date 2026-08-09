@@ -8,23 +8,34 @@ import {
   CITIES_BY_TYPE,
   STATES_BY_TYPE,
   MICROMARKETS,
+  CITY_MIN_LISTINGS,
   type LocationSummary,
 } from '@/data/locations.generated';
 
 // Footer link curation — concentrate link equity on (a) cities already surfacing
 // in Search Console impressions and (b) deepest-inventory markets, instead of
-// diluting ~300 links across the long tail. The sitemap still covers every page.
+// diluting ~300 links across the long tail.
 const FOOTER_CITY_SLUGS = new Set([
   // Deepest inventory
   'bengaluru', 'gurugram', 'hyderabad', 'hosur', 'kolkata', 'ghaziabad',
   'ahmedabad', 'patna', 'noida', 'greater-noida', 'delhi',
   // Surfacing in Search Console impressions (as of June 2026).
-  // Faridabad/Nashik also get impressions but are excluded until inventory
-  // grows past 1–2 listings — footer-linking near-empty pages helps nobody.
   'mumbai', 'pune', 'chennai', 'goa', 'indore', 'okhla', 'kanpur',
   'jaipur', 'surat', 'aurangabad', 'guwahati', 'raipur', 'varanasi', 'kochi',
 ]);
-const curateCities = (items: LocationSummary[]) => items.filter((c) => FOOTER_CITY_SLUGS.has(c.slug));
+
+// Whitelisted *and* past the inventory threshold. The second half is the
+// delisting rule the sitemap applies too — footer-linking a near-empty page
+// helps nobody, and linking one the sitemap omits sends mixed signals. A
+// whitelisted city that falls below the bar drops out on its own and comes
+// back when inventory grows, without a code change.
+const listedCitySlugs = new Set(
+  CITIES.filter((c) => c.count >= CITY_MIN_LISTINGS).map((c) => c.slug),
+);
+// Gated on the city's total inventory, not the per-type count in CITIES_BY_TYPE
+// — a listed city's PEB split stays linked even if only one listing is PEB.
+const curateCities = (items: LocationSummary[]) =>
+  items.filter((c) => FOOTER_CITY_SLUGS.has(c.slug) && listedCitySlugs.has(c.slug));
 
 interface LocationLinkGridProps<T extends LocationSummary = LocationSummary> {
   heading: string;

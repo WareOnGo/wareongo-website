@@ -5,6 +5,7 @@ import {
   summarize,
   locationTypeCombos,
   summarizeMicromarkets,
+  CITY_MIN_LISTINGS,
 } from './lib/locations.mjs';
 
 // Pivot the combo list into { PEB: LocationSummary[]; RCC: LocationSummary[] }
@@ -51,6 +52,11 @@ export interface MicromarketSummary extends LocationSummary {
   /** The {city} in /listings/city/{city}/{slug}. */
   citySlug: string;
 }
+
+// Listings a city needs before its page is advertised in the footer or the
+// sitemap. Mirrors CITY_MIN_LISTINGS in scripts/lib/locations.mjs, so the two
+// surfaces can't drift apart.
+export const CITY_MIN_LISTINGS = ${CITY_MIN_LISTINGS};
 
 export const CITIES: LocationSummary[] = ${JSON.stringify(cities, null, 2)};
 
