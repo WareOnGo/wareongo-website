@@ -10,6 +10,7 @@ import {
   isListedCity,
   CITY_MIN_LISTINGS,
 } from './lib/locations.mjs';
+import { fetchGuides } from './lib/api.mjs';
 
 const SITE_URL = 'https://wareongo.com';
 const today = new Date().toISOString().slice(0, 10);
@@ -31,15 +32,6 @@ const CASE_STUDY_SLUGS = [
   'hoskote-royal-enfield-warehouse',
   'hyderabad-fire-compliant-warehouse',
   'kochi-3pl-warehouse',
-];
-
-// Keep in sync with src/data/guides.ts.
-const GUIDE_SLUGS = [
-  'peb-vs-rcc-warehouse',
-  'grade-a-warehouse-india',
-  'warehouse-compliance-checklist-india',
-  'warehouse-rent-india-guide',
-  'carpet-area-vs-built-up-area-warehouse',
 ];
 
 
@@ -107,6 +99,9 @@ async function flatten404() {
 
 async function main() {
   await flatten404();
+  // Straight from the CMS, so a newly published guide reaches the sitemap
+  // without anyone remembering to edit a hardcoded list here.
+  const guideSlugs = (await fetchGuides()).map((g) => g.slug);
   const warehouses = await fetchAllWarehouses();
   const warehouseEntries = warehouses.map((w) =>
     warehouseUrlEntry(`/warehouse/${warehouseSlug(w)}`, warehousePhotos(w), w.updatedAt),
@@ -129,7 +124,7 @@ async function main() {
     ...STATIC_PATHS.map((p) => urlEntry(p.path, p.changefreq, p.priority)),
     ...CASE_STUDY_SLUGS.map((slug) => urlEntry(`/casestudies/${slug}`, 'monthly', '0.7')),
     urlEntry('/guides', 'monthly', '0.6'),
-    ...GUIDE_SLUGS.map((slug) => urlEntry(`/guides/${slug}`, 'monthly', '0.6')),
+    ...guideSlugs.map((slug) => urlEntry(`/guides/${slug}`, 'monthly', '0.6')),
     ...cities.map((c) => urlEntry(`/listings/city/${c.slug}`, 'weekly', '0.8')),
     ...micromarkets.map((m) => urlEntry(micromarketPath(m), 'weekly', '0.8')),
     ...states.map((s) => urlEntry(`/listings/state/${s.slug}`, 'weekly', '0.7')),

@@ -3,9 +3,7 @@
 // and generate-sitemap.mjs (emits per-location sitemap URLs).
 // Must stay in sync with src/loaders/locationLoader.ts.
 
-// Override to generate against a local backend (e.g. when a new field hasn't
-// shipped to production yet): WAREONGO_API_BASE=http://localhost:3000 npm run build
-const API_BASE = process.env.WAREONGO_API_BASE || 'https://wareongo-website-backend.onrender.com';
+import { API_BASE } from './api.mjs';
 
 /**
  * A city needs this many listings before its page is advertised to search —
