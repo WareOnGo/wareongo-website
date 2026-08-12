@@ -20,13 +20,28 @@ export interface GuideTable {
   rows: string[][];
 }
 
+export interface GuideImage {
+  /** Absolute URL on the R2 public host — uploaded through the CMS. */
+  url: string;
+  alt: string;
+  /** Intrinsic size of the stored file, so the img reserves its box before loading. */
+  width: number;
+  height: number;
+}
+
 export type GuideBlock =
   | { kind: 'h2'; text: string }
   | { kind: 'h3'; text: string }
   | { kind: 'p'; text: string }
   | { kind: 'ul'; items: string[] }
   | { kind: 'ol'; items: string[] }
-  | { kind: 'table'; table: GuideTable };
+  | { kind: 'table'; table: GuideTable }
+  /**
+   * One to four images. The collage layout follows from the count — 1 full
+   * width, 2 side by side, 3 in a row, 4 as a 2×2 — so there is no layout field
+   * that could contradict the images. See the renderer in pages/GuideDetail.tsx.
+   */
+  | { kind: 'images'; images: GuideImage[]; caption?: string };
 
 export interface Guide {
   slug: string;
