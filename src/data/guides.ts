@@ -53,6 +53,11 @@ export interface Guide {
   description: string;
   /** Direct answer shown in the "In short" callout — first thing AI engines extract. */
   summary: string;
+  /**
+   * Optional byline. Rendered under the H1 and emitted as an Article.author
+   * Person; absent falls back to crediting the WareOnGo organisation.
+   */
+  author?: string;
   /** ISO date — rendered on page and used as Article dateModified. */
   updated: string;
   /** ISO date first published — defaults to `updated` in the Article LD when absent. */

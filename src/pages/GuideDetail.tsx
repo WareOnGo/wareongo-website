@@ -223,7 +223,9 @@ const GuideDetail = () => {
       cssSelector: ['#guide-summary'],
     },
     isPartOf: { '@id': WEBSITE_ID },
-    author: { '@id': ORG_ID },
+    // A named byline is a Person; the organisation stays the publisher either
+    // way. Without a byline this is the organisation, as every guide was before.
+    author: guide.author ? { '@type': 'Person', name: guide.author } : { '@id': ORG_ID },
     publisher: { '@id': ORG_ID },
     inLanguage: 'en',
     isAccessibleForFree: true,
@@ -271,7 +273,15 @@ const GuideDetail = () => {
                 {guide.title}
               </h1>
               <p className="text-xs text-wareongo-slate">
-                Updated <time dateTime={guide.updated}>{guide.updated}</time> · WareOnGo
+                {guide.author ? (
+                  <>
+                    By {guide.author} · Updated <time dateTime={guide.updated}>{guide.updated}</time>
+                  </>
+                ) : (
+                  <>
+                    Updated <time dateTime={guide.updated}>{guide.updated}</time> · WareOnGo
+                  </>
+                )}
               </p>
             </header>
 
