@@ -251,12 +251,12 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/guides"
-                  title="Guides on leasing, compliance and warehouse rent in India"
-                  onClick={() => trackEvent('nav_click', { label: 'Guides', destination: '/guides', position: 'footer' })}
+                  to="/blogs"
+                  title="Blogs on leasing, compliance and warehouse rent in India"
+                  onClick={() => trackEvent('nav_click', { label: 'Blogs', destination: '/blogs', position: 'footer' })}
                   className="text-gray-300 hover:text-white transition-colors"
                 >
-                  Warehousing Guides
+                  Blogs
                 </Link>
               </li>
             </ul>

@@ -9,6 +9,10 @@
     "formats": ["image/avif", "image/webp"],
     "minimumCacheTTL": 2678400
   },
+  "redirects": [
+    { "source": "/guides", "destination": "/blogs", "permanent": true },
+    { "source": "/guides/:slug", "destination": "/blogs/:slug", "permanent": true }
+  ],
   "rewrites": [
     {
       "source": "/static-loader-data-manifest-(.*).json",

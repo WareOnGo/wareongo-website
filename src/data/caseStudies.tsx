@@ -265,8 +265,8 @@ export const caseStudies: CaseStudy[] = [
       ],
       internalLinks: [
         { label: 'Explore verified warehouses for rent in Kochi', to: '/listings/city/kochi' },
-        { label: 'Guide: Warehouse Rent in India', to: '/guides/warehouse-rent-india-guide' },
-        { label: 'Guide: Warehouse Compliance Checklist for India', to: '/guides/warehouse-compliance-checklist-india' },
+        { label: 'Blog: Warehouse Rent in India', to: '/blogs/warehouse-rent-india-guide' },
+        { label: 'Blog: Warehouse Compliance Checklist for India', to: '/blogs/warehouse-compliance-checklist-india' },
         { label: 'Next case study: Fire-compliant warehouse in Hyderabad', to: '/casestudies/hyderabad-fire-compliant-warehouse' },
       ],
       cta: {
@@ -469,8 +469,8 @@ export const caseStudies: CaseStudy[] = [
       ],
       internalLinks: [
         { label: 'Explore verified warehouses for rent in Hyderabad', to: '/listings/city/hyderabad' },
-        { label: 'Guide: Warehouse Compliance Checklist for India', to: '/guides/warehouse-compliance-checklist-india' },
-        { label: 'Guide: What Makes a Warehouse Grade A', to: '/guides/grade-a-warehouse-india' },
+        { label: 'Blog: Warehouse Compliance Checklist for India', to: '/blogs/warehouse-compliance-checklist-india' },
+        { label: 'Blog: What Makes a Warehouse Grade A', to: '/blogs/grade-a-warehouse-india' },
         { label: 'Previous case study: Kochi 3PL warehouse', to: '/casestudies/kochi-3pl-warehouse' },
         { label: 'Next case study: FSSAI warehouse in Devanahalli', to: '/casestudies/devanahalli-fssai-warehouse' },
       ],
@@ -683,8 +683,8 @@ export const caseStudies: CaseStudy[] = [
       ],
       internalLinks: [
         { label: 'Explore verified warehouses for rent in Bengaluru', to: '/listings/city/bengaluru' },
-        { label: 'Guide: Warehouse Compliance Checklist for India', to: '/guides/warehouse-compliance-checklist-india' },
-        { label: 'Guide: Warehouse Rent in India', to: '/guides/warehouse-rent-india-guide' },
+        { label: 'Blog: Warehouse Compliance Checklist for India', to: '/blogs/warehouse-compliance-checklist-india' },
+        { label: 'Blog: Warehouse Rent in India', to: '/blogs/warehouse-rent-india-guide' },
         { label: 'Previous case study: Fire-compliant warehouse in Hyderabad', to: '/casestudies/hyderabad-fire-compliant-warehouse' },
         { label: 'Next case study: Automobile warehouse in Hyderabad', to: '/casestudies/hyderabad-automobile-warehouse' },
       ],
@@ -894,8 +894,8 @@ export const caseStudies: CaseStudy[] = [
       ],
       internalLinks: [
         { label: 'Explore verified warehouses for rent in Hyderabad', to: '/listings/city/hyderabad' },
-        { label: 'Guide: Carpet Area vs Built-Up Area in Warehouses', to: '/guides/carpet-area-vs-built-up-area-warehouse' },
-        { label: 'Guide: What Makes a Warehouse Grade A', to: '/guides/grade-a-warehouse-india' },
+        { label: 'Blog: Carpet Area vs Built-Up Area in Warehouses', to: '/blogs/carpet-area-vs-built-up-area-warehouse' },
+        { label: 'Blog: What Makes a Warehouse Grade A', to: '/blogs/grade-a-warehouse-india' },
         { label: 'Previous case study: FSSAI warehouse in Devanahalli', to: '/casestudies/devanahalli-fssai-warehouse' },
         { label: 'Next case study: Warehouse for rent in Hoskote', to: '/casestudies/hoskote-royal-enfield-warehouse' },
       ],
@@ -1078,8 +1078,8 @@ export const caseStudies: CaseStudy[] = [
       ],
       internalLinks: [
         { label: 'Explore verified warehouses for rent in Bengaluru', to: '/listings/city/bengaluru' },
-        { label: 'Guide: Warehouse Rent in India', to: '/guides/warehouse-rent-india-guide' },
-        { label: 'Guide: What Makes a Warehouse Grade A', to: '/guides/grade-a-warehouse-india' },
+        { label: 'Blog: Warehouse Rent in India', to: '/blogs/warehouse-rent-india-guide' },
+        { label: 'Blog: What Makes a Warehouse Grade A', to: '/blogs/grade-a-warehouse-india' },
         { label: 'Previous case study: Automobile warehouse in Hyderabad', to: '/casestudies/hyderabad-automobile-warehouse' },
         { label: 'Next case study: Kochi 3PL warehouse', to: '/casestudies/kochi-3pl-warehouse' },
       ],

@@ -23,14 +23,14 @@ export const CARD_SIZES = '(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 92
 export const DETAIL_WIDTHS = [640, 1080, 1600];
 export const DETAIL_SIZES = '(min-width: 768px) 66vw, 100vw';
 
-// Guide figures. The prose column is max-w-3xl, so 768 CSS px at its widest —
+// Blog figures. The prose column is max-w-3xl, so 768 CSS px at its widest —
 // a full-width figure never needs more than 1600 (2× on a phone), and a collage
 // tile is a half or a third of that. Two lists rather than one shared superset:
 // every extra srcset entry is another source transformation Vercel can bill.
-// The matching `sizes` strings live with the grid in pages/GuideDetail.tsx,
+// The matching `sizes` strings live with the grid in pages/BlogDetail.tsx,
 // since the two have to agree.
-export const GUIDE_FULL_WIDTHS = [640, 1080, 1600];
-export const GUIDE_TILE_WIDTHS = [384, 640, 960];
+export const BLOG_FULL_WIDTHS = [640, 1080, 1600];
+export const BLOG_TILE_WIDTHS = [384, 640, 960];
 
 export const isOptimizable = (url: string | null | undefined): url is string =>
   ENABLED && !!url && REMOTE.test(url);

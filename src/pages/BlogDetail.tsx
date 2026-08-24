@@ -4,26 +4,26 @@ import Breadcrumbs, { type BreadcrumbItem } from '@/components/Breadcrumbs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FAQAccordion from '@/components/FAQAccordion';
-import { getGuideBySlug, guides, type GuideBlock, type GuideImage } from '@/data/guides';
-import { optimizedSrc, optimizedSrcSet, GUIDE_FULL_WIDTHS, GUIDE_TILE_WIDTHS } from '@/lib/imageOpt';
+import { getBlogBySlug, blogs, type BlogBlock, type BlogImage } from '@/data/blogs';
+import { optimizedSrc, optimizedSrcSet, BLOG_FULL_WIDTHS, BLOG_TILE_WIDTHS } from '@/lib/imageOpt';
 import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
 
-// Plain-text length of a guide (summary + blocks) for the Article wordCount.
-const countWords = (guide: NonNullable<ReturnType<typeof getGuideBySlug>>): number => {
-  const texts: string[] = [guide.summary];
-  for (const b of guide.blocks) {
+// Plain-text length of a blog (summary + blocks) for the Article wordCount.
+const countWords = (blog: NonNullable<ReturnType<typeof getBlogBySlug>>): number => {
+  const texts: string[] = [blog.summary];
+  for (const b of blog.blocks) {
     if (b.kind === 'p' || b.kind === 'h2' || b.kind === 'h3') texts.push(b.text);
     else if (b.kind === 'ul' || b.kind === 'ol') texts.push(...b.items);
     else if (b.kind === 'table') texts.push(...b.table.headers, ...b.table.rows.flat());
     // Captions are visible prose; alt text is not, so it stays out of the count.
     else if (b.kind === 'images' && b.caption) texts.push(b.caption);
   }
-  for (const f of guide.faqs) texts.push(f.q, f.a);
+  for (const f of blog.faqs) texts.push(f.q, f.a);
   return texts.join(' ').split(/\s+/).filter(Boolean).length;
 };
 
-/** Every guide image, in reading order — first one doubles as the page's og:image. */
-const imagesIn = (blocks: GuideBlock[]): GuideImage[] =>
+/** Every blog image, in reading order — first one doubles as the page's og:image. */
+const imagesIn = (blocks: BlogBlock[]): BlogImage[] =>
   blocks.flatMap((b) => (b.kind === 'images' ? b.images : []));
 
 // Collage geometry, derived from the image count alone: 1 full width, 2 side by
@@ -66,7 +66,7 @@ const fallbackToRaw = (e: React.SyntheticEvent<HTMLImageElement>) => {
   img.src = raw;
 };
 
-const ImagesBlock = ({ images, caption }: { images: GuideImage[]; caption?: string }) => {
+const ImagesBlock = ({ images, caption }: { images: BlogImage[]; caption?: string }) => {
   const count = images.length;
   if (count === 0) return null;
 
@@ -74,11 +74,11 @@ const ImagesBlock = ({ images, caption }: { images: GuideImage[]; caption?: stri
     <figure className="mb-6">
       {count === 1 ? (
         // Shown at its own aspect ratio, capped in height so a portrait photo
-        // can't push the rest of the guide off the screen. w-auto alongside
+        // can't push the rest of the blog off the screen. w-auto alongside
         // max-w-full keeps it undistorted when that cap bites.
         <img
           src={optimizedSrc(images[0].url, 1080)}
-          srcSet={optimizedSrcSet(images[0].url, GUIDE_FULL_WIDTHS)}
+          srcSet={optimizedSrcSet(images[0].url, BLOG_FULL_WIDTHS)}
           sizes="(min-width: 768px) 768px, 100vw"
           data-raw={images[0].url}
           alt={images[0].alt}
@@ -100,7 +100,7 @@ const ImagesBlock = ({ images, caption }: { images: GuideImage[]; caption?: stri
             >
               <img
                 src={optimizedSrc(img.url, 640)}
-                srcSet={optimizedSrcSet(img.url, GUIDE_TILE_WIDTHS)}
+                srcSet={optimizedSrcSet(img.url, BLOG_TILE_WIDTHS)}
                 sizes={tileSizes(count, i)}
                 data-raw={img.url}
                 alt={img.alt}
@@ -122,9 +122,9 @@ const ImagesBlock = ({ images, caption }: { images: GuideImage[]; caption?: stri
   );
 };
 
-// Simple prose renderer for the structured guide blocks. Deliberately plain —
+// Simple prose renderer for the structured blog blocks. Deliberately plain —
 // these pages exist to be read (by people and by AI engines), not to dazzle.
-const Block = ({ block }: { block: GuideBlock }) => {
+const Block = ({ block }: { block: BlogBlock }) => {
   switch (block.kind) {
     case 'h2':
       return (
@@ -187,45 +187,45 @@ const Block = ({ block }: { block: GuideBlock }) => {
   }
 };
 
-const GuideDetail = () => {
+const BlogDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const guide = slug ? getGuideBySlug(slug) : undefined;
+  const blog = slug ? getBlogBySlug(slug) : undefined;
 
-  if (!guide) {
-    return <Navigate to="/guides" replace />;
+  if (!blog) {
+    return <Navigate to="/blogs" replace />;
   }
 
-  const path = `/guides/${guide.slug}`;
-  const relatedGuides = guide.related
-    .map((s) => guides.find((g) => g.slug === s))
+  const path = `/blogs/${blog.slug}`;
+  const relatedBlogs = blog.related
+    .map((s) => blogs.find((g) => g.slug === s))
     .filter((g): g is NonNullable<typeof g> => Boolean(g));
 
-  // A guide with images is better represented by its own first image than by the
+  // A blog with images is better represented by its own first image than by the
   // generic site card — in the Article LD and in the social preview alike.
-  const leadImage = imagesIn(guide.blocks)[0]?.url;
+  const leadImage = imagesIn(blog.blocks)[0]?.url;
 
   const articleLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: guide.title,
-    description: guide.description,
+    headline: blog.title,
+    description: blog.description,
     url: `${SITE_URL}${path}`,
     mainEntityOfPage: `${SITE_URL}${path}`,
-    datePublished: guide.published ?? guide.updated,
-    dateModified: guide.updated,
-    articleSection: 'Warehousing Guides',
-    wordCount: countWords(guide),
+    datePublished: blog.published ?? blog.updated,
+    dateModified: blog.updated,
+    articleSection: 'Blogs',
+    wordCount: countWords(blog),
     image: leadImage ?? `${SITE_URL}/og-image.jpg`,
-    ...(guide.keywords && guide.keywords.length > 0 ? { keywords: guide.keywords.join(', ') } : {}),
+    ...(blog.keywords && blog.keywords.length > 0 ? { keywords: blog.keywords.join(', ') } : {}),
     // GEO marking: points answer engines at the direct-answer summary block.
     speakable: {
       '@type': 'SpeakableSpecification',
-      cssSelector: ['#guide-summary'],
+      cssSelector: ['#blog-summary'],
     },
     isPartOf: { '@id': WEBSITE_ID },
     // A named byline is a Person; the organisation stays the publisher either
-    // way. Without a byline this is the organisation, as every guide was before.
-    author: guide.author ? { '@type': 'Person', name: guide.author } : { '@id': ORG_ID },
+    // way. Without a byline this is the organisation, as every blog was before.
+    author: blog.author ? { '@type': 'Person', name: blog.author } : { '@id': ORG_ID },
     publisher: { '@id': ORG_ID },
     inLanguage: 'en',
     isAccessibleForFree: true,
@@ -236,7 +236,7 @@ const GuideDetail = () => {
   const faqLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: guide.faqs.map(({ q, a }) => ({
+    mainEntity: blog.faqs.map(({ q, a }) => ({
       '@type': 'Question',
       name: q,
       acceptedAnswer: { '@type': 'Answer', text: a },
@@ -245,13 +245,13 @@ const GuideDetail = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
-      <PageHead title={guide.seoTitle} description={guide.description} path={path} image={leadImage} ogType="article">
+      <PageHead title={blog.seoTitle} description={blog.description} path={path} image={leadImage} ogType="article">
         <script type="application/ld+json">{JSON.stringify(articleLd)}</script>
         <script type="application/ld+json">{JSON.stringify(faqLd)}</script>
       </PageHead>
       <Navbar />
 
-      <main className="flex-grow" role="main" aria-labelledby="guide-title">
+      <main className="flex-grow" role="main" aria-labelledby="blog-title">
         <div className="section-container px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
           <article className="max-w-3xl mx-auto">
             <Breadcrumbs
@@ -259,27 +259,27 @@ const GuideDetail = () => {
               items={
                 [
                   { label: 'Home', path: '/' },
-                  { label: 'Guides', path: '/guides' },
-                  { label: guide.title },
+                  { label: 'Blogs', path: '/blogs' },
+                  { label: blog.title },
                 ] satisfies BreadcrumbItem[]
               }
             />
 
             <header className="mb-6">
               <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate block mb-3">
-                Guide
+                Blog
               </span>
-              <h1 id="guide-title" className="text-2xl sm:text-3xl md:text-4xl font-bold text-wareongo-blue leading-tight mb-3">
-                {guide.title}
+              <h1 id="blog-title" className="text-2xl sm:text-3xl md:text-4xl font-bold text-wareongo-blue leading-tight mb-3">
+                {blog.title}
               </h1>
               <p className="text-xs text-wareongo-slate">
-                {guide.author ? (
+                {blog.author ? (
                   <>
-                    By {guide.author} · Updated <time dateTime={guide.updated}>{guide.updated}</time>
+                    By {blog.author} · Updated <time dateTime={blog.updated}>{blog.updated}</time>
                   </>
                 ) : (
                   <>
-                    Updated <time dateTime={guide.updated}>{guide.updated}</time> · WareOnGo
+                    Updated <time dateTime={blog.updated}>{blog.updated}</time> · WareOnGo
                   </>
                 )}
               </p>
@@ -287,31 +287,31 @@ const GuideDetail = () => {
 
             {/* Direct-answer summary — the first thing answer engines extract.
                 The id is referenced by the Article LD's speakable cssSelector. */}
-            <div id="guide-summary" className="border-l-4 border-wareongo-blue/40 bg-wareongo-blue/5 rounded-r-xl px-4 py-3 mb-8">
+            <div id="blog-summary" className="border-l-4 border-wareongo-blue/40 bg-wareongo-blue/5 rounded-r-xl px-4 py-3 mb-8">
               <p className="text-sm font-semibold text-wareongo-charcoal mb-1">In short</p>
-              <p className="text-[15px] sm:text-base text-wareongo-slate leading-relaxed">{guide.summary}</p>
+              <p className="text-[15px] sm:text-base text-wareongo-slate leading-relaxed">{blog.summary}</p>
             </div>
 
-            {guide.blocks.map((block, i) => (
+            {blog.blocks.map((block, i) => (
               <Block key={i} block={block} />
             ))}
 
             {/* Accordion answers stay in the DOM when collapsed (see FAQAccordion),
                 so the SSG HTML always matches the FAQPage JSON-LD. */}
-            <section aria-labelledby="guide-faq" className="mt-10">
-              <h2 id="guide-faq" className="text-xl sm:text-2xl font-bold text-wareongo-blue mb-4">
+            <section aria-labelledby="blog-faq" className="mt-10">
+              <h2 id="blog-faq" className="text-xl sm:text-2xl font-bold text-wareongo-blue mb-4">
                 Frequently asked questions
               </h2>
-              <FAQAccordion items={guide.faqs.map(({ q, a }) => ({ q, a }))} />
+              <FAQAccordion items={blog.faqs.map(({ q, a }) => ({ q, a }))} />
             </section>
 
-            {relatedGuides.length > 0 && (
-              <section aria-label="Related guides" className="mt-10">
-                <h2 className="text-base font-semibold text-wareongo-charcoal mb-3">Related guides</h2>
+            {relatedBlogs.length > 0 && (
+              <section aria-label="Related blogs" className="mt-10">
+                <h2 className="text-base font-semibold text-wareongo-charcoal mb-3">Related blogs</h2>
                 <ul className="space-y-2">
-                  {relatedGuides.map((g) => (
+                  {relatedBlogs.map((g) => (
                     <li key={g.slug}>
-                      <Link to={`/guides/${g.slug}`} className="text-wareongo-blue hover:underline">
+                      <Link to={`/blogs/${g.slug}`} className="text-wareongo-blue hover:underline">
                         {g.title}
                       </Link>
                     </li>
@@ -320,7 +320,7 @@ const GuideDetail = () => {
               </section>
             )}
 
-            {/* CTA — guides feed the transactional pages */}
+            {/* CTA — blogs feed the transactional pages */}
             <div className="mt-10 border border-wareongo-blue/20 rounded-2xl p-6 text-center">
               <p className="text-wareongo-charcoal font-semibold mb-1">Looking for warehouse space?</p>
               <p className="text-sm text-wareongo-slate mb-4">
@@ -351,4 +351,4 @@ const GuideDetail = () => {
   );
 };
 
-export default GuideDetail;
+export default BlogDetail;

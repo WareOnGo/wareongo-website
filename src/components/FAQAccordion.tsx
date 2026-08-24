@@ -5,7 +5,7 @@ import { ChevronDown } from 'lucide-react';
 export interface FAQEntry {
   q: string;
   a: string;
-  /** Optional trailing link rendered after the answer text (e.g. to a guide). */
+  /** Optional trailing link rendered after the answer text (e.g. to a blog). */
   link?: { to: string; label: string };
 }
 

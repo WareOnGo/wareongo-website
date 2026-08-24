@@ -1,26 +1,26 @@
-// Informational guides — deliberately "hidden": not linked from the navbar or
+// Informational blogs — deliberately "hidden": not linked from the navbar or
 // footer, but present in sitemap.xml and llms.txt so search engines and AI
-// assistants can find and cite them. Each guide targets informational queries
+// assistants can find and cite them. Each blog targets informational queries
 // (e.g. "PEB vs RCC warehouse") that transactional listing pages can't rank for.
 //
 // Content is structured (blocks + FAQs) so the renderer stays simple and the
 // FAQPage JSON-LD is generated from the same source of truth as the visible Q&A.
 //
-// The guides themselves now live in the CMS (Guide table) and are pulled at
-// build time into ./guides.generated.ts by scripts/generate-guides.mjs. This
+// The blogs themselves now live in the CMS (Blog table) and are pulled at
+// build time into ./blogs.generated.ts by scripts/generate-blogs.mjs. This
 // module keeps the types and re-exports that data, so importers are unchanged.
 
-export interface GuideFaq {
+export interface BlogFaq {
   q: string;
   a: string;
 }
 
-export interface GuideTable {
+export interface BlogTable {
   headers: string[];
   rows: string[][];
 }
 
-export interface GuideImage {
+export interface BlogImage {
   /** Absolute URL on the R2 public host — uploaded through the CMS. */
   url: string;
   alt: string;
@@ -29,21 +29,21 @@ export interface GuideImage {
   height: number;
 }
 
-export type GuideBlock =
+export type BlogBlock =
   | { kind: 'h2'; text: string }
   | { kind: 'h3'; text: string }
   | { kind: 'p'; text: string }
   | { kind: 'ul'; items: string[] }
   | { kind: 'ol'; items: string[] }
-  | { kind: 'table'; table: GuideTable }
+  | { kind: 'table'; table: BlogTable }
   /**
    * One to four images. The collage layout follows from the count — 1 full
    * width, 2 side by side, 3 in a row, 4 as a 2×2 — so there is no layout field
-   * that could contradict the images. See the renderer in pages/GuideDetail.tsx.
+   * that could contradict the images. See the renderer in pages/BlogDetail.tsx.
    */
-  | { kind: 'images'; images: GuideImage[]; caption?: string };
+  | { kind: 'images'; images: BlogImage[]; caption?: string };
 
-export interface Guide {
+export interface Blog {
   slug: string;
   /** On-page H1 */
   title: string;
@@ -64,15 +64,15 @@ export interface Guide {
   published?: string;
   /** Keyword phrases for the Article JSON-LD (joined comma-separated). */
   keywords?: string[];
-  blocks: GuideBlock[];
-  faqs: GuideFaq[];
-  /** Slugs of related guides, rendered as cross-links. */
+  blocks: BlogBlock[];
+  faqs: BlogFaq[];
+  /** Slugs of related blogs, rendered as cross-links. */
   related: string[];
 }
 
-export { guides } from './guides.generated';
+export { blogs } from './blogs.generated';
 
-import { guides as allGuides } from './guides.generated';
+import { blogs as allBlogs } from './blogs.generated';
 
-export const getGuideBySlug = (slug: string): Guide | undefined =>
-  allGuides.find((g) => g.slug === slug);
+export const getBlogBySlug = (slug: string): Blog | undefined =>
+  allBlogs.find((g) => g.slug === slug);

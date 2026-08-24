@@ -3,29 +3,29 @@ import PageHead from '@/components/PageHead';
 import Breadcrumbs, { type BreadcrumbItem } from '@/components/Breadcrumbs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { guides } from '@/data/guides';
+import { blogs } from '@/data/blogs';
 import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
 
-const TITLE = 'Warehousing Guides — Leasing, Compliance & Costs in India | WareOnGo';
+const TITLE = 'Blogs — Warehouse Leasing, Compliance & Costs in India | WareOnGo';
 const DESCRIPTION =
-  'Practical guides to warehousing in India: PEB vs RCC construction, Grade A specifications, compliance checklists, and how warehouse rent and lease terms work.';
+  'Practical writing on warehousing in India: PEB vs RCC construction, Grade A specifications, compliance checklists, and how warehouse rent and lease terms work.';
 
-const Guides = () => {
+const Blogs = () => {
   const collectionLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'Warehousing Guides',
+    name: 'Blogs',
     description: DESCRIPTION,
-    url: `${SITE_URL}/guides`,
+    url: `${SITE_URL}/blogs`,
     isPartOf: { '@id': WEBSITE_ID },
     provider: { '@id': ORG_ID },
     mainEntity: {
       '@type': 'ItemList',
-      numberOfItems: guides.length,
-      itemListElement: guides.map((g, idx) => ({
+      numberOfItems: blogs.length,
+      itemListElement: blogs.map((g, idx) => ({
         '@type': 'ListItem',
         position: idx + 1,
-        url: `${SITE_URL}/guides/${g.slug}`,
+        url: `${SITE_URL}/blogs/${g.slug}`,
         name: g.title,
       })),
     },
@@ -33,12 +33,12 @@ const Guides = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
-      <PageHead title={TITLE} description={DESCRIPTION} path="/guides">
+      <PageHead title={TITLE} description={DESCRIPTION} path="/blogs">
         <script type="application/ld+json">{JSON.stringify(collectionLd)}</script>
       </PageHead>
       <Navbar />
 
-      <main className="flex-grow" role="main" aria-labelledby="guides-title">
+      <main className="flex-grow" role="main" aria-labelledby="blogs-title">
         <div className="section-container px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
           <div className="max-w-3xl mx-auto">
             <Breadcrumbs
@@ -46,7 +46,7 @@ const Guides = () => {
               items={
                 [
                   { label: 'Home', path: '/' },
-                  { label: 'Guides' },
+                  { label: 'Blogs' },
                 ] satisfies BreadcrumbItem[]
               }
             />
@@ -55,8 +55,8 @@ const Guides = () => {
               <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate block mb-3">
                 Knowledge base
               </span>
-              <h1 id="guides-title" className="text-3xl sm:text-4xl font-bold text-wareongo-blue mb-3 leading-tight">
-                Warehousing Guides
+              <h1 id="blogs-title" className="text-3xl sm:text-4xl font-bold text-wareongo-blue mb-3 leading-tight">
+                Blogs
               </h1>
               <p className="text-base sm:text-lg text-wareongo-slate leading-relaxed">
                 Practical, India-specific answers on warehouse construction types, grading, compliance and
@@ -65,10 +65,10 @@ const Guides = () => {
             </header>
 
             <ul className="space-y-4">
-              {guides.map((g) => (
+              {blogs.map((g) => (
                 <li key={g.slug}>
                   <Link
-                    to={`/guides/${g.slug}`}
+                    to={`/blogs/${g.slug}`}
                     className="block border border-wareongo-blue/15 rounded-2xl p-5 hover:border-wareongo-blue/40 hover:bg-wareongo-blue/[0.02] transition-colors"
                   >
                     <h2 className="text-lg sm:text-xl font-semibold text-wareongo-blue mb-1">{g.title}</h2>
@@ -89,4 +89,4 @@ const Guides = () => {
   );
 };
 
-export default Guides;
+export default Blogs;

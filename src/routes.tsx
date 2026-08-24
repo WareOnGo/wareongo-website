@@ -3,7 +3,7 @@ import RootLayout from "./RootLayout";
 import Index from "./pages/Index";
 import RouteErrorBoundary from "./components/RouteErrorBoundary";
 import { caseStudies } from "./data/caseStudies";
-import { guides } from "./data/guides";
+import { blogs } from "./data/blogs";
 import { warehouseLoader, warehouseStaticPaths, listingsLoader } from "./loaders/warehouseLoader";
 import {
   cityListingsLoader,
@@ -45,13 +45,13 @@ export const routes: RouteRecord[] = [
             lazy: lazyDefault(() => import("./pages/CaseStudyDetail")),
             getStaticPaths: () => caseStudies.map((cs) => `/casestudies/${cs.slug}`),
           },
-          // Informational guides — intentionally unlinked from nav/footer ("hidden"),
+          // Informational blogs — intentionally unlinked from nav/footer ("hidden"),
           // but in sitemap.xml + llms.txt so search engines and AI assistants find them.
-          { path: "guides", lazy: lazyDefault(() => import("./pages/Guides")) },
+          { path: "blogs", lazy: lazyDefault(() => import("./pages/Blogs")) },
           {
-            path: "guides/:slug",
-            lazy: lazyDefault(() => import("./pages/GuideDetail")),
-            getStaticPaths: () => guides.map((g) => `/guides/${g.slug}`),
+            path: "blogs/:slug",
+            lazy: lazyDefault(() => import("./pages/BlogDetail")),
+            getStaticPaths: () => blogs.map((g) => `/blogs/${g.slug}`),
           },
           {
             path: "listings",

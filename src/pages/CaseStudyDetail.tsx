@@ -310,7 +310,7 @@ const CaseStudyDetail: React.FC = () => {
             )}
           </div>
 
-          {/* Internal links — city listings, related guides, adjacent case studies */}
+          {/* Internal links — city listings, related blogs, adjacent case studies */}
           <section aria-label="Related links" className="mt-8">
             <h2 className="text-base font-semibold text-wareongo-charcoal mb-3">Internal links</h2>
             <ul className="space-y-2">

@@ -231,13 +231,13 @@ const WarehouseDetail = () => {
     faqs.push({
       q: 'What type of construction is this warehouse?',
       a: 'This is a PEB (pre-engineered building) warehouse — a factory-fabricated steel structure bolted together on a concrete plinth. PEB sheds offer wide column-free spans and higher eaves than concrete construction, typically supporting 4–6 racking levels, and are the construction style behind most modern Grade A logistics space in India.',
-      link: { to: '/guides/peb-vs-rcc-warehouse', label: 'PEB vs RCC: which should you lease? →' },
+      link: { to: '/blogs/peb-vs-rcc-warehouse', label: 'PEB vs RCC: which should you lease? →' },
     });
   } else if (typeLabel === 'RCC') {
     faqs.push({
       q: 'What type of construction is this warehouse?',
       a: 'This is an RCC (reinforced cement concrete) warehouse — cast-in-place concrete construction. RCC buildings carry high inherent fire resistance and stay cooler inside thanks to thermal mass, and they are the standard choice for in-city godowns, multi-storey storage and heavy point loads such as machinery.',
-      link: { to: '/guides/peb-vs-rcc-warehouse', label: 'PEB vs RCC: which should you lease? →' },
+      link: { to: '/blogs/peb-vs-rcc-warehouse', label: 'PEB vs RCC: which should you lease? →' },
     });
   }
   if (clearHeight) {
@@ -256,7 +256,7 @@ const WarehouseDetail = () => {
     faqs.push({
       q: 'What compliances does this warehouse have?',
       a: `Compliances on record: ${compliancesText}. These are validated by WareOnGo's Area Managers during physical verification. Note that tenants typically need their own registrations on top — GST additional place of business, trade licence, and sector-specific licences such as FSSAI for food storage.`,
-      link: { to: '/guides/warehouse-compliance-checklist-india', label: 'Full compliance checklist →' },
+      link: { to: '/blogs/warehouse-compliance-checklist-india', label: 'Full compliance checklist →' },
     });
   }
 
