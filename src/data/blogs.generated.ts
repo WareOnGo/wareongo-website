@@ -6,10 +6,11 @@ import type { Blog } from './blogs';
 export const blogs: Blog[] = [
   {
     "slug": "peb-vs-rcc-warehouse",
-    "title": "PEB vs RCC Warehouse: Which Should You Lease in India?",
+    "title": "PEB vs RCC Warehouse - Which Should You Lease in India?",
     "seoTitle": "PEB vs RCC Warehouse — Differences, Costs & Which to Lease | WareOnGo",
     "description": "PEB (pre-engineered building) vs RCC warehouse compared: construction, clear height, cost, fire safety, and which suits 3PL, e-commerce, manufacturing or cold storage.",
-    "summary": "PEB (pre-engineered building) warehouses are steel structures — faster to build, cheaper per sqft at scale, with higher clear heights and wider column-free spans, making them the default for modern Grade A logistics. RCC (reinforced cement concrete) warehouses are concrete structures — slower and costlier to build but better suited to multi-storey use, heavy point loads, and in-city locations. For most leasing decisions: large single-storey distribution → PEB; small in-city godown or multi-floor use → RCC.",
+    "summary": "PEB (Pre-Engineered Building) warehouses are steel structures — faster to build, cheaper per sqft at scale, with higher clear heights and wider column-free spans, making them the default for modern Grade A logistics. RCC (reinforced cement concrete) warehouses are concrete structures — slower and costlier to build but better suited to multi-storey use, heavy point loads, and in-city locations. For most leasing decisions: large single-storey distribution → PEB; small in-city godown or multi-floor use → RCC.",
+    "author": "Raghav Sharma",
     "published": "2026-06-04",
     "updated": "2026-06-05",
     "keywords": [
@@ -21,6 +22,24 @@ export const blogs: Blog[] = [
       "Grade A warehouse construction"
     ],
     "blocks": [
+      {
+        "kind": "images",
+        "images": [
+          {
+            "alt": "RCC Warehouse Image",
+            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/warehouse-1296-image-7-1-ea600a4344aecc3c.webp",
+            "width": 1599,
+            "height": 906
+          },
+          {
+            "alt": "PEB Warehouse Image",
+            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/warehouse-1305-image-2-c968a40240860959.webp",
+            "width": 1280,
+            "height": 960
+          }
+        ],
+        "caption": ""
+      },
       {
         "kind": "p",
         "text": "Almost every warehouse listed in India is described as either PEB or RCC. The label refers to how the structure is built, but it has practical consequences for the tenant: clear height, racking density, fire-safety design, ambient temperature, and rent. This guide explains both, compares them point by point, and tells you which to shortlist for your use case."
@@ -296,7 +315,9 @@ export const blogs: Blog[] = [
     ],
     "related": [
       "grade-a-warehouse-india",
-      "warehouse-rent-india-guide"
+      "warehouse-rent-india-guide",
+      "carpet-area-vs-built-up-area-warehouse",
+      "warehouse-compliance-checklist-india"
     ]
   },
   {
@@ -1205,6 +1226,158 @@ export const blogs: Blog[] = [
       "warehouse-rent-india-guide",
       "peb-vs-rcc-warehouse",
       "grade-a-warehouse-india"
+    ]
+  },
+  {
+    "slug": "dabaspet-multimodal-logistics-park",
+    "title": "Dabaspet Multimodal Logistics Park: What Bengaluru's Rs 1,770 Crore MMLP Means for Warehousing",
+    "seoTitle": "Dabaspet Multimodal Logistics Park, Bangalore | WareOnGo",
+    "description": "Bangalore's 400-acre Dabaspet MMLP runs in phases to 2039. What the Rs 1,770 crore park changes for warehouse and godowns.",
+    "summary": "A 400-acre multimodal logistics park is being built at Dabaspet, in Bengalore's Rural district, at an estimated cost of Rs 1,770 crore. The place is also spelled Dabbaspet, Dobbaspet, Dobbspet and Dobaspet. \r\n\r\nThe National Highways Authority of India [NHAI] describes it as the first and largest such park implemented under the PM Gati Shakti National Master Plan.  Phase 1 is targeted for 2026, Phase 2 for 2034 and Phase 3 for 2039.",
+    "author": "WareOnGo Editorial Team",
+    "published": "2026-08-13",
+    "updated": "2026-08-13",
+    "keywords": [],
+    "blocks": [
+      {
+        "kind": "images",
+        "images": [
+          {
+            "alt": "Image Credits: Deccan Herald",
+            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/deccanherald-import-sites-dh-files-articleimages-2022-06-24--33d26d9c577f0e43.webp",
+            "width": 1200,
+            "height": 738
+          }
+        ],
+        "caption": "Overview of the upcoming MMLP at Bangalore's Dabaspet"
+      },
+      {
+        "kind": "h2",
+        "text": "What is actually being built at Dabaspet"
+      },
+      {
+        "kind": "p",
+        "text": "National Highways Logistics Management Ltd, a wholly owned subsidiary of NHAI, signed the concession on 29 August 2023 with PATH Bengaluru Logistics Park Pvt Ltd, on a design, build, finance, operate and transfer basis. The concessionaire builds the park and then runs it for 45 years, over which NHAI expects it to handle around 30 million metric tonnes of cargo."
+      },
+      {
+        "kind": "p",
+        "text": "The government side sits in a special purpose vehicle called Bengaluru MMLP Pvt Ltd, in which NHLML holds 51.29%, the Karnataka Industrial Areas Development Board holds 32.38% and Rail Vikas Nigam Ltd holds 16.33%."
+      },
+      {
+        "kind": "p",
+        "text": "That shareholding is worth noticing: a state land agency and a railway construction arm are both in the project."
+      },
+      {
+        "kind": "p",
+        "text": "The site sits in the Bengaluru Rural district, in the Dabaspet belt of Nelamangala taluk. It includes both Muddelinganahalli and Obalapura villages; goes to show the scale of the project."
+      },
+      {
+        "kind": "p",
+        "text": "Its three boundaries are the highlight of this project. The Bengaluru to Hubballi to Mumbai railway line runs along the south. NH 648, the Satellite Town Ring Road's Dobbspet to Doddaballapur to Hoskote stretch, bounds it north. An upcoming KIADB industrial area sits on the eastern flank, and Kempegowda International Airport is about 55 km away."
+      },
+      {
+        "kind": "p",
+        "text": "The concessionaire, which markets the park as PATH Logicity Bengaluru, describes the build as roughly 5.2 million sq ft of warehousing plus an inland container depot, six rail sidings, cold storage, customs-bonded areas and commercial space."
+      },
+      {
+        "kind": "h2",
+        "text": "Why the inland container depot is important"
+      },
+      {
+        "kind": "p",
+        "text": "The most useful thing in the build scope is not the warehousing is the Inland Container Depot and its six rail sidings."
+      },
+      {
+        "kind": "p",
+        "text": "Bengaluru is not short of rail-served container handling. CONCOR's ICD Whitefield is Karnataka's largest, at 125 acres, moving more than 1,30,000 TEU a year, and it already connects to the gateway ports of Chennai, Mumbai, Cochin, Mangalore and Tuticorin. Adani Ports has since commissioned a 30-acre ICD at Malur, on the Bengaluru to Chennai main line. Both sit east or south-east of the city."
+      },
+      {
+        "kind": "p",
+        "text": "The belt running north-west from Nelamangala through Dabaspet towards Tumkur is one of Bengaluru's established warehouse corridors, so an exporter or third-party logistics operator holding space there currently has to move containers across or around Bengaluru to reach a depot. So, with the MMLP, that expense is negated and you still pay rent which is lesser than the southern or eastern warehousing belts of Bangalore."
+      },
+      {
+        "kind": "p",
+        "text": "An ICD with six sidings at Dabaspet, on the line running west towards Hubballi and Mumbai, closes that gap."
+      },
+      {
+        "kind": "h2",
+        "text": "How the MMLP affects the rent, and what you should do about it"
+      },
+      {
+        "kind": "p",
+        "text": "The Dabaspet and Nelamangala belt is not greenfield. It is already an established Grade A corridor (https://wareongo.com/guides/grade-a-warehouse-india), and like most of Bangalore's newer warehouse belts, it has mostly PEB warehouses (https://wareongo.com/guides/peb-vs-rcc-warehouse) rather than RCC godowns."
+      },
+      {
+        "kind": "p",
+        "text": "There is stock there today. That is why the first real effect is not on supply. It is on expectation."
+      },
+      {
+        "kind": "p",
+        "text": "Land expectations move; Landlord anchoring follows. Anyone who has negotiated in a corridor with a large development announced in the future knows the pattern: the project becomes a line in the landlord's argument long before it is built."
+      },
+      {
+        "kind": "p",
+        "text": "The practical defence is unglamorous. Know the range of rent in the corridor before you sit down, separate what the building gives you today from what the corridor might give you in 2034, and refuse to pay a 2034 premium on a 2027 lease."
+      },
+      {
+        "kind": "p",
+        "text": "At WareOnGo, that is exactly what we help you do."
+      },
+      {
+        "kind": "h2",
+        "text": "An MMLP is a wholesale asset, is it for you?"
+      },
+      {
+        "kind": "p",
+        "text": "The Dabaspet MMLP is configured around an Inland Container Depot, rail sidings, customs-bonded space and a truck terminal. That serves import and export flows, container consolidation, and large third-party logistics operations running volume through rail. Those users get something from Dabaspet that they cannot get from a standalone space."
+      },
+      {
+        "kind": "p",
+        "text": "A domestic direct-to-consumer brand taking 30,000 sq ft purely for regional distribution gets close to nothing from a rail siding. It may still pay a park premium for infrastructure it will never touch, and accept park-level rules on access and operations in exchange. That is an easy trade to walk into when the marketing talks about multimodal connectivity."
+      },
+      {
+        "kind": "p",
+        "text": "In such cases, the KIADB industrial area on the eastern flank is the more reliable option. A logistics park next to a new industrial area is very advantageous, because the manufacturing anchor generates the demand that fills the warehousing. You also have the existing Nelamangala belt, where there is a ton of Grade A warehousing at extremely affordable rates. This is the best belt if you are looking for premium ready-to-move or built-to-suit warehouses on a budget."
+      },
+      {
+        "kind": "h2",
+        "text": "Should you take space in the corridor now?"
+      },
+      {
+        "kind": "h3",
+        "text": "Move now if:"
+      },
+      {
+        "kind": "p",
+        "text": "You are an exporter or a 3PL operating on Bengaluru's north-west or Tumkur Road side, you move containers, and you want to be inside the catchment before the ICD lands and resets local pricing. Same answer if you supply into the KIADB industrial area on the eastern flank, where the demand shows up before the park opens. It is also one of the best corridors in Bangalore if you are looking for Grade A spaces, and the rates are among the lowest of its peers. If you are looking for genuine Grade A spaces on a budget, this is where you should look"
+      },
+      {
+        "kind": "h3",
+        "text": "Wait if:"
+      },
+      {
+        "kind": "p",
+        "text": "Your requirement is genuinely park-dependent, meaning you need a rail siding, bonded storage or customs clearance inside the boundary. Wait till there is a confirmation on a decent amount of inventory having been built out."
+      }
+    ],
+    "faqs": [
+      {
+        "a": "At Dabaspet in Bengaluru Rural district, in Nelamangala taluk, roughly 12 km from Dabaspet town.The site is bounded by the Bengaluru to Hubballi to Mumbai railway line on the south, NH 648 and the Satellite Town Ring Road on the north, and an upcoming KIADB industrial area on the east.",
+        "q": "Where is the Bengaluru multimodal logistics park being built?"
+      },
+      {
+        "a": "NHAI puts it at 400 acres, at an estimated cost of Rs 1,770 crore. The planned build includes roughly 5.2 million sq ft of warehousing, an inland container depot, six rail sidings, cold storage and customs-bonded areas, spread across the three phases.",
+        "q": "How big is the Dabaspet multimodal logistics park?"
+      },
+      {
+        "a": "The government side is a special purpose vehicle, Bengaluru MMLP Pvt Ltd, in which NHAI's National Highways Logistics Management Ltd holds 51.29%, KIADB holds 32.38% and Rail Vikas Nigam Ltd holds 16.33%. The private concessionaire is PATH Bengaluru Logistics Park Pvt Ltd, which signed a design, build, finance, operate and transfer agreement on 29 August 2023 and will operate the park for 45 years. It is marketed as PATH Logicity Bengaluru.",
+        "q": "Who is developing the Bengaluru MMLP?"
+      }
+    ],
+    "related": [
+      "grade-a-warehouse-india",
+      "warehouse-rent-india-guide",
+      "peb-vs-rcc-warehouse"
     ]
   }
 ];

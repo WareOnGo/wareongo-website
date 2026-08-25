@@ -22,6 +22,14 @@ const countWords = (blog: NonNullable<ReturnType<typeof getBlogBySlug>>): number
   return texts.join(' ').split(/\s+/).filter(Boolean).length;
 };
 
+/**
+ * The CMS byline is free text, so an editor can reasonably type "By the Editorial
+ * Team" where only the name belongs. The page supplies the "By" itself, so strip
+ * a leading one rather than render "By By …" — and strip it for the JSON-LD too,
+ * where a Person's name should be the name alone.
+ */
+const bylineName = (author: string) => author.replace(/^\s*by\s+/i, '').trim();
+
 /** Every blog image, in reading order — first one doubles as the page's og:image. */
 const imagesIn = (blocks: BlogBlock[]): BlogImage[] =>
   blocks.flatMap((b) => (b.kind === 'images' ? b.images : []));
@@ -225,7 +233,7 @@ const BlogDetail = () => {
     isPartOf: { '@id': WEBSITE_ID },
     // A named byline is a Person; the organisation stays the publisher either
     // way. Without a byline this is the organisation, as every blog was before.
-    author: blog.author ? { '@type': 'Person', name: blog.author } : { '@id': ORG_ID },
+    author: blog.author ? { '@type': 'Person', name: bylineName(blog.author) } : { '@id': ORG_ID },
     publisher: { '@id': ORG_ID },
     inLanguage: 'en',
     isAccessibleForFree: true,
@@ -275,7 +283,7 @@ const BlogDetail = () => {
               <p className="text-xs text-wareongo-slate">
                 {blog.author ? (
                   <>
-                    By {blog.author} · Updated <time dateTime={blog.updated}>{blog.updated}</time>
+                    By {bylineName(blog.author)} · Updated <time dateTime={blog.updated}>{blog.updated}</time>
                   </>
                 ) : (
                   <>
