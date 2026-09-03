@@ -14,6 +14,7 @@ import AboutUsSection from '@/components/AboutUsSection';
 import RequestCTASection from '@/components/RequestCTASection';
 import FAQSection from '@/components/FAQSection';
 import Footer from '@/components/Footer';
+import { verifiedWarehousesLabel } from '@/data/companyStats';
 
 const Index = () => {
   useEffect(() => {
@@ -96,7 +97,7 @@ const Index = () => {
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
       <PageHead
         title="Warehouse & Godown for Rent in India | WareOnGo"
-        description="Find verified warehouse & godown space for rent across India — 1,500+ listings with transparent pricing. Get custom options, expert guidance & site visit within 48 hours."
+        description={`Find verified warehouse & godown space for rent across India — ${verifiedWarehousesLabel} listings with transparent pricing. Get custom options, expert guidance & site visit within 48 hours.`}
         path="/"
       >
         <script type="application/ld+json">{JSON.stringify(organizationLd)}</script>

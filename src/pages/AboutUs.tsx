@@ -6,6 +6,12 @@ import Footer from '@/components/Footer';
 import TrustedBySection from '@/components/TrustedBySection';
 import { SITE_URL, ORG_ID } from '@/config/config';
 import { trackEvent } from '@/lib/analytics';
+import {
+  CITIES_COVERED,
+  COMPANIES_SERVED,
+  SHORTLIST_HOURS,
+  verifiedWarehousesLabel,
+} from '@/data/companyStats';
 
 interface Founder {
   name: string;
@@ -35,12 +41,12 @@ const FOUNDERS: Founder[] = [
 ];
 
 const STATS = [
-  { n: '1,500+', l: 'Verified warehouses' },
-  { n: '90+', l: 'Cities across India' },
+  { n: verifiedWarehousesLabel, l: 'Verified warehouses' },
+  { n: `${CITIES_COVERED}+`, l: 'Cities across India' },
+  // Available inventory, not the cumulative figure the homepage strip shows —
+  // two different measures, deliberately.
   { n: '10M+', l: 'sqft available' },
-  // Kept consistent with the site-wide 4-hour shortlist claim (FAQ, How It
-  // Works, llms.txt) — the spec's 36h figure predates that change.
-  { n: '4h', l: 'Shortlist delivery' },
+  { n: `${SHORTLIST_HOURS}h`, l: 'Shortlist delivery' },
 ];
 
 const AboutUs = () => {
@@ -83,7 +89,7 @@ const AboutUs = () => {
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
       <PageHead
         title="About WareOnGo — India's Tech-Led Warehousing Advisory"
-        description="Learn about WareOnGo — founded by SRCC graduates to fix India's broken warehousing market. 1,500+ verified warehouses across 90+ cities, 200+ companies served."
+        description={`Learn about WareOnGo — founded by SRCC graduates to fix India's broken warehousing market. ${verifiedWarehousesLabel} verified warehouses across ${CITIES_COVERED}+ cities, ${COMPANIES_SERVED}+ companies served.`}
         path="/about-us"
       >
         <script type="application/ld+json">{JSON.stringify(organizationLd)}</script>
