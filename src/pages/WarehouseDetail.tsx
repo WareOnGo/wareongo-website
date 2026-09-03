@@ -407,10 +407,16 @@ const WarehouseDetail = () => {
                     <div className="text-[10px] sm:text-xs uppercase tracking-[0.18em] text-wareongo-slate mb-1.5">
                       Rate
                     </div>
-                    <div className="text-xl sm:text-2xl font-bold text-wareongo-blue">
-                      ₹{space.ratePerSqft}
-                      <span className="text-sm font-medium text-wareongo-slate ml-1">/ sqft</span>
-                    </div>
+                    {space.ratePerSqft ? (
+                      <div className="text-xl sm:text-2xl font-bold text-wareongo-blue">
+                        ₹{space.ratePerSqft}
+                        <span className="text-sm font-medium text-wareongo-slate ml-1">/ sqft</span>
+                      </div>
+                    ) : (
+                      // Unguarded, this read "₹0 / sqft". The JSON-LD and the
+                      // prose below already skip a missing rate.
+                      <div className="text-xl sm:text-2xl font-bold text-wareongo-slate">On request</div>
+                    )}
                   </div>
                 </div>
               </section>

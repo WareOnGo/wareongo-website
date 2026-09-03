@@ -33,8 +33,8 @@ interface WarehouseCardProps {
     state: string;
   };
   size: number;
-  ceilingHeight: number;
-  price: number;
+  ceilingHeight: number | null;
+  price: number | null;
   fireCompliance: boolean;
   features: string[];
   onClick?: () => void;
@@ -349,15 +349,21 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
           </div>
           <div className="flex items-center text-wareongo-slate text-xs sm:text-sm">
             <Building2 className="w-4 h-4 mr-1.5 text-wareongo-blue/70" />
-            <span>{ceilingHeight} ft height</span>
+            <span>{ceilingHeight === null ? 'Height not specified' : `${ceilingHeight} ft height`}</span>
           </div>
           <div className="flex items-center text-wareongo-slate text-xs sm:text-sm">
             <ShieldCheck className="w-4 h-4 mr-1.5 text-wareongo-blue/70" />
             <span>Fire: {fireCompliance ? 'Yes' : 'No'}</span>
           </div>
-          <div className="flex items-center text-wareongo-blue font-semibold text-xs sm:text-sm">
-            <IndianRupee className="w-4 h-4 mr-0.5" />
-            <span>{price} / sqft</span>
+          <div
+            className={
+              price === null
+                ? 'flex items-center text-wareongo-slate text-xs sm:text-sm'
+                : 'flex items-center text-wareongo-blue font-semibold text-xs sm:text-sm'
+            }
+          >
+            <IndianRupee className={price === null ? 'w-4 h-4 mr-0.5 text-wareongo-blue/70' : 'w-4 h-4 mr-0.5'} />
+            <span>{price === null ? 'Price on request' : `${price} / sqft`}</span>
           </div>
         </div>
 

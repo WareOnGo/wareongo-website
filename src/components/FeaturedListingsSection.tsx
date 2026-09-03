@@ -126,14 +126,28 @@ const FeaturedListingsSection = () => {
                   </div>
                   <div className="flex items-center text-wareongo-slate text-xs sm:text-sm">
                     <Building2 className="w-4 h-4 mr-1.5 text-wareongo-blue/70" />
-                    <span>{listing.ceilingHeight} ft height</span>
+                    <span>
+                      {listing.ceilingHeight === null
+                        ? 'Height not specified'
+                        : `${listing.ceilingHeight} ft height`}
+                    </span>
                   </div>
                 </div>
 
                 <div className="pt-4 border-t border-wareongo-blue/10 flex items-center justify-between">
-                  <div className="flex items-center text-wareongo-blue font-semibold text-sm sm:text-base">
-                    <IndianRupee className="w-4 h-4 mr-0.5" />
-                    <span>{listing.price} / sqft</span>
+                  <div
+                    className={
+                      listing.price === null
+                        ? 'flex items-center text-wareongo-slate text-sm sm:text-base'
+                        : 'flex items-center text-wareongo-blue font-semibold text-sm sm:text-base'
+                    }
+                  >
+                    <IndianRupee
+                      className={
+                        listing.price === null ? 'w-4 h-4 mr-0.5 text-wareongo-blue/70' : 'w-4 h-4 mr-0.5'
+                      }
+                    />
+                    <span>{listing.price === null ? 'Price on request' : `${listing.price} / sqft`}</span>
                   </div>
                 </div>
               </div>

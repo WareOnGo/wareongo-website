@@ -7,4 +7,35 @@
 // publishes content for it.
 import type { MicromarketContent } from './micromarkets';
 
-export const micromarkets: MicromarketContent[] = [];
+export const micromarkets: MicromarketContent[] = [
+  {
+    "citySlug": "hyderabad",
+    "slug": "kompally",
+    "seoTitle": "50+ Warehouses for Rent in Kompally, Hyderabad",
+    "metaDescription": "50 verified warehouses and godowns for rent in Kompally on NH-44 north of Hyderabad. ₹13 to ₹41/sq ft, median ₹20. Units 500 to 2 lakh sq ft.",
+    "h1": "Warehouses for Rent in Kompally, Hyderabad",
+    "heroProse": "Kompally is the start of Hyderabad's northern warehousing belt, on NH-44 where the road leaves the city for Nagpur. It sits just beyond the Outer Ring Road, which is what makes it work: trucks reach it without entering the city, and city vans reach it without a long run out. The belt continues north through Devaryamjal to Medchal, and most of what is available carries more than one of those names.",
+    "heroImage": {
+      "alt": "Warehouse in Kompally, Hyderabad",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/blogs/whatsapp-image-2026-05-21-at-11-22-30-1e79b9a8d025fb1f.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "marketProse": "This is a belt rather than an estate, and the rate barely moves across it. Kompally proper, the pocket nearest the city, is the priciest at ₹23. Kandlakoya, a little further out, holds ₹20, and so does the long Devaryamjal stretch that carries most of the inventory. Gosaiguda and Muneerabad on the Medchal side sit at ₹25. Dulapally, back towards the city, is the outlier at ₹41, and it is small RCC godown space rather than shed. Medchal and Devaryamjal hold their own pages.",
+    "marketImage": {
+      "alt": "Warehouse interior in Kompally, Hyderabad",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/blogs/warehouse-1373-image-11-c968a40240860959.webp",
+      "width": 1280,
+      "height": 960
+    },
+    "rentsProse": "The median asking rent on our Kompally listings is ₹20/sq ft per month, with the spread running ₹13 at the floor to ₹41 at the ceiling. Hyderabad's northern belt is the cheapest of the large warehousing markets we cover in any city, and Kompally sits at the bottom of it alongside Medchal and Devaryamjal.\r\nThe band is tight in the middle. Almost every quote on this page falls between ₹17 and ₹25, and the two ends are single sites: a small RCC godown at Dulapally at the top and one plot at the bottom. Nearly all of the stock is pre-engineered, so there is little grade difference to price against.",
+    "specProse": "Seven docks per site with a 30 ft median clear height is a genuine distribution specification, and it is what separates this belt from Hyderabad's in-city godown stock. The median unit is 36,250 sq ft and two thirds of the units are above 20,000. Finished flooring is the gap: only a small share has VDF or FM2 down, so budget for the floor if you are racking high.",
+    "faqs": [
+      {
+        "a": "Asking rents on our Kompally listings run from ₹13 to ₹41/sq ft per month with a median of ₹20. Almost everything falls between ₹17 and ₹25. Kompally proper is the priciest pocket at ₹23 and the Devaryamjal stretch holds ₹20.",
+        "q": "What is the rent for a warehouse in Kompally?"
+      }
+    ],
+    "relatedBlogs": []
+  }
+];

@@ -481,10 +481,11 @@ export const transformWarehouseDetailData = (warehouse: WarehouseDetail) => {
   const mainSpace = totalSpaces[0] || 0;
   const availableSpaces = totalSpaces.length > 1 ? totalSpaces.slice(1) : [];
   
-  // Parse pricing
-  const ratePerSqft = warehouse.ratePerSqft 
-    ? parseInt(warehouse.ratePerSqft.replace(/[^\d]/g, '')) || 0
-    : 0;
+  // Parse pricing. The third copy of this parse, and the one with the widest
+  // reach: it feeds the detail page's Rate panel, the JSON-LD additionalProperty
+  // and the analytics payload. Unparseable stayed 0 here, so a listing with no
+  // rate showed "₹0 / sqft".
+  const ratePerSqft = parseRatePerSqft(warehouse.ratePerSqft);
   
   // Parse specifications
   const specifications = {
@@ -525,11 +526,50 @@ export const transformWarehouseDetailData = (warehouse: WarehouseDetail) => {
 };
 
 /**
+ * The ceiling on a believable per-sq-ft rate.
+ *
+ * Warehouse rent in this market is tens of rupees a square foot. A figure above
+ * this is a monthly total, a floor-wise list or a typo, and the card says
+ * "Price on request" rather than publishing a guess.
+ *
+ * Mirrored as RATE_CEILING in WareOnGo-Website-Backend services/micromarketService.js,
+ * which applies the same band to the medians and ranges. Change both together.
+ */
+export const RATE_CEILING = 500;
+
+/**
+ * A believable per-sq-ft rate out of a free-text column, or null.
+ *
+ * The old parser stripped every non-digit and ran the remains together, which
+ * is wrong in two directions at once. "Rs. 15.75/- per sft" lost its decimal
+ * point and became ₹1,575, and "1st floor-150 sft, 2nd floor-120 sft" became a
+ * nine-digit number. 51 of 1,915 live listings carried a rate of that kind.
+ *
+ * So: drop the tokens that are known not to be rates, then take the first
+ * number that lands inside the band. Ordinals go because "1st floor-150" is a
+ * position and a rate, not ₹1. Comma-grouped numbers go because "1,10,000 per
+ * month" is a monthly total. Lakh and crore figures go for the same reason.
+ */
+export const parseRatePerSqft = (raw: string | null | undefined): number | null => {
+  if (!raw) return null;
+  const text = String(raw)
+    .replace(/\b\d+\s*(?:st|nd|rd|th)\b/gi, ' ')
+    .replace(/\b\d+(?:[.,]\d+)?\s*(?:lac|lakh|lakhs|lacs|cr|crore|crores)\b/gi, ' ')
+    .replace(/\b\d{1,3}(?:,\d{2,3})+\b/g, ' ')
+    // And dates, because one row reads "Needs to Call and ask on Monday
+    // 13 - 07- 26" and ₹13 is not what it says.
+    .replace(/\b\d{1,2}\s*[-/]\s*\d{1,2}\s*[-/]\s*\d{2,4}\b/g, ' ');
+  for (const m of text.matchAll(/\d+(?:\.\d+)?/g)) {
+    const n = Number(m[0]);
+    if (Number.isFinite(n) && n > 0 && n <= RATE_CEILING) return n;
+  }
+  return null;
+};
+
+/**
  * Transform API warehouse data to component props format
  */
 export const transformWarehouseData = (warehouse: Warehouse) => {
-  console.log('Transforming warehouse data:', warehouse);
-  
   // Extract features from otherSpecifications and add compliances
   let features: string[] = [];
   
@@ -557,23 +597,23 @@ export const transformWarehouseData = (warehouse: Warehouse) => {
     ? warehouse.totalSpaceSqft[0] 
     : warehouse.totalSpaceSqft || 0;
 
-  // Parse ceiling height
-  const ceilingHeight = warehouse.clearHeightFt 
-    ? parseInt(warehouse.clearHeightFt.replace(/[^\d]/g, '')) || 10
-    : 10;
+  // Parse ceiling height. Null when there is nothing to parse, rather than a
+  // stand-in: 202 of 1000 live listings have no clearHeightFt, and the detail
+  // page renders 'Not specified' for the same field, so a card claiming 10 ft
+  // contradicted the page it linked to.
+  const ceilingHeight = warehouse.clearHeightFt
+    ? parseInt(warehouse.clearHeightFt.replace(/[^\d]/g, '')) || null
+    : null;
 
-  // Parse price
-  const price = warehouse.ratePerSqft 
-    ? parseInt(warehouse.ratePerSqft.replace(/[^\d]/g, '')) || 35
-    : 35;
+  // Parse price. Null for the same reason — transformWarehouseDetailData's own
+  // fallback for a missing rate is 'Price on request', not a number.
+  const price = parseRatePerSqft(warehouse.ratePerSqft);
 
   // Get image URL (WebP preferred, with parallel original-URL fallback)
   const { images: finalImages, fallbacks: finalFallbacks } = buildPreferredImages(
     warehouse.photos,
     warehouse.photosWebp,
   );
-
-  console.log(`Warehouse ${warehouse.id}: Found ${finalImages.length} images`);
 
   return {
     id: warehouse.id,
