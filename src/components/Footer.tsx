@@ -325,7 +325,9 @@ const Footer = () => {
             <Link
               to="/login"
               onClick={() => trackEvent('nav_click', { label: 'Login', destination: '/login', position: 'footer' })}
-              className="text-gray-500 hover:text-white transition-colors text-xs"
+              // gray-400, not gray-500: on the navy footer gray-500 measures
+              // 3.34:1, and the links either side of it are already gray-400.
+              className="text-gray-400 hover:text-white transition-colors text-xs"
             >
               Login
             </Link>

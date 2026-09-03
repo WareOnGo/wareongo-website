@@ -9,7 +9,8 @@ import { CITY_HUBS } from '@/data/cityHubs';
 import { STATE_HUBS } from '@/data/stateHubs';
 import { trackEvent } from '@/lib/analytics';
 import { warehousePath } from '@/lib/warehouseSlug';
-import type { LocationListingsLoaderData } from '@/loaders/locationLoader';
+import MicromarketPage from './MicromarketPage';
+import { isEditorialMicromarket, type LocationListingsLoaderData } from '@/loaders/locationLoader';
 
 const LocationListings = () => {
   const data = useLoaderData() as LocationListingsLoaderData | null;
@@ -18,6 +19,15 @@ const LocationListings = () => {
   // No matching city/state — bounce back to the main listings page.
   if (!data) {
     return <Navigate to="/listings" replace />;
+  }
+
+  // Micromarkets come in two shapes on the same URL. The loader attaches
+  // `content` (and the stats that go with it) only when an editor has published
+  // editorial copy for this one in the CMS; that hands the route to the full
+  // template. Everything else — including every micromarket nobody has written
+  // yet — falls through to the plain listing grid below, unchanged.
+  if (isEditorialMicromarket(data)) {
+    return <MicromarketPage data={data} />;
   }
 
   const { type, canonical, slug, warehouses, warehouseType, typeCounts, parentCity } = data;

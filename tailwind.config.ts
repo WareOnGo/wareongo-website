@@ -78,7 +78,10 @@ export default {
 					sienna: '#B3502D',
 					purple: '#4A2E50',
 					ivory: '#F8F6F1',
-					slate: '#6C757D',
+					// 4.67:1 on the ivory ground. Was #6C757D, which measured 4.34:1
+					// — under WCAG AA's 4.5 for normal text, and this is the token
+					// body copy uses. Keep in sync with wareongo-cms globals.css.
+					slate: '#677078',
 					charcoal: '#343A40',
 				}
 			},

@@ -349,7 +349,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
           </div>
           <div className="flex items-center text-wareongo-slate text-xs sm:text-sm">
             <Building2 className="w-4 h-4 mr-1.5 text-wareongo-blue/70" />
-            <span>{ceilingHeight}m height</span>
+            <span>{ceilingHeight} ft height</span>
           </div>
           <div className="flex items-center text-wareongo-slate text-xs sm:text-sm">
             <ShieldCheck className="w-4 h-4 mr-1.5 text-wareongo-blue/70" />

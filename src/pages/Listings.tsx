@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, useLoaderData, useSearchParams } from 'react-router-dom';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import PageHead from '@/components/PageHead';
+import Pagination from '@/components/Pagination';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WarehouseCard from '@/components/WarehouseCard';
@@ -459,69 +460,19 @@ const Listings = () => {
                 </div>
               )}
 
-              {pagination.totalPages > 1 && (
-                <div className="flex justify-center gap-2">
-                  <button
-                    onClick={() => {
-                      const next = pagination.currentPage - 1;
-                      trackEvent('listings_paginate', { from_page: pagination.currentPage, to_page: next, direction: 'prev' });
-                      setCurrentPage(next);
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
-                    disabled={pagination.currentPage === 1}
-                    className="px-4 h-9 rounded-lg border border-wareongo-blue/30 text-wareongo-blue text-sm font-medium hover:bg-wareongo-blue/5 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-                  >
-                    Previous
-                  </button>
-
-                  <div className="flex gap-1.5">
-                    {Array.from({ length: Math.min(pagination.totalPages, 5) }, (_, i) => {
-                      let pageNum;
-                      if (pagination.totalPages <= 5) {
-                        pageNum = i + 1;
-                      } else if (pagination.currentPage <= 3) {
-                        pageNum = i + 1;
-                      } else if (pagination.currentPage >= pagination.totalPages - 2) {
-                        pageNum = pagination.totalPages - 4 + i;
-                      } else {
-                        pageNum = pagination.currentPage - 2 + i;
-                      }
-
-                      const isActive = pageNum === pagination.currentPage;
-                      return (
-                        <button
-                          key={pageNum}
-                          onClick={() => {
-                            trackEvent('listings_paginate', { from_page: pagination.currentPage, to_page: pageNum, direction: 'jump' });
-                            setCurrentPage(pageNum);
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                          }}
-                          className={`w-9 h-9 rounded-lg text-sm font-medium transition-colors border ${
-                            isActive
-                              ? 'bg-wareongo-blue text-white border-wareongo-blue'
-                              : 'bg-transparent text-wareongo-blue border-wareongo-blue/30 hover:bg-wareongo-blue/5'
-                          }`}
-                        >
-                          {pageNum}
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  <button
-                    onClick={() => {
-                      const next = pagination.currentPage + 1;
-                      trackEvent('listings_paginate', { from_page: pagination.currentPage, to_page: next, direction: 'next' });
-                      setCurrentPage(next);
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
-                    disabled={pagination.currentPage === pagination.totalPages}
-                    className="px-4 h-9 rounded-lg border border-wareongo-blue/30 text-wareongo-blue text-sm font-medium hover:bg-wareongo-blue/5 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-                  >
-                    Next
-                  </button>
-                </div>
-              )}
+              <Pagination
+                currentPage={pagination.currentPage}
+                totalPages={pagination.totalPages}
+                onChange={(page, direction) => {
+                  trackEvent('listings_paginate', {
+                    from_page: pagination.currentPage,
+                    to_page: page,
+                    direction,
+                  });
+                  setCurrentPage(page);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              />
             </div>
           )}
         </div>

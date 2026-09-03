@@ -1,5 +1,13 @@
 import type { LoaderFunctionArgs } from 'react-router-dom';
 import { warehouseAPI, transformWarehouseData, type Warehouse } from '@/services/warehouseAPI';
+import { getMicromarketContent, type MicromarketContent } from '@/data/micromarkets';
+import { applyStatOverrides } from '@/lib/micromarketStats';
+import {
+  buildableMicromarkets,
+  micromarketPath,
+  type Micromarket,
+  type PeerRent,
+} from '@/services/micromarketsAPI';
 
 // ----- canonical name + slug helpers ----------------------------------------
 
@@ -48,11 +56,28 @@ const matchersFor = (canonical: string, type: 'city' | 'state'): Set<string> => 
 
 let warehousesCache: Warehouse[] | null = null;
 
+/**
+ * Listings per request while walking the whole catalogue.
+ *
+ * Large on purpose. This function runs in exactly two places, and neither is a
+ * visitor's browser: the SSG prerender (where its module-level cache means one
+ * walk per build) and the dev server, where vite-react-ssg leaves the real
+ * loader in place because there is no prerendered data to read instead. In a
+ * production page the loader is swapped for one that reads the static manifest,
+ * so nothing here is on the critical path for a real user.
+ *
+ * At 50 it took 39 sequential round trips to Render — around 40 seconds of
+ * blank screen before a listing page rendered anything in dev. The loop is kept
+ * rather than replaced by one unbounded request, so this still terminates
+ * correctly however far the catalogue grows.
+ */
+const FETCH_PAGE_SIZE = 500;
+
 export async function getAllWarehouses(): Promise<Warehouse[]> {
   if (warehousesCache) return warehousesCache;
   const all: Warehouse[] = [];
   let page = 1;
-  const pageSize = 50;
+  const pageSize = FETCH_PAGE_SIZE;
   while (true) {
     const resp = await warehouseAPI.getWarehouses(page, pageSize);
     all.push(...resp.data);
@@ -103,7 +128,35 @@ export interface LocationListingsLoaderData {
   // Micromarket pages only: the city its listings actually sit in, for the
   // "…, Bengaluru" context in the heading plus a breadcrumb/link up to it.
   parentCity?: { canonical: string; slug: string } | null;
+  // ----- micromarket editorial pages ---------------------------------------
+  // The three fields below travel together and are present only when an editor
+  // has published content for this micromarket in the CMS. Their presence is
+  // the switch between the two layouts: with `content`, LocationListings hands
+  // off to the editorial template; without it, the plain listing grid renders
+  // exactly as it always has.
+  //
+  // They are attached only in that case rather than always, because every one
+  // of them is serialised into the prerendered HTML of every listing page.
+  content?: MicromarketContent;
+  stats?: Micromarket;
+  /** Sibling micromarkets under the same city, for the peer rent chart and chips. */
+  peers?: PeerRent[];
 }
+
+/**
+ * A micromarket page that has editorial content. The loader only ever attaches
+ * `content` and `stats` together, so narrowing on the pair is sound — and having
+ * the guard here rather than a cast at the call site means the invariant is
+ * asserted once, next to the code that establishes it.
+ */
+export type MicromarketPageData = LocationListingsLoaderData & {
+  content: MicromarketContent;
+  stats: Micromarket;
+};
+
+export const isEditorialMicromarket = (
+  data: LocationListingsLoaderData,
+): data is MicromarketPageData => data.content !== undefined && data.stats !== undefined;
 
 const countTypes = (scoped: Warehouse[]) =>
   scoped.reduce(
@@ -234,110 +287,17 @@ export const cityTypeStaticPaths = async (): Promise<string[]> => {
 export const stateTypeStaticPaths = () => locationTypeStaticPaths('state');
 
 // ----- micromarkets ---------------------------------------------------------
-// Warehouse.micromarket is a String[] of locality tags ("Nelamangala",
-// "Hosur Road"). One listing can carry several, and one micromarket can span
-// cities (Bidadi shows up under both Bengaluru and Ramnagara), so these pages
-// are built by tag rather than nested under a city.
-//
-// Anything here must stay in sync with scripts/lib/locations.mjs, which builds
-// the same pages' sitemap entries and the generated footer link data.
+// Everything about which micromarkets exist, which earn a page, and every figure
+// on one comes from the backend (GET /micromarkets, see
+// src/services/micromarketsAPI.ts). It used to be derived here, again in
+// scripts/lib/locations.mjs, and a third time in the CMS — three copies of the
+// same parsing rules, with nothing to tell you when they diverged.
 
-/**
- * A micromarket needs this many listings before it gets its own page. Below the
- * threshold the page is thinner than the city page it would compete with in
- * search, so we don't generate one at all.
- */
-export const MICROMARKET_MIN_LISTINGS = 5;
-
-/**
- * A micromarket's parent city has to carry its own weight: it supplies the
- * {city} URL segment and is the breadcrumb/link target, so nesting under a
- * near-empty city page helps nobody.
- */
-export const PARENT_CITY_MIN_LISTINGS = 6;
-
-// The city column carries locality fragments as well as cities ("Sector 78,
-// Badshahpur"). Same test the state pages use to skip them.
-const isRealCityName = (name: string): boolean => name.length > 2 && !name.includes(',');
-
-// Some rows carry an unresolved micro_market row id (a 32-char base62 token)
-// where a name should be, because the tagging tool wrote the FK through. Those
-// aren't places and must never become pages.
-const MICROMARKET_ID_RE = /^[A-Za-z0-9]{32}$/;
-
-const isNamedMicromarket = (raw: string | null | undefined): boolean => {
-  const v = raw?.trim() ?? '';
-  return v.length > 2 && !MICROMARKET_ID_RE.test(v);
-};
-
-// Keeps '/' readable as a separator: "Alipur/Budhpur" -> "alipur-budhpur".
-export const slugifyMicromarket = (name: string): string =>
-  name
-    .toLowerCase()
-    .replace(/[\s/]+/g, '-')
-    .replace(/[^a-z0-9-]/g, '')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
-
-// Deduped so a listing tagged with the same locality twice counts once.
-const micromarketsOf = (w: Warehouse): string[] => [
-  ...new Set(
-    (Array.isArray(w.micromarket) ? w.micromarket : [])
-      .map((m) => String(m).trim())
-      .filter(isNamedMicromarket),
-  ),
-];
-
-export interface MicromarketSummary extends LocationSummary {
-  /** Most common city among this micromarket's listings — the city it nests under. */
+/** Kept as an alias so importers of the old name still compile. */
+export type MicromarketSummary = LocationSummary & {
   parentCity: string;
-  /** Slug of parentCity, i.e. the {city} in /listings/city/{city}/{slug}. */
   citySlug: string;
-}
-
-async function micromarketSummaries(): Promise<MicromarketSummary[]> {
-  const all = await getAllWarehouses();
-  // Cities allowed to host a micromarket page, mapped to their page slug.
-  const hostCities = new Map(
-    (await summariesFor('city'))
-      .filter((c) => isRealCityName(c.canonical) && c.count >= PARENT_CITY_MIN_LISTINGS)
-      .map((c) => [c.canonical, c.slug] as const),
-  );
-  const acc = new Map<string, { canonical: string; count: number; cities: Map<string, number> }>();
-  for (const w of all) {
-    const city = canonicalize(w.city, 'city');
-    for (const name of micromarketsOf(w)) {
-      const slug = slugifyMicromarket(name);
-      if (!slug) continue;
-      // First spelling seen wins as the display name — the DB values are already
-      // properly cased, so they're used verbatim rather than title-cased (which
-      // would mangle "Alipur/Budhpur" and "Harohalli/Kanakapura Road").
-      const entry = acc.get(slug) ?? { canonical: name, count: 0, cities: new Map() };
-      entry.count += 1;
-      if (city) entry.cities.set(city, (entry.cities.get(city) ?? 0) + 1);
-      acc.set(slug, entry);
-    }
-  }
-  return Array.from(acc.entries())
-    .map(([slug, e]) => {
-      // Most listings wins, but only among cities that can host a page — a
-      // micromarket whose top city is a junk value still nests under its
-      // next-best real one instead of losing its page.
-      const parent = Array.from(e.cities.entries())
-        .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
-        .find(([city]) => hostCities.has(city));
-      return { canonical: e.canonical, slug, count: e.count, parentCity: parent?.[0] ?? null };
-    })
-    .filter(
-      // A parent city is required, not optional: it *is* the {city} segment of
-      // the URL, so a micromarket with no eligible city has nowhere to live.
-      (e): e is Omit<MicromarketSummary, 'citySlug'> =>
-        e.count >= MICROMARKET_MIN_LISTINGS && e.parentCity !== null,
-    )
-    // Slug comes from the city summary, so it always matches a real city page.
-    .map((e) => ({ ...e, citySlug: hostCities.get(e.parentCity) as string }))
-    .sort((a, b) => a.canonical.localeCompare(b.canonical));
-}
+};
 
 /**
  * Resolves the micromarket half of /listings/city/:city/:sub. Only the parent
@@ -348,28 +308,41 @@ async function micromarketLoader(
   citySlug: string,
   micromarketSlug: string,
 ): Promise<LocationListingsLoaderData | null> {
-  const summaries = await micromarketSummaries();
-  const match = summaries.find((s) => s.slug === micromarketSlug && s.citySlug === citySlug);
+  const micromarkets = await buildableMicromarkets();
+  const match = micromarkets.find((m) => m.slug === micromarketSlug && m.citySlug === citySlug);
   if (!match) return null;
 
-  // Every listing carrying the tag, including the few sitting in a neighbouring
-  // city — the tag is the market, the city segment is just where it hangs.
+  // Which listings belong to the belt is the backend's answer too, so a locality
+  // spelled two ways cannot lose half its inventory to a slug comparison here.
+  const ids = new Set(match.listingIds);
   const all = await getAllWarehouses();
-  const scoped = all.filter((w) =>
-    micromarketsOf(w).some((m) => slugifyMicromarket(m) === match.slug),
-  );
+  const scoped = all.filter((w) => ids.has(w.id));
 
-  return {
+  const base: LocationListingsLoaderData = {
     type: 'micromarket',
-    canonical: match.canonical,
+    canonical: match.name,
     slug: match.slug,
-    parentCity: { canonical: match.parentCity, slug: match.citySlug },
+    parentCity: { canonical: match.parentCity as string, slug: citySlug },
     typeCounts: countTypes(scoped),
     warehouses: scoped.map(transformWarehouseData),
   };
+
+  // The if/else. No published CMS content means this stays the listing grid it
+  // has always been — the editorial extras aren't attached, and nothing extra
+  // is serialised into the page.
+  const content = getMicromarketContent(citySlug, match.slug);
+  if (!content) return base;
+
+  // Derived once by the backend, then corrected by whatever the editor set — so
+  // clearing an override puts the derived figure straight back. The peers come
+  // out of the same call, because a corrected median has to move this belt's own
+  // bar too.
+  const stats = applyStatOverrides(match, content.statOverrides);
+
+  return { ...base, content, stats, peers: stats.peers };
 }
 
 export async function micromarketStaticPaths(): Promise<string[]> {
-  const micromarkets = await micromarketSummaries();
-  return micromarkets.map((m) => `/listings/city/${m.citySlug}/${m.slug}`);
+  const micromarkets = await buildableMicromarkets();
+  return micromarkets.map(micromarketPath);
 }

@@ -126,7 +126,7 @@ const FeaturedListingsSection = () => {
                   </div>
                   <div className="flex items-center text-wareongo-slate text-xs sm:text-sm">
                     <Building2 className="w-4 h-4 mr-1.5 text-wareongo-blue/70" />
-                    <span>{listing.ceilingHeight}m height</span>
+                    <span>{listing.ceilingHeight} ft height</span>
                   </div>
                 </div>
 

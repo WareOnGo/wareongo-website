@@ -26,6 +26,10 @@ export interface Warehouse {
   // Locality tags (e.g. ["Nelamangala"]). A listing can carry several. Optional
   // so a backend deploy that predates the field doesn't break typing.
   micromarket?: string[] | null;
+  // Free text ("8", "8-10 docks", "VDF"), served by the listings endpoint for
+  // the micromarket pages' specification table. Optional for the same reason.
+  numberOfDocks?: string | null;
+  flooringType?: string | null;
 }
 
 // Extended interface for warehouse detail page with additional fields

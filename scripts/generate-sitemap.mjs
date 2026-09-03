@@ -118,7 +118,7 @@ async function main() {
   const stateTypeCombos = locationTypeCombos(warehouses, 'state');
   // Micromarkets are unaffected: PARENT_CITY_MIN_LISTINGS (6) already exceeds
   // the city threshold, so every parent city here is a listed one.
-  const micromarkets = summarizeMicromarkets(warehouses);
+  const micromarkets = await summarizeMicromarkets();
 
   const entries = [
     ...STATIC_PATHS.map((p) => urlEntry(p.path, p.changefreq, p.priority)),
