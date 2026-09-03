@@ -1,5 +1,7 @@
 import { useLoaderData, useNavigate, Navigate, Link } from 'react-router-dom';
 import PageHead from '@/components/PageHead';
+import Pagination from '@/components/Pagination';
+import { usePagedListings } from '@/hooks/usePagedListings';
 import Breadcrumbs, { type BreadcrumbItem } from '@/components/Breadcrumbs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -15,6 +17,29 @@ import { isEditorialMicromarket, type LocationListingsLoaderData } from '@/loade
 const LocationListings = () => {
   const data = useLoaderData() as LocationListingsLoaderData | null;
   const navigate = useNavigate();
+
+  /**
+   * The grid pages client-side over what the loader already delivered.
+   *
+   * It used to render every listing in scope at once, which on the two biggest
+   * pages meant 609 and 548 cards in one document — 5.7 MB and 5.2 MB of
+   * prerendered HTML, each card carrying its own image carousel. Nothing is lost
+   * to crawlers by trimming it: these cards are buttons rather than anchors, so
+   * the machine-readable listing URLs were only ever in the CollectionPage
+   * ItemList below, which still covers the whole scope.
+   *
+   * Above every early return, and with a fallback for the null case, because a
+   * hook has to run in the same order on every render — this component returns
+   * early both when the route matched nothing and when the page is editorial.
+   */
+  const {
+    shown,
+    currentPage,
+    totalPages,
+    start: pageStart,
+    anchorRef: gridRef,
+    goTo,
+  } = usePagedListings(data?.warehouses ?? []);
 
   // No matching city/state — bounce back to the main listings page.
   if (!data) {
@@ -281,11 +306,20 @@ const LocationListings = () => {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-              {warehouses.map((warehouse, idx) => (
+            <section ref={gridRef as React.RefObject<HTMLElement>} className="scroll-mt-24">
+              <p className="mb-5 text-sm text-wareongo-slate">
+                Showing {pageStart + 1}&ndash;{pageStart + shown.length} of {warehouses.length}
+                {totalPages > 1 && ` · page ${currentPage} of ${totalPages}`}
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+              {shown.map((warehouse, idx) => (
                 <WarehouseCard
                   key={warehouse.id}
                   id={warehouse.id}
+                  // Index is within the page, not the whole set: after paging,
+                  // the top of this grid is what the reader is looking at, so
+                  // its first row is the row worth loading eagerly.
                   index={idx}
                   image={warehouse.image}
                   images={warehouse.images}
@@ -300,7 +334,25 @@ const LocationListings = () => {
                   onClick={() => handleWarehouseClick(warehouse)}
                 />
               ))}
-            </div>
+              </div>
+
+              <Pagination
+                className="mb-10"
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onChange={(next, direction) => {
+                  trackEvent('location_listings_paginate', {
+                    scope: type,
+                    location: slug,
+                    warehouse_type: warehouseType ?? null,
+                    from_page: currentPage,
+                    to_page: next,
+                    direction,
+                  });
+                  goTo(next);
+                }}
+              />
+            </section>
           )}
         </div>
       </main>

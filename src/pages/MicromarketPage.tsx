@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import PageHead from '@/components/PageHead';
 import Breadcrumbs, { type BreadcrumbItem } from '@/components/Breadcrumbs';
@@ -13,7 +13,7 @@ import EditorialImage from '@/components/micromarket/EditorialImage';
 import PeerRentChart from '@/components/micromarket/PeerRentChart';
 import InventoryBand from '@/components/micromarket/InventoryBand';
 import SpecTable from '@/components/micromarket/SpecTable';
-import { useListingsPerPage } from '@/components/micromarket/useListingsPerPage';
+import { usePagedListings } from '@/hooks/usePagedListings';
 import { CHIP, EYEBROW, PANEL, PROSE, SECTION_GAP, SECTION_RULE } from '@/components/micromarket/tokens';
 import { blogs } from '@/data/blogs';
 import { specRowsFor } from '@/lib/micromarketStats';
@@ -90,43 +90,18 @@ const MicromarketPage = ({ data }: { data: MicromarketPageData }) => {
   ];
   const indexOf = (id: string) => numbered.indexOf(id) + 1;
 
-  const [listingsPage, setListingsPage] = useState(1);
-  const listingsRef = useRef<HTMLElement>(null);
-  // Six rows at every breakpoint, so the page is the same length whatever the
-  // column count. See the hook for why it starts at the desktop value.
-  const perPage = useListingsPerPage();
-  // Set when a page change came from the pager, so the effect below can tell a
-  // real navigation from the initial render and not scroll the page on load.
-  const scrollAfterPaging = useRef(false);
-
-  /**
-   * Scroll back to the top of the grid after paging — in an effect, so it runs
-   * once React has committed the new cards.
-   *
-   * Doing it inline in the pager's handler looked fine and wasn't: the handler
-   * runs before the re-render, and the commit that swaps eighteen cards for six
-   * cancels the in-flight smooth scroll, leaving the reader wherever they were.
-   * The eval harness caught it (tests/specs/pagination.spec.ts).
-   */
-  useEffect(() => {
-    if (!scrollAfterPaging.current) return;
-    scrollAfterPaging.current = false;
-    const reduceMotion =
-      typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    listingsRef.current?.scrollIntoView({
-      behavior: reduceMotion ? 'instant' : 'smooth',
-      block: 'start',
-    });
-  }, [listingsPage]);
   const ordered = orderForDisplay(warehouses);
-  const listingsPages = Math.max(1, Math.ceil(ordered.length / perPage));
-  // Clamped rather than reset: rotating a phone changes the page size, and
-  // page 4 of 4 becoming page 4 of 2 would otherwise render an empty grid.
-  // Clamping keeps the reader at the end of the list where they already were.
-  const currentPage = Math.min(listingsPage, listingsPages);
-  const pageStart = (currentPage - 1) * perPage;
-  const shown = ordered.slice(pageStart, pageStart + perPage);
+  // Six rows at every breakpoint, so the page is the same length whatever the
+  // column count, plus the scroll-back-to-the-grid behaviour. Shared with the
+  // plain grid in LocationListings — see the hook.
+  const {
+    shown,
+    currentPage,
+    totalPages: listingsPages,
+    start: pageStart,
+    anchorRef: listingsRef,
+    goTo,
+  } = usePagedListings(ordered);
 
   const siblings = peers.filter((p) => !p.isSelf);
   const relatedBlogs = content.relatedBlogs
@@ -219,7 +194,11 @@ const MicromarketPage = ({ data }: { data: MicromarketPageData }) => {
           </section>
 
           <div>
-            <section id="listings" ref={listingsRef} className={`scroll-mt-24 ${SECTION_RULE}`}>
+            <section
+              id="listings"
+              ref={listingsRef as React.RefObject<HTMLElement>}
+              className={`scroll-mt-24 ${SECTION_RULE}`}
+            >
               <SectionHeading index={indexOf('listings')} eyebrow="Inventory">
                 {content.inventoryHeading ?? `Warehouses for rent in ${canonical}`}
               </SectionHeading>
@@ -264,12 +243,10 @@ const MicromarketPage = ({ data }: { data: MicromarketPageData }) => {
                     to_page: next,
                     direction,
                   });
-                  // Back to the top of this section, not the top of the document:
-                  // the grid sits well down a long editorial page, so scrolling
-                  // to 0 would strand the reader in the hero. The scroll itself
-                  // happens in the effect above, after the cards are committed.
-                  scrollAfterPaging.current = true;
-                  setListingsPage(next);
+                  // Back to the top of this section, not the top of the
+                  // document: the grid sits well down a long editorial page, so
+                  // scrolling to 0 would strand the reader in the hero.
+                  goTo(next);
                 }}
               />
             </section>
