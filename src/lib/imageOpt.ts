@@ -1,17 +1,9 @@
 // Vercel Image Optimization helpers (/_vercel/image endpoint).
 //
-// Only absolute remote URLs (the R2 listing photos) get rewritten — local
-// /public assets are already small WebP. In dev builds there is no
-// /_vercel/image endpoint, so raw URLs pass through untouched.
-//
-// The `w` values used here must exist in vercel.json `images.sizes`.
-//
-// COST NOTE: Vercel bills Image Optimization per unique *source* image
-// transformed in the billing window (plan-dependent included quota, overage
-// after). Only images actually requested by visitors are transformed. To turn
-// the whole thing off, flip ENABLED to false and redeploy — every <img>
-// reverts to the raw R2 URL.
-const ENABLED = import.meta.env.PROD;
+// Vercel currently rejects transformations with HTTP 402. Serve stored WebPs
+// (or their originals) directly; the existing helper API also covers blog images.
+// Re-enable only after an explicit decision to use the paid optimizer.
+const ENABLED = false;
 
 const REMOTE = /^https:\/\//i;
 

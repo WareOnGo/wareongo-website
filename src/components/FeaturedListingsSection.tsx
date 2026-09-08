@@ -1,3 +1,4 @@
+import './FeaturedListingsSection.css';
 import { MapPin, Ruler, Building2, IndianRupee, ArrowRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { trackEvent } from '@/lib/analytics';
@@ -155,42 +156,6 @@ const FeaturedListingsSection = () => {
           ))}
         </div>
 
-        <style>{`
-          .listings-scroller {
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-            scroll-padding-left: 1.25rem;
-          }
-          @media (min-width: 768px) {
-            .listings-scroller { scroll-padding-left: 0; }
-          }
-          .listings-scroller::-webkit-scrollbar { display: none; }
-          .listings-scroller > :last-child {
-            margin-right: 1rem;
-          }
-          @media (min-width: 768px) {
-            .listings-scroller > :last-child { margin-right: 0; }
-          }
-          .listing-card {
-            transform: perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0);
-            transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1), background-color 400ms;
-            will-change: transform;
-          }
-          @media (hover: hover) and (pointer: fine) {
-            .listing-card:hover {
-              transform: perspective(1200px) rotateX(3deg) rotateY(-4deg) translateY(-4px);
-            }
-            .listing-card:nth-child(2):hover {
-              transform: perspective(1200px) rotateX(3deg) rotateY(0deg) translateY(-4px);
-            }
-            .listing-card:nth-child(3):hover {
-              transform: perspective(1200px) rotateX(3deg) rotateY(4deg) translateY(-4px);
-            }
-          }
-          @media (prefers-reduced-motion: reduce) {
-            .listing-card, .listing-card:hover { transform: none; transition: none; }
-          }
-        `}</style>
       </div>
     </section>
   );

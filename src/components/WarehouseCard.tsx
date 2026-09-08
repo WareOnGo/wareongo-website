@@ -1,23 +1,8 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { MapPin, Ruler, Building2, IndianRupee, ImageIcon, ShieldCheck, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
-import { optimizedSrc, optimizedSrcSet, CARD_WIDTHS, CARD_SIZES } from '@/lib/imageOpt';
-
-const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.svg'];
-const DOC_EXTENSIONS = ['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.txt', '.zip', '.rar'];
-const IMAGE_HOSTS = ['r2.dev', 'cloudinary.com', 'imgur.com', 'amazonaws.com', 'googleusercontent.com', 'imagekit.io'];
-
-const filterImageUrls = (urls: string[]): string[] => {
-  return urls.filter(url => {
-    if (!url || typeof url !== 'string') return false;
-    const lowerUrl = url.toLowerCase().trim();
-    if (!lowerUrl.startsWith('http://') && !lowerUrl.startsWith('https://')) return false;
-    if (DOC_EXTENSIONS.some(ext => lowerUrl.includes(ext))) return false;
-    const hasImageExtension = IMAGE_EXTENSIONS.some(ext => lowerUrl.includes(ext));
-    const isImageService = IMAGE_HOSTS.some(host => lowerUrl.includes(host));
-    return hasImageExtension || isImageService;
-  });
-};
+import { MapPin, Ruler, Building2, IndianRupee, ImageIcon, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
+import WarehousePhoto from '@/components/WarehousePhoto';
+import { useWarehouseGallery } from '@/hooks/useWarehouseGallery';
 
 interface WarehouseCardProps {
   id: number;
@@ -38,7 +23,7 @@ interface WarehouseCardProps {
   fireCompliance: boolean;
   features: string[];
   onClick?: () => void;
-  // Position in the grid — first 2 cards stay eager for LCP, the rest lazy-load.
+  // Position in the grid — first 3 cards stay eager for LCP, the rest lazy-load.
   index?: number;
 }
 
@@ -60,158 +45,28 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
   // 3-col desktop grid → first row is 3 cards; keep them eager for LCP.
   const isAboveFold = index < 3;
   const altText = `${size ? size.toLocaleString() + ' sqft ' : ''}warehouse in ${location.city}, ${location.state}`;
-  const [imageError, setImageError] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [prevImageIndex, setPrevImageIndex] = useState(0);
-  const [failedImages, setFailedImages] = useState<Set<number>>(new Set());
-  const [slideDirection, setSlideDirection] = useState<'left' | 'right' | null>(null);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [imageLoading, setImageLoading] = useState(true);
-
-  // Use images array if available, otherwise fall back to single image.
-  // Memoize so the URL filter doesn't run on every render of every card in the listings grid.
-  // We filter images + fallbacks together so per-index alignment survives the
-  // URL filter dropping invalid entries.
-  const { availableImages, availableFallbacks } = useMemo(() => {
-    const raw = images.length > 0 ? images : (image ? [image] : []);
-    const rawFallbacks = images.length > 0 ? imageFallbacks : [];
-    const filtered = filterImageUrls(raw);
-    const indexMap = filtered.map(url => raw.indexOf(url));
-    const fbs = indexMap.map(idx => (idx >= 0 ? rawFallbacks[idx] ?? null : null));
-    return { availableImages: filtered, availableFallbacks: fbs };
-  }, [images, image, imageFallbacks]);
-
-  const validImages = useMemo(
-    () => availableImages.filter((_, idx) => !failedImages.has(idx)),
-    [availableImages, failedImages],
-  );
-
-  // Preload adjacent images for smooth transitions
-  React.useEffect(() => {
-    if (validImages.length <= 1) return;
-
-    const preloadImage = (url: string) => {
-      const img = new Image();
-      img.src = url;
-    };
-
-    // Preload previous and next images
-    const currentValidIndex = validImages.findIndex((_, i) => availableImages[currentImageIndex] === validImages[i]);
-    const prevValidIndex = currentValidIndex === 0 ? validImages.length - 1 : currentValidIndex - 1;
-    const nextValidIndex = currentValidIndex === validImages.length - 1 ? 0 : currentValidIndex + 1;
-
-    const prevActualIndex = availableImages.indexOf(validImages[prevValidIndex]);
-    const nextActualIndex = availableImages.indexOf(validImages[nextValidIndex]);
-
-    if (availableImages[prevActualIndex]) preloadImage(availableImages[prevActualIndex]);
-    if (availableImages[nextActualIndex]) preloadImage(availableImages[nextActualIndex]);
-  }, [currentImageIndex, availableImages, validImages]);
-
-  // Truncate address if too long
+  const [interacting, setInteracting] = useState(false);
+  const gallery = useWarehouseGallery(id, images.length ? images : (image ? [image] : []), imageFallbacks, interacting);
+  const { index: currentImageIndex, previous: prevImageIndex, direction: slideDirection } = gallery.state;
+  const frame = gallery.frames[currentImageIndex];
   const truncate = (str: string, n: number) => (str.length > n ? str.slice(0, n - 1) + '…' : str);
-
-  const handleImageError = (event?: React.SyntheticEvent<HTMLImageElement>) => {
-    // Try the per-index fallback (original URL when current src is a WebP)
-    // before treating this image as failed.
-    if (event?.currentTarget) {
-      const img = event.currentTarget;
-
-      // Step 0: if we're showing a Vercel-optimized variant, drop srcset and
-      // retry the raw source URL once before any other fallback.
-      const raw = img.dataset.raw;
-      if (raw && img.src !== raw) {
-        img.removeAttribute('srcset');
-        img.removeAttribute('sizes');
-        img.dataset.raw = '';
-        img.src = raw;
-        return;
-      }
-
-      const fallback = img.dataset.fallback;
-      if (fallback && img.src !== fallback) {
-        img.dataset.fallback = '';
-        img.src = fallback;
-        return;
-      }
-    }
-
-    setFailedImages(prev => {
-      const newSet = new Set(prev);
-      newSet.add(currentImageIndex);
-      return newSet;
-    });
-
-    const remainingValidImages = availableImages.filter((_, idx) =>
-      idx !== currentImageIndex && !failedImages.has(idx)
-    );
-
-    if (remainingValidImages.length === 0) {
-      setImageError(true);
-    } else {
-      const nextValidIndex = availableImages.findIndex((img, idx) =>
-        idx > currentImageIndex && !failedImages.has(idx)
-      );
-
-      if (nextValidIndex !== -1) {
-        setCurrentImageIndex(nextValidIndex);
-      } else {
-        const firstValidIndex = availableImages.findIndex((img, idx) => !failedImages.has(idx));
-        if (firstValidIndex !== -1 && firstValidIndex !== currentImageIndex) {
-          setCurrentImageIndex(firstValidIndex);
-        } else {
-          setImageError(true);
-        }
-      }
-    }
-  };
-
-  const handlePrevImage = (e: React.MouseEvent) => {
-    e?.stopPropagation();
-    if (isTransitioning) return;
-    
-    const currentValidIndex = validImages.findIndex((_, i) => availableImages[currentImageIndex] === validImages[i]);
-    const newValidIndex = currentValidIndex === 0 ? validImages.length - 1 : currentValidIndex - 1;
-    const newActualIndex = availableImages.indexOf(validImages[newValidIndex]);
-    
-    setPrevImageIndex(currentImageIndex);
-    setSlideDirection('right');
-    setIsTransitioning(true);
-    setImageLoading(true);
-    setCurrentImageIndex(newActualIndex);
-    
-    setTimeout(() => {
-      setIsTransitioning(false);
-      setSlideDirection(null);
-    }, 400);
-  };
-
-  const handleNextImage = (e: React.MouseEvent) => {
-    e?.stopPropagation();
-    if (isTransitioning) return;
-    
-    const currentValidIndex = validImages.findIndex((_, i) => availableImages[currentImageIndex] === validImages[i]);
-    const newValidIndex = currentValidIndex === validImages.length - 1 ? 0 : currentValidIndex + 1;
-    const newActualIndex = availableImages.indexOf(validImages[newValidIndex]);
-    
-    setPrevImageIndex(currentImageIndex);
-    setSlideDirection('left');
-    setIsTransitioning(true);
-    setImageLoading(true);
-    setCurrentImageIndex(newActualIndex);
-    
-    setTimeout(() => {
-      setIsTransitioning(false);
-      setSlideDirection(null);
-    }, 400);
+  const navigate = (event: React.MouseEvent, delta: 1 | -1) => {
+    event.stopPropagation();
+    setInteracting(true);
+    gallery.move(delta);
   };
 
   return (
     <Card
       className="cursor-pointer transition-colors duration-300 overflow-hidden group border border-wareongo-blue rounded-2xl bg-transparent hover:bg-wareongo-blue/5 shadow-none"
       onClick={onClick}
+      data-warehouse-card={id}
+      onPointerEnter={() => setInteracting(true)}
+      onFocusCapture={() => setInteracting(true)}
+      onTouchStart={() => setInteracting(true)}
     >
       <div className="relative overflow-hidden rounded-t-2xl group/image border-b border-wareongo-blue">
-        {imageError || validImages.length === 0 ? (
+        {gallery.valid.length === 0 ? (
           <div className="w-full h-48 bg-wareongo-blue/5 flex flex-col items-center justify-center transition-colors duration-300">
             <ImageIcon className="w-8 h-8 text-wareongo-blue/40 mb-2" />
             <span className="text-xs text-wareongo-slate text-center px-2">
@@ -221,17 +76,10 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
         ) : (
           <>
             <div className="relative w-full h-48 overflow-hidden bg-wareongo-blue/5">
-              {/* Loading spinner */}
-              {imageLoading && (
-                <div className="absolute inset-0 flex items-center justify-center bg-wareongo-blue/5 z-20">
-                  <Loader2 className="w-8 h-8 text-wareongo-blue animate-spin" />
-                </div>
-              )}
-              
               {/* Previous image - slides out */}
-              {slideDirection && prevImageIndex !== currentImageIndex && availableImages[prevImageIndex] && (
+              {slideDirection && prevImageIndex !== currentImageIndex && gallery.source(prevImageIndex) && (
                 <img
-                  src={optimizedSrc(availableImages[prevImageIndex], 640)}
+                  src={gallery.source(prevImageIndex)}
                   alt=""
                   aria-hidden="true"
                   width={640}
@@ -248,13 +96,11 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
               )}
               
               {/* New image - slides in */}
-              <img
-                key={`${id}-${currentImageIndex}-${availableImages[currentImageIndex]}`}
-                src={optimizedSrc(availableImages[currentImageIndex], 640)}
-                srcSet={optimizedSrcSet(availableImages[currentImageIndex], CARD_WIDTHS)}
-                sizes={CARD_SIZES}
-                data-raw={availableImages[currentImageIndex]}
-                data-fallback={availableFallbacks[currentImageIndex] || ''}
+              <WarehousePhoto
+                key={`${gallery.state.key}:${currentImageIndex}`}
+                primary={frame.primary}
+                initialSrc={gallery.source(currentImageIndex)}
+                fallback={frame.fallback}
                 alt={altText}
                 width={640}
                 height={480}
@@ -265,8 +111,8 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
                     ? 'animate-slide-in-right'
                     : ''
                 }`}
-                onLoad={() => setImageLoading(false)}
-                onError={handleImageError}
+                onLoaded={(url) => gallery.loaded(currentImageIndex, url)}
+                onFailed={() => gallery.failed(currentImageIndex)}
                 loading={isAboveFold ? 'eager' : 'lazy'}
                 decoding="async"
                 fetchPriority={isAboveFold ? 'high' : 'auto'}
@@ -274,20 +120,20 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
             </div>
             
             {/* Carousel Navigation Buttons */}
-            {validImages.length > 0 && (
+            {gallery.valid.length > 0 && (
               <>
                 {/* Only show arrow buttons if there are multiple images */}
-                {validImages.length > 1 && (
+                {gallery.valid.length > 1 && (
                   <>
                     <button
-                      onClick={handlePrevImage}
+                      onClick={(event) => navigate(event, -1)}
                       className="absolute left-3 top-1/2 -translate-y-1/2 bg-wareongo-ivory/95 hover:bg-wareongo-ivory text-wareongo-blue p-1.5 rounded-full border border-wareongo-blue/20 transition-all duration-200 z-30 hover:scale-110 backdrop-blur-sm"
                       aria-label="Previous image"
                     >
                       <ChevronLeft className="w-4 h-4" />
                     </button>
                     <button
-                      onClick={handleNextImage}
+                      onClick={(event) => navigate(event, 1)}
                       className="absolute right-3 top-1/2 -translate-y-1/2 bg-wareongo-ivory/95 hover:bg-wareongo-ivory text-wareongo-blue p-1.5 rounded-full border border-wareongo-blue/20 transition-all duration-200 z-30 hover:scale-110 backdrop-blur-sm"
                       aria-label="Next image"
                     >
@@ -297,16 +143,15 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
                 )}
                 
                 {/* Image indicators - only show if multiple images */}
-                {validImages.length > 1 && (
+                {gallery.valid.length > 1 && (
                   <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-30">
-                    {validImages.map((_, validIndex) => {
-                      const actualIndex = availableImages.indexOf(validImages[validIndex]);
+                    {gallery.valid.map((actualIndex, validIndex) => {
                       return (
                         <button
                           key={actualIndex}
                           onClick={(e) => {
                             e.stopPropagation();
-                            setCurrentImageIndex(actualIndex);
+                            gallery.select(actualIndex);
                           }}
                           className="group p-1"
                           aria-label={`Go to image ${validIndex + 1}`}
