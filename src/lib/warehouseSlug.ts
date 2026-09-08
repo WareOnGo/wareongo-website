@@ -61,7 +61,8 @@ export function parseIdFromWarehouseSlug(slug: string): number | null {
   if (!slug) return null;
   const lastDash = slug.lastIndexOf('-');
   const tail = lastDash === -1 ? slug : slug.slice(lastDash + 1);
-  const id = parseInt(tail, 10);
-  if (isNaN(id) || id <= 0) return null;
+  if (!/^[1-9]\d*$/.test(tail)) return null;
+  const id = Number(tail);
+  if (!Number.isSafeInteger(id)) return null;
   return id;
 }

@@ -48,17 +48,30 @@ const skeletonForPath = (pathname: string) => {
 const isLoaderRoute = (pathname: string) =>
   pathname.startsWith("/warehouse/") || pathname.startsWith("/listings");
 
-const NavigationSkeleton = () => {
+const NavigationContent = () => {
   const navigation = useNavigation();
-  if (navigation.state !== "loading" || !navigation.location) return null;
-  const target = navigation.location.pathname;
-  if (!isLoaderRoute(target)) return null;
+  const target = navigation.location?.pathname ?? '';
+  const pending = navigation.state === "loading" && isLoaderRoute(target);
+  useEffect(() => {
+    if (!pending) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = previous; };
+  }, [pending]);
   return (
-    <div className="fixed inset-0 z-40 bg-wareongo-ivory overflow-y-auto">
-      <Navbar />
-      {skeletonForPath(target)}
-      <Footer />
-    </div>
+    <>
+      <div hidden={pending}><Outlet /></div>
+      {pending && (
+        <div className="fixed inset-0 z-[60] bg-wareongo-ivory overflow-y-auto" aria-busy="true">
+          <span role="status" aria-label={target.startsWith('/warehouse/') ? 'Loading warehouse details' : 'Loading listings'} className="sr-only">
+            {target.startsWith('/warehouse/') ? 'Loading warehouse details…' : 'Loading listings…'}
+          </span>
+          <Navbar />
+          {skeletonForPath(target)}
+          <Footer />
+        </div>
+      )}
+    </>
   );
 };
 
@@ -70,8 +83,7 @@ const RootLayout = () => (
       </Suspense>
       <ScrollToTop />
       <RouteTracker />
-      <Outlet />
-      <NavigationSkeleton />
+      <NavigationContent />
     </QueryClientProvider>
   </AuthProvider>
 );

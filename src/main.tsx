@@ -1,6 +1,7 @@
 import { ViteReactSSG } from "vite-react-ssg";
 import { routes } from "./routes";
 import { claimReloadAttempt } from "./lib/staleDeployReload";
+import { createWebsiteRouter } from "./lib/createWebsiteRouter";
 import "./index.css";
 
 // Lazy route chunks are content-hashed per build, and Vercel only serves the
@@ -44,4 +45,4 @@ if (typeof window !== "undefined") {
   });
 }
 
-export const createRoot = ViteReactSSG({ routes });
+export const createRoot = ViteReactSSG({ routes, customCreateRouter: createWebsiteRouter(routes) });
