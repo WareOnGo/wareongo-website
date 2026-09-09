@@ -5,7 +5,7 @@
 
 export const config = {
   // Backend API Base URL
-  apiBaseUrl: 'https://wareongo-website-backend.onrender.com',
+  apiBaseUrl: (import.meta.env.VITE_API_BASE_URL || 'https://wareongo-website-backend.onrender.com').replace(/\/+$/, ''),
   
   // API Endpoints
   api: {

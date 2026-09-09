@@ -1,15 +1,11 @@
-// Editorial content for micromarket listing pages, authored in the CMS
+// Editorial content for micromarket overview pages, authored in the CMS
 // (MicromarketPage table) and pulled into ./micromarkets.generated.ts at build
 // time by scripts/generate-micromarkets.mjs. Same shape as ./blogs.ts — this
 // module holds the types and re-exports the generated data, so importers never
 // touch the generated file directly.
 //
-// This data is the switch behind the two micromarket page layouts:
-//
-//   * no PUBLISHED row for a micromarket  → the plain listing grid it has
-//     always rendered (src/pages/LocationListings.tsx)
-//   * a PUBLISHED row                     → the editorial template
-//     (src/pages/MicromarketPage.tsx), rendered over the same live listings
+// Published rows produce /overview/{state}/{city}/{micromarket}. The existing
+// /listings/city/{city}/{micromarket} route always renders the plain grid.
 //
 // Nothing here carries a number. Counts, rent and size ranges, the construction
 // mix, compliance counts and the peer rent chart are all computed from live
@@ -47,7 +43,7 @@ export interface MicromarketStatOverrides {
 }
 
 export interface MicromarketContent {
-  /** The {city} segment of /listings/city/{citySlug}/{slug}. */
+  /** The {city} segment of /overview/{state}/{citySlug}/{slug}. State is derived. */
   citySlug: string;
   /** The {micromarket} segment. Unique only within its parent city. */
   slug: string;

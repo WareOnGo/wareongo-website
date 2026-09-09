@@ -119,6 +119,32 @@ async function main() {
   // Micromarkets are unaffected: PARENT_CITY_MIN_LISTINGS (6) already exceeds
   // the city threshold, so every parent city here is a listed one.
   const micromarkets = await summarizeMicromarkets();
+  // Read emitted pages rather than re-fetching CMS content: the sitemap must
+  // describe this build even if publication changes while the build is running.
+  const overviewPaths = [];
+  async function walkOverviews(segments = []) {
+    const directory = path.join('dist', 'overview', ...segments);
+    let entries;
+    try { entries = await fs.readdir(directory, { withFileTypes: true }); }
+    catch (error) { if (error.code === 'ENOENT') return; throw error; }
+    if (segments.length && entries.some((entry) => entry.isFile() && entry.name === 'index.html')) {
+      const overviewPath = `/overview/${segments.join('/')}`;
+      // React Router can catch a loader error and SSG still writes an HTML
+      // error page successfully. Do not deploy that page as a published overview.
+      // Shorter state/city routes will use their own templates when added.
+      if (segments.length === 3) {
+        const html = await fs.readFile(path.join(directory, 'index.html'), 'utf8');
+        if (!html.includes('id="micromarket-title"')) {
+          throw new Error(`Overview failed to render: ${overviewPath}. Refusing to publish an error page.`);
+        }
+      }
+      overviewPaths.push(overviewPath);
+    }
+    if (segments.length < 3) {
+      for (const entry of entries) if (entry.isDirectory()) await walkOverviews([...segments, entry.name]);
+    }
+  }
+  await walkOverviews();
 
   const entries = [
     ...STATIC_PATHS.map((p) => urlEntry(p.path, p.changefreq, p.priority)),
@@ -127,6 +153,7 @@ async function main() {
     ...blogSlugs.map((slug) => urlEntry(`/blogs/${slug}`, 'monthly', '0.6')),
     ...cities.map((c) => urlEntry(`/listings/city/${c.slug}`, 'weekly', '0.8')),
     ...micromarkets.map((m) => urlEntry(micromarketPath(m), 'weekly', '0.8')),
+    ...overviewPaths.sort().map((overview) => urlEntry(overview, 'weekly', '0.8')),
     ...states.map((s) => urlEntry(`/listings/state/${s.slug}`, 'weekly', '0.7')),
     ...cityTypeCombos.map((c) =>
       urlEntry(`/listings/city/${c.location.slug}/${c.warehouseType.toLowerCase()}`, 'weekly', '0.7'),
@@ -144,7 +171,7 @@ ${entries.join('\n')}
   const outPath = path.join('dist', 'sitemap.xml');
   await fs.writeFile(outPath, xml, 'utf8');
   console.log(
-    `[sitemap] wrote ${outPath} — ${entries.length} URLs (${warehouseEntries.length} warehouses w/ ${totalImages} images, ${cities.length} cities, ${states.length} states, ${cityTypeCombos.length} city×type, ${stateTypeCombos.length} state×type, ${micromarkets.length} micromarkets)`,
+    `[sitemap] wrote ${outPath} — ${entries.length} URLs (${warehouseEntries.length} warehouses w/ ${totalImages} images, ${cities.length} cities, ${states.length} states, ${cityTypeCombos.length} city×type, ${stateTypeCombos.length} state×type, ${micromarkets.length} micromarkets, ${overviewPaths.length} overviews)`,
   );
   console.log(
     `[sitemap] delisted ${allCities.length - cities.length} of ${allCities.length} cities with <${CITY_MIN_LISTINGS} listings (pages still build and return 200): ${allCities

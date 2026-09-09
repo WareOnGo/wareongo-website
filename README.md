@@ -67,3 +67,22 @@ Simply open [Lovable](https://lovable.dev/projects/727aec1c-75e9-4d24-8c03-c4a29
 ## I want to use a custom domain - is that possible?
 
 We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+
+## Micromarket overview URLs
+
+Published CMS content renders at `/overview/{state}/{city}/{micromarket}`.
+Existing `/listings/city/{city}/{micromarket}` URLs always render the paginated
+listing grid, with a link to the overview when one is published. State comes
+from the backend's `parentState` / `stateSlug` fields; saved CMS content keeps
+its existing city/micromarket key. Shorter state/city overview routes are
+reserved for future work.
+
+Deploy the backend with these geography fields before rebuilding this website.
+No migration or new required environment variable is needed. For local builds
+against a different backend, set both `VITE_API_BASE_URL` (route loaders) and
+`WAREONGO_API_BASE` (build generators). A failed CMS content fetch stops the
+build so existing overview pages cannot be silently removed. The sitemap reads
+overview pages actually emitted by the build.
+
+Validation: `node --test tests/overview-content-fetch.test.mjs`, plus the sibling
+`wareongo-evals` behaviour suite and `test:overview` static-build suite.

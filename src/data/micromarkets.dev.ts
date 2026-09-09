@@ -19,7 +19,7 @@ import type { MicromarketContent } from './micromarkets';
 // is the real thing wrapped around fake words.
 //
 // Slugs have to match a micromarket the site actually builds, or the loader
-// never finds this and the URL keeps serving the plain listing grid.
+// never finds this and no overview URL is emitted.
 
 export const DEV_MICROMARKETS: MicromarketContent[] = [
   {

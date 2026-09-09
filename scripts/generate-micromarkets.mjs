@@ -4,8 +4,8 @@
 // at runtime.
 //
 // Unlike blogs, an empty result is not an error: it means no micromarket has
-// editorial content yet, and every one of them keeps rendering the plain
-// listing grid. See fetchMicromarketPages in ./lib/api.mjs.
+// editorial content yet, so there are no overview pages. Listing grids are
+// always built independently. See fetchMicromarketPages in ./lib/api.mjs.
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fetchMicromarketPages } from './lib/api.mjs';
@@ -22,9 +22,8 @@ async function main() {
 // Regenerated on every \`npm run build\`. Source: backend /micromarket-pages
 // (CMS-managed). Types live in ./micromarkets.ts, which re-exports this data.
 //
-// An empty array is the normal starting state, and it is not a failure: every
-// micromarket simply keeps rendering its plain listing grid until an editor
-// publishes content for it.
+// Only these published records produce /overview pages. Existing micromarket
+// listing URLs always render their plain grid independently of this content.
 import type { MicromarketContent } from './micromarkets';
 
 export const micromarkets: MicromarketContent[] = ${JSON.stringify(pages, null, 2)};

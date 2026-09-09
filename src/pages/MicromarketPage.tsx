@@ -24,13 +24,8 @@ import { trackEvent } from '@/lib/analytics';
 import { warehousePath } from '@/lib/warehouseSlug';
 
 /**
- * The editorial micromarket page: /listings/city/{city}/{micromarket} when an
- * editor has published content for it in the CMS.
- *
- * Without that content the same route renders LocationListings' plain grid, and
- * that is the fallback this page never replaces — the grid is still here, at the
- * foot of the page, carrying every listing. What the editorial layout adds is
- * the prose and the computed context around it.
+ * Published CMS content at /overview/{state}/{city}/{micromarket}.
+ * The existing /listings/city/{city}/{micromarket} page keeps its plain grid.
  *
  * Division of labour, enforced by the data model rather than by convention:
  * the CMS supplies prose, images and FAQs; every figure on the page comes from
@@ -56,10 +51,10 @@ const orderForDisplay = (warehouses: Listing[]): Listing[] =>
 
 const MicromarketPage = ({ data }: { data: MicromarketPageData }) => {
   const navigate = useNavigate();
-  const { content, stats, canonical, slug, parentCity, warehouses } = data;
+  const { content, stats, canonical, slug, parentCity, parentState, warehouses } = data;
   const peers = data.peers ?? [];
 
-  const path = `/listings/city/${content.citySlug}/${slug}`;
+  const path = data.overviewPath;
   // A bare locality name is ambiguous ("Ernakulam" is also a city elsewhere in
   // the data), so anything outward-facing carries the parent city.
   const place =
@@ -181,6 +176,7 @@ const MicromarketPage = ({ data }: { data: MicromarketPageData }) => {
               [
                 { label: 'Home', path: '/' },
                 { label: 'Listings', path: '/listings' },
+                { label: parentState.canonical, path: `/listings/state/${parentState.slug}` },
                 ...(parentCity && parentCity.canonical !== canonical
                   ? [{ label: parentCity.canonical, path: `/listings/city/${parentCity.slug}` }]
                   : []),
@@ -317,6 +313,12 @@ const MicromarketPage = ({ data }: { data: MicromarketPageData }) => {
             {/* Link block: siblings across, city up, editorial out. */}
             <section aria-label="Related pages" className={SECTION_RULE}>
               <dl className="space-y-5 text-sm">
+                <div className="sm:flex sm:gap-6">
+                  <dt className={`mb-2 min-w-[9rem] ${EYEBROW} text-wareongo-slate sm:mb-0`}>All listings</dt>
+                  <dd><Link to={micromarketPath({ citySlug: content.citySlug, slug })} className="text-wareongo-blue hover:underline">
+                    Browse all warehouses in {canonical} →
+                  </Link></dd>
+                </div>
                 {siblings.length > 0 && (
                   <div className="sm:flex sm:gap-6">
                     <dt className={`mb-2 min-w-[9rem] ${EYEBROW} text-wareongo-slate sm:mb-0`}>

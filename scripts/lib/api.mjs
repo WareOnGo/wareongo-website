@@ -34,33 +34,17 @@ export async function fetchBlogs() {
 /**
  * PUBLISHED micromarket pages, keyed by (citySlug, slug).
  *
- * Returns [] rather than throwing, which is the opposite of fetchBlogs and
- * deliberate: these pages are an *upgrade* to a route that already renders
- * fine without them. An empty result means every micromarket keeps its plain
- * listing grid — the same thing the site did before this table existed — so
- * failing the build over it would trade a working deploy for nothing.
- *
- * A 404 is treated the same way, so the website can deploy before (or without)
- * the backend route being live.
+ * An empty published collection is valid. A failed fetch is not: silently
+ * replacing it with [] would remove every published /overview page.
  */
 export async function fetchMicromarketPages() {
-  let resp;
-  try {
-    resp = await fetch(`${API_BASE}/micromarket-pages`);
-  } catch (err) {
-    console.warn('[micromarkets] backend unreachable — building without editorial pages:', err.message);
-    return [];
-  }
-  if (resp.status === 404) {
-    console.warn('[micromarkets] /micromarket-pages not found on the backend yet — building without editorial pages');
-    return [];
-  }
+  const resp = await fetch(`${API_BASE}/micromarket-pages`);
   if (!resp.ok) {
-    console.warn(`[micromarkets] backend returned ${resp.status} ${resp.statusText} — building without editorial pages`);
-    return [];
+    throw new Error(`Failed to fetch micromarket pages: ${resp.status} ${resp.statusText}`);
   }
   const json = await resp.json();
-  return Array.isArray(json?.data) ? json.data : [];
+  if (!Array.isArray(json?.data)) throw new Error('Micromarket pages endpoint returned an unexpected shape');
+  return json.data;
 }
 
 /**

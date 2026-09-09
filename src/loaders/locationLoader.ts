@@ -5,6 +5,7 @@ import { applyStatOverrides } from '@/lib/micromarketStats';
 import {
   buildableMicromarkets,
   micromarketPath,
+  micromarketOverviewPath,
   type Micromarket,
   type PeerRent,
 } from '@/services/micromarketsAPI';
@@ -128,35 +129,18 @@ export interface LocationListingsLoaderData {
   // Micromarket pages only: the city its listings actually sit in, for the
   // "…, Bengaluru" context in the heading plus a breadcrumb/link up to it.
   parentCity?: { canonical: string; slug: string } | null;
-  // ----- micromarket editorial pages ---------------------------------------
-  // The three fields below travel together and are present only when an editor
-  // has published content for this micromarket in the CMS. Their presence is
-  // the switch between the two layouts: with `content`, LocationListings hands
-  // off to the editorial template; without it, the plain listing grid renders
-  // exactly as it always has.
-  //
-  // They are attached only in that case rather than always, because every one
-  // of them is serialised into the prerendered HTML of every listing page.
-  content?: MicromarketContent;
-  stats?: Micromarket;
-  /** Sibling micromarkets under the same city, for the peer rent chart and chips. */
-  peers?: PeerRent[];
+  /** Link to published editorial content; listing routes never carry that copy. */
+  overviewPath?: string;
 }
 
-/**
- * A micromarket page that has editorial content. The loader only ever attaches
- * `content` and `stats` together, so narrowing on the pair is sound — and having
- * the guard here rather than a cast at the call site means the invariant is
- * asserted once, next to the code that establishes it.
- */
+/** Only the overview loader returns editorial content. */
 export type MicromarketPageData = LocationListingsLoaderData & {
   content: MicromarketContent;
   stats: Micromarket;
+  peers: PeerRent[];
+  parentState: { canonical: string; slug: string };
+  overviewPath: string;
 };
-
-export const isEditorialMicromarket = (
-  data: LocationListingsLoaderData,
-): data is MicromarketPageData => data.content !== undefined && data.stats !== undefined;
 
 const countTypes = (scoped: Warehouse[]) =>
   scoped.reduce(
@@ -327,11 +311,22 @@ async function micromarketLoader(
     warehouses: scoped.map(transformWarehouseData),
   };
 
-  // The if/else. No published CMS content means this stays the listing grid it
-  // has always been — the editorial extras aren't attached, and nothing extra
-  // is serialised into the page.
   const content = getMicromarketContent(citySlug, match.slug);
-  if (!content) return base;
+  const overviewPath = content ? micromarketOverviewPath(match) : null;
+  return overviewPath ? { ...base, overviewPath } : base;
+}
+
+/** A wrong state/city or an unpublished overview must not resolve as a grid. */
+export async function micromarketOverviewLoader({ params }: LoaderFunctionArgs): Promise<MicromarketPageData | null> {
+  const match = (await buildableMicromarkets()).find((m) =>
+    m.stateSlug === params.state && m.citySlug === params.city && m.slug === params.micromarket,
+  );
+  if (!match?.parentState || !match.stateSlug || !match.citySlug) return null;
+  const content = getMicromarketContent(match.citySlug, match.slug);
+  const overviewPath = micromarketOverviewPath(match);
+  if (!content || !overviewPath) return null;
+  const base = await micromarketLoader(match.citySlug, match.slug);
+  if (!base) return null;
 
   // Derived once by the backend, then corrected by whatever the editor set — so
   // clearing an override puts the derived figure straight back. The peers come
@@ -339,7 +334,19 @@ async function micromarketLoader(
   // bar too.
   const stats = applyStatOverrides(match, content.statOverrides);
 
-  return { ...base, content, stats, peers: stats.peers };
+  return { ...base, content, stats, peers: stats.peers, overviewPath,
+    parentState: { canonical: match.parentState, slug: match.stateSlug } };
+}
+
+export async function micromarketOverviewStaticPaths(): Promise<string[]> {
+  const markets = await buildableMicromarkets();
+  return markets.filter((m) => m.citySlug && getMicromarketContent(m.citySlug, m.slug)).map((m) => {
+    const path = micromarketOverviewPath(m);
+    if (!path || !m.parentState) {
+      throw new Error(`Missing overview geography for ${m.citySlug}/${m.slug}. Deploy the backend with state data before building.`);
+    }
+    return path;
+  });
 }
 
 export async function micromarketStaticPaths(): Promise<string[]> {

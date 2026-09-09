@@ -46,6 +46,9 @@ export interface Micromarket {
   parentCity: string | null;
   /** The {city} URL segment, or null when no city can host it. */
   citySlug: string | null;
+  /** Canonical city geography, supplied by the backend for overview URLs. */
+  parentState: string | null;
+  stateSlug: string | null;
   /** Whether the site builds a page for this at all. */
   hasPage: boolean;
   /** Everything tagged with this micromarket, land and build-to-suit included. */
@@ -106,3 +109,13 @@ export const buildableMicromarkets = async (): Promise<Micromarket[]> =>
 /** Canonical page path — micromarkets nest under their parent city. */
 export const micromarketPath = (m: Pick<Micromarket, 'citySlug' | 'slug'>) =>
   `/listings/city/${m.citySlug}/${m.slug}`;
+
+/** Separate namespace leaves /overview/:state and /:city available for later. */
+export const micromarketOverviewPath = (
+  m: Pick<Micromarket, 'stateSlug' | 'citySlug' | 'slug'>,
+): string | null => {
+  const segments = [m.stateSlug, m.citySlug, m.slug];
+  return segments.every((segment) => segment && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(segment))
+    ? `/overview/${segments.join('/')}`
+    : null;
+};

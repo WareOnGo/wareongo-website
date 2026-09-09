@@ -14,6 +14,8 @@ import {
   stateTypeListingsLoader,
   cityTypeStaticPaths,
   stateTypeStaticPaths,
+  micromarketOverviewLoader,
+  micromarketOverviewStaticPaths,
 } from "./loaders/locationLoader";
 
 // vite-react-ssg's `lazy` accepts a function returning a module with a `Component` field.
@@ -104,6 +106,16 @@ export const routes: RouteRecord[] = [
             children: [{ path: "admin-panel", lazy: lazyDefault(() => import("./pages/AdminPanel")) }],
           },
           { path: "*", lazy: lazyDefault(() => import("./pages/NotFound")) },
+          {
+            // Append new routes: SSG loader IDs depend on sibling positions,
+            // and older tabs read the current deploy's loader-data manifest.
+            // Router specificity ranks this above '*', regardless of position.
+            // Exact depth leaves state/city overview routes available for later.
+            path: "overview/:state/:city/:micromarket",
+            lazy: lazyDefault(() => import("./pages/MicromarketOverview")),
+            loader: micromarketOverviewLoader,
+            getStaticPaths: micromarketOverviewStaticPaths,
+          },
         ],
       },
     ],
