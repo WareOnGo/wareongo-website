@@ -33,11 +33,13 @@ const Pagination = ({
   currentPage,
   totalPages,
   onChange,
+  disabled = false,
   className = '',
 }: {
   currentPage: number;
   totalPages: number;
   onChange: (page: number, direction: PageChangeDirection) => void;
+  disabled?: boolean;
   className?: string;
 }) => {
   if (totalPages <= 1) return null;
@@ -47,7 +49,7 @@ const Pagination = ({
       <button
         type="button"
         onClick={() => onChange(currentPage - 1, 'prev')}
-        disabled={currentPage === 1}
+        disabled={disabled || currentPage === 1}
         className="h-9 rounded-lg border border-wareongo-blue/30 px-4 text-sm font-medium text-wareongo-blue transition-colors hover:bg-wareongo-blue/5 disabled:cursor-not-allowed disabled:opacity-40"
       >
         Previous
@@ -61,8 +63,9 @@ const Pagination = ({
               key={pageNum}
               type="button"
               onClick={() => onChange(pageNum, 'jump')}
+              disabled={disabled}
               aria-current={isActive ? 'page' : undefined}
-              className={`h-9 w-9 rounded-lg border text-sm font-medium transition-colors ${
+              className={`h-9 w-9 rounded-lg border text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
                 isActive
                   ? 'border-wareongo-blue bg-wareongo-blue text-white'
                   : 'border-wareongo-blue/30 bg-transparent text-wareongo-blue hover:bg-wareongo-blue/5'
@@ -77,7 +80,7 @@ const Pagination = ({
       <button
         type="button"
         onClick={() => onChange(currentPage + 1, 'next')}
-        disabled={currentPage === totalPages}
+        disabled={disabled || currentPage === totalPages}
         className="h-9 rounded-lg border border-wareongo-blue/30 px-4 text-sm font-medium text-wareongo-blue transition-colors hover:bg-wareongo-blue/5 disabled:cursor-not-allowed disabled:opacity-40"
       >
         Next

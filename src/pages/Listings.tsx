@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useLoaderData, useSearchParams } from 'react-router-dom';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import PageHead from '@/components/PageHead';
@@ -6,6 +6,7 @@ import Pagination from '@/components/Pagination';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WarehouseCard from '@/components/WarehouseCard';
+import { WarehouseGridSkeleton } from '@/components/PageSkeletons';
 import ContactFormDialog from '@/components/ContactFormDialog';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -63,9 +64,6 @@ const filtersToSearchParams = (f: WarehouseFilters): Record<string, string> => {
   return out;
 };
 
-const hasAnyFilter = (sp: URLSearchParams) =>
-  ['city', 'state', 'fire', 'type', 'minSqft', 'maxSqft'].some((k) => sp.has(k));
-
 // Frontend filter object → backend API params. Pure, so it can sit outside the component.
 const toApiFilters = (filters: WarehouseFilters) => {
   let cityFilter = filters.city && filters.city !== 'all' ? filters.city : undefined;
@@ -99,15 +97,27 @@ const Listings = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
   const [selectedWarehouseId] = useState<number | null>(null);
+  const resultsRef = useRef<HTMLElement>(null);
+  const scrollAfterPaging = useRef(false);
+
+  useEffect(() => {
+    if (!scrollAfterPaging.current) return;
+    scrollAfterPaging.current = false;
+    // Commit the skeleton (or cached cards) before moving the viewport. An
+    // instant scroll also cannot be cancelled when a short final page arrives.
+    resultsRef.current?.focus({ preventScroll: true });
+    resultsRef.current?.scrollIntoView({ behavior: 'instant', block: 'start' });
+  }, [currentPage, pageSize]);
 
   const apiFilters = toApiFilters(appliedFilters);
   // Use the SSG-baked data only when the user hasn't filtered or paged.
-  const isInitialQuery = !hasAnyFilter(searchParams) && currentPage === 1 && pageSize === DEFAULT_PAGE_SIZE;
+  // Applied filters can change before the URL navigation commits.
+  const isInitialQuery = Object.keys(apiFilters).length === 0 && currentPage === 1 && pageSize === DEFAULT_PAGE_SIZE;
 
-  const { data, isLoading, isError, refetch } = useQuery({
+  const { data, isPending, isPlaceholderData, isError, refetch } = useQuery({
     queryKey: ['warehouses', apiFilters, currentPage, pageSize] as const,
-    queryFn: async () => {
-      const resp = await warehouseAPI.getWarehouses(currentPage, pageSize, apiFilters);
+    queryFn: async ({ signal }) => {
+      const resp = await warehouseAPI.getWarehouses(currentPage, pageSize, apiFilters, signal);
       return {
         warehouses: resp.data.map(transformWarehouseData),
         pagination: resp.pagination,
@@ -123,6 +133,9 @@ const Listings = () => {
     staleTime: 60_000,
   });
 
+  // Previous data keeps the pager's totals stable, but its cards belong to a
+  // different page/filter. Background refreshes of the same page keep its cards.
+  const loadingResults = isPending || isPlaceholderData;
   const warehouses = data?.warehouses ?? [];
   const pagination = data?.pagination ?? {
     currentPage: 1,
@@ -173,6 +186,8 @@ const Listings = () => {
   };
 
   const handlePageSizeChange = (newPageSize: number) => {
+    if (loadingResults || newPageSize === pageSize) return;
+    scrollAfterPaging.current = true;
     setPageSize(newPageSize);
     setCurrentPage(1);
   };
@@ -353,129 +368,136 @@ const Listings = () => {
             </div>
           )}
 
-          {/* Loading State */}
-          {isLoading && (
-            <div className="text-center py-12">
-              <div className="animate-pulse">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                  {[...Array(6)].map((_, i) => (
-                    <div key={i} className="bg-wareongo-blue/5 border border-wareongo-blue/20 rounded-2xl h-80"></div>
-                  ))}
-                </div>
+          <p role="status" className="sr-only">
+            {loadingResults
+              ? `Loading page ${currentPage} of warehouses…`
+              : isError ? 'Warehouse results could not be loaded.'
+                : `${warehouses.length} warehouses shown on page ${pagination.currentPage}.`}
+          </p>
+          <section ref={resultsRef} aria-label="Warehouse results" aria-busy={loadingResults} tabIndex={-1} className="scroll-mt-24 focus:outline-none">
+            {/* Match the page size and card proportions to avoid a collapsing grid. */}
+            {loadingResults && (
+              <div className="mb-12">
+                <WarehouseGridSkeleton count={pageSize} />
               </div>
-            </div>
-          )}
+            )}
 
-          {/* Error State */}
-          {isError && !isLoading && (
-            <div className="text-center py-12">
-              <p className="text-red-600 mb-4">Failed to load warehouses. Please try again later.</p>
-              <button
-                onClick={() => refetch()}
-                className="px-5 h-10 rounded-xl bg-wareongo-blue text-white text-sm font-medium hover:bg-wareongo-blue/90 transition-colors"
-              >
-                Try again
-              </button>
-            </div>
-          )}
-
-          {/* Warehouse Grid */}
-          {!isLoading && !isError && warehouses.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-              {warehouses.map((warehouse, idx) => (
-                <WarehouseCard
-                  key={warehouse.id}
-                  id={warehouse.id}
-                  index={idx}
-                  image={warehouse.image}
-                  images={warehouse.images}
-                  imageFallbacks={warehouse.imageFallbacks}
-                  address={warehouse.address}
-                  location={warehouse.location}
-                  size={warehouse.size}
-                  ceilingHeight={warehouse.ceilingHeight}
-                  price={warehouse.price}
-                  fireCompliance={warehouse.fireCompliance}
-                  features={warehouse.features}
-                  onClick={() => {
-                    trackEvent('listing_open', {
-                      warehouse_id: warehouse.id,
-                      source: 'listings_page',
-                      position: (pagination.currentPage - 1) * pagination.pageSize + idx + 1,
-                      page: pagination.currentPage,
-                      address: warehouse.address,
-                      city: warehouse.location?.city,
-                      state: warehouse.location?.state,
-                      size_sqft: warehouse.size,
-                      price_per_sqft: warehouse.price,
-                    });
-                    handleWarehouseClick(warehouse);
-                  }}
-                />
-              ))}
-            </div>
-          )}
-
-          {/* No Results Message */}
-          {!isLoading && !isError && warehouses.length === 0 && (
-            <div className="text-center py-16 border border-wareongo-blue/30 rounded-2xl">
-              <p className="text-lg sm:text-xl text-wareongo-blue font-semibold mb-2">No warehouses found</p>
-              <p className="text-wareongo-slate text-sm mb-6">
-                Try adjusting your filters to see more results.
-              </p>
-              {hasActiveFilters() && (
+            {/* Error State */}
+            {isError && !loadingResults && (
+              <div className="text-center py-12">
+                <p className="text-red-600 mb-4">Failed to load warehouses. Please try again later.</p>
                 <button
-                  onClick={clearFilters}
+                  onClick={() => refetch()}
                   className="px-5 h-10 rounded-xl bg-wareongo-blue text-white text-sm font-medium hover:bg-wareongo-blue/90 transition-colors"
                 >
-                  Clear all filters
+                  Try again
                 </button>
-              )}
-            </div>
-          )}
+              </div>
+            )}
 
-          {/* Pagination Info and Controls */}
-          {!isLoading && !isError && warehouses.length > 0 && (
-            <div className="text-center space-y-5">
-              <p className="text-wareongo-slate text-sm">
-                Showing {warehouses.length} of {pagination.totalItems} warehouses
-                {pagination.totalPages > 1 && ` · Page ${pagination.currentPage} of ${pagination.totalPages}`}
-              </p>
+            {/* Warehouse Grid */}
+            {!loadingResults && !isError && warehouses.length > 0 && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                {warehouses.map((warehouse, idx) => (
+                  <WarehouseCard
+                    key={warehouse.id}
+                    id={warehouse.id}
+                    index={idx}
+                    image={warehouse.image}
+                    images={warehouse.images}
+                    imageFallbacks={warehouse.imageFallbacks}
+                    address={warehouse.address}
+                    location={warehouse.location}
+                    size={warehouse.size}
+                    ceilingHeight={warehouse.ceilingHeight}
+                    price={warehouse.price}
+                    fireCompliance={warehouse.fireCompliance}
+                    features={warehouse.features}
+                    onClick={() => {
+                      trackEvent('listing_open', {
+                        warehouse_id: warehouse.id,
+                        source: 'listings_page',
+                        position: (pagination.currentPage - 1) * pagination.pageSize + idx + 1,
+                        page: pagination.currentPage,
+                        address: warehouse.address,
+                        city: warehouse.location?.city,
+                        state: warehouse.location?.state,
+                        size_sqft: warehouse.size,
+                        price_per_sqft: warehouse.price,
+                      });
+                      handleWarehouseClick(warehouse);
+                    }}
+                  />
+                ))}
+              </div>
+            )}
 
-              {pagination.totalItems > 10 && (
-                <div className="flex justify-center items-center gap-3">
-                  <label htmlFor="pageSize" className="text-xs uppercase tracking-[0.18em] text-wareongo-slate">
-                    Per page
-                  </label>
-                  <select
-                    id="pageSize"
-                    value={pageSize}
-                    onChange={(e) => handlePageSizeChange(Number(e.target.value))}
-                    className="px-3 h-9 bg-transparent border border-wareongo-blue/30 rounded-lg text-sm text-wareongo-blue focus:outline-none focus:ring-2 focus:ring-wareongo-blue/30"
+            {/* No Results Message */}
+            {!loadingResults && !isError && warehouses.length === 0 && (
+              <div className="text-center py-16 border border-wareongo-blue/30 rounded-2xl">
+                <p className="text-lg sm:text-xl text-wareongo-blue font-semibold mb-2">No warehouses found</p>
+                <p className="text-wareongo-slate text-sm mb-6">
+                  Try adjusting your filters to see more results.
+                </p>
+                {hasActiveFilters() && (
+                  <button
+                    onClick={clearFilters}
+                    className="px-5 h-10 rounded-xl bg-wareongo-blue text-white text-sm font-medium hover:bg-wareongo-blue/90 transition-colors"
                   >
-                    <option value={10}>10</option>
-                    <option value={21}>21</option>
-                    <option value={30}>30</option>
-                    <option value={50}>50</option>
-                  </select>
-                </div>
-              )}
+                    Clear all filters
+                  </button>
+                )}
+              </div>
+            )}
 
-              <Pagination
-                currentPage={pagination.currentPage}
-                totalPages={pagination.totalPages}
-                onChange={(page, direction) => {
-                  trackEvent('listings_paginate', {
-                    from_page: pagination.currentPage,
-                    to_page: page,
-                    direction,
-                  });
-                  setCurrentPage(page);
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-              />
-            </div>
-          )}
+            {/* Pagination Info and Controls */}
+            {!isError && warehouses.length > 0 && (
+              <div className="text-center space-y-5">
+                <p className="text-wareongo-slate text-sm">
+                  {loadingResults ? `Loading page ${currentPage}…` : <>
+                    Showing {warehouses.length} of {pagination.totalItems} warehouses
+                    {pagination.totalPages > 1 && ` · Page ${pagination.currentPage} of ${pagination.totalPages}`}
+                  </>}
+                </p>
+
+                {pagination.totalItems > 10 && (
+                  <div className="flex justify-center items-center gap-3">
+                    <label htmlFor="pageSize" className="text-xs uppercase tracking-[0.18em] text-wareongo-slate">
+                      Per page
+                    </label>
+                    <select
+                      id="pageSize"
+                      value={pageSize}
+                      disabled={loadingResults}
+                      onChange={(e) => handlePageSizeChange(Number(e.target.value))}
+                      className="px-3 h-9 bg-transparent border border-wareongo-blue/30 rounded-lg text-sm text-wareongo-blue focus:outline-none focus:ring-2 focus:ring-wareongo-blue/30"
+                    >
+                      <option value={10}>10</option>
+                      <option value={21}>21</option>
+                      <option value={30}>30</option>
+                      <option value={50}>50</option>
+                    </select>
+                  </div>
+                )}
+
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={pagination.totalPages}
+                  disabled={loadingResults}
+                  onChange={(page, direction) => {
+                    if (loadingResults || page === currentPage) return;
+                    trackEvent('listings_paginate', {
+                      from_page: pagination.currentPage,
+                      to_page: page,
+                      direction,
+                    });
+                    scrollAfterPaging.current = true;
+                    setCurrentPage(page);
+                  }}
+                />
+              </div>
+            )}
+          </section>
         </div>
       </main>
 

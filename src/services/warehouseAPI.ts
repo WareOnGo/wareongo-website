@@ -93,7 +93,8 @@ class WarehouseAPI {
       fireNocAvailable?: boolean;
       minSpace?: number;
       maxSpace?: number;
-    }
+    },
+    signal?: AbortSignal,
   ): Promise<WarehouseAPIResponse> {
     try {
       const params = new URLSearchParams();
@@ -123,7 +124,8 @@ class WarehouseAPI {
       }
 
       const response = await fetch(
-        `${this.baseURL}/warehouses?${params.toString()}`
+        `${this.baseURL}/warehouses?${params.toString()}`,
+        { signal },
       );
       
       if (!response.ok) {
@@ -133,7 +135,7 @@ class WarehouseAPI {
       const result = await response.json();
       return result;
     } catch (error) {
-      console.error('Error fetching warehouses:', error);
+      if (!signal?.aborted) console.error('Error fetching warehouses:', error);
       throw error;
     }
   }

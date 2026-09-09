@@ -1,25 +1,33 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-const CardSkeleton = () => (
-  <div className="border border-wareongo-blue/30 rounded-2xl overflow-hidden bg-transparent">
-    <Skeleton className="w-full h-48 rounded-none" />
-    <div className="p-5 sm:p-6 space-y-4">
-      <div className="space-y-2">
-        <Skeleton className="h-5 w-3/4" />
-        <Skeleton className="h-4 w-1/2" />
+export const WarehouseCardSkeleton = () => (
+  <div data-testid="warehouse-card-skeleton" className="border border-wareongo-blue rounded-2xl overflow-hidden bg-transparent" aria-hidden="true">
+    <div className="border-b border-wareongo-blue">
+      <Skeleton className="w-full h-48 rounded-none" />
+    </div>
+    <div className="p-5 sm:p-6">
+      <div className="mb-4">
+        <Skeleton className="h-7 w-3/4 mb-1.5" />
+        <Skeleton className="h-5 w-1/2" />
       </div>
-      <div className="grid grid-cols-2 gap-3">
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-full" />
+      <div className="grid grid-cols-2 gap-3 mb-4">
+        {Array.from({ length: 4 }, (_, i) => <Skeleton key={i} className="h-4 sm:h-5 w-4/5" />)}
       </div>
-      <div className="pt-4 border-t border-wareongo-blue/10 space-y-2">
-        <Skeleton className="h-3 w-1/3" />
-        <Skeleton className="h-3 w-2/3" />
-        <Skeleton className="h-3 w-1/2" />
+      <div className="pt-4 border-t border-wareongo-blue/10">
+        <Skeleton className="h-[15px] sm:h-4 w-1/3 mb-2" />
+        <div className="space-y-1">
+          <Skeleton className="h-4 w-4/5" />
+          <Skeleton className="h-4 w-2/3" />
+          <Skeleton className="h-4 w-1/2" />
+        </div>
       </div>
     </div>
+  </div>
+);
+
+export const WarehouseGridSkeleton = ({ count = 9 }: { count?: number }) => (
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" aria-hidden="true">
+    {Array.from({ length: count }, (_, i) => <WarehouseCardSkeleton key={i} />)}
   </div>
 );
 
@@ -29,11 +37,7 @@ export const ListingsSkeleton = () => (
       <div className="section-container py-10">
         <Skeleton className="h-8 w-64 mb-2" />
         <Skeleton className="h-4 w-96 max-w-full mb-8" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Array.from({ length: 9 }).map((_, i) => (
-            <CardSkeleton key={i} />
-          ))}
-        </div>
+        <WarehouseGridSkeleton />
       </div>
     </main>
   </div>
