@@ -1,3 +1,4 @@
+import ListingsHeader from "./ListingsHeader";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export const WarehouseCardSkeleton = () => (
@@ -32,20 +33,20 @@ export const WarehouseGridSkeleton = ({ count = 9 }: { count?: number }) => (
 );
 
 export const ListingsSkeleton = () => (
-  <div className="min-h-screen flex flex-col bg-wareongo-ivory">
-    <main className="flex-grow">
-      <div className="section-container py-10">
-        <Skeleton className="h-8 w-64 mb-2" />
-        <Skeleton className="h-4 w-96 max-w-full mb-8" />
-        <WarehouseGridSkeleton />
-      </div>
-    </main>
-  </div>
+  <main className="flex-grow bg-wareongo-ivory">
+    <div className="section-container">
+      <ListingsHeader loading />
+      <div className="mb-12"><WarehouseGridSkeleton count={21} /></div>
+    </div>
+  </main>
+);
+
+export const WarehouseMapSkeleton = () => (
+  <Skeleton className="w-full h-48 sm:h-56 lg:h-60 border border-wareongo-blue rounded-2xl" aria-label="Loading warehouse map" role="status" />
 );
 
 export const WarehouseDetailSkeleton = () => (
-  <div className="min-h-screen flex flex-col bg-wareongo-ivory" aria-hidden="true">
-    <main className="flex-grow">
+  <main className="flex-grow bg-wareongo-ivory" aria-hidden="true">
       <div className="section-container px-4 sm:px-6 lg:px-8">
         <div className="h-9 sm:h-5 mb-4 sm:mb-6 flex flex-col sm:flex-row justify-between sm:justify-start sm:items-center">
           <Skeleton className="h-3 w-28 sm:w-72 max-w-full" />
@@ -53,7 +54,7 @@ export const WarehouseDetailSkeleton = () => (
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-6 lg:mb-8">
           <div className="order-1 lg:row-span-2">
-            <Skeleton data-testid="warehouse-skeleton-gallery" className="w-full h-64 sm:h-80 md:h-96 lg:h-[500px] xl:h-[600px] rounded-2xl" />
+            <Skeleton data-testid="warehouse-skeleton-gallery" className="w-full h-64 sm:h-80 md:h-96 lg:h-[500px] xl:h-[600px] border border-wareongo-blue rounded-2xl" />
           </div>
           <div className="space-y-4 sm:space-y-6 order-2">
             <div>
@@ -78,7 +79,7 @@ export const WarehouseDetailSkeleton = () => (
           </div>
           <div className="order-3">
             <Skeleton className="h-[15px] sm:h-4 w-20 mb-2" />
-            <Skeleton className="h-48 sm:h-56 lg:h-60 w-full rounded" />
+            <WarehouseMapSkeleton />
           </div>
         </div>
         <div className="border border-wareongo-blue rounded-2xl p-6 sm:p-8">
@@ -94,6 +95,5 @@ export const WarehouseDetailSkeleton = () => (
           </div>
         </div>
       </div>
-    </main>
-  </div>
+  </main>
 );

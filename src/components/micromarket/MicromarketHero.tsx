@@ -1,3 +1,4 @@
+import { Skeleton } from '@/components/ui/skeleton';
 import { Link } from 'react-router-dom';
 import EditorialImage from './EditorialImage';
 import type { EditorialContent } from '@/data/editorial';
@@ -17,16 +18,20 @@ const MicromarketHero = ({
   stats,
   place,
   onBrowse,
+  loading = false,
 }: {
   content: EditorialContent;
-  stats: DerivedStats;
   /** "Nelamangala, Bengaluru" — the fully qualified place, for the eyebrow default. */
   place: string;
   onBrowse: string;
-}) => {
+} & ({ loading: true; stats?: never } | { loading?: false; stats: DerivedStats })) => {
   // Built from live inventory, and each one is dropped when the data behind it
   // isn't there — a rent tile reading "₹0" would be worse than three tiles.
-  const tiles: Tile[] = [
+  const tiles: Tile[] = loading ? [
+    { value: '', label: 'Verified spaces' },
+    { value: '', label: 'Sq ft range' },
+    { value: '', label: 'Per sq ft / mo', accent: true },
+  ] : [
     { value: String(stats.listings), label: 'Verified spaces' },
     ...(stats.size ? [{ value: formatSqftRange(stats.size), label: 'Sq ft range' }] : []),
     ...(stats.rent
@@ -41,7 +46,7 @@ const MicromarketHero = ({
           {content.heroEyebrow ?? `Warehouses and godowns · ${place}`}
         </span>
         <h1
-          id="editorial-title"
+          id={loading ? undefined : "editorial-title"}
           className="mb-4 text-3xl font-bold leading-tight text-wareongo-blue sm:text-4xl md:text-5xl"
         >
           {content.h1}
@@ -69,11 +74,11 @@ const MicromarketHero = ({
                 className={`flex flex-row-reverse items-baseline justify-between gap-3 py-2.5 sm:block sm:gap-0 sm:px-3.5 sm:py-2.5 ${METRIC}`}
               >
                 <dd
-                  className={`text-[17px] font-semibold tabular-nums leading-none ${
+                  className={`relative text-[17px] font-semibold tabular-nums leading-none ${
                     t.accent ? 'text-wareongo-green' : 'text-wareongo-blue'
                   }`}
                 >
-                  {t.value}
+                  {loading ? <><span className="invisible" aria-hidden="true">00000000</span><Skeleton className="absolute inset-0 rounded-sm" aria-hidden="true" /></> : t.value}
                 </dd>
                 <dt className={`${EYEBROW} text-wareongo-slate sm:mt-1.5`}>{t.label}</dt>
               </div>
@@ -94,7 +99,8 @@ const MicromarketHero = ({
               than navigating anywhere. The count is deliberately not repeated —
               the "verified spaces" tile directly above already carries it. */}
           <a
-            href={onBrowse}
+            href={loading ? undefined : onBrowse}
+            aria-disabled={loading || undefined}
             className="inline-flex h-11 items-center justify-center rounded-xl border border-wareongo-blue/30 px-5 text-sm font-medium text-wareongo-blue transition-colors hover:bg-wareongo-blue/5"
           >
             Browse the listings ↓

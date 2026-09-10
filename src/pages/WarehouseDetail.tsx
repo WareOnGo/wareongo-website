@@ -1,3 +1,4 @@
+import { WarehouseMapSkeleton } from '@/components/PageSkeletons';
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { useNavigate, useLoaderData } from 'react-router-dom';
 import { ArrowLeft, AlertCircle } from 'lucide-react';
@@ -444,9 +445,9 @@ const WarehouseDetail = () => {
                   Location
                 </span>
                 <h2 id="location-map-title" className="sr-only">Location</h2>
-                <ClientOnly fallback={<div className="w-full h-48 sm:h-56 lg:h-60 bg-muted animate-pulse rounded" />}>
+                <ClientOnly fallback={<WarehouseMapSkeleton />}>
                   {() => (
-                    <Suspense fallback={<div className="w-full h-48 sm:h-56 lg:h-60 bg-muted animate-pulse rounded" />}>
+                    <Suspense fallback={<WarehouseMapSkeleton />}>
                       <WarehouseLocationMap
                         address={loc.address}
                         city={loc.city}

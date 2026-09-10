@@ -1,3 +1,4 @@
+import { LocationListingsSkeleton, OverviewSkeleton } from '@/components/LocationPageSkeletons';
 import { Outlet, useLocation, useNavigation } from "react-router-dom";
 import { lazy, Suspense, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -41,17 +42,25 @@ const ScrollToTop = () => {
 // page, show a skeleton matched to the route they're heading to.
 const skeletonForPath = (pathname: string) => {
   if (pathname.startsWith("/warehouse/")) return <WarehouseDetailSkeleton />;
-  if (pathname.startsWith("/listings")) return <ListingsSkeleton />;
-  return <ListingsSkeleton />;
+  if (pathname === "/listings") return <ListingsSkeleton />;
+  if (pathname.startsWith("/listings/")) return <LocationListingsSkeleton pathname={pathname} />;
+  if (pathname.startsWith("/overview/")) return <OverviewSkeleton pathname={pathname} />;
+  return null;
 };
 
 const isLoaderRoute = (pathname: string) =>
-  pathname.startsWith("/warehouse/") || pathname.startsWith("/listings");
+  pathname.startsWith("/warehouse/") || pathname === "/listings" || pathname.startsWith("/listings/") || pathname.startsWith("/overview/");
 
 const NavigationContent = () => {
   const navigation = useNavigation();
-  const target = navigation.location?.pathname ?? '';
-  const pending = navigation.state === "loading" && isLoaderRoute(target);
+  const location = useLocation();
+  const target = navigation.location?.pathname.replace(/\/+$/, '') || '/';
+  // Paging/filtering owns its inline result skeleton; only replace the whole
+  // page when navigating to a different pathname.
+  const navigating = navigation.state === "loading" && target !== (location.pathname.replace(/\/+$/, '') || '/');
+  const pending = navigating && isLoaderRoute(target);
+  const label = target.startsWith('/warehouse/') ? 'Loading warehouse details'
+    : target.startsWith('/overview/') ? 'Loading overview' : 'Loading listings';
   useEffect(() => {
     if (!pending) return;
     const previous = document.body.style.overflow;
@@ -61,14 +70,22 @@ const NavigationContent = () => {
   return (
     <>
       <div hidden={pending}><Outlet /></div>
+      {navigating && !pending && (
+        <div role="status" aria-label="Loading page" className="fixed inset-x-0 top-0 z-[60] h-1 bg-wareongo-blue/15">
+          <div className="h-full w-1/3 bg-wareongo-blue animate-pulse motion-reduce:animate-none" />
+          <span className="sr-only">Loading page…</span>
+        </div>
+      )}
       {pending && (
         <div className="fixed inset-0 z-[60] bg-wareongo-ivory overflow-y-auto" aria-busy="true">
-          <span role="status" aria-label={target.startsWith('/warehouse/') ? 'Loading warehouse details' : 'Loading listings'} className="sr-only">
-            {target.startsWith('/warehouse/') ? 'Loading warehouse details…' : 'Loading listings…'}
+          <span role="status" aria-label={label} className="sr-only">
+            {label}…
           </span>
-          <Navbar />
-          {skeletonForPath(target)}
-          <Footer />
+          <div className="min-h-full flex flex-col">
+            <Navbar />
+            {skeletonForPath(target)}
+            <Footer />
+          </div>
         </div>
       )}
     </>

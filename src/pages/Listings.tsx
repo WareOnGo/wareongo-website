@@ -11,7 +11,7 @@ import ContactFormDialog from '@/components/ContactFormDialog';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
-import { Filter, X } from 'lucide-react';
+import ListingsHeader from '@/components/ListingsHeader';
 import { warehouseAPI, transformWarehouseData } from '@/services/warehouseAPI';
 import { trackEvent } from '@/lib/analytics';
 import { warehousePath } from '@/lib/warehouseSlug';
@@ -217,42 +217,12 @@ const Listings = () => {
 
       <main className="flex-grow bg-wareongo-ivory">
         <div className="section-container">
-          <div className="max-w-2xl mb-8 md:mb-12">
-            <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate block mb-3">
-              Inventory
-            </span>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-wareongo-blue mb-3 leading-tight">
-              Warehouse Listings
-            </h1>
-            <p className="text-wareongo-slate text-sm sm:text-base md:text-lg">
-              Premium warehouse spaces across India. Find the perfect storage solution for your business.
-            </p>
-          </div>
-
-          {/* Filter Toggle Button */}
-          <div className="mb-6 flex justify-between items-center gap-3">
-            <button
-              onClick={() => setShowFilters(!showFilters)}
-              className="inline-flex items-center gap-2 px-4 h-10 rounded-xl border border-wareongo-blue text-wareongo-blue text-sm font-medium bg-transparent hover:bg-wareongo-blue/5 transition-colors"
-            >
-              <Filter className="w-4 h-4" />
-              {showFilters ? 'Hide filters' : 'Show filters'}
-              {hasActiveFilters() && (
-                <span className="ml-1 bg-wareongo-blue text-white text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full">
-                  Active
-                </span>
-              )}
-            </button>
-            {hasActiveFilters() && (
-              <button
-                onClick={clearFilters}
-                className="inline-flex items-center gap-1 text-sm text-wareongo-slate hover:text-wareongo-blue transition-colors"
-              >
-                <X className="w-4 h-4" />
-                Clear all
-              </button>
-            )}
-          </div>
+          <ListingsHeader
+            showFilters={showFilters}
+            active={hasActiveFilters()}
+            onToggle={() => setShowFilters(!showFilters)}
+            onClear={clearFilters}
+          />
 
           {/* Filter Panel */}
           {showFilters && (
