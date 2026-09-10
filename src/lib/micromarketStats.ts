@@ -1,4 +1,4 @@
-import type { Micromarket, Spread } from '@/services/micromarketsAPI';
+import type { DerivedStats, Spread } from '@/services/derivedStats';
 
 /**
  * Presentation of the figures on a micromarket page, and the one piece of
@@ -38,7 +38,7 @@ export const formatRentRange = (s: Spread): string =>
  * when nothing is recorded, which is the caller's cue to drop the section rather
  * than render an empty table.
  */
-export const specRowsFor = (stats: Micromarket): [string, string][] => {
+export const specRowsFor = (stats: DerivedStats): [string, string][] => {
   const rows: [string, string][] = [];
 
   if (stats.clearHeight) {
@@ -66,7 +66,7 @@ export const specRowsFor = (stats: Micromarket): [string, string][] => {
 
 // ----- editor overrides -----------------------------------------------------
 
-import type { MicromarketStatOverrides } from '@/data/micromarkets';
+import type { StatOverrides } from '@/data/editorial';
 
 /**
  * Lays the CMS's manual corrections over the derived figures.
@@ -99,10 +99,15 @@ const mergeSpread = (
   return { min: low, median: Math.min(Math.max(median, low), high), max: high };
 };
 
-export const applyStatOverrides = (
-  stats: Micromarket,
-  overrides: MicromarketStatOverrides | undefined,
-): Micromarket => {
+/**
+ * Generic over the stats type rather than typed to one scope: a city's figures
+ * carry `parentState` where a micromarket's carry `citySlug`, and the caller
+ * gets its own type back instead of losing those fields to a widened return.
+ */
+export const applyStatOverrides = <T extends DerivedStats>(
+  stats: T,
+  overrides: StatOverrides | undefined,
+): T => {
   if (!overrides) return stats;
   const rent = mergeSpread(stats.rent, overrides.rent);
 

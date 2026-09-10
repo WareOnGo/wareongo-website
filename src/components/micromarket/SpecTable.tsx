@@ -1,8 +1,8 @@
 import { specRowsFor } from '@/lib/micromarketStats';
-import type { Micromarket } from '@/services/micromarketsAPI';
+import type { DerivedStats } from '@/services/derivedStats';
 import { HAIRLINE, PANEL } from './tokens';
 
-const SpecTable = ({ stats }: { stats: Micromarket }) => {
+const SpecTable = ({ stats }: { stats: DerivedStats }) => {
   const rows = specRowsFor(stats);
   if (rows.length === 0) return null;
 

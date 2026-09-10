@@ -12,68 +12,23 @@
 // inventory in src/lib/micromarketStats.ts, so authored copy can never
 // contradict the listings sitting underneath it on the same page.
 
-export interface MicromarketImage {
-  /** Absolute URL on the R2 public host — uploaded through the CMS. */
-  url: string;
-  alt: string;
-  /** Intrinsic size of the stored file, so the img reserves its box before loading. */
-  width: number;
-  height: number;
-}
+// The content shape is shared with city and state pages — see ./editorial.ts —
+// because one wireframe renders all three. Aliased here so existing importers
+// of the Micromarket* names keep working.
+export type {
+  EditorialImage as MicromarketImage,
+  EditorialFaq as MicromarketFaq,
+  StatOverrides as MicromarketStatOverrides,
+} from './editorial';
+import type { EditorialContent } from './editorial';
 
-export interface MicromarketFaq {
-  q: string;
-  a: string;
-}
-
-/**
- * Manual corrections to the figures the site derives from live listings.
- *
- * Partial: any key left out stays computed. See applyStatOverrides in
- * src/lib/micromarketStats.ts for how they merge, and the CMS schema for why
- * the listing count, the construction mix and the peer chart are not in here.
- */
-export interface MicromarketStatOverrides {
-  rent?: { min?: number | null; median?: number | null; max?: number | null };
-  size?: { min?: number | null; median?: number | null; max?: number | null };
-  clearHeight?: { min?: number | null; median?: number | null; max?: number | null };
-  docksMedian?: number | null;
-  fireNoc?: number | null;
-  commercialClu?: number | null;
-}
-
-export interface MicromarketContent {
-  /** The {city} segment of /overview/{state}/{citySlug}/{slug}. State is derived. */
+export interface MicromarketContent extends EditorialContent {
+  /** The {city} segment of /listings/city/{citySlug}/{slug}. */
   citySlug: string;
   /** The {micromarket} segment. Unique only within its parent city. */
   slug: string;
-  /** <title> tag. */
-  seoTitle: string;
-  /** Meta description + CollectionPage.description. */
-  metaDescription: string;
-  /** On-page H1. */
-  h1: string;
-  /** Small uppercase line above the H1; falls back to a derived default. */
-  heroEyebrow?: string;
-  /** Lead paragraph. The one required prose slot. */
-  heroProse: string;
-  heroImage?: MicromarketImage;
-  /** Section headings. Absent falls back to a default built from the place name. */
-  marketHeading?: string;
-  marketProse?: string;
-  marketImage?: MicromarketImage;
-  rentsHeading?: string;
-  rentsProse?: string;
-  specHeading?: string;
-  specProse?: string;
-  inventoryHeading?: string;
-  /** Rendered as an accordion and emitted as FAQPage LD from the same array. */
-  faqs: MicromarketFaq[];
-  /** Slugs of blogs to cross-link in the page footer. Unresolvable ones are dropped. */
-  relatedBlogs: string[];
-  /** Absent when an editor has corrected nothing, which is the normal case. */
-  statOverrides?: MicromarketStatOverrides;
 }
+
 
 import { micromarkets as generated } from './micromarkets.generated';
 import { DEV_MICROMARKETS } from './micromarkets.dev';

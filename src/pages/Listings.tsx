@@ -130,6 +130,9 @@ const Listings = () => {
         }
       : undefined,
     placeholderData: keepPreviousData,
+    // The API already makes at most three read attempts. React Query's own
+    // retries would multiply that budget and prolong a database outage.
+    retry: false,
     staleTime: 60_000,
   });
 

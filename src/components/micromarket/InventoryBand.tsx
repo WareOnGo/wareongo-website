@@ -1,4 +1,4 @@
-import type { Micromarket } from '@/services/micromarketsAPI';
+import type { DerivedStats } from '@/services/derivedStats';
 import { EYEBROW } from './tokens';
 
 interface Tile {
@@ -29,7 +29,7 @@ const COLUMNS: Record<number, string> = {
  * belt of sheds says "Shed" instead of showing an empty PEB tile. A tile whose
  * count is zero is dropped, and the strip hides itself if that leaves nothing.
  */
-const InventoryBand = ({ stats, heading }: { stats: Micromarket; heading: string }) => {
+const InventoryBand = ({ stats, heading }: { stats: DerivedStats; heading: string }) => {
   const { listings, measured } = stats;
   // Clamped: the counts are overridable in the CMS but `measured` is not, so a
   // correction above the built-stock total would otherwise print "238%".

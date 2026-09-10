@@ -2,6 +2,8 @@
 //
 // Override to generate against a local backend (e.g. when a new field hasn't
 // shipped to production yet): WAREONGO_API_BASE=http://localhost:3000 npm run build
+import { fetchRead } from '../../src/lib/fetchRead.mjs';
+
 export const API_BASE = process.env.WAREONGO_API_BASE || 'https://wareongo-website-backend.onrender.com';
 
 /**
@@ -17,10 +19,10 @@ export async function fetchBlogs() {
   // backend as an alias. Falling back to it means a build can't fail just
   // because it ran before the backend finished deploying. Delete both halves
   // once the rename has been live for a while.
-  let resp = await fetch(`${API_BASE}/blogs`);
+  let resp = await fetchRead(`${API_BASE}/blogs`);
   if (resp.status === 404) {
     console.warn('[blogs] /blogs not found on the backend yet — falling back to /guides');
-    resp = await fetch(`${API_BASE}/guides`);
+    resp = await fetchRead(`${API_BASE}/guides`);
   }
   if (!resp.ok) throw new Error(`Failed to fetch blogs: ${resp.status} ${resp.statusText}`);
   const json = await resp.json();
@@ -38,7 +40,7 @@ export async function fetchBlogs() {
  * replacing it with [] would remove every published /overview page.
  */
 export async function fetchMicromarketPages() {
-  const resp = await fetch(`${API_BASE}/micromarket-pages`);
+  const resp = await fetchRead(`${API_BASE}/micromarket-pages`);
   if (!resp.ok) {
     throw new Error(`Failed to fetch micromarket pages: ${resp.status} ${resp.statusText}`);
   }
@@ -60,8 +62,17 @@ export async function fetchMicromarketPages() {
  * indexed pages from the sitemap and the footer, which is worse than a failed
  * deploy. Same reasoning as fetchBlogs.
  */
+/** Published city/state overviews. Empty is valid; outages must stop the build. */
+export async function fetchLocationPages() {
+  const resp = await fetchRead(`${API_BASE}/location-pages`);
+  if (!resp.ok) throw new Error(`Failed to fetch location pages: ${resp.status} ${resp.statusText}`);
+  const json = await resp.json();
+  if (!Array.isArray(json?.data)) throw new Error('Location pages endpoint returned an unexpected shape');
+  return json.data;
+}
+
 export async function fetchMicromarkets() {
-  const resp = await fetch(`${API_BASE}/micromarkets`);
+  const resp = await fetchRead(`${API_BASE}/micromarkets`);
   if (!resp.ok) {
     throw new Error(`Failed to fetch micromarkets: ${resp.status} ${resp.statusText}`);
   }

@@ -86,3 +86,17 @@ overview pages actually emitted by the build.
 
 Validation: `node --test tests/overview-content-fetch.test.mjs`, plus the sibling
 `wareongo-evals` behaviour suite and `test:overview` static-build suite.
+
+## Build connection budget and read retries
+
+Static generation renders five pages concurrently. Public warehouse and content
+reads retry network failures and HTTP 429/500/502/503/504 at most twice, with
+backoff and jitter. Other HTTP errors, including 404, return immediately. The
+last failure still reaches the existing build guards; it is never replaced by
+empty published data. No website environment variable is required for this.
+
+Pagination uses that same three-attempt limit without additional React Query
+retries. Its loading skeleton stays visible during automatic retries, and
+changing filters cancels both the request and pending backoff. Forms and other
+mutations are not retried. Run `npm run test:reads` for the retry checks and the
+sibling harness's `listings-loading.spec.ts` for desktop/mobile verification.

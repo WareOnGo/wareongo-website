@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { micromarketPath, type PeerRent } from '@/services/micromarketsAPI';
+import type { PeerRent } from '@/services/derivedStats';
 import { EYEBROW, PANEL } from './tokens';
 
 /**
@@ -63,7 +63,7 @@ const PeerRentChart = ({ peers, asOf }: { peers: PeerRent[]; asOf?: string }) =>
               {p.isSelf ? (
                 <div aria-current="page">{bar}</div>
               ) : (
-                <Link to={micromarketPath(p)} className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-wareongo-blue/40 rounded-md">
+                <Link to={p.path} className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-wareongo-blue/40 rounded-md">
                   {bar}
                 </Link>
               )}

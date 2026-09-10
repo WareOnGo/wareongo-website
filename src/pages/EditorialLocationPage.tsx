@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import PageHead from '@/components/PageHead';
 import Breadcrumbs, { type BreadcrumbItem } from '@/components/Breadcrumbs';
@@ -17,23 +16,14 @@ import { usePagedListings } from '@/hooks/usePagedListings';
 import { CHIP, EYEBROW, PANEL, PROSE, SECTION_GAP, SECTION_RULE } from '@/components/micromarket/tokens';
 import { blogs } from '@/data/blogs';
 import { specRowsFor } from '@/lib/micromarketStats';
-import { micromarketPath } from '@/services/micromarketsAPI';
-import type { MicromarketPageData } from '@/loaders/locationLoader';
+import type { EditorialPageData } from '@/loaders/locationLoader';
 import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
 import { trackEvent } from '@/lib/analytics';
 import { warehousePath } from '@/lib/warehouseSlug';
 
-/**
- * Published CMS content at /overview/{state}/{city}/{micromarket}.
- * The existing /listings/city/{city}/{micromarket} page keeps its plain grid.
- *
- * Division of labour, enforced by the data model rather than by convention:
- * the CMS supplies prose, images and FAQs; every figure on the page comes from
- * `stats` and `peers`, which are computed from the live listings in the loader.
- * Copy written a year ago therefore cannot go stale against the inventory.
- */
+/** Shared CMS wireframe for state, city and micromarket /overview pages. */
 
-type Listing = MicromarketPageData['warehouses'][number];
+type Listing = EditorialPageData['warehouses'][number];
 
 /**
  * Best first: listings with a photo ahead of those without, then largest first.
@@ -49,18 +39,11 @@ const orderForDisplay = (warehouses: Listing[]): Listing[] =>
     return photos !== 0 ? photos : (b.size ?? 0) - (a.size ?? 0);
   });
 
-const MicromarketPage = ({ data }: { data: MicromarketPageData }) => {
+const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
   const navigate = useNavigate();
-  const { content, stats, canonical, slug, parentCity, parentState, warehouses } = data;
+  const { content, stats, warehouses, editorial } = data;
   const peers = data.peers ?? [];
-
-  const path = data.overviewPath;
-  // A bare locality name is ambiguous ("Ernakulam" is also a city elsewhere in
-  // the data), so anything outward-facing carries the parent city.
-  const place =
-    parentCity && parentCity.canonical !== canonical
-      ? `${canonical}, ${parentCity.canonical}`
-      : canonical;
+  const { name, path, place, scope } = editorial;
 
   // Which sections have something to say. Prose slots are optional in the CMS,
   // and a heading over an empty section is worse than no section — same rule the
@@ -104,7 +87,7 @@ const MicromarketPage = ({ data }: { data: MicromarketPageData }) => {
     .filter((b): b is NonNullable<typeof b> => Boolean(b));
 
   const openListing = (warehouse: Listing) => {
-    trackEvent('listing_open', { warehouse_id: warehouse.id, source: `micromarket_page_${slug}` });
+    trackEvent('listing_open', { warehouse_id: warehouse.id, source: `${scope}_page_${editorial.name}` });
     navigate(
       warehousePath({
         id: warehouse.id,
@@ -119,17 +102,18 @@ const MicromarketPage = ({ data }: { data: MicromarketPageData }) => {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: content.h1,
-    alternateName: `Godowns for Rent in ${canonical}`,
+    alternateName: `Godowns for Rent in ${name}`,
     description: content.metaDescription,
     url: `${SITE_URL}${path}`,
     isPartOf: { '@id': WEBSITE_ID },
     provider: { '@id': ORG_ID },
     keywords: [
-      `warehouse for rent in ${canonical}`,
-      `godown for rent in ${canonical}`,
-      ...(parentCity && parentCity.canonical !== canonical
-        ? [`warehouse for rent in ${canonical} ${parentCity.canonical}`]
-        : []),
+      `warehouse for rent in ${name}`,
+      `godown for rent in ${name}`,
+      // "warehouse in nelamangala bangalore" — the qualified phrasing people
+      // search for a locality. `place` already carries the qualifier where one
+      // is warranted, and equals the name where it is not.
+      ...(place !== name ? [`warehouse for rent in ${place}`] : []),
     ].join(', '),
     mainEntity: {
       '@type': 'ItemList',
@@ -168,7 +152,7 @@ const MicromarketPage = ({ data }: { data: MicromarketPageData }) => {
       </PageHead>
       <Navbar />
 
-      <main className="flex-grow" role="main" aria-labelledby="micromarket-title">
+      <main className="flex-grow" role="main" aria-labelledby="editorial-title">
         <div className="section-container px-4 py-6 sm:px-6 sm:py-10 lg:px-8">
           <Breadcrumbs
             className="mb-4 sm:mb-6"
@@ -176,11 +160,8 @@ const MicromarketPage = ({ data }: { data: MicromarketPageData }) => {
               [
                 { label: 'Home', path: '/' },
                 { label: 'Listings', path: '/listings' },
-                { label: parentState.canonical, path: `/listings/state/${parentState.slug}` },
-                ...(parentCity && parentCity.canonical !== canonical
-                  ? [{ label: parentCity.canonical, path: `/listings/city/${parentCity.slug}` }]
-                  : []),
-                { label: canonical },
+                ...editorial.ancestors,
+                { label: name },
               ] satisfies BreadcrumbItem[]
             }
           />
@@ -196,7 +177,7 @@ const MicromarketPage = ({ data }: { data: MicromarketPageData }) => {
               className={`scroll-mt-24 ${SECTION_RULE}`}
             >
               <SectionHeading index={indexOf('listings')} eyebrow="Inventory">
-                {content.inventoryHeading ?? `Warehouses for rent in ${canonical}`}
+                {content.inventoryHeading ?? `Warehouses for rent in ${name}`}
               </SectionHeading>
 
               <p className="mb-5 text-sm text-wareongo-slate">
@@ -233,8 +214,9 @@ const MicromarketPage = ({ data }: { data: MicromarketPageData }) => {
                 currentPage={currentPage}
                 totalPages={listingsPages}
                 onChange={(next, direction) => {
-                  trackEvent('micromarket_listings_paginate', {
-                    micromarket: slug,
+                  trackEvent('editorial_listings_paginate', {
+                    scope,
+                    location: name,
                     from_page: currentPage,
                     to_page: next,
                     direction,
@@ -249,7 +231,7 @@ const MicromarketPage = ({ data }: { data: MicromarketPageData }) => {
             {hasMarket && (
               <section id="market" className={SECTION_RULE}>
                 <SectionHeading index={indexOf('market')} eyebrow="Market">
-                  {content.marketHeading ?? `Warehouse space in ${canonical}: where the stock sits`}
+                  {content.marketHeading ?? `Warehouse space in ${name}: where the stock sits`}
                 </SectionHeading>
                 {/* Fixed figure width rather than a fraction. The prose caps its
                     own measure at max-w-2xl for readability, so a fractional
@@ -267,7 +249,7 @@ const MicromarketPage = ({ data }: { data: MicromarketPageData }) => {
             {hasRents && (
               <section id="rents" className={SECTION_RULE}>
                 <SectionHeading index={indexOf('rents')} eyebrow="Pricing">
-                  {content.rentsHeading ?? `Warehouse rent in ${canonical}`}
+                  {content.rentsHeading ?? `Warehouse rent in ${name}`}
                 </SectionHeading>
                 <div className="grid items-start gap-6 lg:grid-cols-2 lg:gap-10">
                   {peers.length > 0 && <PeerRentChart peers={peers} />}
@@ -287,7 +269,7 @@ const MicromarketPage = ({ data }: { data: MicromarketPageData }) => {
             {hasSpec && (
               <section id="specification" className={SECTION_RULE}>
                 <SectionHeading index={indexOf('specification')} eyebrow="Specification">
-                  {content.specHeading ?? `Typical specification in ${canonical}`}
+                  {content.specHeading ?? `Typical specification in ${name}`}
                 </SectionHeading>
                 <div className="grid items-start gap-6 lg:grid-cols-2 lg:gap-10">
                   <SpecTable stats={stats} />
@@ -315,20 +297,20 @@ const MicromarketPage = ({ data }: { data: MicromarketPageData }) => {
               <dl className="space-y-5 text-sm">
                 <div className="sm:flex sm:gap-6">
                   <dt className={`mb-2 min-w-[9rem] ${EYEBROW} text-wareongo-slate sm:mb-0`}>All listings</dt>
-                  <dd><Link to={micromarketPath({ citySlug: content.citySlug, slug })} className="text-wareongo-blue hover:underline">
-                    Browse all warehouses in {canonical} →
+                  <dd><Link to={editorial.listingPath} className="text-wareongo-blue hover:underline">
+                    Browse all warehouses in {name} →
                   </Link></dd>
                 </div>
                 {siblings.length > 0 && (
                   <div className="sm:flex sm:gap-6">
                     <dt className={`mb-2 min-w-[9rem] ${EYEBROW} text-wareongo-slate sm:mb-0`}>
-                      Nearby markets
+                      {scope === 'state' ? 'Other states' : 'Nearby markets'}
                     </dt>
                     <dd className="flex flex-wrap gap-2">
                       {siblings.map((s) => (
                         <Link
-                          key={`${s.citySlug}/${s.slug}`}
-                          to={micromarketPath(s)}
+                          key={s.path}
+                          to={s.path}
                           className={`inline-flex items-center gap-1.5 ${CHIP} px-3 py-1.5 text-wareongo-blue transition-colors hover:bg-wareongo-blue/5`}
                         >
                           {s.name}
@@ -339,17 +321,14 @@ const MicromarketPage = ({ data }: { data: MicromarketPageData }) => {
                   </div>
                 )}
 
-                {parentCity && (
+                {editorial.up && (
                   <div className="sm:flex sm:gap-6">
                     <dt className={`mb-2 min-w-[9rem] ${EYEBROW} text-wareongo-slate sm:mb-0`}>
-                      All of {parentCity.canonical}
+                      {editorial.up.label}
                     </dt>
                     <dd>
-                      <Link
-                        to={`/listings/city/${parentCity.slug}`}
-                        className="text-wareongo-blue hover:underline"
-                      >
-                        Warehouse for rent in {parentCity.canonical} →
+                      <Link to={editorial.up.path} className="text-wareongo-blue hover:underline">
+                        {editorial.up.linkLabel}
                       </Link>
                     </dd>
                   </div>
@@ -378,7 +357,7 @@ const MicromarketPage = ({ data }: { data: MicromarketPageData }) => {
 
             <div className={`${SECTION_GAP} ${PANEL} p-6 text-center`}>
               <p className="mb-1 font-semibold text-wareongo-charcoal">
-                Looking for space in {canonical}?
+                Looking for space in {name}?
               </p>
               <p className="mb-4 text-sm text-wareongo-slate">
                 Tell us the size, the compliance you need and when you want to move in. You get a
@@ -400,4 +379,4 @@ const MicromarketPage = ({ data }: { data: MicromarketPageData }) => {
   );
 };
 
-export default MicromarketPage;
+export default EditorialLocationPage;

@@ -26,6 +26,9 @@ export default defineConfig(({ mode, command }) => ({
     __DEV_SERVER__: JSON.stringify(command === "serve"),
   },
   ssgOptions: {
+    // Each warehouse render reads details and specifications from the backend.
+    // Keep build traffic within its small shared Supabase connection budget.
+    concurrency: 5,
     script: "async",
     dirStyle: "nested",
     formatting: "none",

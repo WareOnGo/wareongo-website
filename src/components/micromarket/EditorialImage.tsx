@@ -1,4 +1,4 @@
-import type { MicromarketImage } from '@/data/micromarkets';
+import type { EditorialImage as ImageData } from '@/data/editorial';
 import { optimizedSrc, optimizedSrcSet, BLOG_TILE_WIDTHS } from '@/lib/imageOpt';
 
 /**
@@ -25,7 +25,7 @@ const EditorialImage = ({
   priority = false,
   className = '',
 }: {
-  image: MicromarketImage;
+  image: ImageData;
   /**
    * Tailwind aspect class. One ratio across the page by default: two different
    * ones made the market figure tower over its paragraph while the hero's sat

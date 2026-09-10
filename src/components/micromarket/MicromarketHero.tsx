@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import EditorialImage from './EditorialImage';
-import type { MicromarketContent } from '@/data/micromarkets';
+import type { EditorialContent } from '@/data/editorial';
 import { formatRentRange, formatSqftRange } from '@/lib/micromarketStats';
-import type { Micromarket } from '@/services/micromarketsAPI';
+import type { DerivedStats } from '@/services/derivedStats';
 import { EYEBROW, LEAD, METRIC } from './tokens';
 
 interface Tile {
@@ -18,8 +18,8 @@ const MicromarketHero = ({
   place,
   onBrowse,
 }: {
-  content: MicromarketContent;
-  stats: Micromarket;
+  content: EditorialContent;
+  stats: DerivedStats;
   /** "Nelamangala, Bengaluru" — the fully qualified place, for the eyebrow default. */
   place: string;
   onBrowse: string;
@@ -41,7 +41,7 @@ const MicromarketHero = ({
           {content.heroEyebrow ?? `Warehouses and godowns · ${place}`}
         </span>
         <h1
-          id="micromarket-title"
+          id="editorial-title"
           className="mb-4 text-3xl font-bold leading-tight text-wareongo-blue sm:text-4xl md:text-5xl"
         >
           {content.h1}

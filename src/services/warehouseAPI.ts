@@ -3,6 +3,7 @@
  */
 
 import { config, getApiUrl } from '@/config/config';
+import { fetchRead } from '@/lib/fetchRead.mjs';
 import { buildPreferredImages, photoUrls } from '@/lib/warehouseImages';
 
 // Type definitions for the API response
@@ -123,7 +124,7 @@ class WarehouseAPI {
         }
       }
 
-      const response = await fetch(
+      const response = await fetchRead(
         `${this.baseURL}/warehouses?${params.toString()}`,
         { signal },
       );
@@ -161,7 +162,7 @@ class WarehouseAPI {
 
       console.log(`Fetching warehouse details for ID: ${warehouseId}`);
 
-      const response = await fetch(
+      const response = await fetchRead(
         `${this.baseURL}/warehouses/${warehouseId}`,
         {
           method: 'GET',
@@ -274,7 +275,7 @@ class WarehouseAPI {
    */
   async getWarehouseSpecifications(id: number): Promise<WarehouseSpecifications | null> {
     try {
-      const response = await fetch(`${this.baseURL}/warehouses/${id}/specifications`, {
+      const response = await fetchRead(`${this.baseURL}/warehouses/${id}/specifications`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
       });

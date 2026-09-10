@@ -1,12 +1,15 @@
 import type { LoaderFunctionArgs } from 'react-router-dom';
 import { warehouseAPI, transformWarehouseData, type Warehouse } from '@/services/warehouseAPI';
-import { getMicromarketContent, type MicromarketContent } from '@/data/micromarkets';
+import { getMicromarketContent } from '@/data/micromarkets';
 import { applyStatOverrides } from '@/lib/micromarketStats';
+import type { EditorialContent } from '@/data/editorial';
+import type { DerivedStats } from '@/services/derivedStats';
+import { getLocationPageContent, locationPages } from '@/data/locationPages';
+import { getLocations, locationStats, locationOverviewPath, locationPath, type LocationKind } from '@/services/locationsAPI';
 import {
   buildableMicromarkets,
   micromarketPath,
   micromarketOverviewPath,
-  type Micromarket,
   type PeerRent,
 } from '@/services/micromarketsAPI';
 
@@ -129,18 +132,29 @@ export interface LocationListingsLoaderData {
   // Micromarket pages only: the city its listings actually sit in, for the
   // "…, Bengaluru" context in the heading plus a breadcrumb/link up to it.
   parentCity?: { canonical: string; slug: string } | null;
+  // Retained for older overview bundles reading this deploy's loader data.
+  parentState?: { canonical: string; slug: string };
   /** Link to published editorial content; listing routes never carry that copy. */
   overviewPath?: string;
 }
 
-/** Only the overview loader returns editorial content. */
-export type MicromarketPageData = LocationListingsLoaderData & {
-  content: MicromarketContent;
-  stats: Micromarket;
+/** Only overview loaders return editorial content. */
+export type EditorialPageData = LocationListingsLoaderData & {
+  content: EditorialContent;
+  stats: DerivedStats;
   peers: PeerRent[];
-  parentState: { canonical: string; slug: string };
   overviewPath: string;
+  editorial: {
+    scope: LocationScope;
+    name: string;
+    path: string;
+    listingPath: string;
+    place: string;
+    ancestors: { label: string; path: string }[];
+    up: { label: string; linkLabel: string; path: string } | null;
+  };
 };
+export type MicromarketPageData = EditorialPageData;
 
 const countTypes = (scoped: Warehouse[]) =>
   scoped.reduce(
@@ -205,8 +219,65 @@ async function loaderFor(
     warehouseType,
     typeCounts,
     warehouses: scoped.map(transformWarehouseData),
+    ...(!warehouseType ? { overviewPath: await publishedLocationPath(type === 'city' ? 'CITY' : 'STATE', match.slug) ?? undefined } : {}),
   };
 }
+
+async function publishedLocationPath(kind: LocationKind, slug: string): Promise<string | null> {
+  if (!getLocationPageContent(kind, slug)) return null;
+  const match = await locationStats(kind, slug);
+  return match ? locationOverviewPath(match) : null;
+}
+
+async function ancestor(kind: LocationKind, name: string, slug: string) {
+  return { label: name, path: await publishedLocationPath(kind, slug) ?? locationPath({ kind, slug }) };
+}
+
+async function locationOverviewFor(kind: LocationKind, stateSlug: string, citySlug?: string): Promise<EditorialPageData | null> {
+  const match = await locationStats(kind, kind === 'CITY' ? citySlug ?? '' : stateSlug);
+  if (!match || (kind === 'CITY' && match.stateSlug !== stateSlug)) return null;
+  const content = getLocationPageContent(kind, match.slug);
+  const path = locationOverviewPath(match);
+  if (!content || !path) return null;
+  const ids = new Set(match.listingIds);
+  const warehouses = (await getAllWarehouses()).filter(w => ids.has(w.id)).map(transformWarehouseData);
+  if (warehouses.length === 0) throw new Error(`Overview inventory missing: ${path}`);
+  const parent = kind === 'CITY' && match.stateSlug && match.parentState
+    ? await ancestor('STATE', match.parentState, match.stateSlug) : null;
+  const stats = applyStatOverrides(match, content.statOverrides);
+  return {
+    type: kind === 'CITY' ? 'city' : 'state', canonical: match.name, slug: match.slug,
+    warehouses, content, stats, peers: stats.peers, overviewPath: path,
+    editorial: {
+      scope: kind === 'CITY' ? 'city' : 'state', name: match.name, path,
+      listingPath: locationPath(match), place: match.name,
+      ancestors: parent ? [parent] : [],
+      up: parent ? { label: `All of ${parent.label}`, linkLabel: `Warehouses in ${parent.label} →`, path: parent.path } : null,
+    },
+  };
+}
+
+export const stateOverviewLoader = ({ params }: LoaderFunctionArgs) => locationOverviewFor('STATE', params.state ?? '');
+export const cityOverviewLoader = ({ params }: LoaderFunctionArgs) => locationOverviewFor('CITY', params.state ?? '', params.city ?? '');
+
+async function locationOverviewStaticPaths(kind: LocationKind): Promise<string[]> {
+  const content = locationPages.filter(p => p.kind === kind);
+  if (!content.length) return [];
+  const { cities, states } = await getLocations();
+  const locations = kind === 'CITY' ? cities : states;
+  const paths: string[] = [];
+  for (const page of content) {
+    const match = locations.find(l => l.slug === page.slug);
+    if (!match?.hasPage) continue;
+    const path = locationOverviewPath(match);
+    if (!path) throw new Error(`Missing overview geography for ${kind}/${page.slug}.`);
+    paths.push(path);
+  }
+  return paths;
+}
+
+export const stateOverviewStaticPaths = () => locationOverviewStaticPaths('STATE');
+export const cityOverviewStaticPaths = () => locationOverviewStaticPaths('CITY');
 
 export async function cityListingsLoader({ params }: LoaderFunctionArgs) {
   return loaderFor('city', params.city ?? '');
@@ -334,8 +405,16 @@ export async function micromarketOverviewLoader({ params }: LoaderFunctionArgs):
   // bar too.
   const stats = applyStatOverrides(match, content.statOverrides);
 
+  const state = await ancestor('STATE', match.parentState, match.stateSlug);
+  const city = await ancestor('CITY', match.parentCity!, match.citySlug);
   return { ...base, content, stats, peers: stats.peers, overviewPath,
-    parentState: { canonical: match.parentState, slug: match.stateSlug } };
+    parentState: { canonical: match.parentState, slug: match.stateSlug },
+    editorial: { scope: 'micromarket', name: match.name, path: overviewPath,
+      listingPath: micromarketPath(match),
+      place: match.name === match.parentCity ? match.name : `${match.name}, ${match.parentCity}`,
+      ancestors: [state, ...(match.name === match.parentCity ? [] : [city])],
+      up: { label: `All of ${city.label}`, linkLabel: `Warehouses in ${city.label} →`, path: city.path },
+    } };
 }
 
 export async function micromarketOverviewStaticPaths(): Promise<string[]> {

@@ -131,10 +131,9 @@ async function main() {
       const overviewPath = `/overview/${segments.join('/')}`;
       // React Router can catch a loader error and SSG still writes an HTML
       // error page successfully. Do not deploy that page as a published overview.
-      // Shorter state/city routes will use their own templates when added.
-      if (segments.length === 3) {
+      if (segments.length >= 1 && segments.length <= 3) {
         const html = await fs.readFile(path.join(directory, 'index.html'), 'utf8');
-        if (!html.includes('id="micromarket-title"')) {
+        if (!html.includes('id="editorial-title"')) {
           throw new Error(`Overview failed to render: ${overviewPath}. Refusing to publish an error page.`);
         }
       }

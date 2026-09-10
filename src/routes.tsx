@@ -14,6 +14,10 @@ import {
   stateTypeListingsLoader,
   cityTypeStaticPaths,
   stateTypeStaticPaths,
+  cityOverviewLoader,
+  stateOverviewLoader,
+  cityOverviewStaticPaths,
+  stateOverviewStaticPaths,
   micromarketOverviewLoader,
   micromarketOverviewStaticPaths,
 } from "./loaders/locationLoader";
@@ -110,11 +114,22 @@ export const routes: RouteRecord[] = [
             // Append new routes: SSG loader IDs depend on sibling positions,
             // and older tabs read the current deploy's loader-data manifest.
             // Router specificity ranks this above '*', regardless of position.
-            // Exact depth leaves state/city overview routes available for later.
             path: "overview/:state/:city/:micromarket",
             lazy: lazyDefault(() => import("./pages/MicromarketOverview")),
             loader: micromarketOverviewLoader,
             getStaticPaths: micromarketOverviewStaticPaths,
+          },
+          {
+            path: "overview/:state",
+            lazy: lazyDefault(() => import("./pages/MicromarketOverview")),
+            loader: stateOverviewLoader,
+            getStaticPaths: stateOverviewStaticPaths,
+          },
+          {
+            path: "overview/:state/:city",
+            lazy: lazyDefault(() => import("./pages/MicromarketOverview")),
+            loader: cityOverviewLoader,
+            getStaticPaths: cityOverviewStaticPaths,
           },
         ],
       },

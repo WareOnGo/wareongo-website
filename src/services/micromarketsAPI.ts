@@ -1,4 +1,5 @@
 import { config } from '@/config/config';
+import { fetchRead } from '@/lib/fetchRead.mjs';
 
 /**
  * Derived micromarket data, read from the backend.
@@ -15,30 +16,15 @@ import { config } from '@/config/config';
  * here reads.
  */
 
-export interface Spread {
-  min: number;
-  median: number;
-  max: number;
-}
+/**
+ * The figure types are shared with cities and states — see ./derivedStats.ts —
+ * because one wireframe renders all three. Re-exported here so the existing
+ * importers of `Spread`, `MixEntry` and `PeerRent` keep working.
+ */
+export type { Spread, MixEntry, PeerRent, DerivedStats } from './derivedStats';
+import type { DerivedStats } from './derivedStats';
 
-export interface MixEntry {
-  label: string;
-  count: number;
-  /** Share of the measured set, 0–100, rounded. */
-  share: number;
-}
-
-/** One bar of the nearby-market chart. */
-export interface PeerRent {
-  name: string;
-  slug: string;
-  citySlug: string | null;
-  medianRent: number;
-  /** The page's own micromarket, highlighted in the chart. */
-  isSelf: boolean;
-}
-
-export interface Micromarket {
+export interface Micromarket extends DerivedStats {
   /** Display name, as the tagging data spells it. */
   name: string;
   /** The {micromarket} URL segment. */
@@ -51,22 +37,6 @@ export interface Micromarket {
   stateSlug: string | null;
   /** Whether the site builds a page for this at all. */
   hasPage: boolean;
-  /** Everything tagged with this micromarket, land and build-to-suit included. */
-  listings: number;
-  /** Built stock only — what every figure below is computed from. */
-  measured: number;
-  /** Asking rent, ₹/sq ft/month, published min to max with no trimming. */
-  rent: Spread | null;
-  size: Spread | null;
-  clearHeight: Spread | null;
-  docksMedian: number | null;
-  construction: MixEntry[];
-  flooring: MixEntry[];
-  fireNoc: number;
-  commercialClu: number;
-  /** Which warehouses belong to it, so the grid needs no tag matching here. */
-  listingIds: number[];
-  peers: PeerRent[];
 }
 
 /** The thresholds that decide which micromarkets get a page. Reported, not applied. */
@@ -90,7 +60,7 @@ let cache: Micromarket[] | null = null;
  */
 export async function getMicromarkets(): Promise<Micromarket[]> {
   if (cache) return cache;
-  const res = await fetch(`${config.apiBaseUrl}/micromarkets`);
+  const res = await fetchRead(`${config.apiBaseUrl}/micromarkets`);
   if (!res.ok) {
     throw new Error(`Failed to fetch micromarkets: ${res.status} ${res.statusText}`);
   }

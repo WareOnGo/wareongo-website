@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { fetchMicromarketPages } from '../scripts/lib/api.mjs';
+import { fetchMicromarketPages, fetchLocationPages } from '../scripts/lib/api.mjs';
 
 test('an explicitly empty published collection is allowed', async t => {
   t.mock.method(globalThis, 'fetch', async () => Response.json({ data: [] }));
@@ -27,3 +27,18 @@ test('malformed responses cannot be mistaken for an empty published collection',
   t.mock.method(globalThis, 'fetch', async () => Response.json({ error: 'unavailable' }));
   await assert.rejects(fetchMicromarketPages(), /unexpected shape/);
 });
+
+for (const fetchPages of [fetchLocationPages]) {
+  test('city/state publication accepts an empty collection but refuses outages and malformed responses', async t => {
+    const fetch = t.mock.method(globalThis, 'fetch', async () => Response.json({ data: [] }));
+    assert.deepEqual(await fetchPages(), []);
+    for (const status of [404, 500, 503]) {
+      fetch.mock.mockImplementation(async () => new Response('{}', { status }));
+      await assert.rejects(fetchPages(), /Failed to fetch location pages/);
+    }
+    fetch.mock.mockImplementation(async () => Response.json({ error: 'unavailable' }));
+    await assert.rejects(fetchPages(), /unexpected shape/);
+    fetch.mock.mockImplementation(async () => { throw new TypeError('network unavailable'); });
+    await assert.rejects(fetchPages(), /network unavailable/);
+  });
+}
