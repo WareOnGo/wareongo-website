@@ -4,7 +4,7 @@
 // Must stay in sync with src/loaders/locationLoader.ts.
 
 import { API_BASE, fetchMicromarkets } from './api.mjs';
-import { fetchRead } from '../../src/lib/fetchRead.mjs';
+import { fetchInventory } from '../../src/lib/fetchInventory.mjs';
 
 /**
  * A city needs this many listings before its page is advertised to search —
@@ -93,9 +93,9 @@ export const slugify = (name) =>
 export async function fetchAllWarehouses() {
   const all = [];
   let page = 1;
-  const pageSize = 50;
+  const pageSize = 500;
   while (true) {
-    const resp = await fetchRead(`${API_BASE}/warehouses?page=${page}&pageSize=${pageSize}`);
+    const resp = await fetchInventory(`${API_BASE}/warehouses?page=${page}&pageSize=${pageSize}`, {}, true);
     if (!resp.ok) throw new Error(`Failed to fetch warehouses page ${page}: ${resp.status}`);
     const json = await resp.json();
     all.push(...json.data);

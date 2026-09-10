@@ -100,3 +100,27 @@ retries. Its loading skeleton stays visible during automatic retries, and
 changing filters cancels both the request and pending backoff. Forms and other
 mutations are not retried. Run `npm run test:reads` for the retry checks and the
 sibling harness's `listings-loading.spec.ts` for desktop/mobile verification.
+
+## Fresh inventory during website builds
+
+Deploy the backend cache-bypass support before rebuilding the website. No new
+credentials or environment variables are required. `npm run build` and
+`npm run build:dev` request fresh `/warehouses`, `/locations`, and `/micromarkets`
+data during generation and server rendering. The browser keeps its ordinary
+cached API requests.
+
+Build requests send `Cache-Control: no-cache, no-store`; the backend skips Redis
+reads and writes and acknowledges this with `X-Wareongo-Cache: bypass`. A backend
+without that acknowledgement stops the build early with a deployment-order
+message. Footer/location generation and sitemap generation use the same bypass.
+Route enumeration shares its in-flight warehouse catalogue with other route
+loaders, using pages of 500 to keep the number of database reads down.
+
+The warehouse route-map guard still rejects missing or failed details. A warehouse
+hidden while a build is already running can still trigger that guard; bypassing
+Redis fixes stale cached inventory, not concurrent database edits.
+
+Checks: `npm run test:build-cache` here tests the client contract. In
+`../wareongo-evals`, the command with the same name runs the complete build
+against a fixture whose cached list contains hidden warehouse 2027, then verifies
+that it is absent from generated routes and the sitemap.

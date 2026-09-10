@@ -1,5 +1,5 @@
 import { config } from '@/config/config';
-import { fetchRead } from '@/lib/fetchRead.mjs';
+import { fetchInventory } from '@/lib/fetchInventory.mjs';
 import type { DerivedStats } from './derivedStats';
 
 /**
@@ -58,7 +58,7 @@ let cache: LocationsPayload | null = null;
  */
 export async function getLocations(): Promise<LocationsPayload> {
   if (cache) return cache;
-  const res = await fetchRead(`${config.apiBaseUrl}/locations`);
+  const res = await fetchInventory(`${config.apiBaseUrl}/locations`, {}, import.meta.env.SSR);
   if (!res.ok) {
     throw new Error(`Failed to fetch locations: ${res.status} ${res.statusText}`);
   }

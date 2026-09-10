@@ -77,25 +77,15 @@ export async function warehouseLoader({ params }: LoaderFunctionArgs): Promise<W
 
 // Enumerate every warehouse as a SEO-friendly slug path. Runs once per build.
 export async function warehouseStaticPaths(): Promise<string[]> {
-  const pageSize = 50;
-  const paths: string[] = [];
-  let page = 1;
-  // eslint-disable-next-line no-constant-condition
-  while (true) {
-    const resp = await warehouseAPI.getWarehouses(page, pageSize);
-    for (const w of resp.data) {
-      const sizes = w.totalSpaceSqft;
-      const size = Array.isArray(sizes) ? sizes[0] : sizes;
-      const slug = warehouseSlug({
-        id: w.id,
-        size: typeof size === 'number' ? size : null,
-        warehouseType: w.warehouseType,
-        city: w.city,
-      });
-      paths.push(`/warehouse/${slug}`);
-    }
-    if (page >= resp.pagination.totalPages || resp.data.length === 0) break;
-    page += 1;
-  }
-  return paths;
+  const warehouses = await getAllWarehouses();
+  return warehouses.map((w) => {
+    const sizes = w.totalSpaceSqft;
+    const size = Array.isArray(sizes) ? sizes[0] : sizes;
+    return `/warehouse/${warehouseSlug({
+      id: w.id,
+      size: typeof size === 'number' ? size : null,
+      warehouseType: w.warehouseType,
+      city: w.city,
+    })}`;
+  });
 }

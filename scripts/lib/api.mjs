@@ -2,6 +2,7 @@
 //
 // Override to generate against a local backend (e.g. when a new field hasn't
 // shipped to production yet): WAREONGO_API_BASE=http://localhost:3000 npm run build
+import { fetchInventory } from '../../src/lib/fetchInventory.mjs';
 import { fetchRead } from '../../src/lib/fetchRead.mjs';
 
 export const API_BASE = process.env.WAREONGO_API_BASE || 'https://wareongo-website-backend.onrender.com';
@@ -72,7 +73,7 @@ export async function fetchLocationPages() {
 }
 
 export async function fetchMicromarkets() {
-  const resp = await fetchRead(`${API_BASE}/micromarkets`);
+  const resp = await fetchInventory(`${API_BASE}/micromarkets`, {}, true);
   if (!resp.ok) {
     throw new Error(`Failed to fetch micromarkets: ${resp.status} ${resp.statusText}`);
   }

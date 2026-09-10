@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test:overviews": "node tests/overview-content-fetch.test.mjs",
-    "test:reads": "node tests/fetch-read.test.mjs"
+    "test:reads": "node tests/fetch-read.test.mjs",
+    "test:build-cache": "node tests/build-cache.test.mjs"
   },
   "dependencies": {
     "@radix-ui/react-aspect-ratio": "^1.1.0",

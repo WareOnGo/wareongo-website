@@ -58,7 +58,7 @@ const matchersFor = (canonical: string, type: 'city' | 'state'): Set<string> => 
 
 // ----- cached warehouse fetch -----------------------------------------------
 
-let warehousesCache: Warehouse[] | null = null;
+let warehousesCache: Promise<Warehouse[]> | null = null;
 
 /**
  * Listings per request while walking the whole catalogue.
@@ -77,18 +77,27 @@ let warehousesCache: Warehouse[] | null = null;
  */
 const FETCH_PAGE_SIZE = 500;
 
-export async function getAllWarehouses(): Promise<Warehouse[]> {
-  if (warehousesCache) return warehousesCache;
+export function getAllWarehouses(): Promise<Warehouse[]> {
+  if (!warehousesCache) {
+    // Share in-flight work as well as the result: concurrent route enumeration
+    // must not launch duplicate uncached walks of the inventory.
+    warehousesCache = fetchAllWarehouses().catch((error) => {
+      warehousesCache = null;
+      throw error;
+    });
+  }
+  return warehousesCache;
+}
+
+async function fetchAllWarehouses(): Promise<Warehouse[]> {
   const all: Warehouse[] = [];
   let page = 1;
-  const pageSize = FETCH_PAGE_SIZE;
   while (true) {
-    const resp = await warehouseAPI.getWarehouses(page, pageSize);
+    const resp = await warehouseAPI.getWarehouses(page, FETCH_PAGE_SIZE);
     all.push(...resp.data);
     if (page >= resp.pagination.totalPages || resp.data.length === 0) break;
     page += 1;
   }
-  warehousesCache = all;
   return all;
 }
 

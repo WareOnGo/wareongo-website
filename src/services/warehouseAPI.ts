@@ -1,3 +1,4 @@
+import { fetchInventory } from '@/lib/fetchInventory.mjs';
 /**
  * Warehouse API service for fetching warehouse data from backend
  */
@@ -124,9 +125,10 @@ class WarehouseAPI {
         }
       }
 
-      const response = await fetchRead(
+      const response = await fetchInventory(
         `${this.baseURL}/warehouses?${params.toString()}`,
         { signal },
+        import.meta.env.SSR,
       );
       
       if (!response.ok) {

@@ -1,5 +1,5 @@
 import { config } from '@/config/config';
-import { fetchRead } from '@/lib/fetchRead.mjs';
+import { fetchInventory } from '@/lib/fetchInventory.mjs';
 
 /**
  * Derived micromarket data, read from the backend.
@@ -60,7 +60,7 @@ let cache: Micromarket[] | null = null;
  */
 export async function getMicromarkets(): Promise<Micromarket[]> {
   if (cache) return cache;
-  const res = await fetchRead(`${config.apiBaseUrl}/micromarkets`);
+  const res = await fetchInventory(`${config.apiBaseUrl}/micromarkets`, {}, import.meta.env.SSR);
   if (!res.ok) {
     throw new Error(`Failed to fetch micromarkets: ${res.status} ${res.statusText}`);
   }
