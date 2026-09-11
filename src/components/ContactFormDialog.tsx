@@ -21,6 +21,7 @@ interface ContactFormDialogProps {
   description: string;
   successMessage: string;
   source: string;
+  analyticsContext?: { warehouse_id: number; cta_location: string };
 }
 
 const ContactFormDialog = ({
@@ -29,7 +30,8 @@ const ContactFormDialog = ({
   title,
   description,
   successMessage,
-  source
+  source,
+  analyticsContext
 }: ContactFormDialogProps) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -68,7 +70,7 @@ const ContactFormDialog = ({
         throw new Error(result.error);
       }
 
-      trackEvent('form_submit', { form_type: 'contact', source });
+      trackEvent('form_submit', { ...analyticsContext, form_type: 'contact', source });
 
       toast({
         title: "Success",
@@ -80,7 +82,7 @@ const ContactFormDialog = ({
       setEmail('');
       onOpenChange(false);
     } catch (err: any) {
-      trackEvent('form_error', { form_type: 'contact', source, error_message: err?.message || 'unknown' });
+      trackEvent('form_error', { ...analyticsContext, form_type: 'contact', source, error_message: err?.message || 'unknown' });
       setError(err.message || 'Something went wrong. Please try again.');
       toast({
         title: "Error",

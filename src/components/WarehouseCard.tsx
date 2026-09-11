@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { MapPin, Ruler, Building2, IndianRupee, ImageIcon, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
+import { MapPin, Ruler, Building2, IndianRupee, ImageIcon, ShieldCheck, ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
+import ContactFormDialog from '@/components/ContactFormDialog';
 import WarehousePhoto from '@/components/WarehousePhoto';
 import { useWarehouseGallery } from '@/hooks/useWarehouseGallery';
+import { trackEvent } from '@/lib/analytics';
 
 interface WarehouseCardProps {
   id: number;
@@ -38,7 +40,6 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
   ceilingHeight,
   price,
   fireCompliance,
-  features,
   onClick,
   index = 0,
 }) => {
@@ -46,6 +47,8 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
   const isAboveFold = index < 3;
   const altText = `${size ? size.toLocaleString() + ' sqft ' : ''}warehouse in ${location.city}, ${location.state}`;
   const [interacting, setInteracting] = useState(false);
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+  const enquirySource = `warehouse-card-${id}-callback`;
   const gallery = useWarehouseGallery(id, images.length ? images : (image ? [image] : []), imageFallbacks, interacting);
   const { index: currentImageIndex, previous: prevImageIndex, direction: slideDirection } = gallery.state;
   const frame = gallery.frames[currentImageIndex];
@@ -57,6 +60,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
   };
 
   return (
+    <>
     <Card
       className="cursor-pointer transition-colors duration-300 overflow-hidden group border border-wareongo-blue rounded-2xl bg-transparent hover:bg-wareongo-blue/5 shadow-none"
       onClick={onClick}
@@ -187,7 +191,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
         </div>
 
         {/* Key Details */}
-        <div className="grid grid-cols-2 gap-3 mb-4">
+        <div className="grid grid-cols-2 gap-3">
           <div className="flex items-center text-wareongo-slate text-xs sm:text-sm">
             <Ruler className="w-4 h-4 mr-1.5 text-wareongo-blue/70" />
             <span>{size.toLocaleString()} sqft</span>
@@ -198,7 +202,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
           </div>
           <div className="flex items-center text-wareongo-slate text-xs sm:text-sm">
             <ShieldCheck className="w-4 h-4 mr-1.5 text-wareongo-blue/70" />
-            <span>Fire: {fireCompliance ? 'Yes' : 'No'}</span>
+            <span>Fire NOC: {fireCompliance ? 'Yes' : 'No'}</span>
           </div>
           <div
             className={
@@ -212,19 +216,36 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
           </div>
         </div>
 
-        {/* Features as bullet points */}
-        {features.length > 0 && (
-          <div className="pt-4 border-t border-wareongo-blue/10">
-            <span className="text-[10px] sm:text-xs uppercase tracking-[0.18em] font-medium text-wareongo-slate block mb-2">Key features</span>
-            <ul className="list-disc pl-5 space-y-1 text-xs text-wareongo-slate">
-              {features.map((feature, idx) => (
-                <li key={idx}>{feature}</li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <button
+          type="button"
+          aria-haspopup="dialog"
+          onClick={(event) => {
+            event.stopPropagation();
+            trackEvent('cta_click', {
+              label: 'Raise Enquiry',
+              cta_location: 'warehouse_card',
+              warehouse_id: id,
+              source: enquirySource,
+            });
+            setIsEnquiryOpen(true);
+          }}
+          className="mt-5 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-wareongo-blue/25 px-4 text-sm font-semibold text-wareongo-blue transition-colors hover:border-wareongo-blue hover:bg-wareongo-blue hover:text-wareongo-ivory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wareongo-blue focus-visible:ring-offset-2 focus-visible:ring-offset-wareongo-ivory"
+        >
+          Raise Enquiry
+          <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+        </button>
       </CardContent>
     </Card>
+    <ContactFormDialog
+      open={isEnquiryOpen}
+      onOpenChange={setIsEnquiryOpen}
+      title="Raise Enquiry"
+      description={`Interested in ${address}, ${location.city}? Leave your details and our team will get in touch about this warehouse.`}
+      successMessage="Enquiry sent successfully! Our team will contact you soon."
+      source={enquirySource}
+      analyticsContext={{ warehouse_id: id, cta_location: 'warehouse_card' }}
+    />
+    </>
   );
 };
 

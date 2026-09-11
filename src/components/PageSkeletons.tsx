@@ -11,17 +11,10 @@ export const WarehouseCardSkeleton = () => (
         <Skeleton className="h-7 w-3/4 mb-1.5" />
         <Skeleton className="h-5 w-1/2" />
       </div>
-      <div className="grid grid-cols-2 gap-3 mb-4">
+      <div className="grid grid-cols-2 gap-3">
         {Array.from({ length: 4 }, (_, i) => <Skeleton key={i} className="h-4 sm:h-5 w-4/5" />)}
       </div>
-      <div className="pt-4 border-t border-wareongo-blue/10">
-        <Skeleton className="h-[15px] sm:h-4 w-1/3 mb-2" />
-        <div className="space-y-1">
-          <Skeleton className="h-4 w-4/5" />
-          <Skeleton className="h-4 w-2/3" />
-          <Skeleton className="h-4 w-1/2" />
-        </div>
-      </div>
+      <Skeleton className="mt-5 h-11 w-full rounded-xl" />
     </div>
   </div>
 );
