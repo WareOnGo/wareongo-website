@@ -567,6 +567,7 @@ const WarehouseDetail = () => {
         description={`Request a callback from our team to discuss this warehouse opportunity. Warehouse ID: ${warehouseData.id} located at ${loc.address}, ${loc.city}, ${loc.state}.`}
         successMessage="Callback requested successfully! Our team will contact you soon."
         source={`warehouse-detail-${warehouseData.id}-callback`}
+        requireCompanyName
       />
     </div>
   );

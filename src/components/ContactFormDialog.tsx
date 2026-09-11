@@ -10,7 +10,7 @@ import {
   DialogClose
 } from "@/components/ui/dialog";
 import { toast } from "@/hooks/use-toast";
-import { Mail, Phone, User, Loader } from 'lucide-react';
+import { Building2, Mail, Phone, User, Loader } from 'lucide-react';
 import { submitContactForm } from '@/services/formSubmission';
 import { trackEvent } from '@/lib/analytics';
 
@@ -21,6 +21,7 @@ interface ContactFormDialogProps {
   description: string;
   successMessage: string;
   source: string;
+  requireCompanyName?: boolean;
   analyticsContext?: { warehouse_id: number; cta_location: string };
 }
 
@@ -31,9 +32,11 @@ const ContactFormDialog = ({
   description,
   successMessage,
   source,
+  requireCompanyName = false,
   analyticsContext
 }: ContactFormDialogProps) => {
   const [name, setName] = useState('');
+  const [companyName, setCompanyName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -45,6 +48,7 @@ const ContactFormDialog = ({
     const trimmedName = name.trim();
     const trimmedPhone = phone.trim();
     const trimmedEmail = email.trim();
+    const trimmedCompanyName = companyName.trim();
 
     if (!trimmedName || !trimmedPhone) {
       toast({
@@ -52,6 +56,11 @@ const ContactFormDialog = ({
         description: "Name and phone number are required",
         variant: "destructive"
       });
+      return;
+    }
+
+    if (requireCompanyName && !trimmedCompanyName) {
+      setError('Company name is required');
       return;
     }
 
@@ -63,6 +72,7 @@ const ContactFormDialog = ({
         name: trimmedName,
         phone: trimmedPhone,
         email: trimmedEmail || null,
+        ...(requireCompanyName ? { companyName: trimmedCompanyName } : {}),
         source
       });
 
@@ -78,15 +88,17 @@ const ContactFormDialog = ({
       });
 
       setName('');
+      setCompanyName('');
       setPhone('');
       setEmail('');
       onOpenChange(false);
-    } catch (err: any) {
-      trackEvent('form_error', { ...analyticsContext, form_type: 'contact', source, error_message: err?.message || 'unknown' });
-      setError(err.message || 'Something went wrong. Please try again.');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : '';
+      trackEvent('form_error', { ...analyticsContext, form_type: 'contact', source, error_message: message || 'unknown' });
+      setError(message || 'Something went wrong. Please try again.');
       toast({
         title: "Error",
-        description: err.message || 'Failed to submit form. Please try again.',
+        description: message || 'Failed to submit form. Please try again.',
         variant: "destructive"
       });
     } finally {
@@ -96,7 +108,7 @@ const ContactFormDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="font-sans bg-wareongo-ivory border border-wareongo-blue rounded-2xl sm:max-w-[460px] p-6 sm:p-8 shadow-none gap-0">
+      <DialogContent className="font-sans bg-wareongo-ivory border border-wareongo-blue rounded-2xl sm:max-w-[460px] max-h-[calc(100dvh-2rem)] overflow-y-auto p-6 sm:p-8 shadow-none gap-0">
         <DialogHeader className="mb-5">
           <p className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-wareongo-slate font-medium mb-2 text-left">
             Get in touch
@@ -134,6 +146,28 @@ const ContactFormDialog = ({
               />
             </div>
           </div>
+
+          {requireCompanyName && (
+            <div className="space-y-1.5">
+              <label htmlFor="company-name" className="text-xs uppercase tracking-[0.18em] font-medium text-wareongo-slate block">
+                Company Name
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-wareongo-blue/70">
+                  <Building2 className="h-4 w-4" strokeWidth={1.5} />
+                </div>
+                <input
+                  id="company-name"
+                  autoComplete="organization"
+                  className="w-full h-11 pl-10 pr-3.5 bg-transparent border border-wareongo-blue rounded-xl text-sm text-wareongo-blue placeholder:text-wareongo-slate/60 focus:outline-none focus:ring-2 focus:ring-wareongo-blue/20 focus:border-wareongo-blue transition-colors"
+                  placeholder="Enter your company name"
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+          )}
 
           <div className="space-y-1.5">
             <label htmlFor="phone" className="text-xs uppercase tracking-[0.18em] font-medium text-wareongo-slate block">

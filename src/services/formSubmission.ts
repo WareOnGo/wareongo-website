@@ -5,6 +5,7 @@ interface ContactFormData {
   phone: string;
   email: string | null;
   source: string;
+  companyName?: string;
 }
 
 /**
@@ -17,6 +18,7 @@ export const submitContactForm = async (formData: ContactFormData): Promise<{ su
       phoneNumber: formData.phone.trim(),
       email: formData.email ? formData.email.trim() : null,
       source: formData.source.trim(),
+      ...(formData.companyName !== undefined ? { companyName: formData.companyName.trim() } : {}),
     };
 
     const response = await fetch(getApiUrl(config.api.enquiries), {

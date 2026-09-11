@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { MapPin, Ruler, Building2, IndianRupee, ImageIcon, ShieldCheck, ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
+import { MapPin, Ruler, Building2, IndianRupee, ImageIcon, ShieldCheck, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import ContactFormDialog from '@/components/ContactFormDialog';
 import WarehousePhoto from '@/components/WarehousePhoto';
 import { useWarehouseGallery } from '@/hooks/useWarehouseGallery';
@@ -229,10 +229,10 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
             });
             setIsEnquiryOpen(true);
           }}
-          className="mt-5 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-wareongo-blue/25 px-4 text-sm font-semibold text-wareongo-blue transition-colors hover:border-wareongo-blue hover:bg-wareongo-blue hover:text-wareongo-ivory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wareongo-blue focus-visible:ring-offset-2 focus-visible:ring-offset-wareongo-ivory"
+          className="group/enquiry mt-5 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-wareongo-blue/25 px-4 text-sm font-semibold text-wareongo-blue transition-colors hover:border-wareongo-blue hover:bg-wareongo-blue hover:text-wareongo-ivory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wareongo-blue focus-visible:ring-offset-2 focus-visible:ring-offset-wareongo-ivory"
         >
           Raise Enquiry
-          <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover/enquiry:-rotate-45 group-focus-visible/enquiry:-rotate-45 motion-reduce:transition-none" aria-hidden="true" />
         </button>
       </CardContent>
     </Card>
@@ -243,6 +243,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
       description={`Interested in ${address}, ${location.city}? Leave your details and our team will get in touch about this warehouse.`}
       successMessage="Enquiry sent successfully! Our team will contact you soon."
       source={enquirySource}
+      requireCompanyName
       analyticsContext={{ warehouse_id: id, cta_location: 'warehouse_card' }}
     />
     </>
