@@ -31,7 +31,7 @@ const STEPS: Step[] = [
   {
     n: 5,
     title: 'Negotiation & terms',
-    description: 'We negotiate commercials — you save 8–12% on average. Owners get the best clients, and clients get the best commercials.',
+    description: 'We negotiate commercials so you save 8–12% on average. Owners get the best clients, and clients get the best commercials.',
   },
   {
     n: 6,

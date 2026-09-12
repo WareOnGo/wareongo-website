@@ -18,11 +18,11 @@ const FAQS: FAQ[] = [
   },
   {
     question: "What's the difference between a godown and a warehouse?",
-    answer: "Same thing in most contexts — 'godown' is more common in North India, 'warehouse' in logistics markets. We use the terms interchangeably.",
+    answer: "Same thing in most contexts. 'Godown' is more common in North India, 'warehouse' in logistics markets. We use the terms interchangeably.",
   },
   {
     question: 'Can I list my own warehouse with WareOnGo?',
-    answer: 'Yes. Listing your warehouse takes 5 minutes on WareOnGo — list your warehouse or give us a call.',
+    answer: 'Yes. Listing your warehouse takes 5 minutes on WareOnGo. List your warehouse or give us a call.',
   },
   {
     question: 'Which cities do you cover?',
@@ -30,11 +30,11 @@ const FAQS: FAQ[] = [
   },
   {
     question: 'Do you handle compliance and legal?',
-    answer: 'Yes — end-to-end coordination through move-in day, from lease drafting to municipal approvals.',
+    answer: 'Yes, end-to-end coordination through move-in day, from lease drafting to municipal approvals.',
   },
   {
     question: 'Can I see properties without visiting?',
-    answer: 'Yes — by signing up to WareOnGo Edge, you can gain access to our curated 360° virtual tours of verified warehouses!',
+    answer: 'Yes, by signing up to WareOnGo Edge, you can gain access to our curated 360° virtual tours of verified warehouses!',
   },
 ];
 

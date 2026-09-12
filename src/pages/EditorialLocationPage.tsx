@@ -122,7 +122,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
         '@type': 'ListItem',
         position: idx + 1,
         url: `${SITE_URL}${warehousePath({ id: w.id, size: w.size, warehouseType: w.warehouseType, city: w.location.city })}`,
-        name: `Warehouse ${w.id} — ${w.location.city}, ${w.location.state}`,
+        name: `Warehouse ${w.id}, ${w.location.city}, ${w.location.state}`,
       })),
     },
   };

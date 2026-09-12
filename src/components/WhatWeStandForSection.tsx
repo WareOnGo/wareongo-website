@@ -12,7 +12,7 @@ const VALUES = [
   {
     icon: TrendingUp,
     title: 'Better Commercials, Negotiated by Us',
-    description: 'We close the deal — you save 8–12%.',
+    description: 'We close the deal. You save 8–12%.',
   },
   {
     icon: MapPin,

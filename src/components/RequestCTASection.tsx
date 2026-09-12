@@ -18,7 +18,7 @@ const RequestCTASection = () => {
               Still haven't found the warehouse you want?
             </h2>
             <p className="text-white/80 text-base sm:text-lg mb-2 sm:mb-3 max-w-2xl mx-auto leading-relaxed">
-              Tell us your requirements — we'll find it for you.
+              Tell us your requirements. We'll find it for you.
             </p>
             <p className="text-white/70 text-sm sm:text-base mb-8 sm:mb-10 max-w-2xl mx-auto">
               Pan-India inventory&nbsp;&middot;&nbsp;4-hour shortlist&nbsp;&middot;&nbsp;You only pay when you close.

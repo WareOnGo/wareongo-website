@@ -70,9 +70,10 @@ export interface Blog {
   related: string[];
 }
 
-export { blogs } from './blogs.generated';
+import { blogs as generated } from './blogs.generated';
+import { normalizeContentPunctuation } from '@/lib/contentPunctuation';
 
-import { blogs as allBlogs } from './blogs.generated';
+export const blogs: Blog[] = normalizeContentPunctuation(generated);
 
 export const getBlogBySlug = (slug: string): Blog | undefined =>
-  allBlogs.find((g) => g.slug === slug);
+  blogs.find((g) => g.slug === slug);

@@ -102,7 +102,7 @@ export const caseStudies: CaseStudy[] = [
       tabLabel: '01 · Kochi',
       badge: 'Deal 01 · 3PL · Third-Party Logistics · Kerala',
       title: (
-        <>Kochi, Kerala — India's hardest<br />warehouse market. Cracked.</>
+        <>Kochi, Kerala: India's hardest<br />warehouse market. Cracked.</>
       ),
       sub: '3PL Company · Electrical & Appliances Logistics · June 2025 → November 2025 operationally running handover · 5 follow-on deals secured',
       metrics: [
@@ -120,18 +120,18 @@ export const caseStudies: CaseStudy[] = [
         { strong: 'Location:', text: ' Kochi, Kerala' },
       ],
       challenge: [
-        { text: "Zero ready-to-move warehouses at ₹21 to 22 — budget didn't exist in market" },
+        { text: "Zero ready-to-move warehouses at ₹21 to 22, budget didn't exist in market" },
         { text: 'No owner willing to hold for a June booking with November possession' },
-        { strong: 'Had to pivot to under-construction warehouses', text: ' — track all approvals' },
-        { strong: 'Kerala labour union', text: ' — critical operational blocker before handover' },
+        { strong: 'Had to pivot to under-construction warehouses', text: ': track all approvals' },
+        { strong: 'Kerala labour union', text: ': critical operational blocker before handover' },
         { text: "Four stakeholder groups: Ops Manager, Sales Manager, CEO, end user's VP" },
       ],
       did: [
         { text: 'Identified under-construction warehouse at ₹22 budget' },
         { strong: 'Tracked Fire NOC, building approvals, GST, building number', text: ' in real time' },
-        { strong: 'Conducted 8 site visits', text: ' — managed every stakeholder independently' },
-        { strong: 'Resolved Kerala labour union issue', text: ' — onboarded contractors' },
-        { strong: 'Closed at ₹22/sqft', text: ' — handed over operationally running' },
+        { strong: 'Conducted 8 site visits', text: ': managed every stakeholder independently' },
+        { strong: 'Resolved Kerala labour union issue', text: ': onboarded contractors' },
+        { strong: 'Closed at ₹22/sqft', text: ': handed over operationally running' },
       ],
       outcomes: [
         { n: '₹2.5 to 3/sqft', l: 'Monthly saving vs. market' },
@@ -298,7 +298,7 @@ export const caseStudies: CaseStudy[] = [
       tabLabel: '02 · Hyderabad · Fire NOC',
       badge: 'Deal 02 · Manufacturer · Fire Compliance Mandate · Telangana',
       title: (
-        <>Devarayamjal, Hyderabad — Fire-compliant<br />warehouse. 2 months of failure. Then us.</>
+        <>Devarayamjal, Hyderabad: Fire-compliant<br />warehouse. 2 months of failure. Then us.</>
       ),
       sub: 'Consolidating 35,000 sqft (2 warehouses) into 50,000 sqft fire-compliant · 22 properties screened · 3 new city mandates followed',
       metrics: [
@@ -311,28 +311,28 @@ export const caseStudies: CaseStudy[] = [
         { strong: 'Client:', text: ' Manufacturer consolidating 2 warehouses' },
         { strong: 'Current:', text: ' 20,000 + 15,000 sqft = 35,000 sqft' },
         { strong: 'Need:', text: ' 50,000 to 60,000 sqft · fire-compliant · single location' },
-        { strong: 'Mandate:', text: ' Fire NOC — legal compliance directive post Bhiwandi fire' },
+        { strong: 'Mandate:', text: ' Fire NOC, legal compliance directive post Bhiwandi fire' },
         { strong: 'Pre-WareOnGo:', text: ' 2+ months, zero compliant options found' },
       ],
       challenge: [
-        { strong: 'Fire NOC made legally mandatory', text: ' — no exceptions' },
-        { strong: '2+ months of independent search', text: ' — zero compliant options' },
-        { text: 'Fire-compliant warehouses commanding ₹21/sqft — above range' },
-        { text: 'Needed 50,000+ sqft on main road — very limited inventory' },
-        { strong: 'Fire hydrant installation, inspector coordination', text: ' — entire process had to be owned' },
+        { strong: 'Fire NOC made legally mandatory', text: ': no exceptions' },
+        { strong: '2+ months of independent search', text: ': zero compliant options' },
+        { text: 'Fire-compliant warehouses commanding ₹21/sqft, above range' },
+        { text: 'Needed 50,000+ sqft on main road, very limited inventory' },
+        { strong: 'Fire hydrant installation, inspector coordination', text: ': entire process had to be owned' },
       ],
       did: [
         { strong: 'Legal due diligence on 22 properties', text: ' (50,000 to 60,000 sqft)' },
         { strong: 'Shortlisted 6 fire-NOC eligible', text: ' properties' },
         { strong: 'Spoke directly with fire department + fire inspector', text: '' },
-        { text: 'Installed fire hydrants — secured inspector sign-off' },
-        { strong: 'Client legal team fully approved', text: ' — closed ₹18.5/sqft' },
+        { text: 'Installed fire hydrants and secured inspector sign-off' },
+        { strong: 'Client legal team fully approved', text: ': closed ₹18.5/sqft' },
         { strong: 'Negotiated 45 days rent-free', text: ' for relocation + epoxy flooring' },
       ],
       outcomes: [
         { n: '₹2.5/sqft', l: 'Monthly saving = ₹1,25,000/month on 50,000 sqft' },
         { n: '~₹90L', l: 'Savings over 5-year lease horizon' },
-        { n: '100% compliant', l: 'Legal team signed off — zero risk' },
+        { n: '100% compliant', l: 'Legal team signed off, zero risk' },
         { n: '3 mandates', l: 'Chennai · Bangalore · Delhi followed immediately' },
       ],
       attribution: 'Legal Compliance Head + Operations Director · Manufacturer · Devarayamjal, Hyderabad',
@@ -502,7 +502,7 @@ export const caseStudies: CaseStudy[] = [
       tabLabel: '03 · Devanahalli',
       badge: 'Deal 03 · Food Manufacturer · FSSAI + Vastu + BTS · Bangalore North',
       title: (
-        <>Devanahalli, Bangalore — Vastu. 250KW.<br />FSSAI. Hormuz.</>
+        <>Devanahalli, Bangalore: Vastu. 250KW.<br />FSSAI. Hormuz.</>
       ),
       sub: 'Premium food manufacturer · 3 to 5 star hotels across Karnataka · July 2025 → January 2026 · Factory runs 18 hours/day at full capacity',
       metrics: [
@@ -512,23 +512,23 @@ export const caseStudies: CaseStudy[] = [
         { n: '18 hrs/day', l: 'factory at full operating capacity' },
       ],
       brief: [
-        { strong: 'Client:', text: ' Premium food manufacturer — organic produce, noodles' },
+        { strong: 'Client:', text: ' Premium food manufacturer, organic produce, noodles' },
         { strong: 'Customers:', text: ' All 3, 4 & 5-star hotels in Karnataka' },
-        { strong: 'Vastu mandatory:', text: ' East-facing entry — non-negotiable' },
+        { strong: 'Vastu mandatory:', text: ' East-facing entry, non-negotiable' },
         { strong: 'Power:', text: ' 250KW required (market standard: 100 to 200KW)' },
         { strong: 'Compliance:', text: ' FSSAI certified food facility' },
         { strong: 'No internal team:', text: ' WareOnGo managed everything' },
       ],
       challenge: [
-        { strong: 'Visited 6 warehouses', text: ' — none had east-facing entry' },
-        { strong: '250KW adds ₹75L to 1Cr infrastructure', text: ' — owners refused' },
+        { strong: 'Visited 6 warehouses', text: ': none had east-facing entry' },
+        { strong: '250KW adds ₹75L to 1Cr infrastructure', text: ': owners refused' },
         { strong: 'Spoke to hundreds of owners on-ground', text: ' over months' },
-        { text: 'FSSAI chemical treatment — unfamiliar to most Devanahalli owners' },
+        { text: 'FSSAI chemical treatment, unfamiliar to most Devanahalli owners' },
         { text: 'Full BTS: docks, insulation, barbed wire, flooring, treatment' },
-        { strong: 'Machinery stuck in Strait of Hormuz', text: ' — the Iran war' },
+        { strong: 'Machinery stuck in Strait of Hormuz', text: ': the Iran war' },
       ],
       did: [
-        { text: 'Months on-ground — found east-facing (Vastu-compliant) property' },
+        { text: 'After months on-ground, found east-facing (Vastu-compliant) property' },
         { strong: 'Negotiated 250KW power included', text: ' at ₹27/sqft' },
         { text: 'Constructed docks, fitted insulation, installed barbed wire' },
         { strong: 'Floor polish + FSSAI chemical treatment', text: ' completed' },
@@ -716,42 +716,42 @@ export const caseStudies: CaseStudy[] = [
       tabLabel: '04 · Hyderabad · Auto',
       badge: 'Deal 04 · Automobile Manufacturer · Logistics Warehouse · Hyderabad',
       title: (
-        <>Hyderabad — One of India's largest two-wheeler<br />brands mandated the big 4. Then chose us.</>
+        <>Hyderabad: One of India's largest two-wheeler<br />brands mandated the big 4. Then chose us.</>
       ),
       sub: "Automobile Manufacturer · 55,000 to 62,500 sqft · Nizamabad Highway · Now an approved vendor alongside India's 4 largest CRE firms",
       metrics: [
-        { n: '₹17 to 18/sqft', l: 'within budget — all competitors missed' },
+        { n: '₹17 to 18/sqft', l: 'within budget, all competitors missed' },
         { n: '25 → 1', l: 'options in market vs our shortlist' },
         { n: '100 metres', l: 'from highway vs 12 km for others' },
-        { n: '1 acre', l: 'truck parking — others refused' },
+        { n: '1 acre', l: 'truck parking, others refused' },
       ],
       brief: [
         { strong: 'Client:', text: " One of India's largest two-wheeler manufacturers" },
         { strong: 'Size:', text: ' 55,000 to 62,500 sqft carpet area' },
         { strong: 'Budget:', text: ' ₹17 to 18/sqft' },
-        { strong: 'Location mandate:', text: ' Nizamabad Highway — non-negotiable' },
+        { strong: 'Location mandate:', text: ' Nizamabad Highway, non-negotiable' },
         { strong: 'Additional:', text: ' 1-acre truck parking area required' },
         { strong: 'Competition:', text: ' All 4 largest CRE firms active simultaneously' },
       ],
       challenge: [
-        { strong: '25 options', text: ' in market — competitors showed all 25' },
-        { text: 'Most warehouses 12+ km inside — unsuitable for 60-ft containers' },
+        { strong: '25 options', text: ' in market, competitors showed all 25' },
+        { text: 'Most warehouses 12+ km inside, unsuitable for 60-ft containers' },
         { strong: '60-ft container + nose = 70 to 72 ft turning radius', text: ' needed' },
         { text: 'High-tension cables, wire heights, turning radius all to verify' },
-        { strong: '1-acre parking area', text: ' — no competitor willing to negotiate this' },
+        { strong: '1-acre parking area', text: ': no competitor willing to negotiate this' },
         { strong: '3 months scouting + 1.5 months negotiation', text: '' },
       ],
       did: [
-        { strong: 'Eliminated options without highway access', text: ' — 60-ft test applied first' },
+        { strong: 'Eliminated options without highway access', text: ': 60-ft test applied first' },
         { strong: "Eliminated where landlords wouldn't match rental/deposit terms", text: '' },
         { strong: 'Eliminated where 60-ft containers cannot move freely', text: ' inside' },
-        { strong: 'Identified Yellampet — 100 metres', text: ' from Nizamabad Highway' },
+        { strong: 'Identified Yellampet, 100 metres', text: ' from Nizamabad Highway' },
         { text: 'Verified turning radius, cable clearance, height restrictions' },
-        { strong: 'Negotiated 1-acre parking', text: ' with nearby landlord — others refused' },
+        { strong: 'Negotiated 1-acre parking', text: ' with nearby landlord, others refused' },
       ],
       outcomes: [
         { n: 'Only 1 fit', l: '100m from highway · zero container issues' },
-        { n: '1 acre', l: 'Truck parking secured — a first for this brief' },
+        { n: '1 acre', l: 'Truck parking secured, a first for this brief' },
         { n: 'Approved vendor', l: "Alongside India's 4 largest CRE firms" },
         { n: '3 active', l: 'Expansion mandates: Pune · Bhiwandi · Coimbatore' },
       ],
@@ -927,42 +927,42 @@ export const caseStudies: CaseStudy[] = [
       tabLabel: '05 · Hoskote',
       badge: "Deal 05 · Motorcycle Manufacturer's Logistics Partner · Automobile Spare Parts · Hoskote Bangalore",
       title: (
-        <>Hoskote, Bangalore — A 20,000 sqft deal<br />in a 24-rupee market. Closed at 19.</>
+        <>Hoskote, Bangalore: A 20,000 sqft deal<br />in a 24-rupee market. Closed at 19.</>
       ),
       sub: 'Logistics partner of a leading Indian motorcycle manufacturer · Exact 20,000 sqft · Hoskote · February 2026 → Closed May 2026 · Gate demolished and rebuilt',
       metrics: [
         { n: '₹19/sqft', l: 'vs ₹23 to 24 Hoskote market' },
-        { n: '25,000 sqft', l: 'warehouse — charged only 20,000' },
+        { n: '25,000 sqft', l: 'warehouse, charged only 20,000' },
         { n: '2 months', l: 'deposit vs 6 to 10 month market norm' },
         { n: '20→35 ft', l: 'gate rebuilt wider for 60-ft containers' },
       ],
       brief: [
         { strong: 'Client:', text: ' Logistics partner of a leading Indian motorcycle manufacturer' },
         { strong: 'Cargo:', text: ' Automobile spare parts' },
-        { strong: 'Size:', text: ' Exact 20,000 sqft — no flexibility' },
+        { strong: 'Size:', text: ' Exact 20,000 sqft, no flexibility' },
         { strong: 'Rent budget:', text: ' ₹19/sqft maximum' },
         { strong: 'Deposit:', text: ' 2-month (company standard)' },
         { strong: 'Comparable:', text: ' Same client closed at ₹17 in Hyderabad' },
       ],
       challenge: [
-        { strong: 'Hoskote market:', text: ' ₹23 to 24/sqft — ₹4 to 5 above budget' },
-        { strong: 'Standard deposit:', text: ' 6 to 10 months — client paying only 2' },
-        { strong: 'Entry gate:', text: " Only 20 feet wide — 60-ft container can't enter" },
+        { strong: 'Hoskote market:', text: ' ₹23 to 24/sqft, ₹4 to 5 above budget' },
+        { strong: 'Standard deposit:', text: ' 6 to 10 months, client paying only 2' },
+        { strong: 'Entry gate:', text: " Only 20 feet wide, 60-ft container can't enter" },
         { text: 'Required: labour rooms, washrooms, docks, scissor lift, 1,000 sqft office' },
         { text: 'No owner initially willing to modify gate + add full infra at ₹19' },
       ],
       did: [
-        { strong: 'Found 25,000 sqft warehouse', text: ' — owner agreed to charge only 20,000' },
+        { strong: 'Found 25,000 sqft warehouse', text: ': owner agreed to charge only 20,000' },
         { strong: 'Negotiated 2-month deposit', text: ' in a 6 to 10 month market' },
-        { strong: 'Gate demolished and rebuilt', text: ' — widened from 20 ft to 35 ft' },
+        { strong: 'Gate demolished and rebuilt', text: ': widened from 20 ft to 35 ft' },
         { strong: 'Labour rooms + washrooms + loading docks constructed', text: '' },
         { strong: 'Scissor lift installed', text: ' + 1,000 sqft office created' },
         { strong: 'All at the ₹19/sqft', text: ' client had already decided not to exceed' },
       ],
       outcomes: [
         { n: '₹4 to 5/sqft', l: 'Monthly saving below Hoskote market rate' },
-        { n: 'Only 20,000', l: 'Paying for less sqft than occupied — unheard of' },
-        { n: 'Full infra', l: 'Docks · lift · office · rooms — all done' },
+        { n: 'Only 20,000', l: 'Paying for less sqft than occupied, unheard of' },
+        { n: 'Full infra', l: 'Docks · lift · office · rooms, all done' },
         { n: '3 months', l: 'Feb to May 2026 · Operational and running' },
       ],
       attribution: 'Logistics Partner of a Leading Indian Motorcycle Manufacturer · Automobile Spare Parts · Hoskote, Bangalore',

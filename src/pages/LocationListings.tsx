@@ -99,7 +99,7 @@ const LocationListings = () => {
   // queries (Search Console shows them); Google bolds the matching phrase in the snippet.
   const godownClause = warehouseType ? '' : ` Also listed as godowns for rent in ${canonical}.`;
   const seoDescription = showStats
-    ? `${countNoun} for rent in ${titlePlace}${sizeRange ? ` — ${sizeRange}` : ''}. Transparent pricing, curated shortlist in 4 hours.${godownClause}`
+    ? `${countNoun} for rent in ${titlePlace}${sizeRange ? `, ${sizeRange}` : ''}. Transparent pricing, curated shortlist in 4 hours.${godownClause}`
     : `${descSubject} for rent in ${titlePlace}. Verified listings with transparent pricing. Get custom options, expert guidance & site visit within 48 hours.${godownClause}`;
 
   // Machine-readable synonyms + micro-markets. "Godown" matches North-Indian query
@@ -161,7 +161,7 @@ const LocationListings = () => {
         '@type': 'ListItem',
         position: idx + 1,
         url: `${SITE_URL}${warehousePath({ id: w.id, size: w.size, warehouseType: w.warehouseType, city: w.location.city })}`,
-        name: `Warehouse ${w.id} — ${w.location.city}, ${w.location.state}`,
+        name: `Warehouse ${w.id}, ${w.location.city}, ${w.location.state}`,
       })),
     },
   };
@@ -228,12 +228,12 @@ const LocationListings = () => {
                   {!warehouseType && typeCounts && typeCounts.PEB > 0 && typeCounts.RCC > 0
                     ? ` across ${typeCounts.PEB} PEB and ${typeCounts.RCC} RCC options`
                     : ''}
-                  . Transparent pricing, direct contact, no middlemen.
+                  . Transparent pricing and expert guidance.
                 </>
               ) : (
                 <>
                   Verified {warehouseType ? `${typeLabel} ` : ''}warehouses for rent in {canonical}.
-                  Transparent pricing, direct contact, no middlemen.
+                  Transparent pricing and expert guidance.
                 </>
               )}
             </p>

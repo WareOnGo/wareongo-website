@@ -51,7 +51,7 @@ const HeroSection = () => {
             Find. Shortlist. Move In.
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-wareongo-slate/90 mb-9 sm:mb-11 max-w-2xl leading-relaxed">
-            Verified inventory and expert advisory pan-India. From proposal to possession &mdash; with the speed of technology.
+            Verified inventory and expert advisory pan-India. From proposal to possession, with the speed of technology.
           </p>
           <Link
             to="/request-warehouse"

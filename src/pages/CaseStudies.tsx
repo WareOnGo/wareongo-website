@@ -15,7 +15,7 @@ const CaseStudies = () => {
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
       <PageHead
         title="Warehouse Case Studies | WareOnGo"
-        description="Real warehouse deals across India — fire compliance, Vastu mandates, 3PL setups and more. See how WareOnGo handles complex briefs and delivers results."
+        description="Real warehouse deals across India, fire compliance, Vastu mandates, 3PL setups and more. See how WareOnGo handles complex briefs and delivers results."
         path="/casestudies"
       />
       <Navbar />
@@ -119,7 +119,7 @@ const CaseStudies = () => {
               <span className="italic font-normal text-white/50">our speciality.</span>
             </h2>
             <p className="text-sm sm:text-base text-white/45 leading-relaxed mb-7 max-w-md mx-auto">
-              Fire compliance. Vastu mandates. Labour unions. Strait of Hormuz delays. Gates that needed demolishing. If your brief is complex — we're exactly who you need.
+              Fire compliance. Vastu mandates. Labour unions. Strait of Hormuz delays. Gates that needed demolishing. If your brief is complex, we're exactly who you need.
             </p>
             <a
               href="/request-warehouse"

@@ -210,7 +210,7 @@ const Listings = () => {
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
       <PageHead
         title="Warehouse & Godown for Rent in India | Verified Listings | WareOnGo"
-        description={`Find warehouse & godown space for rent across India — ${verifiedWarehousesLabel} verified listings with transparent pricing. Get custom options, expert guidance & site visit within 48 hours.`}
+        description={`Find warehouse & godown space for rent across India, ${verifiedWarehousesLabel} verified listings with transparent pricing. Get custom options, expert guidance & site visit within 48 hours.`}
         path="/listings"
       />
       <Navbar />

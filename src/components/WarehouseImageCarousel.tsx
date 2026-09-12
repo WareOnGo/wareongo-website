@@ -88,7 +88,7 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
         <WarehousePhoto
           key={`${gallery.state.key}:${index}`}
           primary={frame.primary} initialSrc={gallery.source(index)} fallback={frame.fallback}
-          alt={count > 1 ? `${baseAlt} — photo ${position} of ${count}` : baseAlt}
+          alt={count > 1 ? `${baseAlt}, photo ${position} of ${count}` : baseAlt}
           width={1080} height={720}
           className={`absolute inset-0 w-full h-full object-cover ${direction === 'left' ? 'animate-slide-in-left' : direction === 'right' ? 'animate-slide-in-right' : ''}`}
           onLoaded={(url) => gallery.loaded(index, url)}

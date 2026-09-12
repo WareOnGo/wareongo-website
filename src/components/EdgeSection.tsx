@@ -54,7 +54,7 @@ const EdgeSection = () => {
                 <span className="text-sky-300/70">Significantly Smarter.</span>
               </h2>
               <p className="text-white/75 text-base sm:text-lg md:text-xl mb-8 md:mb-10 max-w-xl leading-relaxed">
-                WareOnGo Edge — India's first verified warehousing advisory portal.
+                WareOnGo Edge: India's first verified warehousing advisory portal.
                 Invite-only access for SCM leaders, 3PL decision-makers, and verified
                 supply chain professionals.
               </p>

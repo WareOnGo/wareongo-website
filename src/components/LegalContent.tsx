@@ -18,7 +18,7 @@ export function LegalInline({ text }: { text: string }) {
 }
 
 function displayDate(iso: string, comma: boolean) {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(iso) || !Number.isFinite(Date.parse(iso))) return '—';
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(iso) || !Number.isFinite(Date.parse(iso))) return 'Not specified';
   const [year, month, day] = iso.split('-').map(Number);
   const suffix = day >= 11 && day <= 13 ? 'th' : ({ 1: 'st', 2: 'nd', 3: 'rd' }[day % 10] ?? 'th');
   const name = new Intl.DateTimeFormat('en-GB', { month: 'long', timeZone: 'UTC' }).format(new Date(Date.UTC(year, month - 1, day)));

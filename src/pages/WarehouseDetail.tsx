@@ -39,7 +39,7 @@ const buildJsonLd = (data: NonNullable<WarehouseLoaderData>) => {
     '@context': 'https://schema.org',
     '@type': ['RealEstateListing', 'Place'],
     '@id': `${SITE_URL}${path}`,
-    name: `Warehouse ${data.id} — ${loc.city}, ${loc.state}`,
+    name: `Warehouse ${data.id}, ${loc.city}, ${loc.state}`,
     url: `${SITE_URL}${path}`,
     ...(updatedAt ? { dateModified: String(updatedAt).slice(0, 10) } : {}),
     isPartOf: { '@id': WEBSITE_ID },
@@ -231,32 +231,32 @@ const WarehouseDetail = () => {
   if (typeLabel === 'PEB') {
     faqs.push({
       q: 'What type of construction is this warehouse?',
-      a: 'This is a PEB (pre-engineered building) warehouse — a factory-fabricated steel structure bolted together on a concrete plinth. PEB sheds offer wide column-free spans and higher eaves than concrete construction, typically supporting 4–6 racking levels, and are the construction style behind most modern Grade A logistics space in India.',
+      a: 'This is a PEB (pre-engineered building) warehouse: a factory-fabricated steel structure bolted together on a concrete plinth. PEB sheds offer wide column-free spans and higher eaves than concrete construction, typically supporting 4–6 racking levels, and are the construction style behind most modern Grade A logistics space in India.',
       link: { to: '/blogs/peb-vs-rcc-warehouse', label: 'PEB vs RCC: which should you lease? →' },
     });
   } else if (typeLabel === 'RCC') {
     faqs.push({
       q: 'What type of construction is this warehouse?',
-      a: 'This is an RCC (reinforced cement concrete) warehouse — cast-in-place concrete construction. RCC buildings carry high inherent fire resistance and stay cooler inside thanks to thermal mass, and they are the standard choice for in-city godowns, multi-storey storage and heavy point loads such as machinery.',
+      a: 'This is an RCC (reinforced cement concrete) warehouse with cast-in-place concrete construction. RCC buildings carry high inherent fire resistance and stay cooler inside thanks to thermal mass, and they are the standard choice for in-city godowns, multi-storey storage and heavy point loads such as machinery.',
       link: { to: '/blogs/peb-vs-rcc-warehouse', label: 'PEB vs RCC: which should you lease? →' },
     });
   }
   if (clearHeight) {
     faqs.push({
       q: 'What is the clear height of this warehouse?',
-      a: `The clear height is ${clearHeight}, measured to the lowest obstruction such as sprinkler lines or ducting. As a rule of thumb, each pallet-racking level needs roughly 1.8–2 m, so clear height decides how far you can stack vertically — and with it, your effective cost per pallet position.`,
+      a: `The clear height is ${clearHeight}, measured to the lowest obstruction such as sprinkler lines or ducting. As a rule of thumb, each pallet-racking level needs roughly 1.8–2 m, so clear height decides how far you can stack vertically, and with it, your effective cost per pallet position.`,
     });
   }
   if (fireNocAvailable) {
     faqs.push({
       q: 'Is this warehouse fire compliant?',
-      a: 'Yes — a fire NOC is available for this warehouse, verified during physical inspection. A current fire NOC from the state fire department is mandatory for warehouses above state-specific size thresholds, and insurers generally require it before covering stock, so this materially de-risks the lease.',
+      a: 'Yes, a fire NOC is available for this warehouse, verified during physical inspection. A current fire NOC from the state fire department is mandatory for warehouses above state-specific size thresholds, and insurers generally require it before covering stock, so this materially de-risks the lease.',
     });
   }
   if (compliancesText) {
     faqs.push({
       q: 'What compliances does this warehouse have?',
-      a: `Compliances on record: ${compliancesText}. These are validated by WareOnGo's Area Managers during physical verification. Note that tenants typically need their own registrations on top — GST additional place of business, trade licence, and sector-specific licences such as FSSAI for food storage.`,
+      a: `Compliances on record: ${compliancesText}. These are validated by WareOnGo's Area Managers during physical verification. Note that tenants typically need their own registrations on top: GST additional place of business, trade licence, and sector-specific licences such as FSSAI for food storage.`,
       link: { to: '/blogs/warehouse-compliance-checklist-india', label: 'Full compliance checklist →' },
     });
   }
@@ -274,7 +274,7 @@ const WarehouseDetail = () => {
     const apron = spec('dockApronLengthFt');
     faqs.push({
       q: 'How many loading docks does this warehouse have?',
-      a: `This warehouse has ${numberOfDocks} dock${/^1$/.test(numberOfDocks.trim()) ? '' : 's'}${apron ? `, with a ${apron} ft dock apron` : ''}. Dock count drives loading throughput — as a benchmark, modern Grade A facilities provision roughly one dock per 10,000 sqft.`,
+      a: `This warehouse has ${numberOfDocks} dock${/^1$/.test(numberOfDocks.trim()) ? '' : 's'}${apron ? `, with a ${apron} ft dock apron` : ''}. Dock count drives loading throughput. As a benchmark, modern Grade A facilities provision roughly one dock per 10,000 sqft.`,
     });
   }
   const powerKva = spec('powerKva');
@@ -307,7 +307,7 @@ const WarehouseDetail = () => {
   }
   faqs.push({
     q: 'How do I visit or book this warehouse?',
-    a: 'Send an enquiry through WareOnGo and our team will arrange a site visit within 48 hours — for custom requirements, a curated shortlist is typically delivered within 4 hours. Every property is physically inspected before listing, and we handle negotiations, compliance and paperwork end-to-end. You only pay when you close.',
+    a: 'Send an enquiry through WareOnGo and our team will arrange a site visit within 48 hours. For custom requirements, a curated shortlist is typically delivered within 4 hours. Every property is physically inspected before listing, and we handle negotiations, compliance and paperwork end-to-end. You only pay when you close.',
   });
 
   const faqLd = {

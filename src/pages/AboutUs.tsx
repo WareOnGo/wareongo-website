@@ -63,7 +63,7 @@ const AboutUs = () => {
     url: SITE_URL,
     logo: `${SITE_URL}/WOG_Logo_light.png`,
     description:
-      'WareOnGo is an end-to-end warehousing platform — verified inventory across India, virtual tours, map-based search, and a dedicated advisory team handling negotiations, compliance and legal coordination.',
+      'WareOnGo is an end-to-end warehousing platform with verified inventory across India, virtual tours, map-based search, and a dedicated advisory team handling negotiations, compliance and legal coordination.',
     foundingDate: '2024',
     founder: FOUNDERS.map((f) => ({
       '@type': 'Person',
@@ -88,8 +88,8 @@ const AboutUs = () => {
   return (
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
       <PageHead
-        title="About WareOnGo — India's Tech-Led Warehousing Advisory"
-        description={`Learn about WareOnGo — founded by SRCC graduates to fix India's broken warehousing market. ${verifiedWarehousesLabel} verified warehouses across ${CITIES_COVERED}+ cities, ${COMPANIES_SERVED}+ companies served.`}
+        title="About WareOnGo: India's Tech-Led Warehousing Advisory"
+        description={`Learn about WareOnGo, founded by SRCC graduates to fix India's broken warehousing market. ${verifiedWarehousesLabel} verified warehouses across ${CITIES_COVERED}+ cities, ${COMPANIES_SERVED}+ companies served.`}
         path="/about-us"
       >
         <script type="application/ld+json">{JSON.stringify(organizationLd)}</script>
@@ -115,8 +115,8 @@ const AboutUs = () => {
               weeks of back-and-forth, and pricing that depends on who you know.
             </p>
             <p className="text-base sm:text-lg text-wareongo-slate leading-relaxed text-left">
-              We started WareOnGo because we believe a warehouse decision — one of the most consequential
-              operational choices a business makes — deserves better tools.
+              We started WareOnGo because we believe a warehouse decision, one of the most consequential
+              operational choices a business makes, deserves better tools.
             </p>
           </header>
 
@@ -139,7 +139,7 @@ const AboutUs = () => {
               to be sure of what they're getting.
             </p>
             <p className="text-base text-wareongo-slate leading-relaxed mb-4 text-left">
-              We combine verified inventory across India with a seamless experience — virtual tours, map-based
+              We combine verified inventory across India with a seamless experience: virtual tours, map-based
               search and custom shortlists. Behind the platform sits a dedicated advisory team that handles
               negotiations, compliance, and legal coordination, so the entire journey from requirement to
               move-in happens through a single point of contact.
@@ -156,7 +156,7 @@ const AboutUs = () => {
             </h2>
             <p className="text-base text-wareongo-slate leading-relaxed max-w-2xl mx-auto mb-8 text-left">
               WareOnGo was founded in 2024 by Jayanth Chunduru and Dhaval Gupta, both graduates of Shri Ram
-              College of Commerce (SRCC) — one of India's top colleges.
+              College of Commerce (SRCC), one of India's top colleges.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-xl mx-auto mb-8">
@@ -166,7 +166,7 @@ const AboutUs = () => {
                   href={f.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${f.name}, ${f.role} — LinkedIn profile`}
+                  aria-label={`${f.name}, ${f.role}, LinkedIn profile`}
                   onClick={() =>
                     trackEvent('nav_click', { label: `founder_${f.initials}`, destination: f.linkedin ?? '', position: 'about_page' })
                   }
@@ -231,7 +231,7 @@ const AboutUs = () => {
                   Let's talk
                 </h2>
                 <p className="text-white/80 text-base leading-relaxed mb-8 max-w-xl mx-auto">
-                  Whether you're looking for warehouse space, listing your property, or exploring partnerships —
+                  Whether you're looking for warehouse space, listing your property, or exploring partnerships,
                   we'd like to hear from you.
                 </p>
                 <Link

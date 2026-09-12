@@ -7,7 +7,7 @@ import { blogs } from '@/data/blogs';
 import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
 import { verifiedWarehousesLabel } from '@/data/companyStats';
 
-const TITLE = 'Blogs — Warehouse Leasing, Compliance & Costs in India | WareOnGo';
+const TITLE = 'Blogs: Warehouse Leasing, Compliance & Costs in India | WareOnGo';
 const DESCRIPTION =
   'Practical writing on warehousing in India: PEB vs RCC construction, Grade A specifications, compliance checklists, and how warehouse rent and lease terms work.';
 
@@ -61,7 +61,7 @@ const Blogs = () => {
               </h1>
               <p className="text-base sm:text-lg text-wareongo-slate leading-relaxed">
                 Practical, India-specific answers on warehouse construction types, grading, compliance and
-                lease economics — written from {verifiedWarehousesLabel} verified listings and hands-on transactions.
+                lease economics, written from {verifiedWarehousesLabel} verified listings and hands-on transactions.
               </p>
             </header>
 

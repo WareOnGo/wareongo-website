@@ -32,6 +32,7 @@ export interface MicromarketContent extends EditorialContent {
 
 import { micromarkets as generated } from './micromarkets.generated';
 import { DEV_MICROMARKETS } from './micromarkets.dev';
+import { normalizeContentPunctuation } from '@/lib/contentPunctuation';
 
 /**
  * CMS content, plus the dev placeholders when running under `vite dev`.
@@ -45,14 +46,14 @@ import { DEV_MICROMARKETS } from './micromarkets.dev';
  * Real content wins on a slug collision, so a placeholder can never shadow a
  * page someone has actually written.
  */
-const all: MicromarketContent[] = __DEV_SERVER__
+const all: MicromarketContent[] = normalizeContentPunctuation(__DEV_SERVER__
   ? [
       ...generated,
       ...DEV_MICROMARKETS.filter(
         (d) => !generated.some((g) => g.citySlug === d.citySlug && g.slug === d.slug),
       ),
     ]
-  : generated;
+  : generated);
 
 export { all as micromarkets };
 
