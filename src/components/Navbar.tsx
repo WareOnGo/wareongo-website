@@ -285,6 +285,7 @@ const Navbar = () => {
         description="Share your details, and we'll get back to you!"
         successMessage="We will reach out within 2 hours."
         source="homepage"
+        requireCompanyName
         analyticsContext={{ placement: 'header', navigation_variant: contactVariant }}
       />
     </nav>

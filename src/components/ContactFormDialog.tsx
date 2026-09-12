@@ -44,11 +44,12 @@ const ContactFormDialog = ({
   const [error, setError] = useState<string | null>(null);
 
   const placement = analyticsContext?.placement || analyticsContext?.cta_location || 'header';
+  const isWarehouseEnquiry = placement === 'warehouse_card' || placement === 'warehouse_detail';
   const analytics = useLeadAnalytics(open, {
     ...analyticsContext,
     placement,
-    form_id: requireCompanyName ? (placement === 'warehouse_detail' ? 'warehouse_detail_callback' : 'warehouse_card_enquiry') : 'header_contact',
-    lead_type: requireCompanyName ? 'warehouse_enquiry' : 'general_contact',
+    form_id: isWarehouseEnquiry ? (placement === 'warehouse_detail' ? 'warehouse_detail_callback' : 'warehouse_card_enquiry') : 'header_contact',
+    lead_type: isWarehouseEnquiry ? 'warehouse_enquiry' : 'general_contact',
   });
 
   const submissionError = useRef('server');
