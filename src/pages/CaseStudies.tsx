@@ -122,7 +122,7 @@ const CaseStudies = () => {
               Fire compliance. Vastu mandates. Labour unions. Strait of Hormuz delays. Gates that needed demolishing. If your brief is complex, we're exactly who you need.
             </p>
             <a
-              href="/request-warehouse"
+              data-analytics-placement="case_studies_footer" href="/request-warehouse"
               className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-wareongo-ivory text-wareongo-blue text-sm font-semibold hover:bg-white transition-colors border border-wareongo-ivory"
             >
               Get My Shortlist in 4 Hours →

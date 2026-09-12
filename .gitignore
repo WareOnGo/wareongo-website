@@ -27,3 +27,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local GA4 audit reports and implementation notes
+/docs/ga4-audit-*.md
+/docs/ga4-audit-*.evidence.json
+/docs/ga4-fixes-*.md

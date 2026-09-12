@@ -3,7 +3,7 @@ import { Outlet, useLocation, useNavigation } from "react-router-dom";
 import { lazy, Suspense, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/context/AuthContext";
-import { trackEvent } from "@/lib/analytics";
+import AnalyticsInteractions from "@/components/AnalyticsInteractions";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import {
@@ -16,18 +16,6 @@ import {
 const Toaster = lazy(() => import("@/components/ui/toaster").then((m) => ({ default: m.Toaster })));
 
 const queryClient = new QueryClient();
-
-const RouteTracker = () => {
-  const location = useLocation();
-  useEffect(() => {
-    trackEvent("page_view", {
-      page_path: location.pathname + location.search,
-      page_location: window.location.href,
-      page_title: document.title,
-    });
-  }, [location.pathname, location.search]);
-  return null;
-};
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -99,7 +87,7 @@ const RootLayout = () => (
         <Toaster />
       </Suspense>
       <ScrollToTop />
-      <RouteTracker />
+      <AnalyticsInteractions />
       <NavigationContent />
     </QueryClientProvider>
   </AuthProvider>

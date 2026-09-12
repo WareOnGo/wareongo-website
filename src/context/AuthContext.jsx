@@ -1,3 +1,4 @@
+import { trackEvent } from '@/lib/analytics';
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 
@@ -51,6 +52,7 @@ export const AuthProvider = ({ children }) => {
 
   // Logout function
   const logout = () => {
+    trackEvent('logout', { method: 'google' });
     setToken(null);
     setUser(null);
     localStorage.removeItem('authToken');

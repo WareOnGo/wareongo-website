@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PageHead from '@/components/PageHead';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { Loader, Mail, MessageCircle } from 'lucide-react';
 import { submitWarehouseRequest } from '@/services/warehouseRequest';
 import { trackEvent } from '@/lib/analytics';
+import { useLeadAnalytics } from '@/hooks/useLeadAnalytics';
 
 const RequestWarehouse = () => {
   const { toast } = useToast();
@@ -37,11 +38,17 @@ const RequestWarehouse = () => {
     }));
   };
 
+  const analytics = useLeadAnalytics(true, { form_id: 'warehouse_request', lead_type: 'warehouse_request', placement: 'request_page' }, true);
+
+  const submissionError = useRef('server');
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    analytics.attempt();
 
 
-    if (!formData.fullName || !formData.phone || !formData.email || !formData.company || !formData.location) {
+    if (![formData.fullName, formData.phone, formData.email, formData.company, formData.location].every(value => value.trim())) {
+      analytics.invalid();
       toast({
         title: "Validation Error",
         description: "Please fill in all required fields",
@@ -75,10 +82,11 @@ const RequestWarehouse = () => {
       });
 
       if (!result.success) {
+        submissionError.current = result.errorCode || 'server';
         throw new Error(result.error);
       }
 
-      trackEvent('form_submit', { form_type: 'warehouse_request', source: 'request_warehouse_page' });
+      analytics.success(result.leadId);
 
       setSubmitted(true);
       toast({
@@ -86,7 +94,7 @@ const RequestWarehouse = () => {
         description: "We'll be in touch with warehouse options shortly!",
       });
     } catch (err: any) {
-      trackEvent('form_error', { form_type: 'warehouse_request', source: 'request_warehouse_page', error_message: err?.message || 'unknown' });
+      analytics.failure(submissionError.current);
       setError(err.message || 'Something went wrong. Please try again.');
       toast({
         title: "Error",
@@ -116,20 +124,20 @@ const RequestWarehouse = () => {
               <p className="text-sm text-wareongo-slate">Prefer to reach out directly? Contact us at:</p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <a
-                  href="mailto:Sales@wareongo.com"
-                  onClick={() => trackEvent('contact_click', { contact_type: 'email', value: 'Sales@wareongo.com', location: 'request_warehouse_page' })}
+                  href="mailto:sales@wareongo.com"
+                  onClick={() => trackEvent('contact_click', { contact_method: 'email', contact_target: 'sales_email', placement: 'request_warehouse_page' })}
                   className="flex items-center gap-3 group"
                 >
                   <div className="w-9 h-9 rounded-lg bg-sky-50 border border-wareongo-blue/20 flex items-center justify-center transition-colors group-hover:bg-wareongo-blue/5">
                     <Mail className="w-4 h-4 text-wareongo-blue" />
                   </div>
-                  <p className="text-sm font-medium text-wareongo-blue group-hover:underline">Sales@wareongo.com</p>
+                  <p className="text-sm font-medium text-wareongo-blue group-hover:underline">sales@wareongo.com</p>
                 </a>
                 <a
                   href="https://wa.me/917400184225"
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackEvent('contact_click', { contact_type: 'whatsapp', value: '+917400184225', location: 'request_warehouse_page' })}
+                  onClick={() => trackEvent('contact_click', { contact_method: 'whatsapp', contact_target: 'sales_whatsapp', placement: 'request_warehouse_page' })}
                   className="flex items-center gap-3 group"
                 >
                   <div className="w-9 h-9 rounded-lg bg-sky-50 border border-wareongo-blue/20 flex items-center justify-center transition-colors group-hover:bg-wareongo-blue/5">
@@ -152,7 +160,7 @@ const RequestWarehouse = () => {
                     For any questions, reach our POC at{' '}
                     <a href="tel:+917400184225" className="text-wareongo-blue hover:underline">+91 74001 84225</a>{' '}
                     or{' '}
-                    <a href="mailto:Sales@wareongo.com" className="text-wareongo-blue hover:underline">Sales@wareongo.com</a>.
+                    <a href="mailto:sales@wareongo.com" className="text-wareongo-blue hover:underline">sales@wareongo.com</a>.
                   </p>
                 </div>
               ) : (
@@ -163,11 +171,11 @@ const RequestWarehouse = () => {
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-3">
+              <form {...analytics.formProps} onSubmit={handleSubmit} className="space-y-3">
                 <div className="space-y-1">
                   <Label htmlFor="fullName" className="text-[13px]">Name</Label>
                   <Input
-                    id="fullName"
+                    id="fullName" name="fullName"
                     placeholder="John Doe"
                     className="bg-wareongo-ivory border-wareongo-blue/20 focus-visible:ring-wareongo-blue/30 h-10"
                     required
@@ -178,7 +186,7 @@ const RequestWarehouse = () => {
                 <div className="space-y-1">
                   <Label htmlFor="phone" className="text-[13px]">Phone</Label>
                   <Input
-                    id="phone"
+                    id="phone" name="phone"
                     placeholder="+91 98765 43210"
                     className="bg-wareongo-ivory border-wareongo-blue/20 focus-visible:ring-wareongo-blue/30 h-10"
                     required
@@ -189,7 +197,7 @@ const RequestWarehouse = () => {
                 <div className="space-y-1">
                   <Label htmlFor="email" className="text-[13px]">Mail</Label>
                   <Input
-                    id="email"
+                    id="email" name="email"
                     type="email"
                     placeholder="you@company.com"
                     className="bg-wareongo-ivory border-wareongo-blue/20 focus-visible:ring-wareongo-blue/30 h-10"
@@ -201,7 +209,7 @@ const RequestWarehouse = () => {
                 <div className="space-y-1">
                   <Label htmlFor="company" className="text-[13px]">Company</Label>
                   <Input
-                    id="company"
+                    id="company" name="company"
                     placeholder="Your Company, Inc."
                     className="bg-wareongo-ivory border-wareongo-blue/20 focus-visible:ring-wareongo-blue/30 h-10"
                     required
@@ -212,7 +220,7 @@ const RequestWarehouse = () => {
                 <div className="space-y-1">
                   <Label htmlFor="location" className="text-[13px]">Location of requirement</Label>
                   <Input
-                    id="location"
+                    id="location" name="location"
                     placeholder="e.g. Bangalore, Hyderabad"
                     className="bg-wareongo-ivory border-wareongo-blue/20 focus-visible:ring-wareongo-blue/30 h-10"
                     required
@@ -223,7 +231,7 @@ const RequestWarehouse = () => {
                 <div className="space-y-1">
                   <Label htmlFor="additionalComments" className="text-[13px]">Additional comments</Label>
                   <textarea
-                    id="additionalComments"
+                    id="additionalComments" name="additionalComments"
                     rows={3}
                     placeholder="Area, budget, timeline, business type, etc."
                     className="w-full rounded-md border border-wareongo-blue/20 bg-wareongo-ivory px-3 py-2 text-sm text-wareongo-blue placeholder:text-wareongo-slate/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wareongo-blue/30 resize-y"

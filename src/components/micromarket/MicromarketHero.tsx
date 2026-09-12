@@ -90,7 +90,7 @@ const MicromarketHero = ({
             a ragged edge, and these are the page's primary tap targets. */}
         <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <Link
-            to="/request-warehouse"
+            data-analytics-placement="overview_hero" to="/request-warehouse"
             className="inline-flex h-11 items-center justify-center rounded-xl bg-wareongo-blue px-5 text-sm font-semibold text-white transition-colors hover:bg-wareongo-blue/90"
           >
             Get a shortlist in 4 hours →
@@ -99,6 +99,7 @@ const MicromarketHero = ({
               than navigating anywhere. The count is deliberately not repeated —
               the "verified spaces" tile directly above already carries it. */}
           <a
+            data-analytics-placement="overview_hero"
             href={loading ? undefined : onBrowse}
             aria-disabled={loading || undefined}
             className="inline-flex h-11 items-center justify-center rounded-xl border border-wareongo-blue/30 px-5 text-sm font-medium text-wareongo-blue transition-colors hover:bg-wareongo-blue/5"

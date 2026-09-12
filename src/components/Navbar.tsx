@@ -8,6 +8,7 @@ import { Menu, X, LogOut, User } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 
 const Navbar = () => {
+  const [contactVariant, setContactVariant] = useState('desktop');
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isOverEdge, setIsOverEdge] = useState(false);
@@ -146,7 +147,8 @@ const Navbar = () => {
           {/* Highlighted CTA */}
           <button
             onClick={() => {
-              trackEvent('cta_click', { label: 'Contact Us', cta_location: 'header_desktop' });
+              trackEvent('cta_click', { cta_id: 'contact_us', form_id: 'header_contact', lead_type: 'general_contact', label: 'Contact Us', cta_location: 'header_desktop' });
+              setContactVariant('desktop');
               setIsContactDialogOpen(true);
             }}
             className="ml-1 bg-wareongo-blue text-white text-sm font-medium px-6 py-3 rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap"
@@ -158,7 +160,7 @@ const Navbar = () => {
         {/* Mobile toggle pill */}
         <div className="md:hidden">
           <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => { trackEvent('menu_toggle', { placement: 'header', navigation_variant: 'mobile', expanded: !isMobileMenuOpen }); setIsMobileMenuOpen(!isMobileMenuOpen); }}
             ref={mobileButtonRef}
             aria-expanded={isMobileMenuOpen}
             aria-label="Toggle menu"
@@ -264,7 +266,8 @@ const Navbar = () => {
 
           <button
             onClick={() => {
-              trackEvent('cta_click', { label: 'Contact Us', cta_location: 'header_mobile' });
+              trackEvent('cta_click', { cta_id: 'contact_us', form_id: 'header_contact', lead_type: 'general_contact', label: 'Contact Us', cta_location: 'header_mobile' });
+              setContactVariant('mobile');
               setIsContactDialogOpen(true);
               setIsMobileMenuOpen(false);
             }}
@@ -282,6 +285,7 @@ const Navbar = () => {
         description="Share your details, and we'll get back to you!"
         successMessage="We will reach out within 2 hours."
         source="homepage"
+        analyticsContext={{ placement: 'header', navigation_variant: contactVariant }}
       />
     </nav>
   );

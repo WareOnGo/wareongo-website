@@ -10,6 +10,7 @@ import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
 import { CITY_HUBS } from '@/data/cityHubs';
 import { STATE_HUBS } from '@/data/stateHubs';
 import { trackEvent } from '@/lib/analytics';
+import { useListingResults } from '@/hooks/useListingAnalytics';
 import { warehousePath } from '@/lib/warehouseSlug';
 import type { LocationListingsLoaderData } from '@/loaders/locationLoader';
 
@@ -34,11 +35,18 @@ const LocationListings = () => {
   const {
     shown,
     currentPage,
+    perPage,
     totalPages,
     start: pageStart,
     anchorRef: gridRef,
     goTo,
   } = usePagedListings(data?.warehouses ?? []);
+
+  const listId = data ? `location:${data.type}:${data.slug}:${data.warehouseType || 'all'}` : 'location';
+  useListingResults({ list_id: listId, placement: 'location_grid', market_slug: data?.slug,
+    warehouse_type: data?.warehouseType, page: currentPage, page_size: perPage,
+    result_count: shown.length, total_count: data?.warehouses.length,
+    result_status: shown.length ? 'success' : 'empty' }, !!data);
 
   // No matching city/state — bounce back to the main listings page.
   if (!data) {
@@ -167,10 +175,6 @@ const LocationListings = () => {
   };
 
   const handleWarehouseClick = (warehouse: { id: number; size?: number; warehouseType?: string | null; location: { city: string } }) => {
-    trackEvent('listing_open', {
-      warehouse_id: warehouse.id,
-      source: `${type}_page_${slug}`,
-    });
     navigate(
       warehousePath({
         id: warehouse.id,
@@ -309,6 +313,7 @@ const LocationListings = () => {
                   // the top of this grid is what the reader is looking at, so
                   // its first row is the row worth loading eagerly.
                   index={idx}
+                  analyticsContext={{ list_id: listId, placement: 'location_grid', market_slug: slug, page: currentPage, page_size: perPage, list_position: pageStart + idx + 1 }}
                   image={warehouse.image}
                   images={warehouse.images}
                   imageFallbacks={warehouse.imageFallbacks}
@@ -329,9 +334,9 @@ const LocationListings = () => {
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onChange={(next, direction) => {
-                  trackEvent('location_listings_paginate', {
-                    scope: type,
-                    location: slug,
+                  if (next === currentPage) return;
+                  trackEvent('listings_paginate', {
+                    list_id: listId, market_slug: slug, page_size: perPage,
                     warehouse_type: warehouseType ?? null,
                     from_page: currentPage,
                     to_page: next,

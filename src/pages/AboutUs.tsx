@@ -246,7 +246,7 @@ const AboutUs = () => {
                 <p className="text-sm text-white/70 mt-8">
                   <a
                     href="mailto:sales@wareongo.com"
-                    onClick={() => trackEvent('contact_click', { contact_type: 'email', value: 'sales@wareongo.com', location: 'about_page' })}
+                    onClick={() => trackEvent('contact_click', { contact_method: 'email', contact_target: 'sales_email', placement: 'about_page' })}
                     className="hover:text-white transition-colors"
                   >
                     sales@wareongo.com
@@ -254,7 +254,7 @@ const AboutUs = () => {
                   {' · '}
                   <a
                     href="tel:+917400184225"
-                    onClick={() => trackEvent('contact_click', { contact_type: 'phone', value: '+917400184225', location: 'about_page' })}
+                    onClick={() => trackEvent('contact_click', { contact_method: 'phone', contact_target: 'sales_phone', placement: 'about_page' })}
                     className="hover:text-white transition-colors"
                   >
                     (+91) 74001-84225
@@ -264,7 +264,7 @@ const AboutUs = () => {
                     href="https://wa.me/917400184225"
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() => trackEvent('contact_click', { contact_type: 'whatsapp', value: '+917400184225', location: 'about_page' })}
+                    onClick={() => trackEvent('contact_click', { contact_method: 'whatsapp', contact_target: 'sales_whatsapp', placement: 'about_page' })}
                     className="hover:text-white transition-colors"
                   >
                     WhatsApp

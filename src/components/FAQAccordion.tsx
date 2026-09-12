@@ -1,3 +1,4 @@
+import { trackEvent, stableContentId } from '@/lib/analytics';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
@@ -33,7 +34,7 @@ const FAQAccordion = ({ items, defaultOpenIndex = 0 }: FAQAccordionProps) => {
           >
             <button
               type="button"
-              onClick={() => setOpenIndex(isOpen ? null : i)}
+              onClick={() => { if (!isOpen) trackEvent('faq_open', { placement: 'faq', question_id: stableContentId(item.q) }); setOpenIndex(isOpen ? null : i); }}
               aria-expanded={isOpen}
               className="w-full flex items-center justify-between gap-4 text-left p-5 sm:p-6"
             >

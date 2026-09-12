@@ -58,6 +58,7 @@ export function usePagedListings<T>(items: T[]) {
   const shown = items.slice(start, start + perPage);
 
   const goTo = (next: number) => {
+    if (next === currentPage) return;
     scrollAfterPaging.current = true;
     setPage(next);
   };
@@ -65,6 +66,7 @@ export function usePagedListings<T>(items: T[]) {
   return {
     /** The items to render for this page. */
     shown,
+    perPage,
     currentPage,
     totalPages,
     /** Zero-based index of the first item shown, for the "Showing 1–18 of 99" line. */

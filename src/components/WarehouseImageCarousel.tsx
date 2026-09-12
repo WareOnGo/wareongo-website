@@ -1,3 +1,4 @@
+import { trackEvent } from '@/lib/analytics';
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, ImageIcon } from 'lucide-react';
 import WarehousePhoto from '@/components/WarehousePhoto';
@@ -39,13 +40,20 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
     return () => observer.disconnect();
   }, []);
 
+  const selectImage = (next: number, action = 'dot') => {
+    if (next === index || direction || count < 2 || !gallery.valid.includes(next)) return;
+    trackEvent('listing_gallery_interaction', { warehouse_id: warehouseId, placement: 'warehouse_detail', action, image_index: gallery.valid.indexOf(next) + 1 });
+    gallery.select(next);
+  };
+  const moveImage = (delta: number) => selectImage(gallery.valid[(gallery.position + delta + count) % count], delta > 0 ? 'next' : 'previous');
+
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.altKey || event.ctrlKey || event.metaKey) return;
     if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
     event.preventDefault();
-    if (event.key === 'ArrowLeft') gallery.move(-1);
-    else if (event.key === 'ArrowRight') gallery.move(1);
-    else gallery.select(event.key === 'Home' ? gallery.valid[0] : gallery.valid[count - 1]);
+    if (event.key === 'ArrowLeft') moveImage(-1);
+    else if (event.key === 'ArrowRight') moveImage(1);
+    else selectImage(event.key === 'Home' ? gallery.valid[0] : gallery.valid[count - 1]);
   };
 
   return (
@@ -68,7 +76,7 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
         if (!start || !end) return;
         const dx = start.x - end.clientX;
         const dy = start.y - end.clientY;
-        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) gallery.move(dx > 0 ? 1 : -1);
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) moveImage(dx > 0 ? 1 : -1);
       }}
     >
       {count === 0 ? (
@@ -103,19 +111,19 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
         {count > 1 && <>
           <button type="button" className={`${arrowClass} left-2 sm:left-4`}
             aria-label={`Previous image. Currently showing image ${position} of ${count}`}
-            disabled={!!direction} onClick={() => gallery.move(-1)}>
+            disabled={!!direction} onClick={() => moveImage(-1)}>
             <ChevronLeft className="w-5 h-5" aria-hidden="true" />
           </button>
           <button type="button" className={`${arrowClass} right-2 sm:right-4`}
             aria-label={`Next image. Currently showing image ${position} of ${count}`}
-            disabled={!!direction} onClick={() => gallery.move(1)}>
+            disabled={!!direction} onClick={() => moveImage(1)}>
             <ChevronRight className="w-5 h-5" aria-hidden="true" />
           </button>
           <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 flex gap-1 sm:gap-2 z-30 max-w-full overflow-x-auto"
             role="tablist" aria-label="Image navigation">
             {gallery.valid.map((actualIndex, validIndex) => {
               const isActive = actualIndex === index;
-              return <button key={actualIndex} type="button" onClick={() => gallery.select(actualIndex)}
+              return <button key={actualIndex} type="button" onClick={() => selectImage(actualIndex)}
                 className="group p-1 focus:outline-none focus:ring-2 focus:ring-wareongo-blue focus:ring-offset-2 rounded"
                 aria-label={`Go to image ${validIndex + 1}${isActive ? ' (current)' : ''}`}
                 role="tab" aria-selected={isActive} tabIndex={isActive ? 0 : -1}>

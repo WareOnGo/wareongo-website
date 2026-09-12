@@ -4,7 +4,8 @@ import { MapPin, Ruler, Building2, IndianRupee, ImageIcon, ShieldCheck, ChevronL
 import ContactFormDialog from '@/components/ContactFormDialog';
 import WarehousePhoto from '@/components/WarehousePhoto';
 import { useWarehouseGallery } from '@/hooks/useWarehouseGallery';
-import { trackEvent } from '@/lib/analytics';
+import { trackEvent, type AnalyticsParams } from '@/lib/analytics';
+import { useListingImpression } from '@/hooks/useListingAnalytics';
 
 interface WarehouseCardProps {
   id: number;
@@ -27,6 +28,7 @@ interface WarehouseCardProps {
   onClick?: () => void;
   // Position in the grid — first 3 cards stay eager for LCP, the rest lazy-load.
   index?: number;
+  analyticsContext?: AnalyticsParams;
 }
 
 const WarehouseCard: React.FC<WarehouseCardProps> = ({
@@ -42,7 +44,10 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
   fireCompliance,
   onClick,
   index = 0,
+  analyticsContext = {},
 }) => {
+  const listingContext = { ...analyticsContext, warehouse_id: id, warehouse_city: location.city, warehouse_state: location.state, size_sqft: size, price_per_sqft: price ?? undefined };
+  const impressionRef = useListingImpression(listingContext);
   // 3-col desktop grid → first row is 3 cards; keep them eager for LCP.
   const isAboveFold = index < 3;
   const altText = `${size ? size.toLocaleString() + ' sqft ' : ''}warehouse in ${location.city}, ${location.state}`;
@@ -56,6 +61,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
   const navigate = (event: React.MouseEvent, delta: 1 | -1) => {
     event.stopPropagation();
     setInteracting(true);
+    if (gallery.valid.length > 1 && !slideDirection) trackEvent('listing_gallery_interaction', { ...listingContext, placement: 'warehouse_card', action: delta === 1 ? 'next' : 'previous', image_index: ((gallery.position + delta + gallery.valid.length) % gallery.valid.length) + 1 });
     gallery.move(delta);
   };
 
@@ -63,7 +69,8 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
     <>
     <Card
       className="cursor-pointer transition-colors duration-300 overflow-hidden group border border-wareongo-blue rounded-2xl bg-transparent hover:bg-wareongo-blue/5 shadow-none"
-      onClick={onClick}
+      ref={impressionRef}
+      onClick={() => { trackEvent('listing_open', listingContext); onClick?.(); }}
       data-warehouse-card={id}
       onPointerEnter={() => setInteracting(true)}
       onFocusCapture={() => setInteracting(true)}
@@ -155,6 +162,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
                           key={actualIndex}
                           onClick={(e) => {
                             e.stopPropagation();
+                            if (actualIndex !== currentImageIndex && !slideDirection) trackEvent('listing_gallery_interaction', { ...listingContext, placement: 'warehouse_card', action: 'dot', image_index: validIndex + 1 });
                             gallery.select(actualIndex);
                           }}
                           className="group p-1"
@@ -222,8 +230,10 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
           onClick={(event) => {
             event.stopPropagation();
             trackEvent('cta_click', {
+              ...listingContext,
               label: 'Raise Enquiry',
-              cta_location: 'warehouse_card',
+              placement: 'warehouse_card',
+              cta_id: 'raise_enquiry', form_id: 'warehouse_card_enquiry', lead_type: 'warehouse_enquiry',
               warehouse_id: id,
               source: enquirySource,
             });
@@ -244,7 +254,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
       successMessage="Enquiry sent successfully! Our team will contact you soon."
       source={enquirySource}
       requireCompanyName
-      analyticsContext={{ warehouse_id: id, cta_location: 'warehouse_card' }}
+      analyticsContext={{ ...listingContext, placement: 'warehouse_card' }}
     />
     </>
   );

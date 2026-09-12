@@ -15,6 +15,7 @@ import ContactFormDialog from '@/components/ContactFormDialog';
 import FAQAccordion, { type FAQEntry } from '@/components/FAQAccordion';
 import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
 import { trackEvent } from '@/lib/analytics';
+import { useListingResults } from '@/hooks/useListingAnalytics';
 import { warehousePath } from '@/lib/warehouseSlug';
 import type { WarehouseLoaderData } from '@/loaders/warehouseLoader';
 
@@ -75,8 +76,13 @@ const WarehouseDetail = () => {
   const navigate = useNavigate();
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
 
+  useListingResults({ list_id: 'related_warehouses', origin_warehouse_id: warehouseData?.id,
+    placement: 'related_warehouses', page: 1, page_size: warehouseData?.related?.length,
+    result_count: warehouseData?.related?.length || 0, total_count: warehouseData?.related?.length || 0,
+    result_status: warehouseData?.related?.length ? 'success' : 'empty' }, !!warehouseData);
+
   useEffect(() => {
-    if (!warehouseData) return;
+    if (!warehouseData) { trackEvent('content_load_error', { error_code: 'warehouse_not_found' }); return; }
     trackEvent('view_listing', {
       warehouse_id: warehouseData.id,
       city: warehouseData.specifications?.location?.city,
@@ -87,6 +93,7 @@ const WarehouseDetail = () => {
   }, [warehouseData]);
 
   const handleBackClick = () => {
+    trackEvent('nav_click', { placement: 'warehouse_detail_back', destination: '/listings', label: 'Back to listings' });
     navigate('/listings');
   };
 
@@ -94,7 +101,8 @@ const WarehouseDetail = () => {
     if (!warehouseData) return;
     trackEvent('cta_click', {
       label: 'Request a callback',
-      cta_location: 'warehouse_detail',
+      placement: 'warehouse_detail',
+      cta_id: 'request_callback', form_id: 'warehouse_detail_callback', lead_type: 'warehouse_enquiry',
       warehouse_id: warehouseData.id,
     });
     setIsContactDialogOpen(true);
@@ -496,7 +504,7 @@ const WarehouseDetail = () => {
                 : ''}{' '}
               Spaces like this are also commonly listed as godowns for rent in {loc.city}.{' '}
               Browse more <Link to={`/listings/city/${loc.city.toLowerCase().replace(/\s+/g, '-')}`} className="text-wareongo-blue underline-offset-2 hover:underline">warehouses in {loc.city}</Link>{' '}
-              or <Link to="/request-warehouse" className="text-wareongo-blue underline-offset-2 hover:underline">request a custom space</Link> if this doesn't fit your requirements.
+              or <Link data-analytics-placement="warehouse_detail_inline" to="/request-warehouse" className="text-wareongo-blue underline-offset-2 hover:underline">request a custom space</Link> if this doesn't fit your requirements.
             </p>
           </section>
 
@@ -530,6 +538,7 @@ const WarehouseDetail = () => {
                     key={w.id}
                     id={w.id}
                     index={idx}
+                    analyticsContext={{ list_id: 'related_warehouses', placement: 'related_warehouses', origin_warehouse_id: warehouseData.id, list_position: idx + 1, page: 1, page_size: warehouseData.related.length }}
                     image={w.image}
                     images={w.images}
                     imageFallbacks={w.imageFallbacks}
@@ -569,6 +578,7 @@ const WarehouseDetail = () => {
         successMessage="Callback requested successfully! Our team will contact you soon."
         source={`warehouse-detail-${warehouseData.id}-callback`}
         requireCompanyName
+        analyticsContext={{ warehouse_id: warehouseData.id, placement: 'warehouse_detail' }}
       />
     </div>
   );

@@ -1,3 +1,4 @@
+import { trackEvent } from '@/lib/analytics';
 
 import React, { useEffect } from 'react';
 import PageHead from '@/components/PageHead';
@@ -10,6 +11,7 @@ const NotFound = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    trackEvent('content_load_error', { error_code: 'not_found' });
     window.scrollTo(0, 0);
   }, []);
 

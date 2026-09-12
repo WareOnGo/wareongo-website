@@ -1,3 +1,4 @@
+import { trackEvent } from '@/lib/analytics';
 import { useEffect } from 'react';
 import { useRouteError, isRouteErrorResponse, Link } from 'react-router-dom';
 import PageHead from '@/components/PageHead';
@@ -20,6 +21,7 @@ const RouteErrorBoundary = () => {
   const error = useRouteError();
 
   useEffect(() => {
+    trackEvent('content_load_error', { error_code: isRouteErrorResponse(error) ? `http_${error.status}` : 'route_load' });
     console.error('Route error:', error);
     if (typeof window === 'undefined' || !shouldAutoReload(error)) return;
     if (!claimReloadAttempt(`route:${window.location.pathname}`)) {
@@ -51,7 +53,7 @@ const RouteErrorBoundary = () => {
             : "This page didn't load correctly. Reloading usually fixes it."}
         </p>
         <div className="flex flex-wrap gap-3 justify-center">
-          <Button onClick={() => window.location.reload()} className="btn-primary">
+          <Button onClick={() => { trackEvent('content_retry', { placement: 'route_error' }); window.location.reload(); }} className="btn-primary">
             Reload page
           </Button>
           <Button asChild variant="outline">

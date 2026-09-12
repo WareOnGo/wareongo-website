@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -12,6 +12,7 @@ import { toast } from "@/hooks/use-toast";
 import { Mail, Phone, User, Building, Briefcase, Loader } from 'lucide-react';
 import { submitContactForm } from '@/services/formSubmission';
 import { trackEvent } from '@/lib/analytics';
+import { useLeadAnalytics } from '@/hooks/useLeadAnalytics';
 
 interface EdgeContactFormDialogProps {
   open: boolean;
@@ -28,8 +29,13 @@ const EdgeContactFormDialog = ({ open, onOpenChange, source }: EdgeContactFormDi
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const analytics = useLeadAnalytics(open, { form_id: 'edge_beta', lead_type: 'edge_beta', placement: 'edge_section' }, false);
+
+  const submissionError = useRef('server');
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    analytics.attempt();
 
     const trimmedName = name.trim();
     const trimmedCompany = company.trim();
@@ -38,6 +44,7 @@ const EdgeContactFormDialog = ({ open, onOpenChange, source }: EdgeContactFormDi
     const trimmedPhone = phone.trim();
 
     if (!trimmedName || !trimmedCompany || !trimmedDesignation || !trimmedEmail || !trimmedPhone) {
+      analytics.invalid();
       toast({
         title: "Validation Error",
         description: "All fields are required",
@@ -65,10 +72,11 @@ const EdgeContactFormDialog = ({ open, onOpenChange, source }: EdgeContactFormDi
       });
 
       if (!result.success) {
+        submissionError.current = result.errorCode || 'server';
         throw new Error(result.error);
       }
 
-      trackEvent('form_submit', { form_type: 'edge_beta_access', source });
+      analytics.success(result.leadId);
 
       toast({
         title: "Success",
@@ -82,7 +90,7 @@ const EdgeContactFormDialog = ({ open, onOpenChange, source }: EdgeContactFormDi
       setPhone('');
       onOpenChange(false);
     } catch (err: any) {
-      trackEvent('form_error', { form_type: 'edge_beta_access', source, error_message: err?.message || 'unknown' });
+      analytics.failure(submissionError.current);
       setError(err.message || 'Something went wrong. Please try again.');
       toast({
         title: "Error",
@@ -99,7 +107,7 @@ const EdgeContactFormDialog = ({ open, onOpenChange, source }: EdgeContactFormDi
   const iconWrapClass = "absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-wareongo-blue/70";
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={(next) => { if (!isSubmitting) onOpenChange(next); }}>
       <DialogContent className="font-sans bg-wareongo-ivory border border-wareongo-blue rounded-2xl sm:max-w-[460px] p-6 sm:p-8 shadow-none gap-0 max-h-[90vh] overflow-y-auto">
         <DialogHeader className="mb-5">
           <p className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-wareongo-slate font-medium mb-2 text-left">
@@ -113,7 +121,7 @@ const EdgeContactFormDialog = ({ open, onOpenChange, source }: EdgeContactFormDi
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form {...analytics.formProps} onSubmit={handleSubmit} className="space-y-4">
           {error && (
             <div className="p-3 text-sm bg-wareongo-sienna/10 border border-wareongo-sienna text-wareongo-sienna rounded-xl">
               {error}
@@ -127,7 +135,7 @@ const EdgeContactFormDialog = ({ open, onOpenChange, source }: EdgeContactFormDi
                 <User className="h-4 w-4" strokeWidth={1.5} />
               </div>
               <input
-                id="edge-name"
+                id="edge-name" name="edge-name"
                 className={inputClass}
                 placeholder="Enter your name"
                 value={name}
@@ -144,7 +152,7 @@ const EdgeContactFormDialog = ({ open, onOpenChange, source }: EdgeContactFormDi
                 <Building className="h-4 w-4" strokeWidth={1.5} />
               </div>
               <input
-                id="edge-company"
+                id="edge-company" name="edge-company"
                 className={inputClass}
                 placeholder="Enter your company"
                 value={company}
@@ -161,7 +169,7 @@ const EdgeContactFormDialog = ({ open, onOpenChange, source }: EdgeContactFormDi
                 <Briefcase className="h-4 w-4" strokeWidth={1.5} />
               </div>
               <input
-                id="edge-designation"
+                id="edge-designation" name="edge-designation"
                 className={inputClass}
                 placeholder="Enter your designation"
                 value={designation}
@@ -178,7 +186,7 @@ const EdgeContactFormDialog = ({ open, onOpenChange, source }: EdgeContactFormDi
                 <Mail className="h-4 w-4" strokeWidth={1.5} />
               </div>
               <input
-                id="edge-email"
+                id="edge-email" name="edge-email"
                 type="email"
                 className={inputClass}
                 placeholder="Enter your email"
@@ -196,7 +204,7 @@ const EdgeContactFormDialog = ({ open, onOpenChange, source }: EdgeContactFormDi
                 <Phone className="h-4 w-4" strokeWidth={1.5} />
               </div>
               <input
-                id="edge-phone"
+                id="edge-phone" name="edge-phone"
                 className={inputClass}
                 placeholder="Enter your phone number"
                 value={phone}

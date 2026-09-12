@@ -85,7 +85,7 @@ const HowItWorksSection = () => {
   const bottomRow = STEPS.slice(3, 6).reverse();
 
   return (
-    <section className="bg-wareongo-ivory pt-16 pb-16 md:pt-24 md:pb-24">
+    <section id="how-it-works" className="bg-wareongo-ivory pt-16 pb-16 md:pt-24 md:pb-24">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-10 md:mb-14">

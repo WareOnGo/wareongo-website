@@ -343,7 +343,7 @@ const BlogDetail = () => {
                   Browse listings
                 </Link>
                 <Link
-                  to="/request-warehouse"
+                  data-analytics-placement="blog_footer" to="/request-warehouse"
                   className="inline-flex items-center px-5 h-10 rounded-xl border border-wareongo-blue/30 text-wareongo-blue text-sm font-medium hover:bg-wareongo-blue/5 transition-colors"
                 >
                   Request a warehouse

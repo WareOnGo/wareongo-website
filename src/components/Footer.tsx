@@ -91,7 +91,7 @@ const ExploreSpacesSection = () => {
     <div className="border-t border-white/10 pt-6">
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => { trackEvent('menu_toggle', { placement: 'footer_explore', expanded: !open }); setOpen(!open); }}
         aria-expanded={open}
         className="flex items-center justify-between w-full text-left text-lg font-semibold mb-3 hover:text-wareongo-ivory transition-colors"
       >
@@ -217,7 +217,7 @@ const Footer = () => {
               </li>
               <li>
                 <button
-                  onClick={() => handleFooterNav('Listings', '#listings', () => scrollToSection('listings'))}
+                  onClick={() => handleFooterNav('Listings', '/listings', () => navigate('/listings'))}
                   className="text-gray-300 hover:text-white transition-colors cursor-pointer"
                 >
                   Listings
@@ -225,7 +225,7 @@ const Footer = () => {
               </li>
               <li>
                 <button
-                  onClick={() => handleFooterNav('Request a Warehouse', '#request', () => scrollToSection('request'))}
+                  onClick={() => handleFooterNav('Request a Warehouse', '/request-warehouse', () => navigate('/request-warehouse'))}
                   className="text-gray-300 hover:text-white transition-colors cursor-pointer"
                 >
                   Request a Warehouse
@@ -280,7 +280,7 @@ const Footer = () => {
                 <Phone className="h-5 w-5 mr-2 flex-shrink-0" />
                 <a
                   href="tel:+917400184225"
-                  onClick={() => trackEvent('contact_click', { contact_type: 'phone', value: '+917400184225', location: 'footer' })}
+                  onClick={() => trackEvent('contact_click', { contact_method: 'phone', contact_target: 'sales_phone', placement: 'footer' })}
                   className="hover:text-wareongo-ivory transition-colors"
                 >
                   (+91) 74001-84225
@@ -290,7 +290,7 @@ const Footer = () => {
                 <Mail className="h-5 w-5 mr-2 flex-shrink-0" />
                 <a
                   href="mailto:sales@wareongo.com"
-                  onClick={() => trackEvent('contact_click', { contact_type: 'email', value: 'sales@wareongo.com', location: 'footer' })}
+                  onClick={() => trackEvent('contact_click', { contact_method: 'email', contact_target: 'sales_email', placement: 'footer' })}
                   className="hover:text-wareongo-ivory transition-colors"
                 >
                   sales@wareongo.com

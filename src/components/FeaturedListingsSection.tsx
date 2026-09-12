@@ -1,7 +1,8 @@
 import './FeaturedListingsSection.css';
 import { MapPin, Ruler, Building2, IndianRupee, ArrowRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { trackEvent } from '@/lib/analytics';
+import { trackEvent, type AnalyticsParams } from '@/lib/analytics';
+import { useListingImpression, useListingResults } from '@/hooks/useListingAnalytics';
 import { warehousePath } from '@/lib/warehouseSlug';
 
 const featuredListings = [
@@ -43,8 +44,14 @@ const featuredListings = [
   }
 ];
 
+const FeaturedExposure = ({ context, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement> & { context: AnalyticsParams }) => {
+  const ref = useListingImpression<HTMLButtonElement>(context);
+  return <button ref={ref} {...props} />;
+};
+
 const FeaturedListingsSection = () => {
   const navigate = useNavigate();
+  useListingResults({ list_id: 'featured', placement: 'featured_listings', page: 1, page_size: 3, result_count: 3, total_count: 3, result_status: 'success' });
 
   return (
     <section className="bg-wareongo-ivory py-16 md:py-24 border-t border-black/5">
@@ -70,12 +77,11 @@ const FeaturedListingsSection = () => {
 
         <div className="listings-scroller -mx-4 pl-5 pr-5 flex gap-5 overflow-x-auto snap-x snap-mandatory pb-2 md:mx-0 md:pl-0 md:pr-0 md:pb-0 md:overflow-visible md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 [perspective:1200px]">
           {featuredListings.map((listing, idx) => (
-            <button
-              key={listing.id}
+            <FeaturedExposure key={listing.id} context={{ list_id: 'featured', warehouse_id: listing.id, placement: 'featured_listings', list_position: idx + 1, page: 1, page_size: 3 }}
               onClick={() => {
                 trackEvent('listing_open', {
                   warehouse_id: listing.id,
-                  source: 'featured_listings',
+                  list_id: 'featured', placement: 'featured_listings', page: 1, page_size: 3,
                   position: idx + 1,
                   address: listing.address,
                   city: listing.location.city,
@@ -152,7 +158,7 @@ const FeaturedListingsSection = () => {
                   </div>
                 </div>
               </div>
-            </button>
+            </FeaturedExposure>
           ))}
         </div>
 

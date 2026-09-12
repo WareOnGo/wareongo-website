@@ -1,3 +1,6 @@
+import { useEffect, useLayoutEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { recordAnalyticsPage } from '@/lib/analytics';
 import { Head } from 'vite-react-ssg';
 import { SITE_URL } from '@/config/config';
 
@@ -12,7 +15,11 @@ interface PageHeadProps {
   children?: React.ReactNode;
 }
 
+const useBrowserLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
+
 const PageHead = ({ title, description, path, image, noindex, ogType = 'website', children }: PageHeadProps) => {
+  const location = useLocation();
+  useBrowserLayoutEffect(() => { recordAnalyticsPage(title); }, [title, location.pathname, location.search]);
   const url = `${SITE_URL}${path}`;
   const ogImage = image ?? `${SITE_URL}/og-image.jpg`;
   return (

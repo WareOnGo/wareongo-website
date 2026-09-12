@@ -34,7 +34,7 @@ const RequestCTASection = () => {
               </Link>
               <a
                 href={`tel:${PHONE}`}
-                onClick={() => trackEvent('cta_click', { label: 'Call Us Now', cta_location: 'request_cta_section', destination: `tel:${PHONE}` })}
+                onClick={() => trackEvent('contact_click', { contact_method: 'phone', contact_target: 'sales_phone', placement: 'request_cta_section' })}
                 className="inline-flex items-center justify-center w-full sm:w-auto border border-white/40 text-white text-base sm:text-lg font-bold px-8 py-4 rounded-xl hover:bg-white/10 transition-all duration-300"
               >
                 <Phone className="mr-2 w-5 h-5" />

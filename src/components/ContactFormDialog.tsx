@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -12,7 +12,8 @@ import {
 import { toast } from "@/hooks/use-toast";
 import { Building2, Mail, Phone, User, Loader } from 'lucide-react';
 import { submitContactForm } from '@/services/formSubmission';
-import { trackEvent } from '@/lib/analytics';
+import type { AnalyticsParams } from '@/lib/analytics';
+import { useLeadAnalytics } from '@/hooks/useLeadAnalytics';
 
 interface ContactFormDialogProps {
   open: boolean;
@@ -22,7 +23,7 @@ interface ContactFormDialogProps {
   successMessage: string;
   source: string;
   requireCompanyName?: boolean;
-  analyticsContext?: { warehouse_id: number; cta_location: string };
+  analyticsContext?: AnalyticsParams;
 }
 
 const ContactFormDialog = ({
@@ -42,8 +43,19 @@ const ContactFormDialog = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const placement = analyticsContext?.placement || analyticsContext?.cta_location || 'header';
+  const analytics = useLeadAnalytics(open, {
+    ...analyticsContext,
+    placement,
+    form_id: requireCompanyName ? (placement === 'warehouse_detail' ? 'warehouse_detail_callback' : 'warehouse_card_enquiry') : 'header_contact',
+    lead_type: requireCompanyName ? 'warehouse_enquiry' : 'general_contact',
+  });
+
+  const submissionError = useRef('server');
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    analytics.attempt();
 
     const trimmedName = name.trim();
     const trimmedPhone = phone.trim();
@@ -51,6 +63,7 @@ const ContactFormDialog = ({
     const trimmedCompanyName = companyName.trim();
 
     if (!trimmedName || !trimmedPhone) {
+      analytics.invalid(!trimmedName ? "name" : "phone");
       toast({
         title: "Validation Error",
         description: "Name and phone number are required",
@@ -60,6 +73,7 @@ const ContactFormDialog = ({
     }
 
     if (requireCompanyName && !trimmedCompanyName) {
+      analytics.invalid('company-name');
       setError('Company name is required');
       return;
     }
@@ -77,10 +91,11 @@ const ContactFormDialog = ({
       });
 
       if (!result.success) {
+        submissionError.current = result.errorCode || 'server';
         throw new Error(result.error);
       }
 
-      trackEvent('form_submit', { ...analyticsContext, form_type: 'contact', source });
+      analytics.success(result.leadId);
 
       toast({
         title: "Success",
@@ -94,7 +109,7 @@ const ContactFormDialog = ({
       onOpenChange(false);
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : '';
-      trackEvent('form_error', { ...analyticsContext, form_type: 'contact', source, error_message: message || 'unknown' });
+      analytics.failure(submissionError.current);
       setError(message || 'Something went wrong. Please try again.');
       toast({
         title: "Error",
@@ -107,7 +122,7 @@ const ContactFormDialog = ({
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={(next) => { if (!isSubmitting) onOpenChange(next); }}>
       <DialogContent className="font-sans bg-wareongo-ivory border border-wareongo-blue rounded-2xl sm:max-w-[460px] max-h-[calc(100dvh-2rem)] overflow-y-auto p-6 sm:p-8 shadow-none gap-0">
         <DialogHeader className="mb-5">
           <p className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-wareongo-slate font-medium mb-2 text-left">
@@ -121,7 +136,7 @@ const ContactFormDialog = ({
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form {...analytics.formProps} onSubmit={handleSubmit} className="space-y-4">
           {error && (
             <div className="p-3 text-sm bg-wareongo-sienna/10 border border-wareongo-sienna text-wareongo-sienna rounded-xl">
               {error}
@@ -137,7 +152,7 @@ const ContactFormDialog = ({
                 <User className="h-4 w-4" strokeWidth={1.5} />
               </div>
               <input
-                id="name"
+                id="name" name="name"
                 className="w-full h-11 pl-10 pr-3.5 bg-transparent border border-wareongo-blue rounded-xl text-sm text-wareongo-blue placeholder:text-wareongo-slate/60 focus:outline-none focus:ring-2 focus:ring-wareongo-blue/20 focus:border-wareongo-blue transition-colors"
                 placeholder="Enter your name"
                 value={name}
@@ -157,7 +172,7 @@ const ContactFormDialog = ({
                   <Building2 className="h-4 w-4" strokeWidth={1.5} />
                 </div>
                 <input
-                  id="company-name"
+                  id="company-name" name="company-name"
                   autoComplete="organization"
                   className="w-full h-11 pl-10 pr-3.5 bg-transparent border border-wareongo-blue rounded-xl text-sm text-wareongo-blue placeholder:text-wareongo-slate/60 focus:outline-none focus:ring-2 focus:ring-wareongo-blue/20 focus:border-wareongo-blue transition-colors"
                   placeholder="Enter your company name"
@@ -178,7 +193,7 @@ const ContactFormDialog = ({
                 <Phone className="h-4 w-4" strokeWidth={1.5} />
               </div>
               <input
-                id="phone"
+                id="phone" name="phone"
                 className="w-full h-11 pl-10 pr-3.5 bg-transparent border border-wareongo-blue rounded-xl text-sm text-wareongo-blue placeholder:text-wareongo-slate/60 focus:outline-none focus:ring-2 focus:ring-wareongo-blue/20 focus:border-wareongo-blue transition-colors"
                 placeholder="Enter your phone number"
                 value={phone}
@@ -197,7 +212,7 @@ const ContactFormDialog = ({
                 <Mail className="h-4 w-4" strokeWidth={1.5} />
               </div>
               <input
-                id="email"
+                id="email" name="email"
                 type="email"
                 className="w-full h-11 pl-10 pr-3.5 bg-transparent border border-wareongo-blue rounded-xl text-sm text-wareongo-blue placeholder:text-wareongo-slate/60 focus:outline-none focus:ring-2 focus:ring-wareongo-blue/20 focus:border-wareongo-blue transition-colors"
                 placeholder="Enter your email (optional)"

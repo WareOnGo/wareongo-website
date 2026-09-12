@@ -1,3 +1,4 @@
+import { trackEvent, stableContentId } from '@/lib/analytics';
 import React, { useState } from 'react';
 import { Head } from 'vite-react-ssg';
 import { ChevronDown } from 'lucide-react';
@@ -122,7 +123,7 @@ const FAQSection = () => {
               key={i}
               faq={faq}
               isOpen={openIndex === i}
-              onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+              onToggle={() => { if (openIndex !== i) trackEvent('faq_open', { placement: 'home_faq', question_id: stableContentId(faq.question) }); setOpenIndex(openIndex === i ? null : i); }}
             />
           ))}
         </div>

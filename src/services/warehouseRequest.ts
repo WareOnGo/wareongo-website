@@ -12,7 +12,7 @@ interface WarehouseRequestData {
 /**
  * Submit warehouse request form data to the backend API
  */
-export const submitWarehouseRequest = async (formData: WarehouseRequestData): Promise<{ success: boolean; error?: string }> => {
+export const submitWarehouseRequest = async (formData: WarehouseRequestData): Promise<{ success: boolean; error?: string; errorCode?: string; leadId?: string }> => {
   try {
     const payload = {
       full_name: formData.name.trim(),
@@ -21,9 +21,8 @@ export const submitWarehouseRequest = async (formData: WarehouseRequestData): Pr
       preferred_location: formData.location.trim(),
       additional_requirements: formData.requirements ? formData.requirements.trim() : '',
     };
-    
-    console.log('Submitting warehouse request:', payload);
-    
+
+
     const response = await fetch(getApiUrl(config.api.customerRequests), {
       method: 'POST',
       headers: {
@@ -31,26 +30,24 @@ export const submitWarehouseRequest = async (formData: WarehouseRequestData): Pr
       },
       body: JSON.stringify(payload),
     });
-    
-    console.log('Response status:', response.status);
-    
+
+
     if (!response.ok) {
       const errorData = await response.json();
-      console.error('Error response:', errorData);
-      return { 
-        success: false, 
-        error: errorData.error || 'Failed to submit request' 
+      return {
+        success: false,
+        error: errorData.error || 'Failed to submit request',
+        errorCode: response.status < 500 ? 'validation_server' : 'server'
       };
     }
-    
+
     const responseData = await response.json();
-    console.log('Success response:', responseData);
-    return { success: true };
+    return { success: true, leadId: responseData.id != null ? `request_${responseData.id}` : undefined };
   } catch (error: any) {
-    console.error('Error submitting warehouse request:', error);
-    return { 
-      success: false, 
-      error: 'Network error. Please check your connection and try again.' 
+    return {
+      success: false,
+      error: 'Network error. Please check your connection and try again.',
+      errorCode: 'network'
     };
   }
 };

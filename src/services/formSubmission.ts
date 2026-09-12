@@ -11,7 +11,7 @@ interface ContactFormData {
 /**
  * Submit contact form data to the backend API
  */
-export const submitContactForm = async (formData: ContactFormData): Promise<{ success: boolean; error?: string }> => {
+export const submitContactForm = async (formData: ContactFormData): Promise<{ success: boolean; error?: string; errorCode?: string; leadId?: string }> => {
   try {
     const payload = {
       name: formData.name.trim(),
@@ -31,20 +31,20 @@ export const submitContactForm = async (formData: ContactFormData): Promise<{ su
 
     if (!response.ok) {
       const errorData = await response.json();
-      console.error('Form submission error response:', errorData);
       return {
         success: false,
         error: errorData.error || 'Failed to submit form',
+        errorCode: response.status < 500 ? 'validation_server' : 'server',
       };
     }
 
-    await response.json();
-    return { success: true };
+    const responseData = await response.json();
+    return { success: true, leadId: responseData.id != null ? `enquiry_${responseData.id}` : undefined };
   } catch (error) {
-    console.error('Form submission error:', error);
     return {
       success: false,
       error: 'Network error. Please check your connection and try again.',
+      errorCode: 'network',
     };
   }
 };

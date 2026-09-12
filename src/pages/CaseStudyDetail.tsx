@@ -1,3 +1,4 @@
+import { trackEvent } from '@/lib/analytics';
 import React, { useEffect, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, BookOpen, LayoutGrid } from 'lucide-react';
@@ -130,7 +131,7 @@ const CaseStudyDetail: React.FC = () => {
           <div className="flex flex-col items-center gap-4 mb-6">
             <div className="inline-flex border border-wareongo-blue rounded-xl overflow-hidden bg-transparent w-fit">
               <button
-                onClick={() => setView('story')}
+                onClick={() => { if (view !== 'story') trackEvent('content_view_change', { content_type: 'case_study', content_id: csPath, view_mode: 'story' }); setView('story'); }}
                 className={`inline-flex items-center gap-1.5 px-5 py-2.5 text-[13px] font-semibold transition-colors ${
                   view === 'story'
                     ? 'bg-wareongo-blue text-wareongo-ivory'
@@ -140,7 +141,7 @@ const CaseStudyDetail: React.FC = () => {
                 <BookOpen className="w-3.5 h-3.5" /> Full Story
               </button>
               <button
-                onClick={() => setView('card')}
+                onClick={() => { if (view !== 'card') trackEvent('content_view_change', { content_type: 'case_study', content_id: csPath, view_mode: 'card' }); setView('card'); }}
                 className={`inline-flex items-center gap-1.5 px-5 py-2.5 text-[13px] font-semibold transition-colors ${
                   view === 'card'
                     ? 'bg-wareongo-blue text-wareongo-ivory'

@@ -19,6 +19,7 @@ import { specRowsFor } from '@/lib/micromarketStats';
 import type { EditorialPageData } from '@/loaders/locationLoader';
 import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
 import { trackEvent } from '@/lib/analytics';
+import { useListingResults } from '@/hooks/useListingAnalytics';
 import { warehousePath } from '@/lib/warehouseSlug';
 
 /** Shared CMS wireframe for state, city and micromarket /overview pages. */
@@ -75,11 +76,17 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
   const {
     shown,
     currentPage,
+    perPage,
     totalPages: listingsPages,
     start: pageStart,
     anchorRef: listingsRef,
     goTo,
   } = usePagedListings(ordered);
+
+  const listId = `overview:${path}`;
+  useListingResults({ list_id: listId, placement: 'overview_grid', market_slug: path.split('/').pop(),
+    page: currentPage, page_size: perPage, result_count: shown.length, total_count: warehouses.length,
+    result_status: shown.length ? 'success' : 'empty' });
 
   const siblings = peers.filter((p) => !p.isSelf);
   const relatedBlogs = content.relatedBlogs
@@ -87,7 +94,6 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
     .filter((b): b is NonNullable<typeof b> => Boolean(b));
 
   const openListing = (warehouse: Listing) => {
-    trackEvent('listing_open', { warehouse_id: warehouse.id, source: `${scope}_page_${editorial.name}` });
     navigate(
       warehousePath({
         id: warehouse.id,
@@ -193,6 +199,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
                     // the top of this grid is what the reader is looking at, so
                     // its first row is the row worth loading eagerly.
                     index={idx}
+                    analyticsContext={{ list_id: listId, placement: 'overview_grid', market_slug: path.split('/').pop(), page: currentPage, page_size: perPage, list_position: pageStart + idx + 1 }}
                     id={w.id}
                     image={w.image}
                     images={w.images}
@@ -214,9 +221,9 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
                 currentPage={currentPage}
                 totalPages={listingsPages}
                 onChange={(next, direction) => {
-                  trackEvent('editorial_listings_paginate', {
-                    scope,
-                    location: name,
+                  if (next === currentPage) return;
+                  trackEvent('listings_paginate', {
+                    list_id: listId, market_slug: path.split('/').pop(), page_size: perPage,
                     from_page: currentPage,
                     to_page: next,
                     direction,
@@ -364,7 +371,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
                 curated shortlist within 4 hours.
               </p>
               <Link
-                to="/request-warehouse"
+                data-analytics-placement="overview_footer" to="/request-warehouse"
                 className="inline-flex h-10 items-center rounded-xl bg-wareongo-blue px-5 text-sm font-medium text-white transition-colors hover:bg-wareongo-blue/90"
               >
                 Request a warehouse

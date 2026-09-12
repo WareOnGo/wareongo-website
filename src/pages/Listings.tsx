@@ -7,13 +7,13 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WarehouseCard from '@/components/WarehouseCard';
 import { WarehouseGridSkeleton } from '@/components/PageSkeletons';
-import ContactFormDialog from '@/components/ContactFormDialog';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
 import ListingsHeader from '@/components/ListingsHeader';
 import { warehouseAPI, transformWarehouseData } from '@/services/warehouseAPI';
 import { trackEvent } from '@/lib/analytics';
+import { useListingResults } from '@/hooks/useListingAnalytics';
 import { warehousePath } from '@/lib/warehouseSlug';
 import type { ListingsLoaderData } from '@/loaders/warehouseLoader';
 import { verifiedWarehousesLabel } from '@/data/companyStats';
@@ -83,6 +83,14 @@ const toApiFilters = (filters: WarehouseFilters) => {
   ) as Record<string, string | number | boolean>;
 };
 
+const analyticsFilters = (filters: WarehouseFilters) => {
+  const api = toApiFilters(filters);
+  return { warehouse_city: api.city ? String(api.city).split(',')[0] : undefined,
+    warehouse_state: api.state as string | undefined, warehouse_type: api.warehouseType as string | undefined,
+    fire_noc: api.fireNocAvailable as boolean | undefined, min_sqft: api.minSpace as number | undefined,
+    max_sqft: api.maxSpace as number | undefined, filter_count: Object.keys(api).length };
+};
+
 const Listings = () => {
   const navigate = useNavigate();
   // Loader baked in at SSG time (page 1, default page size). null if backend was unreachable.
@@ -95,8 +103,6 @@ const Listings = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(initialData?.pagination?.pageSize ?? DEFAULT_PAGE_SIZE);
   const [showFilters, setShowFilters] = useState(false);
-  const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
-  const [selectedWarehouseId] = useState<number | null>(null);
   const resultsRef = useRef<HTMLElement>(null);
   const scrollAfterPaging = useRef(false);
 
@@ -155,22 +161,34 @@ const Listings = () => {
     setFilters((prev) => ({ ...prev, minSqft: values[0], maxSqft: values[1] }));
   };
 
+  const [resultTrigger, setResultTrigger] = useState('deeplink');
+  const previousSearch = useRef(searchParams.toString());
+  useEffect(() => {
+    const value = searchParams.toString();
+    if (value === previousSearch.current) return;
+    previousSearch.current = value;
+    const next = filtersFromSearchParams(searchParams);
+    setFilters(next); setAppliedFilters(next); setCurrentPage(1);
+    setResultTrigger('history');
+  }, [searchParams]);
+  useListingResults({ list_id: 'all_warehouses', placement: 'listings_grid', page: currentPage, page_size: pageSize,
+    result_count: isError ? 0 : warehouses.length, total_count: isError ? undefined : pagination.totalItems,
+    result_status: isError ? 'error' : warehouses.length ? 'success' : 'empty',
+    trigger: resultTrigger, ...analyticsFilters(appliedFilters) }, !loadingResults);
+
   const applyFilters = () => {
-    trackEvent('filter_apply', {
-      city: filters.city || undefined,
-      state: filters.state || undefined,
-      fire_compliance: filters.fireCompliance || undefined,
-      warehouse_type: filters.warehouseType || undefined,
-      min_sqft: filters.minSqft,
-      max_sqft: filters.maxSqft,
-    });
+    setResultTrigger('apply');
+    previousSearch.current = new URLSearchParams(filtersToSearchParams(filters)).toString();
+    trackEvent('filter_apply', { list_id: 'all_warehouses', trigger: 'apply', ...analyticsFilters(filters) });
     setCurrentPage(1);
     setAppliedFilters(filters);
     setSearchParams(filtersToSearchParams(filters), { replace: false });
   };
 
   const clearFilters = () => {
-    trackEvent('filter_clear', {});
+    setResultTrigger('clear');
+    previousSearch.current = '';
+    trackEvent('filter_clear', { list_id: 'all_warehouses', trigger: 'clear', ...analyticsFilters(appliedFilters) });
     setFilters(DEFAULT_FILTERS);
     setAppliedFilters(DEFAULT_FILTERS);
     setCurrentPage(1);
@@ -191,6 +209,7 @@ const Listings = () => {
   const handlePageSizeChange = (newPageSize: number) => {
     if (loadingResults || newPageSize === pageSize) return;
     scrollAfterPaging.current = true;
+    trackEvent('listing_page_size_change', { list_id: 'all_warehouses', from_page_size: pageSize, page_size: newPageSize });
     setPageSize(newPageSize);
     setCurrentPage(1);
   };
@@ -220,7 +239,7 @@ const Listings = () => {
           <ListingsHeader
             showFilters={showFilters}
             active={hasActiveFilters()}
-            onToggle={() => setShowFilters(!showFilters)}
+            onToggle={() => { if (!showFilters) trackEvent('filter_open', { list_id: 'all_warehouses' }); setShowFilters(!showFilters); }}
             onClear={clearFilters}
           />
 
@@ -271,7 +290,7 @@ const Listings = () => {
                 </div>
 
                 <div className="space-y-1.5">
-                  <Label htmlFor="fireCompliance" className="text-[13px]">Fire compliance</Label>
+                  <Label htmlFor="fireCompliance" className="text-[13px]">Fire NOC</Label>
                   <Select
                     value={filters.fireCompliance}
                     onValueChange={(value) => handleFilterChange('fireCompliance', value)}
@@ -360,7 +379,7 @@ const Listings = () => {
               <div className="text-center py-12">
                 <p className="text-red-600 mb-4">Failed to load warehouses. Please try again later.</p>
                 <button
-                  onClick={() => refetch()}
+                  onClick={() => { trackEvent('content_retry', { list_id: 'all_warehouses' }); void refetch(); }}
                   className="px-5 h-10 rounded-xl bg-wareongo-blue text-white text-sm font-medium hover:bg-wareongo-blue/90 transition-colors"
                 >
                   Try again
@@ -376,6 +395,7 @@ const Listings = () => {
                     key={warehouse.id}
                     id={warehouse.id}
                     index={idx}
+                    analyticsContext={{ list_id: 'all_warehouses', placement: 'listings_grid', page: currentPage, page_size: pageSize, list_position: (currentPage - 1) * pageSize + idx + 1 }}
                     image={warehouse.image}
                     images={warehouse.images}
                     imageFallbacks={warehouse.imageFallbacks}
@@ -387,17 +407,6 @@ const Listings = () => {
                     fireCompliance={warehouse.fireCompliance}
                     features={warehouse.features}
                     onClick={() => {
-                      trackEvent('listing_open', {
-                        warehouse_id: warehouse.id,
-                        source: 'listings_page',
-                        position: (pagination.currentPage - 1) * pagination.pageSize + idx + 1,
-                        page: pagination.currentPage,
-                        address: warehouse.address,
-                        city: warehouse.location?.city,
-                        state: warehouse.location?.state,
-                        size_sqft: warehouse.size,
-                        price_per_sqft: warehouse.price,
-                      });
                       handleWarehouseClick(warehouse);
                     }}
                   />
@@ -460,6 +469,7 @@ const Listings = () => {
                   onChange={(page, direction) => {
                     if (loadingResults || page === currentPage) return;
                     trackEvent('listings_paginate', {
+                      list_id: 'all_warehouses', page_size: pageSize,
                       from_page: pagination.currentPage,
                       to_page: page,
                       direction,
@@ -476,14 +486,6 @@ const Listings = () => {
 
       <Footer />
 
-      <ContactFormDialog
-        open={isContactDialogOpen}
-        onOpenChange={setIsContactDialogOpen}
-        title="Request Full Warehouse Listings"
-        description="Share your details to get access to our complete warehouse inventory"
-        successMessage="Thank you! Our team will send you the complete listings within 2 hours."
-        source={selectedWarehouseId ? `${selectedWarehouseId}` : 'listings'}
-      />
     </div>
   );
 };

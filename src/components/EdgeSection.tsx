@@ -62,7 +62,7 @@ const EdgeSection = () => {
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <button
                   onClick={() => {
-                    trackEvent('cta_click', { label: 'Request Beta Access', cta_location: 'edge_section' });
+                    trackEvent('cta_click', { cta_id: 'edge_beta', form_id: 'edge_beta', lead_type: 'edge_beta', label: 'Request Beta Access', cta_location: 'edge_section' });
                     setIsContactDialogOpen(true);
                   }}
                   className="bg-white text-wareongo-blue text-base font-medium px-7 py-4 rounded-lg hover:opacity-90 transition-opacity"
