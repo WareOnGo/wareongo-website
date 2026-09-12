@@ -1,0 +1,154 @@
+{
+  "assessedAt": "2026-09-11T23:58:08.225432+00:00",
+  "verdict": "ready-to-deploy",
+  "liveCatalogue": {
+    "selectionMismatches": [],
+    "listings": 2006,
+    "uniqueIds": 2006,
+    "routeCities": 116,
+    "routeStates": 23,
+    "buildableMarkets": 64,
+    "coverage": {
+      "1": 1,
+      "2": 1300,
+      "3": 705
+    },
+    "uniqueAncestorDestinations": 177,
+    "missingBuildRoutes": [],
+    "missingLiveRoutes": [],
+    "aliasListings": 152,
+    "multipleMatchingMarkets": 376,
+    "stateCityConflicts": 1,
+    "omittedSameNameMarkets": 3,
+    "resolverMilliseconds": 8.94,
+    "serializedBreadcrumbBytes": 321269,
+    "examples": {
+      "multi": [
+        {
+          "id": 2592,
+          "selected": {
+            "label": "Whitefield",
+            "path": "/listings/city/bengaluru/whitefield"
+          },
+          "candidates": [
+            {
+              "slug": "whitefield",
+              "listings": 66
+            },
+            {
+              "slug": "bidrahalli",
+              "listings": 39
+            },
+            {
+              "slug": "budigere",
+              "listings": 39
+            },
+            {
+              "slug": "cheemasandra",
+              "listings": 39
+            },
+            {
+              "slug": "rampura",
+              "listings": 39
+            }
+          ]
+        },
+        {
+          "id": 2587,
+          "selected": {
+            "label": "Nelamangala",
+            "path": "/listings/city/bengaluru/nelamangala"
+          },
+          "candidates": [
+            {
+              "slug": "nelamangala",
+              "listings": 101
+            },
+            {
+              "slug": "peenya",
+              "listings": 60
+            },
+            {
+              "slug": "makali",
+              "listings": 23
+            }
+          ]
+        },
+        {
+          "id": 2585,
+          "selected": {
+            "label": "Nelamangala",
+            "path": "/listings/city/bengaluru/nelamangala"
+          },
+          "candidates": [
+            {
+              "slug": "nelamangala",
+              "listings": 101
+            },
+            {
+              "slug": "peenya",
+              "listings": 60
+            },
+            {
+              "slug": "makali",
+              "listings": 23
+            }
+          ]
+        }
+      ],
+      "conflicts": [
+        {
+          "id": 1779,
+          "city": "Navi Mumbai",
+          "cityState": "maharashtra",
+          "listingState": "tamil-nadu"
+        }
+      ],
+      "sameName": [
+        {
+          "id": 583,
+          "city": "Dadri",
+          "market": "dadri"
+        },
+        {
+          "id": 582,
+          "city": "Dadri",
+          "market": "dadri"
+        },
+        {
+          "id": 581,
+          "city": "Dadri",
+          "market": "dadri"
+        }
+      ]
+    }
+  },
+  "validation": {
+    "unitAndLoaderTests": 12,
+    "browserTests": 48,
+    "typecheck": "passed",
+    "targetedLint": "passed",
+    "fixtureProductionBuild": "passed",
+    "fixtureBuiltUrls": 99,
+    "fixtureWarehouses": 65
+  },
+  "finalBuild": "/tmp/wareongo-location-rebuild-luHbxI/site",
+  "sourceSha256": {
+    "src/lib/listingBreadcrumbs.ts": "0c14ed52f306cae10ce23f0e175646b8b4023c8d35f842574d7dc9a005f3da31",
+    "src/loaders/locationLoader.ts": "d75fd8884ba22d85ff291949dcf4d9e964f68f4da7aced4e9e1dc7e4e1c72a3e",
+    "src/loaders/warehouseLoader.ts": "275bac64d5a41e8e39252d59aaa70802f4d4a404d09c04204718e8f426a5a991",
+    "src/components/Breadcrumbs.tsx": "8d1e897b91057030da4cc3bf9a3f1972c2e916595c39693570fc995dc20e41ac",
+    "src/components/LocationPageSkeletons.tsx": "fe95526a96f73a6b6037a5b1665480e78ba7fbf2dfeef18860c63973279eabbb",
+    "src/pages/LocationListings.tsx": "3db7051e1a6f6c2f398cdb55ef1d7f029cd4af642c18a3ebbdaecdf1207de4d8",
+    "src/pages/WarehouseDetail.tsx": "92c4f5d2e145b91a7ef070311ff28ff9643a378ba18c1d828e200c00188564cd",
+    "src/pages/CaseStudyDetail.tsx": "7fe971ed41915b06cf28445e3c20680d01ebeb711cd33e49bd153ee633a523d0",
+    "src/routes.tsx": "b58a82701208f109bcf0738dc7de62a057b3114a4527411e3b805f3697b5b433",
+    "tests/breadcrumbs.test.mjs": "41110cf3cbe0c5909e44c59408d5a9e561679c12a7bc1f1131b6eea87f6fde28"
+  },
+  "dataSources": [
+    "https://wareongo-website-backend.onrender.com/locations",
+    "https://wareongo-website-backend.onrender.com/micromarkets",
+    "https://wareongo-website-backend.onrender.com/warehouses?page=1&pageSize=500 (pages 1\u20135)",
+    "https://wareongo.com/static-loader-data-manifest-stable.json"
+  ]
+}

@@ -4,6 +4,8 @@ import { getMicromarketContent } from '@/data/micromarkets';
 import { applyStatOverrides } from '@/lib/micromarketStats';
 import type { EditorialContent } from '@/data/editorial';
 import type { DerivedStats } from '@/services/derivedStats';
+import { createListingBreadcrumbs } from '@/lib/listingBreadcrumbs';
+import type { BreadcrumbItem } from '@/components/Breadcrumbs';
 import { getLocationPageContent, locationPages } from '@/data/locationPages';
 import { getLocations, locationStats, locationOverviewPath, locationPath, type LocationKind } from '@/services/locationsAPI';
 import {
@@ -143,6 +145,8 @@ export interface LocationListingsLoaderData {
   parentCity?: { canonical: string; slug: string } | null;
   // Retained for older overview bundles reading this deploy's loader data.
   parentState?: { canonical: string; slug: string };
+  /** Verified listing-grid ancestors; absent in loader data from older builds. */
+  breadcrumbAncestors?: BreadcrumbItem[];
   /** Link to published editorial content; listing routes never carry that copy. */
   overviewPath?: string;
 }
@@ -193,6 +197,33 @@ async function summariesFor(type: 'city' | 'state'): Promise<LocationSummary[]> 
 export const getCityList = () => summariesFor('city');
 export const getStateList = () => summariesFor('state');
 
+let breadcrumbCache: Promise<ReturnType<typeof createListingBreadcrumbs>> | null = null;
+
+export function getListingBreadcrumbs() {
+  if (!breadcrumbCache) {
+    breadcrumbCache = (async () => {
+      // Breadcrumb metadata is auxiliary: unavailable geography must not make
+      // an otherwise valid warehouse inaccessible. Retain whichever levels we
+      // can verify, with /listings always supplied by the page itself.
+      const [locations, markets, cities, states] = await Promise.allSettled([
+        getLocations(), buildableMicromarkets(), getCityList(), getStateList(),
+      ]);
+      for (const result of [locations, markets, cities, states]) {
+        if (result.status === 'rejected') console.warn('[breadcrumbs] parent lookup unavailable:', result.reason);
+      }
+      return createListingBreadcrumbs(
+        locations.status === 'fulfilled' ? locations.value : { cities: [], states: [] },
+        markets.status === 'fulfilled' ? markets.value : [],
+        {
+          cities: cities.status === 'fulfilled' ? cities.value : [],
+          states: states.status === 'fulfilled' ? states.value : [],
+        },
+      );
+    })();
+  }
+  return breadcrumbCache;
+}
+
 // ----- loaders + static paths -----------------------------------------------
 
 async function loaderFor(
@@ -228,6 +259,7 @@ async function loaderFor(
     warehouseType,
     typeCounts,
     warehouses: scoped.map(transformWarehouseData),
+    breadcrumbAncestors: type === 'city' ? (await getListingBreadcrumbs()).city(match.slug) : [],
     ...(!warehouseType ? { overviewPath: await publishedLocationPath(type === 'city' ? 'CITY' : 'STATE', match.slug) ?? undefined } : {}),
   };
 }
@@ -389,6 +421,7 @@ async function micromarketLoader(
     parentCity: { canonical: match.parentCity as string, slug: citySlug },
     typeCounts: countTypes(scoped),
     warehouses: scoped.map(transformWarehouseData),
+    breadcrumbAncestors: (await getListingBreadcrumbs()).micromarket(citySlug, match.slug, match.name),
   };
 
   const content = getMicromarketContent(citySlug, match.slug);

@@ -15,6 +15,11 @@ interface BreadcrumbsProps {
   className?: string;
 }
 
+interface BreadcrumbTrailProps extends BreadcrumbsProps {
+  /** Position reserved for an ancestor whose label is still being loaded. */
+  pendingAncestorAt?: number;
+}
+
 const Breadcrumbs = ({ items, className = '' }: BreadcrumbsProps) => {
   // BreadcrumbList JSON-LD — skip pathless intermediate items (Google requires a URL on
   // every item except optionally the last one). Positions renumber after the filter.
@@ -47,13 +52,17 @@ const Breadcrumbs = ({ items, className = '' }: BreadcrumbsProps) => {
   );
 };
 
-export const BreadcrumbTrail = ({ items, className = '' }: BreadcrumbsProps) => (
+export const BreadcrumbTrail = ({ items, className = '', pendingAncestorAt }: BreadcrumbTrailProps) => (
   <nav aria-label="Breadcrumb" className={className}>
     <ol className="flex items-center flex-wrap gap-1 text-xs sm:text-sm text-wareongo-slate">
       {items.map((item, idx) => {
         const isLast = idx === items.length - 1;
         return (
           <li key={`${item.label}-${idx}`} className="flex items-center gap-1">
+            {idx === pendingAncestorAt && <>
+              <ChevronRight className="w-3.5 h-3.5 text-wareongo-slate/50" aria-hidden="true" />
+              <span className="inline-block h-4 w-20 rounded bg-wareongo-slate/10 motion-safe:animate-pulse" aria-label="Loading state" />
+            </>}
             {idx > 0 && (
               <ChevronRight className="w-3.5 h-3.5 text-wareongo-slate/50" aria-hidden="true" />
             )}

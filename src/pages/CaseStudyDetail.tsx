@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, BookOpen, LayoutGrid } from 'lucide-react';
 import PageHead from '@/components/PageHead';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FAQAccordion from '@/components/FAQAccordion';
@@ -119,14 +120,11 @@ const CaseStudyDetail: React.FC = () => {
       <main className="flex-1 pt-24 pb-16">
         <div className="container mx-auto px-4 max-w-6xl">
           {/* Breadcrumb */}
-          <div className="mb-6">
-            <Link
-              to="/casestudies"
-              className="inline-flex items-center gap-1.5 text-[12px] uppercase tracking-[0.18em] text-wareongo-slate hover:text-wareongo-blue transition-colors"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" /> All Case Studies
-            </Link>
-          </div>
+          <Breadcrumbs className="mb-6" items={[
+            { label: 'Home', path: '/' },
+            { label: 'Case Studies', path: '/casestudies' },
+            { label: c.tabLabel, path: csPath },
+          ]} />
 
           {/* View Toggle */}
           <div className="flex flex-col items-center gap-4 mb-6">

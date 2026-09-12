@@ -1,7 +1,8 @@
 import type { LoaderFunctionArgs } from 'react-router-dom';
 import { warehouseAPI, transformWarehouseData, transformWarehouseDetailData, WarehouseAPIError, type WarehouseSpecifications } from '@/services/warehouseAPI';
 import { warehouseSlug, parseIdFromWarehouseSlug } from '@/lib/warehouseSlug';
-import { getAllWarehouses } from './locationLoader';
+import { getAllWarehouses, getListingBreadcrumbs } from './locationLoader';
+import type { BreadcrumbItem } from '@/components/Breadcrumbs';
 
 type DetailData = ReturnType<typeof transformWarehouseDetailData>;
 type CardData = ReturnType<typeof transformWarehouseData>;
@@ -10,6 +11,7 @@ export interface WarehouseLoaderData extends DetailData {
   related: CardData[];
   // Extended spec sheet (nullable free-text fields) — null when unavailable.
   specs: WarehouseSpecifications | null;
+  breadcrumbAncestors?: BreadcrumbItem[];
 }
 export type ListingsLoaderData = {
   warehouses: ReturnType<typeof transformWarehouseData>[];
@@ -62,11 +64,12 @@ export async function warehouseLoader({ params }: LoaderFunctionArgs): Promise<W
   try {
     const warehouse = await warehouseAPI.getWarehouseById(id);
     const detail = transformWarehouseDetailData(warehouse);
-    const [related, specs] = await Promise.all([
+    const [related, specs, breadcrumbs] = await Promise.all([
       findRelated(detail.id, detail.specifications.location.city),
       warehouseAPI.getWarehouseSpecifications(detail.id),
+      getListingBreadcrumbs(),
     ]);
-    return { ...detail, related, specs };
+    return { ...detail, related, specs, breadcrumbAncestors: breadcrumbs.warehouse(detail.id) };
   } catch (err) {
     if (err instanceof WarehouseAPIError && (err.code === 'WAREHOUSE_NOT_FOUND' || err.code === 'INVALID_ID')) {
       return null;

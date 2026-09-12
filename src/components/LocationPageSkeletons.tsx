@@ -38,7 +38,7 @@ export function LocationListingsSkeleton({ pathname }: { pathname: string }) {
 
   return <main className="flex-grow" data-testid="location-listings-skeleton">
     <div className="section-container px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
-      <BreadcrumbTrail className="mb-4 sm:mb-6" items={[
+      <BreadcrumbTrail className="mb-4 sm:mb-6" pendingAncestorAt={kind === 'city' ? 2 : undefined} items={[
         ...trailStart,
         ...(isMicro && canonical !== parent ? [{ label: parent }] : []),
         { label: canonical },

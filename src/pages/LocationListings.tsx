@@ -197,22 +197,14 @@ const LocationListings = () => {
                 ? ([
                     { label: 'Home', path: '/' },
                     { label: 'Listings', path: '/listings' },
+                    ...(data.breadcrumbAncestors ?? []),
                     { label: canonical, path: basePath },
                     { label: `${typeLabel} warehouses` },
                   ] satisfies BreadcrumbItem[])
                 : ([
                     { label: 'Home', path: '/' },
                     { label: 'Listings', path: '/listings' },
-                    // Micromarkets nest under their parent city so the trail
-                    // matches the hierarchy users expect.
-                    ...(isMicromarket && parentCity && parentCity.canonical !== canonical
-                      ? [
-                          {
-                            label: parentCity.canonical,
-                            path: `/listings/city/${parentCity.slug}`,
-                          },
-                        ]
-                      : []),
+                    ...(data.breadcrumbAncestors ?? []),
                     { label: canonical },
                   ] satisfies BreadcrumbItem[])
             }

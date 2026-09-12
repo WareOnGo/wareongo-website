@@ -345,7 +345,8 @@ const WarehouseDetail = () => {
             items={[
               { label: 'Home', path: '/' },
               { label: 'Listings', path: '/listings' },
-              { label: `Warehouse #${warehouseData.id} — ${loc.city}, ${loc.state}`, path: selfPath },
+              ...(warehouseData.breadcrumbAncestors ?? []),
+              { label: `Warehouse #${warehouseData.id}`, path: selfPath },
             ]}
           />
 
