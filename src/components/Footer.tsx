@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Phone, Mail, ChevronDown } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { trackEvent } from '@/lib/analytics';
+import { SERVICE_PAGES, servicePath } from '@/data/serviceCatalog';
+import { getServiceBySlug } from '@/data/servicePages';
 import {
   CITIES,
   STATES,
@@ -265,11 +267,11 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Services</h3>
             <ul className="space-y-2">
-              <li className="text-gray-300">Warehouse Search</li>
-              <li className="text-gray-300">Build-To-Suit</li>
-              <li className="text-gray-300">Lease Negotiation</li>
-              <li className="text-gray-300">Compliance Procurement</li>
-              <li className="text-gray-300">Manpower Services</li>
+              {Object.entries(SERVICE_PAGES).map(([slug, label]) => <li key={slug} className="text-gray-300">
+                {getServiceBySlug(slug) ? <Link to={servicePath(slug)}
+                  onClick={() => trackEvent('nav_click', { label, destination: servicePath(slug), position: 'footer' })}
+                  className="hover:text-white transition-colors">{label}</Link> : label}
+              </li>)}
             </ul>
           </div>
           

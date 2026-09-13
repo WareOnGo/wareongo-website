@@ -1,4 +1,6 @@
 /** Public-site analytics. Never pass form values or raw API errors here. */
+import { SERVICE_PAGES, servicePath } from '../data/serviceCatalog';
+
 export type AnalyticsEvent = 'page_view' | 'nav_click' | 'cta_click' | 'contact_click'
   | 'listing_open' | 'view_listing' | 'listing_impression' | 'listing_results'
   | 'filter_apply' | 'filter_clear' | 'filter_open' | 'listings_paginate' | 'listing_page_size_change'
@@ -33,12 +35,14 @@ declare global {
 }
 const ID = 'G-X1FJP93CV6';
 const allowedHosts = new Set(['wareongo.com', 'www.wareongo.com']);
+const servicePaths = new Set(Object.keys(SERVICE_PAGES).map(servicePath));
+const isServicePath = (path: string) => servicePaths.has(path.replace(/\/$/, ''));
 const isTest = () => typeof window !== 'undefined' && import.meta.env.DEV && window.__WAREONGO_ANALYTICS_TEST__ === true;
 export const analyticsEnabled = () => typeof window !== 'undefined' && (isTest() || (import.meta.env.PROD && allowedHosts.has(window.location.hostname)));
 export const pageType = (path: string) => path === '/' ? 'home' : path.startsWith('/warehouse/') ? 'warehouse_detail'
   : path.startsWith('/overview/') ? 'overview' : path.startsWith('/listings/') ? 'location_listings'
   : path === '/request-warehouse' ? 'request' : path.startsWith('/blogs/') ? 'blog'
-  : path.startsWith('/casestudies/') ? 'case_study' : path.slice(1).replace(/[^a-z0-9_]/gi, '_') || 'home';
+  : path.startsWith('/casestudies/') ? 'case_study' : isServicePath(path) ? 'service' : path.slice(1).replace(/[^a-z0-9_]/gi, '_') || 'home';
 // Only known discovery/acquisition keys; never forward arbitrary query values.
 const queryKeys = new Set(['city', 'state', 'fire', 'type', 'minSqft', 'maxSqft', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_id', 'utm_content', 'utm_term', 'gclid', 'gbraid', 'wbraid']);
 export function safeUrl(raw: string, query = true): string {
@@ -51,7 +55,7 @@ export function safeUrl(raw: string, query = true): string {
       if (!query || !queryKeys.has(key) || value.length > 100 || /@|%40|\b\d{10,}\b/i.test(value)) u.searchParams.delete(key);
     }
     // Unknown paths can contain private values. Keep only known public path shapes.
-    if (!/^\/(?:$|(?:warehouse|listings|overview|blogs|casestudies)(?:\/[a-z0-9-]+)*\/?$|(?:request-warehouse|about-us|privacy-policy|terms-of-service|login|unauthorized|404)\/?$)/i.test(u.pathname)) u.pathname = '/other';
+    if (!isServicePath(u.pathname) && !/^\/(?:$|(?:warehouse|listings|overview|blogs|casestudies)(?:\/[a-z0-9-]+)*\/?$|(?:request-warehouse|about-us|privacy-policy|terms-of-service|login|unauthorized|404)\/?$)/i.test(u.pathname)) u.pathname = '/other';
     return u.toString();
   } catch { return ''; }
 }

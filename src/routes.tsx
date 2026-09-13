@@ -4,6 +4,8 @@ import Index from "./pages/Index";
 import RouteErrorBoundary from "./components/RouteErrorBoundary";
 import { caseStudies } from "./data/caseStudies";
 import { blogs } from "./data/blogs";
+import { servicePages } from "./data/servicePages";
+import { servicePath } from "./data/serviceCatalog";
 import { warehouseLoader, warehouseStaticPaths, listingsLoader } from "./loaders/warehouseLoader";
 import {
   cityListingsLoader,
@@ -130,6 +132,11 @@ export const routes: RouteRecord[] = [
             lazy: lazyDefault(() => import("./pages/MicromarketOverview")),
             loader: cityOverviewLoader,
             getStaticPaths: cityOverviewStaticPaths,
+          },
+          {
+            path: "services/:slug",
+            lazy: lazyDefault(() => import("./pages/ServiceDetail")),
+            getStaticPaths: () => servicePages.map(page => servicePath(page.slug)),
           },
         ],
       },

@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/generate-locations.mjs && node scripts/generate-blogs.mjs && node scripts/generate-legal-pages.mjs && node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs && vite-react-ssg build && node scripts/stabilize-loader-data.mjs && node scripts/generate-warehouse-route-map.mjs && node scripts/generate-sitemap.mjs && node scripts/indexnow-ping.mjs",
-    "build:dev": "node scripts/generate-locations.mjs && node scripts/generate-blogs.mjs && node scripts/generate-legal-pages.mjs && node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs && vite-react-ssg build --mode development && node scripts/stabilize-loader-data.mjs && node scripts/generate-warehouse-route-map.mjs && node scripts/generate-sitemap.mjs",
+    "build": "node scripts/generate-locations.mjs && node scripts/generate-blogs.mjs && node scripts/generate-service-pages.mjs && node scripts/generate-legal-pages.mjs && node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs && vite-react-ssg build && node scripts/stabilize-loader-data.mjs && node scripts/generate-warehouse-route-map.mjs && node scripts/generate-sitemap.mjs && node scripts/indexnow-ping.mjs",
+    "build:dev": "node scripts/generate-locations.mjs && node scripts/generate-blogs.mjs && node scripts/generate-service-pages.mjs && node scripts/generate-legal-pages.mjs && node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs && vite-react-ssg build --mode development && node scripts/stabilize-loader-data.mjs && node scripts/generate-warehouse-route-map.mjs && node scripts/generate-sitemap.mjs",
     "build:spa": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -15,7 +15,8 @@
     "test:reads": "node tests/fetch-read.test.mjs",
     "test:build-cache": "node tests/build-cache.test.mjs",
     "test:legal": "node --test tests/legal-content.test.mjs",
-    "test:analytics": "node tests/analytics.test.mjs"
+    "test:analytics": "node tests/analytics.test.mjs",
+    "test:services": "node --test tests/service-content.test.mjs"
   },
   "dependencies": {
     "@radix-ui/react-aspect-ratio": "^1.1.0",

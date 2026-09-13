@@ -145,11 +145,25 @@ async function main() {
   }
   await walkOverviews();
 
+  // Only pages emitted by this build belong in the sitemap. Reading disk
+  // keeps it in sync with routes/footer if CMS content changes mid-build.
+  const servicePaths = [];
+  const serviceDirs = await fs.readdir(path.join('dist', 'services'), { withFileTypes: true }).catch(error => {
+    if (error.code === 'ENOENT') return [];
+    throw error;
+  });
+  for (const directory of serviceDirs.filter(d => d.isDirectory())) {
+    const html = await fs.readFile(path.join('dist', 'services', directory.name, 'index.html'), 'utf8');
+    if (!html.includes('id="service-title"')) throw new Error(`Service failed to render: /services/${directory.name}`);
+    servicePaths.push(`/services/${directory.name}`);
+  }
+
   const entries = [
     ...STATIC_PATHS.map((p) => urlEntry(p.path, p.changefreq, p.priority)),
     ...CASE_STUDY_SLUGS.map((slug) => urlEntry(`/casestudies/${slug}`, 'monthly', '0.7')),
     urlEntry('/blogs', 'monthly', '0.6'),
     ...blogSlugs.map((slug) => urlEntry(`/blogs/${slug}`, 'monthly', '0.6')),
+    ...servicePaths.sort().map(service => urlEntry(service, 'monthly', '0.7')),
     ...cities.map((c) => urlEntry(`/listings/city/${c.slug}`, 'weekly', '0.8')),
     ...micromarkets.map((m) => urlEntry(micromarketPath(m), 'weekly', '0.8')),
     ...overviewPaths.sort().map((overview) => urlEntry(overview, 'weekly', '0.8')),

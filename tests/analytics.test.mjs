@@ -43,6 +43,16 @@ test('safe URL drops secrets, unknown query keys, fragments, credentials and unk
   assert.equal(a.safeUrl('mailto:a@b.com'), '');
 });
 
+test('service navigation retains its page identity and strips private query values', async () => {
+  const a = await analytics();
+  for (const slug of ['warehouse-search', 'build-to-suit', 'lease-negotiation', 'compliance-procurement']) {
+    const path = `/services/${slug}`;
+    assert.equal(a.pageType(path), 'service');
+    assert.equal(a.safeUrl(`https://wareongo.com${path}?email=private%40example.com`), `https://wareongo.com${path}`);
+  }
+  assert.equal(a.safeUrl('https://wareongo.com/services/private-token'), 'https://wareongo.com/other');
+});
+
 test('normalization separates placement and rank, normalizes markets, and drops raw values/errors', async () => {
   const a = await analytics();
   const p = a.normalizeAnalytics({ warehouse_id: 12, city: 'Bangalore', position: 2, contact_type: 'email', value: 'sales@wareongo.com', location: 'footer', error_message: 'secret', companyName: 'private', arbitrary: 42 });
