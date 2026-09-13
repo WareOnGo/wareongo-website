@@ -60,8 +60,6 @@ City pages also exist segmented by construction type, e.g. https://wareongo.com/
 - Warehouses for rent in Attibele, Bengaluru: https://wareongo.com/listings/city/bengaluru/attibele
 - Warehouses for rent in Kumbalgodu, Bengaluru: https://wareongo.com/listings/city/bengaluru/kumbalgodu
 - Warehouses for rent in Bannerghatta, Bengaluru: https://wareongo.com/listings/city/bengaluru/bannerghatta
-- Warehouses for rent in Bamnoli/Bharthal, Delhi: https://wareongo.com/listings/city/delhi/bamnoli-bharthal
-- Warehouses for rent in Harohalli/Kanakapura Road, Bengaluru: https://wareongo.com/listings/city/bengaluru/harohalli-kanakapura-road
 - Warehouses for rent in Vazhakkulam, Ernakulam: https://wareongo.com/listings/city/ernakulam/vazhakkulam
 - Warehouses for rent in Medchal, Hyderabad: https://wareongo.com/listings/city/hyderabad/medchal
 
