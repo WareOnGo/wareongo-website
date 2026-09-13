@@ -40,6 +40,8 @@ export interface WarehouseDetail extends Warehouse {
   numberOfDocks?: string;
   warehouseType?: string;
   zone?: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 }
 
 export interface WarehouseAPIResponse {

@@ -10,6 +10,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WarehouseImageCarousel from '@/components/WarehouseImageCarousel';
 import WarehouseInfo, { specPresent } from '@/components/WarehouseInfo';
+import ListingTimestamps from '@/components/ListingTimestamps';
 import WarehouseCard from '@/components/WarehouseCard';
 import ContactFormDialog from '@/components/ContactFormDialog';
 import FAQAccordion, { type FAQEntry } from '@/components/FAQAccordion';
@@ -31,9 +32,8 @@ const buildJsonLd = (data: NonNullable<WarehouseLoaderData>) => {
     warehouseType: data.specifications.infrastructure.type,
     city: loc.city,
   });
-  // Honest freshness signal — the backend's @updatedAt, exposed as `updatedAt`
-  // on the detail endpoint. Omitted entirely until the API ships it.
-  const updatedAt = (data.rawData as { updatedAt?: string | null } | undefined)?.updatedAt;
+  // Use the backend's update timestamp for the structured freshness signal.
+  const updatedAt = data.rawData?.updatedAt;
   // RealEstateListing is in schema.org's pending namespace; pairing with Place keeps
   // compatibility with crawlers that haven't adopted the pending vocab yet.
   return {
@@ -398,6 +398,10 @@ const WarehouseDetail = () => {
                     {loc.address}
                   </p>
                 </address>
+                <ListingTimestamps
+                  updatedAt={warehouseData.rawData.updatedAt}
+                  createdAt={warehouseData.rawData.createdAt}
+                />
               </header>
 
               {/* Quick Stats */}
