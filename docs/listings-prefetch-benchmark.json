@@ -1,0 +1,39 @@
+{
+  "apiDelayMs": 800,
+  "imageDelayMs": 300,
+  "method": "Fresh browser context per sample; actual local HTTP server; no interception; one sample per mode and viewport.",
+  "samples": [
+    {
+      "device": "desktop",
+      "preload": false,
+      "cardsMs": 932,
+      "photosMs": 1277,
+      "pageTwoRequests": 1,
+      "nextRowImageRequests": [1, 1, 1]
+    },
+    {
+      "device": "desktop",
+      "preload": true,
+      "cardsMs": 71,
+      "photosMs": 228,
+      "pageTwoRequests": 1,
+      "nextRowImageRequests": [1, 1, 1]
+    },
+    {
+      "device": "mobile",
+      "preload": false,
+      "cardsMs": 888,
+      "photosMs": 1235,
+      "pageTwoRequests": 1,
+      "nextRowImageRequests": [1]
+    },
+    {
+      "device": "mobile",
+      "preload": true,
+      "cardsMs": 50,
+      "photosMs": 163,
+      "pageTwoRequests": 1,
+      "nextRowImageRequests": [1]
+    }
+  ]
+}

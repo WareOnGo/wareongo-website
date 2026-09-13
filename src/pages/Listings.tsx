@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLoaderData, useSearchParams } from 'react-router-dom';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import PageHead from '@/components/PageHead';
@@ -11,7 +11,8 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
 import ListingsHeader from '@/components/ListingsHeader';
-import { warehouseAPI, transformWarehouseData } from '@/services/warehouseAPI';
+import { listingsQueryOptions } from '@/lib/listingsQuery';
+import { useListingsPrefetch } from '@/hooks/useListingsPrefetch';
 import { trackEvent } from '@/lib/analytics';
 import { useListingResults } from '@/hooks/useListingAnalytics';
 import { warehousePath } from '@/lib/warehouseSlug';
@@ -114,20 +115,13 @@ const Listings = () => {
     resultsRef.current?.scrollIntoView({ behavior: 'instant', block: 'start' });
   }, [currentPage, pageSize]);
 
-  const apiFilters = toApiFilters(appliedFilters);
+  const apiFilters = useMemo(() => toApiFilters(appliedFilters), [appliedFilters]);
   // Use the SSG-baked data only when the user hasn't filtered or paged.
   // Applied filters can change before the URL navigation commits.
   const isInitialQuery = Object.keys(apiFilters).length === 0 && currentPage === 1 && pageSize === DEFAULT_PAGE_SIZE;
 
-  const { data, isPending, isPlaceholderData, isError, refetch } = useQuery({
-    queryKey: ['warehouses', apiFilters, currentPage, pageSize] as const,
-    queryFn: async ({ signal }) => {
-      const resp = await warehouseAPI.getWarehouses(currentPage, pageSize, apiFilters, signal);
-      return {
-        warehouses: resp.data.map(transformWarehouseData),
-        pagination: resp.pagination,
-      };
-    },
+  const { data, isPending, isPlaceholderData, isFetching, isError, refetch } = useQuery({
+    ...listingsQueryOptions(currentPage, pageSize, apiFilters),
     initialData: isInitialQuery && initialData
       ? {
           warehouses: initialData.warehouses,
@@ -135,10 +129,6 @@ const Listings = () => {
         }
       : undefined,
     placeholderData: keepPreviousData,
-    // The API already makes at most three read attempts. React Query's own
-    // retries would multiply that budget and prolong a database outage.
-    retry: false,
-    staleTime: 60_000,
   });
 
   // Previous data keeps the pager's totals stable, but its cards belong to a
@@ -151,6 +141,11 @@ const Listings = () => {
     totalItems: 0,
     pageSize,
   };
+  const pagerRef = useListingsPrefetch({
+    page: currentPage, pageSize, filters: apiFilters, totalPages: pagination.totalPages,
+    ready: !loadingResults && !isFetching && !isError && warehouses.length > 0,
+    resultsRef,
+  });
 
   const handleFilterChange = (key: keyof WarehouseFilters, value: string | number) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
@@ -420,7 +415,7 @@ const Listings = () => {
 
             {/* Pagination Info and Controls */}
             {!isError && warehouses.length > 0 && (
-              <div className="text-center space-y-5">
+              <div ref={pagerRef} className="text-center space-y-5">
                 <p className="text-wareongo-slate text-sm">
                   {loadingResults ? `Loading page ${currentPage}…` : <>
                     Showing {warehouses.length} of {pagination.totalItems} warehouses
