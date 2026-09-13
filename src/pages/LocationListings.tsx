@@ -174,17 +174,6 @@ const LocationListings = () => {
     },
   };
 
-  const handleWarehouseClick = (warehouse: { id: number; size?: number; warehouseType?: string | null; location: { city: string } }) => {
-    navigate(
-      warehousePath({
-        id: warehouse.id,
-        size: warehouse.size,
-        warehouseType: warehouse.warehouseType,
-        city: warehouse.location.city,
-      }),
-    );
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
       <PageHead title={seoTitle} description={seoDescription} path={path}>
@@ -324,7 +313,7 @@ const LocationListings = () => {
                   price={warehouse.price}
                   fireCompliance={warehouse.fireCompliance}
                   features={warehouse.features}
-                  onClick={() => handleWarehouseClick(warehouse)}
+                  href={warehousePath({ id: warehouse.id, size: warehouse.size, warehouseType: warehouse.warehouseType, city: warehouse.location.city })}
                 />
               ))}
               </div>

@@ -553,16 +553,7 @@ const WarehouseDetail = () => {
                     price={w.price}
                     fireCompliance={w.fireCompliance}
                     features={w.features}
-                    onClick={() =>
-                      navigate(
-                        warehousePath({
-                          id: w.id,
-                          size: w.size,
-                          warehouseType: w.warehouseType,
-                          city: w.location.city,
-                        }),
-                      )
-                    }
+                    href={warehousePath({ id: w.id, size: w.size, warehouseType: w.warehouseType, city: w.location.city })}
                   />
                 ))}
               </div>

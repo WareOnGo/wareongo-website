@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { MapPin, Ruler, Building2, IndianRupee, ImageIcon, ShieldCheck, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import ContactFormDialog from '@/components/ContactFormDialog';
@@ -25,7 +26,7 @@ interface WarehouseCardProps {
   price: number | null;
   fireCompliance: boolean;
   features: string[];
-  onClick?: () => void;
+  href: string;
   // Position in the grid — first 3 cards stay eager for LCP, the rest lazy-load.
   index?: number;
   analyticsContext?: AnalyticsParams;
@@ -42,7 +43,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
   ceilingHeight,
   price,
   fireCompliance,
-  onClick,
+  href,
   index = 0,
   analyticsContext = {},
 }) => {
@@ -68,9 +69,8 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
   return (
     <>
     <Card
-      className="cursor-pointer transition-colors duration-300 overflow-hidden group border border-wareongo-blue rounded-2xl bg-transparent hover:bg-wareongo-blue/5 shadow-none"
+      className="relative isolate transition-colors duration-300 overflow-hidden group border border-wareongo-blue rounded-2xl bg-transparent hover:bg-wareongo-blue/5 shadow-none"
       ref={impressionRef}
-      onClick={() => { trackEvent('listing_open', listingContext); onClick?.(); }}
       data-warehouse-card={id}
       onPointerEnter={() => setInteracting(true)}
       onFocusCapture={() => setInteracting(true)}
@@ -190,7 +190,18 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
         {/* Title & Address */}
         <div className="mb-4">
           <h2 className="text-lg font-semibold text-wareongo-blue mb-1.5 truncate" title={address}>
-            {truncate(address, 36)}
+            {/* Stretch the link across the card; gallery/enquiry controls sit above it. */}
+            <Link
+              to={href}
+              aria-label={`View warehouse ${id}: ${address}, ${location.city}, ${location.state}`}
+              onClick={() => trackEvent('listing_open', listingContext)}
+              onAuxClick={(event) => {
+                if (event.button === 1) trackEvent('listing_open', listingContext);
+              }}
+              className="after:absolute after:inset-0 after:z-20 after:rounded-2xl focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-inset focus-visible:after:ring-wareongo-blue"
+            >
+              {truncate(address, 36)}
+            </Link>
           </h2>
           <div className="flex items-center text-wareongo-slate text-sm">
             <MapPin className="w-4 h-4 mr-1" />
@@ -239,7 +250,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
             });
             setIsEnquiryOpen(true);
           }}
-          className="group/enquiry mt-5 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-wareongo-blue/25 px-4 text-sm font-semibold text-wareongo-blue transition-colors hover:border-wareongo-blue hover:bg-wareongo-blue hover:text-wareongo-ivory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wareongo-blue focus-visible:ring-offset-2 focus-visible:ring-offset-wareongo-ivory"
+          className="relative z-30 group/enquiry mt-5 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-wareongo-blue/25 px-4 text-sm font-semibold text-wareongo-blue transition-colors hover:border-wareongo-blue hover:bg-wareongo-blue hover:text-wareongo-ivory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wareongo-blue focus-visible:ring-offset-2 focus-visible:ring-offset-wareongo-ivory"
         >
           Raise Enquiry
           <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover/enquiry:-rotate-45 group-focus-visible/enquiry:-rotate-45 motion-reduce:transition-none" aria-hidden="true" />

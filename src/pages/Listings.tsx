@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate, useLoaderData, useSearchParams } from 'react-router-dom';
+import { useLoaderData, useSearchParams } from 'react-router-dom';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import PageHead from '@/components/PageHead';
 import Pagination from '@/components/Pagination';
@@ -92,7 +92,6 @@ const analyticsFilters = (filters: WarehouseFilters) => {
 };
 
 const Listings = () => {
-  const navigate = useNavigate();
   // Loader baked in at SSG time (page 1, default page size). null if backend was unreachable.
   const initialData = useLoaderData() as ListingsLoaderData | null;
   const [searchParams, setSearchParams] = useSearchParams();
@@ -212,17 +211,6 @@ const Listings = () => {
     trackEvent('listing_page_size_change', { list_id: 'all_warehouses', from_page_size: pageSize, page_size: newPageSize });
     setPageSize(newPageSize);
     setCurrentPage(1);
-  };
-
-  const handleWarehouseClick = (warehouse: { id: number; size?: number; warehouseType?: string | null; location?: { city?: string } }) => {
-    navigate(
-      warehousePath({
-        id: warehouse.id,
-        size: warehouse.size,
-        warehouseType: warehouse.warehouseType,
-        city: warehouse.location?.city,
-      }),
-    );
   };
 
   return (
@@ -406,9 +394,7 @@ const Listings = () => {
                     price={warehouse.price}
                     fireCompliance={warehouse.fireCompliance}
                     features={warehouse.features}
-                    onClick={() => {
-                      handleWarehouseClick(warehouse);
-                    }}
+                    href={warehousePath({ id: warehouse.id, size: warehouse.size, warehouseType: warehouse.warehouseType, city: warehouse.location.city })}
                   />
                 ))}
               </div>

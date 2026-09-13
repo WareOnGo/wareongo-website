@@ -1,4 +1,4 @@
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PageHead from '@/components/PageHead';
 import Breadcrumbs, { type BreadcrumbItem } from '@/components/Breadcrumbs';
 import Navbar from '@/components/Navbar';
@@ -41,7 +41,6 @@ const orderForDisplay = (warehouses: Listing[]): Listing[] =>
   });
 
 const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
-  const navigate = useNavigate();
   const { content, stats, warehouses, editorial } = data;
   const peers = data.peers ?? [];
   const { name, path, place, scope } = editorial;
@@ -92,17 +91,6 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
   const relatedBlogs = content.relatedBlogs
     .map((s) => blogs.find((b) => b.slug === s))
     .filter((b): b is NonNullable<typeof b> => Boolean(b));
-
-  const openListing = (warehouse: Listing) => {
-    navigate(
-      warehousePath({
-        id: warehouse.id,
-        size: warehouse.size,
-        warehouseType: warehouse.warehouseType,
-        city: warehouse.location.city,
-      }),
-    );
-  };
 
   const collectionLd = {
     '@context': 'https://schema.org',
@@ -211,7 +199,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
                     price={w.price}
                     fireCompliance={w.fireCompliance}
                     features={w.features}
-                    onClick={() => openListing(w)}
+                    href={warehousePath({ id: w.id, size: w.size, warehouseType: w.warehouseType, city: w.location.city })}
                   />
                 ))}
               </div>
