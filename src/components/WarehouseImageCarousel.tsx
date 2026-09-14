@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, ImageIcon } from 'lucide-react';
 import WarehousePhoto from '@/components/WarehousePhoto';
 import { useWarehouseGallery } from '@/hooks/useWarehouseGallery';
+import { useGallerySwipe } from '@/hooks/useGallerySwipe';
+import WarehouseGalleryPreview from '@/components/WarehouseGalleryPreview';
 
 interface WarehouseImageCarouselProps {
   images: string[];
@@ -24,7 +26,6 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
   const sizePart = sizeSqft ? `${sizeSqft.toLocaleString()} sqft ` : '';
   const baseAlt = `${sizePart}warehouse ${locationPart}`.trim();
   const carouselRef = useRef<HTMLDivElement>(null);
-  const touch = useRef<{ x: number; y: number } | null>(null);
   const [visible, setVisible] = useState(false);
   const gallery = useWarehouseGallery(warehouseId, images, imageFallbacks, visible);
   const { index, previous, direction } = gallery.state;
@@ -40,12 +41,19 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
     return () => observer.disconnect();
   }, []);
 
-  const selectImage = (next: number, action = 'dot') => {
+  const selectImage = (next: number, action = 'dot', slideDirection?: 'left' | 'right', offset = 0) => {
     if (next === index || direction || count < 2 || !gallery.valid.includes(next)) return;
     trackEvent('listing_gallery_interaction', { warehouse_id: warehouseId, placement: 'warehouse_detail', action, image_index: gallery.valid.indexOf(next) + 1 });
-    gallery.select(next);
+    gallery.select(next, slideDirection, offset);
   };
-  const moveImage = (delta: number) => selectImage(gallery.valid[(gallery.position + delta + count) % count], delta > 0 ? 'next' : 'previous');
+  const moveImage = (delta: 1 | -1, offset = 0) => selectImage(
+    gallery.valid[(gallery.position + delta + count) % count],
+    delta > 0 ? 'next' : 'previous', delta > 0 ? 'left' : 'right', offset,
+  );
+  const swipe = useGallerySwipe({
+    viewport: carouselRef, enabled: count > 1, busy: !!direction,
+    resetKey: `${gallery.state.key}:${index}`, onSwipe: moveImage,
+  });
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.altKey || event.ctrlKey || event.metaKey) return;
@@ -58,26 +66,14 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
 
   return (
     <div
+      {...swipe.handlers}
       ref={carouselRef}
+      style={{ ...swipe.handlers.style, ...gallery.transitionStyle, ...swipe.photoStyle }}
       className={`relative w-full h-64 sm:h-80 md:h-96 lg:h-[500px] xl:h-[600px] bg-wareongo-blue/5 border border-wareongo-blue rounded-2xl overflow-hidden group ${className}`}
       role="region"
       aria-label={`Warehouse ${warehouseId} image carousel with ${count} images`}
       tabIndex={0}
       onKeyDown={handleKeyDown}
-      onTouchStart={(event) => {
-        const point = event.touches[0];
-        touch.current = point ? { x: point.clientX, y: point.clientY } : null;
-      }}
-      onTouchCancel={() => { touch.current = null; }}
-      onTouchEnd={(event) => {
-        const start = touch.current;
-        const end = event.changedTouches[0];
-        touch.current = null;
-        if (!start || !end) return;
-        const dx = start.x - end.clientX;
-        const dy = start.y - end.clientY;
-        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) moveImage(dx > 0 ? 1 : -1);
-      }}
     >
       {count === 0 ? (
         <div className="w-full h-full flex flex-col items-center justify-center">
@@ -85,11 +81,12 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
           <span className="text-sm text-wareongo-slate text-center px-4">Images available on request</span>
         </div>
       ) : <>
+        <WarehouseGalleryPreview gallery={gallery} delta={swipe.preview} />
         {/* Preserve the resolved original when animating away from a failed WebP. */}
         {direction && previous !== index && gallery.source(previous) && (
           <img
-            src={gallery.source(previous)} alt="" aria-hidden="true" width={1080} height={720}
-            className={`absolute inset-0 w-full h-full object-cover ${direction === 'left' ? 'animate-slide-out-left' : 'animate-slide-out-right'}`}
+            src={gallery.source(previous)} alt="" aria-hidden="true" width={1080} height={720} draggable={false}
+            className={`warehouse-gallery-photo absolute inset-0 w-full h-full object-cover ${direction === 'left' ? 'animate-slide-out-left' : 'animate-slide-out-right'}`}
             onError={(event) => { event.currentTarget.style.display = 'none'; }}
           />
         )}
@@ -97,8 +94,8 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
           key={`${gallery.state.key}:${index}`}
           primary={frame.primary} initialSrc={gallery.source(index)} fallback={frame.fallback}
           alt={count > 1 ? `${baseAlt}, photo ${position} of ${count}` : baseAlt}
-          width={1080} height={720}
-          className={`absolute inset-0 w-full h-full object-cover ${direction === 'left' ? 'animate-slide-in-left' : direction === 'right' ? 'animate-slide-in-right' : ''}`}
+          width={1080} height={720} draggable={false}
+          className={`warehouse-gallery-photo absolute inset-0 w-full h-full object-cover ${direction === 'left' ? 'animate-slide-in-left' : direction === 'right' ? 'animate-slide-in-right' : ''}`}
           onLoaded={(url) => gallery.loaded(index, url)}
           onFailed={() => {
             gallery.failed(index);

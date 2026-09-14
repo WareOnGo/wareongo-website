@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import { warehouseImages } from '@/lib/warehouseImages';
 
 type GalleryState = {
@@ -6,10 +6,12 @@ type GalleryState = {
   index: number;
   previous: number;
   direction: 'left' | 'right' | null;
+  offset: number;
   failed: number[];
   resolved: Record<number, string>;
 };
-const initialState = (key: string): GalleryState => ({ key, index: 0, previous: 0, direction: null, failed: [], resolved: {} });
+const TRANSITION_MS = 240;
+const initialState = (key: string): GalleryState => ({ key, index: 0, previous: 0, direction: null, offset: 0, failed: [], resolved: {} });
 
 // Store URLs, not decoded Image objects. The browser owns the actual cache.
 const preloaded = new Set<string>();
@@ -36,16 +38,17 @@ export function useWarehouseGallery(id: number, images: string[], fallbacks: (st
   const valid = frames.map((_, i) => i).filter(i => !state.failed.includes(i));
   const source = (i: number) => state.resolved[i] ?? frames[i]?.primary;
 
-  const select = (index: number, direction: 'left' | 'right' = index > state.index ? 'left' : 'right') => {
+  const select = (index: number, direction: 'left' | 'right' = index > state.index ? 'left' : 'right', offset = 0) => {
     if (!valid.includes(index) || index === state.index || state.direction) return;
-    setState(previous => ({ ...previous, previous: previous.index, index, direction }));
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setState(previous => ({ ...previous, previous: previous.index, index, direction: reducedMotion ? null : direction, offset }));
     clearTimeout(timer.current);
-    timer.current = setTimeout(() => setState(previous => previous.key === key ? { ...previous, direction: null } : previous), 400);
+    if (!reducedMotion) timer.current = setTimeout(() => setState(previous => previous.key === key ? { ...previous, direction: null, offset: 0 } : previous), TRANSITION_MS);
   };
-  const move = (delta: 1 | -1) => {
+  const move = (delta: 1 | -1, offset = 0) => {
     if (valid.length < 2) return;
     const position = valid.indexOf(state.index);
-    select(valid[(position + delta + valid.length) % valid.length], delta === 1 ? 'left' : 'right');
+    select(valid[(position + delta + valid.length) % valid.length], delta === 1 ? 'left' : 'right', offset);
   };
   const loaded = (index: number, url: string) => setState(previous => {
     if (previous.key !== key || previous.resolved[index] === url) return previous;
@@ -55,7 +58,9 @@ export function useWarehouseGallery(id: number, images: string[], fallbacks: (st
     if (previous.key !== key || previous.failed.includes(index)) return previous;
     const rejected = [...previous.failed, index];
     const remaining = frames.map((_, i) => i).filter(i => !rejected.includes(i));
-    return { ...previous, failed: rejected, index: remaining.find(i => i > index) ?? remaining[0] ?? 0, direction: null };
+    // A failed neighbour preview is removed without moving the selected photo.
+    if (index !== previous.index) return { ...previous, failed: rejected };
+    return { ...previous, failed: rejected, index: remaining.find(i => i > index) ?? remaining[0] ?? 0, direction: null, offset: 0 };
   });
 
   const position = valid.indexOf(state.index);
@@ -70,5 +75,9 @@ export function useWarehouseGallery(id: number, images: string[], fallbacks: (st
     preload(nextSource);
   }, [shouldPreload, currentLoaded, nextSource]);
 
-  return { frames, valid, position, state, source, select, move, loaded, failed };
+  const transitionStyle = {
+    '--gallery-start-x': `${state.offset}px`,
+    '--gallery-transition-duration': `${TRANSITION_MS}ms`,
+  } as CSSProperties;
+  return { frames, valid, position, state, source, select, move, loaded, failed, transitionStyle };
 }

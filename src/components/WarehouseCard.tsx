@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { MapPin, Ruler, Building2, IndianRupee, ImageIcon, ShieldCheck, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import ContactFormDialog from '@/components/ContactFormDialog';
 import WarehousePhoto from '@/components/WarehousePhoto';
 import { useWarehouseGallery } from '@/hooks/useWarehouseGallery';
+import { useGallerySwipe } from '@/hooks/useGallerySwipe';
+import WarehouseGalleryPreview from '@/components/WarehouseGalleryPreview';
 import { trackEvent, type AnalyticsParams } from '@/lib/analytics';
 import { useListingImpression } from '@/hooks/useListingAnalytics';
 
@@ -53,22 +55,27 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
   const isAboveFold = index < 3;
   const altText = `${size ? size.toLocaleString() + ' sqft ' : ''}warehouse in ${location.city}, ${location.state}`;
   const [interacting, setInteracting] = useState(false);
+  const imageRef = useRef<HTMLDivElement>(null);
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const enquirySource = `warehouse-card-${id}-callback`;
   const gallery = useWarehouseGallery(id, images.length ? images : (image ? [image] : []), imageFallbacks, interacting);
   const { index: currentImageIndex, previous: prevImageIndex, direction: slideDirection } = gallery.state;
   const frame = gallery.frames[currentImageIndex];
   const truncate = (str: string, n: number) => (str.length > n ? str.slice(0, n - 1) + '…' : str);
-  const navigate = (event: React.MouseEvent, delta: 1 | -1) => {
-    event.stopPropagation();
+  const moveImage = (delta: 1 | -1, offset = 0) => {
     setInteracting(true);
     if (gallery.valid.length > 1 && !slideDirection) trackEvent('listing_gallery_interaction', { ...listingContext, placement: 'warehouse_card', action: delta === 1 ? 'next' : 'previous', image_index: ((gallery.position + delta + gallery.valid.length) % gallery.valid.length) + 1 });
-    gallery.move(delta);
+    gallery.move(delta, offset);
   };
+  const swipe = useGallerySwipe({
+    viewport: imageRef, target: impressionRef, enabled: gallery.valid.length > 1, busy: !!slideDirection,
+    resetKey: `${gallery.state.key}:${currentImageIndex}`, onSwipe: moveImage,
+  });
 
   return (
     <>
     <Card
+      {...swipe.handlers}
       className="relative isolate transition-colors duration-300 overflow-hidden group border border-wareongo-blue rounded-2xl bg-transparent hover:bg-wareongo-blue/5 shadow-none"
       ref={impressionRef}
       data-warehouse-card={id}
@@ -76,7 +83,8 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
       onFocusCapture={() => setInteracting(true)}
       onTouchStart={() => setInteracting(true)}
     >
-      <div className="relative overflow-hidden rounded-t-2xl group/image border-b border-wareongo-blue">
+      <div ref={imageRef} style={{ ...gallery.transitionStyle, ...swipe.photoStyle }}
+        className="relative overflow-hidden rounded-t-2xl group/image border-b border-wareongo-blue">
         {gallery.valid.length === 0 ? (
           <div className="w-full h-48 bg-wareongo-blue/5 flex flex-col items-center justify-center transition-colors duration-300">
             <ImageIcon className="w-8 h-8 text-wareongo-blue/40 mb-2" />
@@ -87,15 +95,17 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
         ) : (
           <>
             <div className="relative w-full h-48 overflow-hidden bg-wareongo-blue/5">
+              <WarehouseGalleryPreview gallery={gallery} delta={swipe.preview} />
               {/* Previous image - slides out */}
               {slideDirection && prevImageIndex !== currentImageIndex && gallery.source(prevImageIndex) && (
                 <img
                   src={gallery.source(prevImageIndex)}
                   alt=""
                   aria-hidden="true"
+                  draggable={false}
                   width={640}
                   height={480}
-                  className={`absolute inset-0 w-full h-48 object-cover object-center ${
+                  className={`warehouse-gallery-photo absolute inset-0 w-full h-48 object-cover object-center ${
                     slideDirection === 'left'
                       ? 'animate-slide-out-left'
                       : 'animate-slide-out-right'
@@ -115,7 +125,8 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
                 alt={altText}
                 width={640}
                 height={480}
-                className={`absolute inset-0 w-full h-48 object-cover object-center ${
+                draggable={false}
+                className={`warehouse-gallery-photo absolute inset-0 w-full h-48 object-cover object-center ${
                   slideDirection === 'left'
                     ? 'animate-slide-in-left'
                     : slideDirection === 'right'
@@ -137,14 +148,14 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
                 {gallery.valid.length > 1 && (
                   <>
                     <button
-                      onClick={(event) => navigate(event, -1)}
+                      onClick={() => moveImage(-1)}
                       className="absolute left-3 top-1/2 -translate-y-1/2 bg-wareongo-ivory/95 hover:bg-wareongo-ivory text-wareongo-blue p-1.5 rounded-full border border-wareongo-blue/20 transition-all duration-200 z-30 hover:scale-110 backdrop-blur-sm"
                       aria-label="Previous image"
                     >
                       <ChevronLeft className="w-4 h-4" />
                     </button>
                     <button
-                      onClick={(event) => navigate(event, 1)}
+                      onClick={() => moveImage(1)}
                       className="absolute right-3 top-1/2 -translate-y-1/2 bg-wareongo-ivory/95 hover:bg-wareongo-ivory text-wareongo-blue p-1.5 rounded-full border border-wareongo-blue/20 transition-all duration-200 z-30 hover:scale-110 backdrop-blur-sm"
                       aria-label="Next image"
                     >

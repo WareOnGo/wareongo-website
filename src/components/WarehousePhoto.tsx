@@ -9,10 +9,11 @@ type Props = Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'srcSet' | 'onLoa
   fallback: string | null;
   onLoaded: (url: string) => void;
   onFailed: () => void;
+  showLoadingIndicator?: boolean;
 };
 
 /** One primary, one fallback, then a terminal result. No cache-busting retries. */
-export default function WarehousePhoto({ primary, initialSrc, fallback, onLoaded, onFailed, loading = 'eager', ...props }: Props) {
+export default function WarehousePhoto({ primary, initialSrc, fallback, onLoaded, onFailed, loading = 'eager', showLoadingIndicator = true, ...props }: Props) {
   const [src, setSrc] = useState(initialSrc);
   const [pending, setPending] = useState(true);
   const image = useRef<HTMLImageElement>(null);
@@ -70,7 +71,7 @@ export default function WarehousePhoto({ primary, initialSrc, fallback, onLoaded
   }, [src, visible, pending]);
 
   return <>
-    {pending && <div data-image-loading aria-hidden="true" className="absolute inset-0 flex items-center justify-center bg-wareongo-blue/5 z-20">
+    {pending && showLoadingIndicator && <div data-image-loading aria-hidden="true" className="absolute inset-0 flex items-center justify-center bg-wareongo-blue/5 z-20">
       <Loader2 className="w-8 h-8 text-wareongo-blue animate-spin motion-reduce:animate-none" />
     </div>}
     <img {...props} ref={image} src={src} data-raw={primary} data-fallback={fallback ?? ''} loading={loading} aria-busy={pending}
