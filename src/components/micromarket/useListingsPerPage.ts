@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 
 /**
  * Cards per page, matched to the grid's column count so every viewport gets the
@@ -10,9 +10,11 @@ import { useEffect, useState } from 'react';
  *
  * Starts at the desktop value on purpose. This page is prerendered, so the
  * served HTML carries the largest page — the most inventory in the document for
- * a crawler to see — and a phone trims it on hydration. Following
- * hooks/use-mobile.tsx, the correction happens in an effect rather than during
- * render, so the first paint always matches the prerendered markup.
+ * a crawler to see — and a phone trims it on hydration. useSyncExternalStore
+ * supplies that value for server rendering and the first
+ * hydration render, then reads the actual viewport. URL pagination can therefore
+ * use the current viewport as soon as hydration completes, without first
+ * clamping a phone's shared page against the desktop page count.
  */
 const ROWS = 6;
 
@@ -23,16 +25,16 @@ const COLUMNS_AT = [
 
 const DESKTOP_COLUMNS = 3;
 
+const subscribe = (onChange: () => void) => {
+  const lists = COLUMNS_AT.map(({ query }) => window.matchMedia(query));
+  lists.forEach((list) => list.addEventListener('change', onChange));
+  return () => lists.forEach((list) => list.removeEventListener('change', onChange));
+};
+
+const getSnapshot = () =>
+  (COLUMNS_AT.find(({ query }) => window.matchMedia(query).matches)?.columns ?? 1) * ROWS;
+const getServerSnapshot = () => DESKTOP_COLUMNS * ROWS;
+
 export function useListingsPerPage(): number {
-  const [columns, setColumns] = useState(DESKTOP_COLUMNS);
-
-  useEffect(() => {
-    const lists = COLUMNS_AT.map((c) => ({ ...c, mql: window.matchMedia(c.query) }));
-    const resolve = () => setColumns(lists.find((c) => c.mql.matches)?.columns ?? 1);
-    resolve();
-    lists.forEach((c) => c.mql.addEventListener('change', resolve));
-    return () => lists.forEach((c) => c.mql.removeEventListener('change', resolve));
-  }, []);
-
-  return columns * ROWS;
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }

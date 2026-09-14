@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useLoaderData, useSearchParams } from 'react-router-dom';
+import { useLoaderData, useLocation, useNavigationType } from 'react-router-dom';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import PageHead from '@/components/PageHead';
 import Pagination from '@/components/Pagination';
@@ -19,51 +19,12 @@ import { warehousePath } from '@/lib/warehouseSlug';
 import type { ListingsLoaderData } from '@/loaders/warehouseLoader';
 import { verifiedWarehousesLabel } from '@/data/companyStats';
 
-interface WarehouseFilters {
-  city: string;
-  state: string;
-  fireCompliance: string;
-  warehouseType: string;
-  minSqft: number;
-  maxSqft: number;
-}
-
-const DEFAULT_FILTERS: WarehouseFilters = {
-  city: '',
-  state: '',
-  fireCompliance: '',
-  warehouseType: '',
-  minSqft: 0,
-  maxSqft: 100000,
-};
-
-const DEFAULT_PAGE_SIZE = 21;
-
-// Module-level — these arrays never change, so don't realloc them every render.
-const CITY_OPTIONS = ['Bangalore', 'Hosur', 'Kolkata', 'Delhi', 'Hyderabad'];
-const STATE_OPTIONS = ['Maharashtra', 'Delhi', 'Karnataka', 'Tamil Nadu', 'West Bengal', 'Telangana'];
-const WAREHOUSE_TYPE_OPTIONS = ['RCC', 'PEB'];
-const FIRE_COMPLIANCE_OPTIONS = ['Yes', 'No'];
-
-const filtersFromSearchParams = (sp: URLSearchParams): WarehouseFilters => ({
-  city: sp.get('city') ?? '',
-  state: sp.get('state') ?? '',
-  fireCompliance: sp.get('fire') ?? '',
-  warehouseType: sp.get('type') ?? '',
-  minSqft: sp.get('minSqft') ? Math.max(0, parseInt(sp.get('minSqft')!, 10) || 0) : 0,
-  maxSqft: sp.get('maxSqft') ? Math.min(100000, parseInt(sp.get('maxSqft')!, 10) || 100000) : 100000,
-});
-
-const filtersToSearchParams = (f: WarehouseFilters): Record<string, string> => {
-  const out: Record<string, string> = {};
-  if (f.city && f.city !== 'all') out.city = f.city;
-  if (f.state && f.state !== 'all') out.state = f.state;
-  if (f.fireCompliance) out.fire = f.fireCompliance;
-  if (f.warehouseType && f.warehouseType !== 'all') out.type = f.warehouseType;
-  if (f.minSqft > 0) out.minSqft = String(f.minSqft);
-  if (f.maxSqft < 100000) out.maxSqft = String(f.maxSqft);
-  return out;
-};
+import { useListingSearch } from '@/hooks/useListingSearch';
+import {
+  DEFAULT_FILTERS, DEFAULT_PAGE_SIZE, PAGE_SIZES, CITY_OPTIONS, STATE_OPTIONS,
+  WAREHOUSE_TYPE_OPTIONS, FIRE_COMPLIANCE_OPTIONS, readListingSearch,
+  writeListingSearch, filtersFromSearchParams, type WarehouseFilters,
+} from '@/lib/listingSearch';
 
 // Frontend filter object → backend API params. Pure, so it can sit outside the component.
 const toApiFilters = (filters: WarehouseFilters) => {
@@ -95,20 +56,40 @@ const analyticsFilters = (filters: WarehouseFilters) => {
 const Listings = () => {
   // Loader baked in at SSG time (page 1, default page size). null if backend was unreachable.
   const initialData = useLoaderData() as ListingsLoaderData | null;
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  // UI state — filters being edited (not yet applied) and page navigation.
-  const [filters, setFilters] = useState<WarehouseFilters>(() => filtersFromSearchParams(searchParams));
-  const [appliedFilters, setAppliedFilters] = useState<WarehouseFilters>(() => filtersFromSearchParams(searchParams));
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(initialData?.pagination?.pageSize ?? DEFAULT_PAGE_SIZE);
+  const { searchParams, setSearchParams, hrefFor, hydrated } = useListingSearch();
+  const location = useLocation();
+  const navigationType = useNavigationType();
+  const initialLocationKey = useRef(location.key);
+  const hasNavigated = useRef(false);
+  if (location.key !== initialLocationKey.current) hasNavigated.current = true;
+  const action = useRef<{ search: string; trigger: string } | null>(null);
+  const state = useMemo(() => readListingSearch(searchParams), [searchParams]);
+  const { filters: appliedFilters, page: currentPage, pageSize } = state;
+  const filterKey = JSON.stringify(appliedFilters);
+  const [draft, setDraft] = useState({ key: filterKey, filters: appliedFilters });
+  // Unsaved edits survive pagination, while a changed applied filter restores
+  // the corresponding controls immediately, including browser history.
+  const filters = draft.key === filterKey ? draft.filters : appliedFilters;
+  useEffect(() => {
+    setDraft(previous => previous.key === filterKey ? previous : { key: filterKey, filters: appliedFilters });
+  }, [filterKey, appliedFilters]);
+  const resultTrigger = navigationType !== 'POP' && action.current?.search === searchParams.toString()
+    ? action.current.trigger
+    : hasNavigated.current ? 'history' : 'deeplink';
+  const changeSearch = (next: URLSearchParams, trigger: string, replace = false) => {
+    action.current = { search: next.toString(), trigger };
+    setSearchParams(next, { replace });
+  };
   const [showFilters, setShowFilters] = useState(false);
   const resultsRef = useRef<HTMLElement>(null);
-  const scrollAfterPaging = useRef(false);
+  const scrollAfterPaging = useRef<{ page: number; pageSize: number } | null>(null);
 
   useEffect(() => {
-    if (!scrollAfterPaging.current) return;
-    scrollAfterPaging.current = false;
+    const target = scrollAfterPaging.current;
+    // Router navigation can commit later than the click. A passive effect from
+    // the outgoing render must not consume the requested page's scroll.
+    if (!target || target.page !== currentPage || target.pageSize !== pageSize) return;
+    scrollAfterPaging.current = null;
     // Commit the skeleton (or cached cards) before moving the viewport. An
     // instant scroll also cannot be cancelled when a short final page arrives.
     resultsRef.current?.focus({ preventScroll: true });
@@ -117,11 +98,11 @@ const Listings = () => {
 
   const apiFilters = useMemo(() => toApiFilters(appliedFilters), [appliedFilters]);
   // Use the SSG-baked data only when the user hasn't filtered or paged.
-  // Applied filters can change before the URL navigation commits.
   const isInitialQuery = Object.keys(apiFilters).length === 0 && currentPage === 1 && pageSize === DEFAULT_PAGE_SIZE;
 
   const { data, isPending, isPlaceholderData, isFetching, isError, refetch } = useQuery({
     ...listingsQueryOptions(currentPage, pageSize, apiFilters),
+    enabled: hydrated,
     initialData: isInitialQuery && initialData
       ? {
           warehouses: initialData.warehouses,
@@ -133,7 +114,9 @@ const Listings = () => {
 
   // Previous data keeps the pager's totals stable, but its cards belong to a
   // different page/filter. Background refreshes of the same page keep its cards.
-  const loadingResults = isPending || isPlaceholderData;
+  const outOfRange = !isPending && !isPlaceholderData && !isError && data &&
+    currentPage > Math.max(1, data.pagination.totalPages);
+  const loadingResults = isPending || isPlaceholderData || !!outOfRange;
   const warehouses = data?.warehouses ?? [];
   const pagination = data?.pagination ?? {
     currentPage: 1,
@@ -143,50 +126,48 @@ const Listings = () => {
   };
   const pagerRef = useListingsPrefetch({
     page: currentPage, pageSize, filters: apiFilters, totalPages: pagination.totalPages,
-    ready: !loadingResults && !isFetching && !isError && warehouses.length > 0,
+    ready: hydrated && !loadingResults && !isFetching && !isError && warehouses.length > 0,
     resultsRef,
   });
 
+  // Normalize malformed/default parameters without adding a history entry.
+  // Clamp only against this query's response, never a previous filter's totals.
+  const normalizedSearch = writeListingSearch(searchParams, {
+    ...state, page: outOfRange ? Math.max(1, data.pagination.totalPages) : currentPage,
+  }).toString();
+  useEffect(() => {
+    if (!hydrated || normalizedSearch === searchParams.toString()) return;
+    action.current = { search: normalizedSearch, trigger: resultTrigger };
+    setSearchParams(new URLSearchParams(normalizedSearch), { replace: true });
+  }, [hydrated, normalizedSearch, searchParams, setSearchParams, resultTrigger]);
+
   const handleFilterChange = (key: keyof WarehouseFilters, value: string | number) => {
-    setFilters((prev) => ({ ...prev, [key]: value }));
+    setDraft({ key: filterKey, filters: { ...filters, [key]: value } });
   };
 
   const handleSqftRangeChange = (values: number[]) => {
-    setFilters((prev) => ({ ...prev, minSqft: values[0], maxSqft: values[1] }));
+    setDraft({ key: filterKey, filters: { ...filters, minSqft: values[0], maxSqft: values[1] } });
   };
 
-  const [resultTrigger, setResultTrigger] = useState('deeplink');
-  const previousSearch = useRef(searchParams.toString());
-  useEffect(() => {
-    const value = searchParams.toString();
-    if (value === previousSearch.current) return;
-    previousSearch.current = value;
-    const next = filtersFromSearchParams(searchParams);
-    setFilters(next); setAppliedFilters(next); setCurrentPage(1);
-    setResultTrigger('history');
-  }, [searchParams]);
   useListingResults({ list_id: 'all_warehouses', placement: 'listings_grid', page: currentPage, page_size: pageSize,
     result_count: isError ? 0 : warehouses.length, total_count: isError ? undefined : pagination.totalItems,
     result_status: isError ? 'error' : warehouses.length ? 'success' : 'empty',
-    trigger: resultTrigger, ...analyticsFilters(appliedFilters) }, !loadingResults);
+    trigger: resultTrigger, ...analyticsFilters(appliedFilters) }, hydrated && !loadingResults);
 
   const applyFilters = () => {
-    setResultTrigger('apply');
-    previousSearch.current = new URLSearchParams(filtersToSearchParams(filters)).toString();
-    trackEvent('filter_apply', { list_id: 'all_warehouses', trigger: 'apply', ...analyticsFilters(filters) });
-    setCurrentPage(1);
-    setAppliedFilters(filters);
-    setSearchParams(filtersToSearchParams(filters), { replace: false });
+    scrollAfterPaging.current = null;
+    const next = writeListingSearch(searchParams, { filters, page: 1, pageSize });
+    const normalizedFilters = filtersFromSearchParams(next);
+    setDraft({ key: JSON.stringify(normalizedFilters), filters: normalizedFilters });
+    trackEvent('filter_apply', { list_id: 'all_warehouses', trigger: 'apply', ...analyticsFilters(normalizedFilters) });
+    changeSearch(writeListingSearch(next, { filters: normalizedFilters, page: 1, pageSize }), 'apply');
   };
 
   const clearFilters = () => {
-    setResultTrigger('clear');
-    previousSearch.current = '';
+    scrollAfterPaging.current = null;
     trackEvent('filter_clear', { list_id: 'all_warehouses', trigger: 'clear', ...analyticsFilters(appliedFilters) });
-    setFilters(DEFAULT_FILTERS);
-    setAppliedFilters(DEFAULT_FILTERS);
-    setCurrentPage(1);
-    setSearchParams({}, { replace: false });
+    setDraft({ key: JSON.stringify(DEFAULT_FILTERS), filters: DEFAULT_FILTERS });
+    changeSearch(writeListingSearch(searchParams, { filters: DEFAULT_FILTERS, page: 1, pageSize }), 'clear');
   };
 
   const hasActiveFilters = () => {
@@ -201,11 +182,11 @@ const Listings = () => {
   };
 
   const handlePageSizeChange = (newPageSize: number) => {
-    if (loadingResults || newPageSize === pageSize) return;
-    scrollAfterPaging.current = true;
+    const validSize = PAGE_SIZES.find(size => size === newPageSize);
+    if (loadingResults || !validSize || validSize === pageSize) return;
+    scrollAfterPaging.current = { page: 1, pageSize: validSize };
     trackEvent('listing_page_size_change', { list_id: 'all_warehouses', from_page_size: pageSize, page_size: newPageSize });
-    setPageSize(newPageSize);
-    setCurrentPage(1);
+    changeSearch(writeListingSearch(searchParams, { ...state, pageSize: validSize, page: 1 }), 'page_size');
   };
 
   return (
@@ -445,6 +426,7 @@ const Listings = () => {
 
                 <Pagination
                   currentPage={currentPage}
+                  hrefForPage={(page) => hrefFor(writeListingSearch(searchParams, { ...state, page }))}
                   totalPages={pagination.totalPages}
                   disabled={loadingResults}
                   onChange={(page, direction) => {
@@ -455,8 +437,8 @@ const Listings = () => {
                       to_page: page,
                       direction,
                     });
-                    scrollAfterPaging.current = true;
-                    setCurrentPage(page);
+                    scrollAfterPaging.current = { page, pageSize };
+                    changeSearch(writeListingSearch(searchParams, { ...state, page }), 'paginate');
                   }}
                 />
               </div>

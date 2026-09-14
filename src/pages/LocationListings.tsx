@@ -40,13 +40,15 @@ const LocationListings = () => {
     start: pageStart,
     anchorRef: gridRef,
     goTo,
-  } = usePagedListings(data?.warehouses ?? []);
+    hrefForPage,
+    hydrated,
+  } = usePagedListings(data?.warehouses ?? [], !!data);
 
   const listId = data ? `location:${data.type}:${data.slug}:${data.warehouseType || 'all'}` : 'location';
   useListingResults({ list_id: listId, placement: 'location_grid', market_slug: data?.slug,
     warehouse_type: data?.warehouseType, page: currentPage, page_size: perPage,
     result_count: shown.length, total_count: data?.warehouses.length,
-    result_status: shown.length ? 'success' : 'empty' }, !!data);
+    result_status: shown.length ? 'success' : 'empty' }, !!data && hydrated);
 
   // No matching city/state — bounce back to the main listings page.
   if (!data) {
@@ -319,6 +321,7 @@ const LocationListings = () => {
               </div>
 
               <Pagination
+                hrefForPage={hrefForPage}
                 className="mb-10"
                 currentPage={currentPage}
                 totalPages={totalPages}

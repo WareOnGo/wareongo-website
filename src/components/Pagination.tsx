@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 /**
  * Previous / numbered / Next pager.
  *
@@ -33,58 +35,58 @@ const Pagination = ({
   currentPage,
   totalPages,
   onChange,
+  hrefForPage,
   disabled = false,
   className = '',
 }: {
   currentPage: number;
   totalPages: number;
   onChange: (page: number, direction: PageChangeDirection) => void;
+  hrefForPage: (page: number) => string;
   disabled?: boolean;
   className?: string;
 }) => {
   if (totalPages <= 1) return null;
 
+  const control = (page: number, label: string, direction: PageChangeDirection, className: string, unavailable = false, active = false) => {
+    const props = { className, 'aria-current': active ? 'page' as const : undefined };
+    if (unavailable) return <button key={label} type="button" {...props} disabled>{label}</button>;
+    return (
+      <Link key={label} to={hrefForPage(page)} {...props} data-analytics-ignore
+        className={`${className} inline-flex items-center justify-center`}
+        preventScrollReset
+        onClick={(event) => {
+          // Preserve native new-tab/window and copy-link behavior. An ordinary
+          // click goes through the caller's existing analytics/scroll handler.
+          if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+          event.preventDefault();
+          onChange(page, direction);
+        }}
+      >{label}</Link>
+    );
+  };
+
   return (
-    <nav aria-label="Pagination" className={`flex justify-center gap-2 ${className}`}>
-      <button
-        type="button"
-        onClick={() => onChange(currentPage - 1, 'prev')}
-        disabled={disabled || currentPage === 1}
-        className="h-9 rounded-lg border border-wareongo-blue/30 px-4 text-sm font-medium text-wareongo-blue transition-colors hover:bg-wareongo-blue/5 disabled:cursor-not-allowed disabled:opacity-40"
-      >
-        Previous
-      </button>
+    <nav aria-label="Pagination" data-analytics-ignore className={`flex justify-center gap-2 ${className}`}>
+      {control(currentPage - 1, 'Previous', 'prev',
+        'h-9 rounded-lg border border-wareongo-blue/30 px-4 text-sm font-medium text-wareongo-blue transition-colors hover:bg-wareongo-blue/5 disabled:cursor-not-allowed disabled:opacity-40',
+        disabled || currentPage === 1)}
 
       <div className="flex gap-1.5">
         {windowFor(currentPage, totalPages).map((pageNum) => {
           const isActive = pageNum === currentPage;
-          return (
-            <button
-              key={pageNum}
-              type="button"
-              onClick={() => onChange(pageNum, 'jump')}
-              disabled={disabled}
-              aria-current={isActive ? 'page' : undefined}
-              className={`h-9 w-9 rounded-lg border text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
+          return control(pageNum, String(pageNum), 'jump',
+              `h-9 w-9 rounded-lg border text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
                 isActive
                   ? 'border-wareongo-blue bg-wareongo-blue text-white'
                   : 'border-wareongo-blue/30 bg-transparent text-wareongo-blue hover:bg-wareongo-blue/5'
-              }`}
-            >
-              {pageNum}
-            </button>
-          );
+              }`, disabled, isActive);
         })}
       </div>
 
-      <button
-        type="button"
-        onClick={() => onChange(currentPage + 1, 'next')}
-        disabled={disabled || currentPage === totalPages}
-        className="h-9 rounded-lg border border-wareongo-blue/30 px-4 text-sm font-medium text-wareongo-blue transition-colors hover:bg-wareongo-blue/5 disabled:cursor-not-allowed disabled:opacity-40"
-      >
-        Next
-      </button>
+      {control(currentPage + 1, 'Next', 'next',
+        'h-9 rounded-lg border border-wareongo-blue/30 px-4 text-sm font-medium text-wareongo-blue transition-colors hover:bg-wareongo-blue/5 disabled:cursor-not-allowed disabled:opacity-40',
+        disabled || currentPage === totalPages)}
     </nav>
   );
 };

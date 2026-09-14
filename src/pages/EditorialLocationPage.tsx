@@ -80,12 +80,14 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
     start: pageStart,
     anchorRef: listingsRef,
     goTo,
+    hrefForPage,
+    hydrated,
   } = usePagedListings(ordered);
 
   const listId = `overview:${path}`;
   useListingResults({ list_id: listId, placement: 'overview_grid', market_slug: path.split('/').pop(),
     page: currentPage, page_size: perPage, result_count: shown.length, total_count: warehouses.length,
-    result_status: shown.length ? 'success' : 'empty' });
+    result_status: shown.length ? 'success' : 'empty' }, hydrated);
 
   const siblings = peers.filter((p) => !p.isSelf);
   const relatedBlogs = content.relatedBlogs
@@ -205,6 +207,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
               </div>
 
               <Pagination
+                hrefForPage={hrefForPage}
                 className="mt-8"
                 currentPage={currentPage}
                 totalPages={listingsPages}

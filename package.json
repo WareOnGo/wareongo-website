@@ -17,7 +17,8 @@
     "test:legal": "node --test tests/legal-content.test.mjs",
     "test:analytics": "node tests/analytics.test.mjs",
     "test:services": "node --test tests/service-content.test.mjs",
-    "test:card-links": "node tests/warehouse-card-links.test.mjs"
+    "test:card-links": "node tests/warehouse-card-links.test.mjs",
+    "test:listing-url": "node tests/listing-search.test.mjs && node tests/location-pagination.test.mjs"
   },
   "dependencies": {
     "@radix-ui/react-aspect-ratio": "^1.1.0",

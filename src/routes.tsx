@@ -1,5 +1,6 @@
 import type { RouteRecord } from "vite-react-ssg";
 import RootLayout from "./RootLayout";
+import { listingShouldRevalidate } from "./lib/listingSearch";
 import Index from "./pages/Index";
 import RouteErrorBoundary from "./components/RouteErrorBoundary";
 import { caseStudies } from "./data/caseStudies";
@@ -65,11 +66,13 @@ export const routes: RouteRecord[] = [
             path: "listings",
             lazy: lazyDefault(() => import("./pages/Listings")),
             loader: listingsLoader,
+            shouldRevalidate: listingShouldRevalidate,
           },
           {
             path: "listings/city/:city",
             lazy: lazyDefault(() => import("./pages/LocationListings")),
             loader: cityListingsLoader,
+            shouldRevalidate: listingShouldRevalidate,
             getStaticPaths: cityStaticPaths,
           },
           {
@@ -78,18 +81,21 @@ export const routes: RouteRecord[] = [
             path: "listings/city/:city/:type",
             lazy: lazyDefault(() => import("./pages/LocationListings")),
             loader: cityTypeListingsLoader,
+            shouldRevalidate: listingShouldRevalidate,
             getStaticPaths: cityTypeStaticPaths,
           },
           {
             path: "listings/state/:state",
             lazy: lazyDefault(() => import("./pages/LocationListings")),
             loader: stateListingsLoader,
+            shouldRevalidate: listingShouldRevalidate,
             getStaticPaths: stateStaticPaths,
           },
           {
             path: "listings/state/:state/:type",
             lazy: lazyDefault(() => import("./pages/LocationListings")),
             loader: stateTypeListingsLoader,
+            shouldRevalidate: listingShouldRevalidate,
             getStaticPaths: stateTypeStaticPaths,
           },
           {
@@ -119,18 +125,21 @@ export const routes: RouteRecord[] = [
             path: "overview/:state/:city/:micromarket",
             lazy: lazyDefault(() => import("./pages/MicromarketOverview")),
             loader: micromarketOverviewLoader,
+            shouldRevalidate: listingShouldRevalidate,
             getStaticPaths: micromarketOverviewStaticPaths,
           },
           {
             path: "overview/:state",
             lazy: lazyDefault(() => import("./pages/MicromarketOverview")),
             loader: stateOverviewLoader,
+            shouldRevalidate: listingShouldRevalidate,
             getStaticPaths: stateOverviewStaticPaths,
           },
           {
             path: "overview/:state/:city",
             lazy: lazyDefault(() => import("./pages/MicromarketOverview")),
             loader: cityOverviewLoader,
+            shouldRevalidate: listingShouldRevalidate,
             getStaticPaths: cityOverviewStaticPaths,
           },
           {
