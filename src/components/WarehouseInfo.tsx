@@ -205,8 +205,8 @@ const WarehouseInfo: React.FC<WarehouseInfoProps> = ({ specifications, specs }) 
         </section>
       )}
 
-      {/* Compliance & Safety */}
-      <section className="border border-wareongo-blue rounded-2xl p-6 sm:p-8 bg-transparent">
+      {/* Compliance & Safety — hidden on warehouse listing pages. */}
+      <section hidden className="border border-wareongo-blue rounded-2xl p-6 sm:p-8 bg-transparent">
         <div className="flex items-center gap-2 mb-5">
           <Shield className="w-4 h-4 text-wareongo-blue" aria-hidden="true" />
           <h3 className="text-[10px] sm:text-xs uppercase tracking-[0.2em] font-medium text-wareongo-slate">
@@ -254,9 +254,9 @@ const WarehouseInfo: React.FC<WarehouseInfoProps> = ({ specifications, specs }) 
         </div>
       </section>
 
-      {/* Additional Features */}
+      {/* Additional Features (other specifications) — hidden on warehouse listing pages. */}
       {features.length > 0 && (
-        <section className="border border-wareongo-blue rounded-2xl p-6 sm:p-8 bg-transparent">
+        <section hidden className="border border-wareongo-blue rounded-2xl p-6 sm:p-8 bg-transparent">
           <div className="flex items-center gap-2 mb-5">
             <CheckCircle className="w-4 h-4 text-wareongo-blue" aria-hidden="true" />
             <h3 className="text-[10px] sm:text-xs uppercase tracking-[0.2em] font-medium text-wareongo-slate">
