@@ -2,9 +2,8 @@
 // Regenerated on every `npm run build`. Source: backend /micromarket-pages
 // (CMS-managed). Types live in ./micromarkets.ts, which re-exports this data.
 //
-// An empty array is the normal starting state, and it is not a failure: every
-// micromarket simply keeps rendering its plain listing grid until an editor
-// publishes content for it.
+// Only these published records produce /overview pages. Existing micromarket
+// listing URLs always render their plain grid independently of this content.
 import type { MicromarketContent } from './micromarkets';
 
 export const micromarkets: MicromarketContent[] = [

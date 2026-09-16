@@ -1,295 +1,195 @@
-
-import React, { useState, useEffect, useRef } from 'react';
-import { Button } from "@/components/ui/button";
-import ContactFormDialog from "@/components/ContactFormDialog";
+import { useEffect, useId, useRef, useState } from 'react';
+import { ChevronDown, LogOut, Menu, User } from 'lucide-react';
+import { useLocation, useNavigation } from 'react-router-dom';
+import ContactFormDialog from '@/components/ContactFormDialog';
 import { useAuth } from '@/context/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, LogOut, User } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
+import type { LocationCategory } from '@/lib/locationNavigation';
+import { NAVIGATION_DESKTOP_QUERY, PRIMARY_LINKS, WAREHOUSE_REQUEST } from '@/data/navigation';
+import { HeaderLink, NavigationBrand } from './navigation/NavigationLinks';
+import LocationsMenu from './navigation/LocationsMenu';
+import NavigationDialog, { type NavigationView } from './navigation/NavigationDialog';
+import './navigation/navigation.css';
+
+type Variant = 'desktop' | 'mobile';
+type Panel = 'locations' | 'account' | null;
 
 const Navbar = () => {
-  const [contactVariant, setContactVariant] = useState('desktop');
-  const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isOverEdge, setIsOverEdge] = useState(false);
+  const id = useId();
   const { user, logout, isAuthenticated } = useAuth();
-  const navigate = useNavigate();
-  const mobileMenuRef = useRef<HTMLDivElement>(null);
-  const mobileButtonRef = useRef<HTMLButtonElement>(null);
+  const location = useLocation();
+  const navigation = useNavigation();
+  const [panel, setPanel] = useState<Panel>(null);
+  const [view, setView] = useState<NavigationView>(null);
+  const [category, setCategory] = useState<LocationCategory>('cities');
+  const [variant, setVariant] = useState<Variant>('desktop');
+  const [contactVariant, setContactVariant] = useState<Variant>('desktop');
+  const [contactOpen, setContactOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const locationsRef = useRef<HTMLDivElement>(null);
+  const accountRef = useRef<HTMLDivElement>(null);
+  const locationsButton = useRef<HTMLButtonElement>(null);
+  const mobileButton = useRef<HTMLButtonElement>(null);
+  const accountButton = useRef<HTMLButtonElement>(null);
+  const contactButton = useRef<HTMLButtonElement>(null);
+  const transferringToContact = useRef(false);
+  const followingLink = useRef(false);
 
-  const scrollToSection = (id: string) => {
-    if (window.location.pathname !== '/') {
-      navigate('/');
-      setTimeout(() => {
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    } else {
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+  const account = isAuthenticated && user ? {
+    name: user.name || user.email,
+    label: user.role === 'admin' ? 'Admin Panel' : 'Dashboard',
+    href: user.role === 'admin' ? '/admin-panel' : user.role === 'user' ? '/user-dashboard' : undefined,
+  } : undefined;
+
+  const focusVisibleTrigger = () => {
+    (window.matchMedia(NAVIGATION_DESKTOP_QUERY).matches ? locationsButton.current : mobileButton.current)?.focus({ preventScroll: true });
+  };
+
+  const navigateFrom = (placement: Variant, label: string, href: string) => {
+    trackEvent('nav_click', { label, destination: href, placement: 'header', navigation_variant: placement });
+    followingLink.current = href.replace(/\/+$/, '') !== location.pathname.replace(/\/+$/, '');
+    if (!followingLink.current && panel) {
+      (panel === 'locations' ? locationsButton : accountButton).current?.focus({ preventScroll: true });
     }
+    setPanel(null);
+    setView(null);
+  };
+  const desktopNavigate = (label: string, href: string) => navigateFrom('desktop', label, href);
+
+  const openDirectory = (nextCategory: LocationCategory) => {
+    followingLink.current = false;
+    setVariant('desktop');
+    setCategory(nextCategory);
+    setPanel(null);
+    setView('directory');
+  };
+
+  const openContact = (placement: Variant) => {
+    trackEvent('cta_click', { cta_id: 'contact_us', form_id: 'header_contact', lead_type: 'general_contact',
+      label: 'Contact Us', placement: 'header', navigation_variant: placement });
+    transferringToContact.current = true;
+    setContactVariant(placement);
+    setPanel(null);
+    setView(null);
+    setContactOpen(true);
+  };
+
+  const signOut = () => {
+    logout();
+    setPanel(null);
+    setView(null);
+    focusVisibleTrigger();
   };
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        mobileMenuRef.current &&
-        !mobileMenuRef.current.contains(event.target as Node) &&
-        mobileButtonRef.current &&
-        !mobileButtonRef.current.contains(event.target as Node)
-      ) {
-        setIsMobileMenuOpen(false);
-      }
+    if (!panel) return;
+    const region = panel === 'locations' ? locationsRef : accountRef;
+    const dismissOutside = (event: PointerEvent | FocusEvent) => {
+      if (event.target instanceof Node && !region.current?.contains(event.target)) setPanel(null);
     };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    const handleScroll = () => {
-      const edgeSection = document.getElementById('edge-section');
-      if (edgeSection) {
-        const rect = edgeSection.getBoundingClientRect();
-        // The navbar is roughly 80px tall. Check if it overlaps the edge section.
-        if (rect.top <= 80 && rect.bottom >= 80) {
-          setIsOverEdge(true);
-        } else {
-          setIsOverEdge(false);
-        }
-      }
+    const escape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      event.preventDefault();
+      setPanel(null);
+      (panel === 'locations' ? locationsButton : accountButton).current?.focus({ preventScroll: true });
     };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check initial position
-
+    document.addEventListener('pointerdown', dismissOutside);
+    document.addEventListener('focusin', dismissOutside);
+    document.addEventListener('keydown', escape);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('pointerdown', dismissOutside);
+      document.removeEventListener('focusin', dismissOutside);
+      document.removeEventListener('keydown', escape);
     };
-  }, []);
+  }, [panel]);
 
-  const pillBgClass = isOverEdge 
-    ? "bg-sky-50 border-wareongo-blue/20" 
-    : "bg-wareongo-ivory border-black/10";
+  useEffect(() => {
+    const media = window.matchMedia(NAVIGATION_DESKTOP_QUERY);
+    const onChange = () => {
+      // Hiding the desktop row can blur its trigger before this event fires.
+      const active = document.activeElement;
+      const hadFocus = (headerRef.current?.contains(active) && active instanceof HTMLElement && !active.getClientRects().length)
+        || (active === document.body && panel !== null);
+      setPanel(null);
+      // Close a mobile menu on desktop; an open directory simply reflows.
+      if (media.matches) {
+        setView(current => current === 'menu' ? null : current);
+        setVariant('desktop');
+      }
+      if (hadFocus) (media.matches ? locationsButton : mobileButton).current?.focus({ preventScroll: true });
+    };
+    media.addEventListener('change', onChange);
+    return () => media.removeEventListener('change', onChange);
+  }, [panel]);
 
-  const navLinkClass =
-    "text-wareongo-charcoal hover:text-wareongo-blue hover:bg-wareongo-ivory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wareongo-blue/40 transition-colors duration-200 whitespace-nowrap text-sm font-medium px-4 py-3 rounded-lg";
+  useEffect(() => {
+    // Also dismiss for history changes and navigation initiated outside this header.
+    setPanel(null);
+    setView(null);
+  }, [location.pathname, location.search, navigation.location?.pathname]);
 
-  return (
-    <nav className="sticky top-0 z-50 pt-4 px-4">
-      <div className="container mx-auto flex justify-between items-center gap-4">
-        {/* Logo pill */}
-        <Link
-          to="/"
-          className={`flex items-center justify-center gap-2.5 border rounded-xl px-5 py-3 transition-all duration-300 hover:opacity-90 ${pillBgClass}`}
-        >
-          <img
-            src="/logo_transparent.webp"
-            alt="WareOnGo Logo"
-            width={120}
-            height={85}
-            className="h-6 w-auto"
-          />
-          <span className="text-wareongo-blue font-bold tracking-widest text-sm md:text-base">
-            WAREONGO
-          </span>
-        </Link>
-
-        {/* Desktop nav pill */}
-        <div className={`hidden md:flex items-center border rounded-xl p-2 gap-1 transition-all duration-300 ${pillBgClass}`}>
-          <Link
-            to="/request-warehouse"
-            className={navLinkClass}
-            onClick={() => trackEvent('nav_click', { label: 'Request a Warehouse', destination: '/request-warehouse', position: 'header_desktop' })}
-          >
-            Request a Warehouse
-          </Link>
-          <Link
-            to="/listings"
-            className={navLinkClass}
-            onClick={() => trackEvent('nav_click', { label: 'Listings', destination: '/listings', position: 'header_desktop' })}
-          >
-            Listings
-          </Link>
-          <Link
-            to="/about-us"
-            className={navLinkClass}
-            onClick={() => trackEvent('nav_click', { label: 'About Us', destination: '/about-us', position: 'header_desktop' })}
-          >
-            About Us
-          </Link>
-
-          {user?.role === 'admin' && (
-            <Link to="/admin-panel" className={`${navLinkClass} text-wareongo-blue`}>
-              Admin Panel
-            </Link>
-          )}
-          {user?.role === 'user' && (
-            <Link to="/user-dashboard" className={`${navLinkClass} text-wareongo-blue`}>
-              Dashboard
-            </Link>
-          )}
-
-          {isAuthenticated && user && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={logout}
-              className="rounded-lg ml-1 text-wareongo-charcoal hover:text-wareongo-blue"
-            >
-              <LogOut className="h-4 w-4 mr-1" />
-              Logout
-            </Button>
-          )}
-
-          {/* Highlighted CTA */}
-          <button
-            onClick={() => {
-              trackEvent('cta_click', { cta_id: 'contact_us', form_id: 'header_contact', lead_type: 'general_contact', label: 'Contact Us', cta_location: 'header_desktop' });
-              setContactVariant('desktop');
-              setIsContactDialogOpen(true);
-            }}
-            className="ml-1 bg-wareongo-blue text-white text-sm font-medium px-6 py-3 rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap"
-          >
-            Contact Us
+  return <header ref={headerRef} className="wog-nav-header wog-navigation" onBlurCapture={event => {
+    // CSS can hide a focused control before matchMedia fires. Handle that blur
+    // without moving focus away from a still-visible logo or page content.
+    if (!event.relatedTarget && event.target instanceof HTMLElement
+      && headerRef.current?.contains(event.target) && !event.target.getClientRects().length) focusVisibleTrigger();
+  }}>
+    {panel === 'locations' && <div className="wog-nav-scrim" aria-hidden="true" />}
+    <div className="wog-nav-bar">
+      <NavigationBrand onNavigate={(label, href) => navigateFrom(window.matchMedia(NAVIGATION_DESKTOP_QUERY).matches ? 'desktop' : 'mobile', label, href)} />
+      <nav aria-label="Main navigation" className="wog-nav-desktop" data-analytics-placement="header_desktop">
+        <div className="wog-nav-page-links">
+        <HeaderLink {...PRIMARY_LINKS[0]} className="wog-nav-item" onNavigate={desktopNavigate} />
+        <div ref={locationsRef} className="wog-nav-locations-disclosure">
+          <button type="button" ref={locationsButton} className="wog-nav-item" aria-expanded={panel === 'locations'}
+            aria-controls={`${id}-locations`} onClick={() => setPanel(panel === 'locations' ? null : 'locations')}>
+            Locations <ChevronDown aria-hidden="true" size={14} />
           </button>
+          <div id={`${id}-locations`} hidden={panel !== 'locations'} className="wog-nav-mega-container">
+            {panel === 'locations' && <LocationsMenu onDirectory={openDirectory} onNavigate={desktopNavigate} />}
+          </div>
         </div>
-
-        {/* Mobile toggle pill */}
-        <div className="md:hidden">
-          <button
-            onClick={() => { trackEvent('menu_toggle', { placement: 'header', navigation_variant: 'mobile', expanded: !isMobileMenuOpen }); setIsMobileMenuOpen(!isMobileMenuOpen); }}
-            ref={mobileButtonRef}
-            aria-expanded={isMobileMenuOpen}
-            aria-label="Toggle menu"
-            className={`border rounded-xl p-3 flex items-center justify-center transition-all duration-300 ${pillBgClass}`}
-          >
-            {isMobileMenuOpen ? (
-              <X className="h-5 w-5 text-wareongo-blue" />
-            ) : (
-              <Menu className="h-5 w-5 text-wareongo-blue" />
-            )}
+        {PRIMARY_LINKS.slice(1).map(link => <HeaderLink {...link} key={link.href} className="wog-nav-item" onNavigate={desktopNavigate} />)}
+        </div>
+        <div className="wog-nav-actions">
+        <HeaderLink {...WAREHOUSE_REQUEST} className="wog-nav-request" onNavigate={desktopNavigate} />
+        <button type="button" className="wog-nav-contact" ref={contactButton} onClick={() => openContact('desktop')}>Contact Us</button>
+        {account && <div ref={accountRef} className="wog-nav-account">
+          <button type="button" ref={accountButton} className="wog-nav-account-toggle" aria-label="Your account"
+            aria-expanded={panel === 'account'} aria-controls={`${id}-account`} onClick={() => setPanel(panel === 'account' ? null : 'account')}>
+            <User aria-hidden="true" size={19} />
           </button>
+          <div id={`${id}-account`} hidden={panel !== 'account'} className="wog-nav-account-panel">
+            {account.name && <p className="wog-nav-account-name">{account.name}</p>}
+            {account.href && <HeaderLink label={account.label} href={account.href} className="wog-nav-item" onNavigate={desktopNavigate} />}
+            <button type="button" className="wog-nav-item" onClick={signOut}><LogOut aria-hidden="true" size={16} /> Logout</button>
+          </div>
+        </div>}
         </div>
-      </div>
-
-      {/* Mobile menu */}
-      <div
-        ref={mobileMenuRef}
-        className={`md:hidden absolute top-full left-4 right-4 mt-2 bg-wareongo-ivory border border-black/10 rounded-xl z-40 transition-all duration-300 transform ${
-          isMobileMenuOpen
-            ? 'opacity-100 translate-y-0'
-            : 'opacity-0 -translate-y-4 pointer-events-none'
-        }`}
-      >
-        <div className="px-4 py-5 flex flex-col space-y-3">
-          <Link
-            to="/request-warehouse"
-            onClick={() => {
-              trackEvent('nav_click', { label: 'Request a Warehouse', destination: '/request-warehouse', position: 'header_mobile' });
-              setIsMobileMenuOpen(false);
-            }}
-            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors text-base font-medium py-2 text-center w-full block"
-          >
-            Request a Warehouse
-          </Link>
-          <Link
-            to="/listings"
-            onClick={() => {
-              trackEvent('nav_click', { label: 'Listings', destination: '/listings', position: 'header_mobile' });
-              setIsMobileMenuOpen(false);
-            }}
-            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors text-base font-medium py-2 text-center w-full"
-          >
-            Listings
-          </Link>
-          <Link
-            to="/about-us"
-            onClick={() => {
-              trackEvent('nav_click', { label: 'About Us', destination: '/about-us', position: 'header_mobile' });
-              setIsMobileMenuOpen(false);
-            }}
-            className="text-wareongo-charcoal hover:text-wareongo-blue transition-colors text-base font-medium py-2 text-center w-full"
-          >
-            About Us
-          </Link>
-
-          {user?.role === 'admin' && (
-            <Link
-              to="/admin-panel"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-wareongo-blue text-base font-medium py-2 text-center w-full"
-            >
-              Admin Panel
-            </Link>
-          )}
-          {user?.role === 'user' && (
-            <Link
-              to="/user-dashboard"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-wareongo-blue text-base font-medium py-2 text-center w-full"
-            >
-              Dashboard
-            </Link>
-          )}
-
-          {isAuthenticated && user && (
-            <div className="pt-3 border-t border-gray-200">
-              <div className="flex flex-col items-center gap-2 mb-3 p-3 bg-wareongo-ivory rounded-md">
-                <div className="flex items-center gap-2">
-                  <User className="h-5 w-5 text-wareongo-blue" />
-                  <span className="text-sm font-medium text-wareongo-charcoal">
-                    {user.name || user.email}
-                  </span>
-                </div>
-                {user.role && (
-                  <span className="text-xs px-3 py-1 bg-wareongo-blue/10 text-wareongo-blue rounded-full">
-                    {user.role}
-                  </span>
-                )}
-              </div>
-              <Button
-                variant="outline"
-                className="w-full mb-3 flex items-center justify-center gap-2"
-                onClick={() => {
-                  logout();
-                  setIsMobileMenuOpen(false);
-                }}
-              >
-                <LogOut className="h-4 w-4" />
-                Logout
-              </Button>
-            </div>
-          )}
-
-          <button
-            onClick={() => {
-              trackEvent('cta_click', { cta_id: 'contact_us', form_id: 'header_contact', lead_type: 'general_contact', label: 'Contact Us', cta_location: 'header_mobile' });
-              setContactVariant('mobile');
-              setIsContactDialogOpen(true);
-              setIsMobileMenuOpen(false);
-            }}
-            className="bg-wareongo-blue text-white text-base font-medium px-5 py-3 rounded-full hover:opacity-90 transition-opacity w-full"
-          >
-            Contact Us
-          </button>
-        </div>
-      </div>
-
-      <ContactFormDialog
-        open={isContactDialogOpen}
-        onOpenChange={setIsContactDialogOpen}
-        title="Contact Us"
-        description="Share your details, and we'll get back to you!"
-        successMessage="We will reach out within 2 hours."
-        source="homepage"
-        requireCompanyName
-        analyticsContext={{ placement: 'header', navigation_variant: contactVariant }}
-      />
-    </nav>
-  );
+      </nav>
+      <button type="button" className="wog-nav-mobile-toggle" ref={mobileButton} aria-label="Toggle menu"
+        aria-haspopup="dialog" aria-expanded={view !== null && variant === 'mobile'} onClick={() => {
+          trackEvent('menu_toggle', { placement: 'header', navigation_variant: 'mobile', expanded: true });
+          followingLink.current = false;
+          setVariant('mobile');
+          setView('menu');
+        }}><Menu aria-hidden="true" size={20} /></button>
+    </div>
+    <NavigationDialog view={view} category={category} mobileOrigin={variant === 'mobile'} account={account}
+      onView={setView} onCategory={setCategory} onContact={() => openContact('mobile')} onLogout={signOut}
+      onNavigate={(label, href) => navigateFrom(variant, label, href)} onCloseAutoFocus={event => {
+        event.preventDefault();
+        if (!transferringToContact.current && !followingLink.current) focusVisibleTrigger();
+      }} />
+    <ContactFormDialog open={contactOpen} onOpenChange={setContactOpen}
+      onCloseAutoFocus={event => {
+        event.preventDefault();
+        transferringToContact.current = false;
+        (window.matchMedia(NAVIGATION_DESKTOP_QUERY).matches ? contactButton : mobileButton).current?.focus({ preventScroll: true });
+      }} title="Contact Us" description="Share your details, and we'll get back to you!"
+      successMessage="We will reach out within 2 hours." source="homepage" requireCompanyName
+      analyticsContext={{ placement: 'header', navigation_variant: contactVariant }} />
+  </header>;
 };
 
 export default Navbar;

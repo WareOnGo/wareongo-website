@@ -24,6 +24,7 @@ interface ContactFormDialogProps {
   source: string;
   requireCompanyName?: boolean;
   analyticsContext?: AnalyticsParams;
+  onCloseAutoFocus?: (event: Event) => void;
 }
 
 const ContactFormDialog = ({
@@ -34,7 +35,8 @@ const ContactFormDialog = ({
   successMessage,
   source,
   requireCompanyName = false,
-  analyticsContext
+  analyticsContext,
+  onCloseAutoFocus
 }: ContactFormDialogProps) => {
   const [name, setName] = useState('');
   const [companyName, setCompanyName] = useState('');
@@ -124,7 +126,7 @@ const ContactFormDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={(next) => { if (!isSubmitting) onOpenChange(next); }}>
-      <DialogContent className="font-sans bg-wareongo-ivory border border-wareongo-blue rounded-2xl sm:max-w-[460px] max-h-[calc(100dvh-2rem)] overflow-y-auto p-6 sm:p-8 shadow-none gap-0">
+      <DialogContent onCloseAutoFocus={onCloseAutoFocus} className="font-sans bg-wareongo-ivory border border-wareongo-blue rounded-2xl sm:max-w-[460px] max-h-[calc(100dvh-2rem)] overflow-y-auto p-6 sm:p-8 shadow-none gap-0">
         <DialogHeader className="mb-5">
           <p className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-wareongo-slate font-medium mb-2 text-left">
             Get in touch

@@ -83,3 +83,14 @@ export async function fetchMicromarkets() {
   }
   return json.data;
 }
+
+/** Fresh aggregate listing counts for build-time city/state navigation. */
+export async function fetchLocations() {
+  const resp = await fetchInventory(`${API_BASE}/locations`, {}, true);
+  if (!resp.ok) throw new Error(`Failed to fetch locations: ${resp.status} ${resp.statusText}`);
+  const json = await resp.json();
+  if (!Array.isArray(json?.data?.cities) || !Array.isArray(json?.data?.states)) {
+    throw new Error('Locations endpoint returned an unexpected shape');
+  }
+  return json.data;
+}
