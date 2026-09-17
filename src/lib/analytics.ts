@@ -1,5 +1,6 @@
 /** Public-site analytics. Never pass form values or raw API errors here. */
 import { SERVICE_PAGES, servicePath } from '../data/serviceCatalog';
+import { installAnalyticsConsole, logAnalyticsCommand } from './analyticsConsole';
 
 export type AnalyticsEvent = 'page_view' | 'nav_click' | 'cta_click' | 'contact_click'
   | 'listing_open' | 'view_listing' | 'listing_impression' | 'listing_results'
@@ -67,7 +68,11 @@ let clickHandled = false;
 export const beginAnalyticsClick = () => { clickHandled = false; };
 export const wasAnalyticsClickHandled = () => clickHandled;
 function command(...args: unknown[]) {
-  if (!analyticsEnabled()) return;
+  if (typeof window === 'undefined') return;
+  const enabled = analyticsEnabled();
+  logAnalyticsCommand(args, enabled);
+  if (!enabled) return;
+  try { installAnalyticsConsole(ID); } catch { /* A browser may disallow wrapping its request methods. */ }
   window.dataLayer ||= [];
   // Keep Google's documented Arguments queue shape for a delayed gtag.js load.
   // eslint-disable-next-line prefer-rest-params
@@ -75,7 +80,7 @@ function command(...args: unknown[]) {
   window.gtag(...args);
 }
 export function recordAnalyticsPage(title: string) {
-  if (!analyticsEnabled()) return;
+  if (typeof window === 'undefined') return;
   const url = safeUrl(window.location.href);
   if (lastUrl === url) { context.page_title = title; command('set', { page_title: title }); return; }
   const previous = lastUrl || safeUrl(document.referrer, false);
@@ -89,7 +94,7 @@ export function recordAnalyticsPage(title: string) {
     initialized = true;
     command('js', new Date());
     command('config', ID, { send_page_view: true });
-    if (!isTest()) {
+    if (analyticsEnabled() && !isTest()) {
       const script = document.createElement('script');
       script.async = true;
       script.src = `https://www.googletagmanager.com/gtag/js?id=${ID}`;
@@ -143,7 +148,6 @@ export function trackEvent(event: AnalyticsEvent, params: AnalyticsParams = {}) 
   const p = normalizeAnalytics(params);
   if (p.destination?.endsWith('/request-warehouse')) { event = 'cta_click'; p.cta_id ||= 'request_warehouse'; rememberLeadOrigin(p); }
   if (event === 'cta_click') p.cta_id ||= slug(p.label || 'contact');
-  if (!analyticsEnabled()) return;
   // PageHead owns resolved metadata. Never derive a title from the previous route.
   command('event', event, { ...context, ...p, transport_type: 'beacon' });
 }
