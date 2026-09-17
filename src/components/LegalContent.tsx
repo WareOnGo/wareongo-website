@@ -28,8 +28,8 @@ function displayDate(iso: string, comma: boolean) {
 export function LegalDates({ content }: { content: LegalContent }) {
   const terms = content.slug === 'terms-of-service';
   return <div className={terms ? '' : 'text-sm text-gray-600 mb-8'}>
-    <p className={terms ? 'text-sm text-gray-500 mb-2' : ''}><strong>Effective Date:</strong> <time dateTime={content.effectiveDate}>{displayDate(content.effectiveDate, terms)}</time></p>
-    <p className={terms ? 'text-sm text-gray-500 mb-6' : ''}><strong>Last Updated:</strong> <time dateTime={content.updated}>{displayDate(content.updated, terms)}</time></p>
+    <p className={terms ? 'text-sm text-wareongo-slate mb-2' : ''}><strong>Effective Date:</strong> <time dateTime={content.effectiveDate}>{displayDate(content.effectiveDate, terms)}</time></p>
+    <p className={terms ? 'text-sm text-wareongo-slate mb-6' : ''}><strong>Last Updated:</strong> <time dateTime={content.updated}>{displayDate(content.updated, terms)}</time></p>
   </div>;
 }
 

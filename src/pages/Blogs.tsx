@@ -74,7 +74,7 @@ const Blogs = () => {
                   >
                     <h2 className="text-lg sm:text-xl font-semibold text-wareongo-blue mb-1">{g.title}</h2>
                     <p className="text-sm text-wareongo-slate leading-relaxed">{g.description}</p>
-                    <p className="text-xs text-wareongo-slate/70 mt-2">
+                    <p className="text-xs text-wareongo-slate mt-2">
                       Updated <time dateTime={g.updated}>{g.updated}</time>
                     </p>
                   </Link>

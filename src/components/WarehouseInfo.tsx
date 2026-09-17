@@ -187,7 +187,7 @@ const WarehouseInfo: React.FC<WarehouseInfoProps> = ({ specifications, specs }) 
           <div className="space-y-7">
             {specGroups.map((group) => (
               <div key={group.title}>
-                <p className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] text-wareongo-slate/70 mb-3">
+                <p className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] text-wareongo-slate mb-3">
                   <group.icon className="w-3.5 h-3.5 text-wareongo-blue/60" aria-hidden="true" />
                   {group.title}
                 </p>

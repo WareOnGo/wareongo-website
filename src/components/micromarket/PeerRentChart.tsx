@@ -23,7 +23,7 @@ const PeerRentChart = ({ peers, asOf }: { peers: PeerRent[]; asOf?: string }) =>
         <span className={`block ${EYEBROW} text-wareongo-slate`}>
           Median asking rent · ₹ per sq ft / month
         </span>
-        {asOf && <span className="mt-0.5 block text-[11px] text-wareongo-slate/80">{asOf}</span>}
+        {asOf && <span className="mt-0.5 block text-[11px] text-wareongo-slate">{asOf}</span>}
       </figcaption>
 
       {/* A hairline under the bars: without it they float in the container's

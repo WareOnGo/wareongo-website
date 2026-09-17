@@ -16,7 +16,7 @@ const SectionHeading = ({
 }) => (
   <header className="mb-4">
     <div className="mb-2 flex items-baseline gap-3">
-      <span className={`${EYEBROW} tabular-nums text-wareongo-blue/45`}>
+      <span className={`${EYEBROW} tabular-nums text-wareongo-slate`}>
         {String(index).padStart(2, '0')}
       </span>
       <span className={`${EYEBROW} text-wareongo-slate`}>{eyebrow}</span>

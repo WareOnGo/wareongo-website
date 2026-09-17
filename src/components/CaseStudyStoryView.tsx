@@ -133,7 +133,7 @@ const StoryView: React.FC<{ story: Story }> = ({ story }) => {
               <div className="mt-2 divide-y divide-wareongo-blue/20">
                 {sec.steps.map((step, idx) => (
                   <div key={idx} className="flex gap-4 py-3.5">
-                    <div className="text-base font-bold text-wareongo-charcoal/40 leading-none flex-shrink-0 w-7 pt-0.5 font-mono">
+                    <div className="text-base font-bold text-wareongo-slate leading-none flex-shrink-0 w-7 pt-0.5 font-mono">
                       {String(idx + 1).padStart(2, '0')}
                     </div>
                     <div>

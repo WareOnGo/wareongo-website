@@ -335,7 +335,7 @@ const CaseStudyDetail: React.FC = () => {
               The hard ones are<br />
               <span className="italic font-normal text-white/50">our speciality.</span>
             </h2>
-            <p className="text-sm sm:text-base text-white/45 leading-relaxed mb-7 max-w-xl mx-auto">
+            <p className="text-sm sm:text-base text-white/80 leading-relaxed mb-7 max-w-xl mx-auto">
               {cs.story.cta.text}
             </p>
             <div className="flex flex-wrap justify-center gap-3">
@@ -355,7 +355,7 @@ const CaseStudyDetail: React.FC = () => {
             </div>
             <div className="flex flex-wrap justify-center gap-5 mt-6">
               {['No broker spam', '100% legal checks', '₹2 to 4/sqft savings', 'Hard markets covered'].map(t => (
-                <span key={t} className="text-[11.5px] text-white/35 flex items-center gap-1.5">
+                <span key={t} className="text-[11.5px] text-white/70 flex items-center gap-1.5">
                   <span className="text-wareongo-ivory text-[10.5px]">✓</span> {t}
                 </span>
               ))}

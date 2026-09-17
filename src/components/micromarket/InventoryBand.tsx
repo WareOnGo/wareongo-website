@@ -65,7 +65,7 @@ const InventoryBand = ({ stats, heading }: { stats: DerivedStats; heading: strin
         >
           {heading}
         </h2>
-        <p className="text-xs tabular-nums text-wareongo-ivory/50 sm:ml-auto">{denominator}</p>
+        <p className="text-xs tabular-nums text-wareongo-ivory/70 sm:ml-auto">{denominator}</p>
       </div>
 
       <dl className={`grid grid-cols-2 gap-3 ${COLUMNS[tiles.length] ?? COLUMNS[4]}`}>
@@ -78,7 +78,7 @@ const InventoryBand = ({ stats, heading }: { stats: DerivedStats; heading: strin
               <dd className="text-2xl font-bold tabular-nums leading-none sm:text-[1.75rem]">
                 {t.value}
               </dd>
-              <span className="text-xs font-semibold tabular-nums text-wareongo-ivory/50">
+              <span className="text-xs font-semibold tabular-nums text-wareongo-ivory/70">
                 {t.share}%
               </span>
             </div>

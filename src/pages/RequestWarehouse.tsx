@@ -237,7 +237,7 @@ const RequestWarehouse = () => {
                     id="additionalComments" name="additionalComments"
                     rows={3}
                     placeholder="Area, budget, timeline, business type, etc."
-                    className="w-full rounded-md border border-wareongo-blue/20 bg-wareongo-ivory px-3 py-2 text-sm text-wareongo-blue placeholder:text-wareongo-slate/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wareongo-blue/30 resize-y"
+                    className="w-full rounded-md border border-wareongo-blue/20 bg-wareongo-ivory px-3 py-2 text-sm text-wareongo-blue placeholder:text-wareongo-slate focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wareongo-blue/30 resize-y"
                     value={formData.additionalComments}
                     onChange={handleChange}
                   />
@@ -254,7 +254,7 @@ const RequestWarehouse = () => {
                       'Submit request'
                     )}
                   </Button>
-                  <p className="text-[11px] leading-relaxed text-center text-wareongo-slate/80 mt-2">
+                  <p className="text-[11px] leading-relaxed text-center text-wareongo-slate mt-2">
                     By submitting, you agree to our <Link to="/terms-of-service" className="text-wareongo-blue hover:underline">Terms</Link> and <Link to="/privacy-policy" className="text-wareongo-blue hover:underline">Privacy Policy</Link>.
                   </p>
                 </div>
