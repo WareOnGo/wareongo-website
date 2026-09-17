@@ -94,7 +94,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-wareongo-ivory">
+    <div className="wog-home min-h-screen flex flex-col bg-wareongo-ivory">
       <PageHead
         title="Warehouse & Godown for Rent in India | WareOnGo"
         description={`Find verified warehouse & godown space for rent across India, ${verifiedWarehousesLabel} listings with transparent pricing. Get custom options, expert guidance & site visit within 48 hours.`}

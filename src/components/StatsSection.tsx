@@ -49,7 +49,7 @@ const format = (value: number, decimals = 0) =>
 
 const StatTile = ({ stat }: { stat: Stat }) => (
   <div className="flex flex-col items-center text-center">
-    <div className="text-4xl sm:text-5xl md:text-6xl font-bold text-wareongo-blue leading-none tabular-nums whitespace-nowrap">
+    <div className="text-4xl sm:text-5xl md:text-[clamp(2rem,5vw,3.75rem)] font-bold text-wareongo-blue leading-none tabular-nums whitespace-nowrap">
       {stat.prefix}
       {format(stat.value, stat.decimals)}
       {stat.suffix}
