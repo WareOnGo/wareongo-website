@@ -134,8 +134,8 @@ const canonicalWarehouseType = (raw) => {
  * Only the micromarkets the site builds a page for, in the shape the callers
  * here already expect ({ canonical, slug, count, parentCity, citySlug }).
  */
-export async function summarizeMicromarkets() {
-  const all = await fetchMicromarkets();
+export async function summarizeMicromarkets(data) {
+  const all = data ?? await fetchMicromarkets();
   return all
     .filter((m) => m.hasPage)
     .map((m) => ({
@@ -146,6 +146,23 @@ export async function summarizeMicromarkets() {
       citySlug: m.citySlug,
     }))
     .sort((a, b) => a.canonical.localeCompare(b.canonical));
+}
+
+/** Filter choices include every named locality, scoped to its actual city inventory. */
+export function filterMicromarkets(warehouses, micromarkets) {
+  const cities = new Map(summarize(warehouses, 'city').map(city => [city.canonical, city]));
+  const warehouseCities = new Map(warehouses.map(warehouse => [warehouse.id, canonicalize(warehouse.city, 'city')]));
+  return micromarkets.flatMap(market => {
+    const counts = new Map();
+    for (const id of new Set(market.listingIds ?? [])) {
+      const city = warehouseCities.get(id);
+      if (cities.has(city)) counts.set(city, (counts.get(city) ?? 0) + 1);
+    }
+    return [...counts].map(([city, count]) => ({
+      canonical: market.name, slug: market.slug, count,
+      parentCity: city, citySlug: cities.get(city).slug,
+    }));
+  }).sort((a, b) => b.count - a.count || a.canonical.localeCompare(b.canonical, 'en') || a.parentCity.localeCompare(b.parentCity, 'en'));
 }
 
 /** Canonical page path — micromarkets nest under their parent city. */

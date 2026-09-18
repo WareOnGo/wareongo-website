@@ -1,12 +1,13 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { fetchLocations } from './lib/api.mjs';
+import { fetchLocations, fetchMicromarkets } from './lib/api.mjs';
 import { popularLocationIds } from './lib/navigation-popularity.mjs';
 import {
   fetchAllWarehouses,
   summarize,
   locationTypeCombos,
   summarizeMicromarkets,
+  filterMicromarkets,
   CITY_MIN_LISTINGS,
 } from './lib/locations.mjs';
 
@@ -28,11 +29,13 @@ function groupByType(combos) {
 }
 
 async function main() {
-  const [warehouses, aggregates, micromarkets] = await Promise.all([
-    fetchAllWarehouses(), fetchLocations(), summarizeMicromarkets(),
+  const [warehouses, aggregates, allMicromarkets] = await Promise.all([
+    fetchAllWarehouses(), fetchLocations(), fetchMicromarkets(),
   ]);
   const cities = summarize(warehouses, 'city');
   const states = summarize(warehouses, 'state');
+  const micromarkets = await summarizeMicromarkets(allMicromarkets);
+  const filterMarkets = filterMicromarkets(warehouses, allMicromarkets);
   const cityByType = groupByType(locationTypeCombos(warehouses, 'city'));
   const stateByType = groupByType(locationTypeCombos(warehouses, 'state'));
   const popular = popularLocationIds({ cities, states, micromarkets }, aggregates, CITY_MIN_LISTINGS);
@@ -72,6 +75,10 @@ export const STATES_BY_TYPE: LocationsByType = ${JSON.stringify(stateByType, nul
 
 // Only micromarkets past MICROMARKET_MIN_LISTINGS in scripts/lib/locations.mjs.
 export const MICROMARKETS: MicromarketSummary[] = ${JSON.stringify(micromarkets, null, 2)};
+
+// All named micromarkets for filters, including those without a standalone page.
+// Counts and city membership use the backend's listing IDs; no tag parsing in the browser.
+export const FILTER_MICROMARKETS: MicromarketSummary[] = ${JSON.stringify(filterMarkets, null, 2)};
 
 // Ranked at build time by fresh API listing counts, highest first.
 // Ties use the canonical name, then the full location ID.

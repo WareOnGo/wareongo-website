@@ -3,23 +3,27 @@ import { test } from 'node:test';
 import { build } from 'esbuild';
 
 const { outputFiles } = await build({
-  entryPoints: ['src/lib/listingSearch.ts'], bundle: true, write: false, platform: 'node', format: 'cjs',
+  stdin: { contents: `export * from './src/lib/listingSearch.ts';
+    export { CITIES, FILTER_MICROMARKETS } from './src/data/locations.generated.ts';`, resolveDir: process.cwd() },
+  bundle: true, write: false, platform: 'node', format: 'cjs',
 });
 const compiled = { exports: {} };
 new Function('module', 'exports', outputFiles[0].text)(compiled, compiled.exports);
-const { readListingSearch, writeListingSearch, DEFAULT_FILTERS, listingShouldRevalidate } = compiled.exports;
+const { readListingSearch, writeListingSearch, DEFAULT_FILTERS, listingShouldRevalidate, toApiFilters,
+  changeListingFilter, micromarketsForCity, CITY_OPTIONS, CITIES, FILTER_MICROMARKETS } = compiled.exports;
 const read = query => readListingSearch(new URLSearchParams(query));
 
 test('shared filters, page and selected page size round trip without dropping attribution', () => {
-  const query = new URLSearchParams('utm_source=mail&utm_content=a&utm_content=b&city=Bangalore&state=Karnataka&fire=no&type=PEB&minSqft=20000&maxSqft=80000&page=3&pageSize=30');
+  const query = new URLSearchParams('utm_source=mail&utm_content=a&utm_content=b&city=Bangalore&state=Karnataka&fire=yes&type=PEB&minSqft=20000&maxSqft=80000&page=3&pageSize=30');
   const state = readListingSearch(query);
   assert.equal(state.page, 3);
   assert.equal(state.pageSize, 30);
-  assert.equal(state.filters.fireCompliance, 'no');
+  assert.equal(state.filters.fireCompliance, 'yes');
   const written = writeListingSearch(query, state);
   assert.deepEqual(readListingSearch(written), state);
   assert.deepEqual(written.getAll('utm_content'), ['a', 'b']);
   assert.equal(written.get('utm_source'), 'mail');
+  assert.equal(written.has('state'), false, 'retired state filters must not remain hidden in shared links');
 });
 
 test('invalid page numbers and unsupported page sizes never reach API offsets', () => {
@@ -35,7 +39,7 @@ test('invalid page numbers and unsupported page sizes never reach API offsets', 
 test('case, all values, duplicates, and ranges normalize to one meaningful query', () => {
   assert.deepEqual(read('city=all&state=ALL&type=all&fire=invalid').filters, DEFAULT_FILTERS);
   const state = read('city=bengaluru&type=peb&fire=YES&minSqft=90000&maxSqft=20000&page=2&page=4');
-  assert.equal(state.filters.city, 'Bangalore');
+  assert.equal(state.filters.city, 'Bengaluru');
   assert.equal(state.filters.warehouseType, 'PEB');
   assert.equal(state.filters.fireCompliance, 'yes');
   assert.equal(state.filters.minSqft, 20000);
@@ -45,6 +49,92 @@ test('case, all values, duplicates, and ranges normalize to one meaningful query
   assert.deepEqual(read('minSqft=-1&maxSqft=999999').filters, DEFAULT_FILTERS);
   assert.deepEqual(read('minSqft=garbage&maxSqft=5junk').filters, DEFAULT_FILTERS);
   assert.equal(read('city=Mumbai').filters.city, 'Mumbai', 'existing free-form location links remain supported');
+});
+
+test('every offered building type survives a shared URL and reaches the backend', () => {
+  for (const type of ['PEB', 'RCC', 'BTS', 'Shed']) {
+    const state = read(`type=${type.toLowerCase()}`);
+    assert.equal(state.filters.warehouseType, type);
+    assert.deepEqual(toApiFilters(state.filters), { warehouseType: type });
+    assert.equal(writeListingSearch(new URLSearchParams(), state).get('type'), type);
+  }
+  assert.equal(read('type=invalid').filters.warehouseType, '');
+});
+
+test('canonical location selections include legacy inventory spellings in API requests', () => {
+  for (const [alias, canonical, api] of [
+    ['bangalore', 'Bengaluru', 'Bangalore,Bengaluru'],
+    ['gurgaon', 'Gurugram', 'Gurgaon,Gurugram'],
+    ['bombay', 'Mumbai', 'Bombay,Mumbai'],
+    ['madras', 'Chennai', 'Madras,Chennai'],
+    ['calcutta', 'Kolkata', 'Calcutta,Kolkata'],
+  ]) {
+    const state = read(`city=${alias}`);
+    assert.equal(state.filters.city, canonical);
+    assert.equal(toApiFilters(state.filters).city, api);
+    assert.equal(writeListingSearch(new URLSearchParams(), state).get('city'), canonical);
+  }
+  assert.equal(toApiFilters(read('city=Ahmedabad&state=gujarat').filters).state, undefined);
+  assert.deepEqual(toApiFilters(read('city=constructor').filters), { city: 'constructor' });
+});
+
+test('cities and their micromarkets use descending inventory order with alphabetical ties', () => {
+  const groups = [[CITY_OPTIONS, CITIES], ...CITY_OPTIONS.map(city => {
+    const markets = micromarketsForCity(city);
+    for (const market of markets) assert.equal(market.parentCity, city);
+    return [markets.map(market => market.canonical), FILTER_MICROMARKETS.filter(market => market.parentCity === city)];
+  })];
+  for (const [options, locations] of groups) {
+    assert.equal(options.length, locations.length);
+    assert.equal(new Set(options).size, locations.length);
+    const counts = new Map(locations.map(location => [location.canonical, location.count]));
+    for (let i = 0; i < options.length; i++) {
+      assert.ok(counts.has(options[i]));
+      if (i === 0) continue;
+      assert.ok(counts.get(options[i - 1]) >= counts.get(options[i]), options[i] + ' is out of order');
+      if (counts.get(options[i - 1]) === counts.get(options[i])) {
+        assert.ok(options[i - 1].localeCompare(options[i], 'en') < 0);
+      }
+    }
+  }
+});
+
+test('micromarket URLs are scoped to the selected city, including city aliases', () => {
+  const state = read('city=bangalore&micromarket=WHITEFIELD&type=BTS');
+  assert.equal(state.filters.micromarket, 'whitefield');
+  assert.deepEqual(toApiFilters(state.filters), { city: 'Bangalore,Bengaluru', micromarket: 'whitefield', warehouseType: 'BTS' });
+  assert.deepEqual(readListingSearch(writeListingSearch(new URLSearchParams('utm_source=test'), state)).filters, state.filters);
+  assert.equal(read('micromarket=whitefield').filters.micromarket, '');
+  assert.equal(read('city=Ahmedabad&micromarket=whitefield').filters.micromarket, '');
+  assert.equal(read('city=Bengaluru&micromarket=unknown-locality').filters.micromarket, '');
+  assert.deepEqual(micromarketsForCity(''), []);
+  assert.deepEqual(micromarketsForCity('Unknown city'), []);
+});
+
+test('changing or clearing a city clears its micromarket and preserves the other requirements', () => {
+  const draft = { ...DEFAULT_FILTERS, city: 'Bengaluru', micromarket: 'whitefield', warehouseType: 'Shed' };
+  assert.deepEqual(changeListingFilter(draft, 'city', 'Pune'), { ...draft, city: 'Pune', micromarket: '' });
+  assert.deepEqual(changeListingFilter(draft, 'city', ''), { ...draft, city: '', micromarket: '' });
+  assert.deepEqual(changeListingFilter(draft, 'city', 'Bengaluru'), draft);
+  assert.deepEqual(changeListingFilter(draft, 'micromarket', ''), { ...draft, micromarket: '' });
+  assert.deepEqual(changeListingFilter(draft, 'fireCompliance', 'yes'), { ...draft, fireCompliance: 'yes' });
+  assert.equal(draft.micromarket, 'whitefield', 'changes must not mutate the current draft');
+});
+
+test('Fire NOC off includes all statuses, including old negative-filter URLs', () => {
+  assert.deepEqual(toApiFilters(read('fire=YES').filters), { fireNocAvailable: true });
+  for (const fire of ['', 'no', 'all', 'invalid']) {
+    const query = new URLSearchParams({ fire, utm_source: 'saved-link' });
+    const state = readListingSearch(query);
+    assert.equal(state.filters.fireCompliance, '');
+    assert.deepEqual(toApiFilters(state.filters), {});
+    assert.equal(writeListingSearch(query, state).toString(), 'utm_source=saved-link');
+  }
+});
+
+test('the open-ended area preset never sends a hidden upper bound', () => {
+  assert.deepEqual(toApiFilters(read('minSqft=50000').filters), { minSpace: 50000 });
+  assert.deepEqual(toApiFilters(read('minSqft=10000&maxSqft=25000').filters), { minSpace: 10000, maxSpace: 25000 });
 });
 
 test('reset clears owned filters and page while retaining selected page size and unrelated parameters', () => {
@@ -63,6 +153,7 @@ const revalidate = (from, to, extra = {}) => listingShouldRevalidate({
 test('query-only pagination/filter navigation retains loader data and ongoing preloads', () => {
   assert.equal(revalidate('/listings', '/listings?page=2'), false);
   assert.equal(revalidate('/listings?city=Delhi', '/listings?city=Bangalore&pageSize=30'), false);
+  assert.equal(revalidate('/listings?city=Bengaluru', '/listings?city=Bengaluru&micromarket=whitefield'), false);
   assert.equal(revalidate('/listings/city/bengaluru', '/listings/city/bengaluru?page=2&pageSize=18'), false);
   assert.equal(revalidate('/overview/karnataka/bengaluru?page=3&pageSize=6', '/overview/karnataka/bengaluru?page=1'), false);
 });

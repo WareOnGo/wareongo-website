@@ -60,7 +60,13 @@ let cache: Micromarket[] | null = null;
  */
 export async function getMicromarkets(): Promise<Micromarket[]> {
   if (cache) return cache;
-  const res = await fetchInventory(`${config.apiBaseUrl}/micromarkets`, {}, import.meta.env.SSR);
+  cache = await fetchMicromarkets();
+  return cache;
+}
+
+/** Uncached reader for browser queries, whose lifetime is managed by React Query. */
+export async function fetchMicromarkets(signal?: AbortSignal): Promise<Micromarket[]> {
+  const res = await fetchInventory(`${config.apiBaseUrl}/micromarkets`, { signal }, import.meta.env.SSR);
   if (!res.ok) {
     throw new Error(`Failed to fetch micromarkets: ${res.status} ${res.statusText}`);
   }
@@ -68,8 +74,7 @@ export async function getMicromarkets(): Promise<Micromarket[]> {
   if (!Array.isArray(json.data)) {
     throw new Error('Micromarkets endpoint returned an unexpected shape');
   }
-  cache = json.data;
-  return cache;
+  return json.data;
 }
 
 /** Only the ones the site builds a page for. */

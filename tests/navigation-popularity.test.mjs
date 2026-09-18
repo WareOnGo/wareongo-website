@@ -86,13 +86,14 @@ const fixture = () => ({
     { id: 7, city: 'Jhajjar', state: 'Haryana', warehouseType: 'PEB' },
   ],
   locations: {
-    cities: [{ slug: 'bengaluru', listings: 10 }, { slug: 'hyderabad', listings: 20 }, { slug: 'jhajjar', listings: 1 }],
+    cities: [{ slug: 'bengaluru', stateSlug: 'karnataka', listings: 10 },
+      { slug: 'hyderabad', stateSlug: 'telangana', listings: 20 }, { slug: 'jhajjar', stateSlug: 'haryana', listings: 1 }],
     states: [{ slug: 'karnataka', listings: 10 }, { slug: 'telangana', listings: 20 }, { slug: 'haryana', listings: 1 }],
   },
   micromarkets: [
-    { name: 'Hoskote', slug: 'hoskote', parentCity: 'Bengaluru', citySlug: 'bengaluru', listings: 4, hasPage: true },
-    { name: 'Kompally', slug: 'kompally', parentCity: 'Hyderabad', citySlug: 'hyderabad', listings: 8, hasPage: true },
-    { name: 'Unpublished', slug: 'unpublished', parentCity: 'Hyderabad', citySlug: 'hyderabad', listings: 100, hasPage: false },
+    { name: 'Hoskote', slug: 'hoskote', parentCity: 'Bengaluru', citySlug: 'bengaluru', listings: 4, hasPage: true, listingIds: [1, 2, 3, 4] },
+    { name: 'Kompally', slug: 'kompally', parentCity: 'Hyderabad', citySlug: 'hyderabad', listings: 8, hasPage: true, listingIds: [4, 5, 6] },
+    { name: 'Unpublished', slug: 'unpublished', parentCity: null, citySlug: null, listings: 1, hasPage: false, listingIds: [7, 7, 999] },
   ],
 });
 
@@ -132,6 +133,12 @@ function rankedIds(source) {
   return JSON.parse(match[1]);
 }
 
+function filterMarkets(source) {
+  const match = source.match(/export const FILTER_MICROMARKETS[^=]*= (\[[\s\S]*?\n\]);/);
+  assert.ok(match, 'the build must emit all city-scoped micromarket choices');
+  return JSON.parse(match[1]);
+}
+
 test('the real generator fetches fresh APIs and writes revised order only at build time', async t => {
   const harness = await generatorHarness(t);
   const data = fixture();
@@ -141,6 +148,12 @@ test('the real generator fetches fresh APIs and writes revised order only at bui
     cities: ['cities/hyderabad', 'cities/bengaluru'],
     micromarkets: ['micromarkets/hyderabad/kompally', 'micromarkets/bengaluru/hoskote'],
   });
+  assert.deepEqual(filterMarkets(await harness.snapshot()), [
+    { canonical: 'Hoskote', slug: 'hoskote', count: 3, parentCity: 'Bengaluru', citySlug: 'bengaluru' },
+    { canonical: 'Kompally', slug: 'kompally', count: 3, parentCity: 'Hyderabad', citySlug: 'hyderabad' },
+    { canonical: 'Hoskote', slug: 'hoskote', count: 1, parentCity: 'Hyderabad', citySlug: 'hyderabad' },
+    { canonical: 'Unpublished', slug: 'unpublished', count: 1, parentCity: 'Jhajjar', citySlug: 'jhajjar' },
+  ], 'scope membership by actual inventory, resolve city aliases, deduplicate IDs and include small markets');
   const requests = (await fs.readFile(path.join(harness.dir, 'requests.jsonl'), 'utf8')).trim().split('\n').map(JSON.parse);
   assert.deepEqual(requests.map(r => r.endpoint).sort(), ['/locations', '/micromarkets', '/warehouses']);
   for (const request of requests) {
@@ -150,11 +163,13 @@ test('the real generator fetches fresh APIs and writes revised order only at bui
   data.locations.cities[0].listings = 30;
   data.locations.states[0].listings = 30;
   data.micromarkets[0].listings = 12;
+  data.micromarkets[0].listingIds = [1, 2];
   await harness.generate(data);
   const updated = rankedIds(await harness.snapshot());
   assert.equal(updated.cities[0], 'cities/bengaluru');
   assert.equal(updated.states[0], 'states/karnataka');
   assert.equal(updated.micromarkets[0], 'micromarkets/bengaluru/hoskote');
+  assert.equal(filterMarkets(await harness.snapshot())[0].slug, 'kompally', 'a rebuild refreshes filter counts and order');
 });
 
 test('failed or stale APIs and malformed counts leave the previous generated snapshot untouched', async t => {

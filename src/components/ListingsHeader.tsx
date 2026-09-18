@@ -21,6 +21,7 @@ export default function ListingsHeader({
     </div>
     <div className="mb-6 flex justify-between items-center gap-3">
       <button onClick={onToggle} disabled={loading}
+        aria-expanded={showFilters} aria-controls={showFilters ? 'listing-filters' : undefined}
         className="inline-flex items-center gap-2 px-4 h-10 rounded-xl border border-wareongo-blue text-wareongo-blue text-sm font-medium bg-transparent hover:bg-wareongo-blue/5 transition-colors">
         <Filter className="w-4 h-4" />
         {showFilters ? 'Hide filters' : 'Show filters'}

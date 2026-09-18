@@ -1,15 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLoaderData, useLocation, useNavigationType } from 'react-router-dom';
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query';
 import PageHead from '@/components/PageHead';
 import Pagination from '@/components/Pagination';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WarehouseCard from '@/components/WarehouseCard';
 import { WarehouseGridSkeleton } from '@/components/PageSkeletons';
-import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Slider } from '@/components/ui/slider';
+import { X } from 'lucide-react';
+import ListingFilters from '@/components/ListingFilters';
 import ListingsHeader from '@/components/ListingsHeader';
 import { listingsQueryOptions } from '@/lib/listingsQuery';
 import { useListingsPrefetch } from '@/hooks/useListingsPrefetch';
@@ -21,39 +20,20 @@ import { verifiedWarehousesLabel } from '@/data/companyStats';
 
 import { useListingSearch } from '@/hooks/useListingSearch';
 import {
-  DEFAULT_FILTERS, DEFAULT_PAGE_SIZE, PAGE_SIZES, CITY_OPTIONS, STATE_OPTIONS,
-  WAREHOUSE_TYPE_OPTIONS, FIRE_COMPLIANCE_OPTIONS, readListingSearch,
-  writeListingSearch, filtersFromSearchParams, type WarehouseFilters,
+  DEFAULT_FILTERS, DEFAULT_PAGE_SIZE, PAGE_SIZES, readListingSearch, toApiFilters,
+  writeListingSearch, filtersFromSearchParams, changeListingFilter, micromarketsForCity, type WarehouseFilters,
 } from '@/lib/listingSearch';
-
-// Frontend filter object → backend API params. Pure, so it can sit outside the component.
-const toApiFilters = (filters: WarehouseFilters) => {
-  let cityFilter = filters.city && filters.city !== 'all' ? filters.city : undefined;
-  if (cityFilter && cityFilter.toLowerCase() === 'bangalore') {
-    cityFilter = 'Bangalore,Bengaluru';
-  }
-  const apiFilters = {
-    city: cityFilter,
-    state: filters.state && filters.state !== 'all' ? filters.state : undefined,
-    warehouseType: filters.warehouseType && filters.warehouseType !== 'all' ? filters.warehouseType : undefined,
-    fireNocAvailable: filters.fireCompliance ? filters.fireCompliance === 'yes' : undefined,
-    minSpace: filters.minSqft > 0 ? filters.minSqft : undefined,
-    maxSpace: filters.maxSqft < 100000 ? filters.maxSqft : undefined,
-  };
-  return Object.fromEntries(
-    Object.entries(apiFilters).filter(([, v]) => v !== undefined),
-  ) as Record<string, string | number | boolean>;
-};
 
 const analyticsFilters = (filters: WarehouseFilters) => {
   const api = toApiFilters(filters);
   return { warehouse_city: api.city ? String(api.city).split(',')[0] : undefined,
-    warehouse_state: api.state as string | undefined, warehouse_type: api.warehouseType as string | undefined,
+    market_slug: api.micromarket, warehouse_type: api.warehouseType,
     fire_noc: api.fireNocAvailable as boolean | undefined, min_sqft: api.minSpace as number | undefined,
     max_sqft: api.maxSpace as number | undefined, filter_count: Object.keys(api).length };
 };
 
 const Listings = () => {
+  const queryClient = useQueryClient();
   // Loader baked in at SSG time (page 1, default page size). null if backend was unreachable.
   const initialData = useLoaderData() as ListingsLoaderData | null;
   const { searchParams, setSearchParams, hrefFor, hydrated } = useListingSearch();
@@ -101,7 +81,7 @@ const Listings = () => {
   const isInitialQuery = Object.keys(apiFilters).length === 0 && currentPage === 1 && pageSize === DEFAULT_PAGE_SIZE;
 
   const { data, isPending, isPlaceholderData, isFetching, isError, refetch } = useQuery({
-    ...listingsQueryOptions(currentPage, pageSize, apiFilters),
+    ...listingsQueryOptions(currentPage, pageSize, apiFilters, queryClient),
     enabled: hydrated,
     initialData: isInitialQuery && initialData
       ? {
@@ -142,7 +122,7 @@ const Listings = () => {
   }, [hydrated, normalizedSearch, searchParams, setSearchParams, resultTrigger]);
 
   const handleFilterChange = (key: keyof WarehouseFilters, value: string | number) => {
-    setDraft({ key: filterKey, filters: { ...filters, [key]: value } });
+    setDraft({ key: filterKey, filters: changeListingFilter(filters, key, value) });
   };
 
   const handleSqftRangeChange = (values: number[]) => {
@@ -173,12 +153,35 @@ const Listings = () => {
   const hasActiveFilters = () => {
     return Boolean(
       appliedFilters.city ||
-        appliedFilters.state ||
+        appliedFilters.micromarket ||
         appliedFilters.fireCompliance ||
         appliedFilters.warehouseType ||
         appliedFilters.minSqft > 0 ||
         appliedFilters.maxSqft < 100000,
     );
+  };
+
+  const activeChips: { id: string; label: string; reset: Partial<WarehouseFilters> }[] = [
+    ...(appliedFilters.city ? [{ id: 'city', label: `City: ${appliedFilters.city}`, reset: { city: '', micromarket: '' } }] : []),
+    ...(appliedFilters.micromarket ? [{ id: 'micromarket',
+      label: micromarketsForCity(appliedFilters.city).find(market => market.slug === appliedFilters.micromarket)?.canonical ?? appliedFilters.micromarket,
+      reset: { micromarket: '' } }] : []),
+    ...(appliedFilters.warehouseType ? [{ id: 'type', label: appliedFilters.warehouseType, reset: { warehouseType: '' } }] : []),
+    ...(appliedFilters.fireCompliance === 'yes' ? [{ id: 'fire', label: 'Fire NOC required', reset: { fireCompliance: '' } }] : []),
+    ...(appliedFilters.minSqft > 0 || appliedFilters.maxSqft < 100000 ? [{
+      id: 'area',
+      label: appliedFilters.maxSqft >= 100000 ? `${appliedFilters.minSqft.toLocaleString('en-IN')}+ sq ft`
+        : `${appliedFilters.minSqft.toLocaleString('en-IN')}–${appliedFilters.maxSqft.toLocaleString('en-IN')} sq ft`,
+      reset: { minSqft: 0, maxSqft: 100000 },
+    }] : []),
+  ];
+
+  const removeFilter = (reset: Partial<WarehouseFilters>) => {
+    const nextFilters = { ...appliedFilters, ...reset };
+    scrollAfterPaging.current = null;
+    setDraft({ key: JSON.stringify(nextFilters), filters: nextFilters });
+    trackEvent('filter_apply', { list_id: 'all_warehouses', trigger: 'apply', ...analyticsFilters(nextFilters) });
+    changeSearch(writeListingSearch(searchParams, { filters: nextFilters, page: 1, pageSize }), 'apply');
   };
 
   const handlePageSizeChange = (newPageSize: number) => {
@@ -207,122 +210,17 @@ const Listings = () => {
             onClear={clearFilters}
           />
 
-          {/* Filter Panel */}
-          {showFilters && (
-            <div className="bg-transparent border border-wareongo-blue rounded-2xl p-6 sm:p-8 mb-8">
-              <div className="mb-6">
-                <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate block mb-1.5">
-                  Refine
-                </span>
-                <h2 className="text-lg sm:text-xl font-semibold text-wareongo-blue">Filter warehouses</h2>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                <div className="space-y-1.5">
-                  <Label htmlFor="city" className="text-[13px]">City</Label>
-                  <Select
-                    value={filters.city}
-                    onValueChange={(value) => handleFilterChange('city', value)}
-                  >
-                    <SelectTrigger id="city" className="bg-wareongo-ivory border-wareongo-blue/20 focus:ring-wareongo-blue/30">
-                      <SelectValue placeholder="Select city" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-wareongo-ivory border-wareongo-blue/20">
-                      <SelectItem value="all" className="focus:bg-wareongo-blue/10 focus:text-black cursor-pointer">All cities</SelectItem>
-                      {CITY_OPTIONS.map((city) => (
-                        <SelectItem key={city} value={city} className="focus:bg-wareongo-blue/10 focus:text-black cursor-pointer">{city}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
+          {showFilters && <ListingFilters filters={filters} onChange={handleFilterChange}
+            onAreaChange={handleSqftRangeChange} onApply={applyFilters} onClear={clearFilters} />}
 
-                <div className="space-y-1.5">
-                  <Label htmlFor="state" className="text-[13px]">State</Label>
-                  <Select
-                    value={filters.state}
-                    onValueChange={(value) => handleFilterChange('state', value)}
-                  >
-                    <SelectTrigger id="state" className="bg-wareongo-ivory border-wareongo-blue/20 focus:ring-wareongo-blue/30">
-                      <SelectValue placeholder="Select state" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-wareongo-ivory border-wareongo-blue/20">
-                      <SelectItem value="all" className="focus:bg-wareongo-blue/10 focus:text-black cursor-pointer">All states</SelectItem>
-                      {STATE_OPTIONS.map((state) => (
-                        <SelectItem key={state} value={state} className="focus:bg-wareongo-blue/10 focus:text-black cursor-pointer">{state}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-1.5">
-                  <Label htmlFor="fireCompliance" className="text-[13px]">Fire NOC</Label>
-                  <Select
-                    value={filters.fireCompliance}
-                    onValueChange={(value) => handleFilterChange('fireCompliance', value)}
-                  >
-                    <SelectTrigger id="fireCompliance" className="bg-wareongo-ivory border-wareongo-blue/20 focus:ring-wareongo-blue/30">
-                      <SelectValue placeholder="Select compliance" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-wareongo-ivory border-wareongo-blue/20">
-                      {FIRE_COMPLIANCE_OPTIONS.map((option) => (
-                        <SelectItem key={option} value={option.toLowerCase()} className="focus:bg-wareongo-blue/10 focus:text-black cursor-pointer">{option}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-1.5">
-                  <Label htmlFor="warehouseType" className="text-[13px]">Warehouse type</Label>
-                  <Select
-                    value={filters.warehouseType}
-                    onValueChange={(value) => handleFilterChange('warehouseType', value)}
-                  >
-                    <SelectTrigger id="warehouseType" className="bg-wareongo-ivory border-wareongo-blue/20 focus:ring-wareongo-blue/30">
-                      <SelectValue placeholder="Select type" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-wareongo-ivory border-wareongo-blue/20">
-                      <SelectItem value="all" className="focus:bg-wareongo-blue/10 focus:text-black cursor-pointer">All types</SelectItem>
-                      {WAREHOUSE_TYPE_OPTIONS.map((type) => (
-                        <SelectItem key={type} value={type} className="focus:bg-wareongo-blue/10 focus:text-black cursor-pointer">{type}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-1.5 md:col-span-2">
-                  <Label className="text-[13px]">Total area range (sqft)</Label>
-                  <div className="pt-2">
-                    <Slider
-                      min={0}
-                      max={100000}
-                      step={1000}
-                      value={[filters.minSqft, filters.maxSqft]}
-                      onValueChange={handleSqftRangeChange}
-                      className="mb-3"
-                    />
-                    <div className="flex justify-between text-xs text-wareongo-slate font-medium">
-                      <span>{filters.minSqft.toLocaleString()} sqft</span>
-                      <span>{filters.maxSqft.toLocaleString()} sqft</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 flex justify-end gap-3">
-                <button
-                  onClick={clearFilters}
-                  className="px-4 h-10 rounded-xl border border-wareongo-blue/30 text-wareongo-blue text-sm font-medium hover:bg-wareongo-blue/5 transition-colors"
-                >
-                  Reset
-                </button>
-                <button
-                  onClick={applyFilters}
-                  className="px-5 h-10 rounded-xl bg-wareongo-blue text-white text-sm font-medium hover:bg-wareongo-blue/90 transition-colors"
-                >
-                  Apply filters
-                </button>
-              </div>
-            </div>
-          )}
+          {activeChips.length > 0 && <div role="group" aria-label="Active filters" className="mb-6 flex flex-wrap items-center gap-2">
+            <span className="mr-1 text-xs text-wareongo-slate">Filtering by</span>
+            {activeChips.map(chip => <button key={chip.id} type="button" onClick={() => removeFilter(chip.reset)}
+              aria-label={`Remove ${chip.label} filter`}
+              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-wareongo-blue/25 bg-transparent px-3 text-xs text-wareongo-blue hover:border-wareongo-blue hover:bg-wareongo-blue/5">
+              {chip.label}<X className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+            </button>)}
+          </div>}
 
           <p role="status" className="sr-only">
             {loadingResults

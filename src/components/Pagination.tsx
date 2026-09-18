@@ -67,12 +67,12 @@ const Pagination = ({
   };
 
   return (
-    <nav aria-label="Pagination" data-analytics-ignore className={`flex justify-center gap-2 ${className}`}>
+    <nav aria-label="Pagination" data-analytics-ignore className={`flex flex-wrap justify-center gap-2 ${className}`}>
       {control(currentPage - 1, 'Previous', 'prev',
         'h-9 rounded-lg border border-wareongo-blue/30 px-4 text-sm font-medium text-wareongo-blue transition-colors hover:bg-wareongo-blue/5 disabled:cursor-not-allowed disabled:opacity-40',
         disabled || currentPage === 1)}
 
-      <div className="flex gap-1.5">
+      <div className="order-first flex w-full justify-center gap-1.5 min-[420px]:order-none min-[420px]:w-auto">
         {windowFor(currentPage, totalPages).map((pageNum) => {
           const isActive = pageNum === currentPage;
           return control(pageNum, String(pageNum), 'jump',

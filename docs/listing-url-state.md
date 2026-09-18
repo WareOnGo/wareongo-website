@@ -11,10 +11,11 @@ Example: `/listings?city=Bangalore&type=PEB&page=3&pageSize=10`.
 
 | Parameter | Meaning |
 | --- | --- |
-| `city`, `state` | Existing location filters; known labels and the Bengaluru alias normalize consistently. |
-| `type` | `PEB` or `RCC`. |
-| `fire` | `yes` or `no`. |
-| `minSqft`, `maxSqft` | Area range, bounded to the existing 0–100,000 controls. Reversed bounds are ordered. |
+| `city` | City name; build-time choices are ranked by warehouse count. Known aliases normalize to canonical labels. |
+| `micromarket` | Locality slug belonging to the selected city. Changing the city clears this selection. Legacy `state` parameters are removed. |
+| `type` | `PEB`, `RCC`, `BTS`, or `Shed`. |
+| `fire` | `yes` requires Fire NOC. Off includes every status; old `no` parameters are removed. |
+| `minSqft`, `maxSqft` | Slider range, 0–100,000 in steps of 1,000. The upper endpoint means **No max**, so it also includes larger warehouses. Reversed bounds are ordered. |
 | `page` | Positive integer, default 1. Invalid or unsafe offsets fall back to 1. |
 | `pageSize` | 10, 21, 30, or 50; default 21. |
 
@@ -42,8 +43,13 @@ unchanged.
 
 ## Data loading and hydration
 
-- React Query still owns main-listing requests, cache identity, freshness, and
-  cancellation. The prefetch query options and image warming policy are unchanged.
+- React Query owns main-listing requests, cache identity, freshness, and
+  cancellation. Visible results and prefetches share query options; image warming
+  policy is unchanged. Ordinary filters use server pagination. Micromarket or
+  area searches read the full matching city/type/NOC scope, cache it for 60 seconds,
+  then filter before slicing into pages. Micromarket membership uses backend IDs,
+  with an exact city check to exclude similarly named cities. Abandoning the last
+  consumer aborts the shared read; one consumer cannot cancel another's request.
 - Listing route loaders do not revalidate for changes to their owned search
   parameters. Path changes, unrelated search changes, actions/submissions, and
   explicit same-URL revalidation retain the router's normal behavior.
