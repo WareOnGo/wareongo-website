@@ -1,3 +1,4 @@
+import InlineText from './InlineText';
 import type { BlogBlock, BlogImage } from '@/data/blogs';
 import { optimizedSrc, optimizedSrcSet, BLOG_FULL_WIDTHS, BLOG_TILE_WIDTHS } from '@/lib/imageOpt';
 
@@ -91,7 +92,7 @@ const ImagesBlock = ({ images, caption }: { images: BlogImage[]; caption?: strin
         </div>
       )}
       {caption && (
-        <figcaption className="mt-2 text-center text-xs sm:text-sm text-wareongo-slate">{caption}</figcaption>
+        <figcaption className="mt-2 text-center text-xs sm:text-sm text-wareongo-slate"><InlineText text={caption} /></figcaption>
       )}
     </figure>
   );
@@ -103,19 +104,19 @@ export const ContentBlock = ({ block }: { block: BlogBlock }) => {
   switch (block.kind) {
     case 'h2':
       return (
-        <h2 className="text-xl sm:text-2xl font-bold text-wareongo-blue mt-10 mb-3">{block.text}</h2>
+        <h2 className="text-xl sm:text-2xl font-bold text-wareongo-blue mt-10 mb-3"><InlineText text={block.text} /></h2>
       );
     case 'h3':
       return (
-        <h3 className="text-lg sm:text-xl font-semibold text-wareongo-charcoal mt-6 mb-2">{block.text}</h3>
+        <h3 className="text-lg sm:text-xl font-semibold text-wareongo-charcoal mt-6 mb-2"><InlineText text={block.text} /></h3>
       );
     case 'p':
-      return <p className="text-[15px] sm:text-base text-wareongo-slate leading-relaxed mb-4">{block.text}</p>;
+      return <p className="text-[15px] sm:text-base text-wareongo-slate leading-relaxed mb-4"><InlineText text={block.text} /></p>;
     case 'ul':
       return (
         <ul className="list-disc pl-5 mb-4 space-y-2">
           {block.items.map((item, i) => (
-            <li key={i} className="text-[15px] sm:text-base text-wareongo-slate leading-relaxed">{item}</li>
+            <li key={i} className="text-[15px] sm:text-base text-wareongo-slate leading-relaxed"><InlineText text={item} /></li>
           ))}
         </ul>
       );
@@ -123,7 +124,7 @@ export const ContentBlock = ({ block }: { block: BlogBlock }) => {
       return (
         <ol className="list-decimal pl-5 mb-4 space-y-2">
           {block.items.map((item, i) => (
-            <li key={i} className="text-[15px] sm:text-base text-wareongo-slate leading-relaxed">{item}</li>
+            <li key={i} className="text-[15px] sm:text-base text-wareongo-slate leading-relaxed"><InlineText text={item} /></li>
           ))}
         </ol>
       );
@@ -137,7 +138,7 @@ export const ContentBlock = ({ block }: { block: BlogBlock }) => {
               <thead>
                 <tr className="border-b border-wareongo-blue bg-wareongo-blue/5">
                   {block.table.headers.map((h, i) => (
-                    <th key={i} className="px-4 py-3 font-semibold text-wareongo-blue text-[11px] sm:text-xs uppercase tracking-[0.12em]">{h}</th>
+                    <th key={i} className="px-4 py-3 font-semibold text-wareongo-blue text-[11px] sm:text-xs uppercase tracking-[0.12em]"><InlineText text={h} /></th>
                   ))}
                 </tr>
               </thead>
@@ -148,7 +149,7 @@ export const ContentBlock = ({ block }: { block: BlogBlock }) => {
                     className={`transition-colors hover:bg-wareongo-blue/5 ${ri < block.table.rows.length - 1 ? 'border-b border-wareongo-blue/30' : ''}`}
                   >
                     {row.map((cell, ci) => (
-                      <td key={ci} className={`px-4 py-3 align-top ${ci === 0 ? 'font-medium text-wareongo-charcoal' : 'text-wareongo-slate'}`}>{cell}</td>
+                      <td key={ci} className={`px-4 py-3 align-top ${ci === 0 ? 'font-medium text-wareongo-charcoal' : 'text-wareongo-slate'}`}><InlineText text={cell} /></td>
                     ))}
                   </tr>
                 ))}

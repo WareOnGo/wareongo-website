@@ -1,3 +1,4 @@
+import InlineText from '../InlineText';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Link } from 'react-router-dom';
 import EditorialImage from './EditorialImage';
@@ -51,7 +52,7 @@ const MicromarketHero = ({
         >
           {content.h1}
         </h1>
-        <p className={`max-w-2xl ${LEAD}`}>{content.heroProse}</p>
+        <p className={`max-w-2xl ${LEAD}`}><InlineText text={content.heroProse} /></p>
 
         {/*
           Boxed tiles from `sm`, a ruled strip below it.

@@ -1,3 +1,4 @@
+import InlineText from './InlineText';
 import { trackEvent, stableContentId } from '@/lib/analytics';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -55,7 +56,7 @@ const FAQAccordion = ({ items, defaultOpenIndex = 0 }: FAQAccordionProps) => {
             >
               <div className="overflow-hidden">
                 <p className="px-5 sm:px-6 pb-5 sm:pb-6 text-sm sm:text-base text-wareongo-slate leading-relaxed">
-                  {item.a}
+                  <InlineText text={item.a} />
                   {item.link && (
                     <>
                       {' '}

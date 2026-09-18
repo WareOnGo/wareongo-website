@@ -1,3 +1,5 @@
+import InlineText from '@/components/InlineText';
+import { plainInlineText } from '@/lib/inline-format';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import PageHead from '@/components/PageHead';
 import Breadcrumbs, { type BreadcrumbItem } from '@/components/Breadcrumbs';
@@ -19,7 +21,7 @@ const countWords = (blog: NonNullable<ReturnType<typeof getBlogBySlug>>): number
     else if (b.kind === 'images' && b.caption) texts.push(b.caption);
   }
   for (const f of blog.faqs) texts.push(f.q, f.a);
-  return texts.join(' ').split(/\s+/).filter(Boolean).length;
+  return texts.map(plainInlineText).join(' ').split(/\s+/).filter(Boolean).length;
 };
 
 /**
@@ -86,7 +88,7 @@ const BlogDetail = () => {
     mainEntity: blog.faqs.map(({ q, a }) => ({
       '@type': 'Question',
       name: q,
-      acceptedAnswer: { '@type': 'Answer', text: a },
+      acceptedAnswer: { '@type': 'Answer', text: plainInlineText(a) },
     })),
   };
 
@@ -136,7 +138,7 @@ const BlogDetail = () => {
                 The id is referenced by the Article LD's speakable cssSelector. */}
             <div id="blog-summary" className="border-l-4 border-wareongo-blue/40 bg-wareongo-blue/5 rounded-r-xl px-4 py-3 mb-8">
               <p className="text-sm font-semibold text-wareongo-charcoal mb-1">In short</p>
-              <p className="text-[15px] sm:text-base text-wareongo-slate leading-relaxed">{blog.summary}</p>
+              <p className="text-[15px] sm:text-base text-wareongo-slate leading-relaxed"><InlineText text={blog.summary} /></p>
             </div>
 
             {blog.blocks.map((block, i) => (

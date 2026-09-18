@@ -1,3 +1,5 @@
+import InlineText from '@/components/InlineText';
+import { plainInlineText } from '@/lib/inline-format';
 import { Link } from 'react-router-dom';
 import PageHead from '@/components/PageHead';
 import Breadcrumbs, { type BreadcrumbItem } from '@/components/Breadcrumbs';
@@ -131,7 +133,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
     mainEntity: content.faqs.map(({ q, a }) => ({
       '@type': 'Question',
       name: q,
-      acceptedAnswer: { '@type': 'Answer', text: a },
+      acceptedAnswer: { '@type': 'Answer', text: plainInlineText(a) },
     })),
   };
 
@@ -238,7 +240,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
                     482px tall against 192px of prose. At 22rem the figure's 4:3
                     lands near the paragraph's own height. */}
                 <div className="grid items-start gap-6 lg:grid-cols-[1fr_22rem] lg:gap-10">
-                  <p className={`max-w-2xl ${PROSE}`}>{content.marketProse}</p>
+                  <p className={`max-w-2xl ${PROSE}`}><InlineText text={content.marketProse ?? ''} /></p>
                   {content.marketImage && <EditorialImage image={content.marketImage} />}
                 </div>
               </section>
@@ -253,7 +255,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
                   {peers.length > 0 && <PeerRentChart peers={peers} />}
                   {content.rentsProse && (
                     <p className={`max-w-2xl ${PROSE}`}>
-                      {content.rentsProse}
+                      <InlineText text={content.rentsProse} />
                     </p>
                   )}
                 </div>
@@ -273,7 +275,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
                   <SpecTable stats={stats} />
                   {content.specProse && (
                     <p className={`max-w-2xl ${PROSE}`}>
-                      {content.specProse}
+                      <InlineText text={content.specProse} />
                     </p>
                   )}
                 </div>

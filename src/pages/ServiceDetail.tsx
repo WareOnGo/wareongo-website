@@ -1,3 +1,5 @@
+import InlineText from '@/components/InlineText';
+import { plainInlineText } from '@/lib/inline-format';
 import { Link, useParams } from 'react-router-dom';
 import PageHead from '@/components/PageHead';
 import Breadcrumbs from '@/components/Breadcrumbs';
@@ -27,7 +29,7 @@ export default function ServiceDetail() {
   };
   const faqLd = {
     '@context': 'https://schema.org', '@type': 'FAQPage',
-    mainEntity: page.faqs.map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+    mainEntity: page.faqs.map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: plainInlineText(a) } })),
   };
   return <div className="min-h-screen flex flex-col bg-wareongo-ivory">
     <PageHead title={page.seoTitle} description={page.description} path={path} image={image}>
@@ -42,7 +44,7 @@ export default function ServiceDetail() {
           <header className="mb-8">
             <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate block mb-3">Our services</span>
             <h1 id="service-title" className="text-2xl sm:text-3xl md:text-4xl font-bold text-wareongo-blue leading-tight mb-4">{page.title}</h1>
-            <p className="text-base sm:text-lg text-wareongo-slate leading-relaxed">{page.summary}</p>
+            <p className="text-base sm:text-lg text-wareongo-slate leading-relaxed"><InlineText text={page.summary} /></p>
           </header>
           {page.blocks.map((block, i) => <ContentBlock key={i} block={block} />)}
           {page.faqs.length > 0 && <section aria-labelledby="service-faq" className="mt-10">
