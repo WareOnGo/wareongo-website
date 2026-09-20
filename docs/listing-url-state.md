@@ -1,9 +1,12 @@
 # Listing URLs
 
-Applied filters and pagination are stored in the URL. The existing filter panel
-still waits for **Apply filters**; changing a draft does not navigate or request
-results. Apply, Clear, page selection, and page-size selection add browser history
-entries. Invalid/default parameter cleanup replaces the current entry.
+Applied filters and pagination are stored in the URL. The filter modal waits for
+**Apply filters**; editing controls, selecting quick presets and Reset only change
+the draft. Apply commits the search and closes the modal. Dismissing without Apply
+keeps the current results; reopening restores the applied filters. Clear all on
+the page clears the applied search immediately. Apply, Clear all, page selection,
+and page-size selection add browser history entries. Invalid/default parameter
+cleanup replaces the current entry.
 
 ## Main listings
 

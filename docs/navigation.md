@@ -41,8 +41,11 @@ focus to the disclosure trigger, including URLs with a trailing slash.
 At the desktop breakpoint, focus moves only when its control disappears;
 the visible logo and content links retain focus.
 
-The base bar is 64px tall on desktop and 60px on mobile, retaining 44px control
-targets. Desktop page links use 15px/500 and Contact Us uses 14px/600.
+Every page uses the homepage header geometry from `navigation.css`; the homepage
+no longer overrides the navbar. The bar is 68px tall on desktop and 74px below
+1280px, retaining at least 44px control targets. Its top inset is 24px on desktop
+and 18px below 1280px, so the header occupies 92px in both layouts. Desktop page
+links use 15px/500 and Contact Us uses 14px/600.
 Request a Warehouse is a plain text link; Contact Us stays
 filled navy. In the Locations panel, the title is 28px/600, column headings
 14px/600, place names 15px/500 and parent cities 12px/400. The three directory
@@ -50,12 +53,21 @@ actions share a baseline. Phone and directory place names use 14px/500.
 
 The base bar has no full-width fill behind it. One slim rounded container holds
 the wordmark, plain page links, Request a Warehouse and the filled Contact Us
-button. It has a faint border and shadow, and is capped at 1200px. The final
+button. It has a subtle shadow and is capped at 1600px. The final
 user-provided Rig.dev screenshot informed this grouping; colours and type
 remain WareOnGo's.
 Equal side columns keep the page-link group geometrically centered, including
-when account controls appear. Desktop padding is 9px vertically and 24px
-horizontally; mobile uses 7px and 16px, with 12px sides on the smallest phones.
+when account controls appear. Desktop padding is 10px vertically and 20px
+horizontally; mobile uses 12px and 24px, with 16px sides below 360px. The outer
+gutter is 32px from 768px, 20px on phones, and 16px below 360px. The homepage hero
+shares these width, gutter and header-height variables.
+
+On the listings page, the Filters button sticks 8px below the shared header.
+Only the buttons have a solid background: the space beside them remains
+transparent and lets pointer input reach the cards beneath. Pagination scrolls
+the first result below both the navbar and filter button. The loading placeholder
+uses the same header and filter controls to preserve the page layout.
+
 General navigation guidance came from the
 [USWDS basic header](https://designsystem.digital.gov/components/header/),
 [HyperUI header patterns](https://www.hyperui.dev/components/marketing/headers)
@@ -90,3 +102,12 @@ loading transitions. It writes screenshots to
 `../wareongo-evals/output/navigation-artifacts` and a report to
 `../wareongo-evals/output/navigation-report`. It uses fixture inventory and
 photographs plus local copies of the actual font faces for repeatable images.
+
+The 20 September 2026 shared-header and sticky-filter checks are in
+`../wareongo-evals/output/navigation-sticky-2026-09-20/`. All 14 desktop/mobile
+Chromium checks passed, covering page consistency, widths from 320px to 1920px,
+sticky positioning, transparent space beside the buttons, modal dismissal,
+pagination, menus and loading placeholders. The mobile pagination assertion
+needed a 1px tolerance for fractional scroll rounding and passed on rerun.
+Screenshots were inspected; TypeScript, changed-file ESLint and the SPA build
+also passed. Physical devices and the full SSG deployment remain unverified.

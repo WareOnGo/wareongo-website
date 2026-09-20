@@ -61,6 +61,7 @@ const Listings = () => {
     setSearchParams(next, { replace });
   };
   const [showFilters, setShowFilters] = useState(false);
+  const filterButtonRef = useRef<HTMLButtonElement>(null);
   const resultsRef = useRef<HTMLElement>(null);
   const scrollAfterPaging = useRef<{ page: number; pageSize: number } | null>(null);
 
@@ -141,6 +142,7 @@ const Listings = () => {
     setDraft({ key: JSON.stringify(normalizedFilters), filters: normalizedFilters });
     trackEvent('filter_apply', { list_id: 'all_warehouses', trigger: 'apply', ...analyticsFilters(normalizedFilters) });
     changeSearch(writeListingSearch(next, { filters: normalizedFilters, page: 1, pageSize }), 'apply');
+    setShowFilters(false);
   };
 
   const clearFilters = () => {
@@ -206,12 +208,18 @@ const Listings = () => {
           <ListingsHeader
             showFilters={showFilters}
             active={hasActiveFilters()}
-            onToggle={() => { if (!showFilters) trackEvent('filter_open', { list_id: 'all_warehouses' }); setShowFilters(!showFilters); }}
+            filterButtonRef={filterButtonRef}
+            onToggle={() => {
+              setDraft({ key: filterKey, filters: appliedFilters });
+              trackEvent('filter_open', { list_id: 'all_warehouses' });
+              setShowFilters(true);
+            }}
             onClear={clearFilters}
           />
 
-          {showFilters && <ListingFilters filters={filters} onChange={handleFilterChange}
-            onAreaChange={handleSqftRangeChange} onApply={applyFilters} onClear={clearFilters} />}
+          <ListingFilters open={showFilters} onOpenChange={setShowFilters} triggerRef={filterButtonRef}
+            filters={filters} onChange={handleFilterChange} onAreaChange={handleSqftRangeChange}
+            onApply={applyFilters} onReset={() => setDraft({ key: filterKey, filters: DEFAULT_FILTERS })} />
 
           {activeChips.length > 0 && <div role="group" aria-label="Active filters" className="mb-6 flex flex-wrap items-center gap-2">
             <span className="mr-1 text-xs text-wareongo-slate">Filtering by</span>
@@ -228,7 +236,7 @@ const Listings = () => {
               : isError ? 'Warehouse results could not be loaded.'
                 : `${warehouses.length} warehouses shown on page ${pagination.currentPage}.`}
           </p>
-          <section ref={resultsRef} aria-label="Warehouse results" aria-busy={loadingResults} tabIndex={-1} className="scroll-mt-24 focus:outline-none">
+          <section ref={resultsRef} aria-label="Warehouse results" aria-busy={loadingResults} tabIndex={-1} className="scroll-mt-[calc(var(--wog-nav-height)+68px)] focus:outline-none">
             {/* Match the page size and card proportions to avoid a collapsing grid. */}
             {loadingResults && (
               <div className="mb-12">

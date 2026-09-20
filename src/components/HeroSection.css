@@ -1,29 +1,10 @@
 .wog-home {
-  --home-header-height: 92px;
-  --home-content-width: 1600px;
-  --home-gutter: 20px;
+  --home-header-height: var(--wog-nav-height);
+  --home-content-width: var(--wog-nav-content-width);
+  --home-gutter: var(--wog-nav-gutter);
 }
 
-/* The floating header and hero share an inset; the photo continues behind it. */
-.wog-home > .wog-nav-header { padding: 18px var(--home-gutter) 0; }
-.wog-home > .wog-nav-header .wog-nav-bar {
-  min-height: 74px;
-  max-width: var(--home-content-width);
-  padding: 12px 24px;
-  border: 0;
-  border-radius: 16px;
-}
-.wog-home > .wog-nav-header .wog-nav-brand { gap: 16px; }
-.wog-home > .wog-nav-header .wog-nav-brand img { height: 30px; }
-.wog-home > .wog-nav-header .wog-nav-brand span {
-  font-size: clamp(17px, 5.47vw, 22px);
-  font-weight: 600;
-  letter-spacing: 0;
-}
-.wog-home > .wog-nav-header .wog-nav-mobile-toggle svg { width: 32px; height: 32px; }
-.wog-home > .wog-nav-header .wog-nav-scrim { top: var(--home-header-height); }
-.wog-home > .wog-nav-header .wog-nav-mega { max-height: calc(100dvh - var(--home-header-height) - 24px); }
-
+/* The shared floating header and hero use the same inset; the photo continues behind it. */
 .wog-hero {
   position: relative;
   isolation: isolate;
@@ -112,7 +93,6 @@
 .wog-hero-button:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
 
 @media (min-width: 768px) {
-  .wog-home { --home-gutter: 32px; }
   .wog-hero-image { top: 0; height: 100%; object-position: center 55%; }
   .wog-hero-content { text-align: left; }
   .wog-hero-categories { justify-content: flex-start; gap: 10px; margin-bottom: 20px; }
@@ -136,18 +116,6 @@
   .wog-hero-request { min-width: 244px; }
 }
 
-@media (min-width: 1280px) {
-  .wog-home > .wog-nav-header { padding: 24px var(--home-gutter) 0; }
-  .wog-home > .wog-nav-header .wog-nav-bar { min-height: 68px; padding: 10px 20px; border-radius: 12px; }
-  .wog-home > .wog-nav-header .wog-nav-brand { gap: 12px; }
-  .wog-home > .wog-nav-header .wog-nav-brand img { height: 26px; }
-  .wog-home > .wog-nav-header .wog-nav-brand span { font-size: 18px; }
-  .wog-home > .wog-nav-header .wog-nav-actions .wog-nav-contact { min-height: 48px; padding-inline: 20px; }
-}
-
 @media (max-width: 359px) {
-  .wog-home { --home-gutter: 16px; }
-  .wog-home > .wog-nav-header .wog-nav-bar { padding-inline: 16px; gap: 8px; }
-  .wog-home > .wog-nav-header .wog-nav-brand { gap: 10px; }
   .wog-hero-categories { gap: 8px; }
 }

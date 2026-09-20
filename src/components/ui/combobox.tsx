@@ -1,4 +1,4 @@
-import { useEffect, useId, useLayoutEffect, useRef, useState, type KeyboardEvent } from 'react';
+import { useEffect, useId, useLayoutEffect, useRef, useState, type KeyboardEvent, type RefObject } from 'react';
 import { Check, ChevronDown } from 'lucide-react';
 
 export interface ComboboxOption {
@@ -15,20 +15,21 @@ interface ComboboxProps {
   emptyLabel: string;
   placeholder?: string;
   disabled?: boolean;
+  popupBoundaryRef?: RefObject<HTMLElement>;
   onValueChange: (value: string) => void;
 }
 
 const normalize = (text: string) => text.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 
 /** Searchable single selection. Typing is a draft; Enter/click commits a choice. */
-export function Combobox({ id, label, value, options, emptyLabel, placeholder = emptyLabel, disabled = false, onValueChange }: ComboboxProps) {
+export function Combobox({ id, label, value, options, emptyLabel, placeholder = emptyLabel, disabled = false, popupBoundaryRef, onValueChange }: ComboboxProps) {
   const listId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState<string | null>(null);
   const [activeIndex, setActiveIndex] = useState(-1);
-  const [popup, setPopup] = useState({ above: false, maxHeight: 240 });
+  const [popup, setPopup] = useState<{ above: boolean; maxHeight: number; left: number; width?: number }>({ above: false, maxHeight: 240, left: 0 });
   const selectedLabel = options.find(option => option.value === value)?.label ?? value;
   const choices = [{ value: '', label: emptyLabel }, ...options];
   // Saved links can reference a location outside the latest build catalogue.
@@ -61,14 +62,27 @@ export function Combobox({ id, label, value, options, emptyLabel, placeholder = 
       const bounds = inputRef.current?.getBoundingClientRect();
       if (!bounds) return;
       const viewport = window.visualViewport;
-      const top = viewport?.offsetTop ?? 0;
-      const bottom = top + (viewport?.height ?? window.innerHeight);
+      const viewportTop = viewport?.offsetTop ?? 0;
+      // Keep suggestions inside the modal's scrollable body as well as the
+      // visual viewport, including when a mobile keyboard reduces its height.
+      const boundaryElement = popupBoundaryRef?.current;
+      const boundary = boundaryElement?.getBoundingClientRect();
+      const top = Math.max(viewportTop, boundary?.top ?? viewportTop);
+      const bottom = Math.min(viewportTop + (viewport?.height ?? window.innerHeight), boundary?.bottom ?? Infinity);
       const below = bottom - bounds.bottom;
       const above = bounds.top - top;
       const desired = Math.min(240, Math.max(1, matches.length) * 44) + 20;
       const flip = below < desired && above > below;
       const maxHeight = Math.max(44, Math.min(240, (flip ? above : below) - 20));
-      setPopup(previous => previous.above === flip && previous.maxHeight === maxHeight ? previous : { above: flip, maxHeight });
+      // Compact, side-by-side fields still need room for full location names.
+      // Expand the suggestions within the body's padding without clipping them.
+      const boundaryStyle = boundaryElement ? getComputedStyle(boundaryElement) : null;
+      const leftEdge = boundary ? boundary.left + parseFloat(boundaryStyle!.paddingLeft) : bounds.left;
+      const rightEdge = boundary ? boundary.right - parseFloat(boundaryStyle!.paddingRight) : bounds.right;
+      const width = Math.max(bounds.width, Math.min(280, rightEdge - leftEdge));
+      const left = Math.max(leftEdge, Math.min(bounds.left, rightEdge - width)) - bounds.left;
+      setPopup(previous => previous.above === flip && previous.maxHeight === maxHeight && previous.left === left && previous.width === width
+        ? previous : { above: flip, maxHeight, left, width });
     };
     measure();
     window.addEventListener('resize', measure);
@@ -81,7 +95,7 @@ export function Combobox({ id, label, value, options, emptyLabel, placeholder = 
       window.visualViewport?.removeEventListener('resize', measure);
       window.visualViewport?.removeEventListener('scroll', measure);
     };
-  }, [expanded, matches.length]);
+  }, [expanded, matches.length, popupBoundaryRef]);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.nativeEvent.isComposing) return;
@@ -150,7 +164,8 @@ export function Combobox({ id, label, value, options, emptyLabel, placeholder = 
         </button>
       </div>
       {expanded && (
-        <div className={`absolute z-30 w-full overflow-hidden rounded-2xl border border-wareongo-blue bg-wareongo-ivory p-1.5 ${popup.above ? 'bottom-full mb-2' : 'top-full mt-2'}`}>
+        <div className={`absolute z-30 w-full overflow-hidden rounded-2xl border border-wareongo-blue bg-wareongo-ivory p-1.5 ${popup.above ? 'bottom-full mb-2' : 'top-full mt-2'}`}
+          style={{ left: popup.left, width: popup.width }}>
           <ul ref={listRef} id={listId} role="listbox" aria-label={`${label} options`} className="overflow-y-auto overscroll-contain" style={{ maxHeight: popup.maxHeight }}>
             {matches.map((option, index) => (
               <li
