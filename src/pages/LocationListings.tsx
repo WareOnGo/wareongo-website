@@ -16,7 +16,6 @@ export default function LocationListings() {
   const { type, canonical, slug, warehouses, warehouseType, typeCounts, parentCity } = data;
   const total = data.pagination.totalItems;
   const isMicromarket = type === 'micromarket';
-  const scopeLabel = type === 'city' ? 'City' : type === 'state' ? 'State' : 'Micro-market';
   const noun = type === 'state' ? `${canonical} state` : canonical;
   // Micromarkets nest under their parent city: /listings/city/{city}/{locality}.
   const basePath =
@@ -148,9 +147,6 @@ export default function LocationListings() {
           />
 
           <header className="mb-8 sm:mb-10 max-w-3xl">
-            <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate block mb-3">
-              {warehouseType ? `${typeLabel} · ${scopeLabel}` : scopeLabel}
-            </span>
             <h1
               id="location-title"
               className="text-3xl sm:text-4xl md:text-5xl font-bold text-wareongo-blue mb-3 leading-tight"

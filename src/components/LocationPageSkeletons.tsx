@@ -29,7 +29,6 @@ export function LocationListingsSkeleton({ pathname }: { pathname: string }) {
   const canonical = summary?.canonical ?? nameFromSlug(isMicro ? variant : slug);
   const parent = cityName(slug);
   const place = isMicro && canonical !== parent ? `${canonical}, ${parent}` : canonical;
-  const scope = isMicro ? 'Micro-market' : kind === 'state' ? 'State' : 'City';
   const chips = warehouseType || isMicro ? [] : (['PEB', 'RCC'] as const).filter(t => types[t].some(p => p.slug === slug));
   const hasStats = (summary?.count ?? 5) >= 5;
   const hasMix = !warehouseType && (isMicro || chips.length === 2);
@@ -48,9 +47,6 @@ export function LocationListingsSkeleton({ pathname }: { pathname: string }) {
         ...(warehouseType ? [{ label: `${warehouseType} warehouses` }] : []),
       ]} />
       <header className="mb-8 sm:mb-10 max-w-3xl">
-        <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate block mb-3">
-          {warehouseType ? `${warehouseType} · ${scope}` : scope}
-        </span>
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-wareongo-blue mb-3 leading-tight">
           {warehouseType ? `${warehouseType} Warehouses` : 'Warehouses'} for Rent in {place}
         </h1>

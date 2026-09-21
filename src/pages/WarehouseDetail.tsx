@@ -376,10 +376,7 @@ const WarehouseDetail = () => {
             <div className="space-y-4 sm:space-y-6 order-2 lg:order-2">
               {/* Header */}
               <header>
-                <div className="flex items-start justify-between gap-3 mb-2">
-                  <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate">
-                    Warehouse
-                  </span>
+                <div className="flex justify-end mb-2">
                   <span
                     className="bg-wareongo-ivory border border-wareongo-blue/20 text-wareongo-blue px-2.5 py-1 rounded-md text-xs font-semibold"
                     aria-label={`Warehouse ID ${warehouseData.id}`}

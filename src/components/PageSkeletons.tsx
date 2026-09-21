@@ -51,8 +51,7 @@ export const WarehouseDetailSkeleton = () => (
           </div>
           <div className="space-y-4 sm:space-y-6 order-2">
             <div>
-              <div className="flex items-start justify-between gap-3 mb-2 h-7">
-                <Skeleton className="h-3 w-24" />
+              <div className="flex justify-end mb-2 h-7">
                 <Skeleton className="h-7 w-20" />
               </div>
               <Skeleton className="h-[30px] sm:h-[38px] md:h-[45px] w-4/5 mb-3" />
