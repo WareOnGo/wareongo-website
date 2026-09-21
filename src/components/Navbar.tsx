@@ -4,6 +4,7 @@ import { useLocation, useNavigation } from 'react-router-dom';
 import ContactFormDialog from '@/components/ContactFormDialog';
 import { useAuth } from '@/context/AuthContext';
 import { trackEvent } from '@/lib/analytics';
+import { useScrollHeader } from '@/hooks/useScrollHeader';
 import type { LocationCategory } from '@/lib/locationNavigation';
 import { NAVIGATION_DESKTOP_QUERY, PRIMARY_LINKS, WAREHOUSE_REQUEST } from '@/data/navigation';
 import { HeaderLink, NavigationBrand } from './navigation/NavigationLinks';
@@ -14,7 +15,7 @@ import './navigation/navigation.css';
 type Variant = 'desktop' | 'mobile';
 type Panel = 'locations' | 'account' | null;
 
-const Navbar = () => {
+const Navbar = ({ scrollLocked = false }: { scrollLocked?: boolean }) => {
   const id = useId();
   const { user, logout, isAuthenticated } = useAuth();
   const location = useLocation();
@@ -34,6 +35,8 @@ const Navbar = () => {
   const contactButton = useRef<HTMLButtonElement>(null);
   const transferringToContact = useRef(false);
   const followingLink = useRef(false);
+  const scrollHidden = useScrollHeader(headerRef,
+    !scrollLocked && !view && !panel && !contactOpen, location.pathname);
 
   const account = isAuthenticated && user ? {
     name: user.name || user.email,
@@ -128,7 +131,8 @@ const Navbar = () => {
     setView(null);
   }, [location.pathname, location.search, navigation.location?.pathname]);
 
-  return <header ref={headerRef} className="wog-nav-header wog-navigation" onBlurCapture={event => {
+  return <header ref={headerRef} className="wog-nav-header wog-navigation"
+    data-scroll-hidden={scrollHidden || undefined} onBlurCapture={event => {
     // CSS can hide a focused control before matchMedia fires. Handle that blur
     // without moving focus away from a still-visible logo or page content.
     if (!event.relatedTarget && event.target instanceof HTMLElement

@@ -27,7 +27,7 @@ export const WarehouseGridSkeleton = ({ count = 9 }: { count?: number }) => (
 
 export const ListingsSkeleton = () => (
   <main className="flex-grow bg-wareongo-ivory">
-    <div className="section-container">
+    <div className="section-container pt-6 md:pt-24">
       <ListingsHeader loading />
       <div className="mb-12"><WarehouseGridSkeleton count={21} /></div>
     </div>

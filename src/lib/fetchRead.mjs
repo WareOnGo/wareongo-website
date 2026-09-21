@@ -1,4 +1,5 @@
-const TRANSIENT_STATUS = new Set([429, 500, 502, 503, 504]);
+// Cloudflare can return 520 for a temporary invalid/empty origin response.
+const TRANSIENT_STATUS = new Set([429, 500, 502, 503, 504, 520]);
 const MAX_ATTEMPTS = 3;
 const MAX_DELAY_MS = 5000;
 

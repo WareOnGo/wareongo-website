@@ -32,6 +32,30 @@ test('persistent pool exhaustion returns the final failure after exactly three a
   assert.equal(fetch.mock.callCount(), 3);
 });
 
+test('a Cloudflare 520 on a warehouse detail read recovers with bounded backoff', async t => {
+  const delays = fastBackoff(t);
+  const failure = new Response('unknown origin error', { status: 520 });
+  const success = Response.json({ id: 2661, city: 'Ranchi' });
+  const responses = [failure, success];
+  const fetch = t.mock.method(globalThis, 'fetch', async () => responses.shift());
+  const init = { headers: { 'Cache-Control': 'no-cache' } };
+  assert.equal(await fetchRead(url, init), success);
+  assert.equal(fetch.mock.callCount(), 2);
+  assert.deepEqual(delays, [500]);
+  assert.ok(failure.bodyUsed);
+  assert.ok(fetch.mock.calls.every(call => call.arguments[0] === url && call.arguments[1] === init));
+});
+
+test('persistent Cloudflare errors still fail after three attempts', async t => {
+  const delays = fastBackoff(t);
+  const fetch = t.mock.method(globalThis, 'fetch', async () => new Response('origin unavailable', { status: 520 }));
+  const response = await fetchRead(url);
+  assert.equal(response.status, 520);
+  assert.equal(await response.text(), 'origin unavailable');
+  assert.equal(fetch.mock.callCount(), 3);
+  assert.deepEqual(delays, [500, 1000]);
+});
+
 test('missing warehouses and other permanent failures are never retried', async t => {
   const fetch = t.mock.method(globalThis, 'fetch');
   for (const status of [400, 401, 403, 404, 422, 501]) {

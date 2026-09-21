@@ -40,7 +40,7 @@ export function LocationListingsSkeleton({ pathname }: { pathname: string }) {
     : getLocationPageContent(kind === 'state' ? 'STATE' : 'CITY', slug));
 
   return <main className="flex-grow" data-testid="location-listings-skeleton">
-    <div className="section-container">
+    <div className="section-container pt-6 md:pt-24">
       <BreadcrumbTrail className="mb-4 sm:mb-6" pendingAncestorAt={kind === 'city' ? 2 : undefined} items={[
         ...trailStart,
         ...(isMicro && canonical !== parent ? [{ label: parent }] : []),

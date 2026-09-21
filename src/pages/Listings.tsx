@@ -195,10 +195,10 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
         description={`Find warehouse & godown space for rent across India, ${verifiedWarehousesLabel} verified listings with transparent pricing. Get custom options, expert guidance & site visit within 48 hours.`}
         path="/listings"
       />}
-      <Navbar />
+      <Navbar scrollLocked={showFilters} />
 
       <main className="flex-grow bg-wareongo-ivory">
-        <div className="section-container">
+        <div className="section-container pt-6 md:pt-24">
           <ListingsHeader
             heading={header}
             showFilters={showFilters}
@@ -209,14 +209,13 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
               trackEvent('filter_open', { list_id: listId });
               setShowFilters(true);
             }}
-            onClear={clearFilters}
           />
 
           <ListingFilters open={showFilters} onOpenChange={setShowFilters} triggerRef={filterButtonRef}
             filters={filters} onChange={handleFilterChange} onAreaChange={handleSqftRangeChange}
             onApply={applyFilters} onReset={() => setDraft({ key: filterKey, filters: DEFAULT_FILTERS })} />
 
-          <ListingFilterChips filters={appliedFilters} onRemove={removeFilter} />
+          <ListingFilterChips filters={appliedFilters} onRemove={removeFilter} onClear={clearFilters} />
 
           <p role="status" className="sr-only">
             {loadingResults

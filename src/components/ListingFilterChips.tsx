@@ -2,9 +2,10 @@ import { X } from 'lucide-react';
 import { micromarketsForCity, selectedAreaPresets, type WarehouseFilters } from '@/lib/listingSearch';
 
 /** Shared geometry for live filters and the pending location route. */
-export default function ListingFilterChips({ filters, onRemove }: {
+export default function ListingFilterChips({ filters, onRemove, onClear }: {
   filters: WarehouseFilters;
   onRemove?: (reset: Partial<WarehouseFilters>) => void;
+  onClear?: () => void;
 }) {
   const ranges = selectedAreaPresets(filters);
   const activeChips: { id: string; label: string; reset: Partial<WarehouseFilters> }[] = [
@@ -35,6 +36,10 @@ export default function ListingFilterChips({ filters, onRemove }: {
         className="inline-flex min-h-11 items-center gap-2 rounded-full border border-wareongo-blue/25 bg-transparent px-3 text-xs text-wareongo-blue hover:border-wareongo-blue hover:bg-wareongo-blue/5">
         {chip.label}<X className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
       </button>)}
+      <button type="button" onClick={onClear} disabled={!onClear}
+        className="inline-flex min-h-11 items-center gap-1 rounded-lg px-2 text-sm text-wareongo-slate transition-colors hover:text-wareongo-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wareongo-blue">
+        <X className="w-4 h-4" aria-hidden="true" />Clear all
+      </button>
     </div>
   );
 }
