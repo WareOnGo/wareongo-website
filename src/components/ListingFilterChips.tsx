@@ -30,10 +30,10 @@ export default function ListingFilterChips({ filters, onRemove, onClear }: {
   if (!activeChips.length) return null;
   return (
     <div role="group" aria-label="Active filters" className="mb-6 flex flex-wrap items-center gap-2">
-      <span className="mr-1 text-xs text-wareongo-slate">Filtering by</span>
+      <span className="mr-1 text-sm text-wareongo-slate">Filtering by</span>
       {activeChips.map(chip => <button key={chip.id} type="button" disabled={!onRemove} onClick={() => onRemove?.(chip.reset)}
         aria-label={`Remove ${chip.label} filter`}
-        className="inline-flex min-h-11 items-center gap-2 rounded-full border border-wareongo-blue/25 bg-transparent px-3 text-xs text-wareongo-blue hover:border-wareongo-blue hover:bg-wareongo-blue/5">
+        className="inline-flex min-h-11 items-center gap-2 rounded-full border border-wareongo-blue/25 bg-transparent px-3 text-sm text-wareongo-blue hover:border-wareongo-blue hover:bg-wareongo-blue/5">
         {chip.label}<X className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
       </button>)}
       <button type="button" onClick={onClear} disabled={!onClear}

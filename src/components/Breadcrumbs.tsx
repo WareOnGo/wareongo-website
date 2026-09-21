@@ -54,7 +54,7 @@ const Breadcrumbs = ({ items, className = '' }: BreadcrumbsProps) => {
 
 export const BreadcrumbTrail = ({ items, className = '', pendingAncestorAt }: BreadcrumbTrailProps) => (
   <nav aria-label="Breadcrumb" className={className}>
-    <ol className="flex items-center flex-wrap gap-1 text-xs sm:text-sm text-wareongo-slate">
+    <ol className="flex items-center flex-wrap gap-1 text-sm text-wareongo-slate">
       {items.map((item, idx) => {
         const isLast = idx === items.length - 1;
         return (

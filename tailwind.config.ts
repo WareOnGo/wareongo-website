@@ -25,7 +25,6 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: ['Montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-				display: ['"Instrument Serif"', 'ui-serif', 'Georgia', 'serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',

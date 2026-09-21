@@ -146,14 +146,15 @@ export default function LocationListings() {
             }
           />
 
-          <header className="mb-8 sm:mb-10 max-w-3xl">
+          <header className="mb-8 sm:mb-10 max-w-5xl">
             <h1
               id="location-title"
-              className="text-3xl sm:text-4xl md:text-5xl font-bold text-wareongo-blue mb-3 leading-tight"
+              className="text-2xl sm:text-4xl md:text-5xl font-bold text-wareongo-blue mb-3 leading-tight"
             >
-              {heading}
+              {headingPrefix} for Rent{' '}
+              <span className="block">in {titlePlace}</span>
             </h1>
-            <p className="text-base sm:text-lg text-wareongo-slate leading-relaxed">
+            <p className="max-w-3xl text-sm leading-normal text-wareongo-slate">
               {showStats ? (
                 <>
                   {countNoun} available for rent in {canonical}
@@ -198,7 +199,7 @@ export default function LocationListings() {
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-wareongo-blue/30 text-sm text-wareongo-blue hover:bg-wareongo-blue/5 transition-colors"
                   >
                     PEB warehouses
-                    <span className="text-xs text-wareongo-slate">({typeCounts.PEB})</span>
+                    <span className="text-wareongo-slate">({typeCounts.PEB})</span>
                   </Link>
                 )}
                 {typeCounts.RCC > 0 && (
@@ -207,7 +208,7 @@ export default function LocationListings() {
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-wareongo-blue/30 text-sm text-wareongo-blue hover:bg-wareongo-blue/5 transition-colors"
                   >
                     RCC warehouses
-                    <span className="text-xs text-wareongo-slate">({typeCounts.RCC})</span>
+                    <span className="text-wareongo-slate">({typeCounts.RCC})</span>
                   </Link>
                 )}
               </div>

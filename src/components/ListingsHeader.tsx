@@ -27,7 +27,7 @@ export default function ListingsHeader({
         className="pointer-events-auto inline-flex items-center gap-2 px-4 h-11 rounded-xl border border-wareongo-blue text-wareongo-blue text-sm font-medium bg-wareongo-ivory hover:bg-[#efede8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wareongo-blue focus-visible:ring-offset-2 focus-visible:ring-offset-wareongo-ivory">
         <Filter className="w-4 h-4" aria-hidden="true" />
         Filters
-        {active && <span className="ml-1 bg-wareongo-blue text-white text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full">Active</span>}
+        {active && <span className="ml-1 bg-wareongo-blue text-white text-sm uppercase tracking-wider px-2 py-0.5 rounded-full">Active</span>}
       </button>
     </div>
   </>;

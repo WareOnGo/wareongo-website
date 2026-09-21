@@ -33,7 +33,7 @@ export function LocationListingsSkeleton({ pathname }: { pathname: string }) {
   const hasStats = (summary?.count ?? 5) >= 5;
   const hasMix = !warehouseType && (isMicro || chips.length === 2);
   const mobileLines = hasStats ? hasMix ? 5 : 4 : 3;
-  const desktopLines = hasStats && hasMix ? 3 : 2;
+  const desktopLines = 2;
   const hasOverview = !warehouseType && (isMicro
     ? getMicromarketContent(slug, variant)
     : getLocationPageContent(kind === 'state' ? 'STATE' : 'CITY', slug));
@@ -46,15 +46,16 @@ export function LocationListingsSkeleton({ pathname }: { pathname: string }) {
         { label: canonical },
         ...(warehouseType ? [{ label: `${warehouseType} warehouses` }] : []),
       ]} />
-      <header className="mb-8 sm:mb-10 max-w-3xl">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-wareongo-blue mb-3 leading-tight">
-          {warehouseType ? `${warehouseType} Warehouses` : 'Warehouses'} for Rent in {place}
+      <header className="mb-8 sm:mb-10 max-w-5xl">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-wareongo-blue mb-3 leading-tight">
+          {warehouseType ? `${warehouseType} Warehouses` : 'Warehouses'} for Rent{' '}
+          <span className="block">in {place}</span>
         </h1>
         {/* The inventory-dependent lead is unknown until the loader completes.
             Reserve text lines at the actual paragraph's responsive line height. */}
-        <div>
+        <div className="max-w-3xl">
           {Array.from({ length: mobileLines }, (_, i) => <div key={i}
-            className={`h-[26px] sm:h-7 flex items-center ${i >= desktopLines ? 'sm:hidden' : ''}`}>
+            className={`h-[21px] flex items-center ${i >= desktopLines ? 'sm:hidden' : ''}`}>
             <Skeleton className={`h-4 ${i === mobileLines - 1 ? 'w-2/3' : 'w-full'}`} />
           </div>)}
         </div>
