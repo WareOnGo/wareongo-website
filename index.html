@@ -10,25 +10,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="WareOnGo" />
     <!-- title / description / og tags injected per-page via PageHead (react-helmet-async) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Preload the hero H1 font weight directly so its bytes start arriving before the Google Fonts CSS is parsed. -->
+    <!-- Match the local variable font in fonts.css so this request is reused. -->
     <link
       rel="preload"
       as="font"
       type="font/woff2"
-      href="https://fonts.gstatic.com/s/montserrat/v31/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCuM73w5aXp-p7K4KLg.woff2"
+      href="/src/assets/fonts/montserrat-v31-normal-latin.woff2"
       crossorigin
     />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    </noscript>
     <link rel="preload" as="image" href="/logo_transparent.webp" />
     <!-- Google tag is initialized by PageHead on production hostnames only. -->
   </head>

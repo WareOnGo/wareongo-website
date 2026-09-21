@@ -19,19 +19,28 @@
   color: #fff;
   background: #343a40;
 }
-.wog-hero-image, .wog-hero-shade {
+.wog-hero::before, .wog-hero-image, .wog-hero-shade {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
 }
+.wog-hero::before, .wog-hero-image {
+  top: -14%;
+  height: 114%;
+}
+/* Vite inlines this tiny preview into the CSS. It shares the photo's crop and
+   remains visible until the browser can paint the full image, even without JS. */
+.wog-hero::before {
+  content: '';
+  z-index: -3;
+  background: url('../assets/hero-image-preview.webp') 42% center / cover no-repeat;
+}
 .wog-hero-image {
   z-index: -2;
   object-fit: cover;
   object-position: 42% center;
-  top: -14%;
-  height: 114%;
 }
 .wog-hero-shade {
   z-index: -1;
@@ -93,7 +102,9 @@
 .wog-hero-button:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
 
 @media (min-width: 768px) {
-  .wog-hero-image { top: 0; height: 100%; object-position: center 55%; }
+  .wog-hero::before, .wog-hero-image { top: 0; height: 100%; }
+  .wog-hero::before { background-position: center 55%; }
+  .wog-hero-image { object-position: center 55%; }
   .wog-hero-content { text-align: left; }
   .wog-hero-categories { justify-content: flex-start; gap: 10px; margin-bottom: 20px; }
   .wog-hero-categories li { padding: 6px 10px; border-radius: 10px; font-size: 14px; }

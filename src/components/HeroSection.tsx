@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
 import { trackEvent } from '@/lib/analytics';
-import heroImage from '@/assets/hero-image.webp';
-import heroImageWide from '@/assets/hero-image-2560.webp';
-import heroImageRetina from '@/assets/hero-image-3840.webp';
-import heroImageMobile from '@/assets/hero-image-mobile.webp';
+import heroImage from '@/assets/hero-image-1536.jpg';
+import heroImageWide from '@/assets/hero-image-2560.jpg';
+import heroImageRetina from '@/assets/hero-image-3840.jpg';
+import heroImageMobile from '@/assets/hero-image-mobile.jpg';
+import heroAvif from '@/assets/hero-image-1536.avif';
+import heroAvifWide from '@/assets/hero-image-2560.avif';
+import heroAvifRetina from '@/assets/hero-image-3840.avif';
+import heroAvifMobile from '@/assets/hero-image-mobile.avif';
 import './HeroSection.css';
 
 // React 18 forwards this newer image hint as a lowercase HTML attribute.
@@ -12,7 +16,13 @@ const imagePriority = { fetchpriority: 'high' };
 const HeroSection = () => (
   <section className="wog-hero" aria-labelledby="hero-heading" data-analytics-placement="hero">
     <picture>
+      <source media="(max-width: 767px)" type="image/avif" srcSet={heroAvifMobile} />
       <source media="(max-width: 767px)" srcSet={heroImageMobile} />
+      <source
+        type="image/avif"
+        srcSet={`${heroAvif} 1536w, ${heroAvifWide} 2560w, ${heroAvifRetina} 3840w`}
+        sizes="100vw"
+      />
       <img
         className="wog-hero-image"
         src={heroImage}
@@ -23,6 +33,7 @@ const HeroSection = () => (
         height="2048"
         {...imagePriority}
         loading="eager"
+        decoding="async"
       />
     </picture>
     <div className="wog-hero-shade" aria-hidden="true" />

@@ -104,16 +104,18 @@ const Index = () => {
         <script type="application/ld+json">{JSON.stringify(webSiteLd)}</script>
       </PageHead>
       <Navbar />
-      <HeroSection />
-      <WhatWeStandForSection />
-      {/* <BentoSection /> */}
-      <HowItWorksSection />
-      <EdgeSection />
-      {/* <CaseStudiesSection /> */}
-      <FeaturedListingsSection />
-      {/* <AboutUsSection /> */}
-      <RequestCTASection />
-      <FAQSection />
+      <main className="flex flex-col flex-1">
+        <HeroSection />
+        <WhatWeStandForSection />
+        {/* <BentoSection /> */}
+        <HowItWorksSection />
+        <EdgeSection />
+        {/* <CaseStudiesSection /> */}
+        <FeaturedListingsSection />
+        {/* <AboutUsSection /> */}
+        <RequestCTASection />
+        <FAQSection />
+      </main>
       <Footer />
     </div>
   );

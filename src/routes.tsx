@@ -3,8 +3,6 @@ import RootLayout from "./RootLayout";
 import { listingShouldRevalidate } from "./lib/listingSearch";
 import Index from "./pages/Index";
 import RouteErrorBoundary from "./components/RouteErrorBoundary";
-import { caseStudies } from "./data/caseStudies";
-import { blogs } from "./data/blogs";
 import { servicePages } from "./data/servicePages";
 import { servicePath } from "./data/serviceCatalog";
 import { warehouseLoader, warehouseStaticPaths, listingsLoader } from "./loaders/warehouseLoader";
@@ -52,7 +50,9 @@ export const routes: RouteRecord[] = [
           {
             path: "casestudies/:slug",
             lazy: lazyDefault(() => import("./pages/CaseStudyDetail")),
-            getStaticPaths: () => caseStudies.map((cs) => `/casestudies/${cs.slug}`),
+            // Only the static build needs the entire content collection here.
+            // Keep it out of the initial browser bundle for every route.
+            getStaticPaths: async () => (await import("./data/caseStudies")).caseStudies.map((cs) => `/casestudies/${cs.slug}`),
           },
           // Informational blogs — intentionally unlinked from nav/footer ("hidden"),
           // but in sitemap.xml + llms.txt so search engines and AI assistants find them.
@@ -60,7 +60,7 @@ export const routes: RouteRecord[] = [
           {
             path: "blogs/:slug",
             lazy: lazyDefault(() => import("./pages/BlogDetail")),
-            getStaticPaths: () => blogs.map((g) => `/blogs/${g.slug}`),
+            getStaticPaths: async () => (await import("./data/blogs")).blogs.map((g) => `/blogs/${g.slug}`),
           },
           {
             path: "listings",

@@ -32,5 +32,20 @@ export default defineConfig(({ mode, command }) => ({
     script: "async",
     dirStyle: "nested",
     formatting: "none",
+    // Paint prerendered pages without waiting for the shared stylesheet. Keep
+    // that stylesheet intact for hydrated controls and client-side navigation.
+    beastiesOptions: {
+      preload: "media",
+      noscriptFallback: true,
+      pruneSource: false,
+      reduceInlineStyles: false,
+      inlineFonts: true,
+      // Preserve keyboard-focus motion overrides: this extractor version
+      // cannot match :has(:focus-visible) against the static document.
+      allowRules: [/\.wog-nav-header:has\(/],
+      // index.html preloads only the Montserrat Latin face; other subsets
+      // should load only when the page actually uses them.
+      preloadFonts: false,
+    },
   },
 }));
