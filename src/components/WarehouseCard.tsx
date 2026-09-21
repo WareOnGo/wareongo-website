@@ -18,6 +18,7 @@ interface WarehouseCardProps {
   // WebP) fails to load, the <img> swaps once to this URL before being marked
   // failed. null entries mean no fallback available.
   imageFallbacks?: (string | null)[];
+  coverImage?: string;
   address: string;
   location: {
     city: string;
@@ -29,7 +30,8 @@ interface WarehouseCardProps {
   fireCompliance: boolean;
   features: string[];
   href: string;
-  // Position in the grid — first 3 cards stay eager for LCP, the rest lazy-load.
+  // Only the first photo is critical at every grid width. Native lazy loading
+  // still discovers the other visible desktop/tablet cards after layout.
   index?: number;
   analyticsContext?: AnalyticsParams;
 }
@@ -39,6 +41,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
   image,
   images = [],
   imageFallbacks = [],
+  coverImage,
   address,
   location,
   size,
@@ -51,8 +54,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
 }) => {
   const listingContext = { ...analyticsContext, warehouse_id: id, warehouse_city: location.city, warehouse_state: location.state, size_sqft: size, price_per_sqft: price ?? undefined };
   const impressionRef = useListingImpression(listingContext);
-  // 3-col desktop grid → first row is 3 cards; keep them eager for LCP.
-  const isAboveFold = index < 3;
+  const isFirstCard = index === 0;
   const altText = `${size ? size.toLocaleString() + ' sqft ' : ''}warehouse in ${location.city}, ${location.state}`;
   const [interacting, setInteracting] = useState(false);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -121,6 +123,8 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
                 key={`${gallery.state.key}:${currentImageIndex}`}
                 primary={frame.primary}
                 initialSrc={gallery.source(currentImageIndex)}
+                preview={currentImageIndex === 0 && (!gallery.state.resolved[0] || gallery.state.resolved[0] === coverImage)
+                  ? coverImage : undefined}
                 fallback={frame.fallback}
                 alt={altText}
                 width={640}
@@ -135,9 +139,9 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
                 }`}
                 onLoaded={(url) => gallery.loaded(currentImageIndex, url)}
                 onFailed={() => gallery.failed(currentImageIndex)}
-                loading={isAboveFold ? 'eager' : 'lazy'}
+                loading={isFirstCard ? 'eager' : 'lazy'}
                 decoding="async"
-                fetchPriority={isAboveFold ? 'high' : 'auto'}
+                fetchPriority={isFirstCard ? 'high' : 'auto'}
               />
             </div>
             
@@ -166,7 +170,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
                 
                 {/* Image indicators - only show if multiple images */}
                 {gallery.valid.length > 1 && (
-                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-30">
+                  <div className="absolute bottom-1 left-1/2 -translate-x-1/2 flex max-w-[calc(100%-1.5rem)] overflow-x-auto z-30">
                     {gallery.valid.map((actualIndex, validIndex) => {
                       return (
                         <button
@@ -176,7 +180,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
                             if (actualIndex !== currentImageIndex && !slideDirection) trackEvent('listing_gallery_interaction', { ...listingContext, placement: 'warehouse_card', action: 'dot', image_index: validIndex + 1 });
                             gallery.select(actualIndex);
                           }}
-                          className="group p-1"
+                          className="group flex h-8 w-8 shrink-0 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                           aria-label={`Go to image ${validIndex + 1}`}
                         >
                           <div

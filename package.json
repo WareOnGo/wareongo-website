@@ -6,8 +6,8 @@
   "scripts": {
     "test:formatting": "node tests/formatting.test.mjs",
     "dev": "vite",
-    "build": "node scripts/generate-locations.mjs && node scripts/generate-blogs.mjs && node scripts/generate-service-pages.mjs && node scripts/generate-legal-pages.mjs && node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs && vite-react-ssg build && node scripts/stabilize-loader-data.mjs && node scripts/generate-warehouse-route-map.mjs && node scripts/generate-sitemap.mjs && node scripts/indexnow-ping.mjs",
-    "build:dev": "node scripts/generate-locations.mjs && node scripts/generate-blogs.mjs && node scripts/generate-service-pages.mjs && node scripts/generate-legal-pages.mjs && node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs && vite-react-ssg build --mode development && node scripts/stabilize-loader-data.mjs && node scripts/generate-warehouse-route-map.mjs && node scripts/generate-sitemap.mjs",
+    "build": "node scripts/generate-locations.mjs && node scripts/generate-blogs.mjs && node scripts/generate-service-pages.mjs && node scripts/generate-legal-pages.mjs && node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs && vite-react-ssg build && node scripts/stabilize-loader-data.mjs && node scripts/publish-listing-covers.mjs && node scripts/generate-warehouse-route-map.mjs && node scripts/generate-sitemap.mjs && node scripts/indexnow-ping.mjs",
+    "build:dev": "node scripts/generate-locations.mjs && node scripts/generate-blogs.mjs && node scripts/generate-service-pages.mjs && node scripts/generate-legal-pages.mjs && node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs && vite-react-ssg build --mode development && node scripts/stabilize-loader-data.mjs && node scripts/publish-listing-covers.mjs && node scripts/generate-warehouse-route-map.mjs && node scripts/generate-sitemap.mjs",
     "build:spa": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -20,6 +20,7 @@
     "test:analytics": "node tests/analytics.test.mjs",
     "test:services": "node --test tests/service-content.test.mjs",
     "test:card-links": "node tests/warehouse-card-links.test.mjs",
+    "test:listing-covers": "node tests/listing-cover.test.mjs",
     "test:listing-url": "node tests/listing-search.test.mjs && node tests/location-pagination.test.mjs && node tests/micromarket-listings.test.mjs && node tests/location-listing-seed.test.mjs && node tests/prerender-errors.test.mjs"
   },
   "dependencies": {
@@ -62,6 +63,7 @@
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
     "postcss": "^8.4.47",
+    "sharp": "0.34.5",
     "tailwindcss": "^3.4.11",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",

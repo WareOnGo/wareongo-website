@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { useLoaderData, useLocation, useNavigationType } from 'react-router-dom';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { Head } from 'vite-react-ssg';
 import PageHead from '@/components/PageHead';
 import Pagination from '@/components/Pagination';
 import Navbar from '@/components/Navbar';
@@ -17,6 +18,8 @@ import { useListingResults } from '@/hooks/useListingAnalytics';
 import { warehousePath } from '@/lib/warehouseSlug';
 import type { ListingsLoaderData } from '@/loaders/warehouseLoader';
 import { verifiedWarehousesLabel } from '@/data/companyStats';
+import { config } from '@/config/config';
+import { warehouseImages } from '@/lib/warehouseImages';
 
 import { useListingSearch } from '@/hooks/useListingSearch';
 import {
@@ -107,6 +110,11 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
     currentPage > Math.max(1, data.pagination.totalPages);
   const loadingResults = isPending || isPlaceholderData || !!outOfRange;
   const warehouses = data?.warehouses ?? [];
+  const firstWarehouse = !loadingResults && !isLoadingError ? warehouses[0] : undefined;
+  const firstSource = firstWarehouse ? warehouseImages(firstWarehouse.images.length
+    ? firstWarehouse.images : [firstWarehouse.image])[0]?.primary : undefined;
+  const coverImage = initialData?.coverImage;
+  const firstPhoto = coverImage && coverImage.source === firstSource ? coverImage.src : firstSource;
   const pagination = data?.pagination ?? {
     currentPage: 1,
     totalPages: 1,
@@ -190,6 +198,11 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
 
   return (
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
+      <Head>
+        <link rel="preconnect" href={new URL(config.apiBaseUrl).origin} crossOrigin="anonymous" />
+        {firstSource && <link rel="preconnect" href={new URL(firstSource).origin} />}
+        {firstPhoto && <link rel="preload" as="image" href={firstPhoto} fetchPriority="high" />}
+      </Head>
       {head ?? <PageHead
         title="Warehouse & Godown for Rent in India | Verified Listings | WareOnGo"
         description={`Find warehouse & godown space for rent across India, ${verifiedWarehousesLabel} verified listings with transparent pricing. Get custom options, expert guidance & site visit within 48 hours.`}
@@ -267,6 +280,8 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
                     image={warehouse.image}
                     images={warehouse.images}
                     imageFallbacks={warehouse.imageFallbacks}
+                    coverImage={coverImage && coverImage.source === (warehouse.images[0] ?? warehouse.image)
+                      ? coverImage.src : undefined}
                     address={warehouse.address}
                     location={warehouse.location}
                     size={warehouse.size}

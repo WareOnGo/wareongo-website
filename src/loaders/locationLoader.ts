@@ -148,9 +148,13 @@ async function seedLocationListings(data: LocationListingsLoaderData): Promise<L
   const filters = locationListingPreset(data);
   // Use the same matching, ordering and totals as every later browser request.
   const response = await warehouseAPI.getWarehouses(1, DEFAULT_PAGE_SIZE, toApiFilters(filters));
+  const warehouses = response.data.map(transformWarehouseData);
+  const coverImage = import.meta.env.SSR
+    ? await (await import('@/lib/listingCover.server.mjs')).prepareListingCover(warehouses[0]?.images[0])
+    : undefined;
   return createLocationListingSeed(data, {
     pagination: response.pagination, fetchedAt: Date.now(),
-    warehouses: response.data.map(transformWarehouseData),
+    warehouses, coverImage,
   });
 }
 

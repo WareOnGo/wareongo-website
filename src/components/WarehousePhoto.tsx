@@ -6,15 +6,17 @@ const IMAGE_TIMEOUT_MS = 15_000;
 type Props = Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'srcSet' | 'onLoad' | 'onError'> & {
   primary: string;
   initialSrc: string;
+  /** A build-generated card cover; remote primary/original recovery stays intact. */
+  preview?: string;
   fallback: string | null;
   onLoaded: (url: string) => void;
   onFailed: () => void;
   showLoadingIndicator?: boolean;
 };
 
-/** One primary, one fallback, then a terminal result. No cache-busting retries. */
-export default function WarehousePhoto({ primary, initialSrc, fallback, onLoaded, onFailed, loading = 'eager', showLoadingIndicator = true, ...props }: Props) {
-  const [src, setSrc] = useState(initialSrc);
+/** Optional local cover, one primary, one fallback, then a terminal result. */
+export default function WarehousePhoto({ primary, initialSrc, preview, fallback, onLoaded, onFailed, loading = 'eager', showLoadingIndicator = true, ...props }: Props) {
+  const [src, setSrc] = useState(initialSrc !== primary ? initialSrc : preview ?? initialSrc);
   const [pending, setPending] = useState(true);
   const image = useRef<HTMLImageElement>(null);
   const attempted = useRef(new Set<string>());
@@ -32,9 +34,10 @@ export default function WarehousePhoto({ primary, initialSrc, fallback, onLoaded
   const failure = () => {
     if (attempted.current.has(src) || settled.current.has(src)) return;
     attempted.current.add(src);
-    if (fallback && !attempted.current.has(fallback) && fallback !== src) {
+    const next = preview && src === preview ? primary : fallback;
+    if (next && !attempted.current.has(next) && next !== src) {
       setPending(true);
-      setSrc(fallback);
+      setSrc(next);
     } else {
       setPending(false);
       callbacks.current.onFailed();

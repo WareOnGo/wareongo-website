@@ -15,6 +15,7 @@ export interface WarehouseLoaderData extends DetailData {
 }
 export type ListingsLoaderData = {
   fetchedAt?: number;
+  coverImage?: { source: string; src: string };
   warehouses: ReturnType<typeof transformWarehouseData>[];
   pagination: {
     currentPage: number;
@@ -31,9 +32,13 @@ const LISTINGS_DEFAULT_PAGE_SIZE = 21;
 export async function listingsLoader(): Promise<ListingsLoaderData | null> {
   try {
     const resp = await warehouseAPI.getWarehouses(1, LISTINGS_DEFAULT_PAGE_SIZE);
+    const warehouses = resp.data.map(transformWarehouseData);
+    const coverImage = import.meta.env.SSR
+      ? await (await import('@/lib/listingCover.server.mjs')).prepareListingCover(warehouses[0]?.images[0])
+      : undefined;
     return {
       fetchedAt: Date.now(),
-      warehouses: resp.data.map(transformWarehouseData),
+      warehouses, coverImage,
       pagination: resp.pagination,
     };
   } catch (err) {

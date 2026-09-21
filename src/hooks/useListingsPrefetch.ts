@@ -46,6 +46,17 @@ function defer(work: () => void) {
   };
 }
 
+function hasPendingVisibleImage(results: HTMLElement) {
+  return [...results.querySelectorAll('img')].some(image => {
+    if (image.complete) return false;
+    // Skip offscreen cards before measuring their photo contents.
+    const card = image.closest('[data-warehouse-card]')?.getBoundingClientRect();
+    if (card && (card.bottom <= 0 || card.top >= window.innerHeight || card.right <= 0 || card.left >= window.innerWidth)) return false;
+    const rect = image.getBoundingClientRect();
+    return rect.bottom > 0 && rect.top < window.innerHeight && rect.right > 0 && rect.left < window.innerWidth;
+  });
+}
+
 function createPhotoBatch(key: string) {
   const attempted = new Set<string>();
   const pending = new Map<string, HTMLImageElement>();
@@ -96,26 +107,46 @@ export function useListingsPrefetch({ page, pageSize, filters, totalPages, ready
   const photos = useMemo(() => createPhotoBatch(targetKey), [targetKey]);
 
   useEffect(() => {
-    if (!enabled) return;
+    const results = resultsRef.current;
+    if (!enabled || !results) return;
     let disposed = false;
-    const cancel = defer(() => {
-      void client.prefetchQuery(options).then(() => {
-        if (disposed) return;
-        const state = client.getQueryState(options.queryKey);
-        const data = client.getQueryData(options.queryKey);
-        if (state?.status === 'success' && data) setPrefetched({ key: targetKey, data });
+    let started = false;
+    let cancel: (() => void) | undefined;
+    const schedule = () => {
+      if (started || cancel) return;
+      cancel = defer(() => {
+        cancel = undefined;
+        // CPU idle does not mean the visible photos have finished downloading.
+        // Keep the next-page API request off their critical network path.
+        if (hasPendingVisibleImage(results)) return;
+        started = true;
+        void client.prefetchQuery(options).then(() => {
+          if (disposed) return;
+          const state = client.getQueryState(options.queryKey);
+          const data = client.getQueryData(options.queryKey);
+          if (state?.status === 'success' && data) setPrefetched({ key: targetKey, data });
+        });
       });
-    });
+    };
+    schedule();
+    results.addEventListener('load', schedule, true);
+    results.addEventListener('error', schedule, true);
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
     return () => {
       disposed = true;
-      cancel();
+      cancel?.();
+      results.removeEventListener('load', schedule, true);
+      results.removeEventListener('error', schedule, true);
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
       // Next may have promoted this very request to the visible query. Passive
       // cleanup must not abort it while React is subscribing its new observer.
       if (currentKey.current !== targetKey) {
         void client.cancelQueries({ queryKey: options.queryKey, exact: true, type: 'inactive' });
       }
     };
-  }, [client, enabled, options, targetKey]);
+  }, [client, enabled, options, resultsRef, targetKey]);
 
   useEffect(() => {
     const node = pagerRef.current;
@@ -151,11 +182,7 @@ export function useListingsPrefetch({ page, pageSize, filters, totalPages, ready
       if (cancel) return;
       cancel = defer(() => {
         cancel = undefined;
-        const visiblePending = [...results.querySelectorAll('img')].some(image => {
-          const rect = image.getBoundingClientRect();
-          return !image.complete && rect.bottom > 0 && rect.top < window.innerHeight && rect.right > 0 && rect.left < window.innerWidth;
-        });
-        if (!visiblePending) urls.forEach(url => photos.preload(url));
+        if (!hasPendingVisibleImage(results)) urls.forEach(url => photos.preload(url));
       });
     };
     schedule();
