@@ -6,6 +6,10 @@ import type { EditorialContent } from '@/data/editorial';
 import type { DerivedStats } from '@/services/derivedStats';
 import { createListingBreadcrumbs } from '@/lib/listingBreadcrumbs';
 import type { BreadcrumbItem } from '@/components/Breadcrumbs';
+import { DEFAULT_PAGE_SIZE, toApiFilters, type WarehouseFilters } from '@/lib/listingSearch';
+import { canonicalListingLocation as canonicalize, matchesListingType } from '@/lib/listingLocation.mjs';
+import { createLocationListingSeed, locationListingPreset } from '@/lib/locationListingSeed';
+import type { ListingsLoaderData } from './warehouseLoader';
 import { getLocationPageContent, locationPages } from '@/data/locationPages';
 import { getLocations, locationStats, locationOverviewPath, locationPath, type LocationKind } from '@/services/locationsAPI';
 import {
@@ -17,46 +21,11 @@ import {
 
 // ----- canonical name + slug helpers ----------------------------------------
 
-const CITY_ALIASES: Record<string, string> = {
-  bangalore: 'Bengaluru',
-  bombay: 'Mumbai',
-  calcutta: 'Kolkata',
-  madras: 'Chennai',
-  gurgaon: 'Gurugram',
-};
-
-const titleCase = (s: string): string =>
-  s
-    .toLowerCase()
-    .split(/\s+/)
-    .filter(Boolean)
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(' ');
-
-const canonicalize = (raw: string | null | undefined, type: 'city' | 'state'): string | null => {
-  if (!raw) return null;
-  const lower = raw.trim().toLowerCase();
-  if (!lower) return null;
-  if (type === 'city' && CITY_ALIASES[lower]) return CITY_ALIASES[lower];
-  return titleCase(lower);
-};
-
 export const slugify = (name: string): string =>
   name
     .toLowerCase()
     .replace(/\s+/g, '-')
     .replace(/[^a-z0-9-]/g, '');
-
-// Every raw name that should match a given canonical (handles aliases).
-const matchersFor = (canonical: string, type: 'city' | 'state'): Set<string> => {
-  const out = new Set<string>([canonical.toLowerCase()]);
-  if (type === 'city') {
-    for (const [alias, can] of Object.entries(CITY_ALIASES)) {
-      if (can === canonical) out.add(alias);
-    }
-  }
-  return out;
-};
 
 // ----- cached warehouse fetch -----------------------------------------------
 
@@ -169,6 +138,22 @@ export type EditorialPageData = LocationListingsLoaderData & {
 };
 export type MicromarketPageData = EditorialPageData;
 
+export type LocationListingSeed = LocationListingsLoaderData & ListingsLoaderData & {
+  filters: WarehouseFilters;
+  summary: { minSize: number | null; maxSize: number | null; cities: string[] };
+};
+
+/** Only grid routes use this seed. Overview loaders retain their full inventory. */
+async function seedLocationListings(data: LocationListingsLoaderData): Promise<LocationListingSeed> {
+  const filters = locationListingPreset(data);
+  // Use the same matching, ordering and totals as every later browser request.
+  const response = await warehouseAPI.getWarehouses(1, DEFAULT_PAGE_SIZE, toApiFilters(filters));
+  return createLocationListingSeed(data, {
+    pagination: response.pagination, fetchedAt: Date.now(),
+    warehouses: response.data.map(transformWarehouseData),
+  });
+}
+
 const countTypes = (scoped: Warehouse[]) =>
   scoped.reduce(
     (acc, w) => {
@@ -230,38 +215,33 @@ async function loaderFor(
   type: 'city' | 'state',
   slug: string,
   typeSlug?: string,
-): Promise<LocationListingsLoaderData | null> {
+): Promise<LocationListingSeed | null> {
   const summaries = await summariesFor(type);
   const match = summaries.find((s) => s.slug === slug);
   if (!match) return null;
   const all = await getAllWarehouses();
-  const matchers = matchersFor(match.canonical, type);
   let scoped = all.filter((w) => {
     const raw = (type === 'city' ? w.city : w.state) ?? '';
-    return matchers.has(raw.trim().toLowerCase());
+    return canonicalize(raw, type) === match.canonical;
   });
-
-  // Count PEB/RCC inside this scope before any type filter (used by link block on base pages).
-  const typeCounts = countTypes(scoped);
 
   let warehouseType: WarehouseType | undefined;
   if (typeSlug) {
     warehouseType = typeSlugToCanonical(typeSlug) ?? undefined;
     if (!warehouseType) return null;
-    scoped = scoped.filter((w) => canonicalType(w.warehouseType) === warehouseType);
+    scoped = scoped.filter((w) => matchesListingType(w.warehouseType, warehouseType));
     if (scoped.length === 0) return null;
   }
 
-  return {
+  return seedLocationListings({
     type,
     canonical: match.canonical,
     slug: match.slug,
     warehouseType,
-    typeCounts,
     warehouses: scoped.map(transformWarehouseData),
     breadcrumbAncestors: type === 'city' ? (await getListingBreadcrumbs()).city(match.slug) : [],
     ...(!warehouseType ? { overviewPath: await publishedLocationPath(type === 'city' ? 'CITY' : 'STATE', match.slug) ?? undefined } : {}),
-  };
+  });
 }
 
 async function publishedLocationPath(kind: LocationKind, slug: string): Promise<string | null> {
@@ -336,7 +316,8 @@ export async function cityTypeListingsLoader({ params }: LoaderFunctionArgs) {
   const citySlug = params.city ?? '';
   const sub = params.type ?? '';
   if (typeSlugToCanonical(sub)) return loaderFor('city', citySlug, sub);
-  return micromarketLoader(citySlug, sub);
+  const data = await micromarketLoader(citySlug, sub);
+  return data ? seedLocationListings(data) : null;
 }
 
 export async function stateTypeListingsLoader({ params }: LoaderFunctionArgs) {
@@ -359,13 +340,12 @@ async function locationTypeStaticPaths(type: 'city' | 'state'): Promise<string[]
   const summaries = await summariesFor(type);
   const paths: string[] = [];
   for (const loc of summaries) {
-    const matchers = matchersFor(loc.canonical, type);
     const inScope = all.filter((w) => {
       const raw = (type === 'city' ? w.city : w.state) ?? '';
-      return matchers.has(raw.trim().toLowerCase());
+      return canonicalize(raw, type) === loc.canonical;
     });
     for (const t of ['PEB', 'RCC'] as const) {
-      const count = inScope.filter((w) => canonicalType(w.warehouseType) === t).length;
+      const count = inScope.filter((w) => matchesListingType(w.warehouseType, t)).length;
       if (count > 0) paths.push(`/listings/${type}/${loc.slug}/${t.toLowerCase()}`);
     }
   }

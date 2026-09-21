@@ -1,11 +1,12 @@
 import { useCallback, useMemo, useSyncExternalStore } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { listingSearchHref, type WarehouseFilters } from '@/lib/listingSearch';
 
 const subscribe = () => () => {};
 const clientSnapshot = () => true;
 const serverSnapshot = () => false;
 
-export function useListingSearch() {
+export function useListingSearch(preset?: WarehouseFilters) {
   const location = useLocation();
   const navigate = useNavigate();
   // A built document contains the default page. Its first React render must
@@ -14,9 +15,10 @@ export function useListingSearch() {
   const searchParams = useMemo(() => new URLSearchParams(hydrated ? location.search : ''), [hydrated, location.search]);
   const hash = hydrated ? location.hash : '';
   const hrefFor = useCallback((next: URLSearchParams) => {
+    if (preset) return listingSearchHref(location.pathname, next, hash, preset);
     const search = next.toString();
     return `${location.pathname}${search ? `?${search}` : ''}${hash}`;
-  }, [location.pathname, hash]);
+  }, [location.pathname, hash, preset]);
   const setSearchParams = useCallback((next: URLSearchParams, options: { replace?: boolean } = {}) => {
     const href = hrefFor(next);
     if (href === `${location.pathname}${location.search}${location.hash}`) return;

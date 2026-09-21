@@ -112,7 +112,7 @@ async function generatorHarness(t) {
     "  const body = endpoint === '/warehouses' ? { data: fixture.warehouses, pagination: { totalPages: 1 } }",
     "    : { data: endpoint === '/locations' ? fixture.locations : fixture.micromarkets };",
     "  return new Response(JSON.stringify(body), { status: broken === 'http' ? 400 : 200,",
-    "    headers: broken === 'stale' ? {} : { 'X-Wareongo-Cache': 'bypass' } });",
+    "    headers: broken === 'stale' ? {} : { 'X-Wareongo-Cache': 'bypass', 'X-Wareongo-Listing-Filters': fixture.failure === 'legacy-filters' ? '0' : '1' } });",
     "};",
   ].join('\n'));
   return {
@@ -176,7 +176,7 @@ test('failed or stale APIs and malformed counts leave the previous generated sna
   const harness = await generatorHarness(t);
   await harness.generate(fixture());
   const previous = await harness.snapshot();
-  for (const failure of ['http', 'stale', 'shape', 'count', 'empty']) {
+  for (const failure of ['http', 'stale', 'shape', 'count', 'empty', 'legacy-filters']) {
     const data = fixture();
     if (failure === 'shape') data.locations = {};
     else if (failure === 'count') data.locations.cities[0].listings = -1;

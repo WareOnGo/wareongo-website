@@ -1,61 +1,20 @@
-import { useLoaderData, useNavigate, Navigate, Link } from 'react-router-dom';
+import { useLoaderData, Navigate, Link } from 'react-router-dom';
 import PageHead from '@/components/PageHead';
-import Pagination from '@/components/Pagination';
-import { usePagedListings } from '@/hooks/usePagedListings';
 import Breadcrumbs, { type BreadcrumbItem } from '@/components/Breadcrumbs';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import WarehouseCard from '@/components/WarehouseCard';
 import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
 import { CITY_HUBS } from '@/data/cityHubs';
 import { STATE_HUBS } from '@/data/stateHubs';
-import { trackEvent } from '@/lib/analytics';
-import { useListingResults } from '@/hooks/useListingAnalytics';
 import { warehousePath } from '@/lib/warehouseSlug';
-import type { LocationListingsLoaderData } from '@/loaders/locationLoader';
+import type { LocationListingSeed } from '@/loaders/locationLoader';
+import { readLocationListingSeed } from '@/lib/locationListingSeed';
+import { ListingsView } from './Listings';
 
-const LocationListings = () => {
-  const data = useLoaderData() as LocationListingsLoaderData | null;
-  const navigate = useNavigate();
-
-  /**
-   * The grid pages client-side over what the loader already delivered.
-   *
-   * It used to render every listing in scope at once, which on the two biggest
-   * pages meant 609 and 548 cards in one document — 5.7 MB and 5.2 MB of
-   * prerendered HTML, each card carrying its own image carousel. Nothing is lost
-   * to crawlers by trimming it: these cards are buttons rather than anchors, so
-   * the machine-readable listing URLs were only ever in the CollectionPage
-   * ItemList below, which still covers the whole scope.
-   *
-   * Above every early return, and with a fallback for the null case, because a
-   * hook has to run in the same order on every render — this component returns
-   * early when the route matched nothing.
-   */
-  const {
-    shown,
-    currentPage,
-    perPage,
-    totalPages,
-    start: pageStart,
-    anchorRef: gridRef,
-    goTo,
-    hrefForPage,
-    hydrated,
-  } = usePagedListings(data?.warehouses ?? [], !!data);
-
-  const listId = data ? `location:${data.type}:${data.slug}:${data.warehouseType || 'all'}` : 'location';
-  useListingResults({ list_id: listId, placement: 'location_grid', market_slug: data?.slug,
-    warehouse_type: data?.warehouseType, page: currentPage, page_size: perPage,
-    result_count: shown.length, total_count: data?.warehouses.length,
-    result_status: shown.length ? 'success' : 'empty' }, !!data && hydrated);
-
-  // No matching city/state — bounce back to the main listings page.
-  if (!data) {
-    return <Navigate to="/listings" replace />;
-  }
-
+export default function LocationListings() {
+  const loaded = useLoaderData() as LocationListingSeed | null;
+  if (!loaded) return <Navigate to="/listings" replace />;
+  const data = readLocationListingSeed(loaded);
   const { type, canonical, slug, warehouses, warehouseType, typeCounts, parentCity } = data;
+  const total = data.pagination.totalItems;
   const isMicromarket = type === 'micromarket';
   const scopeLabel = type === 'city' ? 'City' : type === 'state' ? 'State' : 'Micro-market';
   const noun = type === 'state' ? `${canonical} state` : canonical;
@@ -90,11 +49,10 @@ const LocationListings = () => {
   // size range — "1 verified warehouse in Pune" advertises weakness, not
   // inventory. The grid itself still shows whatever exists.
   const STATS_MIN_LISTINGS = 5;
-  const showStats = warehouses.length >= STATS_MIN_LISTINGS;
-  const sizes = warehouses.map((w) => w.size).filter((s) => typeof s === 'number' && s > 0);
+  const showStats = total >= STATS_MIN_LISTINGS;
   const fmtSqft = (n: number) => n.toLocaleString('en-IN');
-  const minSize = sizes.length > 0 ? Math.min(...sizes) : null;
-  const maxSize = sizes.length > 0 ? Math.max(...sizes) : null;
+  const minSize = data.summary.minSize;
+  const maxSize = data.summary.maxSize;
   const sizeRange =
     minSize !== null && maxSize !== null
       ? minSize === maxSize
@@ -103,7 +61,7 @@ const LocationListings = () => {
       : null;
   // ", ranging from 5,000 to 120,000 sqft" / " of 24,000 sqft" (single listing)
   const sizeLead = sizeRange ? (minSize === maxSize ? ` of ${sizeRange}` : `, ranging from ${sizeRange}`) : '';
-  const countNoun = `${warehouses.length} verified ${warehouseType ? `${typeLabel} ` : ''}warehouse${warehouses.length === 1 ? '' : 's'}`;
+  const countNoun = `${total} verified ${warehouseType ? `${typeLabel} ` : ''}warehouse${total === 1 ? '' : 's'}`;
 
   // "godown" synonym on base pages only — exact-match for "godown for rent in {city}"
   // queries (Search Console shows them); Google bolds the matching phrase in the snippet.
@@ -123,20 +81,7 @@ const LocationListings = () => {
     warehouseType || isMicromarket
       ? []
       : ((type === 'city' ? CITY_HUBS[slug] : STATE_HUBS[slug]) ?? []);
-  const titleCase = (s: string) =>
-    s.toLowerCase().split(/\s+/).filter(Boolean).map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-  const stateCities =
-    type === 'state' && !warehouseType
-      ? [...new Set(
-          warehouses
-            .map((w) => w.location.city?.trim() ?? '')
-            // Skip junk/locality-grade values: too short, or comma-containing
-            // ("Sector 78, Badshahpur") which would also corrupt the
-            // comma-separated keywords string.
-            .filter((c) => c.length > 2 && !c.includes(','))
-            .map(titleCase),
-        )].slice(0, 15)
-      : [];
+  const stateCities = type === 'state' && !warehouseType ? data.summary.cities : [];
   const keywordPlaces = [...new Set([...stateCities, ...hubs])];
   const ldKeywords = warehouseType
     ? undefined
@@ -166,7 +111,7 @@ const LocationListings = () => {
     provider: { '@id': ORG_ID },
     mainEntity: {
       '@type': 'ItemList',
-      numberOfItems: warehouses.length,
+      numberOfItems: total,
       itemListElement: warehouses.slice(0, 50).map((w, idx) => ({
         '@type': 'ListItem',
         position: idx + 1,
@@ -176,15 +121,12 @@ const LocationListings = () => {
     },
   };
 
-  return (
-    <div className="min-h-screen flex flex-col bg-wareongo-ivory">
-      <PageHead title={seoTitle} description={seoDescription} path={path}>
-        <script type="application/ld+json">{JSON.stringify(collectionLd)}</script>
-      </PageHead>
-      <Navbar />
-
-      <main className="flex-grow bg-wareongo-ivory" role="main" aria-labelledby="location-title">
-        <div className="section-container px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+  return <ListingsView key={path} initialData={data} preset={data.filters}
+    listId={`location:${type}:${slug}:${warehouseType || 'all'}`}
+    head={<PageHead title={seoTitle} description={seoDescription} path={path}>
+      <script type="application/ld+json">{JSON.stringify(collectionLd)}</script>
+    </PageHead>}
+    header={<>
           <Breadcrumbs
             className="mb-4 sm:mb-6"
             items={
@@ -221,7 +163,7 @@ const LocationListings = () => {
                   {countNoun} available for rent in {canonical}
                   {sizeLead}
                   {!warehouseType && typeCounts && typeCounts.PEB > 0 && typeCounts.RCC > 0
-                    ? ` across ${typeCounts.PEB} PEB and ${typeCounts.RCC} RCC options`
+                    ? ` including ${typeCounts.PEB} PEB and ${typeCounts.RCC} RCC options`
                     : ''}
                   . Transparent pricing and expert guidance.
                 </>
@@ -275,76 +217,5 @@ const LocationListings = () => {
               </div>
             )}
           </header>
-
-          {warehouses.length === 0 ? (
-            <div className="border border-wareongo-blue/30 rounded-2xl p-8 text-center max-w-md mx-auto">
-              <p className="text-wareongo-slate mb-4">
-                No active listings in {canonical} right now.
-              </p>
-              <button
-                onClick={() => navigate('/request-warehouse')}
-                className="inline-flex items-center px-5 h-10 rounded-xl bg-wareongo-blue text-white text-sm font-medium hover:bg-wareongo-blue/90 transition-colors"
-              >
-                Request a warehouse
-              </button>
-            </div>
-          ) : (
-            <section ref={gridRef as React.RefObject<HTMLElement>} className="scroll-mt-24">
-              <p className="mb-5 text-sm text-wareongo-slate">
-                Showing {pageStart + 1}&ndash;{pageStart + shown.length} of {warehouses.length}
-                {totalPages > 1 && ` · page ${currentPage} of ${totalPages}`}
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-              {shown.map((warehouse, idx) => (
-                <WarehouseCard
-                  key={warehouse.id}
-                  id={warehouse.id}
-                  // Index is within the page, not the whole set: after paging,
-                  // the top of this grid is what the reader is looking at, so
-                  // its first row is the row worth loading eagerly.
-                  index={idx}
-                  analyticsContext={{ list_id: listId, placement: 'location_grid', market_slug: slug, page: currentPage, page_size: perPage, list_position: pageStart + idx + 1 }}
-                  image={warehouse.image}
-                  images={warehouse.images}
-                  imageFallbacks={warehouse.imageFallbacks}
-                  address={warehouse.address}
-                  location={warehouse.location}
-                  size={warehouse.size}
-                  ceilingHeight={warehouse.ceilingHeight}
-                  price={warehouse.price}
-                  fireCompliance={warehouse.fireCompliance}
-                  features={warehouse.features}
-                  href={warehousePath({ id: warehouse.id, size: warehouse.size, warehouseType: warehouse.warehouseType, city: warehouse.location.city })}
-                />
-              ))}
-              </div>
-
-              <Pagination
-                hrefForPage={hrefForPage}
-                className="mb-10"
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onChange={(next, direction) => {
-                  if (next === currentPage) return;
-                  trackEvent('listings_paginate', {
-                    list_id: listId, market_slug: slug, page_size: perPage,
-                    warehouse_type: warehouseType ?? null,
-                    from_page: currentPage,
-                    to_page: next,
-                    direction,
-                  });
-                  goTo(next);
-                }}
-              />
-            </section>
-          )}
-        </div>
-      </main>
-
-      <Footer />
-    </div>
-  );
-};
-
-export default LocationListings;
+    </>} />;
+}

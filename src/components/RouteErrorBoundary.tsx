@@ -32,6 +32,12 @@ const RouteErrorBoundary = () => {
     window.location.reload();
   }, [error]);
 
+  // React Router catches loader failures before SSG renders. Re-throw during
+  // prerendering so a failed API read cannot publish a successful error page.
+  if (import.meta.env.SSR) {
+    throw error instanceof Error ? error : new Error('A route loader failed during prerendering');
+  }
+
   const status = isRouteErrorResponse(error) ? error.status : null;
 
   return (

@@ -93,6 +93,8 @@ class WarehouseAPI {
     filters?: {
       city?: string;
       state?: string;
+      locationMatch?: 'exact' | 'partial';
+      micromarket?: string;
       warehouseType?: string;
       fireNocAvailable?: boolean;
       minSpace?: number;
@@ -113,16 +115,18 @@ class WarehouseAPI {
         if (filters.state) {
           params.append('state', filters.state);
         }
+        if (filters.locationMatch) params.append('locationMatch', filters.locationMatch);
+        if (filters.micromarket) params.append('micromarket', filters.micromarket);
         if (filters.warehouseType) {
           params.append('warehouseType', filters.warehouseType);
         }
         if (filters.fireNocAvailable !== undefined) {
           params.append('fireNocAvailable', filters.fireNocAvailable.toString());
         }
-        if (filters.minSpace !== undefined && filters.minSpace > 0) {
+        if (filters.minSpace !== undefined) {
           params.append('minSpace', filters.minSpace.toString());
         }
-        if (filters.maxSpace !== undefined && filters.maxSpace < 100000) {
+        if (filters.maxSpace !== undefined) {
           params.append('maxSpace', filters.maxSpace.toString());
         }
       }

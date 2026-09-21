@@ -86,10 +86,10 @@ export function useListingsPrefetch({ page, pageSize, filters, totalPages, ready
   const navigation = useNavigation();
   const policy = usePrefetchPolicy();
   const pagerRef = useRef<HTMLDivElement>(null);
-  const options = useMemo(() => listingsQueryOptions(page + 1, pageSize, filters, client), [page, pageSize, filters, client]);
+  const options = useMemo(() => listingsQueryOptions(page + 1, pageSize, filters), [page, pageSize, filters]);
   const targetKey = hashKey(options.queryKey);
   const currentKey = useRef('');
-  currentKey.current = hashKey(listingsQueryOptions(page, pageSize, filters, client).queryKey);
+  currentKey.current = hashKey(listingsQueryOptions(page, pageSize, filters).queryKey);
   const enabled = ready && page < totalPages && policy.allowed && navigation.state === 'idle';
   const [prefetched, setPrefetched] = useState<{ key: string; data: ListingsQueryData } | null>(null);
   const [near, setNear] = useState<{ key: string; value: boolean } | null>(null);

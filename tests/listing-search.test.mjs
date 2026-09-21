@@ -10,7 +10,7 @@ const { outputFiles } = await build({
 const compiled = { exports: {} };
 new Function('module', 'exports', outputFiles[0].text)(compiled, compiled.exports);
 const { readListingSearch, writeListingSearch, DEFAULT_FILTERS, listingShouldRevalidate, toApiFilters,
-  changeListingFilter, micromarketsForCity, CITY_OPTIONS, CITIES, FILTER_MICROMARKETS } = compiled.exports;
+  changeListingFilter, micromarketsForCity, listingSearchHref, CITY_OPTIONS, CITIES, FILTER_MICROMARKETS } = compiled.exports;
 const read = query => readListingSearch(new URLSearchParams(query));
 
 test('shared filters, page and selected page size round trip without dropping attribution', () => {
@@ -23,7 +23,7 @@ test('shared filters, page and selected page size round trip without dropping at
   assert.deepEqual(readListingSearch(written), state);
   assert.deepEqual(written.getAll('utm_content'), ['a', 'b']);
   assert.equal(written.get('utm_source'), 'mail');
-  assert.equal(written.has('state'), false, 'retired state filters must not remain hidden in shared links');
+  assert.equal(written.get('state'), 'Karnataka', 'state filters remain visible and shareable');
 });
 
 test('invalid page numbers and unsupported page sizes never reach API offsets', () => {
@@ -71,11 +71,12 @@ test('canonical location selections include legacy inventory spellings in API re
   ]) {
     const state = read(`city=${alias}`);
     assert.equal(state.filters.city, canonical);
-    assert.equal(toApiFilters(state.filters).city, api);
+    assert.equal(toApiFilters(state.filters).city, canonical);
+    assert.equal(toApiFilters(state.filters).locationMatch, 'exact');
     assert.equal(writeListingSearch(new URLSearchParams(), state).get('city'), canonical);
   }
-  assert.equal(toApiFilters(read('city=Ahmedabad&state=gujarat').filters).state, undefined);
-  assert.deepEqual(toApiFilters(read('city=constructor').filters), { city: 'constructor' });
+  assert.equal(toApiFilters(read('city=Ahmedabad&state=gujarat').filters).state, 'Gujarat');
+  assert.deepEqual(toApiFilters(read('city=constructor').filters), { city: 'constructor', locationMatch: 'exact' });
 });
 
 test('cities and their micromarkets use descending inventory order with alphabetical ties', () => {
@@ -102,11 +103,11 @@ test('cities and their micromarkets use descending inventory order with alphabet
 test('micromarket URLs are scoped to the selected city, including city aliases', () => {
   const state = read('city=bangalore&micromarket=WHITEFIELD&type=BTS');
   assert.equal(state.filters.micromarket, 'whitefield');
-  assert.deepEqual(toApiFilters(state.filters), { city: 'Bangalore,Bengaluru', micromarket: 'whitefield', warehouseType: 'BTS' });
+  assert.deepEqual(toApiFilters(state.filters), { city: 'Bengaluru', locationMatch: 'exact', micromarket: 'whitefield', warehouseType: 'BTS' });
   assert.deepEqual(readListingSearch(writeListingSearch(new URLSearchParams('utm_source=test'), state)).filters, state.filters);
   assert.equal(read('micromarket=whitefield').filters.micromarket, '');
-  assert.equal(read('city=Ahmedabad&micromarket=whitefield').filters.micromarket, '');
-  assert.equal(read('city=Bengaluru&micromarket=unknown-locality').filters.micromarket, '');
+  assert.equal(read('city=Ahmedabad&micromarket=whitefield').filters.micromarket, 'whitefield');
+  assert.equal(read('city=Bengaluru&micromarket=unknown-locality').filters.micromarket, 'unknown-locality');
   assert.deepEqual(micromarketsForCity(''), []);
   assert.deepEqual(micromarketsForCity('Unknown city'), []);
 });
@@ -161,10 +162,38 @@ test('query-only pagination/filter navigation retains loader data and ongoing pr
 test('path changes, unrelated search changes, actions and explicit revalidation keep router defaults', () => {
   assert.equal(revalidate('/listings/city/bengaluru?page=2', '/listings/city/delhi?page=2'), true);
   assert.equal(revalidate('/listings?utm_source=a', '/listings?page=2&utm_source=b'), true);
-  assert.equal(revalidate('/listings/city/bengaluru', '/listings/city/bengaluru?city=Delhi'), true);
+  assert.equal(revalidate('/listings/city/bengaluru', '/listings/city/bengaluru?city=Delhi'), false);
   assert.equal(revalidate('/listings?page=2', '/listings?page=2'), true);
   for (const extra of [{ formMethod: 'GET' }, { formMethod: 'POST' }, { actionResult: null }, { actionStatus: 200 }]) {
     assert.equal(revalidate('/listings', '/listings?page=2', extra), true);
   }
   assert.equal(revalidate('/listings', '/listings', { defaultShouldRevalidate: false }), false);
+});
+
+
+test('location presets stay in clean URLs while refinements and history remain explicit', () => {
+  for (const preset of [
+    { ...DEFAULT_FILTERS, city: 'Bengaluru' },
+    { ...DEFAULT_FILTERS, state: 'Karnataka' },
+    { ...DEFAULT_FILTERS, city: 'Bengaluru', micromarket: 'nelamangala' },
+    { ...DEFAULT_FILTERS, city: 'Bengaluru', warehouseType: 'PEB' },
+  ]) {
+    const state = readListingSearch(new URLSearchParams('utm_source=test&page=2'), preset);
+    assert.deepEqual(state.filters, preset);
+    const query = writeListingSearch(new URLSearchParams('utm_source=test'), { ...state, filters: { ...preset, minSqft: 10000 } }, preset);
+    assert.equal(query.toString(), 'utm_source=test&minSqft=10000&page=2');
+    assert.deepEqual(readListingSearch(query, preset).filters, { ...preset, minSqft: 10000 });
+    assert.equal(listingSearchHref('/listings/city/bengaluru', query, '#results', preset), '/listings/city/bengaluru?utm_source=test&minSqft=10000&page=2#results');
+    const cleared = writeListingSearch(new URLSearchParams('utm_source=test'), { filters: DEFAULT_FILTERS, page: 1, pageSize: 21 }, preset);
+    assert.equal(listingSearchHref('/listings/city/bengaluru', cleared, '#results', preset), '/listings?utm_source=test#results');
+  }
+});
+
+test('switching geography drops dependent selections without hiding requirements', () => {
+  const preset = { ...DEFAULT_FILTERS, state: 'Karnataka', city: 'Bengaluru', micromarket: 'nelamangala', warehouseType: 'PEB' };
+  assert.deepEqual(changeListingFilter(preset, 'city', 'Delhi'), { ...preset, state: '', city: 'Delhi', micromarket: '' });
+  assert.deepEqual(changeListingFilter(preset, 'state', 'Delhi'), { ...preset, state: 'Delhi', city: '', micromarket: '' });
+  const filters = changeListingFilter(preset, 'city', 'Delhi');
+  const query = writeListingSearch(new URLSearchParams('utm_source=test'), { filters, page: 1, pageSize: 21 }, preset);
+  assert.equal(listingSearchHref('/listings/city/bengaluru/nelamangala', query, '', preset), '/listings?utm_source=test&city=Delhi&type=PEB');
 });

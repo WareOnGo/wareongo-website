@@ -14,6 +14,7 @@ export interface WarehouseLoaderData extends DetailData {
   breadcrumbAncestors?: BreadcrumbItem[];
 }
 export type ListingsLoaderData = {
+  fetchedAt?: number;
   warehouses: ReturnType<typeof transformWarehouseData>[];
   pagination: {
     currentPage: number;
@@ -31,6 +32,7 @@ export async function listingsLoader(): Promise<ListingsLoaderData | null> {
   try {
     const resp = await warehouseAPI.getWarehouses(1, LISTINGS_DEFAULT_PAGE_SIZE);
     return {
+      fetchedAt: Date.now(),
       warehouses: resp.data.map(transformWarehouseData),
       pagination: resp.pagination,
     };

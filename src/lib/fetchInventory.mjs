@@ -18,5 +18,9 @@ export async function fetchInventory(url, init = {}, fresh = false) {
     await response.body?.cancel().catch(() => {});
     throw new Error(`Backend did not confirm fresh inventory for ${new URL(url).pathname}. Deploy the backend cache-bypass change before rebuilding the website.`);
   }
+  if (response.ok && new URL(url).pathname.endsWith('/warehouses') && response.headers.get('X-Wareongo-Listing-Filters') !== '1') {
+    await response.body?.cancel().catch(() => {});
+    throw new Error('Deploy the backend listing-filter change before rebuilding the website. Native area, micromarket and exact-location filtering was not confirmed.');
+  }
   return response;
 }

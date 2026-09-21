@@ -1,6 +1,6 @@
 import { LocationListingsSkeleton, OverviewSkeleton } from '@/components/LocationPageSkeletons';
 import { Outlet, useLocation, useNavigation } from "react-router-dom";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/context/AuthContext";
 import AnalyticsInteractions from "@/components/AnalyticsInteractions";
@@ -14,6 +14,14 @@ import {
 // Toaster pulls in @radix-ui/react-toast (~14 KB gz). Only mounted forms ever fire it,
 // so defer the chunk until after the initial paint.
 const Toaster = lazy(() => import("@/components/ui/toaster").then((m) => ({ default: m.Toaster })));
+
+const ClientToaster = () => {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  // Toasts have no initial server content. Mount after hydration so an early
+  // navigation cannot interrupt a dehydrated boundary waiting for this chunk.
+  return mounted ? <Suspense fallback={null}><Toaster /></Suspense> : null;
+};
 
 const queryClient = new QueryClient();
 
@@ -83,9 +91,7 @@ const NavigationContent = () => {
 const RootLayout = () => (
   <AuthProvider>
     <QueryClientProvider client={queryClient}>
-      <Suspense fallback={null}>
-        <Toaster />
-      </Suspense>
+      <ClientToaster />
       <ScrollToTop />
       <AnalyticsInteractions />
       <NavigationContent />

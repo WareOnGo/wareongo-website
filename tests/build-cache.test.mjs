@@ -4,7 +4,7 @@ import { fetchInventory } from '../src/lib/fetchInventory.mjs';
 
 test('build reads explicitly bypass both caches and preserve caller headers/cancellation', async t => {
   const init = { headers: { Accept: 'application/json' }, signal: new AbortController().signal };
-  const fetch = t.mock.method(globalThis, 'fetch', async () => Response.json({ data: [] }, { headers: { 'X-Wareongo-Cache': 'bypass' } }));
+  const fetch = t.mock.method(globalThis, 'fetch', async () => Response.json({ data: [] }, { headers: { 'X-Wareongo-Cache': 'bypass', 'X-Wareongo-Listing-Filters': '1' } }));
   await fetchInventory('https://backend.example/warehouses', init, true);
   const sent = fetch.mock.calls[0].arguments[1];
   assert.equal(sent.cache, 'no-store');
@@ -26,6 +26,13 @@ test('an older backend cannot silently ignore the build cache bypass', async t =
   t.mock.method(globalThis, 'fetch', async () => stale);
   await assert.rejects(fetchInventory('https://backend.example/warehouses', {}, true), /Deploy the backend cache-bypass change/);
   assert.equal(stale.bodyUsed, true);
+});
+
+test('fresh listing builds reject a backend that acknowledges freshness but cannot apply native filters', async t => {
+  const legacy = Response.json({ data: [], pagination: { totalItems: 0 } }, { headers: { 'X-Wareongo-Cache': 'bypass' } });
+  t.mock.method(globalThis, 'fetch', async () => legacy);
+  await assert.rejects(fetchInventory('https://backend.example/warehouses?pageSize=500', {}, true), /Deploy the backend listing-filter change/);
+  assert.equal(legacy.bodyUsed, true);
 });
 
 test('fresh reads retain bounded retries and the bypass on every attempt', async t => {

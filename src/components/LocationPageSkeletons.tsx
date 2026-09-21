@@ -1,3 +1,6 @@
+import ListingsHeader from './ListingsHeader';
+import ListingFilterChips from './ListingFilterChips';
+import { DEFAULT_FILTERS, DEFAULT_PAGE_SIZE } from '@/lib/listingSearch';
 import { BreadcrumbTrail } from './Breadcrumbs';
 import { WarehouseGridSkeleton } from './PageSkeletons';
 import { Skeleton } from './ui/skeleton';
@@ -15,7 +18,7 @@ const stateName = (slug: string) => STATES.find(s => s.slug === slug)?.canonical
 const trailStart = [{ label: 'Home' }, { label: 'Listings' }];
 
 export function LocationListingsSkeleton({ pathname }: { pathname: string }) {
-  const pageSize = useListingsPerPage();
+  const pageSize = DEFAULT_PAGE_SIZE;
   const [, , kind, slug = '', variant] = pathname.split('/');
   const warehouseType = variant === 'peb' || variant === 'rcc' ? variant.toUpperCase() as 'PEB' | 'RCC' : undefined;
   const isMicro = kind === 'city' && !!variant && !warehouseType;
@@ -37,7 +40,7 @@ export function LocationListingsSkeleton({ pathname }: { pathname: string }) {
     : getLocationPageContent(kind === 'state' ? 'STATE' : 'CITY', slug));
 
   return <main className="flex-grow" data-testid="location-listings-skeleton">
-    <div className="section-container px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+    <div className="section-container">
       <BreadcrumbTrail className="mb-4 sm:mb-6" pendingAncestorAt={kind === 'city' ? 2 : undefined} items={[
         ...trailStart,
         ...(isMicro && canonical !== parent ? [{ label: parent }] : []),
@@ -67,8 +70,11 @@ export function LocationListingsSkeleton({ pathname }: { pathname: string }) {
             </span>)}
         </div>}
       </header>
-      <Skeleton className="mb-5 h-5 w-52" />
-      <div className="mb-10"><WarehouseGridSkeleton count={Math.min(pageSize, summary?.count || pageSize)} /></div>
+      <ListingsHeader loading active heading={<></>} />
+      <ListingFilterChips filters={{ ...DEFAULT_FILTERS, state: kind === 'state' ? canonical : '',
+        city: kind === 'city' ? isMicro ? parent : canonical : '',
+        micromarket: isMicro ? variant : '', warehouseType: warehouseType ?? '' }} />
+      <div className="mb-12"><WarehouseGridSkeleton count={Math.min(pageSize, summary?.count || pageSize)} /></div>
     </div>
   </main>;
 }

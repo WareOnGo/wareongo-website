@@ -1,10 +1,10 @@
 import { Filter, X } from 'lucide-react';
-import type { Ref } from 'react';
+import type { Ref, ReactNode } from 'react';
 
 /** Shared by the page and its route placeholder so text wrapping and controls
  * reserve exactly the same space on every viewport. */
 export default function ListingsHeader({
-  showFilters = false, active = false, loading = false, onToggle, onClear, filterButtonRef,
+  showFilters = false, active = false, loading = false, onToggle, onClear, filterButtonRef, heading,
 }: {
   showFilters?: boolean;
   active?: boolean;
@@ -12,15 +12,16 @@ export default function ListingsHeader({
   onToggle?: () => void;
   onClear?: () => void;
   filterButtonRef?: Ref<HTMLButtonElement>;
+  heading?: ReactNode;
 }) {
   return <>
-    <div className="max-w-2xl mb-8 md:mb-12">
+    {heading ?? <div className="max-w-2xl mb-8 md:mb-12">
       <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate block mb-3">Inventory</span>
       <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-wareongo-blue mb-3 leading-tight">Warehouse Listings</h1>
       <p className="text-wareongo-slate text-sm sm:text-base md:text-lg">
         Premium warehouse spaces across India. Find the perfect storage solution for your business.
       </p>
-    </div>
+    </div>}
     <div className="pointer-events-none sticky top-[calc(var(--wog-nav-height)+8px)] z-40 mb-6 flex items-center justify-between gap-3" data-listing-filter-bar>
       <button ref={filterButtonRef} type="button" onClick={onToggle} disabled={loading}
         aria-haspopup="dialog" aria-expanded={showFilters} aria-controls={showFilters ? 'listing-filters' : undefined}

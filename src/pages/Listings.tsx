@@ -1,13 +1,13 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { useLoaderData, useLocation, useNavigationType } from 'react-router-dom';
-import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import PageHead from '@/components/PageHead';
 import Pagination from '@/components/Pagination';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WarehouseCard from '@/components/WarehouseCard';
 import { WarehouseGridSkeleton } from '@/components/PageSkeletons';
-import { X } from 'lucide-react';
+import ListingFilterChips from '@/components/ListingFilterChips';
 import ListingFilters from '@/components/ListingFilters';
 import ListingsHeader from '@/components/ListingsHeader';
 import { listingsQueryOptions } from '@/lib/listingsQuery';
@@ -21,7 +21,7 @@ import { verifiedWarehousesLabel } from '@/data/companyStats';
 import { useListingSearch } from '@/hooks/useListingSearch';
 import {
   DEFAULT_FILTERS, DEFAULT_PAGE_SIZE, PAGE_SIZES, readListingSearch, toApiFilters,
-  writeListingSearch, filtersFromSearchParams, changeListingFilter, micromarketsForCity, type WarehouseFilters,
+  writeListingSearch as serializeListingSearch, filtersFromSearchParams, changeListingFilter, type WarehouseFilters,
 } from '@/lib/listingSearch';
 
 const analyticsFilters = (filters: WarehouseFilters) => {
@@ -29,21 +29,26 @@ const analyticsFilters = (filters: WarehouseFilters) => {
   return { warehouse_city: api.city ? String(api.city).split(',')[0] : undefined,
     market_slug: api.micromarket, warehouse_type: api.warehouseType,
     fire_noc: api.fireNocAvailable as boolean | undefined, min_sqft: api.minSpace as number | undefined,
-    max_sqft: api.maxSpace as number | undefined, filter_count: Object.keys(api).length };
+    max_sqft: api.maxSpace as number | undefined, filter_count: Object.keys(api).filter(key => key !== 'locationMatch').length };
 };
 
-const Listings = () => {
-  const queryClient = useQueryClient();
-  // Loader baked in at SSG time (page 1, default page size). null if backend was unreachable.
-  const initialData = useLoaderData() as ListingsLoaderData | null;
-  const { searchParams, setSearchParams, hrefFor, hydrated } = useListingSearch();
+export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, head, listId = 'all_warehouses' }: {
+  initialData: ListingsLoaderData | null;
+  preset?: WarehouseFilters;
+  header?: ReactNode;
+  head?: ReactNode;
+  listId?: string;
+}) {
+  const { searchParams, setSearchParams, hrefFor, hydrated } = useListingSearch(preset);
+  const writeListingSearch = (search: URLSearchParams, state: ReturnType<typeof readListingSearch>) =>
+    serializeListingSearch(search, state, preset);
   const location = useLocation();
   const navigationType = useNavigationType();
   const initialLocationKey = useRef(location.key);
   const hasNavigated = useRef(false);
   if (location.key !== initialLocationKey.current) hasNavigated.current = true;
   const action = useRef<{ search: string; trigger: string } | null>(null);
-  const state = useMemo(() => readListingSearch(searchParams), [searchParams]);
+  const state = useMemo(() => readListingSearch(searchParams, preset), [searchParams, preset]);
   const { filters: appliedFilters, page: currentPage, pageSize } = state;
   const filterKey = JSON.stringify(appliedFilters);
   const [draft, setDraft] = useState({ key: filterKey, filters: appliedFilters });
@@ -79,11 +84,14 @@ const Listings = () => {
 
   const apiFilters = useMemo(() => toApiFilters(appliedFilters), [appliedFilters]);
   // Use the SSG-baked data only when the user hasn't filtered or paged.
-  const isInitialQuery = Object.keys(apiFilters).length === 0 && currentPage === 1 && pageSize === DEFAULT_PAGE_SIZE;
+  const isInitialQuery = JSON.stringify(apiFilters) === JSON.stringify(toApiFilters(preset)) && currentPage === 1 && pageSize === DEFAULT_PAGE_SIZE;
 
-  const { data, isPending, isPlaceholderData, isFetching, isError, refetch } = useQuery({
-    ...listingsQueryOptions(currentPage, pageSize, apiFilters, queryClient),
+  const { data, isPending, isPlaceholderData, isFetching, isError, isLoadingError, isRefetchError, refetch } = useQuery({
+    ...listingsQueryOptions(currentPage, pageSize, apiFilters),
     enabled: hydrated,
+    // An older build's seed paints immediately, then refreshes in the
+    // background before we preload more pages from the current inventory.
+    initialDataUpdatedAt: initialData?.fetchedAt ?? 0,
     initialData: isInitialQuery && initialData
       ? {
           warehouses: initialData.warehouses,
@@ -117,10 +125,10 @@ const Listings = () => {
     ...state, page: outOfRange ? Math.max(1, data.pagination.totalPages) : currentPage,
   }).toString();
   useEffect(() => {
-    if (!hydrated || normalizedSearch === searchParams.toString()) return;
+    if (!hydrated || hrefFor(new URLSearchParams(normalizedSearch)) === `${location.pathname}${location.search}${location.hash}`) return;
     action.current = { search: normalizedSearch, trigger: resultTrigger };
     setSearchParams(new URLSearchParams(normalizedSearch), { replace: true });
-  }, [hydrated, normalizedSearch, searchParams, setSearchParams, resultTrigger]);
+  }, [hydrated, normalizedSearch, searchParams, setSearchParams, resultTrigger, hrefFor, location]);
 
   const handleFilterChange = (key: keyof WarehouseFilters, value: string | number) => {
     setDraft({ key: filterKey, filters: changeListingFilter(filters, key, value) });
@@ -130,31 +138,31 @@ const Listings = () => {
     setDraft({ key: filterKey, filters: { ...filters, minSqft: values[0], maxSqft: values[1] } });
   };
 
-  useListingResults({ list_id: 'all_warehouses', placement: 'listings_grid', page: currentPage, page_size: pageSize,
-    result_count: isError ? 0 : warehouses.length, total_count: isError ? undefined : pagination.totalItems,
-    result_status: isError ? 'error' : warehouses.length ? 'success' : 'empty',
+  useListingResults({ list_id: listId, placement: listId === 'all_warehouses' ? 'listings_grid' : 'location_grid', page: currentPage, page_size: pageSize,
+    result_count: isLoadingError ? 0 : warehouses.length, total_count: isLoadingError ? undefined : pagination.totalItems,
+    result_status: isLoadingError ? 'error' : warehouses.length ? 'success' : 'empty',
     trigger: resultTrigger, ...analyticsFilters(appliedFilters) }, hydrated && !loadingResults);
 
   const applyFilters = () => {
     scrollAfterPaging.current = null;
     const next = writeListingSearch(searchParams, { filters, page: 1, pageSize });
-    const normalizedFilters = filtersFromSearchParams(next);
+    const normalizedFilters = filtersFromSearchParams(next, preset);
     setDraft({ key: JSON.stringify(normalizedFilters), filters: normalizedFilters });
-    trackEvent('filter_apply', { list_id: 'all_warehouses', trigger: 'apply', ...analyticsFilters(normalizedFilters) });
+    trackEvent('filter_apply', { list_id: listId, trigger: 'apply', ...analyticsFilters(normalizedFilters) });
     changeSearch(writeListingSearch(next, { filters: normalizedFilters, page: 1, pageSize }), 'apply');
     setShowFilters(false);
   };
 
   const clearFilters = () => {
     scrollAfterPaging.current = null;
-    trackEvent('filter_clear', { list_id: 'all_warehouses', trigger: 'clear', ...analyticsFilters(appliedFilters) });
+    trackEvent('filter_clear', { list_id: listId, trigger: 'clear', ...analyticsFilters(appliedFilters) });
     setDraft({ key: JSON.stringify(DEFAULT_FILTERS), filters: DEFAULT_FILTERS });
     changeSearch(writeListingSearch(searchParams, { filters: DEFAULT_FILTERS, page: 1, pageSize }), 'clear');
   };
 
   const hasActiveFilters = () => {
     return Boolean(
-      appliedFilters.city ||
+      appliedFilters.state || appliedFilters.city ||
         appliedFilters.micromarket ||
         appliedFilters.fireCompliance ||
         appliedFilters.warehouseType ||
@@ -163,26 +171,12 @@ const Listings = () => {
     );
   };
 
-  const activeChips: { id: string; label: string; reset: Partial<WarehouseFilters> }[] = [
-    ...(appliedFilters.city ? [{ id: 'city', label: `City: ${appliedFilters.city}`, reset: { city: '', micromarket: '' } }] : []),
-    ...(appliedFilters.micromarket ? [{ id: 'micromarket',
-      label: micromarketsForCity(appliedFilters.city).find(market => market.slug === appliedFilters.micromarket)?.canonical ?? appliedFilters.micromarket,
-      reset: { micromarket: '' } }] : []),
-    ...(appliedFilters.warehouseType ? [{ id: 'type', label: appliedFilters.warehouseType, reset: { warehouseType: '' } }] : []),
-    ...(appliedFilters.fireCompliance === 'yes' ? [{ id: 'fire', label: 'Fire NOC required', reset: { fireCompliance: '' } }] : []),
-    ...(appliedFilters.minSqft > 0 || appliedFilters.maxSqft < 100000 ? [{
-      id: 'area',
-      label: appliedFilters.maxSqft >= 100000 ? `${appliedFilters.minSqft.toLocaleString('en-IN')}+ sq ft`
-        : `${appliedFilters.minSqft.toLocaleString('en-IN')}–${appliedFilters.maxSqft.toLocaleString('en-IN')} sq ft`,
-      reset: { minSqft: 0, maxSqft: 100000 },
-    }] : []),
-  ];
 
   const removeFilter = (reset: Partial<WarehouseFilters>) => {
     const nextFilters = { ...appliedFilters, ...reset };
     scrollAfterPaging.current = null;
     setDraft({ key: JSON.stringify(nextFilters), filters: nextFilters });
-    trackEvent('filter_apply', { list_id: 'all_warehouses', trigger: 'apply', ...analyticsFilters(nextFilters) });
+    trackEvent('filter_apply', { list_id: listId, trigger: 'apply', ...analyticsFilters(nextFilters) });
     changeSearch(writeListingSearch(searchParams, { filters: nextFilters, page: 1, pageSize }), 'apply');
   };
 
@@ -190,28 +184,29 @@ const Listings = () => {
     const validSize = PAGE_SIZES.find(size => size === newPageSize);
     if (loadingResults || !validSize || validSize === pageSize) return;
     scrollAfterPaging.current = { page: 1, pageSize: validSize };
-    trackEvent('listing_page_size_change', { list_id: 'all_warehouses', from_page_size: pageSize, page_size: newPageSize });
+    trackEvent('listing_page_size_change', { list_id: listId, from_page_size: pageSize, page_size: newPageSize });
     changeSearch(writeListingSearch(searchParams, { ...state, pageSize: validSize, page: 1 }), 'page_size');
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
-      <PageHead
+      {head ?? <PageHead
         title="Warehouse & Godown for Rent in India | Verified Listings | WareOnGo"
         description={`Find warehouse & godown space for rent across India, ${verifiedWarehousesLabel} verified listings with transparent pricing. Get custom options, expert guidance & site visit within 48 hours.`}
         path="/listings"
-      />
+      />}
       <Navbar />
 
       <main className="flex-grow bg-wareongo-ivory">
         <div className="section-container">
           <ListingsHeader
+            heading={header}
             showFilters={showFilters}
             active={hasActiveFilters()}
             filterButtonRef={filterButtonRef}
             onToggle={() => {
               setDraft({ key: filterKey, filters: appliedFilters });
-              trackEvent('filter_open', { list_id: 'all_warehouses' });
+              trackEvent('filter_open', { list_id: listId });
               setShowFilters(true);
             }}
             onClear={clearFilters}
@@ -221,19 +216,12 @@ const Listings = () => {
             filters={filters} onChange={handleFilterChange} onAreaChange={handleSqftRangeChange}
             onApply={applyFilters} onReset={() => setDraft({ key: filterKey, filters: DEFAULT_FILTERS })} />
 
-          {activeChips.length > 0 && <div role="group" aria-label="Active filters" className="mb-6 flex flex-wrap items-center gap-2">
-            <span className="mr-1 text-xs text-wareongo-slate">Filtering by</span>
-            {activeChips.map(chip => <button key={chip.id} type="button" onClick={() => removeFilter(chip.reset)}
-              aria-label={`Remove ${chip.label} filter`}
-              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-wareongo-blue/25 bg-transparent px-3 text-xs text-wareongo-blue hover:border-wareongo-blue hover:bg-wareongo-blue/5">
-              {chip.label}<X className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-            </button>)}
-          </div>}
+          <ListingFilterChips filters={appliedFilters} onRemove={removeFilter} />
 
           <p role="status" className="sr-only">
             {loadingResults
               ? `Loading page ${currentPage} of warehouses…`
-              : isError ? 'Warehouse results could not be loaded.'
+              : isLoadingError ? 'Warehouse results could not be loaded.'
                 : `${warehouses.length} warehouses shown on page ${pagination.currentPage}.`}
           </p>
           <section ref={resultsRef} aria-label="Warehouse results" aria-busy={loadingResults} tabIndex={-1} className="scroll-mt-[calc(var(--wog-nav-height)+68px)] focus:outline-none">
@@ -244,12 +232,23 @@ const Listings = () => {
               </div>
             )}
 
-            {/* Error State */}
-            {isError && !loadingResults && (
+            {/* A failed refresh still has valid data for this exact query.
+                A failed new search has no data and must never show old cards. */}
+            {isRefetchError && !loadingResults && (
+              <div role="status" className="flex flex-wrap items-center justify-between gap-3 mb-6 px-4 py-3 border border-wareongo-blue/20 rounded-xl text-sm text-wareongo-slate">
+                <p>Could not refresh listings. Showing the last loaded results.</p>
+                <button
+                  disabled={isFetching}
+                  onClick={() => { trackEvent('content_retry', { list_id: listId }); void refetch(); }}
+                  className="min-h-11 px-4 rounded-lg border border-wareongo-blue/30 text-wareongo-blue hover:bg-wareongo-blue/5 disabled:opacity-50"
+                >Retry refresh</button>
+              </div>
+            )}
+            {isLoadingError && !loadingResults && (
               <div className="text-center py-12">
                 <p className="text-red-600 mb-4">Failed to load warehouses. Please try again later.</p>
                 <button
-                  onClick={() => { trackEvent('content_retry', { list_id: 'all_warehouses' }); void refetch(); }}
+                  onClick={() => { trackEvent('content_retry', { list_id: listId }); void refetch(); }}
                   className="px-5 h-10 rounded-xl bg-wareongo-blue text-white text-sm font-medium hover:bg-wareongo-blue/90 transition-colors"
                 >
                   Try again
@@ -258,14 +257,14 @@ const Listings = () => {
             )}
 
             {/* Warehouse Grid */}
-            {!loadingResults && !isError && warehouses.length > 0 && (
+            {!loadingResults && !isLoadingError && warehouses.length > 0 && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                 {warehouses.map((warehouse, idx) => (
                   <WarehouseCard
                     key={warehouse.id}
                     id={warehouse.id}
                     index={idx}
-                    analyticsContext={{ list_id: 'all_warehouses', placement: 'listings_grid', page: currentPage, page_size: pageSize, list_position: (currentPage - 1) * pageSize + idx + 1 }}
+                    analyticsContext={{ list_id: listId, placement: listId === 'all_warehouses' ? 'listings_grid' : 'location_grid', page: currentPage, page_size: pageSize, list_position: (currentPage - 1) * pageSize + idx + 1 }}
                     image={warehouse.image}
                     images={warehouse.images}
                     imageFallbacks={warehouse.imageFallbacks}
@@ -283,7 +282,7 @@ const Listings = () => {
             )}
 
             {/* No Results Message */}
-            {!loadingResults && !isError && warehouses.length === 0 && (
+            {!loadingResults && !isLoadingError && warehouses.length === 0 && (
               <div className="text-center py-16 border border-wareongo-blue/30 rounded-2xl">
                 <p className="text-lg sm:text-xl text-wareongo-blue font-semibold mb-2">No warehouses found</p>
                 <p className="text-wareongo-slate text-sm mb-6">
@@ -301,7 +300,7 @@ const Listings = () => {
             )}
 
             {/* Pagination Info and Controls */}
-            {!isError && warehouses.length > 0 && (
+            {!isLoadingError && warehouses.length > 0 && (
               <div ref={pagerRef} className="text-center space-y-5">
                 <p className="text-wareongo-slate text-sm">
                   {loadingResults ? `Loading page ${currentPage}…` : <>
@@ -338,7 +337,7 @@ const Listings = () => {
                   onChange={(page, direction) => {
                     if (loadingResults || page === currentPage) return;
                     trackEvent('listings_paginate', {
-                      list_id: 'all_warehouses', page_size: pageSize,
+                      list_id: listId, page_size: pageSize,
                       from_page: pagination.currentPage,
                       to_page: page,
                       direction,
@@ -359,4 +358,7 @@ const Listings = () => {
   );
 };
 
-export default Listings;
+export default function Listings() {
+  const initialData = useLoaderData() as ListingsLoaderData | null;
+  return <ListingsView initialData={initialData} />;
+}

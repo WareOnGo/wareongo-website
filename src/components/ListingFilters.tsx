@@ -5,11 +5,12 @@ import { Combobox } from '@/components/ui/combobox';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
 import {
-  CITY_OPTIONS, CITY_SEARCH_ALIASES, WAREHOUSE_TYPE_OPTIONS, micromarketsForCity,
+  CITY_OPTIONS, STATE_OPTIONS, CITY_SEARCH_ALIASES, WAREHOUSE_TYPE_OPTIONS, micromarketsForCity,
   type WarehouseFilters,
 } from '@/lib/listingSearch';
 
 const cities = CITY_OPTIONS.map(city => ({ value: city, label: city, keywords: CITY_SEARCH_ALIASES[city] }));
+const states = STATE_OPTIONS.map(state => ({ value: state, label: state }));
 const areaPresets = [
   { label: 'Any area', compactLabel: 'Any', min: 0, max: 100000 },
   { label: 'Up to 10,000', compactLabel: '≤10k', min: 0, max: 10000 },
@@ -33,7 +34,7 @@ const focusClass = 'focus-visible:outline-none focus-visible:ring-2 focus-visibl
 
 function TypeControl({ filters, onChange }: Pick<ListingFiltersProps, 'filters' | 'onChange'>) {
   return <fieldset className="min-w-0">
-    <legend className="mb-1.5 text-xs font-medium text-wareongo-blue sm:mb-3 sm:text-sm">Warehouse type</legend>
+    <legend className="mb-1 text-xs font-medium text-wareongo-blue sm:mb-3 sm:text-sm">Warehouse type</legend>
     <div className="grid grid-cols-5 gap-1 sm:gap-3">
       {['', ...WAREHOUSE_TYPE_OPTIONS].map(type => <button key={type} type="button"
         aria-label={type || 'Any type'} aria-pressed={filters.warehouseType === type} onClick={() => onChange('warehouseType', type)}
@@ -65,8 +66,8 @@ function AreaControls({ filters, onAreaChange }: Pick<ListingFiltersProps, 'filt
   const minLabel = filters.minSqft === 0 ? 'No minimum' : filters.minSqft.toLocaleString('en-IN');
   const maxLabel = filters.maxSqft === 100000 ? 'No maximum' : filters.maxSqft.toLocaleString('en-IN');
   return <fieldset className="min-w-0">
-    <legend className="mb-1.5 text-xs font-medium text-wareongo-blue sm:mb-4 sm:text-sm">Area <span className="font-normal text-wareongo-slate">(sq ft)</span></legend>
-    <div role="group" aria-label="Quick area filters" className="mb-2 grid grid-cols-5 gap-1 sm:mb-5 sm:flex sm:flex-wrap sm:gap-2">
+    <legend className="mb-1 text-xs font-medium text-wareongo-blue sm:mb-4 sm:text-sm">Area <span className="font-normal text-wareongo-slate">(sq ft)</span></legend>
+    <div role="group" aria-label="Quick area filters" className="mb-1 grid grid-cols-5 gap-1 sm:mb-5 sm:flex sm:flex-wrap sm:gap-2">
       {areaPresets.map(preset => {
         const selected = filters.minSqft === preset.min && filters.maxSqft === preset.max;
         return <button key={preset.label} type="button" aria-label={preset.label} aria-pressed={selected}
@@ -106,7 +107,7 @@ export default function ListingFilters({ open, onOpenChange, triggerRef, filters
     <Dialog.Portal>
       <Dialog.Overlay className="fixed inset-0 z-[70] bg-wareongo-blue/40 data-[state=open]:animate-in data-[state=open]:fade-in-0 motion-reduce:animate-none" />
       <Dialog.Content id="listing-filters" aria-modal="true"
-        className="fixed left-1/2 top-1/2 z-[71] flex max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[720px] -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-2xl border border-wareongo-blue bg-wareongo-ivory font-sans shadow-2xl outline-none data-[state=open]:animate-in data-[state=open]:fade-in-0 motion-reduce:animate-none"
+        className="fixed left-1/2 top-1/2 z-[71] flex max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[720px] -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-2xl border border-wareongo-blue bg-wareongo-ivory font-sans shadow-2xl outline-none"
         onOpenAutoFocus={event => {
           event.preventDefault();
           // Keep the keyboard and city suggestions closed until a field is chosen.
@@ -120,11 +121,11 @@ export default function ListingFilters({ open, onOpenChange, triggerRef, filters
           // Escape dismisses an open combobox first, then the modal.
           if (event.target instanceof HTMLElement && event.target.matches('[role="combobox"][aria-expanded="true"]')) event.preventDefault();
         }}>
-        <div className="shrink-0 border-b border-wareongo-blue/15 px-4 py-3 sm:px-8 sm:py-7">
+        <div className="shrink-0 border-b border-wareongo-blue/15 px-4 py-2 sm:px-8 sm:py-7">
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="mb-2 hidden text-[10px] uppercase tracking-[0.2em] text-wareongo-slate sm:block">Your requirements</p>
-              <Dialog.Title ref={titleRef} tabIndex={-1} className="py-2 text-lg font-bold leading-tight text-wareongo-blue outline-none sm:py-0 sm:text-3xl">Filter warehouses</Dialog.Title>
+              <Dialog.Title ref={titleRef} tabIndex={-1} className="py-2 text-lg max-[359px]:text-base font-bold leading-tight text-wareongo-blue outline-none sm:py-0 sm:text-3xl">Filter warehouses</Dialog.Title>
             </div>
             <Dialog.Close aria-label="Close filters" className={`-mr-1 -mt-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-wareongo-blue/20 text-wareongo-blue transition-colors hover:border-wareongo-blue hover:bg-wareongo-blue/5 ${focusClass}`}>
               <X aria-hidden="true" className="h-5 w-5" />
@@ -133,15 +134,20 @@ export default function ListingFilters({ open, onOpenChange, triggerRef, filters
           <Dialog.Description className="sr-only text-sm leading-relaxed text-wareongo-slate sm:not-sr-only sm:mt-2">Find the right space for your business.</Dialog.Description>
         </div>
 
-        <div ref={bodyRef} className="min-h-0 space-y-3 overflow-y-auto overscroll-contain px-4 py-3 sm:space-y-7 sm:px-8 sm:py-7">
-          <div className="grid grid-cols-2 gap-3 sm:gap-6">
+        <div ref={bodyRef} className="min-h-0 space-y-1.5 overflow-y-auto overscroll-contain px-4 py-1.5 sm:space-y-7 sm:px-8 sm:py-7">
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4">
             <div className="min-w-0">
-              <Label htmlFor="city" className="mb-1.5 block text-xs font-medium text-wareongo-blue sm:mb-3 sm:text-sm">City</Label>
+              <Label htmlFor="state" className="mb-1 block text-xs font-medium text-wareongo-blue sm:mb-3 sm:text-sm">State</Label>
+              <Combobox id="state" label="State" value={filters.state} options={states} emptyLabel="All states" placeholder="All states"
+                popupBoundaryRef={bodyRef} onValueChange={value => onChange('state', value)} />
+            </div>
+            <div className="min-w-0">
+              <Label htmlFor="city" className="mb-1 block text-xs font-medium text-wareongo-blue sm:mb-3 sm:text-sm">City</Label>
               <Combobox id="city" label="City" value={filters.city} options={cities} emptyLabel="All cities" placeholder="All cities"
                 popupBoundaryRef={bodyRef} onValueChange={value => onChange('city', value)} />
             </div>
-            <div className="min-w-0">
-              <Label htmlFor="micromarket" className="mb-1.5 block text-xs font-medium text-wareongo-blue sm:mb-3 sm:text-sm">Micromarket</Label>
+            <div className="col-span-2 min-w-0 sm:col-span-1">
+              <Label htmlFor="micromarket" className="mb-1 block text-xs font-medium text-wareongo-blue sm:mb-3 sm:text-sm">Micromarket</Label>
               <Combobox key={filters.city} id="micromarket" label="Micromarket" value={filters.micromarket}
                 options={micromarkets} disabled={!filters.city} placeholder={!filters.city ? 'City first' : 'Any'}
                 emptyLabel="All micromarkets" popupBoundaryRef={bodyRef} onValueChange={value => onChange('micromarket', value)} />
@@ -149,10 +155,10 @@ export default function ListingFilters({ open, onOpenChange, triggerRef, filters
           </div>
           <TypeControl filters={filters} onChange={onChange} />
           <AreaControls filters={filters} onAreaChange={onAreaChange} />
-          <div className="border-t border-wareongo-blue/15 pt-3 sm:pt-6"><FireControl filters={filters} onChange={onChange} /></div>
+          <div className="border-t border-wareongo-blue/15 pt-1 sm:pt-6"><FireControl filters={filters} onChange={onChange} /></div>
         </div>
 
-        <div className="flex shrink-0 items-center justify-between gap-4 border-t border-wareongo-blue/15 px-4 py-3 sm:px-8 sm:py-5">
+        <div className="flex shrink-0 items-center justify-between gap-4 border-t border-wareongo-blue/15 px-4 py-2 sm:px-8 sm:py-5">
           <button type="button" onClick={onReset} className={`-ml-2 h-11 rounded-xl px-2 text-sm font-medium text-wareongo-slate transition-colors hover:bg-wareongo-blue/5 hover:text-wareongo-blue sm:h-12 sm:px-3 ${focusClass}`}>Reset</button>
           <button type="button" onClick={onApply} className={`h-11 rounded-xl border border-wareongo-blue bg-wareongo-blue px-5 text-sm font-medium text-wareongo-ivory transition-colors hover:bg-wareongo-blue/90 sm:h-12 sm:px-8 ${focusClass}`}>Apply filters</button>
         </div>

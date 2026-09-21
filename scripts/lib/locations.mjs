@@ -5,6 +5,9 @@
 
 import { API_BASE, fetchMicromarkets } from './api.mjs';
 import { fetchInventory } from '../../src/lib/fetchInventory.mjs';
+import { canonicalListingLocation as canonicalize, matchesListingType } from '../../src/lib/listingLocation.mjs';
+
+export { canonicalize };
 
 /**
  * A city needs this many listings before its page is advertised to search —
@@ -19,22 +22,6 @@ import { fetchInventory } from '../../src/lib/fetchInventory.mjs';
 export const CITY_MIN_LISTINGS = 3;
 
 export const isListedCity = (city) => city.count >= CITY_MIN_LISTINGS;
-
-const CITY_ALIASES = {
-  bangalore: 'Bengaluru',
-  bombay: 'Mumbai',
-  calcutta: 'Kolkata',
-  madras: 'Chennai',
-  gurgaon: 'Gurugram',
-};
-
-const titleCase = (s) =>
-  s
-    .toLowerCase()
-    .split(/\s+/)
-    .filter(Boolean)
-    .map((w) => w[0].toUpperCase() + w.slice(1))
-    .join(' ');
 
 // Mirror of src/lib/warehouseSlug.ts — keep in sync.
 const SLUG_CITY_ALIASES = {
@@ -76,14 +63,6 @@ export function warehouseSlug(w) {
   return parts.join('-');
 }
 
-export const canonicalize = (raw, type) => {
-  if (!raw) return null;
-  const lower = String(raw).trim().toLowerCase();
-  if (!lower) return null;
-  if (type === 'city' && CITY_ALIASES[lower]) return CITY_ALIASES[lower];
-  return titleCase(lower);
-};
-
 export const slugify = (name) =>
   name
     .toLowerCase()
@@ -117,13 +96,6 @@ export function summarize(warehouses, type) {
     .filter((s) => s.slug.length > 0)
     .sort((a, b) => a.canonical.localeCompare(b.canonical));
 }
-
-const canonicalWarehouseType = (raw) => {
-  if (!raw) return null;
-  const upper = String(raw).trim().toUpperCase();
-  if (upper === 'PEB' || upper === 'RCC') return upper;
-  return null;
-};
 
 // ----- micromarkets ---------------------------------------------------------
 // Read from the backend, not derived. See fetchMicromarkets in ./api.mjs for
@@ -173,19 +145,12 @@ export function locationTypeCombos(warehouses, type) {
   const summaries = summarize(warehouses, type);
   const combos = [];
   for (const loc of summaries) {
-    const matchersLower = new Set([loc.canonical.toLowerCase()]);
-    // alias expansion mirrors locationLoader.ts matchersFor
-    if (type === 'city') {
-      for (const [alias, can] of Object.entries(CITY_ALIASES)) {
-        if (can === loc.canonical) matchersLower.add(alias);
-      }
-    }
     const inScope = warehouses.filter((w) => {
       const raw = (type === 'city' ? w.city : w.state) ?? '';
-      return matchersLower.has(String(raw).trim().toLowerCase());
+      return canonicalize(raw, type) === loc.canonical;
     });
     for (const t of ['PEB', 'RCC']) {
-      const count = inScope.filter((w) => canonicalWarehouseType(w.warehouseType) === t).length;
+      const count = inScope.filter((w) => matchesListingType(w.warehouseType, t)).length;
       if (count > 0) combos.push({ location: loc, warehouseType: t, count });
     }
   }
