@@ -99,6 +99,7 @@ class WarehouseAPI {
       fireNocAvailable?: boolean;
       minSpace?: number;
       maxSpace?: number;
+      spaceRanges?: string;
     },
     signal?: AbortSignal,
   ): Promise<WarehouseAPIResponse> {
@@ -129,6 +130,7 @@ class WarehouseAPI {
         if (filters.maxSpace !== undefined) {
           params.append('maxSpace', filters.maxSpace.toString());
         }
+        if (filters.spaceRanges) params.append('spaceRanges', filters.spaceRanges);
       }
 
       const response = await fetchInventory(

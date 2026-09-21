@@ -7,13 +7,14 @@ export interface WarehouseFilters {
   city: string;
   micromarket: string;
   fireCompliance: string;
-  warehouseType: string;
+  warehouseTypes: string[];
+  areaRanges: string[];
   minSqft: number;
   maxSqft: number;
 }
 
 export const DEFAULT_FILTERS: WarehouseFilters = {
-  state: '', city: '', micromarket: '', fireCompliance: '', warehouseType: '', minSqft: 0, maxSqft: 100000,
+  state: '', city: '', micromarket: '', fireCompliance: '', warehouseTypes: [], areaRanges: [], minSqft: 0, maxSqft: 100000,
 };
 export const DEFAULT_PAGE_SIZE = 21;
 export const PAGE_SIZES = [10, 21, 30, 50] as const;
@@ -22,24 +23,43 @@ const byWarehouseCount = (a: LocationSummary, b: LocationSummary) =>
 export const CITY_OPTIONS = [...CITIES].sort(byWarehouseCount).map(city => city.canonical);
 export const STATE_OPTIONS = [...STATES].sort(byWarehouseCount).map(state => state.canonical);
 export const WAREHOUSE_TYPE_OPTIONS = ['PEB', 'RCC', 'BTS', 'Shed'];
+export const AREA_PRESETS = [
+  { value: '0-10000', label: 'Up to 10,000', compactLabel: '≤10k', min: 0, max: 10000 },
+  { value: '10000-25000', label: '10,000–25,000', compactLabel: '10–25k', min: 10000, max: 25000 },
+  { value: '25000-50000', label: '25,000–50,000', compactLabel: '25–50k', min: 25000, max: 50000 },
+  { value: '50000-', label: '50,000+', compactLabel: '50k+', min: 50000, max: 100000 },
+];
 
 export const CITY_SEARCH_ALIASES: Record<string, string[]> = {
   Bengaluru: ['Bangalore'], Mumbai: ['Bombay'], Kolkata: ['Calcutta'],
   Chennai: ['Madras'], Gurugram: ['Gurgaon'],
 };
 
-const FILTER_KEYS = ['city', 'state', 'micromarket', 'fire', 'type', 'minSqft', 'maxSqft'];
+const FILTER_KEYS = ['city', 'state', 'micromarket', 'fire', 'type', 'area', 'minSqft', 'maxSqft'];
 const PAGING_KEYS = ['page', 'pageSize'];
 
 export const micromarketsForCity = (city: string) => FILTER_MICROMARKETS
   .filter(market => market.parentCity === city).sort(byWarehouseCount);
 
 /** A locality selection belongs to one city and resets when that city changes. */
-export function changeListingFilter(filters: WarehouseFilters, key: keyof WarehouseFilters, value: string | number): WarehouseFilters {
+export function changeListingFilter<K extends keyof WarehouseFilters>(filters: WarehouseFilters, key: K, value: WarehouseFilters[K]): WarehouseFilters {
   const next = { ...filters, [key]: value };
   if (key === 'city' && value !== filters.city) { next.micromarket = ''; next.state = ''; }
   if (key === 'state' && value !== filters.state) { next.city = ''; next.micromarket = ''; }
+  if (key === 'areaRanges') { next.minSqft = 0; next.maxSqft = 100000; }
   return next;
+}
+
+// Saved single-range URLs still select their corresponding quick filter.
+export function selectedAreaPresets(filters: WarehouseFilters) {
+  return AREA_PRESETS.filter(preset => filters.areaRanges.length
+    ? filters.areaRanges.includes(preset.value)
+    : filters.minSqft === preset.min && filters.maxSqft === preset.max);
+}
+
+function options(values: string[], available: string[]): string[] {
+  const requested = new Set(values.flatMap(value => value.split(',').map(part => part.trim().toLowerCase())));
+  return available.filter(value => requested.has(value.toLowerCase()));
 }
 
 export function readPositiveInteger(value: string | null, fallback: number): number {
@@ -67,7 +87,7 @@ function location(value: string | null, options: string[]): string {
 
 export function filtersFromSearchParams(input: URLSearchParams, preset = DEFAULT_FILTERS): WarehouseFilters {
   const search = new URLSearchParams(input);
-  for (const [key, value] of [['state', preset.state], ['city', preset.city], ['micromarket', preset.micromarket], ['type', preset.warehouseType]]) {
+  for (const [key, value] of [['state', preset.state], ['city', preset.city], ['micromarket', preset.micromarket], ['type', preset.warehouseTypes.join(',')]]) {
     if (!search.has(key) && value) search.set(key, value);
   }
   const requestedCity = location(search.get('city'), CITY_OPTIONS);
@@ -75,6 +95,7 @@ export function filtersFromSearchParams(input: URLSearchParams, preset = DEFAULT
     aliases.some(alias => alias.toLowerCase() === requestedCity.toLowerCase()))?.[0] ?? requestedCity;
   const min = area(search.get('minSqft'), 0);
   const max = area(search.get('maxSqft'), 100000);
+  const areaRanges = options(search.getAll('area'), AREA_PRESETS.map(preset => preset.value));
   return {
     state: location(search.get('state'), STATE_OPTIONS),
     city,
@@ -84,24 +105,29 @@ export function filtersFromSearchParams(input: URLSearchParams, preset = DEFAULT
       ? search.get('micromarket')!.toLowerCase() : '',
     // The switch is a positive requirement: off includes all NOC statuses.
     fireCompliance: search.get('fire')?.trim().toLowerCase() === 'yes' ? 'yes' : '',
-    warehouseType: option(search.get('type'), WAREHOUSE_TYPE_OPTIONS),
-    minSqft: Math.min(min, max),
-    maxSqft: Math.max(min, max),
+    warehouseTypes: options(search.getAll('type'), WAREHOUSE_TYPE_OPTIONS),
+    areaRanges,
+    minSqft: areaRanges.length ? 0 : Math.min(min, max),
+    maxSqft: areaRanges.length ? 100000 : Math.max(min, max),
   };
 }
 
 /** The backend owns exact geography, aliases, locality matching and paging. */
 export function toApiFilters(filters: WarehouseFilters): ListingsFilters {
   const city = filters.city && filters.city !== 'all' ? filters.city : undefined;
+  const ranges = selectedAreaPresets(filters);
+  const min = ranges.length === 1 ? ranges[0].min : filters.minSqft;
+  const max = ranges.length === 1 ? ranges[0].max : filters.maxSqft;
   const apiFilters = {
     city,
     state: filters.state || undefined,
     locationMatch: city || filters.state ? 'exact' as const : undefined,
     micromarket: city && filters.micromarket ? filters.micromarket : undefined,
-    warehouseType: filters.warehouseType && filters.warehouseType !== 'all' ? filters.warehouseType : undefined,
+    warehouseType: options(filters.warehouseTypes, WAREHOUSE_TYPE_OPTIONS).join(',') || undefined,
     fireNocAvailable: filters.fireCompliance === 'yes' ? true : undefined,
-    minSpace: filters.minSqft > 0 ? filters.minSqft : undefined,
-    maxSpace: filters.maxSqft < 100000 ? filters.maxSqft : undefined,
+    spaceRanges: ranges.length > 1 ? ranges.map(range => range.value).join(',') : undefined,
+    minSpace: ranges.length <= 1 && min > 0 ? min : undefined,
+    maxSpace: ranges.length <= 1 && max < 100000 ? max : undefined,
   };
   return Object.fromEntries(Object.entries(apiFilters).filter(([, value]) => value !== undefined)) as ListingsFilters;
 }
@@ -125,13 +151,19 @@ export function writeListingSearch(
   for (const [key, value, initial] of [
     ['state', filters.state, preset.state], ['city', filters.city, preset.city],
     ['micromarket', filters.city ? filters.micromarket : '', preset.micromarket],
-    ['type', filters.warehouseType, preset.warehouseType],
+    ['type', options(filters.warehouseTypes, WAREHOUSE_TYPE_OPTIONS).join(','), preset.warehouseTypes.join(',')],
   ]) {
     if (value !== initial) next.set(key, value === 'all' ? '' : value);
   }
   if (filters.fireCompliance) next.set('fire', filters.fireCompliance);
-  if (filters.minSqft > 0) next.set('minSqft', String(filters.minSqft));
-  if (filters.maxSqft < 100000) next.set('maxSqft', String(filters.maxSqft));
+  const ranges = selectedAreaPresets(filters);
+  if (ranges.length > 1) next.set('area', ranges.map(range => range.value).join(','));
+  else {
+    const min = ranges.length === 1 ? ranges[0].min : filters.minSqft;
+    const max = ranges.length === 1 ? ranges[0].max : filters.maxSqft;
+    if (min > 0) next.set('minSqft', String(min));
+    if (max < 100000) next.set('maxSqft', String(max));
+  }
   if (page > 1) next.set('page', String(page));
   if (pageSize !== DEFAULT_PAGE_SIZE) next.set('pageSize', String(pageSize));
   return next;
@@ -140,8 +172,9 @@ export function writeListingSearch(
 /** Refinements keep a location URL; changing its scope opens the shared search. */
 export function listingSearchHref(pathname: string, search: URLSearchParams, hash: string, preset = DEFAULT_FILTERS) {
   const state = readListingSearch(search, preset);
-  const changedScope = (['state', 'city', 'micromarket', 'warehouseType'] as const)
-    .some(key => preset[key] && state.filters[key] !== preset[key]);
+  const changedScope = (['state', 'city', 'micromarket'] as const)
+    .some(key => preset[key] && state.filters[key] !== preset[key]) ||
+    (preset.warehouseTypes.length > 0 && state.filters.warehouseTypes.join(',') !== preset.warehouseTypes.join(','));
   const path = changedScope ? '/listings' : pathname;
   const query = writeListingSearch(search, state, changedScope ? DEFAULT_FILTERS : preset).toString();
   return `${path}${query ? `?${query}` : ''}${hash}`;

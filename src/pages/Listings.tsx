@@ -130,12 +130,12 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
     setSearchParams(new URLSearchParams(normalizedSearch), { replace: true });
   }, [hydrated, normalizedSearch, searchParams, setSearchParams, resultTrigger, hrefFor, location]);
 
-  const handleFilterChange = (key: keyof WarehouseFilters, value: string | number) => {
+  const handleFilterChange = <K extends keyof WarehouseFilters,>(key: K, value: WarehouseFilters[K]) => {
     setDraft({ key: filterKey, filters: changeListingFilter(filters, key, value) });
   };
 
   const handleSqftRangeChange = (values: number[]) => {
-    setDraft({ key: filterKey, filters: { ...filters, minSqft: values[0], maxSqft: values[1] } });
+    setDraft({ key: filterKey, filters: { ...filters, areaRanges: [], minSqft: values[0], maxSqft: values[1] } });
   };
 
   useListingResults({ list_id: listId, placement: listId === 'all_warehouses' ? 'listings_grid' : 'location_grid', page: currentPage, page_size: pageSize,
@@ -165,7 +165,7 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
       appliedFilters.state || appliedFilters.city ||
         appliedFilters.micromarket ||
         appliedFilters.fireCompliance ||
-        appliedFilters.warehouseType ||
+        appliedFilters.warehouseTypes.length || appliedFilters.areaRanges.length ||
         appliedFilters.minSqft > 0 ||
         appliedFilters.maxSqft < 100000,
     );

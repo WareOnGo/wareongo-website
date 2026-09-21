@@ -10,7 +10,7 @@ const { outputFiles } = await build({
 const compiled = { exports: {} };
 new Function('module', 'exports', outputFiles[0].text)(compiled, compiled.exports);
 const { readListingSearch, writeListingSearch, DEFAULT_FILTERS, listingShouldRevalidate, toApiFilters,
-  changeListingFilter, micromarketsForCity, listingSearchHref, CITY_OPTIONS, CITIES, FILTER_MICROMARKETS } = compiled.exports;
+  changeListingFilter, selectedAreaPresets, micromarketsForCity, listingSearchHref, CITY_OPTIONS, CITIES, FILTER_MICROMARKETS } = compiled.exports;
 const read = query => readListingSearch(new URLSearchParams(query));
 
 test('shared filters, page and selected page size round trip without dropping attribution', () => {
@@ -40,7 +40,7 @@ test('case, all values, duplicates, and ranges normalize to one meaningful query
   assert.deepEqual(read('city=all&state=ALL&type=all&fire=invalid').filters, DEFAULT_FILTERS);
   const state = read('city=bengaluru&type=peb&fire=YES&minSqft=90000&maxSqft=20000&page=2&page=4');
   assert.equal(state.filters.city, 'Bengaluru');
-  assert.equal(state.filters.warehouseType, 'PEB');
+  assert.deepEqual(state.filters.warehouseTypes, ['PEB']);
   assert.equal(state.filters.fireCompliance, 'yes');
   assert.equal(state.filters.minSqft, 20000);
   assert.equal(state.filters.maxSqft, 90000);
@@ -54,11 +54,53 @@ test('case, all values, duplicates, and ranges normalize to one meaningful query
 test('every offered building type survives a shared URL and reaches the backend', () => {
   for (const type of ['PEB', 'RCC', 'BTS', 'Shed']) {
     const state = read(`type=${type.toLowerCase()}`);
-    assert.equal(state.filters.warehouseType, type);
+    assert.deepEqual(state.filters.warehouseTypes, [type]);
     assert.deepEqual(toApiFilters(state.filters), { warehouseType: type });
     assert.equal(writeListingSearch(new URLSearchParams(), state).get('type'), type);
   }
-  assert.equal(read('type=invalid').filters.warehouseType, '');
+  assert.deepEqual(read('type=invalid').filters.warehouseTypes, []);
+});
+
+test('multiple types and disjoint area bands round trip in canonical order without filling gaps', () => {
+  const query = new URLSearchParams('type=rcc,peb&type=RCC,unknown&area=50000-,0-10000&area=0-10000&minSqft=20000&maxSqft=25000&utm_source=shared&page=2');
+  const state = readListingSearch(query);
+  assert.deepEqual(state.filters.warehouseTypes, ['PEB', 'RCC']);
+  assert.deepEqual(state.filters.areaRanges, ['0-10000', '50000-']);
+  assert.deepEqual(toApiFilters(state.filters), { warehouseType: 'PEB,RCC', spaceRanges: '0-10000,50000-' });
+  const written = writeListingSearch(query, state);
+  assert.deepEqual(written.getAll('type'), ['PEB,RCC']);
+  assert.deepEqual(written.getAll('area'), ['0-10000,50000-']);
+  assert.equal(written.has('minSqft') || written.has('maxSqft'), false);
+  assert.equal(written.get('utm_source'), 'shared');
+  assert.deepEqual(readListingSearch(written), state);
+});
+
+test('selecting, removing and clearing area chips replaces the custom range without changing other filters', () => {
+  const filters = read('type=PEB,RCC&minSqft=15000&maxSqft=19000').filters;
+  const multiple = changeListingFilter(filters, 'areaRanges', ['0-10000', '50000-']);
+  assert.deepEqual(toApiFilters(multiple), { warehouseType: 'PEB,RCC', spaceRanges: '0-10000,50000-' });
+  const single = changeListingFilter(multiple, 'areaRanges', ['50000-']);
+  assert.deepEqual(toApiFilters(single), { warehouseType: 'PEB,RCC', minSpace: 50000 });
+  const written = writeListingSearch(new URLSearchParams('area=0-10000,50000-'), { filters: single, page: 1, pageSize: 21 });
+  assert.equal(written.has('area'), false);
+  assert.equal(written.get('minSqft'), '50000');
+  assert.deepEqual(selectedAreaPresets(readListingSearch(written).filters).map(range => range.value), ['50000-']);
+  assert.deepEqual(toApiFilters(changeListingFilter(single, 'areaRanges', [])), { warehouseType: 'PEB,RCC' });
+  assert.equal(filters.minSqft, 15000, 'draft changes leave the original untouched');
+  assert.deepEqual(read('area=bad,500-100,10000').filters, DEFAULT_FILTERS);
+});
+
+test('expanding a type-specific route keeps the location and both types in the shared search', () => {
+  const preset = { ...DEFAULT_FILTERS, city: 'Bengaluru', warehouseTypes: ['PEB'] };
+  const state = readListingSearch(new URLSearchParams('type=RCC,PEB&area=0-10000,50000-&utm_source=shared'), preset);
+  const written = writeListingSearch(new URLSearchParams('utm_source=shared'), state, preset);
+  const href = new URL(listingSearchHref('/listings/city/bengaluru/peb', written, '#results', preset), 'https://wareongo.com');
+  assert.equal(href.pathname, '/listings');
+  assert.equal(href.searchParams.get('city'), 'Bengaluru');
+  assert.equal(href.searchParams.get('type'), 'PEB,RCC');
+  assert.equal(href.searchParams.get('area'), '0-10000,50000-');
+  assert.equal(href.hash, '#results');
+  assert.equal(href.searchParams.get('utm_source'), 'shared');
 });
 
 test('canonical location selections include legacy inventory spellings in API requests', () => {
@@ -113,7 +155,7 @@ test('micromarket URLs are scoped to the selected city, including city aliases',
 });
 
 test('changing or clearing a city clears its micromarket and preserves the other requirements', () => {
-  const draft = { ...DEFAULT_FILTERS, city: 'Bengaluru', micromarket: 'whitefield', warehouseType: 'Shed' };
+  const draft = { ...DEFAULT_FILTERS, city: 'Bengaluru', micromarket: 'whitefield', warehouseTypes: ['Shed'] };
   assert.deepEqual(changeListingFilter(draft, 'city', 'Pune'), { ...draft, city: 'Pune', micromarket: '' });
   assert.deepEqual(changeListingFilter(draft, 'city', ''), { ...draft, city: '', micromarket: '' });
   assert.deepEqual(changeListingFilter(draft, 'city', 'Bengaluru'), draft);
@@ -155,6 +197,7 @@ test('query-only pagination/filter navigation retains loader data and ongoing pr
   assert.equal(revalidate('/listings', '/listings?page=2'), false);
   assert.equal(revalidate('/listings?city=Delhi', '/listings?city=Bangalore&pageSize=30'), false);
   assert.equal(revalidate('/listings?city=Bengaluru', '/listings?city=Bengaluru&micromarket=whitefield'), false);
+  assert.equal(revalidate('/listings/city/bengaluru', '/listings/city/bengaluru?area=0-10000,50000-&type=PEB,RCC'), false);
   assert.equal(revalidate('/listings/city/bengaluru', '/listings/city/bengaluru?page=2&pageSize=18'), false);
   assert.equal(revalidate('/overview/karnataka/bengaluru?page=3&pageSize=6', '/overview/karnataka/bengaluru?page=1'), false);
 });
@@ -176,7 +219,7 @@ test('location presets stay in clean URLs while refinements and history remain e
     { ...DEFAULT_FILTERS, city: 'Bengaluru' },
     { ...DEFAULT_FILTERS, state: 'Karnataka' },
     { ...DEFAULT_FILTERS, city: 'Bengaluru', micromarket: 'nelamangala' },
-    { ...DEFAULT_FILTERS, city: 'Bengaluru', warehouseType: 'PEB' },
+    { ...DEFAULT_FILTERS, city: 'Bengaluru', warehouseTypes: ['PEB'] },
   ]) {
     const state = readListingSearch(new URLSearchParams('utm_source=test&page=2'), preset);
     assert.deepEqual(state.filters, preset);
@@ -190,7 +233,7 @@ test('location presets stay in clean URLs while refinements and history remain e
 });
 
 test('switching geography drops dependent selections without hiding requirements', () => {
-  const preset = { ...DEFAULT_FILTERS, state: 'Karnataka', city: 'Bengaluru', micromarket: 'nelamangala', warehouseType: 'PEB' };
+  const preset = { ...DEFAULT_FILTERS, state: 'Karnataka', city: 'Bengaluru', micromarket: 'nelamangala', warehouseTypes: ['PEB'] };
   assert.deepEqual(changeListingFilter(preset, 'city', 'Delhi'), { ...preset, state: '', city: 'Delhi', micromarket: '' });
   assert.deepEqual(changeListingFilter(preset, 'state', 'Delhi'), { ...preset, state: 'Delhi', city: '', micromarket: '' });
   const filters = changeListingFilter(preset, 'city', 'Delhi');

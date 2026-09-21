@@ -8,7 +8,7 @@ export const locationListingPreset = (data: LocationListingsLoaderData): Warehou
   state: data.type === 'state' ? data.canonical : '',
   city: data.type === 'city' ? data.canonical : data.parentCity?.canonical ?? '',
   micromarket: data.type === 'micromarket' ? data.slug : '',
-  warehouseType: data.warehouseType ?? '',
+  warehouseTypes: data.warehouseType ? [data.warehouseType] : [],
 });
 
 /** Grid-only metadata. Overview inventories and their statistics stay intact. */
@@ -17,7 +17,7 @@ export function createLocationListingSeed(data: LocationListingsLoaderData, page
   const inventory = data.warehouses.filter(w =>
     (!filters.city || canonicalListingLocation(w.location.city, 'city') === filters.city) &&
     (!filters.state || canonicalListingLocation(w.location.state, 'state') === filters.state) &&
-    (!filters.warehouseType || matchesListingType(w.warehouseType, filters.warehouseType)),
+    (!filters.warehouseTypes.length || filters.warehouseTypes.some(type => matchesListingType(w.warehouseType, type))),
   );
   const sizes = inventory.map(w => w.size).filter(size => typeof size === 'number' && size > 0);
   return {

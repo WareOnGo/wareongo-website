@@ -112,7 +112,7 @@ async function generatorHarness(t) {
     "  const body = endpoint === '/warehouses' ? { data: fixture.warehouses, pagination: { totalPages: 1 } }",
     "    : { data: endpoint === '/locations' ? fixture.locations : fixture.micromarkets };",
     "  return new Response(JSON.stringify(body), { status: broken === 'http' ? 400 : 200,",
-    "    headers: broken === 'stale' ? {} : { 'X-Wareongo-Cache': 'bypass', 'X-Wareongo-Listing-Filters': fixture.failure === 'legacy-filters' ? '0' : '1' } });",
+    "    headers: broken === 'stale' ? {} : { 'X-Wareongo-Cache': 'bypass', 'X-Wareongo-Listing-Filters': fixture.failure === 'legacy-filters' ? '1' : '2' } });",
     "};",
   ].join('\n'));
   return {

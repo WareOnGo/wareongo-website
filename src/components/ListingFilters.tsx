@@ -5,26 +5,21 @@ import { Combobox } from '@/components/ui/combobox';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
 import {
-  CITY_OPTIONS, STATE_OPTIONS, CITY_SEARCH_ALIASES, WAREHOUSE_TYPE_OPTIONS, micromarketsForCity,
+  CITY_OPTIONS, STATE_OPTIONS, CITY_SEARCH_ALIASES, WAREHOUSE_TYPE_OPTIONS, AREA_PRESETS,
+  micromarketsForCity, selectedAreaPresets,
   type WarehouseFilters,
 } from '@/lib/listingSearch';
 
 const cities = CITY_OPTIONS.map(city => ({ value: city, label: city, keywords: CITY_SEARCH_ALIASES[city] }));
 const states = STATE_OPTIONS.map(state => ({ value: state, label: state }));
-const areaPresets = [
-  { label: 'Any area', compactLabel: 'Any', min: 0, max: 100000 },
-  { label: 'Up to 10,000', compactLabel: '≤10k', min: 0, max: 10000 },
-  { label: '10,000–25,000', compactLabel: '10–25k', min: 10000, max: 25000 },
-  { label: '25,000–50,000', compactLabel: '25–50k', min: 25000, max: 50000 },
-  { label: '50,000+', compactLabel: '50k+', min: 50000, max: 100000 },
-];
+const areaPresets = [{ value: '', label: 'Any area', compactLabel: 'Any' }, ...AREA_PRESETS];
 
 interface ListingFiltersProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   triggerRef: RefObject<HTMLButtonElement>;
   filters: WarehouseFilters;
-  onChange: (key: keyof WarehouseFilters, value: string | number) => void;
+  onChange: <K extends keyof WarehouseFilters>(key: K, value: WarehouseFilters[K]) => void;
   onAreaChange: (values: number[]) => void;
   onApply: () => void;
   onReset: () => void;
@@ -34,15 +29,21 @@ const focusClass = 'focus-visible:outline-none focus-visible:ring-2 focus-visibl
 
 function TypeControl({ filters, onChange }: Pick<ListingFiltersProps, 'filters' | 'onChange'>) {
   return <fieldset className="min-w-0">
-    <legend className="mb-1 text-xs font-medium text-wareongo-blue sm:mb-3 sm:text-sm">Warehouse type</legend>
+    <legend className="mb-1 w-full text-xs font-medium text-wareongo-blue sm:mb-3 sm:text-sm">Warehouse type<span className="float-right text-[11px] font-normal text-wareongo-slate sm:text-xs">Select any</span></legend>
     <div className="grid grid-cols-5 gap-1 sm:gap-3">
-      {['', ...WAREHOUSE_TYPE_OPTIONS].map(type => <button key={type} type="button"
-        aria-label={type || 'Any type'} aria-pressed={filters.warehouseType === type} onClick={() => onChange('warehouseType', type)}
-        className={`h-11 min-w-0 rounded-xl border px-1 text-xs transition-colors sm:h-12 sm:px-3 sm:text-sm ${focusClass} ${filters.warehouseType === type
+      {['', ...WAREHOUSE_TYPE_OPTIONS].map(type => {
+        const selected = type ? filters.warehouseTypes.includes(type) : !filters.warehouseTypes.length;
+        return <button key={type} type="button"
+        aria-label={type || 'Any type'} aria-pressed={selected}
+        onClick={() => onChange('warehouseTypes', type
+          ? WAREHOUSE_TYPE_OPTIONS.filter(option => option === type ? !selected : filters.warehouseTypes.includes(option)) : [])}
+        className={`relative h-11 min-w-0 rounded-xl border px-1 text-xs transition-colors sm:h-12 sm:px-3 sm:text-sm ${focusClass} ${selected
           ? 'border-wareongo-blue bg-wareongo-blue font-medium text-wareongo-ivory'
           : 'border-wareongo-blue/25 text-wareongo-blue hover:border-wareongo-blue hover:bg-wareongo-blue/5'}`}>
         {type || <><span className="sm:hidden">Any</span><span className="hidden sm:inline">Any type</span></>}
-      </button>)}
+        {selected && type && <X aria-hidden="true" className="pointer-events-none absolute right-1 top-1 h-2.5 w-2.5 sm:h-3 sm:w-3" />}
+      </button>;
+      })}
     </div>
   </fieldset>;
 }
@@ -62,23 +63,34 @@ function FireControl({ filters, onChange }: Pick<ListingFiltersProps, 'filters' 
   </button>;
 }
 
-function AreaControls({ filters, onAreaChange }: Pick<ListingFiltersProps, 'filters' | 'onAreaChange'>) {
-  const minLabel = filters.minSqft === 0 ? 'No minimum' : filters.minSqft.toLocaleString('en-IN');
-  const maxLabel = filters.maxSqft === 100000 ? 'No maximum' : filters.maxSqft.toLocaleString('en-IN');
+function AreaControls({ filters, onChange, onAreaChange }: Pick<ListingFiltersProps, 'filters' | 'onChange' | 'onAreaChange'>) {
+  const ranges = selectedAreaPresets(filters);
+  const min = ranges.length === 1 ? ranges[0].min : filters.minSqft;
+  const max = ranges.length === 1 ? ranges[0].max : filters.maxSqft;
+  const minLabel = min === 0 ? 'No minimum' : min.toLocaleString('en-IN');
+  const maxLabel = max === 100000 ? 'No maximum' : max.toLocaleString('en-IN');
   return <fieldset className="min-w-0">
-    <legend className="mb-1 text-xs font-medium text-wareongo-blue sm:mb-4 sm:text-sm">Area <span className="font-normal text-wareongo-slate">(sq ft)</span></legend>
+    <legend className="mb-1 w-full text-xs font-medium text-wareongo-blue sm:mb-4 sm:text-sm">Area <span className="font-normal text-wareongo-slate">(sq ft)</span><span className="float-right text-[11px] font-normal text-wareongo-slate sm:text-xs">Select any</span></legend>
     <div role="group" aria-label="Quick area filters" className="mb-1 grid grid-cols-5 gap-1 sm:mb-5 sm:flex sm:flex-wrap sm:gap-2">
       {areaPresets.map(preset => {
-        const selected = filters.minSqft === preset.min && filters.maxSqft === preset.max;
+        const selected = preset.value ? ranges.some(range => range.value === preset.value)
+          : !ranges.length && min === 0 && max === 100000;
         return <button key={preset.label} type="button" aria-label={preset.label} aria-pressed={selected}
-          onClick={() => onAreaChange([preset.min, preset.max])}
-          className={`min-h-11 min-w-0 rounded-xl border px-0.5 py-2 text-[11px] transition-colors sm:px-3 sm:text-[13px] ${focusClass} ${selected
+          onClick={() => onChange('areaRanges', preset.value
+            ? AREA_PRESETS.filter(option => option.value === preset.value ? !selected : ranges.some(range => range.value === option.value)).map(option => option.value) : [])}
+          className={`relative min-h-11 min-w-0 rounded-xl border px-0.5 py-2 text-[11px] transition-colors sm:px-3 sm:text-[13px] ${focusClass} ${selected
             ? 'border-wareongo-blue bg-wareongo-blue font-medium text-wareongo-ivory'
             : 'border-wareongo-blue/25 text-wareongo-blue hover:border-wareongo-blue hover:bg-wareongo-blue/5'}`}>
           <span className="sm:hidden">{preset.compactLabel}</span><span className="hidden sm:inline">{preset.label}</span>
+          {selected && preset.value && <X aria-hidden="true" className="pointer-events-none absolute right-1 top-1 h-2.5 w-2.5 sm:h-3 sm:w-3" />}
         </button>;
       })}
     </div>
+    {ranges.length > 1 ? <div className="text-xs text-wareongo-slate sm:text-sm">
+      <p>Match any selected range.</p>
+      <button type="button" onClick={() => onAreaChange([0, 100000])}
+        className={`min-h-11 rounded-lg text-wareongo-blue underline underline-offset-4 ${focusClass}`}>Use a custom range</button>
+    </div> : <>
     <div aria-hidden="true" className="flex justify-between gap-4 sm:mb-2">
       <div>
         <span className="mb-1 hidden text-xs text-wareongo-slate sm:block">Minimum</span>
@@ -90,11 +102,12 @@ function AreaControls({ filters, onAreaChange }: Pick<ListingFiltersProps, 'filt
       </div>
     </div>
     <div className="px-2.5">
-      <Slider min={0} max={100000} step={1000} value={[filters.minSqft, filters.maxSqft]}
+      <Slider min={0} max={100000} step={1000} value={[min, max]}
         thumbLabels={['Minimum area', 'Maximum area']}
-        thumbValueTexts={[filters.minSqft === 0 ? 'No minimum area' : `${minLabel} square feet`, filters.maxSqft === 100000 ? 'No maximum area' : `${maxLabel} square feet`]}
+        thumbValueTexts={[min === 0 ? 'No minimum area' : `${minLabel} square feet`, max === 100000 ? 'No maximum area' : `${maxLabel} square feet`]}
         onValueChange={onAreaChange} className="h-11" />
     </div>
+    </>}
   </fieldset>;
 }
 
@@ -154,7 +167,7 @@ export default function ListingFilters({ open, onOpenChange, triggerRef, filters
             </div>
           </div>
           <TypeControl filters={filters} onChange={onChange} />
-          <AreaControls filters={filters} onAreaChange={onAreaChange} />
+          <AreaControls filters={filters} onChange={onChange} onAreaChange={onAreaChange} />
           <div className="border-t border-wareongo-blue/15 pt-1 sm:pt-6"><FireControl filters={filters} onChange={onChange} /></div>
         </div>
 

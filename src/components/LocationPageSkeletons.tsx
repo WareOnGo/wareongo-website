@@ -73,7 +73,7 @@ export function LocationListingsSkeleton({ pathname }: { pathname: string }) {
       <ListingsHeader loading active heading={<></>} />
       <ListingFilterChips filters={{ ...DEFAULT_FILTERS, state: kind === 'state' ? canonical : '',
         city: kind === 'city' ? isMicro ? parent : canonical : '',
-        micromarket: isMicro ? variant : '', warehouseType: warehouseType ?? '' }} />
+        micromarket: isMicro ? variant : '', warehouseTypes: warehouseType ? [warehouseType] : [] }} />
       <div className="mb-12"><WarehouseGridSkeleton count={Math.min(pageSize, summary?.count || pageSize)} /></div>
     </div>
   </main>;

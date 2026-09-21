@@ -1,24 +1,28 @@
 import { X } from 'lucide-react';
-import { micromarketsForCity, type WarehouseFilters } from '@/lib/listingSearch';
+import { micromarketsForCity, selectedAreaPresets, type WarehouseFilters } from '@/lib/listingSearch';
 
 /** Shared geometry for live filters and the pending location route. */
 export default function ListingFilterChips({ filters, onRemove }: {
   filters: WarehouseFilters;
   onRemove?: (reset: Partial<WarehouseFilters>) => void;
 }) {
+  const ranges = selectedAreaPresets(filters);
   const activeChips: { id: string; label: string; reset: Partial<WarehouseFilters> }[] = [
     ...(filters.state ? [{ id: 'state', label: `State: ${filters.state}`, reset: { state: '' } }] : []),
     ...(filters.city ? [{ id: 'city', label: `City: ${filters.city}`, reset: { city: '', micromarket: '' } }] : []),
     ...(filters.micromarket ? [{ id: 'micromarket',
       label: micromarketsForCity(filters.city).find(market => market.slug === filters.micromarket)?.canonical ?? filters.micromarket,
       reset: { micromarket: '' } }] : []),
-    ...(filters.warehouseType ? [{ id: 'type', label: filters.warehouseType, reset: { warehouseType: '' } }] : []),
+    ...filters.warehouseTypes.map(type => ({ id: `type-${type}`, label: type,
+      reset: { warehouseTypes: filters.warehouseTypes.filter(value => value !== type) } })),
     ...(filters.fireCompliance === 'yes' ? [{ id: 'fire', label: 'Fire NOC required', reset: { fireCompliance: '' } }] : []),
-    ...(filters.minSqft > 0 || filters.maxSqft < 100000 ? [{
+    ...ranges.map(range => ({ id: `area-${range.value}`, label: `${range.label} sq ft`,
+      reset: { areaRanges: ranges.filter(value => value !== range).map(value => value.value), minSqft: 0, maxSqft: 100000 } })),
+    ...(!ranges.length && (filters.minSqft > 0 || filters.maxSqft < 100000) ? [{
       id: 'area',
       label: filters.maxSqft >= 100000 ? `${filters.minSqft.toLocaleString('en-IN')}+ sq ft`
         : `${filters.minSqft.toLocaleString('en-IN')}–${filters.maxSqft.toLocaleString('en-IN')} sq ft`,
-      reset: { minSqft: 0, maxSqft: 100000 },
+      reset: { areaRanges: [], minSqft: 0, maxSqft: 100000 },
     }] : []),
   ];
 
