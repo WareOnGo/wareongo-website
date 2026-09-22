@@ -97,7 +97,7 @@ const AboutUs = () => {
       <Navbar />
 
       <main className="flex-grow bg-wareongo-ivory" role="main" aria-labelledby="about-title">
-        <div className="section-container">
+        <div className="section-container page-content">
           {/* Hero — centered, like the homepage section headers */}
           <header className="text-center max-w-2xl mx-auto mb-14 sm:mb-16">
             <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate block mb-3">

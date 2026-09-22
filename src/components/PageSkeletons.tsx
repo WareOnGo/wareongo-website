@@ -27,7 +27,7 @@ export const WarehouseGridSkeleton = ({ count = 9 }: { count?: number }) => (
 
 export const ListingsSkeleton = () => (
   <main className="flex-grow bg-wareongo-ivory">
-    <div className="section-container pt-6 md:pt-24">
+    <div className="section-container page-content">
       <ListingsHeader loading />
       <div className="mb-12"><WarehouseGridSkeleton count={21} /></div>
     </div>
@@ -40,14 +40,14 @@ export const WarehouseMapSkeleton = () => (
 
 export const WarehouseDetailSkeleton = () => (
   <main className="flex-grow bg-wareongo-ivory" aria-hidden="true">
-      <div className="section-container px-4 sm:px-6 lg:px-8">
+      <div className="section-container page-content px-4 sm:px-6 lg:px-8">
         <div className="h-9 sm:h-5 mb-4 sm:mb-6 flex flex-col sm:flex-row justify-between sm:justify-start sm:items-center">
           <Skeleton className="h-3 w-28 sm:w-72 max-w-full" />
           <Skeleton className="h-3 w-56 max-w-full sm:hidden" />
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-6 lg:mb-8">
           <div className="order-1 lg:row-span-2">
-            <Skeleton data-testid="warehouse-skeleton-gallery" className="w-full h-64 sm:h-80 md:h-96 lg:h-[500px] xl:h-[600px] border border-wareongo-blue rounded-2xl" />
+            <Skeleton data-testid="warehouse-skeleton-gallery" className="w-full h-64 sm:h-80 md:h-96 lg:h-full lg:min-h-[500px] xl:min-h-[600px] border border-wareongo-blue rounded-2xl" />
           </div>
           <div className="space-y-4 sm:space-y-6 order-2">
             <div>
@@ -69,7 +69,7 @@ export const WarehouseDetailSkeleton = () => (
             </div>
             <Skeleton className="h-12 w-full rounded-xl" />
           </div>
-          <div className="order-3">
+          <div className="order-3 lg:self-end">
             <Skeleton className="h-[15px] sm:h-4 w-20 mb-2" />
             <WarehouseMapSkeleton />
           </div>

@@ -38,7 +38,7 @@ function TypeControl({ filters, onChange }: Pick<ListingFiltersProps, 'filters' 
         onClick={() => onChange('warehouseTypes', type
           ? WAREHOUSE_TYPE_OPTIONS.filter(option => option === type ? !selected : filters.warehouseTypes.includes(option)) : [])}
         className={`relative h-11 min-w-0 rounded-xl border px-1 text-xs transition-colors sm:h-12 sm:px-3 sm:text-sm ${focusClass} ${selected
-          ? 'border-wareongo-blue bg-wareongo-blue font-medium text-wareongo-ivory'
+          ? 'border-wareongo-blue/40 bg-[#DCE5EB] font-medium text-wareongo-blue'
           : 'border-wareongo-blue/25 text-wareongo-blue hover:border-wareongo-blue hover:bg-wareongo-blue/5'}`}>
         {type || <><span className="sm:hidden">Any</span><span className="hidden sm:inline">Any type</span></>}
         {selected && type && <X aria-hidden="true" className="pointer-events-none absolute right-1 top-1 h-2.5 w-2.5 sm:h-3 sm:w-3" />}
@@ -79,7 +79,7 @@ function AreaControls({ filters, onChange, onAreaChange }: Pick<ListingFiltersPr
           onClick={() => onChange('areaRanges', preset.value
             ? AREA_PRESETS.filter(option => option.value === preset.value ? !selected : ranges.some(range => range.value === option.value)).map(option => option.value) : [])}
           className={`relative min-h-11 min-w-0 rounded-xl border px-0.5 py-2 text-[11px] transition-colors sm:px-3 sm:text-[13px] ${focusClass} ${selected
-            ? 'border-wareongo-blue bg-wareongo-blue font-medium text-wareongo-ivory'
+            ? 'border-wareongo-blue/40 bg-[#DCE5EB] font-medium text-wareongo-blue'
             : 'border-wareongo-blue/25 text-wareongo-blue hover:border-wareongo-blue hover:bg-wareongo-blue/5'}`}>
           <span className="sm:hidden">{preset.compactLabel}</span><span className="hidden sm:inline">{preset.label}</span>
           {selected && preset.value && <X aria-hidden="true" className="pointer-events-none absolute right-1 top-1 h-2.5 w-2.5 sm:h-3 sm:w-3" />}

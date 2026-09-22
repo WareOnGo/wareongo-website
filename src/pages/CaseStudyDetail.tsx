@@ -118,7 +118,7 @@ const CaseStudyDetail: React.FC = () => {
       </PageHead>
       <Navbar />
 
-      <main className="flex-1 pt-24 pb-16">
+      <main className="page-content flex-1 pb-16">
         <div className="container mx-auto px-4 max-w-6xl">
           {/* Breadcrumb */}
           <Breadcrumbs className="mb-6" items={[

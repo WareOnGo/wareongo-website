@@ -120,7 +120,7 @@ const WarehouseDetail = () => {
         />
         <Navbar />
         <main className="flex-grow bg-wareongo-ivory">
-          <div className="section-container">
+          <div className="section-container page-content">
             <div className="flex items-center justify-center min-h-[60vh]">
               <div className="text-center max-w-md border border-wareongo-blue/30 rounded-2xl p-8">
                 <AlertCircle className="w-12 h-12 text-wareongo-blue mx-auto mb-4" />
@@ -346,7 +346,7 @@ const WarehouseDetail = () => {
         role="main"
         aria-labelledby="warehouse-title"
       >
-        <div className="section-container px-4 sm:px-6 lg:px-8">
+        <div className="section-container page-content px-4 sm:px-6 lg:px-8">
           {/* Breadcrumbs */}
           <Breadcrumbs
             className="mb-4 sm:mb-6"
@@ -449,7 +449,7 @@ const WarehouseDetail = () => {
             </div>
 
             {/* Location Map - Mobile: order-3 (below info), Desktop: bottom right */}
-            <div className="order-3 lg:order-3">
+            <div className="order-3 lg:order-3 lg:self-end">
               <section aria-labelledby="location-map-title">
                 <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate block mb-2">
                   Location

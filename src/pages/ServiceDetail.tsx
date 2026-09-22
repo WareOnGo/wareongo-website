@@ -38,7 +38,7 @@ export default function ServiceDetail() {
     </PageHead>
     <Navbar />
     <main className="flex-grow" aria-labelledby="service-title">
-      <div className="section-container px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+      <div className="section-container page-content px-4 sm:px-6 lg:px-8 pb-6 sm:pb-10">
         <div className="max-w-3xl mx-auto break-words">
           <Breadcrumbs className="mb-4 sm:mb-6" items={[{ label: 'Home', path: '/' }, { label: page.title }]} />
           <header className="mb-8">

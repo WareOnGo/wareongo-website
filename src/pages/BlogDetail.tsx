@@ -101,7 +101,7 @@ const BlogDetail = () => {
       <Navbar />
 
       <main className="flex-grow" role="main" aria-labelledby="blog-title">
-        <div className="section-container px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+        <div className="section-container page-content px-4 sm:px-6 lg:px-8 pb-6 sm:pb-10">
           <article className="max-w-3xl mx-auto">
             <Breadcrumbs
               className="mb-4 sm:mb-6"

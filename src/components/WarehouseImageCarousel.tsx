@@ -69,7 +69,7 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
       {...swipe.handlers}
       ref={carouselRef}
       style={{ ...swipe.handlers.style, ...gallery.transitionStyle, ...swipe.photoStyle }}
-      className={`relative w-full h-64 sm:h-80 md:h-96 lg:h-[500px] xl:h-[600px] bg-wareongo-blue/5 border border-wareongo-blue rounded-2xl overflow-hidden group ${className}`}
+      className={`relative w-full h-64 sm:h-80 md:h-96 lg:h-full lg:min-h-[500px] xl:min-h-[600px] bg-wareongo-blue/5 border border-wareongo-blue rounded-2xl overflow-hidden group ${className}`}
       role="region"
       aria-label={`Warehouse ${warehouseId} image carousel with ${count} images`}
       tabIndex={0}

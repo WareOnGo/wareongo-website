@@ -163,7 +163,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
       <Navbar />
 
       <main className="flex-grow" role="main" aria-labelledby="editorial-title">
-        <div className="section-container px-4 py-6 sm:px-6 sm:py-10 lg:px-8">
+        <div className="section-container page-content px-4 pb-6 sm:px-6 sm:pb-10 lg:px-8">
           <Breadcrumbs
             className="mb-4 sm:mb-6"
             items={

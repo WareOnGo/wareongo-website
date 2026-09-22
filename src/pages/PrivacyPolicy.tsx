@@ -30,7 +30,7 @@ const PrivacyPolicy = () => {
       <Navbar />
 
       <main className="flex-grow bg-wareongo-ivory bg-opacity-50">
-        <div className="section-container px-4 sm:px-6 lg:px-8 py-8">
+        <div className="section-container page-content px-4 sm:px-6 lg:px-8 pb-8">
           {/* Back Navigation */}
           <div className="mb-6">
             <Button 

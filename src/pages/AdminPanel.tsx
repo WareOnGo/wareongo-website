@@ -60,7 +60,7 @@ const AdminPanel = () => {
       <PageHead title="Admin Panel | WareOnGo" description="WareOnGo admin tools." path="/admin-panel" noindex />
       <Navbar />
 
-      <main className="flex-grow bg-wareongo-ivory bg-opacity-50 py-12">
+      <main className="page-content flex-grow bg-wareongo-ivory bg-opacity-50 pb-12">
         <div className="container mx-auto px-4 max-w-7xl">
           {/* Header */}
           <div className="mb-8">

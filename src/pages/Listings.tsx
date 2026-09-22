@@ -211,7 +211,7 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
       <Navbar scrollLocked={showFilters} />
 
       <main className="flex-grow bg-wareongo-ivory">
-        <div className="section-container pt-6 md:pt-24">
+        <div className="section-container page-content">
           <ListingsHeader
             heading={header}
             showFilters={showFilters}

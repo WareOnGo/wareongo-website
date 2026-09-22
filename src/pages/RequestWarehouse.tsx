@@ -115,7 +115,7 @@ const RequestWarehouse = () => {
       />
       <Navbar />
 
-      <main className="flex-1 py-6 md:py-12 lg:py-16">
+      <main className="page-content flex-1 pb-6 md:pb-12 lg:pb-16">
         <div className="container mx-auto px-4 max-w-2xl">
           <div className="space-y-4">
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-wareongo-blue">

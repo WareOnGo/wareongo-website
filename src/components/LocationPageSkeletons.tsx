@@ -39,7 +39,7 @@ export function LocationListingsSkeleton({ pathname }: { pathname: string }) {
     : getLocationPageContent(kind === 'state' ? 'STATE' : 'CITY', slug));
 
   return <main className="flex-grow" data-testid="location-listings-skeleton">
-    <div className="section-container pt-6 md:pt-24">
+    <div className="section-container page-content">
       <BreadcrumbTrail className="mb-4 sm:mb-6" pendingAncestorAt={kind === 'city' ? 2 : undefined} items={[
         ...trailStart,
         ...(isMicro && canonical !== parent ? [{ label: parent }] : []),
@@ -86,7 +86,7 @@ export function OverviewSkeleton({ pathname }: { pathname: string }) {
   const place = micro && cityName(city) !== name ? `${name}, ${cityName(city)}` : name;
 
   return <main className="flex-grow" data-testid="overview-skeleton">
-    <div className="section-container px-4 py-6 sm:px-6 sm:py-10 lg:px-8">
+    <div className="section-container page-content px-4 pb-6 sm:px-6 sm:pb-10 lg:px-8">
       <BreadcrumbTrail className="mb-4 sm:mb-6" items={[
         ...trailStart,
         ...(city ? [{ label: stateName(state) }] : []),

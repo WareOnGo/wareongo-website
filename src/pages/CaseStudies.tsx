@@ -20,7 +20,7 @@ const CaseStudies = () => {
       />
       <Navbar />
 
-      <main className="flex-1 pt-24 pb-16">
+      <main className="page-content flex-1 pb-16">
         <div className="container mx-auto px-4 max-w-6xl">
           {/* Page hero */}
           <div className="text-center mb-8 md:mb-12">
