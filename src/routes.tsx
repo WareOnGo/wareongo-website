@@ -1,7 +1,6 @@
 import type { RouteRecord } from "vite-react-ssg";
 import RootLayout from "./RootLayout";
 import { listingShouldRevalidate } from "./lib/listingSearch";
-import Index from "./pages/Index";
 import RouteErrorBoundary from "./components/RouteErrorBoundary";
 import { servicePages } from "./data/servicePages";
 import { servicePath } from "./data/serviceCatalog";
@@ -41,7 +40,7 @@ export const routes: RouteRecord[] = [
         // AuthProvider/QueryClientProvider out from under the boundary's Navbar.
         errorElement: <RouteErrorBoundary />,
         children: [
-          { index: true, element: <Index /> },
+          { index: true, lazy: lazyDefault(() => import("./pages/Index")) },
           { path: "privacy-policy", lazy: lazyDefault(() => import("./pages/PrivacyPolicy")) },
           { path: "terms-of-service", lazy: lazyDefault(() => import("./pages/TermsOfService")) },
           { path: "about-us", lazy: lazyDefault(() => import("./pages/AboutUs")) },

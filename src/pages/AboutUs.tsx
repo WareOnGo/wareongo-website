@@ -166,7 +166,6 @@ const AboutUs = () => {
                   href={f.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${f.name}, ${f.role}, LinkedIn profile`}
                   onClick={() =>
                     trackEvent('nav_click', { label: `founder_${f.initials}`, destination: f.linkedin ?? '', position: 'about_page' })
                   }

@@ -18,7 +18,7 @@ const Login = () => {
 
   return (
     <GoogleOAuthProvider clientId={config.googleClientId}>
-      <div className="min-h-screen flex items-center justify-center bg-wareongo-ivory px-4">
+      <main className="min-h-screen flex items-center justify-center bg-wareongo-ivory px-4">
         <PageHead title="Login | WareOnGo" description="Sign in to WareOnGo." path="/login" noindex />
         <div className="bg-white shadow-sm rounded-xl p-8 max-w-sm w-full text-center">
           <h1 className="text-2xl font-bold text-wareongo-blue mb-2">Login</h1>
@@ -29,7 +29,7 @@ const Login = () => {
             <LoginButton />
           </div>
         </div>
-      </div>
+      </main>
     </GoogleOAuthProvider>
   );
 };

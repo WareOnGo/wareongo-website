@@ -62,7 +62,7 @@ const LocationLinkGrid = <T extends LocationSummary>({
   if (items.length === 0) return null;
   return (
     <div>
-      <h4 className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-3">{heading}</h4>
+      <h3 className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-3">{heading}</h3>
       <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-2 text-sm">
         {items.map((loc) => {
           const href = hrefFor ? hrefFor(loc) : `${basePath}/${loc.slug}${pathSuffix}`;
@@ -91,18 +91,20 @@ const ExploreSpacesSection = () => {
   const [open, setOpen] = useState(false);
   return (
     <div className="border-t border-white/10 pt-6">
-      <button
-        type="button"
-        onClick={() => { trackEvent('menu_toggle', { placement: 'footer_explore', expanded: !open }); setOpen(!open); }}
-        aria-expanded={open}
-        className="flex items-center justify-between w-full text-left text-lg font-semibold mb-3 hover:text-wareongo-ivory transition-colors"
-      >
-        <span>Explore our spaces</span>
-        <ChevronDown
-          className={`h-4 w-4 transition-transform ${open ? 'rotate-180' : ''}`}
-          aria-hidden="true"
-        />
-      </button>
+      <h2>
+        <button
+          type="button"
+          onClick={() => { trackEvent('menu_toggle', { placement: 'footer_explore', expanded: !open }); setOpen(!open); }}
+          aria-expanded={open}
+          className="flex items-center justify-between w-full text-left text-lg font-semibold mb-3 hover:text-wareongo-ivory transition-colors"
+        >
+          <span>Explore our spaces</span>
+          <ChevronDown
+            className={`h-4 w-4 transition-transform ${open ? 'rotate-180' : ''}`}
+            aria-hidden="true"
+          />
+        </button>
+      </h2>
       {/* Always rendered to DOM so crawlers can follow links — visually toggled via display class. */}
       <div aria-hidden={!open} className={open ? 'space-y-6' : 'hidden'}>
         <LocationLinkGrid heading="By City" basePath="/listings/city" items={curateCities(CITIES)} />
@@ -192,14 +194,14 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">WareOnGo</h3>
+            <h2 className="text-xl font-bold mb-4">WareOnGo</h2>
             <p className="mb-4 text-gray-300">
               Find the Right Warehouse, Faster.
             </p>
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <h2 className="text-lg font-semibold mb-4">Quick Links</h2>
             <ul className="space-y-2">
               <li>
                 <button
@@ -265,7 +267,7 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Services</h3>
+            <h2 className="text-lg font-semibold mb-4">Services</h2>
             <ul className="space-y-2">
               {Object.entries(SERVICE_PAGES).map(([slug, label]) => <li key={slug} className="text-gray-300">
                 {getServiceBySlug(slug) ? <Link to={servicePath(slug)}
@@ -276,7 +278,7 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+            <h2 className="text-lg font-semibold mb-4">Contact Us</h2>
             <ul className="space-y-3">
               <li className="flex items-center">
                 <Phone className="h-5 w-5 mr-2 flex-shrink-0" />

@@ -1,4 +1,5 @@
 import React from 'react';
+import { logoVariants } from '@/data/logoVariants.generated';
 
 const SCROLL_SECONDS = 35;
 const BG = 'transparent';
@@ -28,6 +29,8 @@ const TrustedBySection = () => {
         <div className="trusted-item" key={logo.src}>
           <img
             src={logo.src}
+            srcSet={logoVariants[logo.src]}
+            sizes={`(min-width: 768px) ${Math.min(136, 64 * logo.width / logo.height)}px, ${Math.min(104, 52 * logo.width / logo.height)}px`}
             alt={ariaHidden ? '' : logo.alt}
             width={logo.width}
             height={logo.height}

@@ -3,6 +3,11 @@ import { routes } from "./routes";
 import { claimReloadAttempt } from "./lib/staleDeployReload";
 import { createWebsiteRouter } from "./lib/createWebsiteRouter";
 import "./index.css";
+// Keep homepage styles available to SSG's critical-CSS extraction while its
+// interactive components are loaded as a separate route chunk.
+import "./components/HeroSection.css";
+import "./components/FeaturedListingsSection.css";
+import "./components/SpotlightCard.css";
 
 // Lazy route chunks are content-hashed per build, and Vercel only serves the
 // current deployment's files. A document that outlived its deploy asks for a

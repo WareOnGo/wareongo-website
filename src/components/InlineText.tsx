@@ -9,7 +9,7 @@ function renderParts(parts: InlinePart[]): ReactNode {
       const safe = /^(https?:\/\/|mailto:|tel:|\/(?!\/))/i.test(part.href)
         && !/[\s\\]/.test(part.href) && !Array.from(part.href).some(c => c.charCodeAt(0) < 32);
       return safe
-        ? <a key={i} href={part.href} className="text-wareongo-blue hover:underline break-words">{children}</a>
+        ? <a key={i} href={part.href} className="text-wareongo-blue underline underline-offset-2 break-words">{children}</a>
         : <Fragment key={i}>{children}</Fragment>;
     }
     if (part.style === 'bold') return <strong key={i}>{children}</strong>;

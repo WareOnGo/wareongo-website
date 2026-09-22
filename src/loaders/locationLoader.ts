@@ -2,7 +2,7 @@ import type { LoaderFunctionArgs } from 'react-router-dom';
 import { warehouseAPI, transformWarehouseData, type Warehouse } from '@/services/warehouseAPI';
 import { getMicromarketContent } from '@/data/micromarkets';
 import { applyStatOverrides } from '@/lib/micromarketStats';
-import type { EditorialContent } from '@/data/editorial';
+import type { EditorialContent, EditorialImageVariant } from '@/data/editorial';
 import type { DerivedStats } from '@/services/derivedStats';
 import { createListingBreadcrumbs } from '@/lib/listingBreadcrumbs';
 import type { BreadcrumbItem } from '@/components/Breadcrumbs';
@@ -122,6 +122,8 @@ export interface LocationListingsLoaderData {
 
 /** Only overview loaders return editorial content. */
 export type EditorialPageData = LocationListingsLoaderData & {
+  imageVariants?: Record<string, EditorialImageVariant[]>;
+  coverImages?: Record<string, string>;
   content: EditorialContent;
   stats: DerivedStats;
   peers: PeerRent[];
@@ -273,6 +275,7 @@ async function locationOverviewFor(kind: LocationKind, stateSlug: string, citySl
   return {
     type: kind === 'CITY' ? 'city' : 'state', canonical: match.name, slug: match.slug,
     warehouses, content, stats, peers: stats.peers, overviewPath: path,
+    ...await overviewImages(content, warehouses),
     editorial: {
       scope: kind === 'CITY' ? 'city' : 'state', name: match.name, path,
       listingPath: locationPath(match), place: match.name,
@@ -284,6 +287,12 @@ async function locationOverviewFor(kind: LocationKind, stateSlug: string, citySl
 
 export const stateOverviewLoader = ({ params }: LoaderFunctionArgs) => locationOverviewFor('STATE', params.state ?? '');
 export const cityOverviewLoader = ({ params }: LoaderFunctionArgs) => locationOverviewFor('CITY', params.state ?? '', params.city ?? '');
+
+async function overviewImages(content: EditorialContent, warehouses: EditorialPageData['warehouses']) {
+  return import.meta.env.SSR
+    ? (await import('@/lib/overviewImages.server.mjs')).prepareOverviewImages(content, warehouses)
+    : {};
+}
 
 async function locationOverviewStaticPaths(kind: LocationKind): Promise<string[]> {
   const content = locationPages.filter(p => p.kind === kind);
@@ -434,6 +443,7 @@ export async function micromarketOverviewLoader({ params }: LoaderFunctionArgs):
   const state = await ancestor('STATE', match.parentState, match.stateSlug);
   const city = await ancestor('CITY', match.parentCity!, match.citySlug);
   return { ...base, content, stats, peers: stats.peers, overviewPath,
+    ...await overviewImages(content, base.warehouses),
     parentState: { canonical: match.parentState, slug: match.stateSlug },
     editorial: { scope: 'micromarket', name: match.name, path: overviewPath,
       listingPath: micromarketPath(match),

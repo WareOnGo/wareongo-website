@@ -1,0 +1,1143 @@
+{
+  "baseline_commit": "75c5e67e34089c02b020fac4f4a6268edabaf04d",
+  "method": "Local compressed HTTPS/HTTP2 production assets under production hostname; live API, R2 and analytics enabled. Lighthouse 13.4.1 / Chromium 151; fresh sequential browser sessions.",
+  "notes": [
+    "Individual warehouse pages excluded from Lighthouse and optimization.",
+    "The first overview-priority mobile run briefly overlapped a TypeScript check; the isolated repeat is identified separately.",
+    "Actual DevTools throttling is diagnostic and is not mixed with default simulated scores.",
+    "All navigation/overview suite failures also reproduce on baseline; see Markdown review."
+  ],
+  "samples": {
+    "baseline_mobile": {
+      "artifact": "/tmp/wog-public-page-stages/lighthouse-before/summary-home,about,request,blogs,blog-news,cases,overview-mobile-1.json",
+      "throttling_method": "simulate",
+      "results": [
+        {
+          "key": "home",
+          "pathname": "/",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T06:31:45.258Z",
+          "source": "/tmp/wog-listing-audit/full-source/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 95,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 1808.491,
+            "largest-contentful-paint": 2558.491,
+            "total-blocking-time": 102.5,
+            "cumulative-layout-shift": 0,
+            "speed-index": 1808.491
+          },
+          "transferBytes": 624504,
+          "requests": 28,
+          "warnings": []
+        },
+        {
+          "key": "about",
+          "pathname": "/about-us",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T06:31:56.895Z",
+          "source": "/tmp/wog-listing-audit/full-source/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 98,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 1657.8609999999999,
+            "largest-contentful-paint": 2032.8609999999999,
+            "total-blocking-time": 116,
+            "cumulative-layout-shift": 0,
+            "speed-index": 1657.8609999999999
+          },
+          "transferBytes": 564706,
+          "requests": 29,
+          "warnings": []
+        },
+        {
+          "key": "request",
+          "pathname": "/request-warehouse",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T06:32:07.466Z",
+          "source": "/tmp/wog-listing-audit/full-source/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 95,
+            "accessibility": 95,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 1680,
+            "largest-contentful-paint": 1830,
+            "total-blocking-time": 210,
+            "cumulative-layout-shift": 0,
+            "speed-index": 1680
+          },
+          "transferBytes": 432095,
+          "requests": 14,
+          "warnings": []
+        },
+        {
+          "key": "blogs",
+          "pathname": "/blogs",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T06:32:15.682Z",
+          "source": "/tmp/wog-listing-audit/full-source/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 94,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 1980,
+            "largest-contentful-paint": 2280,
+            "total-blocking-time": 184.00000000000045,
+            "cumulative-layout-shift": 0,
+            "speed-index": 1980
+          },
+          "transferBytes": 518625,
+          "requests": 15,
+          "warnings": []
+        },
+        {
+          "key": "blog-news",
+          "pathname": "/blogs/dabaspet-multimodal-logistics-park",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T06:32:23.929Z",
+          "source": "/tmp/wog-listing-audit/full-source/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 95,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 2130,
+            "largest-contentful-paint": 2430,
+            "total-blocking-time": 95,
+            "cumulative-layout-shift": 0.04621725485630042,
+            "speed-index": 2130
+          },
+          "transferBytes": 611762,
+          "requests": 18,
+          "warnings": []
+        },
+        {
+          "key": "cases",
+          "pathname": "/casestudies",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T06:32:32.432Z",
+          "source": "/tmp/wog-listing-audit/full-source/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 94,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 1980,
+            "largest-contentful-paint": 2280,
+            "total-blocking-time": 185.99999999999955,
+            "cumulative-layout-shift": 0,
+            "speed-index": 1980
+          },
+          "transferBytes": 517496,
+          "requests": 15,
+          "warnings": []
+        },
+        {
+          "key": "overview",
+          "pathname": "/overview/telangana/hyderabad/kompally",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T06:32:40.783Z",
+          "source": "/tmp/wog-listing-audit/full-source/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 95,
+            "accessibility": 93,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 2100.675,
+            "largest-contentful-paint": 2400.675,
+            "total-blocking-time": 84,
+            "cumulative-layout-shift": 0,
+            "speed-index": 2100.675
+          },
+          "transferBytes": 1700452,
+          "requests": 26,
+          "warnings": []
+        }
+      ]
+    },
+    "candidate_before_overview_priority_adjustment": {
+      "artifact": "/tmp/wog-public-page-stages/lighthouse-after/summary-all-mobile,desktop-1.json",
+      "throttling_method": "simulate",
+      "results": [
+        {
+          "key": "home",
+          "pathname": "/",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T06:34:04.590Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 96,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 1658.078,
+            "largest-contentful-paint": 2408.078,
+            "total-blocking-time": 105.5,
+            "cumulative-layout-shift": 0,
+            "speed-index": 1658.078
+          },
+          "transferBytes": 595675,
+          "requests": 30,
+          "warnings": []
+        },
+        {
+          "key": "home",
+          "pathname": "/",
+          "profile": "desktop",
+          "round": "1",
+          "timestamp": "2026-09-22T06:34:16.172Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 366.82,
+            "largest-contentful-paint": 586.8199999999999,
+            "total-blocking-time": 0,
+            "cumulative-layout-shift": 0,
+            "speed-index": 366.82
+          },
+          "transferBytes": 686059,
+          "requests": 30,
+          "warnings": []
+        },
+        {
+          "key": "listings",
+          "pathname": "/listings/city/lucknow",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T06:34:27.097Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 95,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 1720.6086,
+            "largest-contentful-paint": 2291.6782,
+            "total-blocking-time": 160.5,
+            "cumulative-layout-shift": 0,
+            "speed-index": 1720.6086
+          },
+          "transferBytes": 959422,
+          "requests": 28,
+          "warnings": []
+        },
+        {
+          "key": "listings",
+          "pathname": "/listings/city/lucknow",
+          "profile": "desktop",
+          "round": "1",
+          "timestamp": "2026-09-22T06:34:38.971Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 400.19190000000003,
+            "largest-contentful-paint": 511.39300000000003,
+            "total-blocking-time": 8,
+            "cumulative-layout-shift": 0,
+            "speed-index": 400.19190000000003
+          },
+          "transferBytes": 2062332,
+          "requests": 41,
+          "warnings": []
+        },
+        {
+          "key": "about",
+          "pathname": "/about-us",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T06:34:50.449Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 97,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 1652.9,
+            "largest-contentful-paint": 2252.9,
+            "total-blocking-time": 97.50000000000023,
+            "cumulative-layout-shift": 0,
+            "speed-index": 1652.9
+          },
+          "transferBytes": 524569,
+          "requests": 29,
+          "warnings": []
+        },
+        {
+          "key": "about",
+          "pathname": "/about-us",
+          "profile": "desktop",
+          "round": "1",
+          "timestamp": "2026-09-22T06:35:00.309Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 365.248,
+            "largest-contentful-paint": 485.248,
+            "total-blocking-time": 0,
+            "cumulative-layout-shift": 0,
+            "speed-index": 365.248
+          },
+          "transferBytes": 521680,
+          "requests": 29,
+          "warnings": []
+        },
+        {
+          "key": "request",
+          "pathname": "/request-warehouse",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T06:35:10.174Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 95,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 1530,
+            "largest-contentful-paint": 1830,
+            "total-blocking-time": 220,
+            "cumulative-layout-shift": 0,
+            "speed-index": 1530
+          },
+          "transferBytes": 418494,
+          "requests": 12,
+          "warnings": []
+        },
+        {
+          "key": "request",
+          "pathname": "/request-warehouse",
+          "profile": "desktop",
+          "round": "1",
+          "timestamp": "2026-09-22T06:35:18.312Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 360.796,
+            "largest-contentful-paint": 400.796,
+            "total-blocking-time": 0,
+            "cumulative-layout-shift": 0,
+            "speed-index": 360.796
+          },
+          "transferBytes": 418492,
+          "requests": 12,
+          "warnings": []
+        },
+        {
+          "key": "blogs",
+          "pathname": "/blogs",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T06:35:26.413Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 95,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 1680,
+            "largest-contentful-paint": 1980,
+            "total-blocking-time": 193,
+            "cumulative-layout-shift": 0,
+            "speed-index": 1680
+          },
+          "transferBytes": 419221,
+          "requests": 14,
+          "warnings": []
+        },
+        {
+          "key": "blogs",
+          "pathname": "/blogs",
+          "profile": "desktop",
+          "round": "1",
+          "timestamp": "2026-09-22T06:35:34.396Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 361.204,
+            "largest-contentful-paint": 401.204,
+            "total-blocking-time": 0,
+            "cumulative-layout-shift": 0,
+            "speed-index": 361.204
+          },
+          "transferBytes": 419118,
+          "requests": 14,
+          "warnings": []
+        },
+        {
+          "key": "blog-comparison",
+          "pathname": "/blogs/peb-vs-rcc-warehouse",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T06:35:42.713Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 97,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 1801.95,
+            "largest-contentful-paint": 2101.95,
+            "total-blocking-time": 92.5,
+            "cumulative-layout-shift": 0,
+            "speed-index": 1801.95
+          },
+          "transferBytes": 579386,
+          "requests": 17,
+          "warnings": []
+        },
+        {
+          "key": "blog-comparison",
+          "pathname": "/blogs/peb-vs-rcc-warehouse",
+          "profile": "desktop",
+          "round": "1",
+          "timestamp": "2026-09-22T06:35:51.443Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 99,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 402.5125,
+            "largest-contentful-paint": 854.6105,
+            "total-blocking-time": 0,
+            "cumulative-layout-shift": 0,
+            "speed-index": 402.5125
+          },
+          "transferBytes": 579395,
+          "requests": 17,
+          "warnings": []
+        },
+        {
+          "key": "blog-news",
+          "pathname": "/blogs/dabaspet-multimodal-logistics-park",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T06:36:00.127Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 97,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 1801.0465,
+            "largest-contentful-paint": 2101.0465,
+            "total-blocking-time": 97.5,
+            "cumulative-layout-shift": 0,
+            "speed-index": 1801.0465
+          },
+          "transferBytes": 531159,
+          "requests": 16,
+          "warnings": []
+        },
+        {
+          "key": "blog-news",
+          "pathname": "/blogs/dabaspet-multimodal-logistics-park",
+          "profile": "desktop",
+          "round": "1",
+          "timestamp": "2026-09-22T06:36:08.624Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 98,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 402.378,
+            "largest-contentful-paint": 1054.011,
+            "total-blocking-time": 0,
+            "cumulative-layout-shift": 0,
+            "speed-index": 402.378
+          },
+          "transferBytes": 531175,
+          "requests": 16,
+          "warnings": []
+        },
+        {
+          "key": "cases",
+          "pathname": "/casestudies",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T06:36:16.946Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 96,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 1650.0725,
+            "largest-contentful-paint": 1950.0725,
+            "total-blocking-time": 166.99999999999977,
+            "cumulative-layout-shift": 0,
+            "speed-index": 1650.0725
+          },
+          "transferBytes": 436671,
+          "requests": 13,
+          "warnings": []
+        },
+        {
+          "key": "cases",
+          "pathname": "/casestudies",
+          "profile": "desktop",
+          "round": "1",
+          "timestamp": "2026-09-22T06:36:25.118Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 390,
+            "largest-contentful-paint": 430,
+            "total-blocking-time": 0,
+            "cumulative-layout-shift": 0,
+            "speed-index": 390
+          },
+          "transferBytes": 436767,
+          "requests": 13,
+          "warnings": []
+        },
+        {
+          "key": "case-detail",
+          "pathname": "/casestudies/hyderabad-fire-compliant-warehouse",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T06:36:33.296Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 94,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 1801.9679999999998,
+            "largest-contentful-paint": 2101.968,
+            "total-blocking-time": 235.00000000000045,
+            "cumulative-layout-shift": 0,
+            "speed-index": 1801.9679999999998
+          },
+          "transferBytes": 445277,
+          "requests": 14,
+          "warnings": []
+        },
+        {
+          "key": "case-detail",
+          "pathname": "/casestudies/hyderabad-fire-compliant-warehouse",
+          "profile": "desktop",
+          "round": "1",
+          "timestamp": "2026-09-22T06:36:42.147Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 402.053,
+            "largest-contentful-paint": 442.053,
+            "total-blocking-time": 0,
+            "cumulative-layout-shift": 0,
+            "speed-index": 402.053
+          },
+          "transferBytes": 445277,
+          "requests": 14,
+          "warnings": []
+        },
+        {
+          "key": "overview",
+          "pathname": "/overview/telangana/hyderabad/kompally",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T06:36:50.598Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 91,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 1700.2885,
+            "largest-contentful-paint": 3302.2885,
+            "total-blocking-time": 106.5,
+            "cumulative-layout-shift": 0,
+            "speed-index": 1700.2885
+          },
+          "transferBytes": 860559,
+          "requests": 25,
+          "warnings": []
+        },
+        {
+          "key": "overview",
+          "pathname": "/overview/telangana/hyderabad/kompally",
+          "profile": "desktop",
+          "round": "1",
+          "timestamp": "2026-09-22T06:37:00.128Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 406.68899999999996,
+            "largest-contentful-paint": 526.689,
+            "total-blocking-time": 0,
+            "cumulative-layout-shift": 0,
+            "speed-index": 406.68899999999996
+          },
+          "transferBytes": 1415440,
+          "requests": 39,
+          "warnings": []
+        },
+        {
+          "key": "privacy",
+          "pathname": "/privacy-policy",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T06:37:10.698Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 96,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 1530,
+            "largest-contentful-paint": 1830,
+            "total-blocking-time": 202,
+            "cumulative-layout-shift": 0,
+            "speed-index": 1530
+          },
+          "transferBytes": 424670,
+          "requests": 12,
+          "warnings": []
+        },
+        {
+          "key": "privacy",
+          "pathname": "/privacy-policy",
+          "profile": "desktop",
+          "round": "1",
+          "timestamp": "2026-09-22T06:37:18.876Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 360.68600000000004,
+            "largest-contentful-paint": 400.68600000000004,
+            "total-blocking-time": 0,
+            "cumulative-layout-shift": 0,
+            "speed-index": 360.68600000000004
+          },
+          "transferBytes": 424798,
+          "requests": 12,
+          "warnings": []
+        },
+        {
+          "key": "terms",
+          "pathname": "/terms-of-service",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T06:37:27.039Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 97,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 1680,
+            "largest-contentful-paint": 2130,
+            "total-blocking-time": 127.00000000000023,
+            "cumulative-layout-shift": 0,
+            "speed-index": 1680
+          },
+          "transferBytes": 424859,
+          "requests": 12,
+          "warnings": []
+        },
+        {
+          "key": "terms",
+          "pathname": "/terms-of-service",
+          "profile": "desktop",
+          "round": "1",
+          "timestamp": "2026-09-22T06:37:35.291Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 360.988,
+            "largest-contentful-paint": 440.988,
+            "total-blocking-time": 0,
+            "cumulative-layout-shift": 0,
+            "speed-index": 360.988
+          },
+          "transferBytes": 424859,
+          "requests": 12,
+          "warnings": []
+        },
+        {
+          "key": "login",
+          "pathname": "/login",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T06:37:43.581Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 97,
+            "accessibility": 100,
+            "best-practices": 96,
+            "seo": 66
+          },
+          "metrics": {
+            "first-contentful-paint": 1530,
+            "largest-contentful-paint": 1830,
+            "total-blocking-time": 156,
+            "cumulative-layout-shift": 0.0024851183375384804,
+            "speed-index": 1530
+          },
+          "transferBytes": 642056,
+          "requests": 15,
+          "warnings": []
+        },
+        {
+          "key": "login",
+          "pathname": "/login",
+          "profile": "desktop",
+          "round": "1",
+          "timestamp": "2026-09-22T06:37:52.022Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 96,
+            "seo": 66
+          },
+          "metrics": {
+            "first-contentful-paint": 360.676,
+            "largest-contentful-paint": 400.676,
+            "total-blocking-time": 0,
+            "cumulative-layout-shift": 0.0004048075183142165,
+            "speed-index": 360.676
+          },
+          "transferBytes": 642055,
+          "requests": 15,
+          "warnings": []
+        }
+      ]
+    },
+    "candidate_repeated_about_and_overview": {
+      "artifact": "/tmp/wog-public-page-stages/lighthouse-after/summary-about,overview-mobile-2.json",
+      "throttling_method": "simulate",
+      "results": [
+        {
+          "key": "about",
+          "pathname": "/about-us",
+          "profile": "mobile",
+          "round": "2",
+          "timestamp": "2026-09-22T08:20:24.447Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 97,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 1655.6689999999999,
+            "largest-contentful-paint": 2255.669,
+            "total-blocking-time": 96,
+            "cumulative-layout-shift": 0,
+            "speed-index": 1655.6689999999999
+          },
+          "transferBytes": 524641,
+          "requests": 29,
+          "warnings": []
+        },
+        {
+          "key": "overview",
+          "pathname": "/overview/telangana/hyderabad/kompally",
+          "profile": "mobile",
+          "round": "2",
+          "timestamp": "2026-09-22T08:20:34.856Z",
+          "source": "/tmp/wog-public-page-stages/full-live/site/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 91,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 1693.5030000000002,
+            "largest-contentful-paint": 3226.503,
+            "total-blocking-time": 124.5,
+            "cumulative-layout-shift": 0,
+            "speed-index": 1693.5030000000002
+          },
+          "transferBytes": 860581,
+          "requests": 25,
+          "warnings": []
+        }
+      ]
+    },
+    "overview_priority_first_run": {
+      "artifact": "/tmp/wog-public-page-stages/lighthouse-priority/summary-overview-mobile,desktop-1.json",
+      "throttling_method": "simulate",
+      "results": [
+        {
+          "key": "overview",
+          "pathname": "/overview/telangana/hyderabad/kompally",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T08:28:32.145Z",
+          "source": "/tmp/wog-public-page-stages/stage6",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 93,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 1750.2745,
+            "largest-contentful-paint": 2592.8565000000003,
+            "total-blocking-time": 186,
+            "cumulative-layout-shift": 0,
+            "speed-index": 1750.2745
+          },
+          "transferBytes": 860779,
+          "requests": 25,
+          "warnings": []
+        },
+        {
+          "key": "overview",
+          "pathname": "/overview/telangana/hyderabad/kompally",
+          "profile": "desktop",
+          "round": "1",
+          "timestamp": "2026-09-22T08:28:43.563Z",
+          "source": "/tmp/wog-public-page-stages/stage6",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 380.264,
+            "largest-contentful-paint": 489.264,
+            "total-blocking-time": 0,
+            "cumulative-layout-shift": 0,
+            "speed-index": 380.264
+          },
+          "transferBytes": 1415235,
+          "requests": 38,
+          "warnings": []
+        }
+      ]
+    },
+    "overview_priority_isolated_repeat": {
+      "artifact": "/tmp/wog-public-page-stages/lighthouse-priority/summary-overview-mobile-2.json",
+      "throttling_method": "simulate",
+      "results": [
+        {
+          "key": "overview",
+          "pathname": "/overview/telangana/hyderabad/kompally",
+          "profile": "mobile",
+          "round": "2",
+          "timestamp": "2026-09-22T08:34:38.399Z",
+          "source": "/tmp/wog-public-page-stages/stage6",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 94,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 1736,
+            "largest-contentful-paint": 2580,
+            "total-blocking-time": 166,
+            "cumulative-layout-shift": 0,
+            "speed-index": 1736
+          },
+          "transferBytes": 860788,
+          "requests": 25,
+          "warnings": []
+        }
+      ]
+    },
+    "actual_throttling_baseline": {
+      "artifact": "/tmp/wog-public-page-stages/lighthouse-throttled-before/summary-overview-mobile-1.json",
+      "throttling_method": "devtools",
+      "results": [
+        {
+          "key": "overview",
+          "pathname": "/overview/telangana/hyderabad/kompally",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T08:43:07.079Z",
+          "source": "/tmp/wog-listing-audit/full-source/dist",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 88,
+            "accessibility": 93,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 966.55,
+            "largest-contentful-paint": 966.55,
+            "total-blocking-time": 475.9899999694826,
+            "cumulative-layout-shift": 0.01422706024020364,
+            "speed-index": 1002
+          },
+          "transferBytes": 1674487,
+          "requests": 26,
+          "warnings": []
+        }
+      ]
+    },
+    "actual_throttling_candidate": {
+      "artifact": "/tmp/wog-public-page-stages/lighthouse-throttled-after/summary-overview-mobile-1.json",
+      "throttling_method": "devtools",
+      "results": [
+        {
+          "key": "overview",
+          "pathname": "/overview/telangana/hyderabad/kompally",
+          "profile": "mobile",
+          "round": "1",
+          "timestamp": "2026-09-22T08:45:04.569Z",
+          "source": "/tmp/wog-public-page-stages/stage6",
+          "version": "13.4.1",
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+          "scores": {
+            "performance": 88,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metrics": {
+            "first-contentful-paint": 965.985,
+            "largest-contentful-paint": 965.985,
+            "total-blocking-time": 482.7600000000007,
+            "cumulative-layout-shift": 0.0126348301832697,
+            "speed-index": 1021
+          },
+          "transferBytes": 841673,
+          "requests": 25,
+          "warnings": []
+        }
+      ]
+    }
+  },
+  "final_build": {
+    "mode": "live-final",
+    "site": "/tmp/wog-public-page-stages/full-live-final/site",
+    "dist": "/tmp/wog-public-page-stages/full-live-final/site/dist",
+    "loaderRoutes": 2529,
+    "success": true
+  },
+  "final_static_verification": {
+    "static_routes_checked": 410,
+    "preserved_fields": [
+      "title",
+      "h1",
+      "canonical",
+      "robots"
+    ],
+    "one_main_per_route": true,
+    "promised_overview_images": 56,
+    "all_images_exist": true
+  },
+  "final_smoke": {
+    "passed": 11,
+    "failed": 0,
+    "artifact": "/tmp/wog-public-page-stages/final-page-smoke/summary.json"
+  },
+  "working_tree_preservation": {
+    "unchanged_unstaged_files": [
+      "src/components/LocationPageSkeletons.tsx",
+      "src/components/PageSkeletons.tsx",
+      "src/components/WarehouseImageCarousel.tsx",
+      "src/index.css",
+      "src/lib/warehouseImages.ts",
+      "src/pages/AboutUs.tsx",
+      "src/pages/AdminPanel.tsx",
+      "src/pages/BlogDetail.tsx",
+      "src/pages/Blogs.tsx",
+      "src/pages/CaseStudies.tsx",
+      "src/pages/CaseStudyDetail.tsx",
+      "src/pages/EditorialLocationPage.tsx",
+      "src/pages/Listings.tsx",
+      "src/pages/PrivacyPolicy.tsx",
+      "src/pages/RequestWarehouse.tsx",
+      "src/pages/ServiceDetail.tsx",
+      "src/pages/TermsOfService.tsx",
+      "src/pages/WarehouseDetail.tsx",
+      "src/services/warehouseAPI.ts"
+    ],
+    "untracked_preserved": true,
+    "index_matches_candidate": true
+  }
+}

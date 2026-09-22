@@ -13,6 +13,8 @@
  * sitting underneath it on the same page.
  */
 
+export interface EditorialImageVariant { src: string; width: number }
+
 export interface EditorialImage {
   /** Absolute URL on the R2 public host — uploaded through the CMS. */
   url: string;

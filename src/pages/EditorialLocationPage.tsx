@@ -10,13 +10,13 @@ import WarehouseCard from '@/components/WarehouseCard';
 import Pagination from '@/components/Pagination';
 import SectionHeading from '@/components/micromarket/SectionHeading';
 import MicromarketHero from '@/components/micromarket/MicromarketHero';
-import EditorialImage from '@/components/micromarket/EditorialImage';
+import EditorialImage, { EDITORIAL_HERO_SIZES } from '@/components/micromarket/EditorialImage';
 import PeerRentChart from '@/components/micromarket/PeerRentChart';
 import InventoryBand from '@/components/micromarket/InventoryBand';
 import SpecTable from '@/components/micromarket/SpecTable';
 import { usePagedListings } from '@/hooks/usePagedListings';
 import { CHIP, EYEBROW, PANEL, PROSE, SECTION_GAP, SECTION_RULE } from '@/components/micromarket/tokens';
-import { blogs } from '@/data/blogs';
+import { blogSummaries as blogs } from '@/data/blogSummaries.generated';
 import { specRowsFor } from '@/lib/micromarketStats';
 import type { EditorialPageData } from '@/loaders/locationLoader';
 import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
@@ -46,6 +46,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
   const { content, stats, warehouses, editorial } = data;
   const peers = data.peers ?? [];
   const { name, path, place, scope } = editorial;
+  const heroVariants = content.heroImage && data.imageVariants?.[content.heroImage.url];
 
   // Which sections have something to say. Prose slots are optional in the CMS,
   // and a heading over an empty section is worse than no section — same rule the
@@ -145,6 +146,17 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
         path={path}
         image={content.heroImage?.url}
       >
+        {content.heroImage && (
+          <link
+            rel="preload"
+            as="image"
+            media="(min-width: 1024px)"
+            href={heroVariants?.at(-1)?.src ?? content.heroImage.url}
+            imageSrcSet={heroVariants?.map(v => `${v.src} ${v.width}w`).join(', ')}
+            imageSizes={EDITORIAL_HERO_SIZES}
+            fetchPriority="high"
+          />
+        )}
         <script type="application/ld+json">{JSON.stringify(collectionLd)}</script>
         {hasFaqs && <script type="application/ld+json">{JSON.stringify(faqLd)}</script>}
       </PageHead>
@@ -165,7 +177,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
           />
 
           <section id="overview">
-            <MicromarketHero content={content} stats={stats} place={place} onBrowse="#listings" />
+            <MicromarketHero content={content} imageVariants={heroVariants} stats={stats} place={place} onBrowse="#listings" />
           </section>
 
           <div>
@@ -187,14 +199,15 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
                 {shown.map((w, idx) => (
                   <WarehouseCard
                     key={w.id}
-                    // Index is within the page, not the whole set: after paging,
-                    // the top of this grid is what the reader is looking at, so
-                    // its first row is the row worth loading eagerly.
+                    // The initial grid is below the hero. Paging scrolls it into
+                    // view, so prioritize its first photo on subsequent pages.
                     index={idx}
+                    priority={currentPage > 1 && idx === 0}
                     analyticsContext={{ list_id: listId, placement: 'overview_grid', market_slug: path.split('/').pop(), page: currentPage, page_size: perPage, list_position: pageStart + idx + 1 }}
                     id={w.id}
                     image={w.image}
                     images={w.images}
+                    coverImage={data.coverImages?.[w.images[0]]}
                     imageFallbacks={w.imageFallbacks}
                     address={w.address}
                     location={w.location}
@@ -241,7 +254,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
                     lands near the paragraph's own height. */}
                 <div className="grid items-start gap-6 lg:grid-cols-[1fr_22rem] lg:gap-10">
                   <p className={`max-w-2xl ${PROSE}`}><InlineText text={content.marketProse ?? ''} /></p>
-                  {content.marketImage && <EditorialImage image={content.marketImage} />}
+                  {content.marketImage && <EditorialImage image={content.marketImage} variants={data.imageVariants?.[content.marketImage.url]} />}
                 </div>
               </section>
             )}

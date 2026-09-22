@@ -72,29 +72,23 @@ const InventoryBand = ({ stats, heading }: { stats: DerivedStats; heading: strin
         {tiles.map((t) => (
           <div
             key={t.label}
-            className="rounded-xl border border-wareongo-ivory/10 bg-wareongo-ivory/[0.06] px-4 py-3.5"
+            className="flex flex-col rounded-xl border border-wareongo-ivory/10 bg-wareongo-ivory/[0.06] px-4 py-3.5"
           >
-            <div className="flex items-baseline gap-1.5">
-              <dd className="text-2xl font-bold tabular-nums leading-none sm:text-[1.75rem]">
+            <dt className="order-last mt-1.5 text-xs leading-snug text-wareongo-ivory/80">
+              {t.label}
+              {/* The share is already stated in the description below. */}
+              <div aria-hidden="true" className="mt-2.5 h-1 overflow-hidden rounded-full bg-wareongo-ivory/15">
+                <div className="h-full rounded-full bg-wareongo-ivory/60" style={{ width: `${Math.max(t.share, 2)}%` }} />
+              </div>
+            </dt>
+            <dd className="flex items-baseline gap-1.5">
+              <span className="text-2xl font-bold tabular-nums leading-none sm:text-[1.75rem]">
                 {t.value}
-              </dd>
+              </span>
               <span className="text-xs font-semibold tabular-nums text-wareongo-ivory/70">
                 {t.share}%
               </span>
-            </div>
-            <dt className="mt-1.5 text-xs leading-snug text-wareongo-ivory/80">{t.label}</dt>
-            {/* The bar restates the share visually, which is what makes four
-                tiles read as one comparison instead of four separate facts.
-                aria-hidden: the number above it already says this. */}
-            <div
-              aria-hidden="true"
-              className="mt-2.5 h-1 overflow-hidden rounded-full bg-wareongo-ivory/15"
-            >
-              <div
-                className="h-full rounded-full bg-wareongo-ivory/60"
-                style={{ width: `${Math.max(t.share, 2)}%` }}
-              />
-            </div>
+            </dd>
           </div>
         ))}
       </dl>

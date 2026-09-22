@@ -1,8 +1,8 @@
 import InlineText from '../InlineText';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Link } from 'react-router-dom';
-import EditorialImage from './EditorialImage';
-import type { EditorialContent } from '@/data/editorial';
+import EditorialImage, { EDITORIAL_HERO_SIZES } from './EditorialImage';
+import type { EditorialContent, EditorialImageVariant } from '@/data/editorial';
 import { formatRentRange, formatSqftRange } from '@/lib/micromarketStats';
 import type { DerivedStats } from '@/services/derivedStats';
 import { EYEBROW, LEAD, METRIC } from './tokens';
@@ -16,12 +16,14 @@ interface Tile {
 
 const MicromarketHero = ({
   content,
+  imageVariants,
   stats,
   place,
   onBrowse,
   loading = false,
 }: {
   content: EditorialContent;
+  imageVariants?: EditorialImageVariant[];
   /** "Nelamangala, Bengaluru" — the fully qualified place, for the eyebrow default. */
   place: string;
   onBrowse: string;
@@ -111,7 +113,9 @@ const MicromarketHero = ({
       </div>
 
       {content.heroImage && (
-        <EditorialImage image={content.heroImage} ratio="aspect-[4/3]" priority className="lg:mt-1" />
+        <EditorialImage image={content.heroImage} variants={imageVariants}
+          sizes={EDITORIAL_HERO_SIZES}
+          ratio="aspect-[4/3]" priority className="lg:mt-1" />
       )}
     </header>
   );

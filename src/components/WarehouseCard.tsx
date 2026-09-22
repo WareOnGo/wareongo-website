@@ -33,6 +33,8 @@ interface WarehouseCardProps {
   // Only the first photo is critical at every grid width. Native lazy loading
   // still discovers the other visible desktop/tablet cards after layout.
   index?: number;
+  /** Overview grids start below the hero; paging scrolls them into view. */
+  priority?: boolean;
   analyticsContext?: AnalyticsParams;
 }
 
@@ -50,11 +52,11 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
   fireCompliance,
   href,
   index = 0,
+  priority = index === 0,
   analyticsContext = {},
 }) => {
   const listingContext = { ...analyticsContext, warehouse_id: id, warehouse_city: location.city, warehouse_state: location.state, size_sqft: size, price_per_sqft: price ?? undefined };
   const impressionRef = useListingImpression(listingContext);
-  const isFirstCard = index === 0;
   const altText = `${size ? size.toLocaleString() + ' sqft ' : ''}warehouse in ${location.city}, ${location.state}`;
   const [interacting, setInteracting] = useState(false);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -139,9 +141,9 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
                 }`}
                 onLoaded={(url) => gallery.loaded(currentImageIndex, url)}
                 onFailed={() => gallery.failed(currentImageIndex)}
-                loading={isFirstCard ? 'eager' : 'lazy'}
+                loading={priority ? 'eager' : 'lazy'}
                 decoding="async"
-                fetchPriority={isFirstCard ? 'high' : 'auto'}
+                fetchPriority={priority ? 'high' : 'auto'}
               />
             </div>
             

@@ -3,7 +3,7 @@ import PageHead from '@/components/PageHead';
 import Breadcrumbs, { type BreadcrumbItem } from '@/components/Breadcrumbs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { blogs } from '@/data/blogs';
+import { blogSummaries as blogs } from '@/data/blogSummaries.generated';
 import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
 import { verifiedWarehousesLabel } from '@/data/companyStats';
 

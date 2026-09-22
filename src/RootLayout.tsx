@@ -6,20 +6,21 @@ import { AuthProvider } from "@/context/AuthContext";
 import AnalyticsInteractions from "@/components/AnalyticsInteractions";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useToast } from '@/hooks/use-toast';
 import {
   ListingsSkeleton,
   WarehouseDetailSkeleton,
 } from "@/components/PageSkeletons";
 
-// Toaster pulls in @radix-ui/react-toast (~14 KB gz). Only mounted forms ever fire it,
-// so defer the chunk until after the initial paint.
+// The toast store queues messages while the optional UI chunk is downloading.
 const Toaster = lazy(() => import("@/components/ui/toaster").then((m) => ({ default: m.Toaster })));
 
 const ClientToaster = () => {
+  const { toasts } = useToast();
   const [mounted, setMounted] = useState(false);
-  useEffect(() => { setMounted(true); }, []);
-  // Toasts have no initial server content. Mount after hydration so an early
-  // navigation cannot interrupt a dehydrated boundary waiting for this chunk.
+  useEffect(() => { if (toasts.length > 0) setMounted(true); }, [toasts.length]);
+  // Start after hydration and the first message, then keep the host mounted
+  // across navigation so dismissal timers and later messages behave as before.
   return mounted ? <Suspense fallback={null}><Toaster /></Suspense> : null;
 };
 

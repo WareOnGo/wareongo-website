@@ -49,9 +49,8 @@ const ImagesBlock = ({ images, caption }: { images: BlogImage[]; caption?: strin
   return (
     <figure className="mb-6">
       {count === 1 ? (
-        // Shown at its own aspect ratio, capped in height so a portrait photo
-        // can't push the rest of the blog off the screen. w-auto alongside
-        // max-w-full keeps it undistorted when that cap bites.
+        // An explicit width lets the intrinsic ratio reserve space before load.
+        // Preserve natural size and the 32rem portrait cap, including borders.
         <img
           src={optimizedSrc(images[0].url, 1080)}
           srcSet={optimizedSrcSet(images[0].url, BLOG_FULL_WIDTHS)}
@@ -60,6 +59,9 @@ const ImagesBlock = ({ images, caption }: { images: BlogImage[]; caption?: strin
           alt={images[0].alt}
           width={images[0].width}
           height={images[0].height}
+          style={images[0].width > 0 && images[0].height > 0 ? {
+            width: `min(100%, ${images[0].width + 2}px, calc((32rem - 2px) * ${images[0].width / images[0].height} + 2px))`,
+          } : undefined}
           loading="lazy"
           decoding="async"
           onError={fallbackToRaw}

@@ -161,9 +161,9 @@ const RequestWarehouse = () => {
                   </p>
                   <p className="text-sm text-wareongo-slate">
                     For any questions, reach our POC at{' '}
-                    <a href="tel:+917400184225" className="text-wareongo-blue hover:underline">+91 74001 84225</a>{' '}
+                    <a href="tel:+917400184225" className="text-wareongo-blue underline underline-offset-2">+91 74001 84225</a>{' '}
                     or{' '}
-                    <a href="mailto:sales@wareongo.com" className="text-wareongo-blue hover:underline">sales@wareongo.com</a>.
+                    <a href="mailto:sales@wareongo.com" className="text-wareongo-blue underline underline-offset-2">sales@wareongo.com</a>.
                   </p>
                 </div>
               ) : (
@@ -255,7 +255,7 @@ const RequestWarehouse = () => {
                     )}
                   </Button>
                   <p className="text-[11px] leading-relaxed text-center text-wareongo-slate mt-2">
-                    By submitting, you agree to our <Link to="/terms-of-service" className="text-wareongo-blue hover:underline">Terms</Link> and <Link to="/privacy-policy" className="text-wareongo-blue hover:underline">Privacy Policy</Link>.
+                    By submitting, you agree to our <Link to="/terms-of-service" className="text-wareongo-blue underline underline-offset-2">Terms</Link> and <Link to="/privacy-policy" className="text-wareongo-blue underline underline-offset-2">Privacy Policy</Link>.
                   </p>
                 </div>
               </form>

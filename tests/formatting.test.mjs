@@ -71,8 +71,16 @@ test('paragraphs, lists, headings, tables and captions render emphasis', () => {
 
 test('legal copy keeps safe links and formats their labels and surrounding words', () => {
   const html = render('**Contact [*support*](mailto:sales@wareongo.com)**', LegalInline);
-  assert.equal(html, '<strong>Contact <a href="mailto:sales@wareongo.com" class="text-wareongo-blue hover:underline break-words"><em>support</em></a></strong>');
+  assert.equal(html, '<strong>Contact <a href="mailto:sales@wareongo.com" class="text-wareongo-blue underline underline-offset-2 break-words"><em>support</em></a></strong>');
   for (const href of ['javascript:alert', '//evil.example', '/\\evil.example', 'data:text/html,evil']) {
     assert.equal(render('[**link**](' + href + ')', LegalInline), '<strong>link</strong>');
   }
+});
+
+
+test('blog index metadata stays identical to normalized article metadata', () => {
+  const { blogs } = load('src/data/blogs.ts');
+  const { blogSummaries } = load('src/data/blogSummaries.generated.ts');
+  const expected = blogs.map(({ slug, title, description, updated }) => ({ slug, title, description, updated }));
+  assert.equal(JSON.stringify(blogSummaries), JSON.stringify(expected));
 });
