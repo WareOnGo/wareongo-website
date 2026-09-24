@@ -5,7 +5,7 @@ import { fetchInventory } from '@/lib/fetchInventory.mjs';
 
 import { config, getApiUrl } from '@/config/config';
 import { fetchRead } from '@/lib/fetchRead.mjs';
-import { buildPreferredImages, photoUrls } from '@/lib/warehouseImages';
+import { preferredWarehouseImages, photoUrls, type ImageRecord } from '@/lib/warehouseImages';
 
 // Type definitions for the API response
 export interface Warehouse {
@@ -21,6 +21,7 @@ export interface Warehouse {
   ratePerSqft: string;
   photos: string[] | string | null;
   photosWebp?: string[] | string | null;
+  images?: ImageRecord[];
   fireNocAvailable: boolean | null;
   fireSafetyMeasures: string | null;
   // The listings endpoint includes warehouseType too, even though it's not in
@@ -352,10 +353,7 @@ export const transformWarehouseDetailData = (warehouse: WarehouseDetail) => {
   console.log('Transforming warehouse detail data:', warehouse);
 
   // Get all image URLs (WebP preferred, original kept as per-index fallback)
-  const { images: imageUrls, fallbacks: imageFallbacks } = buildPreferredImages(
-    warehouse.photos,
-    warehouse.photosWebp,
-  );
+  const { images: imageUrls, fallbacks: imageFallbacks } = preferredWarehouseImages(warehouse);
   
   // Parse space information
   const totalSpaces = Array.isArray(warehouse.totalSpaceSqft) 
@@ -494,10 +492,7 @@ export const transformWarehouseData = (warehouse: Warehouse) => {
   const price = parseRatePerSqft(warehouse.ratePerSqft);
 
   // Get image URL (WebP preferred, with parallel original-URL fallback)
-  const { images: finalImages, fallbacks: finalFallbacks } = buildPreferredImages(
-    warehouse.photos,
-    warehouse.photosWebp,
-  );
+  const { images: finalImages, fallbacks: finalFallbacks } = preferredWarehouseImages(warehouse);
 
   return {
     id: warehouse.id,

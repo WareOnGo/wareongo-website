@@ -52,9 +52,37 @@ export function buildPreferredImages(originalInput: unknown, webpInput: unknown)
   return { images, fallbacks };
 }
 
+export interface ImageRecord {
+  id: number | null;
+  originalUrl: string;
+  webpUrl: string | null;
+  displayUrl: string;
+  classification: string | null;
+  documentKind: string | null;
+  caption: string | null;
+}
+
+/** API rows carry explicit original/variant pairs, including pending images. */
+export function preferredWarehouseImages(warehouse: {
+  images?: ImageRecord[]; photos?: unknown; photosWebp?: unknown;
+}): { images: string[]; fallbacks: (string | null)[] } {
+  if (!Array.isArray(warehouse.images)) return buildPreferredImages(warehouse.photos, warehouse.photosWebp);
+  const images: string[] = [], fallbacks: (string | null)[] = [];
+  const seen = new Set<string>();
+  for (const row of warehouse.images) {
+    if (!row || typeof row.originalUrl !== 'string' || seen.has(row.originalUrl)) continue;
+    const primary = isWarehouseImageUrl(row.webpUrl) ? row.webpUrl : row.originalUrl;
+    if (!isWarehouseImageUrl(primary)) continue;
+    seen.add(row.originalUrl);
+    images.push(primary);
+    fallbacks.push(primary !== row.originalUrl ? row.originalUrl : null);
+  }
+  return { images, fallbacks };
+}
+
 export interface WarehouseImage { primary: string; fallback: string | null }
 
-/** Also protects client navigation using payloads cached before the pairing fix. */
+/** The API transform supplies verified pairs; filenames need not be related. */
 export function warehouseImages(images: string[], fallbacks: (string | null)[] = []): WarehouseImage[] {
   const seen = new Set<string>();
   return images.flatMap((value, i) => {
@@ -62,6 +90,6 @@ export function warehouseImages(images: string[], fallbacks: (string | null)[] =
     if (!isWarehouseImageUrl(primary) || seen.has(primary)) return [];
     seen.add(primary);
     const fallback = fallbacks[i]?.trim();
-    return [{ primary, fallback: isWarehouseImageUrl(fallback) && fallback !== primary && sourceKey(primary) === sourceKey(fallback) ? fallback : null }];
+    return [{ primary, fallback: isWarehouseImageUrl(fallback) && fallback !== primary ? fallback : null }];
   });
 }

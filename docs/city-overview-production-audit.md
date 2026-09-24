@@ -93,3 +93,42 @@ discard authored content.
   loader/content/API types, city panels/types, dev-only review copy, audit docs
   and ESLint compatibility configuration. Exclude the separate changes to
   `warehouseImages.ts`, `warehouseAPI.ts` and image-pipeline tests.
+
+## Verification against the deployed backend — 2026-09-24
+
+After the city backend deployment, the user deployed the shared image registry
+in backend commit `2f0dd20` and requested another test before the remaining push.
+That deployment returns authoritative, ordered `images` records with explicit
+WebP/original pairs, including hashed WebP paths. The website release now also
+includes the compatibility changes to `warehouseImages.ts`, `warehouseAPI.ts`
+and `image-pipeline.test.mjs`; this supersedes the initial city-only exclusion
+above. Both listing and detail transforms use those pairs, preserve pending
+originals and intentional empty arrays, and retain support for older responses.
+No further page layout changes were made.
+
+The local end-to-end environment used an isolated PostgreSQL database for CMS
+content. Its real content controller served that local content while other GET
+requests went to the deployed Render backend. Production content was not edited.
+
+| Check | Result |
+| --- | --- |
+| Live city API | Database/Redis healthy; fresh reads confirmed; all 124 cities reconciled; 25 states omitted city-only statistics. |
+| Live image API | All 2,131 public listings had explicit image arrays: 14,571 ready variants, 307 pending originals, 129 hashed paths, and 13 empty galleries. Six sampled detail responses matched their listing image pairs/order; cached responses retained the new contract. |
+| Image delivery | 18 remote image assets across 10 warehouse samples returned successfully and decoded with Sharp. Sampled variants had WebP encoding and MIME type. |
+| Backend image tests | All 50 passed outside the sandbox, which blocks the suite's local sockets and child-process communication. |
+| Website checks | Three image compatibility tests, existing listing-cover/card-link tests, TypeScript, and lint for the two changed image source files passed. |
+| CMS | Full production build passed. Browser checks verified authentication, save/reload, draft privacy, publish/delist/republish, all four fields, and city-only form scope. Desktop/mobile previews also passed against the latest backend. |
+| Full website build | Passed: 2,560 rendered pages, 2,131 warehouse destinations, 215 listing covers, 740 overview image assets, and a 2,456-URL sitemap. Live inventory changed during the test, so these counts describe their respective snapshots. |
+| City browser integration | Saved CMS fields appeared in generated HTML and the hydrated site. City/state/Kompally passed at 1440/768/390 pixels, with pagination/history, FAQ, internal links, SEO, Montserrat, full-width paragraphs and no overflow. City copy also rendered without JavaScript. |
+| Image browser integration | Desktop/mobile galleries loaded hashed and legacy WebPs, pending originals and empty galleries. Keyboard navigation, explicit original recovery, retention on return, local-cover recovery, listing-card recovery and client navigation all passed with real assets and simulated 404s. No page errors occurred. |
+
+The card harness initially assumed newest-first ordering; it was corrected to
+use the overview's existing photo/size ordering. A repeated gallery run had one
+image-load timeout; a diagnostic rerun passed without application changes.
+
+Evidence, logs, screenshots and the isolated build are under
+`/tmp/wareongo-city-deployed-e2e`. Only the public image sample was checked for
+delivery; this was not a download audit of every stored image. The existing
+repository-wide lint findings described above remain outside this release.
+The production API still had no published city/state editorial pages during
+verification; local test copy was not published to the live CMS.
