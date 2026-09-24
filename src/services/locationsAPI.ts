@@ -1,6 +1,7 @@
 import { config } from '@/config/config';
 import { fetchInventory } from '@/lib/fetchInventory.mjs';
 import type { DerivedStats } from './derivedStats';
+import type { CityOverviewStats } from './cityOverview';
 
 /**
  * Derived city and state data, read from the backend.
@@ -15,6 +16,7 @@ import type { DerivedStats } from './derivedStats';
 export type LocationKind = 'CITY' | 'STATE';
 
 export interface LocationStats extends DerivedStats {
+  cityOverview?: CityOverviewStats;
   kind: LocationKind;
   /** Canonical display name, aliases resolved ("Bangalore" → "Bengaluru"). */
   name: string;

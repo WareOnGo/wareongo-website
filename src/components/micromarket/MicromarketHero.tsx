@@ -26,7 +26,7 @@ const MicromarketHero = ({
   imageVariants?: EditorialImageVariant[];
   /** "Nelamangala, Bengaluru" — the fully qualified place, for the eyebrow default. */
   place: string;
-  onBrowse: string;
+  onBrowse?: string;
 } & ({ loading: true; stats?: never } | { loading?: false; stats: DerivedStats })) => {
   // Built from live inventory, and each one is dropped when the data behind it
   // isn't there — a rent tile reading "₹0" would be worse than three tiles.
@@ -101,14 +101,14 @@ const MicromarketHero = ({
           {/* Down arrow, not right: this jumps to a section of this page rather
               than navigating anywhere. The count is deliberately not repeated —
               the "verified spaces" tile directly above already carries it. */}
-          <a
+          {onBrowse && <a
             data-analytics-placement="overview_hero"
             href={loading ? undefined : onBrowse}
             aria-disabled={loading || undefined}
             className="inline-flex h-11 items-center justify-center rounded-xl border border-wareongo-blue/30 px-5 text-sm font-medium text-wareongo-blue transition-colors hover:bg-wareongo-blue/5"
           >
             Browse the listings ↓
-          </a>
+          </a>}
         </div>
       </div>
 

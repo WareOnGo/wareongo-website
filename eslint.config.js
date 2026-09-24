@@ -20,6 +20,13 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
+      // Pass the recommended defaults explicitly: the installed TypeScript
+      // rule delegates to ESLint's core rule, which now expects this object.
+      "@typescript-eslint/no-unused-expressions": ["error", {
+        allowShortCircuit: false,
+        allowTernary: false,
+        allowTaggedTemplates: false,
+      }],
       "react-refresh/only-export-components": [
         "warn",
         { allowConstantExport: true },

@@ -29,7 +29,11 @@ const COLUMNS: Record<number, string> = {
  * belt of sheds says "Shed" instead of showing an empty PEB tile. A tile whose
  * count is zero is dropped, and the strip hides itself if that leaves nothing.
  */
-const InventoryBand = ({ stats, heading }: { stats: DerivedStats; heading: string }) => {
+const InventoryBand = ({ stats, heading, excludedLabel = 'land or build-to-suit' }: {
+  stats: DerivedStats;
+  heading: string;
+  excludedLabel?: string;
+}) => {
   const { listings, measured } = stats;
   // Clamped: the counts are overridable in the CMS but `measured` is not, so a
   // correction above the built-stock total would otherwise print "238%".
@@ -50,7 +54,7 @@ const InventoryBand = ({ stats, heading }: { stats: DerivedStats; heading: strin
   const unbuilt = listings - measured;
   const denominator =
     unbuilt > 0
-      ? `of ${measured} built units · ${unbuilt} land or build-to-suit excluded`
+      ? `of ${measured} built units · ${unbuilt} ${excludedLabel} excluded`
       : `of ${measured} listed units`;
 
   return (

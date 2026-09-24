@@ -4,6 +4,7 @@ import { getMicromarketContent } from '@/data/micromarkets';
 import { applyStatOverrides } from '@/lib/micromarketStats';
 import type { EditorialContent, EditorialImageVariant } from '@/data/editorial';
 import type { DerivedStats } from '@/services/derivedStats';
+import type { CityOverviewStats, CityOverviewContent } from '@/services/cityOverview';
 import { createListingBreadcrumbs } from '@/lib/listingBreadcrumbs';
 import type { BreadcrumbItem } from '@/components/Breadcrumbs';
 import { DEFAULT_PAGE_SIZE, toApiFilters, type WarehouseFilters } from '@/lib/listingSearch';
@@ -124,7 +125,8 @@ export interface LocationListingsLoaderData {
 export type EditorialPageData = LocationListingsLoaderData & {
   imageVariants?: Record<string, EditorialImageVariant[]>;
   coverImages?: Record<string, string>;
-  content: EditorialContent;
+  content: EditorialContent & CityOverviewContent;
+  cityOverview?: CityOverviewStats;
   stats: DerivedStats;
   peers: PeerRent[];
   overviewPath: string;
@@ -271,10 +273,20 @@ async function locationOverviewFor(kind: LocationKind, stateSlug: string, citySl
   if (warehouses.length === 0) throw new Error(`Overview inventory missing: ${path}`);
   const parent = kind === 'CITY' && match.stateSlug && match.parentState
     ? await ancestor('STATE', match.parentState, match.stateSlug) : null;
-  const stats = applyStatOverrides(match, content.statOverrides);
+  let cityOverview = kind === 'CITY' ? match.cityOverview : undefined;
+  if (cityOverview) {
+    const markets = await buildableMicromarkets();
+    cityOverview = { ...cityOverview, micromarkets: cityOverview.micromarkets.map(m => {
+      const target = markets.find(real => real.citySlug === match.slug && real.slug === m.slug);
+      return { ...m, path: target ? (getMicromarketContent(match.slug, m.slug)
+        ? micromarketOverviewPath(target) : micromarketPath(target)) : null };
+    }) };
+  }
+  const stats = applyStatOverrides(cityOverview
+    ? { ...match, ...cityOverview.summary, peers: cityOverview.comparisonCities } : match, content.statOverrides);
   return {
     type: kind === 'CITY' ? 'city' : 'state', canonical: match.name, slug: match.slug,
-    warehouses, content, stats, peers: stats.peers, overviewPath: path,
+    warehouses, content, stats, peers: stats.peers, overviewPath: path, cityOverview,
     ...await overviewImages(content, warehouses),
     editorial: {
       scope: kind === 'CITY' ? 'city' : 'state', name: match.name, path,

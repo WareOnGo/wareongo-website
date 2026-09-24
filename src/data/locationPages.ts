@@ -3,10 +3,11 @@
 
 import type { EditorialContent } from './editorial';
 import type { LocationKind } from '@/services/locationsAPI';
+import type { CityOverviewContent } from '@/services/cityOverview';
 
 export type { EditorialImage, EditorialFaq, StatOverrides } from './editorial';
 
-export interface LocationPageContent extends EditorialContent {
+export interface LocationPageContent extends EditorialContent, CityOverviewContent {
   kind: LocationKind;
   /**
    * The URL segment. Unique only within its kind: "delhi", "puducherry" and

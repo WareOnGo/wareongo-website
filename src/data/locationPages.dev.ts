@@ -10,15 +10,9 @@ import type { LocationPageContent } from './locationPages';
 // not do: it is true under `build:dev` too.) Same arrangement as
 // ./micromarkets.dev.ts.
 //
-// The prose is lorem ipsum sized to the same editorial bands the micromarket
-// placeholder uses — hero 68, market 104, rents 96, spec 66 words — because the
-// slots are laid out beside the same figure, chart and specification table.
-// Everything else on the page is computed from live inventory by the loader, so
-// what you see is the real thing wrapped around fake words.
-//
-// One of each kind, deliberately: a city page has a parent state to link up to
-// and a state page has none, which is the only structural difference between
-// the two and the thing worth eyeballing.
+// The city has review copy for its additional sections; the state keeps the
+// existing lorem ipsum fixture. Inventory figures are computed by the loader.
+// These examples help compare the shared layout across the two scopes.
 //
 // Slugs have to match a city or state the site actually builds, or the loader
 // never finds this and the overview does not exist.
@@ -58,7 +52,7 @@ export const DEV_LOCATION_PAGES: LocationPageContent[] = [
     metaDescription:
       '[dev] Placeholder meta description for the city editorial template. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
     h1: '[dev] Warehouse for Rent in Bengaluru',
-    heroProse: HERO,
+    heroProse: "Bangalore’s warehousing is organised around the highways out of the city. Each corridor serves different goods movements, from regional distribution to manufacturing supply chains. The right location depends on where your goods enter and leave, the size of the unit and the infrastructure your operation needs. Use this overview to compare locations, asking rents and typical specifications, then browse the available spaces.",
     // picsum rather than an R2 object: this is a dev fixture, and imageOpt
     // passes remote URLs through untouched outside a production build anyway.
     heroImage: {
@@ -67,16 +61,28 @@ export const DEV_LOCATION_PAGES: LocationPageContent[] = [
       width: 1200,
       height: 900,
     },
-    marketProse: MARKET,
+    marketHeading: 'Why rent a warehouse in Bangalore?',
+    marketProse: 'Bangalore’s warehousing follows its outward routes. **Nelamangala** and the Tumkur Road belt serve movements towards the northwest. **Hoskote** and Old Madras Road connect the eastern side, while **Hosur Road** brings together industrial areas such as Bommasandra, Jigani and Attibele. **Devanahalli** provides a different setting for requirements connected with the airport. The starting point is the journey your goods make, rather than the distance from an office. Compare highway access with the final delivery routes, then check whether the unit can support your vehicle movements, storage system and operating hours. Larger industrial units and smaller urban godowns can have very different rents and specifications within the same city. A shortlist should reflect that distinction. The comparisons below bring those differences together so you can focus on suitable locations before arranging a visit.',
+    corridorHeading: 'Where warehouse stock sits in Bangalore',
+    corridorProse: 'Start with the routes that matter to your operation. The **Nelamangala / Tumkur Road** corridor serves the northwest, while **Hoskote / Old Madras Road** serves the east. **Hosur Road** connects the southern industrial areas; **Devanahalli / Airport** is relevant to northern and airport-facing requirements. Whitefield, Sarjapur and Peenya add options for smaller distribution and urban storage requirements. Mysore Road and the NICE corridor offer a southwestern approach. Compare the rent and median unit size in each group, then check individual listings for access, loading space and the documents your operation needs. Listings with ambiguous or unmapped locations remain in the unassigned row.',
+    complianceHeading: 'Compliance and approvals in Bangalore',
+    complianceProse: 'The documents needed for a warehouse depend on the property, its approved use and the activities planned inside it. Establish the land and building position for the shortlisted property, including whether it is in an industrial estate or on separately converted land. Ask the owner for the relevant approval documents and check that the permitted use matches your intended operation. Fire arrangements also need to be checked for the actual building and goods you plan to store. A listing’s recorded details provide a starting point for these discussions. The recorded figures show what is documented in the inventory; they do not replace a document review for an individual property. Confirm the applicable local requirements and any operational restrictions before committing to a lease.',
     marketImage: {
       url: 'https://picsum.photos/seed/wog-city-market/1000/800',
       alt: '[dev] Placeholder market image',
       width: 1000,
       height: 800,
     },
-    rentsProse: RENTS,
-    specProse: SPEC,
-    faqs: FAQS,
+    rentsProse: 'Unit size helps explain the spread in asking rents. Smaller urban spaces can serve different uses from larger industrial warehouses, so a single city median is only a starting point. Use the size bands to find the closest comparison to your requirement, then compare the relevant locations. Check whether a quoted rate covers the same area basis, and discuss any additional charges with the counterparty. The city comparison gives broader context, while the individual listing and site visit establish what is included for a particular property.',
+    specProse: 'Compare the specification for the size of unit you need. Clear height, dock provision, construction and flooring can vary considerably between smaller godowns and larger warehouses. Use these comparisons to guide a shortlist, then verify the actual usable height, loading arrangement and floor specification at the property before planning your storage or material-handling system.',
+    faqs: [
+      { q: 'What is the rent for a warehouse in Bangalore?', a: 'The pricing section shows asking rents from the current listing data. Compare the size band closest to your requirement, then review the corridor and individual listing.' },
+      { q: 'Which part of Bangalore should I look in for my requirement?', a: 'Start with where your goods arrive and where they are delivered. Compare the highway corridors and the unit sizes available, then consider airport access, urban deliveries and proximity to your customers or suppliers.' },
+      { q: 'What warehouse sizes are available in Bangalore?', a: 'The overview shows the recorded size range and median unit size. Browse the city listings to filter the available spaces against your requirement.' },
+      { q: 'How do I check Fire NOC and land-use approvals?', a: 'Request the documents for the shortlisted property and confirm that the approvals cover its building and your intended activity. Recorded listing details are a starting point for that review.' },
+      { q: 'Am I dealing with an owner or a broker?', a: 'Confirm the counterparty for each shortlisted property before arranging a site visit or discussing commercial terms.' },
+      { q: 'How can I get a warehouse shortlist?', a: 'Use the request form to share your preferred locations, space requirement, timeline and operational needs. The team can then identify suitable options.' },
+    ],
     // Left empty: the slugs would have to match real blogs, and an unresolvable
     // one is silently dropped, so a placeholder here would preview as nothing.
     relatedBlogs: [],

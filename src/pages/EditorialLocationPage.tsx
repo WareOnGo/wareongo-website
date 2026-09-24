@@ -14,6 +14,7 @@ import EditorialImage, { EDITORIAL_HERO_SIZES } from '@/components/micromarket/E
 import PeerRentChart from '@/components/micromarket/PeerRentChart';
 import InventoryBand from '@/components/micromarket/InventoryBand';
 import SpecTable from '@/components/micromarket/SpecTable';
+import { CorridorPanel, RentBySize, SpecSizeComparison } from '@/components/city/CityPanels';
 import { usePagedListings } from '@/hooks/usePagedListings';
 import { CHIP, EYEBROW, PANEL, PROSE, SECTION_GAP, SECTION_RULE } from '@/components/micromarket/tokens';
 import { blogSummaries as blogs } from '@/data/blogSummaries.generated';
@@ -46,14 +47,18 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
   const { content, stats, warehouses, editorial } = data;
   const peers = data.peers ?? [];
   const { name, path, place, scope } = editorial;
+  const isCity = scope === 'city';
+  const city = isCity ? data.cityOverview : undefined;
   const heroVariants = content.heroImage && data.imageVariants?.[content.heroImage.url];
 
   // Which sections have something to say. Prose slots are optional in the CMS,
   // and a heading over an empty section is worse than no section — same rule the
   // location content templates follow: never publish half-filled copy.
   const hasMarket = Boolean(content.marketProse);
-  const hasRents = Boolean(content.rentsProse) || peers.length > 0;
+  const hasCorridors = isCity && (Boolean(content.corridorProse) || Boolean(city?.corridors.length));
+  const hasRents = Boolean(content.rentsProse) || peers.length > 0 || Boolean(city?.rentBySize.length);
   const hasSpec = Boolean(content.specProse) || specRowsFor(stats).length > 0;
+  const hasCompliance = isCity && Boolean(content.complianceProse);
   const hasFaqs = content.faqs.length > 0;
 
   // Numbered as rendered, so a page without rents copy reads 01, 02, 03 rather
@@ -65,8 +70,10 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
   const numbered = [
     'listings',
     ...(hasMarket ? ['market'] : []),
+    ...(hasCorridors ? ['corridors'] : []),
     ...(hasRents ? ['rents'] : []),
     ...(hasSpec ? ['specification'] : []),
+    ...(hasCompliance ? ['compliance'] : []),
     ...(hasFaqs ? ['faq'] : []),
   ];
   const indexOf = (id: string) => numbered.indexOf(id) + 1;
@@ -92,7 +99,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
     page: currentPage, page_size: perPage, result_count: shown.length, total_count: warehouses.length,
     result_status: shown.length ? 'success' : 'empty' }, hydrated);
 
-  const siblings = peers.filter((p) => !p.isSelf);
+  const siblings = city?.nearbyCities ?? peers.filter((p) => !p.isSelf);
   const relatedBlogs = content.relatedBlogs
     .map((s) => blogs.find((b) => b.slug === s))
     .filter((b): b is NonNullable<typeof b> => Boolean(b));
@@ -139,7 +146,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-wareongo-ivory">
+    <div className="flex min-h-screen flex-col bg-wareongo-ivory font-sans">
       <PageHead
         title={content.seoTitle}
         description={content.metaDescription}
@@ -177,7 +184,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
           />
 
           <section id="overview">
-            <MicromarketHero content={content} imageVariants={heroVariants} stats={stats} place={place} onBrowse="#listings" />
+            <MicromarketHero content={content} imageVariants={heroVariants} stats={stats} place={place} onBrowse={isCity ? undefined : '#listings'} />
           </section>
 
           <div>
@@ -259,6 +266,18 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
               </section>
             )}
 
+            {hasCorridors && (
+              <section id="corridors" className={SECTION_RULE}>
+                <SectionHeading index={indexOf('corridors')} eyebrow="Locations">
+                  {content.corridorHeading ?? `Where to rent in ${name}`}
+                </SectionHeading>
+                {city && city.corridors.length > 0 && <CorridorPanel data={city} />}
+                {content.corridorProse && (
+                  <p className={`mt-6 ${PROSE}`}><InlineText text={content.corridorProse} /></p>
+                )}
+              </section>
+            )}
+
             {hasRents && (
               <section id="rents" className={SECTION_RULE}>
                 <SectionHeading index={indexOf('rents')} eyebrow="Pricing">
@@ -272,11 +291,12 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
                     </p>
                   )}
                 </div>
+                {city && city.rentBySize.length > 0 && <div className="mt-6"><RentBySize bands={city.rentBySize} /></div>}
               </section>
             )}
 
             <div className={SECTION_GAP}>
-              <InventoryBand stats={stats} heading="What you'll find here" />
+              <InventoryBand stats={stats} heading="What you'll find here" excludedLabel={city ? 'land, build-to-suit or under construction' : undefined} />
             </div>
 
             {hasSpec && (
@@ -292,9 +312,21 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
                     </p>
                   )}
                 </div>
+                {city && <>
+                  <SpecSizeComparison cohorts={city.specsBySize} />
+                  <p className="mt-4 text-xs leading-relaxed text-wareongo-slate">Based on {stats.measured} existing warehouse listings. Each measure uses listings that record it; construction and flooring shares use recorded, recognised types.</p>
+                </>}
               </section>
             )}
 
+            {hasCompliance && (
+              <section id="compliance" className={SECTION_RULE}>
+                <SectionHeading index={indexOf('compliance')} eyebrow="Compliance">
+                  {content.complianceHeading ?? `Warehouse compliance in ${name}`}
+                </SectionHeading>
+                <p className={PROSE}><InlineText text={content.complianceProse ?? ''} /></p>
+              </section>
+            )}
 
             {hasFaqs && (
               <section id="faq" className={SECTION_RULE}>
@@ -314,10 +346,26 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
                     Browse all warehouses in {name} →
                   </Link></dd>
                 </div>
+                {city && city.micromarkets.length > 0 && (
+                  <div className="sm:flex sm:gap-6">
+                    <dt className={`mb-2 min-w-[9rem] ${EYEBROW} text-wareongo-slate sm:mb-0`}>Micromarkets</dt>
+                    <dd className="flex flex-wrap gap-2">
+                      {city.micromarkets.map((market) => market.path ? (
+                        <Link key={market.slug} to={market.path} className={`inline-flex items-center gap-1.5 ${CHIP} px-3 py-1.5 text-wareongo-blue hover:bg-wareongo-blue/5`}>
+                          {market.name}<span className="text-xs tabular-nums text-wareongo-slate">{market.listings}</span>
+                        </Link>
+                      ) : (
+                        <span key={market.slug} className={`inline-flex items-center gap-1.5 ${CHIP} px-3 py-1.5 text-wareongo-slate`}>
+                          {market.name}<span className="text-xs tabular-nums">{market.listings}</span>
+                        </span>
+                      ))}
+                    </dd>
+                  </div>
+                )}
                 {siblings.length > 0 && (
                   <div className="sm:flex sm:gap-6">
                     <dt className={`mb-2 min-w-[9rem] ${EYEBROW} text-wareongo-slate sm:mb-0`}>
-                      {scope === 'state' ? 'Other states' : 'Nearby markets'}
+                      {city?.nearbyLabel ?? (scope === 'state' ? 'Other states' : 'Nearby markets')}
                     </dt>
                     <dd className="flex flex-wrap gap-2">
                       {siblings.map((s) => (
@@ -327,7 +375,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
                           className={`inline-flex items-center gap-1.5 ${CHIP} px-3 py-1.5 text-wareongo-blue transition-colors hover:bg-wareongo-blue/5`}
                         >
                           {s.name}
-                          <span className="text-xs tabular-nums text-wareongo-slate">₹{s.medianRent}</span>
+                          {'medianRent' in s && typeof s.medianRent === 'number' && <span className="text-xs tabular-nums text-wareongo-slate">₹{s.medianRent}</span>}
                         </Link>
                       ))}
                     </dd>

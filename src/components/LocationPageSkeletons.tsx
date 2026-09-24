@@ -93,7 +93,7 @@ export function OverviewSkeleton({ pathname }: { pathname: string }) {
         ...(micro && cityName(city) !== name ? [{ label: cityName(city) }] : []),
         { label: name },
       ]} />
-      {content ? <MicromarketHero content={content} place={place} onBrowse="#listings" loading /> : <header className="max-w-3xl">
+      {content ? <MicromarketHero content={content} place={place} onBrowse={city && !micro ? undefined : '#listings'} loading /> : <header className="max-w-3xl">
         <Skeleton className="mb-3 h-[15px] w-48" />
         <h1 className="mb-4 text-3xl font-bold leading-tight text-wareongo-blue sm:text-4xl md:text-5xl">Warehouses for rent in {name}</h1>
         <Skeleton className="h-24 w-full" />
