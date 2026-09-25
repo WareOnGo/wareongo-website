@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import {
   fetchAllWarehouses,
   summarize,
@@ -52,18 +53,27 @@ function urlEntry(loc, changefreq, priority) {
   </url>`;
 }
 
-// Prefer WebP (what the site actually serves — smaller, faster) and fall back
-// to the JPEGs only when a listing has no webp variants.
-// Backend quirk: both fields are arrays whose elements may themselves be
-// comma-joined URL strings. Flatten, split, validate, dedupe, cap.
-function warehousePhotos(w, max = 10) {
-  const webp = Array.isArray(w.photosWebp) ? w.photosWebp : [];
-  const jpg = Array.isArray(w.photos) ? w.photos : [];
-  const raw = webp.length > 0 ? webp : jpg;
+// The approved gallery is authoritative, including an explicitly empty one.
+// Prefer each photo's WebP, with its own original as the missing-variant fallback.
+// Older responses without explicit pairs retain their original photo URLs.
+export function warehousePhotos(w, max = 8) {
+  const httpUrl = (value) => {
+    if (typeof value !== 'string') return null;
+    try {
+      const url = new URL(value.trim());
+      return ['http:', 'https:'].includes(url.protocol) ? value.trim() : null;
+    } catch { return null; }
+  };
+  const raw = Array.isArray(w.images)
+    ? w.images.flatMap((row) => {
+      const original = httpUrl(row?.originalUrl);
+      return original ? [httpUrl(row.webpUrl) ?? original] : [];
+    })
+    : (Array.isArray(w.photos) ? w.photos : [])
+      .flatMap((value) => typeof value === 'string' ? value.split(/,\s*(?=https?:\/\/)/i) : []);
   const urls = raw
-    .flatMap((p) => String(p).split(','))
-    .map((s) => s.trim())
-    .filter((s) => /^https?:\/\//.test(s));
+    .map(httpUrl)
+    .filter(Boolean);
   return [...new Set(urls)].slice(0, max);
 }
 
@@ -194,7 +204,9 @@ ${entries.join('\n')}
   );
 }
 
-main().catch((err) => {
-  console.error('[sitemap] generation failed:', err);
-  process.exit(1);
-});
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch((err) => {
+    console.error('[sitemap] generation failed:', err);
+    process.exit(1);
+  });
+}
