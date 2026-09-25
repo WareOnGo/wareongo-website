@@ -1,26 +1,53 @@
 import React from 'react';
 import { logoVariants } from '@/data/logoVariants.generated';
 
-const SCROLL_SECONDS = 35;
 const BG = 'transparent';
 const FADE_COLOR = '#F8F6F1'; // matches bg-wareongo-ivory
 
+// Groups of three or four larger, established brands followed by one smaller brand.
+// Company scale is approximate; keep the smaller brands spread throughout the loop.
 const COMPANY_LOGOS = [
+  { src: '/company_logos/apple.svg', alt: 'Apple', width: 140, height: 160 },
+  { src: '/company_logos/siemens.svg', alt: 'Siemens', width: 1000, height: 159 },
   { src: '/company_logos/reliance_digital.webp', alt: 'Reliance Digital', width: 360, height: 99 },
-  { src: '/company_logos/hero_motorcorp.webp', alt: 'Hero MotoCorp', width: 160, height: 180 },
-  { src: '/company_logos/cadbury.webp', alt: 'Cadbury', width: 360, height: 134 },
   { src: '/company_logos/mars.webp', alt: 'Mars', width: 360, height: 128 },
-  { src: '/company_logos/mumbai_pav_company.webp', alt: 'Mumbai Pav Company', grayscaleOnly: true, width: 222, height: 180 },
-  { src: '/company_logos/increff.webp', alt: 'Increff', width: 360, height: 108 },
+  { src: '/company_logos/slikk_2026.webp', alt: 'Slikk', width: 92, height: 52 },
+
+  { src: '/company_logos/cadbury.webp', alt: 'Cadbury', width: 360, height: 134 },
+  { src: '/company_logos/flipkart.webp', alt: 'Flipkart', width: 363, height: 95 },
+  { src: '/company_logos/tata_power_solar.webp', alt: 'Tata Power Solar', grayscaleOnly: true, width: 179, height: 23 },
+  { src: '/company_logos/hero_motorcorp.webp', alt: 'Hero MotoCorp', width: 160, height: 180 },
+  { src: '/company_logos/indus_valley.svg', alt: 'The Indus Valley', width: 627, height: 85 },
+
+  { src: '/company_logos/royal_enfield.webp', alt: 'Royal Enfield', width: 400, height: 53 },
+  { src: '/company_logos/franke_faber.webp', alt: 'Franke Faber', grayscaleOnly: true, width: 125, height: 19 },
   { src: '/company_logos/renew_power.webp', alt: 'ReNew Power', width: 360, height: 117 },
-  { src: '/company_logos/rentomojo.webp', alt: 'Rentomojo', width: 180, height: 180 },
+  { src: '/company_logos/eshopbox.svg', alt: 'Eshopbox', width: 205, height: 28 },
+
+  { src: '/company_logos/steinweg.svg', alt: 'C. Steinweg Group', grayscaleOnly: true, width: 289, height: 72 },
   { src: '/company_logos/pioneer.webp', alt: 'Pioneer', grayscaleOnly: true, width: 360, height: 110 },
+  { src: '/company_logos/tci.webp', alt: 'TCI', width: 400, height: 130 },
+  { src: '/company_logos/bisleri.webp', alt: 'Bisleri', width: 168, height: 64 },
+  { src: '/company_logos/yusuf_bhai.webp', alt: 'Yusuf Bhai Perfumes', width: 400, height: 28 },
+
+  { src: '/company_logos/eureka_forbes.svg', alt: 'Eureka Forbes', width: 360, height: 80 },
+  { src: '/company_logos/sunpure.webp', alt: 'Sunpure', grayscaleOnly: true, width: 100, height: 116 },
+  { src: '/company_logos/Mamaearth-Logo-Vector.svg-.webp', alt: 'Mamaearth', width: 360, height: 47 },
+  { src: '/company_logos/arasfirma.webp', alt: 'Arasfirma', width: 324, height: 180 },
+
   { src: '/company_logos/symphony.webp', alt: 'Symphony', grayscaleOnly: true, width: 360, height: 150 },
+  { src: '/company_logos/snitch.svg', alt: 'Snitch', width: 3325, height: 518 },
+  { src: '/company_logos/farmley.webp', alt: 'Farmley', grayscaleOnly: true, width: 140, height: 103 },
+  { src: '/company_logos/mumbai_pav_company.webp', alt: 'Mumbai Pav Company', grayscaleOnly: true, width: 222, height: 180 },
+
+  { src: '/company_logos/rentomojo.webp', alt: 'Rentomojo', width: 180, height: 180 },
+  { src: '/company_logos/increff.webp', alt: 'Increff', width: 360, height: 108 },
   { src: '/company_logos/holisol.webp', alt: 'Holisol', width: 200, height: 71 },
   { src: '/company_logos/alienkind.webp', alt: 'Alienkind', width: 360, height: 91 },
-  { src: '/company_logos/slikk_logo.webp', alt: 'Slikk', width: 320, height: 180 },
-  { src: '/company_logos/Mamaearth-Logo-Vector.svg-.webp', alt: 'Mamaearth', width: 360, height: 47 },
 ];
+
+// Keep the same pace as the original 14-logo, 35-second strip as the list grows.
+const SCROLL_SECONDS = COMPANY_LOGOS.length * 2.5;
 
 const TrustedBySection = () => {
   const Track = ({ ariaHidden }: { ariaHidden?: boolean }) => (
@@ -65,6 +92,7 @@ const TrustedBySection = () => {
         .trusted-scroller {
           display: flex;
           width: max-content;
+          mix-blend-mode: multiply;
           animation: trusted-scroll ${SCROLL_SECONDS}s linear infinite;
         }
         .trusted-strip:hover .trusted-scroller {
@@ -126,6 +154,11 @@ const TrustedBySection = () => {
         @keyframes trusted-scroll {
           from { transform: translateX(0); }
           to   { transform: translateX(-50%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .trusted-strip { overflow-x: auto; }
+          .trusted-scroller { animation: none; }
+          .trusted-track[aria-hidden="true"], .trusted-fade { display: none; }
         }
       `}</style>
     </div>

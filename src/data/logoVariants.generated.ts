@@ -2,7 +2,10 @@
 export const logoVariants: Record<string, string> = {
   "/company_logos/Mamaearth-Logo-Vector.svg-.webp": "/optimized-logos/ee36576c7ef27433-128.webp 128w, /optimized-logos/ee36576c7ef27433-256.webp 256w, /company_logos/Mamaearth-Logo-Vector.svg-.webp 360w",
   "/company_logos/alienkind.webp": "/optimized-logos/49812cfb0b7903e7-128.webp 128w, /optimized-logos/49812cfb0b7903e7-256.webp 256w, /company_logos/alienkind.webp 360w",
+  "/company_logos/arasfirma.webp": "/optimized-logos/408b037281cb5e58-128.webp 128w, /optimized-logos/408b037281cb5e58-256.webp 256w, /company_logos/arasfirma.webp 324w",
+  "/company_logos/bisleri.webp": "/optimized-logos/0fa82106f0b38c72-128.webp 128w, /company_logos/bisleri.webp 168w",
   "/company_logos/cadbury.webp": "/optimized-logos/010389604de01eb7-128.webp 128w, /optimized-logos/010389604de01eb7-256.webp 256w, /company_logos/cadbury.webp 360w",
+  "/company_logos/flipkart.webp": "/optimized-logos/c8d7ecf8fdc776cd-128.webp 128w, /optimized-logos/c8d7ecf8fdc776cd-256.webp 256w, /company_logos/flipkart.webp 363w",
   "/company_logos/hero_motorcorp.webp": "/optimized-logos/ba5e28ebd7136a01-128.webp 128w, /company_logos/hero_motorcorp.webp 160w",
   "/company_logos/holisol.webp": "/optimized-logos/95f63d5646767617-128.webp 128w, /company_logos/holisol.webp 200w",
   "/company_logos/increff.webp": "/optimized-logos/4f2c8096446750f7-128.webp 128w, /optimized-logos/4f2c8096446750f7-256.webp 256w, /company_logos/increff.webp 360w",
@@ -12,6 +15,10 @@ export const logoVariants: Record<string, string> = {
   "/company_logos/reliance_digital.webp": "/optimized-logos/a76a8d7f0fc79fd9-128.webp 128w, /optimized-logos/a76a8d7f0fc79fd9-256.webp 256w, /company_logos/reliance_digital.webp 360w",
   "/company_logos/renew_power.webp": "/optimized-logos/4f4b8d1d3a2a3575-128.webp 128w, /optimized-logos/4f4b8d1d3a2a3575-256.webp 256w, /company_logos/renew_power.webp 360w",
   "/company_logos/rentomojo.webp": "/optimized-logos/803045a254de4709-128.webp 128w, /company_logos/rentomojo.webp 180w",
+  "/company_logos/royal_enfield.webp": "/optimized-logos/d24df8cb5cc64b1e-128.webp 128w, /optimized-logos/d24df8cb5cc64b1e-256.webp 256w, /company_logos/royal_enfield.webp 400w",
   "/company_logos/slikk_logo.webp": "/optimized-logos/5ea5601d994939d6-128.webp 128w, /optimized-logos/5ea5601d994939d6-256.webp 256w, /company_logos/slikk_logo.webp 320w",
-  "/company_logos/symphony.webp": "/optimized-logos/2ac0203399474f83-128.webp 128w, /optimized-logos/2ac0203399474f83-256.webp 256w, /company_logos/symphony.webp 360w"
+  "/company_logos/symphony.webp": "/optimized-logos/2ac0203399474f83-128.webp 128w, /optimized-logos/2ac0203399474f83-256.webp 256w, /company_logos/symphony.webp 360w",
+  "/company_logos/tata_power_solar.webp": "/optimized-logos/768fd22a43c5261c-128.webp 128w, /company_logos/tata_power_solar.webp 179w",
+  "/company_logos/tci.webp": "/optimized-logos/f7de3246ae7abfa5-128.webp 128w, /optimized-logos/f7de3246ae7abfa5-256.webp 256w, /company_logos/tci.webp 400w",
+  "/company_logos/yusuf_bhai.webp": "/optimized-logos/5480f3afc7c2f0ba-128.webp 128w, /optimized-logos/5480f3afc7c2f0ba-256.webp 256w, /company_logos/yusuf_bhai.webp 400w"
 };
