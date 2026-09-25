@@ -288,6 +288,11 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
                     ceilingHeight={warehouse.ceilingHeight}
                     price={warehouse.price}
                     fireCompliance={warehouse.fireCompliance}
+                    numberOfDocks={warehouse.numberOfDocks}
+                    warehouseType={warehouse.warehouseType}
+                    micromarket={warehouse.micromarket}
+                    postalCode={warehouse.postalCode}
+                    updatedAt={warehouse.updatedAt}
                     features={warehouse.features}
                     href={warehousePath({ id: warehouse.id, size: warehouse.size, warehouseType: warehouse.warehouseType, city: warehouse.location.city })}
                   />

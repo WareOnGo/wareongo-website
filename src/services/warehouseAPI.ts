@@ -6,6 +6,7 @@ import { fetchInventory } from '@/lib/fetchInventory.mjs';
 import { config, getApiUrl } from '@/config/config';
 import { fetchRead } from '@/lib/fetchRead.mjs';
 import { preferredWarehouseImages, photoUrls, type ImageRecord } from '@/lib/warehouseImages';
+import { parseClearHeight, parseDockCount } from '@/lib/warehouseCardData';
 
 // Type definitions for the API response
 export interface Warehouse {
@@ -18,7 +19,7 @@ export interface Warehouse {
   clearHeightFt: string | null;
   compliances: string;
   otherSpecifications: string | null;
-  ratePerSqft: string;
+  ratePerSqft: string | null;
   photos: string[] | string | null;
   photosWebp?: string[] | string | null;
   images?: ImageRecord[];
@@ -34,6 +35,7 @@ export interface Warehouse {
   // the micromarket pages' specification table. Optional for the same reason.
   numberOfDocks?: string | null;
   flooringType?: string | null;
+  updatedAt?: string | null;
 }
 
 // Extended interface for warehouse detail page with additional fields
@@ -483,9 +485,7 @@ export const transformWarehouseData = (warehouse: Warehouse) => {
   // stand-in: 202 of 1000 live listings have no clearHeightFt, and the detail
   // page renders 'Not specified' for the same field, so a card claiming 10 ft
   // contradicted the page it linked to.
-  const ceilingHeight = warehouse.clearHeightFt
-    ? parseInt(warehouse.clearHeightFt.replace(/[^\d]/g, '')) || null
-    : null;
+  const ceilingHeight = parseClearHeight(warehouse.clearHeightFt);
 
   // Parse price. Null for the same reason — transformWarehouseDetailData's own
   // fallback for a missing rate is 'Price on request', not a number.
@@ -507,7 +507,11 @@ export const transformWarehouseData = (warehouse: Warehouse) => {
     size: mainSize,
     ceilingHeight,
     price,
-    fireCompliance: warehouse.fireNocAvailable || false,
+    fireCompliance: warehouse.fireNocAvailable ?? null,
+    numberOfDocks: parseDockCount(warehouse.numberOfDocks),
+    micromarket: warehouse.micromarket ?? [],
+    postalCode: warehouse.postalCode ?? null,
+    updatedAt: warehouse.updatedAt ?? null,
     features: features.slice(0, 3), // Limit to 3 features
     warehouseType: warehouse.warehouseType ?? null,
   };

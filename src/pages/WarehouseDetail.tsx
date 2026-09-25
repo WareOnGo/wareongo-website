@@ -549,6 +549,11 @@ const WarehouseDetail = () => {
                     ceilingHeight={w.ceilingHeight}
                     price={w.price}
                     fireCompliance={w.fireCompliance}
+                    numberOfDocks={w.numberOfDocks}
+                    warehouseType={w.warehouseType}
+                    micromarket={w.micromarket}
+                    postalCode={w.postalCode}
+                    updatedAt={w.updatedAt}
                     features={w.features}
                     href={warehousePath({ id: w.id, size: w.size, warehouseType: w.warehouseType, city: w.location.city })}
                   />

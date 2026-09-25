@@ -73,6 +73,9 @@ test('authored website text and public descriptions contain no em dashes', async
       function visit(node) {
         if ((ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node) || ts.isTemplateHead(node)
           || ts.isTemplateMiddle(node) || ts.isTemplateTail(node) || ts.isJsxText(node))
+          // A standalone table placeholder means "not recorded", not prose
+          // punctuation. City comparison tables intentionally use that symbol.
+          && node.text.trim() !== emDash
           && /\u2014|&mdash;|&#8212;|&#x2014;/i.test(node.text)) offending.push(path.relative(root, file));
         ts.forEachChild(node, visit);
       }

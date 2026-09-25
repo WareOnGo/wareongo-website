@@ -1,20 +1,28 @@
 import ListingsHeader from "./ListingsHeader";
 import { Skeleton } from "@/components/ui/skeleton";
+import './WarehouseCard.css';
 
 export const WarehouseCardSkeleton = () => (
-  <div data-testid="warehouse-card-skeleton" className="border border-wareongo-blue rounded-2xl overflow-hidden bg-transparent" aria-hidden="true">
-    <div className="border-b border-wareongo-blue">
-      <Skeleton className="w-full h-48 rounded-none" />
+  <div data-testid="warehouse-card-skeleton" className="warehouse-card" aria-hidden="true">
+    <div className="warehouse-card__photo">
+      <Skeleton className="absolute inset-0 rounded-none" />
     </div>
-    <div className="p-5 sm:p-6">
-      <div className="mb-4">
-        <Skeleton className="h-7 w-3/4 mb-1.5" />
-        <Skeleton className="h-5 w-1/2" />
+    <div className="warehouse-card__body">
+      <dl className="warehouse-card__metrics">
+        {['area', 'rent'].map(metric => (
+          <div key={metric} className={`warehouse-card__metric warehouse-card__${metric}`}>
+            <dt><Skeleton className="h-[19px] w-20" /></dt>
+            <dd><strong><Skeleton className="h-[1lh] w-24" /></strong></dd>
+          </div>
+        ))}
+      </dl>
+      <div className="warehouse-card__place"><Skeleton className="h-6 w-3/4" /></div>
+      <div className="warehouse-card__specs">
+        <Skeleton className="h-[22px] w-28 rounded-[3px]" />
+        <Skeleton className="h-[22px] w-14 rounded-[3px]" />
+        <Skeleton className="h-[22px] w-20 rounded-[3px]" />
       </div>
-      <div className="grid grid-cols-2 gap-3">
-        {Array.from({ length: 4 }, (_, i) => <Skeleton key={i} className="h-4 sm:h-5 w-4/5" />)}
-      </div>
-      <Skeleton className="mt-5 h-11 w-full rounded-xl" />
+      <div className="warehouse-card__actions"><Skeleton className="h-11 w-full rounded-[5px]" /></div>
     </div>
   </div>
 );
@@ -41,7 +49,7 @@ export const WarehouseMapSkeleton = () => (
 export const WarehouseDetailSkeleton = () => (
   <main className="flex-grow bg-wareongo-ivory" aria-hidden="true">
       <div className="section-container page-content px-4 sm:px-6 lg:px-8">
-        <div className="h-9 sm:h-5 mb-4 sm:mb-6 flex flex-col sm:flex-row justify-between sm:justify-start sm:items-center">
+        <div className="h-11 sm:h-5 mb-4 sm:mb-6 flex flex-col sm:flex-row justify-between sm:justify-start sm:items-center">
           <Skeleton className="h-3 w-28 sm:w-72 max-w-full" />
           <Skeleton className="h-3 w-56 max-w-full sm:hidden" />
         </div>

@@ -1,0 +1,80 @@
+{
+  "date": "2026-09-25",
+  "design": "Approved Ivory listing card",
+  "source_sha256": {
+    "src/components/WarehouseCard.tsx": "5628be74320912373343fa3ddf13534cf3ae9bc4778196ec453591769e642fa8",
+    "src/components/WarehouseCard.css": "01549f2e4fa71d3518b74b0086563d24ea043cef899279ce9391341858da7117",
+    "src/components/PageSkeletons.tsx": "fa297761240ccf70dcddc1ea03e97bfb43d4686ad9c16cdc6e7ae1342abea683",
+    "src/lib/warehouseCardData.ts": "e599cdfedb98d7883ad0300389da07dc68d98e14adb71a1e88aa8f7cfb870b51",
+    "src/services/warehouseAPI.ts": "a51edc855634aa50526a9704c821e9dc5b9b103ef7b15c5af7cdd3efc01a36a5",
+    "src/pages/Listings.tsx": "10fbf43ec081b0a91488f3ce1ec1a69767276a3241a788d45428a0db43d5125b",
+    "src/pages/EditorialLocationPage.tsx": "fb426d67cd904e283b7b5b2172b3a50d2081ebd5e9d1e165f0cca8f86cb4bda8",
+    "src/pages/WarehouseDetail.tsx": "a083b3b5c4b4428297f448ccd33da899c3838eef62c45569e94b1507e5e718fe"
+  },
+  "production_build": {
+    "site": "/tmp/wog-listing-integration-awtdjD/site",
+    "routes": 117,
+    "sitemap_urls": 112,
+    "property_destinations": 73,
+    "application_sources_match": true
+  },
+  "browser_reports": {
+    "behaviour": {
+      "report": "../wareongo-evals/output/behaviour-results.json",
+      "stats": {
+        "startTime": "2026-09-25T06:33:57.408Z",
+        "duration": 336572.89900000003,
+        "expected": 264,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "cards": {
+      "report": "../wareongo-evals/output/card-results.json",
+      "stats": {
+        "startTime": "2026-09-25T06:34:00.071Z",
+        "duration": 305556.396,
+        "expected": 76,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "integration": {
+      "report": "/tmp/wog-listing-integration-hMFM37/browser/listing-integration-results.json",
+      "stats": {
+        "startTime": "2026-09-25T06:04:39.991Z",
+        "duration": 308893.96,
+        "expected": 222,
+        "skipped": 6,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  },
+  "other_checks": {
+    "website_node_test_files": 20,
+    "card_node_cases": 20,
+    "database_integration_cases": 14,
+    "url_state_cases": 48,
+    "prefetch_cases": 40,
+    "analytics_transport_cases": 2,
+    "visual_cases": 9,
+    "pixel_baselines": 21,
+    "page_screenshots": 15,
+    "screenshot_crops": 36,
+    "preview_checks": 57,
+    "application_typescript": "passed",
+    "eval_typescript": "passed",
+    "changed_application_eslint": "passed",
+    "native_tabs_repeated_cases": 12
+  },
+  "scope_notes": [
+    "The 76 card cases are also partly covered by the general behaviour suite; counts are not additive coverage.",
+    "Six integration cases are conditionally skipped: previous deployment and service-template fixtures, across three browser projects.",
+    "Browser harness and preview source changes are in sibling directories outside the website Git repository.",
+    "WebKit uses device emulation, not a physical iPhone.",
+    "Enquiries and analytics collection were intercepted; no build notifications were sent."
+  ]
+}
