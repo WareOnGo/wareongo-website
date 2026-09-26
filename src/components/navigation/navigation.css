@@ -116,7 +116,7 @@
 .wog-nav-modal-head { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 28px 8px; }
 .wog-nav-directory-heading { min-width: 0; }
 .wog-nav-directory-heading h2 { margin: 0; font-size: 26px; font-weight: 600; line-height: 1.3; letter-spacing: -.025em; outline: none; }
-.wog-nav-close { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 44px; min-height: 44px; padding: 8px; font-size: 12px; font-weight: 500; border-radius: 6px; }
+.wog-nav-close { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; flex-shrink: 0; border: 1px solid var(--nav-line); border-radius: 8px; }
 .wog-nav-close:hover { background: var(--nav-tint); }
 .wog-nav-directory-description { margin: 0; padding: 0 28px 20px; font-size: 13px; color: var(--nav-muted); }
 .wog-nav-directory-controls { display: flex; flex-direction: column; gap: 16px; padding: 0 28px; flex-shrink: 0; }

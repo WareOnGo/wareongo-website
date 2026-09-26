@@ -92,7 +92,7 @@ export default function NavigationDialog({ view, category, mobileOrigin, account
           </div>}
           {view === 'menu' && <Dialog.Title className="sr-only">Navigation menu</Dialog.Title>}
           <Dialog.Close ref={closeRef} className="wog-nav-close" aria-label={view === 'menu' ? 'Close menu' : 'Close directory'}>
-            <span>Close</span><X aria-hidden="true" size={20} />
+            <X aria-hidden="true" size={20} />
           </Dialog.Close>
         </div>
         <Dialog.Description id={`${id}-description`} className={view === 'menu' ? 'sr-only' : 'wog-nav-directory-description'}>
