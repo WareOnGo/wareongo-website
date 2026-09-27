@@ -2,15 +2,15 @@ import { specRowsFor } from '@/lib/micromarketStats';
 import type { DerivedStats } from '@/services/derivedStats';
 import { HAIRLINE, PANEL } from './tokens';
 
-const SpecTable = ({ stats }: { stats: DerivedStats }) => {
+const SpecTable = ({ stats, caption = 'Typical specification across the warehouses listed in this micromarket' }: { stats: DerivedStats; caption?: string }) => {
   const rows = specRowsFor(stats);
   if (rows.length === 0) return null;
 
   return (
-    <div className={`overflow-hidden ${PANEL}`}>
+    <div className={`warehouse-spec-table overflow-hidden ${PANEL}`}>
       <table className="w-full text-left text-[13px] sm:text-sm">
         <caption className="sr-only">
-          Typical specification across the warehouses listed in this micromarket
+          {caption}
         </caption>
         <tbody>
           {rows.map(([label, value], i) => (

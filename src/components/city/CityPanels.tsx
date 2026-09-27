@@ -10,19 +10,19 @@ const money = (value: number | undefined) => value === undefined ? '—' : `₹$
 const mixText = (entries: CityStockStats['construction']) => entries.map(e => `${e.label} ${e.share}%`).join(' · ') || '—';
 
 export function CorridorPanel({ data }: { data: CityOverviewStats }) {
-  return <div className="space-y-6">
-    <div className="grid gap-4 sm:grid-cols-2">
+  return <div className="city-corridor-panel space-y-6">
+    <div className="city-corridor-segments grid gap-4 sm:grid-cols-2">
       {([
         ['20,000 sq ft and up', data.segments.large],
         ['Under 20,000 sq ft', data.segments.small],
-      ] as const).filter(([, stats]) => stats.listings > 0).map(([label, stats]) => <div key={label} className={`${PANEL} p-5`}>
+      ] as const).filter(([, stats]) => stats.listings > 0).map(([label, stats]) => <div key={label} className={`city-corridor-segment ${PANEL} p-5`}>
         <p className={`${EYEBROW} text-wareongo-slate`}>{label}</p>
         <p className="my-3 text-3xl font-bold tabular-nums text-wareongo-blue">{money(stats.rent?.median)}<span className="ml-2 text-xs font-normal text-wareongo-slate">/ sq ft / month</span></p>
         <p className="text-sm text-wareongo-slate">{stats.rent ? formatRentRange(stats.rent) : 'Rent not recorded'} · {stats.listings} listings</p>
         <p className="mt-1 text-xs text-wareongo-slate">{mixText(stats.construction)}</p>
       </div>)}
     </div>
-    <div className={`overflow-hidden ${PANEL}`}>
+    <div className={`city-corridor-table overflow-hidden ${PANEL}`}>
       <div className="overflow-x-auto" role="region" aria-label="Warehouse locations comparison" tabIndex={0}>
         <table className="w-full min-w-[700px] text-left text-sm">
           <caption className="sr-only">{data.corridorMode === 'corridors' ? 'Corridors' : 'Localities'} compared by listing count, asking rent, unit size and construction</caption>
@@ -31,7 +31,7 @@ export function CorridorPanel({ data }: { data: CityOverviewStats }) {
             <th scope="row" className={`${CELL} font-medium text-wareongo-blue`}>{c.name}{c.direction && <span className="mt-1 block text-xs font-normal text-wareongo-slate">{c.direction}</span>}</th>
             <td className={`${CELL} tabular-nums`}>{c.listings}</td><td className={`${CELL} whitespace-nowrap tabular-nums`}>{money(c.rent?.median)}</td>
             <td className={`${CELL} whitespace-nowrap tabular-nums`}>{c.rent ? formatRentRange(c.rent) : '—'}</td>
-            <td className={`${CELL} whitespace-nowrap tabular-nums`}>{c.size ? formatSqft(c.size.median) : '—'}</td><td className={CELL}>{c.construction[0]?.label ?? '—'}</td>
+            <td className={`${CELL} whitespace-nowrap tabular-nums`}>{c.size ? formatSqft(c.size.median) : '—'}</td><td className={CELL}><span className="city-corridor-build">{c.construction[0]?.label ?? '—'}</span></td>
           </tr>)}</tbody>
         </table>
       </div>
@@ -41,7 +41,7 @@ export function CorridorPanel({ data }: { data: CityOverviewStats }) {
 }
 
 export function RentBySize({ bands }: { bands: CityOverviewStats['rentBySize'] }) {
-  return <div className={`overflow-hidden ${PANEL}`}>
+  return <div className={`city-rent-table overflow-hidden ${PANEL}`}>
     <table className="w-full text-left text-sm">
       <caption className="px-4 py-4 text-left font-semibold text-wareongo-blue">Median asking rent by unit size</caption>
       <thead className="bg-wareongo-blue/5"><tr><th scope="col" className={HEAD}>Unit size</th><th scope="col" className={HEAD}>₹ / sq ft / mo</th><th scope="col" className={`${HEAD} hidden sm:table-cell`}>Priced listings</th></tr></thead>
@@ -61,7 +61,7 @@ export function SpecSizeComparison({ cohorts }: { cohorts: CityOverviewStats['sp
     ['Construction type', s => mixText(s.construction)],
     ['VDF or FM2 flooring', s => s.engineeredFloorShare === null ? '—' : `${s.engineeredFloorShare}%`],
   ];
-  return <div className={`mt-6 overflow-hidden ${PANEL}`}>
+  return <div className={`city-spec-comparison mt-6 overflow-hidden ${PANEL}`}>
       <div className="overflow-x-auto" role="region" aria-label="Specification by unit size" tabIndex={0}><table className="w-full min-w-[480px] text-left text-sm">
         <caption className="px-4 py-4 text-left font-semibold text-wareongo-blue">Specification by unit size</caption>
         <thead className="bg-wareongo-blue/5"><tr><th scope="col" className={HEAD}>Specification</th>{(['large', 'small'] as const).map(key => <th key={key} scope="col" className={HEAD}>{key === 'large' ? '50,000 sq ft and up' : 'Under 20,000 sq ft'}<span className="mt-1 block normal-case tracking-normal">{cohorts[key].listings} listings</span></th>)}</tr></thead>

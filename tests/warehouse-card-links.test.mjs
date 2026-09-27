@@ -104,6 +104,18 @@ test('gallery and enquiry remain independent controls beside the property link',
   assertIndependentControls(root);
 });
 
+test('landing-page card actions use native dialog buttons without property links', () => {
+  const root = parseFragment(renderCard({ ...fixture, images: [], onContact: () => {} }));
+  assert.equal(elements(root, 'a').length, 0, 'an enquiry-only card must not navigate to a listing');
+  const buttons = elements(root, 'button');
+  const title = buttons.find(button => attr(button, 'class') === 'warehouse-card__link');
+  assert.equal(textOf(title), fixture.address);
+  assert.equal(attr(title, 'aria-haspopup'), 'dialog');
+  assert.ok(attr(title, 'aria-label').includes(String(fixture.id)));
+  assert.ok(buttons.some(button => textOf(button) === 'Get details' && attr(button, 'aria-haspopup') === 'dialog'));
+  assertIndependentControls(root);
+});
+
 test('a card without photographs still has a crawlable title and enquiry action', () => {
   const root = parseFragment(renderCard({ ...fixture, images: [] }));
   assert.equal(attr(elements(root, 'a')[0], 'href'), fixture.href);

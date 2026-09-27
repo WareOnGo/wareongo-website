@@ -19,6 +19,7 @@ interface WarehouseCardProps {
   /** Original-image fallback for each preferred WebP. */
   imageFallbacks?: (string | null)[];
   coverImage?: string;
+  imageAlt?: string;
   address: string;
   location: { city: string; state: string };
   micromarket?: string[] | null;
@@ -36,6 +37,8 @@ interface WarehouseCardProps {
   /** Overview grids start below the hero; paging scrolls them into view. */
   priority?: boolean;
   analyticsContext?: AnalyticsParams;
+  /** Landing pages can send every card action to their shared contact form. */
+  onContact?: (trigger: HTMLButtonElement, context: AnalyticsParams) => void;
 }
 
 const number = new Intl.NumberFormat('en-IN', { maximumFractionDigits: 2 });
@@ -50,10 +53,10 @@ function UpdatedBadge({ updatedAt }: { updatedAt?: string | null }) {
 }
 
 const WarehouseCard: React.FC<WarehouseCardProps> = ({
-  id, image, images = [], imageFallbacks = [], coverImage, address, location,
+  id, image, images = [], imageFallbacks = [], coverImage, imageAlt, address, location,
   micromarket, postalCode, warehouseType, updatedAt, size, ceilingHeight,
   numberOfDocks, price, fireCompliance, href, index = 0,
-  priority = index === 0, analyticsContext = {},
+  priority = index === 0, analyticsContext = {}, onContact,
 }) => {
   const listingContext = { ...analyticsContext, warehouse_id: id, warehouse_city: location.city, warehouse_state: location.state, size_sqft: size, price_per_sqft: price ?? undefined };
   const impressionRef = useListingImpression(listingContext);
@@ -63,7 +66,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
   const placeLabel = place && place.primary === address?.trim() && place.primary.length > 28
     ? `${place.primary.slice(0, 27).trimEnd()}…` : place?.primary;
   const construction = cardConstructionLabel(warehouseType);
-  const altText = `${number.format(size)} sqft warehouse${place ? ` in ${[place.city, location.state].filter(Boolean).join(', ')}` : ''}`;
+  const altText = imageAlt || `${number.format(size)} sqft warehouse${place ? ` in ${[place.city, location.state].filter(Boolean).join(', ')}` : ''}`;
   const [interacting, setInteracting] = useState(false);
   const imageRef = useRef<HTMLDivElement>(null);
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
@@ -159,8 +162,15 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
             {place && <MapPin aria-hidden="true" />}
             <div className="warehouse-card__place-text">
               <h2 title={place ? `${place.primary}${place.primary !== place.city ? ` · ${place.city}` : ''}` : undefined}>
-                {/* A native stretched link preserves new-tab and keyboard navigation. */}
-                <Link
+                {onContact ? <button
+                  type="button"
+                  aria-haspopup="dialog"
+                  aria-label={`Enquire about warehouse ${id}: ${[address, place?.city, location.state].filter(Boolean).join(', ')}`}
+                  onClick={event => onContact(event.currentTarget, { ...listingContext, label: `Warehouse ${id}`, source: enquirySource })}
+                  className="warehouse-card__link"
+                >
+                  <span className={place ? undefined : 'sr-only'}>{placeLabel ?? `Enquire about warehouse ${id}`}</span>
+                </button> : <Link
                   to={href}
                   aria-label={`View warehouse ${id}: ${[address, place?.city, location.state].filter(Boolean).join(', ')}`}
                   onClick={() => trackEvent('listing_open', listingContext)}
@@ -168,7 +178,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
                   className="warehouse-card__link"
                 >
                   <span className={place ? undefined : 'sr-only'}>{placeLabel ?? `View warehouse ${id}`}</span>
-                </Link>
+                </Link>}
               </h2>
               {place && place.primary !== place.city && <p>{place.city}</p>}
             </div>
@@ -186,15 +196,19 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
               type="button" aria-haspopup="dialog"
               onClick={event => {
                 event.stopPropagation();
+                if (onContact) {
+                  onContact(event.currentTarget, { ...listingContext, label: 'Get details', source: enquirySource });
+                  return;
+                }
                 trackEvent('cta_click', { ...listingContext, placement: 'warehouse_card', label: 'Raise Enquiry', action: 'open_enquiry_modal', warehouse_id: id, source: enquirySource });
                 setIsEnquiryOpen(true);
               }}
               className="warehouse-card__enquiry"
-            >Raise enquiry</button>
+            >{onContact ? 'Get details' : 'Raise enquiry'}</button>
           </div>
         </div>
       </div>
-      <ContactFormDialog
+      {!onContact && <ContactFormDialog
         open={isEnquiryOpen} onOpenChange={setIsEnquiryOpen} title="Raise Enquiry"
         description={`Interested in ${[address || place?.primary, place?.city].filter(Boolean).join(', ') || `warehouse ${id}`}? Leave your details and our team will get in touch about this warehouse.`}
         successMessage="Enquiry sent successfully! Our team will contact you soon."
@@ -204,7 +218,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
           enquiryRef.current?.focus({ preventScroll: true });
         }}
         analyticsContext={{ ...listingContext, placement: 'warehouse_card' }}
-      />
+      />}
     </>
   );
 };

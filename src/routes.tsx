@@ -5,6 +5,7 @@ import RouteErrorBoundary from "./components/RouteErrorBoundary";
 import { servicePages } from "./data/servicePages";
 import { servicePath } from "./data/serviceCatalog";
 import { warehouseLoader, warehouseStaticPaths, listingsLoader } from "./loaders/warehouseLoader";
+import { bangaloreLandingLoader } from "./loaders/bangaloreLandingLoader";
 import {
   cityListingsLoader,
   stateListingsLoader,
@@ -145,6 +146,11 @@ export const routes: RouteRecord[] = [
             path: "services/:slug",
             lazy: lazyDefault(() => import("./pages/ServiceDetail")),
             getStaticPaths: () => servicePages.map(page => servicePath(page.slug)),
+          },
+          {
+            path: "bangalore",
+            lazy: lazyDefault(() => import("./pages/BangaloreLanding")),
+            loader: bangaloreLandingLoader,
           },
         ],
       },
