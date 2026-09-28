@@ -150,6 +150,15 @@ export const routes: RouteRecord[] = [
           {
             path: "bangalore",
             lazy: lazyDefault(() => import("./pages/BangaloreLanding")),
+            // lazyDefault hides the import from SSG's asset detection. Include
+            // the page's styles in the initial HTML, before hydration.
+            entry: "src/pages/BangaloreLanding.tsx",
+            loader: bangaloreLandingLoader,
+          },
+          {
+            path: "preview/ad-pages/bangalore",
+            lazy: lazyDefault(() => import("./pages/BangaloreAdPreview")),
+            entry: "src/pages/BangaloreAdPreview.tsx",
             loader: bangaloreLandingLoader,
           },
         ],

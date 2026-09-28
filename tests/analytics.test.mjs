@@ -40,6 +40,18 @@ test('automatic page views have one config owner and resolved context on SPA eve
   assert.equal(document.title, 'Home');
 });
 
+test('CMS ad-page previews never send analytics, including on the production domain', async () => {
+  const a = await analytics({ productionBundle: true });
+  window.location.pathname = '/preview/ad-pages/bangalore';
+  window.location.href = 'https://wareongo.com/preview/ad-pages/bangalore';
+  a.recordAnalyticsPage('Unsaved draft heading');
+  a.trackEvent('listing_impression', { warehouse_id: 967 });
+  a.trackEvent('form_open', { form_id: 'header_contact' });
+  assert.equal(a.analyticsEnabled(), false);
+  assert.equal(a.scripts.length, 0);
+  assert.equal(a.calls().length, 0);
+});
+
 test('safe URL drops secrets, unknown query keys, fragments, credentials and unknown routes', async () => {
   const a = await analytics();
   assert.equal(a.safeUrl('https://user:pass@wareongo.com/listings?city=Bangalore&token=secret&email=a%40b.com&utm_source=google#email'), 'https://wareongo.com/listings?city=Bangalore&utm_source=google');

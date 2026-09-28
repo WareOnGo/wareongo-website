@@ -39,7 +39,7 @@ const allowedHosts = new Set(['wareongo.com', 'www.wareongo.com']);
 const servicePaths = new Set(Object.keys(SERVICE_PAGES).map(servicePath));
 const isServicePath = (path: string) => servicePaths.has(path.replace(/\/$/, ''));
 const isTest = () => typeof window !== 'undefined' && import.meta.env.DEV && window.__WAREONGO_ANALYTICS_TEST__ === true;
-export const analyticsEnabled = () => typeof window !== 'undefined' && (isTest() || (import.meta.env.PROD && allowedHosts.has(window.location.hostname)));
+export const analyticsEnabled = () => typeof window !== 'undefined' && !window.location.pathname.startsWith('/preview/ad-pages/') && (isTest() || (import.meta.env.PROD && allowedHosts.has(window.location.hostname)));
 export const pageType = (path: string) => path === '/' ? 'home' : path.startsWith('/warehouse/') ? 'warehouse_detail'
   : path.startsWith('/overview/') ? 'overview' : path.startsWith('/listings/') ? 'location_listings'
   : path === '/request-warehouse' ? 'request' : path.startsWith('/blogs/') ? 'blog'

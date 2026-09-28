@@ -7,6 +7,9 @@ const original = JSON.parse(fs.readFileSync(new URL('../src/data/ad-pages/bangal
 test('an approved CMS revision becomes the website snapshot', async () => {
   const approved = structuredClone(original);
   approved.copy.heroHeading = 'CMS-approved warehouse heading';
+  approved.heroSteps[0] = 'Share your requirement';
+  approved.benefits[3] = { ...approved.benefits[3], title: 'Approved fourth benefit', body: 'Approved supporting copy.' };
+  approved.images.why = { ...approved.images.why, url: 'https://images.example.test/why.webp', alt: 'Approved benefit section image' };
   approved.images.services = { ...approved.images.services, url: 'https://images.example.test/service.webp', alt: 'Approved warehouse image' };
   const writes = [];
   const pages = await generateAdPages({ read: async (url, options) => {
@@ -17,6 +20,7 @@ test('an approved CMS revision becomes the website snapshot', async () => {
   assert.deepEqual(pages, [approved]);
   assert.equal(writes.length, 1);
   assert.match(writes[0][1], /CMS-approved warehouse heading/);
+  assert.match(writes[0][1], /Share your requirement/);
   assert.match(writes[0][1], /Approved warehouse image/);
   assert.doesNotMatch(writes[0][1], /Never publish this/);
 });
@@ -30,4 +34,17 @@ for (const [label, response] of [
   let wrote = false;
   await assert.rejects(generateAdPages({ read: async () => response, write: async () => { wrote = true; } }));
   assert.equal(wrote, false);
+});
+
+test('an older approved revision builds with process steps and drops removed hero copy', async () => {
+  const older = structuredClone(original);
+  delete older.heroSteps;
+  older.benefits = older.benefits.slice(0, 3);
+  delete older.images.why;
+  older.copy.heroIntro = 'Previous introduction';
+  older.heroPoints = [{ value: '611', label: 'live listings' }];
+  let generated = '';
+  const pages = await generateAdPages({ read: async () => Response.json({ data: [older] }), write: async (_path, value) => { generated = value; } });
+  assert.deepEqual(pages, [original]);
+  assert.doesNotMatch(generated, /heroIntro|heroPoints|Previous introduction/);
 });

@@ -13,7 +13,7 @@ import BangaloreAreaGuide from '@/components/city/BangaloreAreaGuide';
 import BangaloreMicromarkets from '@/components/city/BangaloreMicromarkets';
 import ContactFormDialog from '@/components/ContactFormDialog';
 import RequestCTASection from '@/components/RequestCTASection';
-import { getBangaloreAdPage } from '@/data/adPages';
+import { getBangaloreAdPage, type AdPageContent } from '@/data/adPages';
 import { MICROMARKETS } from '@/data/locations.generated';
 import type { BangaloreLandingData } from '@/loaders/bangaloreLandingLoader';
 import { trackEvent, type AnalyticsParams } from '@/lib/analytics';
@@ -44,8 +44,7 @@ function CopySlot({ label, lines = 3 }: { label: string; lines?: number }) {
 }
 
 /** Content slots follow the supplied Google Ads wireframe, top to bottom. */
-export default function BangaloreLanding() {
-  const content = getBangaloreAdPage();
+export default function BangaloreLanding({ content = getBangaloreAdPage() }: { content?: AdPageContent } = {}) {
   const copy = content.copy;
   const highlights = content.benefits.map(item => ({ ...item, icon: BENEFIT_ICONS[item.id] }));
   const services = content.services.map(item => ({ ...item, slug: item.id, description: item.body, icon: SERVICE_ICONS[item.id] }));
@@ -76,22 +75,23 @@ export default function BangaloreLanding() {
         noindex
       />
 
-      <Navbar />
+      <Navbar contactDialogClassName="bangalore-landing-dialog" />
 
       <main aria-labelledby="bangalore-title">
         <section className="bangalore-landing__hero bangalore-landing__container" aria-labelledby="bangalore-title">
           <div className="bangalore-landing__hero-copy">
             <h1 id="bangalore-title" className="bangalore-landing__headline">{copy.heroHeading} <span>{copy.heroAccent}</span></h1>
-            <p className="bangalore-landing__hero-intro">{copy.heroIntro}</p>
-            <ul className="bangalore-landing__hero-points">
-              {content.heroPoints.map((point, index) => <li key={index}><strong>{point.value}</strong> {point.label}</li>)}
-            </ul>
+            <ol className="bangalore-landing__hero-steps" aria-label="How it works">
+              {content.heroSteps.map((step, index) => <li key={index}>
+                <span>{step}</span>{index < content.heroSteps.length - 1 && <ArrowRight size={16} strokeWidth={1.5} aria-hidden="true" />}
+              </li>)}
+            </ol>
           </div>
           <BangaloreEnquiryForm copy={copy} />
+          <BangaloreFeaturedListings content={content} onContact={openContact} />
           <section className="bangalore-landing__trust" aria-label="Our clients">
             <TrustedBySection />
           </section>
-          <BangaloreFeaturedListings content={content} onContact={openContact} />
         </section>
 
         <BangaloreAvailableListings content={content} onContact={openContact} totalListings={data?.stats.listings} />
@@ -103,9 +103,15 @@ export default function BangaloreLanding() {
         <section className="bangalore-landing__why bangalore-landing__container" aria-labelledby="bangalore-why-title">
           <div className="bangalore-landing__section-heading"><h2 id="bangalore-why-title" className="bangalore-landing__section-title">{copy.whyHeading}</h2></div>
           <div className="bangalore-landing__why-grid">
+            <div className="bangalore-landing__why-image">
+              <img src={content.images.why.url} alt={content.images.why.alt} width={content.images.why.width} height={content.images.why.height} loading="lazy" decoding="async" />
+            </div>
             <div className="bangalore-landing__why-copy">
-              {highlights.map(({ id, icon: Icon, title, body }) => (
-                <div key={id} className="bangalore-landing__benefit"><div className="bangalore-landing__icon"><Icon size={22} strokeWidth={1.5} aria-hidden="true" /></div><div><h3>{title}</h3>{body ? <p className="bangalore-landing__benefit-body">{body}</p> : <CopySlot label="Supporting copy" lines={2} />}</div></div>
+              {highlights.map(({ id, icon: Icon, title, body }, index) => (
+                <article key={id} className="bangalore-landing__benefit" data-benefit={id}>
+                  <div className="bangalore-landing__icon" aria-hidden="true">{Icon ? <Icon size={22} strokeWidth={1.5} /> : <span>{String(index + 1).padStart(2, '0')}</span>}</div>
+                  <div><h3>{title}</h3>{body ? <p className="bangalore-landing__benefit-body">{body}</p> : <CopySlot label="Supporting copy" lines={2} />}</div>
+                </article>
               ))}
             </div>
           </div>
@@ -186,6 +192,7 @@ export default function BangaloreLanding() {
       </main>
       <Footer />
       <ContactFormDialog
+        className="bangalore-landing-dialog"
         open={contactContext !== null}
         onOpenChange={open => { if (!open) setContactContext(null); }}
         title={copy.contactHeading}

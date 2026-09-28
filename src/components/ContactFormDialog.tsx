@@ -16,6 +16,7 @@ import type { AnalyticsParams } from '@/lib/analytics';
 import { useLeadAnalytics } from '@/hooks/useLeadAnalytics';
 
 interface ContactFormDialogProps {
+  className?: string;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   title: string;
@@ -28,6 +29,7 @@ interface ContactFormDialogProps {
 }
 
 const ContactFormDialog = ({
+  className = '',
   open,
   onOpenChange,
   title,
@@ -126,7 +128,7 @@ const ContactFormDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={(next) => { if (!isSubmitting) onOpenChange(next); }}>
-      <DialogContent onCloseAutoFocus={onCloseAutoFocus} className="font-sans bg-wareongo-ivory border border-wareongo-blue rounded-2xl sm:max-w-[460px] max-h-[calc(100dvh-2rem)] overflow-y-auto p-6 sm:p-8 shadow-none gap-0">
+      <DialogContent onCloseAutoFocus={onCloseAutoFocus} className={`font-sans bg-wareongo-ivory border border-wareongo-blue rounded-2xl sm:max-w-[460px] max-h-[calc(100dvh-2rem)] overflow-y-auto p-6 sm:p-8 shadow-none gap-0 ${className}`}>
         <DialogHeader className="mb-5">
           <p className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-wareongo-slate font-medium mb-2 text-left">
             Get in touch

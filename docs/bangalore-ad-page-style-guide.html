@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Bangalore ad page · Style guide</title>
+  <link rel="stylesheet" href="../src/fonts.css">
+  <link rel="stylesheet" href="../src/pages/BangaloreLanding.css">
+  <style>
+    * { box-sizing: border-box; }
+    body, h1, h2, h3, p, ul, ol, figure, dl, dd { margin: 0; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; }
+    .guide { max-width: 1120px; margin: auto; padding: 48px 32px; }
+    .guide > section { margin-top: 48px; }
+    .guide-intro { max-width: 720px; color: var(--landing-muted); }
+    .guide h1 { margin-bottom: 16px; }
+    .guide-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .guide-palette { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .guide-swatch { height: 64px; border: var(--landing-border); border-radius: var(--landing-control-radius); background: var(--swatch); }
+    .guide figcaption { margin-top: 8px; font-size: var(--landing-text-xs); color: var(--landing-muted); }
+    .guide figcaption strong { display: block; color: var(--landing-ink); font-size: var(--landing-text-sm); }
+    .guide-note { margin-top: 16px; color: var(--landing-muted); font-size: var(--landing-text-sm); }
+    .guide-type, .guide-controls { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .guide-control-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+    .guide .bangalore-landing__enquiry { grid-area: auto; width: 100%; max-width: 520px; }
+    .guide .bangalore-landing__form-fields { display: grid; gap: 16px; }
+    .guide .bangalore-landing__input-wrap input { padding-left: 14px; }
+    .guide .bangalore-landing__featured-card { align-self: start; }
+    .guide .bangalore-landing__service h3 { margin-top: 16px; }
+    .guide .bangalore-landing__service:hover { border-color: var(--landing-outline); }
+    .guide-table { overflow: hidden; border: var(--landing-interactive-border); border-radius: var(--landing-radius); }
+    .guide-table table { margin: 0; text-align: left; }
+    .guide-table th { text-align: inherit; }
+    .guide-table :is(th, td):last-child { text-align: right; }
+    .guide > section > h2 { margin-bottom: 24px; }
+    @media (max-width: 767px) {
+      .guide { padding: 32px 20px; }
+      .guide-grid { grid-template-columns: 1fr; }
+      .guide-palette { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body class="bangalore-landing">
+  <main class="guide">
+    <header>
+      <p class="bangalore-landing__eyebrow">WareOnGo · Bangalore ad page</p>
+      <h1 class="bangalore-landing__section-title">Style guide</h1>
+      <p class="guide-intro">Light ivory, navy typography and restrained outlines. These examples load the page’s actual styles. <a href="bangalore-ad-page-style-guide.md">Read the implementation rules</a>.</p>
+    </header>
+    <section aria-labelledby="palette">
+      <h2 id="palette" class="bangalore-landing__section-title bangalore-landing__section-heading">Palette and surfaces</h2>
+      <div class="guide-grid guide-palette">
+        <figure><div class="guide-swatch" style="--swatch:var(--landing-paper)"></div><figcaption><strong>Page ivory</strong>Warm, quiet background</figcaption></figure>
+        <figure><div class="guide-swatch" style="--swatch:var(--landing-card)"></div><figcaption><strong>Surface ivory</strong>Cards, forms and dialogs</figcaption></figure>
+        <figure><div class="guide-swatch" style="--swatch:var(--landing-ink)"></div><figcaption><strong>Navy</strong>Headings and primary actions</figcaption></figure>
+        <figure><div class="guide-swatch" style="--swatch:var(--landing-accent)"></div><figcaption><strong>Accent navy</strong>Links, icons and focus</figcaption></figure>
+        <figure><div class="guide-swatch" style="--swatch:var(--landing-muted)"></div><figcaption><strong>Secondary text</strong>Descriptions and metadata</figcaption></figure>
+        <figure><div class="guide-swatch" style="--swatch:var(--landing-tint)"></div><figcaption><strong>Blue tint</strong>Small icon tiles</figcaption></figure>
+        <figure><div class="guide-swatch" style="--swatch:var(--landing-line)"></div><figcaption><strong>Quiet line</strong>Dividers and informational cards</figcaption></figure>
+        <figure><div class="guide-swatch" style="--swatch:var(--landing-outline)"></div><figcaption><strong>Defined outline</strong>Actionable cards and controls</figcaption></figure>
+      </div>
+      <p class="guide-note">Both outline strengths are 1px. Cards use 12px corners; controls use 8px. No card shadows.</p>
+    </section>
+    <section aria-labelledby="type">
+      <h2 id="type" class="bangalore-landing__section-title bangalore-landing__section-heading">Typography</h2>
+      <div class="guide-type">
+        <p class="bangalore-landing__headline">Warehouses for rent<span>in Bangalore.</span></p>
+        <h3 class="bangalore-landing__section-title">Explore spaces in Bangalore</h3>
+        <p style="font-size:var(--landing-text-card);font-weight:600">Verified spaces</p>
+        <p>Montserrat body copy uses a comfortable 1.6 line height.</p>
+        <p class="bangalore-landing__slot-label">Metadata stays at 12px or larger.</p>
+      </div>
+    </section>
+    <section aria-labelledby="controls">
+      <h2 id="controls" class="bangalore-landing__section-title bangalore-landing__section-heading">Controls and form</h2>
+      <div class="guide-controls">
+        <div class="guide-control-row">
+          <button class="bangalore-landing__button" type="button">Find a warehouse</button>
+          <button class="bangalore-landing__button bangalore-landing__button--outline" type="button">Tell us what you need</button>
+          <button class="bangalore-landing__size-filter" type="button" aria-pressed="true">All sizes</button>
+          <button class="bangalore-landing__size-filter" type="button" aria-pressed="false">Under 5,000 sq ft</button>
+        </div>
+        <div class="bangalore-landing__enquiry">
+          <h2>Find your warehouse</h2>
+          <p class="bangalore-landing__enquiry-intro">Clear labels, comfortable inputs and one primary action.</p>
+          <div class="bangalore-landing__form-fields">
+            <div class="bangalore-landing__form-field"><label for="guide-name">Name</label><div class="bangalore-landing__input-wrap"><input id="guide-name" autocomplete="off" placeholder="Enter your name"></div></div>
+            <button class="bangalore-landing__button" type="button">Get in touch</button>
+          </div>
+        </div>
+      </div>
+      <p class="guide-note">Use Tab to inspect the focus ring. These are visual examples; they do not submit enquiries.</p>
+    </section>
+    <section aria-labelledby="cards">
+      <h2 id="cards" class="bangalore-landing__section-title bangalore-landing__section-heading">Card hierarchy</h2>
+      <div class="guide-grid">
+        <article class="bangalore-landing__featured-card">
+          <div class="bangalore-landing__featured-photo"><img src="/bangalore/hoskote.webp" alt="Hoskote warehouse exterior"></div>
+          <div class="bangalore-landing__featured-body"><h3>Hoskote</h3><p class="bangalore-landing__featured-area">1,89,000 <span>sq ft</span></p><p class="bangalore-landing__featured-specs">PEB · 40 ft height</p><div class="bangalore-landing__featured-footer"><p>₹28.5 <span>/ sq ft</span></p></div></div>
+        </article>
+        <article class="bangalore-landing__benefit">
+          <span class="bangalore-landing__icon" aria-hidden="true"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+          <div><h3>Verified spaces</h3><p class="bangalore-landing__benefit-body">Informational cards keep a softer outline and the same ivory surface.</p></div>
+        </article>
+        <article class="bangalore-landing__service">
+          <span class="bangalore-landing__icon" aria-hidden="true"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
+          <h3>Find a warehouse</h3><p>Actionable cards use a slightly more defined outline, with a compact CTA underneath.</p><button class="bangalore-landing__button bangalore-landing__button--compact" type="button">Find my warehouse</button>
+        </article>
+      </div>
+    </section>
+    <section aria-labelledby="tables">
+      <h2 id="tables" class="bangalore-landing__section-title bangalore-landing__section-heading">Quiet table surfaces</h2>
+      <div class="bangalore-landing__stats-content guide-table">
+        <table><caption>Example market table</caption><thead><tr><th scope="col">Unit size</th><th scope="col">Median rent / sq ft</th></tr></thead><tbody><tr><th scope="row">Under 5,000 sq ft</th><td>₹62.5</td></tr><tr><th scope="row">20,000 sq ft and up</th><td>₹25</td></tr></tbody></table>
+      </div>
+      <p class="guide-note">Neutral ivory headers and alternating rows, with softer internal dividers.</p>
+    </section>
+  </main>
+</body>
+</html>

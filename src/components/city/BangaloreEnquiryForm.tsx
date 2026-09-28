@@ -72,7 +72,6 @@ export default function BangaloreEnquiryForm({ copy }: { copy: AdPageCopy }) {
 
   return (
     <section id="bangalore-enquiry" className="bangalore-landing__enquiry" aria-labelledby="bangalore-enquiry-title" tabIndex={-1}>
-      <p className="bangalore-landing__eyebrow">{copy.enquiryEyebrow}</p>
       <h2 id="bangalore-enquiry-title">{copy.enquiryHeading}</h2>
       <p className="bangalore-landing__enquiry-intro">{copy.enquiryDescription}</p>
 

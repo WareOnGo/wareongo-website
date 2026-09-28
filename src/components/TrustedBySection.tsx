@@ -158,7 +158,7 @@ const TrustedBySection = () => {
         @media (prefers-reduced-motion: reduce) {
           .trusted-strip { overflow-x: auto; }
           .trusted-scroller { animation: none; }
-          .trusted-track[aria-hidden="true"], .trusted-fade { display: none; }
+          .trusted-track[aria-hidden=true], .trusted-fade { display: none; }
         }
       `}</style>
     </div>

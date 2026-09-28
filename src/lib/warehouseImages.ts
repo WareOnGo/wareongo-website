@@ -82,14 +82,22 @@ export function preferredWarehouseImages(warehouse: {
 
 export interface WarehouseImage { primary: string; fallback: string | null }
 
-/** The API transform supplies verified pairs; filenames need not be related. */
+// Curated/CMS cards also use photos bundled with the website. Keep API image
+// parsing absolute-only, while allowing root-relative photo paths in galleries.
+function isGalleryImageUrl(value: unknown): value is string {
+  if (isWarehouseImageUrl(value)) return true;
+  return typeof value === 'string' && value.startsWith('/') && !value.startsWith('//') && !value.includes('\\')
+    && isWarehouseImageUrl(`https://wareongo.com${value}`);
+}
+
+/** API and CMS photo pairs; filenames need not be related. */
 export function warehouseImages(images: string[], fallbacks: (string | null)[] = []): WarehouseImage[] {
   const seen = new Set<string>();
   return images.flatMap((value, i) => {
     const primary = typeof value === 'string' ? value.trim() : '';
-    if (!isWarehouseImageUrl(primary) || seen.has(primary)) return [];
+    if (!isGalleryImageUrl(primary) || seen.has(primary)) return [];
     seen.add(primary);
     const fallback = fallbacks[i]?.trim();
-    return [{ primary, fallback: isWarehouseImageUrl(fallback) && fallback !== primary ? fallback : null }];
+    return [{ primary, fallback: isGalleryImageUrl(fallback) && fallback !== primary ? fallback : null }];
   });
 }

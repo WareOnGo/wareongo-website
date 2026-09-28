@@ -15,7 +15,7 @@ import './navigation/navigation.css';
 type Variant = 'desktop' | 'mobile';
 type Panel = 'locations' | 'account' | null;
 
-const Navbar = ({ scrollLocked = false }: { scrollLocked?: boolean }) => {
+const Navbar = ({ scrollLocked = false, contactDialogClassName }: { scrollLocked?: boolean; contactDialogClassName?: string }) => {
   const id = useId();
   const { user, logout, isAuthenticated } = useAuth();
   const location = useLocation();
@@ -185,7 +185,7 @@ const Navbar = ({ scrollLocked = false }: { scrollLocked?: boolean }) => {
         event.preventDefault();
         if (!transferringToContact.current && !followingLink.current) focusVisibleTrigger();
       }} />
-    <ContactFormDialog open={contactOpen} onOpenChange={setContactOpen}
+    <ContactFormDialog open={contactOpen} onOpenChange={setContactOpen} className={contactDialogClassName}
       onCloseAutoFocus={event => {
         event.preventDefault();
         transferringToContact.current = false;

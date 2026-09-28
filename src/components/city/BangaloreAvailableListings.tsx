@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import WarehouseCard from '@/components/WarehouseCard';
 import { BANGALORE_ALL_SIZES_IDS, BANGALORE_AVAILABLE_WAREHOUSES } from '@/data/bangaloreAvailableWarehouses';
@@ -21,6 +21,7 @@ export default function BangaloreAvailableListings({ onContact, totalListings, c
   totalListings?: number;
 }) {
   const [filter, setFilter] = useState<SizeFilter>('all');
+  const track = useRef<HTMLDivElement>(null);
   const copy = content.copy;
   const sizeFilters = SIZE_FILTERS.map(option => ({ ...option, label: copy[option.labelKey] }));
   const band = sizeFilters.find(option => option.id === filter)!;
@@ -50,6 +51,7 @@ export default function BangaloreAvailableListings({ onContact, totalListings, c
             aria-controls="bangalore-available-grid"
             onClick={() => {
               setFilter(id);
+              if (track.current) track.current.scrollLeft = 0;
               trackEvent(id === 'all' ? 'filter_clear' : 'filter_apply', {
                 ...listContext, content_id: id, label, min_sqft: min || undefined,
                 max_sqft: Number.isFinite(max) ? max - 1 : undefined, filter_count: id === 'all' ? 0 : 1,
@@ -59,7 +61,7 @@ export default function BangaloreAvailableListings({ onContact, totalListings, c
         ))}
       </div>
       <p className="sr-only" role="status" aria-live="polite">Showing {listings.length} selected warehouses: {band.label}.</p>
-      <div id="bangalore-available-grid" className="bangalore-landing__available-grid">
+      <div ref={track} id="bangalore-available-grid" className="bangalore-landing__available-grid" role="region" aria-labelledby="bangalore-available-title" tabIndex={0}>
         {listings.map((listing, index) => (
           <WarehouseCard
             key={`${filter}-${listing.id}`}
@@ -75,7 +77,6 @@ export default function BangaloreAvailableListings({ onContact, totalListings, c
             fireCompliance={listing.fireCompliance}
             image={content.images[`warehouse-${listing.id}`].url}
             imageFallbacks={[listing.imageFallback]}
-            coverImage={content.images[`warehouse-${listing.id}`].url}
             imageAlt={content.images[`warehouse-${listing.id}`].alt}
             href={warehousePath({ ...listing, city: 'Bengaluru' })}
             index={index}
