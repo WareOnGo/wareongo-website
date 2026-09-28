@@ -20,8 +20,8 @@ const TermsOfService = () => {
         path="/terms-of-service"
       />
       <Navbar />
-      <main className="page-content container mx-auto px-4 pb-12 flex-grow">
-        <h1 className="text-3xl font-bold mb-6 text-wareongo-blue">{content.title}</h1>
+      <main className="page-content container mx-auto pb-12 flex-grow">
+        <h1 className="ui-page-title mb-6 text-wareongo-blue">{content.title}</h1>
         
         <LegalDates content={content} />
         <LegalBody content={content} />

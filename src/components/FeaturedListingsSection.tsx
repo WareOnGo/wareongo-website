@@ -54,13 +54,13 @@ const FeaturedListingsSection = () => {
 
   return (
     <section className="bg-wareongo-ivory py-16 md:py-24 border-t border-black/5">
-      <div className="container mx-auto px-4 max-w-6xl">
+      <div className="container mx-auto max-w-6xl">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-12 gap-6">
           <div className="max-w-2xl">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-wareongo-blue mb-2 md:mb-3">
+            <h2 className="ui-section-title text-wareongo-blue mb-2 md:mb-3">
               Featured Listings
             </h2>
-            <p className="text-wareongo-slate text-sm sm:text-base md:text-lg">
+            <p className="text-wareongo-slate text-base">
               Explore some of our top verified properties ready for immediate possession.
             </p>
           </div>
@@ -90,7 +90,7 @@ const FeaturedListingsSection = () => {
                   price_per_sqft: listing.price,
                 });
               }}
-              className="listing-card text-left group bg-transparent border border-wareongo-blue rounded-2xl overflow-hidden flex flex-col hover:bg-wareongo-blue/5 transition-colors shrink-0 w-[78%] min-[400px]:w-[70%] snap-start md:w-auto md:shrink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wareongo-blue focus-visible:ring-offset-2"
+              className="listing-card ui-listing-card text-left group border overflow-hidden flex flex-col shrink-0 w-[78%] min-[400px]:w-[70%] snap-start md:w-auto md:shrink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wareongo-blue focus-visible:ring-offset-2"
             >
               <div className="aspect-[16/10] overflow-hidden w-full relative">
                 <img
@@ -102,14 +102,14 @@ const FeaturedListingsSection = () => {
                   decoding="async"
                   className="w-full h-full object-cover transition-transform duration-500"
                 />
-                <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-wareongo-blue px-2.5 py-1 rounded-md text-xs font-semibold shadow-sm border border-wareongo-blue/20">
+                <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-wareongo-blue px-2.5 py-1 rounded-md text-xs font-semibold shadow-none border border-ui-line">
                   ID: {listing.id}
                 </div>
               </div>
               
               <div className="p-5 sm:p-6 flex flex-col flex-1">
                 <div className="mb-4">
-                  <h3 className="text-lg font-semibold text-wareongo-blue mb-1.5 truncate" title={listing.address}>
+                  <h3 className="ui-card-title text-wareongo-blue mb-1.5 truncate" title={listing.address}>
                     {listing.address}
                   </h3>
                   <div className="flex items-center text-wareongo-slate text-sm">
@@ -120,11 +120,11 @@ const FeaturedListingsSection = () => {
 
                 <div className="grid grid-cols-2 gap-3 mb-4 mt-auto">
                   <div className="flex items-center text-wareongo-slate text-xs sm:text-sm">
-                    <Ruler className="w-4 h-4 mr-1.5 text-wareongo-blue/70" />
+                    <Ruler className="w-4 h-4 mr-1.5 text-ui-accent" />
                     <span>{listing.size.toLocaleString()} sqft</span>
                   </div>
                   <div className="flex items-center text-wareongo-slate text-xs sm:text-sm">
-                    <Building2 className="w-4 h-4 mr-1.5 text-wareongo-blue/70" />
+                    <Building2 className="w-4 h-4 mr-1.5 text-ui-accent" />
                     <span>
                       {listing.ceilingHeight === null
                         ? 'Height not specified'
@@ -133,7 +133,7 @@ const FeaturedListingsSection = () => {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-wareongo-blue/10 flex items-center justify-between">
+                <div className="pt-4 border-t border-ui-line flex items-center justify-between">
                   <div
                     className={
                       listing.price === null
@@ -143,7 +143,7 @@ const FeaturedListingsSection = () => {
                   >
                     <IndianRupee
                       className={
-                        listing.price === null ? 'w-4 h-4 mr-0.5 text-wareongo-blue/70' : 'w-4 h-4 mr-0.5'
+                        listing.price === null ? 'w-4 h-4 mr-0.5 text-ui-accent' : 'w-4 h-4 mr-0.5'
                       }
                     />
                     <span>{listing.price === null ? 'Price on request' : `${listing.price} / sqft`}</span>

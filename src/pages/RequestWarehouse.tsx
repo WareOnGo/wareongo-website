@@ -93,12 +93,13 @@ const RequestWarehouse = () => {
         title: "Request Submitted",
         description: "We'll be in touch with warehouse options shortly!",
       });
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : undefined;
       analytics.failure(submissionError.current);
-      setError(err.message || 'Something went wrong. Please try again.');
+      setError(message || 'Something went wrong. Please try again.');
       toast({
         title: "Error",
-        description: err.message || 'Failed to submit request. Please try again.',
+        description: message || 'Failed to submit request. Please try again.',
         variant: "destructive"
       });
     } finally {
@@ -116,9 +117,9 @@ const RequestWarehouse = () => {
       <Navbar />
 
       <main className="page-content flex-1 pb-6 md:pb-12 lg:pb-16">
-        <div className="container mx-auto px-4 max-w-2xl">
+        <div className="container mx-auto max-w-2xl">
           <div className="space-y-4">
-            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-wareongo-blue">
+            <h1 className="ui-page-title text-wareongo-blue">
               Request a Warehouse
             </h1>
 
@@ -131,7 +132,7 @@ const RequestWarehouse = () => {
                   onClick={() => trackEvent('contact_click', { contact_method: 'email', contact_target: 'sales_email', placement: 'request_warehouse_page' })}
                   className="flex items-center gap-3 group"
                 >
-                  <div className="w-9 h-9 rounded-lg bg-sky-50 border border-wareongo-blue/20 flex items-center justify-center transition-colors group-hover:bg-wareongo-blue/5">
+                  <div className="w-9 h-9 rounded-lg bg-sky-50 border border-ui-line flex items-center justify-center transition-colors group-hover:bg-ui-tint">
                     <Mail className="w-4 h-4 text-wareongo-blue" />
                   </div>
                   <p className="text-sm font-medium text-wareongo-blue group-hover:underline">sales@wareongo.com</p>
@@ -143,7 +144,7 @@ const RequestWarehouse = () => {
                   onClick={() => trackEvent('contact_click', { contact_method: 'whatsapp', contact_target: 'sales_whatsapp', placement: 'request_warehouse_page' })}
                   className="flex items-center gap-3 group"
                 >
-                  <div className="w-9 h-9 rounded-lg bg-sky-50 border border-wareongo-blue/20 flex items-center justify-center transition-colors group-hover:bg-wareongo-blue/5">
+                  <div className="w-9 h-9 rounded-lg bg-sky-50 border border-ui-line flex items-center justify-center transition-colors group-hover:bg-ui-tint">
                     <MessageCircle className="w-4 h-4 text-wareongo-blue" />
                   </div>
                   <p className="text-sm font-medium text-wareongo-blue group-hover:underline">+91 74001 84225</p>
@@ -152,10 +153,10 @@ const RequestWarehouse = () => {
             </div>
 
             {/* Form */}
-            <div className="bg-transparent border border-wareongo-blue rounded-2xl p-5 sm:p-6 md:p-8">
+            <div className="bg-ui-surface border border-ui-outline rounded-xl p-5 sm:p-6 md:p-8">
               {submitted ? (
                 <div className="text-center py-8">
-                  <h2 className="text-2xl font-semibold text-wareongo-blue mb-4">Thank you!</h2>
+                  <h2 className="ui-section-title text-wareongo-blue mb-4">Thank you!</h2>
                   <p className="text-wareongo-slate mb-6">
                     Our team is curating the best-fit warehouses for you.
                   </p>
@@ -174,77 +175,77 @@ const RequestWarehouse = () => {
                 </div>
               )}
 
-              <form {...analytics.formProps} onSubmit={handleSubmit} className="space-y-3">
+              <form {...analytics.formProps} onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-1">
-                  <Label htmlFor="fullName" className="text-[13px]">Name</Label>
+                  <Label htmlFor="fullName" className="ui-label">Name</Label>
                   <Input
                     id="fullName" name="fullName"
                     placeholder="John Doe"
-                    className="bg-wareongo-ivory border-wareongo-blue/20 focus-visible:ring-wareongo-blue/30 h-10"
+
                     required
                     value={formData.fullName}
                     onChange={handleChange}
                   />
                 </div>
                 <div className="space-y-1">
-                  <Label htmlFor="phone" className="text-[13px]">Phone</Label>
+                  <Label htmlFor="phone" className="ui-label">Phone</Label>
                   <Input
                     id="phone" name="phone"
                     placeholder="+91 98765 43210"
-                    className="bg-wareongo-ivory border-wareongo-blue/20 focus-visible:ring-wareongo-blue/30 h-10"
+
                     required
                     value={formData.phone}
                     onChange={handleChange}
                   />
                 </div>
                 <div className="space-y-1">
-                  <Label htmlFor="email" className="text-[13px]">Mail</Label>
+                  <Label htmlFor="email" className="ui-label">Mail</Label>
                   <Input
                     id="email" name="email"
                     type="email"
                     placeholder="you@company.com"
-                    className="bg-wareongo-ivory border-wareongo-blue/20 focus-visible:ring-wareongo-blue/30 h-10"
+
                     required
                     value={formData.email}
                     onChange={handleChange}
                   />
                 </div>
                 <div className="space-y-1">
-                  <Label htmlFor="company" className="text-[13px]">Company</Label>
+                  <Label htmlFor="company" className="ui-label">Company</Label>
                   <Input
                     id="company" name="company"
                     placeholder="Your Company, Inc."
-                    className="bg-wareongo-ivory border-wareongo-blue/20 focus-visible:ring-wareongo-blue/30 h-10"
+
                     required
                     value={formData.company}
                     onChange={handleChange}
                   />
                 </div>
                 <div className="space-y-1">
-                  <Label htmlFor="location" className="text-[13px]">Location of requirement</Label>
+                  <Label htmlFor="location" className="ui-label">Location of requirement</Label>
                   <Input
                     id="location" name="location"
                     placeholder="e.g. Bangalore, Hyderabad"
-                    className="bg-wareongo-ivory border-wareongo-blue/20 focus-visible:ring-wareongo-blue/30 h-10"
+
                     required
                     value={formData.location}
                     onChange={handleChange}
                   />
                 </div>
                 <div className="space-y-1">
-                  <Label htmlFor="additionalComments" className="text-[13px]">Additional comments</Label>
+                  <Label htmlFor="additionalComments" className="ui-label">Additional comments</Label>
                   <textarea
                     id="additionalComments" name="additionalComments"
                     rows={3}
                     placeholder="Area, budget, timeline, business type, etc."
-                    className="w-full rounded-md border border-wareongo-blue/20 bg-wareongo-ivory px-3 py-2 text-sm text-wareongo-blue placeholder:text-wareongo-slate focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wareongo-blue/30 resize-y"
+                    className="ui-field w-full px-3 py-2 text-wareongo-blue resize-y"
                     value={formData.additionalComments}
                     onChange={handleChange}
                   />
                 </div>
 
                 <div className="pt-1">
-                  <Button type="submit" className="w-full bg-wareongo-blue hover:bg-wareongo-blue/90 text-white h-11 rounded-xl text-sm font-medium tracking-wide transition-colors" disabled={isSubmitting}>
+                  <Button type="submit" className="ui-button w-full" disabled={isSubmitting}>
                     {isSubmitting ? (
                       <>
                         <Loader className="h-4 w-4 mr-2 animate-spin" />
@@ -254,7 +255,7 @@ const RequestWarehouse = () => {
                       'Submit request'
                     )}
                   </Button>
-                  <p className="text-[11px] leading-relaxed text-center text-wareongo-slate mt-2">
+                  <p className="text-xs leading-relaxed text-center text-wareongo-slate mt-2">
                     By submitting, you agree to our <Link to="/terms-of-service" className="text-wareongo-blue underline underline-offset-2">Terms</Link> and <Link to="/privacy-policy" className="text-wareongo-blue underline underline-offset-2">Privacy Policy</Link>.
                   </p>
                 </div>

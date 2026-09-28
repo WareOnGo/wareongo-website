@@ -29,10 +29,10 @@ const VALUES = [
 const WhatWeStandForSection = () => {
   return (
     <section className="bg-wareongo-ivory pt-16 pb-0 md:pt-24 md:pb-0">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         {/* Social proof: trust line + full-bleed logo carousel + stats */}
         <div className="max-w-3xl mx-auto mb-8 md:mb-10 text-center">
-          <p className="text-base sm:text-lg md:text-xl uppercase tracking-[0.2em] text-wareongo-blue font-bold">
+          <p className="text-base uppercase tracking-[0.2em] text-wareongo-blue font-bold">
             Trusted by 200+ companies across India
           </p>
         </div>
@@ -41,14 +41,14 @@ const WhatWeStandForSection = () => {
         </div>
 
         {/* Divider between social proof and core values */}
-        <div className="max-w-5xl mx-auto my-12 md:my-20 border-t border-wareongo-blue/10" />
+        <div className="max-w-5xl mx-auto my-12 md:my-20 border-t border-ui-line" />
 
         {/* Core values header */}
         <div className="text-center mb-10 md:mb-12">
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-wareongo-slate font-medium mb-3">
+          <p className="ui-eyebrow text-wareongo-slate font-medium mb-3">
             Our Core Values
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-wareongo-blue">
+          <h2 className="ui-section-title text-wareongo-blue">
             What We Stand For
           </h2>
           <p className="mt-6 text-lg sm:text-xl font-semibold text-wareongo-blue">
@@ -69,16 +69,16 @@ const WhatWeStandForSection = () => {
           {VALUES.map((item, i) => (
             <div
               key={i}
-              className="bg-transparent border border-wareongo-blue rounded-2xl p-5 sm:p-6 flex items-start gap-4 transition-colors duration-300 hover:bg-wareongo-blue/5"
+              className="bg-ui-surface border border-ui-line rounded-xl p-5 sm:p-6 flex items-start gap-4 transition-colors duration-300"
             >
               {/* Icon */}
-              <div className="w-11 h-11 shrink-0 rounded-xl bg-sky-100/50 border border-wareongo-blue/20 flex items-center justify-center">
+              <div className="w-11 h-11 shrink-0 rounded-xl bg-ui-tint border border-ui-line flex items-center justify-center">
                 <item.icon className="w-5 h-5 text-wareongo-blue" strokeWidth={1.5} />
               </div>
 
               {/* Content */}
               <div>
-                <h3 className="text-base sm:text-lg font-semibold text-wareongo-blue leading-snug">
+                <h3 className="ui-card-title text-wareongo-blue">
                   {item.title}
                 </h3>
                 <p className="mt-1.5 text-sm sm:text-base text-wareongo-slate leading-relaxed">

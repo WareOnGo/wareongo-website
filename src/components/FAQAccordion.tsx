@@ -25,13 +25,13 @@ const FAQAccordion = ({ items, defaultOpenIndex = 0 }: FAQAccordionProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(defaultOpenIndex);
 
   return (
-    <div className="bg-transparent border border-wareongo-blue rounded-2xl shadow-none overflow-hidden">
+    <div className="bg-transparent border border-ui-outline rounded-xl shadow-none overflow-hidden">
       {items.map((item, i) => {
         const isOpen = openIndex === i;
         return (
           <div
             key={item.q}
-            className="bg-transparent border-t border-wareongo-blue first:border-t-0 transition-colors duration-300 hover:bg-wareongo-blue/5"
+            className="bg-transparent border-t border-ui-outline first:border-t-0 transition-colors duration-300 hover:bg-ui-tint"
           >
             <button
               type="button"
@@ -39,7 +39,7 @@ const FAQAccordion = ({ items, defaultOpenIndex = 0 }: FAQAccordionProps) => {
               aria-expanded={isOpen}
               className="w-full flex items-center justify-between gap-4 text-left p-5 sm:p-6"
             >
-              <h3 className="text-base sm:text-lg font-semibold text-wareongo-blue">{item.q}</h3>
+              <h3 className="ui-card-title text-wareongo-blue">{item.q}</h3>
               <ChevronDown
                 className={`w-5 h-5 shrink-0 text-wareongo-blue transition-transform duration-300 ${
                   isOpen ? 'rotate-180' : ''

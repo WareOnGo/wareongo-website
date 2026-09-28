@@ -62,7 +62,7 @@ const LocationLinkGrid = <T extends LocationSummary>({
   if (items.length === 0) return null;
   return (
     <div>
-      <h3 className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-3">{heading}</h3>
+      <h3 className="ui-eyebrow text-ui-line mb-3">{heading}</h3>
       <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-2 text-sm">
         {items.map((loc) => {
           const href = hrefFor ? hrefFor(loc) : `${basePath}/${loc.slug}${pathSuffix}`;
@@ -75,7 +75,7 @@ const LocationLinkGrid = <T extends LocationSummary>({
                 onClick={() =>
                   trackEvent('nav_click', { label, destination: href, position: 'footer' })
                 }
-                className="block truncate text-gray-300 hover:text-white transition-colors"
+                className="block truncate text-ui-line hover:text-ui-surface transition-colors"
               >
                 {label}
               </Link>
@@ -190,23 +190,23 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-wareongo-blue text-white">
-      <div className="container mx-auto px-4 py-12">
+    <footer className="bg-wareongo-blue text-ui-surface">
+      <div className="container mx-auto py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <h2 className="text-xl font-bold mb-4">WareOnGo</h2>
-            <p className="mb-4 text-gray-300">
+            <h2 className="ui-card-title mb-4">WareOnGo</h2>
+            <p className="mb-4 text-ui-line">
               Find the Right Warehouse, Faster.
             </p>
           </div>
           
           <div>
-            <h2 className="text-lg font-semibold mb-4">Quick Links</h2>
+            <h2 className="ui-card-title mb-4">Quick Links</h2>
             <ul className="space-y-2">
               <li>
                 <button
                   onClick={() => handleFooterNav('Home', '/', () => navigate('/'))}
-                  className="text-gray-300 hover:text-white transition-colors cursor-pointer"
+                  className="text-ui-line hover:text-ui-surface transition-colors cursor-pointer"
                 >
                   Home
                 </button>
@@ -214,7 +214,7 @@ const Footer = () => {
               <li>
                 <button
                   onClick={() => handleFooterNav('How It Works', '#how-it-works', () => scrollToSection('how-it-works'))}
-                  className="text-gray-300 hover:text-white transition-colors cursor-pointer"
+                  className="text-ui-line hover:text-ui-surface transition-colors cursor-pointer"
                 >
                   How It Works
                 </button>
@@ -222,7 +222,7 @@ const Footer = () => {
               <li>
                 <button
                   onClick={() => handleFooterNav('Listings', '/listings', () => navigate('/listings'))}
-                  className="text-gray-300 hover:text-white transition-colors cursor-pointer"
+                  className="text-ui-line hover:text-ui-surface transition-colors cursor-pointer"
                 >
                   Listings
                 </button>
@@ -230,7 +230,7 @@ const Footer = () => {
               <li>
                 <button
                   onClick={() => handleFooterNav('Request a Warehouse', '/request-warehouse', () => navigate('/request-warehouse'))}
-                  className="text-gray-300 hover:text-white transition-colors cursor-pointer"
+                  className="text-ui-line hover:text-ui-surface transition-colors cursor-pointer"
                 >
                   Request a Warehouse
                 </button>
@@ -238,7 +238,7 @@ const Footer = () => {
               <li>
                 <button
                   onClick={() => handleFooterNav('About Us', '/about-us', handleAboutUsClick)}
-                  className="text-gray-300 hover:text-white transition-colors cursor-pointer"
+                  className="text-ui-line hover:text-ui-surface transition-colors cursor-pointer"
                 >
                   About Us
                 </button>
@@ -248,7 +248,7 @@ const Footer = () => {
                   to="/casestudies"
                   title="Real warehouse deals we closed, costs, compliance and timelines"
                   onClick={() => trackEvent('nav_click', { label: 'Case Studies', destination: '/casestudies', position: 'footer' })}
-                  className="text-gray-300 hover:text-white transition-colors"
+                  className="text-ui-line hover:text-ui-surface transition-colors"
                 >
                   Case Studies
                 </Link>
@@ -258,7 +258,7 @@ const Footer = () => {
                   to="/blogs"
                   title="Blogs on leasing, compliance and warehouse rent in India"
                   onClick={() => trackEvent('nav_click', { label: 'Blogs', destination: '/blogs', position: 'footer' })}
-                  className="text-gray-300 hover:text-white transition-colors"
+                  className="text-ui-line hover:text-ui-surface transition-colors"
                 >
                   Blogs
                 </Link>
@@ -267,18 +267,18 @@ const Footer = () => {
           </div>
           
           <div>
-            <h2 className="text-lg font-semibold mb-4">Services</h2>
+            <h2 className="ui-card-title mb-4">Services</h2>
             <ul className="space-y-2">
-              {Object.entries(SERVICE_PAGES).map(([slug, label]) => <li key={slug} className="text-gray-300">
+              {Object.entries(SERVICE_PAGES).map(([slug, label]) => <li key={slug} className="text-ui-line">
                 {getServiceBySlug(slug) ? <Link to={servicePath(slug)}
                   onClick={() => trackEvent('nav_click', { label, destination: servicePath(slug), position: 'footer' })}
-                  className="hover:text-white transition-colors">{label}</Link> : label}
+                  className="hover:text-ui-surface transition-colors">{label}</Link> : label}
               </li>)}
             </ul>
           </div>
           
           <div>
-            <h2 className="text-lg font-semibold mb-4">Contact Us</h2>
+            <h2 className="ui-card-title mb-4">Contact Us</h2>
             <ul className="space-y-3">
               <li className="flex items-center">
                 <Phone className="h-5 w-5 mr-2 flex-shrink-0" />
@@ -308,12 +308,12 @@ const Footer = () => {
           <ExploreSpacesSection />
         </div>
 
-        <div className="border-t border-gray-700 mt-12 pt-6 text-center text-gray-400 text-sm">
+        <div className="border-t border-gray-700 mt-12 pt-6 text-center text-ui-line text-sm">
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-4">
             <Link
               to="/privacy-policy"
               onClick={() => trackEvent('nav_click', { label: 'Privacy Policy', destination: '/privacy-policy', position: 'footer' })}
-              className="hover:text-white transition-colors"
+              className="hover:text-ui-surface transition-colors"
             >
               Privacy Policy
             </Link>
@@ -321,7 +321,7 @@ const Footer = () => {
             <Link
               to="/terms-of-service"
               onClick={() => trackEvent('nav_click', { label: 'Terms of Service', destination: '/terms-of-service', position: 'footer' })}
-              className="hover:text-white transition-colors"
+              className="hover:text-ui-surface transition-colors"
             >
               Terms of Service
             </Link>
@@ -331,7 +331,7 @@ const Footer = () => {
               onClick={() => trackEvent('nav_click', { label: 'Login', destination: '/login', position: 'footer' })}
               // gray-400, not gray-500: on the navy footer gray-500 measures
               // 3.34:1, and the links either side of it are already gray-400.
-              className="text-gray-400 hover:text-white transition-colors text-xs"
+              className="text-ui-line hover:text-ui-surface transition-colors text-xs"
             >
               Login
             </Link>

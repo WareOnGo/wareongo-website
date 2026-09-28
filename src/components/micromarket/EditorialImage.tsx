@@ -48,7 +48,7 @@ const EditorialImage = ({
   }, [image.url]);
   return (
     <div
-      className={`${ratio} overflow-hidden rounded-2xl border border-wareongo-blue bg-wareongo-blue/5 ${className}`}
+      className={`${ratio} overflow-hidden rounded-xl border border-ui-outline bg-ui-tint ${className}`}
     >
       <img
         ref={imageRef}

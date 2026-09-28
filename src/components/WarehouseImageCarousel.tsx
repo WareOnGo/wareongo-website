@@ -17,7 +17,7 @@ interface WarehouseImageCarouselProps {
   sizeSqft?: number;
 }
 
-const arrowClass = 'absolute top-1/2 -translate-y-1/2 bg-wareongo-ivory/95 hover:bg-wareongo-ivory text-wareongo-blue h-10 w-10 sm:h-11 sm:w-11 rounded-full z-30 focus:ring-2 focus:ring-wareongo-blue/40 focus:ring-offset-2 backdrop-blur-sm md:opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 flex items-center justify-center border border-wareongo-blue/20';
+const arrowClass = 'absolute top-1/2 -translate-y-1/2 bg-wareongo-ivory/95 hover:bg-wareongo-ivory text-wareongo-blue h-10 w-10 sm:h-11 sm:w-11 rounded-full z-30 focus:ring-2 focus:ring-wareongo-blue/40 focus:ring-offset-2 backdrop-blur-sm md:opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 flex items-center justify-center border border-ui-line';
 
 const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
   images = [], imageFallbacks = [], warehouseId, className = '', onImageError, city, state, sizeSqft,
@@ -69,7 +69,7 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
       {...swipe.handlers}
       ref={carouselRef}
       style={{ ...swipe.handlers.style, ...gallery.transitionStyle, ...swipe.photoStyle }}
-      className={`relative w-full h-64 sm:h-80 md:h-96 lg:h-full lg:min-h-[500px] xl:min-h-[600px] bg-wareongo-blue/5 border border-wareongo-blue rounded-2xl overflow-hidden group ${className}`}
+      className={`relative w-full h-64 sm:h-80 md:h-96 lg:h-full lg:min-h-[500px] xl:min-h-[600px] bg-ui-tint border border-ui-outline rounded-xl overflow-hidden group ${className}`}
       role="region"
       aria-label={`Warehouse ${warehouseId} image carousel with ${count} images`}
       tabIndex={0}
@@ -124,11 +124,11 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
                 className="group p-1 focus:outline-none focus:ring-2 focus:ring-wareongo-blue focus:ring-offset-2 rounded"
                 aria-label={`Go to image ${validIndex + 1}${isActive ? ' (current)' : ''}`}
                 role="tab" aria-selected={isActive} tabIndex={isActive ? 0 : -1}>
-                <div aria-hidden="true" className={`rounded-full transition-all duration-300 w-2.5 h-2.5 sm:w-3 sm:h-3 ${isActive ? 'bg-white shadow-lg' : 'border-2 border-white/80 group-hover:border-white group-focus:border-white'}`} />
+                <div aria-hidden="true" className={`rounded-full transition-all duration-300 w-2.5 h-2.5 sm:w-3 sm:h-3 ${isActive ? 'bg-ui-surface shadow-none' : 'border-2 border-white/80 group-hover:border-white group-focus:border-white'}`} />
               </button>;
             })}
           </div>
-          <div aria-hidden="true" className="absolute top-3 right-3 bg-wareongo-ivory/90 backdrop-blur-sm border border-wareongo-blue/20 text-wareongo-blue px-2.5 py-1 rounded-md text-xs font-semibold z-30">
+          <div aria-hidden="true" className="absolute top-3 right-3 bg-wareongo-ivory/90 backdrop-blur-sm border border-ui-line text-wareongo-blue px-2.5 py-1 rounded-md text-xs font-semibold z-30">
             {position} / {count}
           </div>
         </>}

@@ -89,12 +89,13 @@ const EdgeContactFormDialog = ({ open, onOpenChange, source }: EdgeContactFormDi
       setEmail('');
       setPhone('');
       onOpenChange(false);
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : undefined;
       analytics.failure(submissionError.current);
-      setError(err.message || 'Something went wrong. Please try again.');
+      setError(message || 'Something went wrong. Please try again.');
       toast({
         title: "Error",
-        description: err.message || 'Failed to submit form. Please try again.',
+        description: message || 'Failed to submit form. Please try again.',
         variant: "destructive"
       });
     } finally {
@@ -102,18 +103,18 @@ const EdgeContactFormDialog = ({ open, onOpenChange, source }: EdgeContactFormDi
     }
   };
 
-  const inputClass = "w-full h-11 pl-10 pr-3.5 bg-transparent border border-wareongo-blue rounded-xl text-sm text-wareongo-blue placeholder:text-wareongo-slate focus:outline-none focus:ring-2 focus:ring-wareongo-blue/20 focus:border-wareongo-blue transition-colors";
-  const labelClass = "text-xs uppercase tracking-[0.18em] font-medium text-wareongo-slate block";
-  const iconWrapClass = "absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-wareongo-blue/70";
+  const inputClass = "w-full h-11 pl-10 pr-3.5 bg-transparent border border-ui-outline rounded-xl text-sm text-wareongo-blue placeholder:text-wareongo-slate focus:outline-none focus:ring-2 focus:ring-wareongo-blue/20 focus:border-ui-outline transition-colors";
+  const labelClass = "ui-eyebrow font-medium text-wareongo-slate block";
+  const iconWrapClass = "absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-ui-accent";
 
   return (
     <Dialog open={open} onOpenChange={(next) => { if (!isSubmitting) onOpenChange(next); }}>
-      <DialogContent className="font-sans bg-wareongo-ivory border border-wareongo-blue rounded-2xl sm:max-w-[460px] p-6 sm:p-8 shadow-none gap-0 max-h-[90vh] overflow-y-auto">
+      <DialogContent className="font-sans bg-ui-surface border border-ui-outline rounded-xl sm:max-w-[460px] p-6 sm:p-8 shadow-none gap-0 max-h-[90vh] overflow-y-auto">
         <DialogHeader className="mb-5">
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-wareongo-slate font-medium mb-2 text-left">
+          <p className="ui-eyebrow text-wareongo-slate font-medium mb-2 text-left">
             Get in touch
           </p>
-          <DialogTitle className="text-2xl sm:text-3xl font-bold text-wareongo-blue text-left">
+          <DialogTitle className="ui-panel-title text-wareongo-blue text-left">
             Request Beta Access
           </DialogTitle>
           <DialogDescription className="text-sm text-wareongo-slate text-left pt-1">
@@ -218,7 +219,7 @@ const EdgeContactFormDialog = ({ open, onOpenChange, source }: EdgeContactFormDi
             <DialogClose asChild>
               <button
                 type="button"
-                className="h-11 px-5 bg-transparent border border-wareongo-blue rounded-xl text-sm font-semibold text-wareongo-blue hover:bg-wareongo-blue/5 transition-colors"
+                className="ui-button ui-button--secondary"
               >
                 Cancel
               </button>
@@ -226,7 +227,7 @@ const EdgeContactFormDialog = ({ open, onOpenChange, source }: EdgeContactFormDi
             <button
               type="submit"
               disabled={isSubmitting}
-              className="h-11 px-5 bg-wareongo-blue border border-wareongo-blue rounded-xl text-sm font-semibold text-wareongo-ivory hover:bg-wareongo-blue/90 transition-colors disabled:opacity-60 disabled:cursor-not-allowed inline-flex items-center justify-center"
+              className="ui-button disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {isSubmitting ? (
                 <>

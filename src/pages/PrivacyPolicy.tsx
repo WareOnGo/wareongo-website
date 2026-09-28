@@ -30,7 +30,7 @@ const PrivacyPolicy = () => {
       <Navbar />
 
       <main className="flex-grow bg-wareongo-ivory bg-opacity-50">
-        <div className="section-container page-content px-4 sm:px-6 lg:px-8 pb-8">
+        <div className="section-container page-content pb-8">
           {/* Back Navigation */}
           <div className="mb-6">
             <Button 
@@ -44,8 +44,8 @@ const PrivacyPolicy = () => {
           </div>
 
           {/* Privacy Policy Content */}
-          <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-sm p-6 sm:p-8 lg:p-12">
-            <h1 className="text-3xl sm:text-4xl font-bold text-wareongo-charcoal mb-4">
+          <div className="max-w-4xl mx-auto bg-ui-surface rounded-lg shadow-none p-6 sm:p-8 lg:p-12">
+            <h1 className="ui-page-title text-wareongo-charcoal mb-4">
               {content.title}
             </h1>
             

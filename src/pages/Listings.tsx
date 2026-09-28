@@ -247,12 +247,12 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
             {/* A failed refresh still has valid data for this exact query.
                 A failed new search has no data and must never show old cards. */}
             {isRefetchError && !loadingResults && (
-              <div role="status" className="flex flex-wrap items-center justify-between gap-3 mb-6 px-4 py-3 border border-wareongo-blue/20 rounded-xl text-sm text-wareongo-slate">
+              <div role="status" className="flex flex-wrap items-center justify-between gap-3 mb-6 px-4 py-3 border border-ui-line rounded-xl text-sm text-wareongo-slate">
                 <p>Could not refresh listings. Showing the last loaded results.</p>
                 <button
                   disabled={isFetching}
                   onClick={() => { trackEvent('content_retry', { list_id: listId }); void refetch(); }}
-                  className="min-h-11 px-4 rounded-lg border border-wareongo-blue/30 text-wareongo-blue hover:bg-wareongo-blue/5 disabled:opacity-50"
+                  className="min-h-11 px-4 rounded-lg border border-ui-outline text-wareongo-blue hover:bg-ui-tint disabled:opacity-50"
                 >Retry refresh</button>
               </div>
             )}
@@ -261,7 +261,7 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
                 <p className="text-red-600 mb-4">Failed to load warehouses. Please try again later.</p>
                 <button
                   onClick={() => { trackEvent('content_retry', { list_id: listId }); void refetch(); }}
-                  className="px-5 h-10 rounded-xl bg-wareongo-blue text-white text-sm font-medium hover:bg-wareongo-blue/90 transition-colors"
+                  className="px-5 h-10 rounded-xl bg-wareongo-blue text-ui-surface text-sm font-medium hover:bg-wareongo-blue/90 transition-colors"
                 >
                   Try again
                 </button>
@@ -302,7 +302,7 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
 
             {/* No Results Message */}
             {!loadingResults && !isLoadingError && warehouses.length === 0 && (
-              <div className="text-center py-16 border border-wareongo-blue/30 rounded-2xl">
+              <div className="text-center py-16 border border-ui-outline rounded-xl">
                 <p className="text-lg sm:text-xl text-wareongo-blue font-semibold mb-2">No warehouses found</p>
                 <p className="text-wareongo-slate text-sm mb-6">
                   Try adjusting your filters to see more results.
@@ -310,7 +310,7 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
                 {hasActiveFilters() && (
                   <button
                     onClick={clearFilters}
-                    className="px-5 h-10 rounded-xl bg-wareongo-blue text-white text-sm font-medium hover:bg-wareongo-blue/90 transition-colors"
+                    className="ui-button"
                   >
                     Clear all filters
                   </button>
@@ -330,7 +330,7 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
 
                 {pagination.totalItems > 10 && (
                   <div className="flex justify-center items-center gap-3">
-                    <label htmlFor="pageSize" className="text-xs uppercase tracking-[0.18em] text-wareongo-slate">
+                    <label htmlFor="pageSize" className="ui-label ui-eyebrow text-wareongo-slate">
                       Per page
                     </label>
                     <select
@@ -338,7 +338,7 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
                       value={pageSize}
                       disabled={loadingResults}
                       onChange={(e) => handlePageSizeChange(Number(e.target.value))}
-                      className="px-3 h-9 bg-transparent border border-wareongo-blue/30 rounded-lg text-sm text-wareongo-blue focus:outline-none focus:ring-2 focus:ring-wareongo-blue/30"
+                      className="px-3 h-9 bg-transparent border border-ui-outline rounded-lg text-sm text-wareongo-blue focus:outline-none focus:ring-2 focus:ring-wareongo-blue/30"
                     >
                       <option value={10}>10</option>
                       <option value={21}>21</option>

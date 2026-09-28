@@ -1,10 +1,12 @@
 # Bangalore ad page style guide
 
 Applies to `/bangalore`, its real CMS preview, and contact dialogs opened from
-this page. The source of truth is
-[`BangaloreLanding.tokens.css`](../src/pages/BangaloreLanding.tokens.css);
-[`BangaloreLanding.css`](../src/pages/BangaloreLanding.css) applies those tokens
-to the page and adapts shared components without changing other pages.
+this page. The shared visual roles now live in
+[`ui.tokens.css`](../src/styles/ui.tokens.css).
+[`BangaloreLanding.tokens.css`](../src/pages/BangaloreLanding.tokens.css) aliases
+them and retains the ad page's exceptions; [`BangaloreLanding.css`](../src/pages/BangaloreLanding.css)
+owns its layout. See the [shared UI guide](ui-standard.md) for the website-wide
+implementation.
 
 Open the [visual guide](bangalore-ad-page-style-guide.html) through the website's
 dev server at `/docs/bangalore-ad-page-style-guide.html` to review the real
@@ -63,15 +65,20 @@ case of form labels. Use tabular numerals for prices, areas, counts, and table d
 
 ## Borders, corners, icons, and states
 
-- Every light card, form, and table: **1px stroke, 12px radius, no shadow**.
-  Use the outline role for actionable cards, forms and table frames; the line
+- Every light card, form, and table: **1px stroke and 12px radius**.
+  Listing cards use the original navy stroke, 2px navy hard shadow and sinking hover;
+  other cards, forms and tables remain flat.
+  Use the outline role for other actionable cards, forms and table frames; the line
   role for benefits, summary cards, image frames and internal dividers.
 - Buttons and inputs: **8px radius**. Small fact badges: **4px radius**.
 - Filter chips and map bubbles: pill shape. Their shape distinguishes their role.
 - Primary buttons: navy fill and ivory text. Secondary buttons: surface fill or
   transparent ivory, thin line, navy text. Hover uses accent navy or the light tint.
 - Clickable cards change their border on hover. Informational cards have no
-  hover effect. Do not add lift, offset shadows, or a thicker resting outline.
+  hover effect. Listing cards alone retain their navy stroke, press down 2px,
+  reduce their navy hard shadow to 1px and warm the fill to `#F6F4EE` on pointer
+  hover, using the original 180ms ease-out. Reduced motion suppresses movement.
+  Do not add lift, heavy shadows, or a thicker resting outline.
 - Keyboard focus: a visible **2px accent ring**. On photo or navy backgrounds,
   use an ivory ring. A selected map bubble uses navy fill and an ivory count.
   Focused inputs also use the accent outline in both the hero and dialogs.
@@ -127,8 +134,9 @@ font utilities. Avoid duplicate primary actions inside a card.
   scroll inside their panels on phones.
 - **Dialogs:** the compact 24px heading role, with the same field, label and button styles as the hero form.
   Keep focus trapping, close controls, validation and focus restoration intact.
-- **Site chrome:** retain the shared navbar/footer structure; use the page's
-  typography and colors locally. Do not change global listing or city styles.
+- **Site chrome:** retain the shared navbar/footer structure and visual roles.
+  Keep ad-page layout adaptations local; shared listing and city components
+  now consume the same standard at their source.
 
 ## Maintaining the guide
 

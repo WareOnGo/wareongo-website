@@ -50,7 +50,7 @@ const MicromarketHero = ({
         </span>
         <h1
           id={loading ? undefined : "editorial-title"}
-          className="mb-4 text-3xl font-bold leading-tight text-wareongo-blue sm:text-4xl md:text-5xl"
+          className="ui-page-title mb-4 text-wareongo-blue"
         >
           {content.h1}
         </h1>
@@ -68,7 +68,7 @@ const MicromarketHero = ({
           replaces — 3 rules instead of 6 borders.
         */}
         {tiles.length > 0 && (
-          <dl className="mt-7 grid grid-cols-1 border-t border-wareongo-blue/15 sm:grid-cols-3 sm:gap-3 sm:border-t-0">
+          <dl className="mt-7 grid grid-cols-1 border-t border-ui-line sm:grid-cols-3 sm:gap-3 sm:border-t-0">
             {tiles.map((t) => (
               // row-reverse so the label (second in the DOM, because dd precedes
               // dt) reads on the left, with the figure right-aligned against it.
@@ -77,8 +77,8 @@ const MicromarketHero = ({
                 className={`flex flex-row-reverse items-baseline justify-between gap-3 py-2.5 sm:block sm:gap-0 sm:px-3.5 sm:py-2.5 ${METRIC}`}
               >
                 <dd
-                  className={`relative text-[17px] font-semibold tabular-nums leading-none ${
-                    t.accent ? 'text-wareongo-green' : 'text-wareongo-blue'
+                  className={`relative text-lg font-semibold tabular-nums leading-none ${
+                    t.accent ? 'text-ui-accent' : 'text-wareongo-blue'
                   }`}
                 >
                   {loading ? <><span className="invisible" aria-hidden="true">00000000</span><Skeleton className="absolute inset-0 rounded-sm" aria-hidden="true" /></> : t.value}
@@ -94,7 +94,7 @@ const MicromarketHero = ({
         <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <Link
             data-analytics-placement="overview_hero" to="/request-warehouse"
-            className="inline-flex h-11 items-center justify-center rounded-xl bg-wareongo-blue px-5 text-sm font-semibold text-white transition-colors hover:bg-wareongo-blue/90"
+            className="ui-button"
           >
             Get a shortlist in 4 hours →
           </Link>
@@ -105,7 +105,7 @@ const MicromarketHero = ({
             data-analytics-placement="overview_hero"
             href={loading ? undefined : onBrowse}
             aria-disabled={loading || undefined}
-            className="inline-flex h-11 items-center justify-center rounded-xl border border-wareongo-blue/30 px-5 text-sm font-medium text-wareongo-blue transition-colors hover:bg-wareongo-blue/5"
+            className="ui-button ui-button--secondary"
           >
             Browse the listings ↓
           </a>}

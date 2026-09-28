@@ -44,7 +44,7 @@ const HeroSection = () => (
         <li>Dark Stores</li>
         <li>Industrial</li>
       </ul>
-      <h1 id="hero-heading" className="wog-hero-heading">
+      <h1 id="hero-heading" className="ui-page-title wog-hero-heading">
         Find Verified<br />Warehouses Faster
       </h1>
       <p className="wog-hero-description">Your Tech-First Warehousing Partner</p>

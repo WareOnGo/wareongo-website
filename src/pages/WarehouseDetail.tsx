@@ -122,9 +122,9 @@ const WarehouseDetail = () => {
         <main className="flex-grow bg-wareongo-ivory">
           <div className="section-container page-content">
             <div className="flex items-center justify-center min-h-[60vh]">
-              <div className="text-center max-w-md border border-wareongo-blue/30 rounded-2xl p-8">
+              <div className="text-center max-w-md border border-ui-outline rounded-xl p-8">
                 <AlertCircle className="w-12 h-12 text-wareongo-blue mx-auto mb-4" />
-                <h2 className="text-xl sm:text-2xl font-semibold text-wareongo-blue mb-2">
+                <h2 className="ui-section-title text-wareongo-blue mb-2">
                   Warehouse not found
                 </h2>
                 <p className="text-wareongo-slate text-sm mb-6">
@@ -132,7 +132,7 @@ const WarehouseDetail = () => {
                 </p>
                 <button
                   onClick={handleBackClick}
-                  className="inline-flex items-center px-4 h-10 rounded-xl border border-wareongo-blue/30 text-wareongo-blue text-sm font-medium hover:bg-wareongo-blue/5 transition-colors"
+                  className="ui-button ui-button--secondary"
                 >
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Back to listings
@@ -346,7 +346,7 @@ const WarehouseDetail = () => {
         role="main"
         aria-labelledby="warehouse-title"
       >
-        <div className="section-container page-content px-4 sm:px-6 lg:px-8">
+        <div className="section-container page-content">
           {/* Breadcrumbs */}
           <Breadcrumbs
             className="mb-4 sm:mb-6"
@@ -378,7 +378,7 @@ const WarehouseDetail = () => {
               <header>
                 <div className="flex justify-end mb-2">
                   <span
-                    className="bg-wareongo-ivory border border-wareongo-blue/20 text-wareongo-blue px-2.5 py-1 rounded-md text-xs font-semibold"
+                    className="bg-wareongo-ivory border border-ui-line text-wareongo-blue px-2.5 py-1 rounded-md text-xs font-semibold"
                     aria-label={`Warehouse ID ${warehouseData.id}`}
                   >
                     ID: {warehouseData.id}
@@ -386,7 +386,7 @@ const WarehouseDetail = () => {
                 </div>
                 <h1
                   id="warehouse-title"
-                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-wareongo-blue leading-tight mb-3"
+                  className="ui-page-title text-wareongo-blue mb-3"
                 >
                   {loc.city}, {loc.state}
                 </h1>
@@ -405,28 +405,28 @@ const WarehouseDetail = () => {
               <section aria-labelledby="quick-stats-title">
                 <h2 id="quick-stats-title" className="sr-only">Quick Statistics</h2>
                 <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                  <div className="border border-wareongo-blue/30 rounded-xl p-4 sm:p-5">
-                    <div className="text-[10px] sm:text-xs uppercase tracking-[0.18em] text-wareongo-slate mb-1.5">
+                  <div className="border border-ui-outline rounded-xl p-4 sm:p-5">
+                    <div className="ui-eyebrow text-wareongo-slate mb-1.5">
                       Total area
                     </div>
-                    <div className="text-xl sm:text-2xl font-bold text-wareongo-blue">
+                    <div className="ui-metric text-wareongo-blue">
                       {space.totalSpace.toLocaleString()}
                       <span className="text-sm font-medium text-wareongo-slate ml-1">sqft</span>
                     </div>
                   </div>
-                  <div className="border border-wareongo-blue/30 rounded-xl p-4 sm:p-5">
-                    <div className="text-[10px] sm:text-xs uppercase tracking-[0.18em] text-wareongo-slate mb-1.5">
+                  <div className="border border-ui-outline rounded-xl p-4 sm:p-5">
+                    <div className="ui-eyebrow text-wareongo-slate mb-1.5">
                       Rate
                     </div>
                     {space.ratePerSqft ? (
-                      <div className="text-xl sm:text-2xl font-bold text-wareongo-blue">
+                      <div className="ui-metric text-wareongo-blue">
                         ₹{space.ratePerSqft}
                         <span className="text-sm font-medium text-wareongo-slate ml-1">/ sqft</span>
                       </div>
                     ) : (
                       // Unguarded, this read "₹0 / sqft". The JSON-LD and the
                       // prose below already skip a missing rate.
-                      <div className="text-xl sm:text-2xl font-bold text-wareongo-slate">On request</div>
+                      <div className="ui-metric text-wareongo-slate">On request</div>
                     )}
                   </div>
                 </div>
@@ -437,7 +437,7 @@ const WarehouseDetail = () => {
                 <h2 id="contact-actions-title" className="sr-only">Contact Actions</h2>
                 <button
                   onClick={handleRequestCallback}
-                  className="w-full h-12 rounded-xl bg-wareongo-blue text-white text-sm font-medium tracking-wide hover:bg-wareongo-blue/90 focus:outline-none focus:ring-2 focus:ring-wareongo-blue/40 focus:ring-offset-2 transition-colors"
+                  className="ui-button w-full focus:outline-none focus:ring-2 focus:ring-wareongo-blue/40 focus:ring-offset-2"
                   aria-describedby="request-callback-desc"
                 >
                   Request a callback
@@ -451,7 +451,7 @@ const WarehouseDetail = () => {
             {/* Location Map - Mobile: order-3 (below info), Desktop: bottom right */}
             <div className="order-3 lg:order-3 lg:self-end">
               <section aria-labelledby="location-map-title">
-                <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate block mb-2">
+                <span className="ui-eyebrow text-wareongo-slate block mb-2">
                   Location
                 </span>
                 <h2 id="location-map-title" className="sr-only">Location</h2>
@@ -483,7 +483,7 @@ const WarehouseDetail = () => {
           <section aria-labelledby="about-this-warehouse-title" className="mt-10 sm:mt-12 max-w-3xl">
             <h2
               id="about-this-warehouse-title"
-              className="text-xl sm:text-2xl font-bold text-wareongo-blue mb-4"
+              className="ui-section-title text-wareongo-blue mb-4"
             >
               About this warehouse
             </h2>
@@ -514,7 +514,7 @@ const WarehouseDetail = () => {
           <section aria-labelledby="warehouse-faq-title" className="mt-10 sm:mt-12 max-w-3xl">
             <h2
               id="warehouse-faq-title"
-              className="text-xl sm:text-2xl font-bold text-wareongo-blue mb-4"
+              className="ui-section-title text-wareongo-blue mb-4"
             >
               Frequently asked questions
             </h2>
@@ -526,7 +526,7 @@ const WarehouseDetail = () => {
             <section aria-labelledby="related-warehouses-title" className="mt-12 sm:mt-16">
               <h2
                 id="related-warehouses-title"
-                className="text-xl sm:text-2xl font-bold text-wareongo-blue mb-2"
+                className="ui-section-title text-wareongo-blue mb-2"
               >
                 More warehouses in {loc.city}
               </h2>

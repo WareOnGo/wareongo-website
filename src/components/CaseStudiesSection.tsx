@@ -23,13 +23,13 @@ const studies = [
 
 const CaseStudiesSection = () => {
   return (
-    <section className="bg-wareongo-ivory py-12 md:py-24">
-      <div className="container mx-auto px-4">
+    <section className="bg-wareongo-ivory py-12 md:py-16">
+      <div className="container mx-auto">
         <div className="max-w-2xl mb-8 md:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-wareongo-blue mb-2 md:mb-3">
+          <h2 className="ui-section-title text-wareongo-blue mb-2 md:mb-3">
             Case Studies
           </h2>
-          <p className="text-wareongo-slate text-sm sm:text-base md:text-lg">
+          <p className="text-wareongo-slate text-base">
             How we've helped teams find the right space, fast.
           </p>
         </div>
@@ -39,7 +39,7 @@ const CaseStudiesSection = () => {
             <a
               key={s.eyebrow}
               href={s.href}
-              className="case-card group bg-transparent border border-wareongo-blue rounded-2xl overflow-hidden flex flex-col hover:bg-wareongo-blue/5"
+              className="ui-card ui-card--action case-card group flex overflow-hidden flex-col"
             >
               <div className="aspect-[16/10] overflow-hidden bg-wareongo-ivory">
                 <img
@@ -52,10 +52,10 @@ const CaseStudiesSection = () => {
                 />
               </div>
               <div className="p-5 sm:p-6 md:p-8 flex flex-col gap-2 sm:gap-3">
-                <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate">
+                <span className="ui-eyebrow text-wareongo-slate">
                   {s.eyebrow}
                 </span>
-                <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-wareongo-blue leading-snug">
+                <h3 className="ui-card-title text-wareongo-blue">
                   {s.title}
                 </h3>
                 <p className="text-sm sm:text-base text-wareongo-slate">
@@ -69,25 +69,6 @@ const CaseStudiesSection = () => {
             </a>
           ))}
         </div>
-
-        <style>{`
-          @media (hover: hover) and (pointer: fine) {
-            .case-card {
-              transform: perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0);
-              transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1), background-color 400ms;
-              will-change: transform;
-            }
-            .case-card:hover {
-              transform: perspective(1200px) rotateX(3deg) rotateY(-4deg) translateY(-4px);
-            }
-            .case-card:nth-child(2):hover {
-              transform: perspective(1200px) rotateX(3deg) rotateY(4deg) translateY(-4px);
-            }
-          }
-          @media (prefers-reduced-motion: reduce) {
-            .case-card, .case-card:hover { transform: none; transition: none; }
-          }
-        `}</style>
       </div>
     </section>
   );

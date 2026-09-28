@@ -50,7 +50,7 @@ const RouteErrorBoundary = () => {
       />
       <Navbar />
       <div className="flex-grow flex flex-col items-center justify-center text-center px-4 py-12">
-        <h1 className="text-4xl font-bold text-wareongo-blue mb-4">
+        <h1 className="ui-page-title text-wareongo-blue mb-4">
           {status === 404 ? '404' : 'Something went wrong'}
         </h1>
         <p className="text-xl mb-8 max-w-md">

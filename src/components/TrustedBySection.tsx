@@ -2,7 +2,7 @@ import React from 'react';
 import { logoVariants } from '@/data/logoVariants.generated';
 
 const BG = 'transparent';
-const FADE_COLOR = '#F8F6F1'; // matches bg-wareongo-ivory
+const FADE_COLOR = 'var(--ui-paper)';
 
 // Groups of three or four larger, established brands followed by one smaller brand.
 // Company scale is approximate; keep the smaller brands spread throughout the loop.

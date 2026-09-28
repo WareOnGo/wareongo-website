@@ -69,7 +69,7 @@ const Pagination = ({
   return (
     <nav aria-label="Pagination" data-analytics-ignore className={`flex flex-wrap justify-center gap-2 ${className}`}>
       {control(currentPage - 1, 'Previous', 'prev',
-        'h-9 rounded-lg border border-wareongo-blue/30 px-4 text-sm font-medium text-wareongo-blue transition-colors hover:bg-wareongo-blue/5 disabled:cursor-not-allowed disabled:opacity-40',
+        'h-9 rounded-lg border border-ui-outline px-4 text-sm font-medium text-wareongo-blue transition-colors hover:bg-ui-tint disabled:cursor-not-allowed disabled:opacity-40',
         disabled || currentPage === 1)}
 
       <div className="order-first flex w-full justify-center gap-1.5 min-[420px]:order-none min-[420px]:w-auto">
@@ -78,14 +78,14 @@ const Pagination = ({
           return control(pageNum, String(pageNum), 'jump',
               `h-9 w-9 rounded-lg border text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
                 isActive
-                  ? 'border-wareongo-blue bg-wareongo-blue text-white'
-                  : 'border-wareongo-blue/30 bg-transparent text-wareongo-blue hover:bg-wareongo-blue/5'
+                  ? 'border-ui-outline bg-wareongo-blue text-ui-surface'
+                  : 'border-ui-outline bg-transparent text-wareongo-blue hover:bg-ui-tint'
               }`, disabled, isActive);
         })}
       </div>
 
       {control(currentPage + 1, 'Next', 'next',
-        'h-9 rounded-lg border border-wareongo-blue/30 px-4 text-sm font-medium text-wareongo-blue transition-colors hover:bg-wareongo-blue/5 disabled:cursor-not-allowed disabled:opacity-40',
+        'h-9 rounded-lg border border-ui-outline px-4 text-sm font-medium text-wareongo-blue transition-colors hover:bg-ui-tint disabled:cursor-not-allowed disabled:opacity-40',
         disabled || currentPage === totalPages)}
     </nav>
   );

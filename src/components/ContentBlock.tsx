@@ -65,7 +65,7 @@ const ImagesBlock = ({ images, caption }: { images: BlogImage[]; caption?: strin
           loading="lazy"
           decoding="async"
           onError={fallbackToRaw}
-          className="mx-auto block h-auto w-auto max-h-[32rem] max-w-full rounded-2xl border border-wareongo-blue/20 bg-wareongo-blue/5"
+          className="mx-auto block h-auto w-auto max-h-[32rem] max-w-full rounded-xl border border-ui-line bg-ui-tint"
         />
       ) : (
         <div className={`grid gap-2 sm:gap-3 ${COLLAGE_GRID[count]}`}>
@@ -74,7 +74,7 @@ const ImagesBlock = ({ images, caption }: { images: BlogImage[]; caption?: strin
             // source photos are; the wrapper owns the box, the img fills it.
             <div
               key={img.url}
-              className={`aspect-[4/3] overflow-hidden rounded-xl sm:rounded-2xl border border-wareongo-blue/20 bg-wareongo-blue/5 ${collageSpan(count, i)}`}
+              className={`aspect-[4/3] overflow-hidden rounded-xl sm:rounded-xl border border-ui-line bg-ui-tint ${collageSpan(count, i)}`}
             >
               <img
                 src={optimizedSrc(img.url, 640)}
@@ -106,19 +106,19 @@ export const ContentBlock = ({ block }: { block: BlogBlock }) => {
   switch (block.kind) {
     case 'h2':
       return (
-        <h2 className="text-xl sm:text-2xl font-bold text-wareongo-blue mt-10 mb-3"><InlineText text={block.text} /></h2>
+        <h2 className="ui-panel-title text-wareongo-blue mt-10 mb-3"><InlineText text={block.text} /></h2>
       );
     case 'h3':
       return (
-        <h3 className="text-lg sm:text-xl font-semibold text-wareongo-charcoal mt-6 mb-2"><InlineText text={block.text} /></h3>
+        <h3 className="ui-card-title text-wareongo-charcoal mt-6 mb-2"><InlineText text={block.text} /></h3>
       );
     case 'p':
-      return <p className="text-[15px] sm:text-base text-wareongo-slate leading-relaxed mb-4"><InlineText text={block.text} /></p>;
+      return <p className="text-base text-wareongo-slate leading-relaxed mb-4"><InlineText text={block.text} /></p>;
     case 'ul':
       return (
         <ul className="list-disc pl-5 mb-4 space-y-2">
           {block.items.map((item, i) => (
-            <li key={i} className="text-[15px] sm:text-base text-wareongo-slate leading-relaxed"><InlineText text={item} /></li>
+            <li key={i} className="text-base text-wareongo-slate leading-relaxed"><InlineText text={item} /></li>
           ))}
         </ul>
       );
@@ -126,21 +126,20 @@ export const ContentBlock = ({ block }: { block: BlogBlock }) => {
       return (
         <ol className="list-decimal pl-5 mb-4 space-y-2">
           {block.items.map((item, i) => (
-            <li key={i} className="text-[15px] sm:text-base text-wareongo-slate leading-relaxed"><InlineText text={item} /></li>
+            <li key={i} className="text-base text-wareongo-slate leading-relaxed"><InlineText text={item} /></li>
           ))}
         </ol>
       );
     case 'table':
-      // Flat full-strength borders + transparent background, matching the
-      // listing-card / accordion idiom.
+      // Neutral table surfaces with a defined frame; wide content scrolls locally.
       return (
         <div className="overflow-x-auto mb-6">
-          <div className="border border-wareongo-blue rounded-2xl overflow-hidden min-w-fit">
-            <table className="w-full text-left text-[13px] sm:text-sm bg-transparent">
+          <div className="border border-ui-outline rounded-xl overflow-hidden min-w-fit">
+            <table className="ui-table text-left">
               <thead>
-                <tr className="border-b border-wareongo-blue bg-wareongo-blue/5">
+                <tr className="border-b border-ui-line">
                   {block.table.headers.map((h, i) => (
-                    <th key={i} className="px-4 py-3 font-semibold text-wareongo-blue text-[11px] sm:text-xs uppercase tracking-[0.12em]"><InlineText text={h} /></th>
+                    <th key={i} className="px-4 py-3 font-medium text-ui-muted text-xs"><InlineText text={h} /></th>
                   ))}
                 </tr>
               </thead>
@@ -148,7 +147,7 @@ export const ContentBlock = ({ block }: { block: BlogBlock }) => {
                 {block.table.rows.map((row, ri) => (
                   <tr
                     key={ri}
-                    className={`transition-colors hover:bg-wareongo-blue/5 ${ri < block.table.rows.length - 1 ? 'border-b border-wareongo-blue/30' : ''}`}
+                    className={`transition-colors hover:bg-ui-tint ${ri < block.table.rows.length - 1 ? 'border-b border-ui-line' : ''}`}
                   >
                     {row.map((cell, ci) => (
                       <td key={ci} className={`px-4 py-3 align-top ${ci === 0 ? 'font-medium text-wareongo-charcoal' : 'text-wareongo-slate'}`}><InlineText text={cell} /></td>

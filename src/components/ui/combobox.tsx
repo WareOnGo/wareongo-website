@@ -145,14 +145,14 @@ export function Combobox({ id, label, value, options, emptyLabel, placeholder = 
           onClick={() => setOpen(true)}
           onChange={event => { setQuery(event.target.value); setOpen(true); setActiveIndex(-1); }}
           onKeyDown={handleKeyDown}
-          className="h-11 w-full rounded-xl border border-wareongo-blue/30 bg-transparent pl-3 pr-9 text-base text-wareongo-blue placeholder:text-wareongo-slate transition-colors hover:border-wareongo-blue focus:border-wareongo-blue focus:outline-none focus:ring-2 focus:ring-wareongo-blue/20 disabled:cursor-not-allowed disabled:bg-wareongo-blue/5 md:text-sm"
+          className="ui-field pl-3 pr-9"
         />
         <button
           type="button"
           tabIndex={-1}
           disabled={disabled}
           aria-label={`Toggle ${label.toLowerCase()} options`}
-          className="absolute right-0 top-0 flex h-11 w-11 items-center justify-center text-wareongo-slate disabled:cursor-not-allowed"
+          className="absolute right-0 top-0 flex min-h-12 w-11 items-center justify-center text-wareongo-slate disabled:cursor-not-allowed"
           onMouseDown={event => event.preventDefault()}
           onClick={() => {
             inputRef.current?.focus();
@@ -164,7 +164,7 @@ export function Combobox({ id, label, value, options, emptyLabel, placeholder = 
         </button>
       </div>
       {expanded && (
-        <div className={`absolute z-30 w-full overflow-hidden rounded-2xl border border-wareongo-blue bg-wareongo-ivory p-1.5 ${popup.above ? 'bottom-full mb-2' : 'top-full mt-2'}`}
+        <div className={`absolute z-30 w-full overflow-hidden rounded-xl border border-ui-outline bg-ui-surface p-1.5 ${popup.above ? 'bottom-full mb-2' : 'top-full mt-2'}`}
           style={{ left: popup.left, width: popup.width }}>
           <ul ref={listRef} id={listId} role="listbox" aria-label={`${label} options`} className="overflow-y-auto overscroll-contain" style={{ maxHeight: popup.maxHeight }}>
             {matches.map((option, index) => (
@@ -175,7 +175,7 @@ export function Combobox({ id, label, value, options, emptyLabel, placeholder = 
                 aria-selected={active >= 0 ? index === active : option.value === value}
                 onMouseDown={event => event.preventDefault()}
                 onClick={() => choose(option)}
-                className={`flex min-h-11 cursor-pointer items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-sm text-wareongo-blue hover:bg-wareongo-blue/5 ${index === active ? 'bg-wareongo-blue/10' : ''}`}
+                className={`flex min-h-11 cursor-pointer items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-sm text-wareongo-blue hover:bg-ui-tint ${index === active ? 'bg-ui-tint' : ''}`}
               >
                 <span>{option.label}</span>
                 {option.value === value && <Check className="h-4 w-4 shrink-0" aria-hidden="true" />}

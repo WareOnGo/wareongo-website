@@ -47,7 +47,7 @@ export function LocationListingsSkeleton({ pathname }: { pathname: string }) {
         ...(warehouseType ? [{ label: `${warehouseType} warehouses` }] : []),
       ]} />
       <header className="mb-8 sm:mb-10 max-w-5xl">
-        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-wareongo-blue mb-3 leading-tight">
+        <h1 className="ui-page-title text-wareongo-blue mb-3">
           {warehouseType ? `${warehouseType} Warehouses` : 'Warehouses'} for Rent{' '}
           <span className="block">in {place}</span>
         </h1>
@@ -61,8 +61,8 @@ export function LocationListingsSkeleton({ pathname }: { pathname: string }) {
         </div>
         {hasOverview && <span className="mt-4 inline-block text-sm text-wareongo-blue">Read the {canonical} overview →</span>}
         {(chips.length > 0 || (isMicro && canonical !== parent)) && <div className="mt-5 flex flex-wrap gap-2">
-          {isMicro ? <span className="inline-flex px-3 py-1.5 rounded-full border border-wareongo-blue/30 text-sm">All warehouses in {parent}</span>
-            : chips.map(t => <span key={t} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-wareongo-blue/30 text-sm text-wareongo-blue">
+          {isMicro ? <span className="inline-flex px-3 py-1.5 rounded-full border border-ui-outline text-sm">All warehouses in {parent}</span>
+            : chips.map(t => <span key={t} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-ui-outline text-sm text-wareongo-blue">
               {t} warehouses <Skeleton className="h-3 w-6" />
             </span>)}
         </div>}
@@ -86,7 +86,7 @@ export function OverviewSkeleton({ pathname }: { pathname: string }) {
   const place = micro && cityName(city) !== name ? `${name}, ${cityName(city)}` : name;
 
   return <main className="flex-grow" data-testid="overview-skeleton">
-    <div className="section-container page-content px-4 pb-6 sm:px-6 sm:pb-10 lg:px-8">
+    <div className="section-container page-content pb-6 sm:pb-10">
       <BreadcrumbTrail className="mb-4 sm:mb-6" items={[
         ...trailStart,
         ...(city ? [{ label: stateName(state) }] : []),
@@ -95,7 +95,7 @@ export function OverviewSkeleton({ pathname }: { pathname: string }) {
       ]} />
       {content ? <MicromarketHero content={content} place={place} onBrowse={city && !micro ? undefined : '#listings'} loading /> : <header className="max-w-3xl">
         <Skeleton className="mb-3 h-[15px] w-48" />
-        <h1 className="mb-4 text-3xl font-bold leading-tight text-wareongo-blue sm:text-4xl md:text-5xl">Warehouses for rent in {name}</h1>
+        <h1 className="ui-page-title mb-4 text-wareongo-blue">Warehouses for rent in {name}</h1>
         <Skeleton className="h-24 w-full" />
       </header>}
       <section className={SECTION_RULE}>

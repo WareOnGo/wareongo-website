@@ -100,21 +100,21 @@ const AboutUs = () => {
         <div className="section-container page-content">
           {/* Hero — centered, like the homepage section headers */}
           <header className="text-center max-w-2xl mx-auto mb-14 sm:mb-16">
-            <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate block mb-3">
+            <span className="ui-eyebrow text-wareongo-slate block mb-3">
               Company
             </span>
             <h1
               id="about-title"
-              className="text-3xl sm:text-4xl md:text-5xl font-bold text-wareongo-blue mb-6 leading-tight"
+              className="ui-page-title text-wareongo-blue mb-6"
             >
               About WareOnGo
             </h1>
-            <p className="text-base sm:text-lg text-wareongo-slate leading-relaxed mb-4 text-left">
+            <p className="text-base text-wareongo-slate leading-relaxed mb-4 text-left">
               India's warehousing market is worth over $35 billion and growing 15% year-on-year. Yet finding a
               warehouse still works the way it did fifty years ago: opaque broker networks, outdated listings,
               weeks of back-and-forth, and pricing that depends on who you know.
             </p>
-            <p className="text-base sm:text-lg text-wareongo-slate leading-relaxed text-left">
+            <p className="text-base text-wareongo-slate leading-relaxed text-left">
               We started WareOnGo because we believe a warehouse decision, one of the most consequential
               operational choices a business makes, deserves better tools.
             </p>
@@ -123,7 +123,7 @@ const AboutUs = () => {
           <section aria-labelledby="trusted-by" className="mb-14 sm:mb-16">
             <h2
               id="trusted-by"
-              className="text-center text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate mb-5 font-normal"
+              className="ui-eyebrow text-center text-wareongo-slate mb-5"
             >
               Trusted by 200+ companies
             </h2>
@@ -131,7 +131,7 @@ const AboutUs = () => {
           </section>
 
           <section aria-labelledby="what-we-do" className="text-center max-w-2xl mx-auto mb-14 sm:mb-16">
-            <h2 id="what-we-do" className="text-2xl sm:text-3xl font-bold text-wareongo-blue mb-5">
+            <h2 id="what-we-do" className="ui-section-title text-wareongo-blue mb-5">
               What we do
             </h2>
             <p className="text-base text-wareongo-slate leading-relaxed mb-4 text-left">
@@ -151,7 +151,7 @@ const AboutUs = () => {
           </section>
 
           <section aria-labelledby="founders" className="text-center mb-14 sm:mb-16">
-            <h2 id="founders" className="text-2xl sm:text-3xl font-bold text-wareongo-blue mb-3">
+            <h2 id="founders" className="ui-section-title text-wareongo-blue mb-3">
               Meet the founders
             </h2>
             <p className="text-base text-wareongo-slate leading-relaxed max-w-2xl mx-auto mb-8 text-left">
@@ -169,7 +169,7 @@ const AboutUs = () => {
                   onClick={() =>
                     trackEvent('nav_click', { label: `founder_${f.initials}`, destination: f.linkedin ?? '', position: 'about_page' })
                   }
-                  className="flex flex-col items-center text-center cursor-pointer border border-wareongo-blue rounded-2xl p-6 bg-transparent hover:bg-wareongo-blue/5 transition-colors"
+                  className="flex flex-col items-center text-center cursor-pointer border border-ui-outline rounded-xl p-6 bg-transparent hover:bg-ui-tint transition-colors"
                 >
                   {f.headshot ? (
                     <img
@@ -177,18 +177,18 @@ const AboutUs = () => {
                       alt={`${f.name}, ${f.role} of WareOnGo`}
                       width={384}
                       height={384}
-                      className="w-full aspect-square rounded-xl border border-wareongo-blue object-cover mb-5"
+                      className="w-full aspect-square rounded-xl border border-ui-outline object-cover mb-5"
                     />
                   ) : (
                     <div
                       aria-hidden="true"
-                      className="w-full aspect-square rounded-xl border border-wareongo-blue text-wareongo-blue flex items-center justify-center text-5xl font-semibold mb-5"
+                      className="w-full aspect-square rounded-xl border border-ui-outline text-wareongo-blue flex items-center justify-center text-5xl font-semibold mb-5"
                     >
                       {f.initials}
                     </div>
                   )}
                   <p className="text-lg font-semibold text-wareongo-blue">{f.name}</p>
-                  <p className="text-[11px] uppercase tracking-[0.15em] text-wareongo-slate mt-1.5">{f.role}</p>
+                  <p className="ui-eyebrow text-wareongo-slate mt-1.5">{f.role}</p>
                   <span className="inline-block text-sm text-wareongo-blue hover:underline mt-3">LinkedIn →</span>
                 </a>
               ))}
@@ -205,14 +205,14 @@ const AboutUs = () => {
           <section aria-labelledby="built-so-far" className="text-center mb-14 sm:mb-16">
             <h2
               id="built-so-far"
-              className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate mb-6 font-normal"
+              className="ui-eyebrow text-wareongo-slate mb-6"
             >
               What we've built so far
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-3xl mx-auto">
               {STATS.map((s) => (
                 <div key={s.l} className="text-center">
-                  <p className="text-3xl sm:text-4xl font-bold text-wareongo-blue">{s.n}</p>
+                  <p className="ui-metric text-wareongo-blue">{s.n}</p>
                   <p className="text-xs sm:text-sm text-wareongo-slate mt-1">{s.l}</p>
                 </div>
               ))}
@@ -220,16 +220,16 @@ const AboutUs = () => {
           </section>
 
           <section aria-labelledby="lets-talk" className="max-w-3xl mx-auto">
-            <div className="bg-wareongo-blue text-white rounded-2xl px-6 py-10 sm:px-10 sm:py-12 text-center relative overflow-hidden">
+            <div className="bg-wareongo-blue text-ui-surface rounded-xl px-6 py-10 sm:px-10 sm:py-12 text-center relative overflow-hidden">
               {/* Subtle background decoration — matches RequestCTASection */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl -translate-y-1/3 translate-x-1/3"></div>
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3"></div>
+              <div className="absolute top-0 right-0 w-64 h-64 bg-ui-surface opacity-5 rounded-full blur-3xl -translate-y-1/3 translate-x-1/3"></div>
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-ui-surface opacity-5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3"></div>
 
               <div className="relative z-10">
-                <h2 id="lets-talk" className="text-2xl sm:text-3xl font-bold mb-3">
+                <h2 id="lets-talk" className="ui-section-title mb-3">
                   Let's talk
                 </h2>
-                <p className="text-white/80 text-base leading-relaxed mb-8 max-w-xl mx-auto">
+                <p className="text-ui-line text-base leading-relaxed mb-8 max-w-xl mx-auto">
                   Whether you're looking for warehouse space, listing your property, or exploring partnerships,
                   we'd like to hear from you.
                 </p>
@@ -238,15 +238,15 @@ const AboutUs = () => {
                   onClick={() =>
                     trackEvent('cta_click', { label: 'Talk to Us', cta_location: 'about_page', destination: '/request-warehouse' })
                   }
-                  className="inline-flex items-center justify-center bg-white text-wareongo-blue text-base font-bold px-8 py-3.5 rounded-xl hover:bg-wareongo-ivory hover:shadow-xl transition-all duration-300"
+                  className="inline-flex items-center justify-center bg-ui-surface text-wareongo-blue text-base font-bold px-8 py-3.5 rounded-xl hover:bg-wareongo-ivory shadow-none transition-all duration-300"
                 >
                   Talk to Us
                 </Link>
-                <p className="text-sm text-white/70 mt-8">
+                <p className="text-sm text-ui-line mt-8">
                   <a
                     href="mailto:sales@wareongo.com"
                     onClick={() => trackEvent('contact_click', { contact_method: 'email', contact_target: 'sales_email', placement: 'about_page' })}
-                    className="hover:text-white transition-colors"
+                    className="hover:text-ui-surface transition-colors"
                   >
                     sales@wareongo.com
                   </a>
@@ -254,7 +254,7 @@ const AboutUs = () => {
                   <a
                     href="tel:+917400184225"
                     onClick={() => trackEvent('contact_click', { contact_method: 'phone', contact_target: 'sales_phone', placement: 'about_page' })}
-                    className="hover:text-white transition-colors"
+                    className="hover:text-ui-surface transition-colors"
                   >
                     (+91) 74001-84225
                   </a>
@@ -264,7 +264,7 @@ const AboutUs = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => trackEvent('contact_click', { contact_method: 'whatsapp', contact_target: 'sales_whatsapp', placement: 'about_page' })}
-                    className="hover:text-white transition-colors"
+                    className="hover:text-ui-surface transition-colors"
                   >
                     WhatsApp
                   </a>

@@ -11,7 +11,7 @@ const UserDashboard = () => {
       
       <main className="flex-grow bg-wareongo-ivory bg-opacity-50 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl text-wareongo-charcoal">
+          <h1 className="ui-page-title text-wareongo-charcoal">
             Coming Soon
           </h1>
         </div>

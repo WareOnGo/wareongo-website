@@ -149,7 +149,7 @@ export default function LocationListings() {
           <header className="mb-8 sm:mb-10 max-w-5xl">
             <h1
               id="location-title"
-              className="text-2xl sm:text-4xl md:text-5xl font-bold text-wareongo-blue mb-3 leading-tight"
+              className="ui-page-title text-wareongo-blue mb-3"
             >
               {headingPrefix} for Rent{' '}
               <span className="block">in {titlePlace}</span>
@@ -183,7 +183,7 @@ export default function LocationListings() {
               <div className="mt-5 flex flex-wrap gap-2">
                 <Link
                   to={`/listings/city/${parentCity.slug}`}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-wareongo-blue/30 text-sm text-wareongo-blue hover:bg-wareongo-blue/5 transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-ui-outline text-sm text-wareongo-blue hover:bg-ui-tint transition-colors"
                 >
                   All warehouses in {parentCity.canonical}
                 </Link>
@@ -196,7 +196,7 @@ export default function LocationListings() {
                 {typeCounts.PEB > 0 && (
                   <Link
                     to={`${basePath}/peb`}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-wareongo-blue/30 text-sm text-wareongo-blue hover:bg-wareongo-blue/5 transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-ui-outline text-sm text-wareongo-blue hover:bg-ui-tint transition-colors"
                   >
                     PEB warehouses
                     <span className="text-wareongo-slate">({typeCounts.PEB})</span>
@@ -205,7 +205,7 @@ export default function LocationListings() {
                 {typeCounts.RCC > 0 && (
                   <Link
                     to={`${basePath}/rcc`}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-wareongo-blue/30 text-sm text-wareongo-blue hover:bg-wareongo-blue/5 transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-ui-outline text-sm text-wareongo-blue hover:bg-ui-tint transition-colors"
                   >
                     RCC warehouses
                     <span className="text-wareongo-slate">({typeCounts.RCC})</span>

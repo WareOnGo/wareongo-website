@@ -64,14 +64,14 @@ const FAQItem = ({
   isOpen: boolean;
   onToggle: () => void;
 }) => (
-  <div className="bg-transparent border-t border-wareongo-blue first:border-t-0 transition-colors duration-300 hover:bg-wareongo-blue/5">
+  <div className="bg-transparent border-t border-ui-outline first:border-t-0 transition-colors duration-300 hover:bg-ui-tint">
     <button
       type="button"
       onClick={onToggle}
       aria-expanded={isOpen}
       className="w-full flex items-center justify-between gap-4 text-left p-5 sm:p-6"
     >
-      <h3 className="text-base sm:text-lg font-semibold text-wareongo-blue">
+      <h3 className="ui-card-title text-wareongo-blue">
         {faq.question}
       </h3>
       <ChevronDown
@@ -105,19 +105,19 @@ const FAQSection = () => {
       <Head>
         <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
       </Head>
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         {/* Section Header */}
         <div className="text-center mb-10 md:mb-14">
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-wareongo-slate font-medium mb-3">
+          <p className="ui-eyebrow text-wareongo-slate font-medium mb-3">
             FAQ
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-wareongo-blue">
+          <h2 className="ui-section-title text-wareongo-blue">
             Frequently Asked Questions
           </h2>
         </div>
 
         {/* Accordion — single unit */}
-        <div className="max-w-3xl mx-auto bg-transparent border border-wareongo-blue rounded-2xl shadow-none overflow-hidden">
+        <div className="max-w-3xl mx-auto bg-transparent border border-ui-outline rounded-xl shadow-none overflow-hidden">
           {FAQS.map((faq, i) => (
             <FAQItem
               key={i}

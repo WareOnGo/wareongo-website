@@ -61,10 +61,10 @@ const AdminPanel = () => {
       <Navbar />
 
       <main className="page-content flex-grow bg-wareongo-ivory bg-opacity-50 pb-12">
-        <div className="container mx-auto px-4 max-w-7xl">
+        <div className="container mx-auto max-w-7xl">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-4xl font-bold text-wareongo-blue mb-2">Admin Panel</h1>
+            <h1 className="ui-page-title text-wareongo-blue mb-2">Admin Panel</h1>
             <p className="text-lg text-wareongo-charcoal">
               Welcome back, <span className="font-semibold">{user?.name || user?.email}</span>
             </p>
@@ -80,13 +80,13 @@ const AdminPanel = () => {
                 return (
                   <div
                     key={index}
-                    className="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between"
+                    className="ui-card p-6 flex flex-col justify-between"
                   >
                     <div>
                       <div className={`${tool.color} w-12 h-12 rounded-lg flex items-center justify-center mb-4`}>
-                        <Icon className="h-6 w-6 text-white" />
+                        <Icon className="h-6 w-6 text-ui-surface" />
                       </div>
-                      <h3 className="text-lg font-semibold text-wareongo-blue mb-4">
+                      <h3 className="ui-card-title text-wareongo-blue mb-4">
                         {tool.name}
                       </h3>
                     </div>
@@ -104,13 +104,13 @@ const AdminPanel = () => {
                   href={tool.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 flex flex-col justify-between hover:scale-105"
+                  className="ui-card ui-card--action group p-6 flex flex-col justify-between"
                 >
                   <div>
-                    <div className={`${tool.color} w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                      <Icon className="h-6 w-6 text-white" />
+                    <div className={`${tool.color} w-12 h-12 rounded-md flex items-center justify-center mb-4`}>
+                      <Icon className="h-6 w-6 text-ui-surface" />
                     </div>
-                    <h3 className="text-lg font-semibold text-wareongo-blue mb-4 group-hover:text-wareongo-blue/80">
+                    <h3 className="ui-card-title text-wareongo-blue mb-4 group-hover:text-wareongo-blue/80">
                       {tool.name}
                     </h3>
                   </div>

@@ -8,7 +8,7 @@ const SpecTable = ({ stats, caption = 'Typical specification across the warehous
 
   return (
     <div className={`warehouse-spec-table overflow-hidden ${PANEL}`}>
-      <table className="w-full text-left text-[13px] sm:text-sm">
+      <table className="ui-table text-left">
         <caption className="sr-only">
           {caption}
         </caption>

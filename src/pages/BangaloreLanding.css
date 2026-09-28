@@ -13,7 +13,7 @@
 .bangalore-landing__container { width: min(100% - 2 * var(--landing-gutter), var(--landing-content-width)); margin-inline: auto; }
 :where(.bangalore-landing, .bangalore-landing-dialog) :where(button, input, select, textarea) { font-family: inherit; }
 .bangalore-landing main .lucide, .bangalore-landing-dialog .lucide { stroke-width: var(--landing-icon-stroke); }
-.bangalore-landing .warehouse-card { --card-ink: var(--landing-ink); --card-muted: var(--landing-muted); --card-edge: var(--landing-outline); --card-hover: var(--landing-card); font-family: var(--landing-font); transition: border-color var(--landing-motion); }
+.bangalore-landing .warehouse-card { --card-ink: var(--landing-ink); --card-muted: var(--landing-muted); font-family: var(--landing-font); }
 .bangalore-landing__section-heading { margin-bottom: 24px; text-align: left; }
 .bangalore-landing__section-title { margin: 0; font-size: var(--landing-text-section); font-weight: 600; line-height: var(--landing-leading-heading); letter-spacing: -.025em; text-wrap: balance; }
 .bangalore-landing__eyebrow { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; color: var(--landing-muted); font-size: var(--landing-text-xs); font-weight: 600; line-height: var(--landing-leading-body); letter-spacing: .1em; text-transform: uppercase; }
@@ -56,11 +56,10 @@
 .bangalore-landing__featured-controls > button { display: grid; width: var(--landing-compact-height); height: var(--landing-compact-height); place-items: center; border: var(--landing-interactive-border); border-radius: 50%; background: var(--landing-card); color: var(--landing-ink); }
 .bangalore-landing__featured-controls > button:hover:not(:disabled) { border-color: var(--landing-accent); background: var(--landing-tint); }
 .bangalore-landing__featured-controls > button:disabled { opacity: .35; cursor: default; }
-.bangalore-landing__featured-grid { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 24px) / 2.25); gap: 12px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: 2px; scrollbar-width: none; margin: -2px; padding: 2px; }
+.bangalore-landing__featured-grid { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 24px) / 2.25); gap: 12px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: 2px; scrollbar-width: none; margin: -2px; padding: 2px 2px 4px; }
 .bangalore-landing__featured-grid::-webkit-scrollbar { display: none; }
 .bangalore-landing__featured-grid:focus-visible { outline: var(--landing-focus-width) solid var(--landing-accent); outline-offset: 3px; border-radius: var(--landing-radius); }
-.bangalore-landing__featured-card { position: relative; min-width: 0; overflow: hidden; border: var(--landing-interactive-border); border-radius: var(--landing-radius); background: var(--landing-card); scroll-snap-align: start; transition: border-color var(--landing-motion); }
-.bangalore-landing__featured-card:hover { border-color: var(--landing-accent); }
+.bangalore-landing__featured-card { position: relative; min-width: 0; overflow: hidden; border: 1px solid var(--card-edge); border-radius: var(--landing-radius); background: var(--landing-card); scroll-snap-align: start; }
 .bangalore-landing__featured-photo { aspect-ratio: 16 / 9; overflow: hidden; background: var(--landing-tint); }
 .bangalore-landing__featured-photo > img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .bangalore-landing__featured-body { padding: var(--landing-compact-padding); }
@@ -112,8 +111,6 @@
 .bangalore-landing__size-filter:focus-visible { outline: var(--landing-focus-width) solid var(--landing-accent); outline-offset: 3px; }
 .bangalore-landing__available-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--landing-grid-gap); }
 .bangalore-landing__available-grid:focus-visible { outline: var(--landing-focus-width) solid var(--landing-accent); outline-offset: 3px; border-radius: var(--landing-radius); }
-.bangalore-landing__available .warehouse-card { border-color: var(--landing-outline); border-radius: var(--landing-radius); background: var(--landing-card); box-shadow: none; }
-.bangalore-landing__available .warehouse-card:hover { transform: none; border-color: var(--landing-accent); box-shadow: none; }
 .bangalore-landing__available .warehouse-card__photo { background: var(--landing-tint); }
 .bangalore-landing__available .warehouse-card__body { padding: var(--landing-compact-padding); }
 .bangalore-landing__available .warehouse-card__type { border: var(--landing-border); border-radius: var(--landing-tag-radius); background: var(--landing-card); font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); }
@@ -263,8 +260,8 @@
 
 /* Apply the same scale to the shared city statistics on this page. */
 .bangalore-landing__stats-content :is(.text-xs, .text-\[10px\], .text-\[11px\]) { font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); }
-.bangalore-landing__stats-content .uppercase { font-weight: 500; letter-spacing: 0; text-transform: none; }
-.bangalore-landing__stats-content .text-3xl,
+.bangalore-landing__stats-content .ui-eyebrow { font-weight: 500; letter-spacing: 0; text-transform: none; }
+.bangalore-landing__stats-content .ui-metric,
 .bangalore-landing__stats-content dd > span:first-child { font-size: var(--landing-text-metric); font-weight: 600; line-height: var(--landing-leading-heading); }
 .bangalore-landing__stats-content caption:not(.sr-only),
 .bangalore-landing__stats-content figcaption > span:first-child { color: var(--landing-ink); font-size: var(--landing-text-sm); font-weight: 600; line-height: var(--landing-leading-ui); letter-spacing: 0; text-transform: none; }
@@ -277,7 +274,7 @@
 .bangalore-landing__spec-overview { box-shadow: none; }
 .bangalore-landing__stats-content .city-corridor-segment { padding: 24px; background: var(--landing-card); border-color: var(--landing-line); }
 .bangalore-landing__stats-content .city-corridor-segment > p:first-child { font-size: var(--landing-text-sm); font-weight: 600; color: var(--landing-ink); }
-.bangalore-landing__stats-content .city-corridor-segment > .text-3xl { margin-block: 12px 8px; }
+.bangalore-landing__stats-content .city-corridor-segment > .ui-metric { margin-block: 12px 8px; }
 .bangalore-landing__stats-content .city-corridor-panel > p { max-width: 960px; line-height: var(--landing-leading-body); }
 .bangalore-landing__stats-content table { width: 100%; border-collapse: separate; border-spacing: 0; }
 .bangalore-landing__stats-content :is(th, td) { padding: 16px 20px; vertical-align: middle; }
@@ -324,7 +321,7 @@
   .bangalore-landing__area-panel tbody tr:hover { background: var(--landing-table-hover); }
 }
 
-/* Shared site components adopt these roles only inside the ad page. */
+/* Ad-page adaptations of the shared visual roles. */
 .bangalore-landing .wog-navigation { --nav-ink: var(--landing-ink); --nav-muted: var(--landing-muted); --nav-paper: var(--landing-card); --nav-ivory: var(--landing-paper); --nav-line: var(--landing-line); --nav-accent: var(--landing-accent); --nav-tint: var(--landing-tint); }
 .bangalore-landing .wog-nav-bar { border-radius: var(--landing-radius); }
 .bangalore-landing .wog-nav-page-links .wog-nav-item { color: var(--landing-muted); font-size: var(--landing-text-sm); }

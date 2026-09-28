@@ -73,11 +73,12 @@ const RequestFormSection = () => {
         location: '',
         requirements: ''
       });
-    } catch (err: any) {
-      setError(err.message || 'Something went wrong. Please try again.');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : undefined;
+      setError(message || 'Something went wrong. Please try again.');
       toast({
         title: "Error",
-        description: err.message || 'Failed to submit request. Please try again.',
+        description: message || 'Failed to submit request. Please try again.',
         variant: "destructive"
       });
     } finally {
@@ -88,8 +89,8 @@ const RequestFormSection = () => {
   return (
     <section id="request" className="section-container">
       <div className="max-w-4xl mx-auto">
-        <h2 className="section-title">Request a Warehouse</h2>
-        <div className="bg-white p-6 md:p-8 rounded-lg shadow-md">
+        <h2 className="ui-section-title section-title">Request a Warehouse</h2>
+        <div className="bg-ui-surface p-6 md:p-8 rounded-lg shadow-none">
           {error && (
             <div className="p-3 mb-6 text-sm bg-red-50 border border-red-200 text-red-600 rounded">
               {error}

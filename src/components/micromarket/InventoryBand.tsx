@@ -60,7 +60,7 @@ const InventoryBand = ({ stats, heading, excludedLabel = 'land or build-to-suit'
   return (
     <section
       aria-labelledby="inventory-band"
-      className="rounded-2xl bg-wareongo-blue px-5 py-6 text-wareongo-ivory sm:px-7 sm:py-7"
+      className="rounded-xl bg-wareongo-blue px-5 py-6 text-wareongo-ivory sm:px-7 sm:py-7"
     >
       <div className="mb-5 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-wareongo-ivory/15 pb-4">
         <h2
@@ -86,7 +86,7 @@ const InventoryBand = ({ stats, heading, excludedLabel = 'land or build-to-suit'
               </div>
             </dt>
             <dd className="flex items-baseline gap-1.5">
-              <span className="text-2xl font-bold tabular-nums leading-none sm:text-[1.75rem]">
+              <span className="ui-metric">
                 {t.value}
               </span>
               <span className="text-xs font-semibold tabular-nums text-wareongo-ivory/70">

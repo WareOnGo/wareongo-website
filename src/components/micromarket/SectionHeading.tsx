@@ -21,7 +21,7 @@ const SectionHeading = ({
       </span>
       <span className={`${EYEBROW} text-wareongo-slate`}>{eyebrow}</span>
     </div>
-    <h2 className="text-xl font-bold leading-tight text-wareongo-blue sm:text-2xl md:text-[1.75rem]">
+    <h2 className="ui-section-title text-wareongo-blue">
       {children}
     </h2>
   </header>

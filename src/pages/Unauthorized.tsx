@@ -13,10 +13,10 @@ const Unauthorized = () => {
       <Navbar />
       
       <main className="flex-grow bg-wareongo-ivory bg-opacity-50 flex items-center justify-center py-12">
-        <div className="container mx-auto px-4 max-w-2xl text-center">
-          <div className="bg-white rounded-lg shadow-lg p-12">
+        <div className="container mx-auto max-w-2xl text-center">
+          <div className="bg-ui-surface rounded-lg shadow-none p-12">
             <ShieldX className="h-20 w-20 text-red-500 mx-auto mb-6" />
-            <h1 className="text-4xl font-bold text-wareongo-blue mb-4">
+            <h1 className="ui-page-title text-wareongo-blue mb-4">
               Access Denied
             </h1>
             <p className="text-xl text-wareongo-charcoal mb-6">

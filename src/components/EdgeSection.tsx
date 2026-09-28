@@ -41,19 +41,19 @@ const EdgeSection = () => {
         className="edge-spotlight"
         spotlightColor="rgba(56, 140, 224, 0.25)"
       >
-        <div className="container mx-auto px-4 max-w-[85rem]">
+        <div className="container mx-auto max-w-[85rem]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             
             {/* Left Column: Text & CTAs */}
             <div className="lg:col-span-5 flex flex-col justify-center">
-              <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-sky-300/90 font-medium mb-5 inline-block">
+              <span className="ui-eyebrow text-ui-line font-medium mb-5 inline-block">
                 Beta Access · By Application Only
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-4xl xl:text-5xl font-bold mb-5 md:mb-6 leading-tight text-white text-balance">
+              <h2 className="ui-section-title mb-5 md:mb-6 text-ui-surface text-balance">
                 Warehousing Decisions Just Got{' '}
-                <span className="text-sky-300/70">Significantly Smarter.</span>
+                <span className="text-ui-line">Significantly Smarter.</span>
               </h2>
-              <p className="text-white/75 text-base sm:text-lg md:text-xl mb-8 md:mb-10 max-w-xl leading-relaxed">
+              <p className="text-ui-line text-base mb-8 md:mb-10 max-w-xl leading-relaxed">
                 WareOnGo Edge: India's first verified warehousing advisory portal.
                 Invite-only access for SCM leaders, 3PL decision-makers, and verified
                 supply chain professionals.
@@ -65,13 +65,13 @@ const EdgeSection = () => {
                     trackEvent('cta_click', { cta_id: 'edge_beta', form_id: 'edge_beta', lead_type: 'edge_beta', label: 'Request Beta Access', cta_location: 'edge_section' });
                     setIsContactDialogOpen(true);
                   }}
-                  className="bg-white text-wareongo-blue text-base font-medium px-7 py-4 rounded-lg hover:opacity-90 transition-opacity"
+                  className="ui-button ui-button--inverse"
                 >
                   Request Beta Access
                 </button>
                 <button
                   onClick={() => setShowCardsMobile(!showCardsMobile)}
-                  className="md:hidden inline-flex items-center justify-center gap-2 border border-white/25 text-white text-base font-medium px-7 py-4 rounded-lg hover:bg-white/5 transition-colors"
+                  className="ui-button ui-button--on-dark md:hidden"
                 >
                   {showCardsMobile ? 'Show Less' : 'Learn More'}
                   <ArrowDown className={`h-4 w-4 transition-transform ${showCardsMobile ? 'rotate-180' : ''}`} />
@@ -87,8 +87,8 @@ const EdgeSection = () => {
                     key={idx} 
                     className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 flex flex-col justify-center items-start text-left h-full"
                   >
-                    <h3 className="text-sky-100 font-medium text-lg mb-1.5">{feature.title}</h3>
-                    <p className="text-sky-100/60 text-sm leading-relaxed">{feature.description}</p>
+                    <h3 className="ui-card-title text-ui-surface mb-1.5">{feature.title}</h3>
+                    <p className="text-ui-line text-sm leading-relaxed">{feature.description}</p>
                   </div>
                 ))}
               </div>

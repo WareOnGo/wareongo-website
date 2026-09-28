@@ -1,4 +1,6 @@
 @import "./fonts.css";
+@import "./styles/ui.tokens.css";
+@import "./styles/ui.css";
 
 @tailwind base;
 @tailwind components;
@@ -6,35 +8,35 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 215 14% 25%;
+    --background: 48 33% 97%;
+    --foreground: 209 70% 13%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 215 14% 25%;
+    --card: 48 100% 99%;
+    --card-foreground: 209 70% 13%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 215 14% 25%;
+    --popover: 48 100% 99%;
+    --popover-foreground: 209 70% 13%;
 
     --primary: 209 84% 13%;  /* Midnight Blue */
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 147 21% 30%; /* Dark Olive Green */
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 210 38% 95%;
+    --secondary-foreground: 209 70% 13%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 210 12% 32%;
 
-    --accent: 304 25% 25%; /* Aubergine Purple */
-    --accent-foreground: 0 0% 98%;
+    --accent: 210 38% 95%;
+    --accent-foreground: 205 59% 22%;
 
     --destructive: 15 68% 44%; /* Burnt Sienna */
     --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --border: 210 24% 87%;
+    --input: 208 21% 74%;
     --ring: 209 84% 13%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -91,13 +93,16 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-ui-paper text-ui-ink font-sans;
   }
 }
 
 @layer components {
   .section-container {
-    @apply container mx-auto px-4 py-16 md:py-24;
+    width: 100%;
+    max-width: calc(var(--ui-content-width) + 2 * var(--ui-gutter));
+    margin-inline: auto;
+    padding: var(--ui-section-space) var(--ui-gutter);
   }
 
   .page-content {
@@ -105,15 +110,15 @@
   }
   
   .section-title {
-    @apply text-3xl md:text-4xl font-bold mb-12 text-center text-wareongo-blue;
+    @apply ui-section-title mb-6 text-center text-wareongo-blue;
   }
   
   .btn-primary {
-    @apply bg-wareongo-blue text-white font-semibold py-3 px-6 rounded-md hover:bg-opacity-90 transition-all duration-300;
+    @apply ui-button;
   }
 
   .btn-secondary {
-    @apply bg-wareongo-green text-white font-semibold py-2 px-4 rounded-md hover:bg-opacity-90 transition-all duration-300;
+    @apply ui-button ui-button--secondary;
   }
 }
 
@@ -193,7 +198,7 @@
   .focus-visible\:ring-2:focus-visible {
     outline: 2px solid transparent;
     outline-offset: 2px;
-    box-shadow: 0 0 0 2px var(--ring);
+    box-shadow: 0 0 0 2px hsl(var(--ring));
   }
 
   /* Reduced motion support */
@@ -225,35 +230,35 @@
   }
 }
 
-/* Leaflet popup — match neubrutal stroked theme */
+/* Leaflet popups use the same surface and outline as the listing cards. */
 .leaflet-popup.warehouse-popup .leaflet-popup-content-wrapper {
-  background-color: #F8F6F1;
-  color: #0A2239;
-  border: 1px solid #0A2239;
-  border-radius: 1rem;
+  background-color: var(--ui-surface);
+  color: var(--ui-ink);
+  border: 1px solid var(--ui-outline);
+  border-radius: var(--ui-radius);
   box-shadow: none;
   padding: 4px;
 }
 
 .leaflet-popup.warehouse-popup .leaflet-popup-content {
   margin: 12px 14px;
-  font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+  font-family: var(--ui-font);
   line-height: 1.4;
 }
 
 .leaflet-popup.warehouse-popup .leaflet-popup-tip {
-  background: #F8F6F1;
-  border: 1px solid #0A2239;
+  background: var(--ui-surface);
+  border: 1px solid var(--ui-outline);
   box-shadow: none;
 }
 
 .leaflet-popup.warehouse-popup a.leaflet-popup-close-button {
-  color: #0A2239;
+  color: var(--ui-ink);
   font-weight: 400;
   padding: 6px 8px 0 0;
 }
 
 .leaflet-popup.warehouse-popup a.leaflet-popup-close-button:hover {
-  color: #0A2239;
+  color: var(--ui-accent);
   background: transparent;
 }

@@ -128,12 +128,12 @@ const ContactFormDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={(next) => { if (!isSubmitting) onOpenChange(next); }}>
-      <DialogContent onCloseAutoFocus={onCloseAutoFocus} className={`font-sans bg-wareongo-ivory border border-wareongo-blue rounded-2xl sm:max-w-[460px] max-h-[calc(100dvh-2rem)] overflow-y-auto p-6 sm:p-8 shadow-none gap-0 ${className}`}>
+      <DialogContent onCloseAutoFocus={onCloseAutoFocus} className={`font-sans bg-ui-surface border border-ui-outline rounded-xl sm:max-w-[460px] max-h-[calc(100dvh-2rem)] overflow-y-auto p-6 sm:p-8 shadow-none gap-0 ${className}`}>
         <DialogHeader className="mb-5">
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-wareongo-slate font-medium mb-2 text-left">
+          <p className="ui-eyebrow text-wareongo-slate font-medium mb-2 text-left">
             Get in touch
           </p>
-          <DialogTitle className="text-2xl sm:text-3xl font-bold text-wareongo-blue text-left">
+          <DialogTitle className="ui-panel-title text-wareongo-blue text-left">
             {title}
           </DialogTitle>
           <DialogDescription className="text-sm text-wareongo-slate text-left pt-1">
@@ -149,16 +149,16 @@ const ContactFormDialog = ({
           )}
 
           <div className="space-y-1.5">
-            <label htmlFor="name" className="text-xs uppercase tracking-[0.18em] font-medium text-wareongo-slate block">
+            <label htmlFor="name" className="ui-label text-wareongo-slate block">
               Name
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-wareongo-blue/70">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-ui-accent">
                 <User className="h-4 w-4" strokeWidth={1.5} />
               </div>
               <input
                 id="name" name="name"
-                className="w-full h-11 pl-10 pr-3.5 bg-transparent border border-wareongo-blue rounded-xl text-sm text-wareongo-blue placeholder:text-wareongo-slate focus:outline-none focus:ring-2 focus:ring-wareongo-blue/20 focus:border-wareongo-blue transition-colors"
+                className="ui-field w-full pl-10 pr-3.5 text-wareongo-blue"
                 placeholder="Enter your name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -169,17 +169,17 @@ const ContactFormDialog = ({
 
           {requireCompanyName && (
             <div className="space-y-1.5">
-              <label htmlFor="company-name" className="text-xs uppercase tracking-[0.18em] font-medium text-wareongo-slate block">
+              <label htmlFor="company-name" className="ui-label text-wareongo-slate block">
                 Company Name
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-wareongo-blue/70">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-ui-accent">
                   <Building2 className="h-4 w-4" strokeWidth={1.5} />
                 </div>
                 <input
                   id="company-name" name="company-name"
                   autoComplete="organization"
-                  className="w-full h-11 pl-10 pr-3.5 bg-transparent border border-wareongo-blue rounded-xl text-sm text-wareongo-blue placeholder:text-wareongo-slate focus:outline-none focus:ring-2 focus:ring-wareongo-blue/20 focus:border-wareongo-blue transition-colors"
+                  className="ui-field w-full pl-10 pr-3.5 text-wareongo-blue"
                   placeholder="Enter your company name"
                   value={companyName}
                   onChange={(e) => setCompanyName(e.target.value)}
@@ -190,16 +190,16 @@ const ContactFormDialog = ({
           )}
 
           <div className="space-y-1.5">
-            <label htmlFor="phone" className="text-xs uppercase tracking-[0.18em] font-medium text-wareongo-slate block">
+            <label htmlFor="phone" className="ui-label text-wareongo-slate block">
               Phone Number
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-wareongo-blue/70">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-ui-accent">
                 <Phone className="h-4 w-4" strokeWidth={1.5} />
               </div>
               <input
                 id="phone" name="phone"
-                className="w-full h-11 pl-10 pr-3.5 bg-transparent border border-wareongo-blue rounded-xl text-sm text-wareongo-blue placeholder:text-wareongo-slate focus:outline-none focus:ring-2 focus:ring-wareongo-blue/20 focus:border-wareongo-blue transition-colors"
+                className="ui-field w-full pl-10 pr-3.5 text-wareongo-blue"
                 placeholder="Enter your phone number"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
@@ -209,17 +209,17 @@ const ContactFormDialog = ({
           </div>
 
           <div className="space-y-1.5">
-            <label htmlFor="email" className="text-xs uppercase tracking-[0.18em] font-medium text-wareongo-slate block">
+            <label htmlFor="email" className="ui-label text-wareongo-slate block">
               Email <span className="lowercase tracking-normal text-wareongo-slate normal-case">(optional)</span>
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-wareongo-blue/70">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-ui-accent">
                 <Mail className="h-4 w-4" strokeWidth={1.5} />
               </div>
               <input
                 id="email" name="email"
                 type="email"
-                className="w-full h-11 pl-10 pr-3.5 bg-transparent border border-wareongo-blue rounded-xl text-sm text-wareongo-blue placeholder:text-wareongo-slate focus:outline-none focus:ring-2 focus:ring-wareongo-blue/20 focus:border-wareongo-blue transition-colors"
+                className="ui-field w-full pl-10 pr-3.5 text-wareongo-blue"
                 placeholder="Enter your email (optional)"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -231,7 +231,7 @@ const ContactFormDialog = ({
             <DialogClose asChild>
               <button
                 type="button"
-                className="h-11 px-5 bg-transparent border border-wareongo-blue rounded-xl text-sm font-semibold text-wareongo-blue hover:bg-wareongo-blue/5 transition-colors"
+                className="ui-button ui-button--secondary"
               >
                 Cancel
               </button>
@@ -239,7 +239,7 @@ const ContactFormDialog = ({
             <button
               type="submit"
               disabled={isSubmitting}
-              className="h-11 px-5 bg-wareongo-blue border border-wareongo-blue rounded-xl text-sm font-semibold text-wareongo-ivory hover:bg-wareongo-blue/90 transition-colors disabled:opacity-60 disabled:cursor-not-allowed inline-flex items-center justify-center"
+              className="ui-button disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {isSubmitting ? (
                 <>

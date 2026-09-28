@@ -23,7 +23,7 @@ function FeaturedWarehouseCard({ listing, index, onContact, content }: Bangalore
   const ref = useListingImpression<HTMLElement>(context);
 
   return (
-    <article ref={ref} className="bangalore-landing__featured-card">
+    <article ref={ref} className="bangalore-landing__featured-card ui-listing-card">
       <div className="bangalore-landing__featured-photo">
         <img src={image.url} alt={image.alt} width={image.width} height={image.height} decoding="async" />
       </div>

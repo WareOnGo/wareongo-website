@@ -40,7 +40,7 @@ const Blogs = () => {
       <Navbar />
 
       <main className="flex-grow" role="main" aria-labelledby="blogs-title">
-        <div className="section-container page-content px-4 sm:px-6 lg:px-8 pb-6 sm:pb-10">
+        <div className="section-container page-content pb-6 sm:pb-10">
           <div className="max-w-3xl mx-auto">
             <Breadcrumbs
               className="mb-4 sm:mb-6"
@@ -53,13 +53,13 @@ const Blogs = () => {
             />
 
             <header className="mb-8">
-              <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate block mb-3">
+              <span className="ui-eyebrow text-wareongo-slate block mb-3">
                 Knowledge base
               </span>
-              <h1 id="blogs-title" className="text-3xl sm:text-4xl font-bold text-wareongo-blue mb-3 leading-tight">
+              <h1 id="blogs-title" className="ui-page-title text-wareongo-blue mb-3">
                 Blogs
               </h1>
-              <p className="text-base sm:text-lg text-wareongo-slate leading-relaxed">
+              <p className="text-base text-wareongo-slate leading-relaxed">
                 Practical, India-specific answers on warehouse construction types, grading, compliance and
                 lease economics, written from {verifiedWarehousesLabel} verified listings and hands-on transactions.
               </p>
@@ -70,9 +70,9 @@ const Blogs = () => {
                 <li key={g.slug}>
                   <Link
                     to={`/blogs/${g.slug}`}
-                    className="block border border-wareongo-blue/15 rounded-2xl p-5 hover:border-wareongo-blue/40 hover:bg-wareongo-blue/[0.02] transition-colors"
+                    className="ui-card ui-card--action block p-6"
                   >
-                    <h2 className="text-lg sm:text-xl font-semibold text-wareongo-blue mb-1">{g.title}</h2>
+                    <h2 className="ui-card-title text-wareongo-blue mb-1">{g.title}</h2>
                     <p className="text-sm text-wareongo-slate leading-relaxed">{g.description}</p>
                     <p className="text-xs text-wareongo-slate mt-2">
                       Updated <time dateTime={g.updated}>{g.updated}</time>

@@ -44,12 +44,12 @@ const LINE = 'bg-wareongo-blue/30';
 const TIP = 'text-wareongo-blue/40';
 
 const StepCard = ({ step }: { step: Step }) => (
-  <div className="flex-1 bg-transparent border border-wareongo-blue rounded-2xl shadow-none p-5 sm:p-6 flex flex-col items-start text-left transition-colors duration-300 hover:bg-wareongo-blue/5">
+  <div className="flex-1 bg-ui-surface border border-ui-line rounded-xl shadow-none p-5 sm:p-6 flex flex-col items-start text-left transition-colors duration-300">
     <div className="flex items-center gap-3 mb-4">
-      <span className="w-8 h-8 shrink-0 rounded-full bg-wareongo-blue text-white text-sm font-bold flex items-center justify-center tabular-nums">
+      <span className="w-8 h-8 shrink-0 rounded-full bg-wareongo-blue text-ui-surface text-sm font-bold flex items-center justify-center tabular-nums">
         {step.n}
       </span>
-      <h3 className="text-base sm:text-lg font-semibold text-wareongo-blue leading-tight">
+      <h3 className="ui-card-title text-wareongo-blue">
         {step.title}
       </h3>
     </div>
@@ -86,13 +86,13 @@ const HowItWorksSection = () => {
 
   return (
     <section id="how-it-works" className="bg-wareongo-ivory pt-16 pb-16 md:pt-24 md:pb-24">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         {/* Section Header */}
         <div className="text-center mb-10 md:mb-14">
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-wareongo-slate font-medium mb-3">
+          <p className="ui-eyebrow text-wareongo-slate font-medium mb-3">
             How WareOnGo Works
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-wareongo-blue">
+          <h2 className="ui-section-title text-wareongo-blue">
             Get your Warehouse: Faster, Better, Cheaper.
           </h2>
         </div>

@@ -23,12 +23,12 @@ const PeerRentChart = ({ peers, asOf }: { peers: PeerRent[]; asOf?: string }) =>
         <span className={`block ${EYEBROW} text-wareongo-slate`}>
           Median asking rent · ₹ per sq ft / month
         </span>
-        {asOf && <span className="mt-0.5 block text-[11px] text-wareongo-slate">{asOf}</span>}
+        {asOf && <span className="mt-0.5 block text-xs text-wareongo-slate">{asOf}</span>}
       </figcaption>
 
       {/* A hairline under the bars: without it they float in the container's
           padding and the chart reads as five loose blocks. */}
-      <div className="flex items-end gap-2 border-b border-wareongo-blue/15 sm:gap-3">
+      <div className="flex items-end gap-2 border-b border-ui-line sm:gap-3">
         {peers.map((p) => {
           const height = Math.max(12, Math.round((p.medianRent / max) * 100));
           const bar = (
@@ -40,15 +40,15 @@ const PeerRentChart = ({ peers, asOf }: { peers: PeerRent[]; asOf?: string }) =>
               <span className="flex h-32 w-full items-end sm:h-40">
                 <span
                   style={{ height: `${height}%` }}
-                  className={`mx-auto flex w-full max-w-[4.5rem] items-start justify-center rounded-t-md pt-1 text-[11px] font-semibold tabular-nums text-white transition-opacity ${
-                    p.isSelf ? 'bg-wareongo-green' : 'bg-wareongo-blue group-hover:opacity-85'
+                  className={`mx-auto flex w-full max-w-[4.5rem] items-start justify-center rounded-t-md pt-1 text-xs font-semibold tabular-nums text-ui-surface transition-opacity ${
+                    p.isSelf ? 'bg-ui-accent' : 'bg-wareongo-blue group-hover:opacity-85'
                   }`}
                 >
                   {p.medianRent}
                 </span>
               </span>
               <span
-                className={`mt-2 block text-center text-[10px] leading-tight ${
+                className={`mt-2 block min-h-12 break-words text-center text-xs leading-tight sm:min-h-8 ${
                   p.isSelf ? 'font-semibold text-wareongo-blue' : 'text-wareongo-slate'
                 }`}
               >

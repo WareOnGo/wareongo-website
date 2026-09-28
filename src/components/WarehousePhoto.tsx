@@ -74,7 +74,7 @@ export default function WarehousePhoto({ primary, initialSrc, preview, fallback,
   }, [src, visible, pending]);
 
   return <>
-    {pending && showLoadingIndicator && <div data-image-loading aria-hidden="true" className="absolute inset-0 flex items-center justify-center bg-wareongo-blue/5 z-20">
+    {pending && showLoadingIndicator && <div data-image-loading aria-hidden="true" className="absolute inset-0 flex items-center justify-center bg-ui-tint z-20">
       <Loader2 className="w-8 h-8 text-wareongo-blue animate-spin motion-reduce:animate-none" />
     </div>}
     <img {...props} ref={image} src={src} data-raw={primary} data-fallback={fallback ?? ''} loading={loading} aria-busy={pending}

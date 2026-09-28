@@ -33,7 +33,7 @@ export default function ListingFilterChips({ filters, onRemove, onClear }: {
       <span className="mr-1 text-sm text-wareongo-slate">Filtering by</span>
       {activeChips.map(chip => <button key={chip.id} type="button" disabled={!onRemove} onClick={() => onRemove?.(chip.reset)}
         aria-label={`Remove ${chip.label} filter`}
-        className="inline-flex min-h-11 items-center gap-2 rounded-full border border-wareongo-blue/25 bg-transparent px-3 text-sm text-wareongo-blue hover:border-wareongo-blue hover:bg-wareongo-blue/5">
+        className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ui-outline bg-transparent px-3 text-sm text-wareongo-blue hover:border-ui-outline hover:bg-ui-tint">
         {chip.label}<X className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
       </button>)}
       <button type="button" onClick={onClear} disabled={!onClear}

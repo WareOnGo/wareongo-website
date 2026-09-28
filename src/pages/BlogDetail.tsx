@@ -101,7 +101,7 @@ const BlogDetail = () => {
       <Navbar />
 
       <main className="flex-grow" role="main" aria-labelledby="blog-title">
-        <div className="section-container page-content px-4 sm:px-6 lg:px-8 pb-6 sm:pb-10">
+        <div className="section-container page-content pb-6 sm:pb-10">
           <article className="max-w-3xl mx-auto">
             <Breadcrumbs
               className="mb-4 sm:mb-6"
@@ -115,10 +115,10 @@ const BlogDetail = () => {
             />
 
             <header className="mb-6">
-              <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate block mb-3">
+              <span className="ui-eyebrow text-wareongo-slate block mb-3">
                 Blog
               </span>
-              <h1 id="blog-title" className="text-2xl sm:text-3xl md:text-4xl font-bold text-wareongo-blue leading-tight mb-3">
+              <h1 id="blog-title" className="ui-page-title text-wareongo-blue mb-3">
                 {blog.title}
               </h1>
               <p className="text-xs text-wareongo-slate">
@@ -136,9 +136,9 @@ const BlogDetail = () => {
 
             {/* Direct-answer summary — the first thing answer engines extract.
                 The id is referenced by the Article LD's speakable cssSelector. */}
-            <div id="blog-summary" className="border-l-4 border-wareongo-blue/40 bg-wareongo-blue/5 rounded-r-xl px-4 py-3 mb-8">
+            <div id="blog-summary" className="border-l-4 border-ui-outline bg-ui-tint rounded-r-xl px-4 py-3 mb-8">
               <p className="text-sm font-semibold text-wareongo-charcoal mb-1">In short</p>
-              <p className="text-[15px] sm:text-base text-wareongo-slate leading-relaxed"><InlineText text={blog.summary} /></p>
+              <p className="text-base sm:text-base text-wareongo-slate leading-relaxed"><InlineText text={blog.summary} /></p>
             </div>
 
             {blog.blocks.map((block, i) => (
@@ -148,7 +148,7 @@ const BlogDetail = () => {
             {/* Accordion answers stay in the DOM when collapsed (see FAQAccordion),
                 so the SSG HTML always matches the FAQPage JSON-LD. */}
             <section aria-labelledby="blog-faq" className="mt-10">
-              <h2 id="blog-faq" className="text-xl sm:text-2xl font-bold text-wareongo-blue mb-4">
+              <h2 id="blog-faq" className="ui-section-title text-wareongo-blue mb-4">
                 Frequently asked questions
               </h2>
               <FAQAccordion items={blog.faqs.map(({ q, a }) => ({ q, a }))} />
@@ -156,7 +156,7 @@ const BlogDetail = () => {
 
             {relatedBlogs.length > 0 && (
               <section aria-label="Related blogs" className="mt-10">
-                <h2 className="text-base font-semibold text-wareongo-charcoal mb-3">Related blogs</h2>
+                <h2 className="ui-section-title text-wareongo-charcoal mb-3">Related blogs</h2>
                 <ul className="space-y-2">
                   {relatedBlogs.map((g) => (
                     <li key={g.slug}>
@@ -170,7 +170,7 @@ const BlogDetail = () => {
             )}
 
             {/* CTA — blogs feed the transactional pages */}
-            <div className="mt-10 border border-wareongo-blue/20 rounded-2xl p-6 text-center">
+            <div className="mt-10 border border-ui-line rounded-xl p-6 text-center">
               <p className="text-wareongo-charcoal font-semibold mb-1">Looking for warehouse space?</p>
               <p className="text-sm text-wareongo-slate mb-4">
                 Browse verified, physically inspected warehouses across India, or tell us your requirement and get a
@@ -179,13 +179,13 @@ const BlogDetail = () => {
               <div className="flex flex-wrap justify-center gap-3">
                 <Link
                   to="/listings"
-                  className="inline-flex items-center px-5 h-10 rounded-xl bg-wareongo-blue text-white text-sm font-medium hover:bg-wareongo-blue/90 transition-colors"
+                  className="ui-button"
                 >
                   Browse listings
                 </Link>
                 <Link
                   data-analytics-placement="blog_footer" to="/request-warehouse"
-                  className="inline-flex items-center px-5 h-10 rounded-xl border border-wareongo-blue/30 text-wareongo-blue text-sm font-medium hover:bg-wareongo-blue/5 transition-colors"
+                  className="ui-button ui-button--secondary"
                 >
                   Request a warehouse
                 </Link>

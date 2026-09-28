@@ -34,7 +34,7 @@ const BulletList: React.FC<{ items: Bullet[] }> = ({ items }) => (
     {items.map((b, i) => (
       <li
         key={i}
-        className="flex items-start gap-2.5 py-2 text-[13px] leading-relaxed text-wareongo-slate"
+        className="flex items-start gap-2.5 py-2 text-sm leading-relaxed text-wareongo-slate"
       >
         <span className="mt-[7px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-wareongo-blue/30" />
         <span>
@@ -119,7 +119,7 @@ const CaseStudyDetail: React.FC = () => {
       <Navbar />
 
       <main className="page-content flex-1 pb-16">
-        <div className="container mx-auto px-4 max-w-6xl">
+        <div className="container mx-auto max-w-6xl">
           {/* Breadcrumb */}
           <Breadcrumbs className="mb-6" items={[
             { label: 'Home', path: '/' },
@@ -129,23 +129,23 @@ const CaseStudyDetail: React.FC = () => {
 
           {/* View Toggle */}
           <div className="flex flex-col items-center gap-4 mb-6">
-            <div className="inline-flex border border-wareongo-blue rounded-xl overflow-hidden bg-transparent w-fit">
+            <div className="inline-flex border border-ui-outline rounded-xl overflow-hidden bg-transparent w-fit">
               <button
                 onClick={() => { if (view !== 'story') trackEvent('content_view_change', { content_type: 'case_study', content_id: csPath, view_mode: 'story' }); setView('story'); }}
-                className={`inline-flex items-center gap-1.5 px-5 py-2.5 text-[13px] font-semibold transition-colors ${
+                className={`inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold transition-colors ${
                   view === 'story'
                     ? 'bg-wareongo-blue text-wareongo-ivory'
-                    : 'text-wareongo-slate hover:bg-wareongo-blue/5 hover:text-wareongo-blue'
+                    : 'text-wareongo-slate hover:bg-ui-tint hover:text-wareongo-blue'
                 }`}
               >
                 <BookOpen className="w-3.5 h-3.5" /> Full Story
               </button>
               <button
                 onClick={() => { if (view !== 'card') trackEvent('content_view_change', { content_type: 'case_study', content_id: csPath, view_mode: 'card' }); setView('card'); }}
-                className={`inline-flex items-center gap-1.5 px-5 py-2.5 text-[13px] font-semibold transition-colors ${
+                className={`inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold transition-colors ${
                   view === 'card'
                     ? 'bg-wareongo-blue text-wareongo-ivory'
-                    : 'text-wareongo-slate hover:bg-wareongo-blue/5 hover:text-wareongo-blue'
+                    : 'text-wareongo-slate hover:bg-ui-tint hover:text-wareongo-blue'
                 }`}
               >
                 <LayoutGrid className="w-3.5 h-3.5" /> Deal Card
@@ -161,8 +161,8 @@ const CaseStudyDetail: React.FC = () => {
                 to={`/casestudies/${other.slug}`}
                 className={`text-xs font-medium px-4 py-2 rounded-full border transition-colors ${
                   i === idx
-                    ? 'bg-wareongo-blue text-white border-wareongo-blue'
-                    : 'bg-transparent text-wareongo-slate border-wareongo-blue/20 hover:border-wareongo-blue/60 hover:text-wareongo-blue'
+                    ? 'bg-wareongo-blue text-ui-surface border-ui-outline'
+                    : 'bg-transparent text-wareongo-slate border-ui-line hover:border-ui-outline/60 hover:text-wareongo-blue'
                 }`}
               >
                 {other.card.tabLabel}
@@ -177,15 +177,15 @@ const CaseStudyDetail: React.FC = () => {
           {view === 'card' && (
             <>
               {/* Header (navy) */}
-              <div className="border border-wareongo-blue rounded-t-2xl bg-wareongo-blue overflow-hidden">
+              <div className="border border-ui-outline rounded-t-2xl bg-wareongo-blue overflow-hidden">
                 <div className="px-6 sm:px-9 pt-7 sm:pt-9 pb-6">
-                  <span className="inline-block text-[10px] sm:text-[11px] font-medium tracking-[0.18em] uppercase text-white/50 mb-3">
+                  <span className="inline-block text-xs sm:text-xs font-medium tracking-[0.18em] uppercase text-ui-line mb-3">
                     {c.badge}
                   </span>
-                  <h1 className="text-2xl sm:text-3xl md:text-[34px] font-bold text-white leading-[1.15] tracking-tight mb-2">
+                  <h1 className="ui-page-title text-ui-surface mb-2">
                     {c.title}
                   </h1>
-                  <p className="text-sm text-white/60 leading-relaxed max-w-3xl">{c.sub}</p>
+                  <p className="text-sm text-ui-line leading-relaxed max-w-3xl">{c.sub}</p>
                 </div>
 
                 {/* Metrics strip */}
@@ -200,14 +200,14 @@ const CaseStudyDetail: React.FC = () => {
                       <div className="text-xl sm:text-2xl font-bold text-wareongo-ivory leading-none mb-1">
                         {m.n}
                       </div>
-                      <div className="text-[10.5px] text-white/60 leading-snug">{m.l}</div>
+                      <div className="text-xs text-ui-line leading-snug">{m.l}</div>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Body — 4 columns */}
-              <div className="border border-wareongo-blue border-t-0 rounded-b-2xl bg-transparent grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+              <div className="border border-ui-outline border-t-0 rounded-b-2xl bg-transparent grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
                 {[
                   { label: 'The Brief', content: <BulletList items={c.brief} /> },
                   { label: 'The Challenge', content: <BulletList items={c.challenge} /> },
@@ -219,12 +219,12 @@ const CaseStudyDetail: React.FC = () => {
                         {c.outcomes.map((o, i) => (
                           <div
                             key={i}
-                            className="border border-wareongo-blue/30 rounded-xl px-3 py-2"
+                            className="border border-ui-outline rounded-xl px-3 py-2"
                           >
-                            <div className="text-[15px] font-bold text-wareongo-blue leading-tight mb-0.5">
+                            <div className="text-base font-bold text-wareongo-blue leading-tight mb-0.5">
                               {o.n}
                             </div>
-                            <div className="text-[11px] text-wareongo-slate leading-snug">{o.l}</div>
+                            <div className="text-xs text-wareongo-slate leading-snug">{o.l}</div>
                           </div>
                         ))}
                       </div>
@@ -234,12 +234,12 @@ const CaseStudyDetail: React.FC = () => {
                   <div
                     key={col.label}
                     className={`px-5 sm:px-6 py-6 ${
-                      i < 3 ? 'xl:border-r xl:border-wareongo-blue' : ''
-                    } ${i === 0 ? 'md:border-r md:border-wareongo-blue' : ''} ${
-                      i === 2 ? 'md:border-r md:border-wareongo-blue' : ''
+                      i < 3 ? 'xl:border-r xl:border-ui-outline' : ''
+                    } ${i === 0 ? 'md:border-r md:border-ui-outline' : ''} ${
+                      i === 2 ? 'md:border-r md:border-ui-outline' : ''
                     }`}
                   >
-                    <span className="text-[10px] font-semibold tracking-[0.18em] uppercase text-wareongo-charcoal block mb-4">
+                    <span className="text-xs font-semibold tracking-[0.18em] uppercase text-wareongo-charcoal block mb-4">
                       {col.label}
                     </span>
                     {col.content}
@@ -248,9 +248,9 @@ const CaseStudyDetail: React.FC = () => {
               </div>
 
               {/* Footer attribution bar */}
-              <div className="border border-wareongo-blue border-t-0 rounded-b-2xl px-6 sm:px-9 py-3.5 mt-[-1px] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 flex-wrap bg-wareongo-blue/[0.03]">
+              <div className="border border-ui-outline border-t-0 rounded-b-2xl px-6 sm:px-9 py-3.5 mt-[-1px] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 flex-wrap bg-wareongo-blue/[0.03]">
                 <span className="text-[12px] text-wareongo-slate">{c.attribution}</span>
-                <span className="text-[12px] font-semibold text-wareongo-blue border border-wareongo-blue/30 px-3 py-1 rounded-full whitespace-nowrap">
+                <span className="text-[12px] font-semibold text-wareongo-blue border border-ui-outline px-3 py-1 rounded-full whitespace-nowrap">
                   {c.follow}
                 </span>
               </div>
@@ -262,7 +262,7 @@ const CaseStudyDetail: React.FC = () => {
           <section aria-labelledby="case-study-faq" className="mt-12">
             <h2
               id="case-study-faq"
-              className="text-xl sm:text-2xl font-bold text-wareongo-blue mb-4"
+              className="ui-section-title text-wareongo-blue mb-4"
             >
               FAQs
             </h2>
@@ -274,9 +274,9 @@ const CaseStudyDetail: React.FC = () => {
             {prev ? (
               <Link
                 to={`/casestudies/${prev.slug}`}
-                className="group border border-wareongo-blue/30 rounded-2xl px-5 py-4 hover:bg-wareongo-blue/5 transition-colors"
+                className="ui-card ui-card--action group block p-5"
               >
-                <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] text-wareongo-slate mb-1.5">
+                <div className="flex items-center gap-1.5 ui-eyebrow text-wareongo-slate mb-1.5">
                   <ArrowLeft className="w-3 h-3" /> Previous
                 </div>
                 <div className="text-sm font-semibold text-wareongo-blue leading-snug">
@@ -292,9 +292,9 @@ const CaseStudyDetail: React.FC = () => {
             {next ? (
               <Link
                 to={`/casestudies/${next.slug}`}
-                className="group border border-wareongo-blue/30 rounded-2xl px-5 py-4 hover:bg-wareongo-blue/5 transition-colors sm:text-right"
+                className="ui-card ui-card--action group block p-5 sm:text-right"
               >
-                <div className="flex items-center sm:justify-end gap-1.5 text-[10px] uppercase tracking-[0.18em] text-wareongo-slate mb-1.5">
+                <div className="flex items-center sm:justify-end gap-1.5 ui-eyebrow text-wareongo-slate mb-1.5">
                   Next <ArrowRight className="w-3 h-3" />
                 </div>
                 <div className="text-sm font-semibold text-wareongo-blue leading-snug">
@@ -311,7 +311,7 @@ const CaseStudyDetail: React.FC = () => {
 
           {/* Internal links — city listings, related blogs, adjacent case studies */}
           <section aria-label="Related links" className="mt-8">
-            <h2 className="text-base font-semibold text-wareongo-charcoal mb-3">Internal links</h2>
+            <h2 className="ui-section-title text-wareongo-charcoal mb-3">Internal links</h2>
             <ul className="space-y-2">
               {cs.story.internalLinks.map((l) => (
                 <li key={l.to + l.label}>
@@ -329,13 +329,13 @@ const CaseStudyDetail: React.FC = () => {
         </div>
 
         {/* Bottom CTA */}
-        <div className="container mx-auto px-4 max-w-6xl mt-16">
-          <div className="border border-wareongo-blue rounded-2xl bg-wareongo-blue px-6 sm:px-10 py-10 sm:py-14 text-center">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-[1.15] mb-3">
+        <div className="container mx-auto max-w-6xl mt-16">
+          <div className="border border-ui-outline rounded-xl bg-wareongo-blue px-6 sm:px-10 py-10 sm:py-14 text-center">
+            <h2 className="ui-section-title text-ui-surface mb-3">
               The hard ones are<br />
-              <span className="italic font-normal text-white/50">our speciality.</span>
+              <span className="italic font-normal text-ui-line">our speciality.</span>
             </h2>
-            <p className="text-sm sm:text-base text-white/80 leading-relaxed mb-7 max-w-xl mx-auto">
+            <p className="text-sm sm:text-base text-ui-line leading-relaxed mb-7 max-w-xl mx-auto">
               {cs.story.cta.text}
             </p>
             <div className="flex flex-wrap justify-center gap-3">
@@ -345,7 +345,7 @@ const CaseStudyDetail: React.FC = () => {
                   to={l.to}
                   className={`inline-flex items-center gap-2 px-7 py-3 rounded-xl text-sm font-semibold transition-colors border ${
                     i === 0
-                      ? 'bg-wareongo-ivory text-wareongo-blue hover:bg-white border-wareongo-ivory'
+                      ? 'bg-wareongo-ivory text-wareongo-blue hover:bg-ui-surface border-wareongo-ivory'
                       : 'text-wareongo-ivory border-wareongo-ivory/40 hover:bg-white/10'
                   }`}
                 >
@@ -355,8 +355,8 @@ const CaseStudyDetail: React.FC = () => {
             </div>
             <div className="flex flex-wrap justify-center gap-5 mt-6">
               {['No broker spam', '100% legal checks', '₹2 to 4/sqft savings', 'Hard markets covered'].map(t => (
-                <span key={t} className="text-[11.5px] text-white/70 flex items-center gap-1.5">
-                  <span className="text-wareongo-ivory text-[10.5px]">✓</span> {t}
+                <span key={t} className="text-xs text-ui-line flex items-center gap-1.5">
+                  <span className="text-wareongo-ivory text-xs">✓</span> {t}
                 </span>
               ))}
             </div>

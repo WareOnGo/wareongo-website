@@ -170,7 +170,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
       <Navbar />
 
       <main className="flex-grow" role="main" aria-labelledby="editorial-title">
-        <div className="section-container page-content px-4 pb-6 sm:px-6 sm:pb-10 lg:px-8">
+        <div className="section-container page-content pb-6 sm:pb-10">
           <Breadcrumbs
             className="mb-4 sm:mb-6"
             items={
@@ -356,7 +356,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
                     <dt className={`mb-2 min-w-[9rem] ${EYEBROW} text-wareongo-slate sm:mb-0`}>Micromarkets</dt>
                     <dd className="flex flex-wrap gap-2">
                       {city.micromarkets.map((market) => market.path ? (
-                        <Link key={market.slug} to={market.path} className={`inline-flex items-center gap-1.5 ${CHIP} px-3 py-1.5 text-wareongo-blue hover:bg-wareongo-blue/5`}>
+                        <Link key={market.slug} to={market.path} className={`inline-flex items-center gap-1.5 ${CHIP} px-3 py-1.5 text-wareongo-blue hover:bg-ui-tint`}>
                           {market.name}<span className="text-xs tabular-nums text-wareongo-slate">{market.listings}</span>
                         </Link>
                       ) : (
@@ -377,7 +377,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
                         <Link
                           key={s.path}
                           to={s.path}
-                          className={`inline-flex items-center gap-1.5 ${CHIP} px-3 py-1.5 text-wareongo-blue transition-colors hover:bg-wareongo-blue/5`}
+                          className={`inline-flex items-center gap-1.5 ${CHIP} px-3 py-1.5 text-wareongo-blue transition-colors hover:bg-ui-tint`}
                         >
                           {s.name}
                           {'medianRent' in s && typeof s.medianRent === 'number' && <span className="text-xs tabular-nums text-wareongo-slate">₹{s.medianRent}</span>}
@@ -431,7 +431,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
               </p>
               <Link
                 data-analytics-placement="overview_footer" to="/request-warehouse"
-                className="inline-flex h-10 items-center rounded-xl bg-wareongo-blue px-5 text-sm font-medium text-white transition-colors hover:bg-wareongo-blue/90"
+                className="ui-button"
               >
                 Request a warehouse
               </Link>

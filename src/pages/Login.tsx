@@ -20,8 +20,8 @@ const Login = () => {
     <GoogleOAuthProvider clientId={config.googleClientId}>
       <main className="min-h-screen flex items-center justify-center bg-wareongo-ivory px-4">
         <PageHead title="Login | WareOnGo" description="Sign in to WareOnGo." path="/login" noindex />
-        <div className="bg-white shadow-sm rounded-xl p-8 max-w-sm w-full text-center">
-          <h1 className="text-2xl font-bold text-wareongo-blue mb-2">Login</h1>
+        <div className="bg-ui-surface shadow-none rounded-xl p-8 max-w-sm w-full text-center">
+          <h1 className="ui-page-title text-wareongo-blue mb-2">Login</h1>
           <p className="text-sm text-wareongo-slate mb-6">
             Sign in to your WareOnGo account.
           </p>

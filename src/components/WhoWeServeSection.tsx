@@ -22,14 +22,14 @@ const SEGMENTS = [
 
 const WhoWeServeSection = () => {
   return (
-    <section className="bg-wareongo-ivory pt-16 pb-4 md:pt-24 md:pb-8">
-      <div className="container mx-auto px-4">
+    <section className="bg-wareongo-ivory pt-12 pb-4 md:pt-16 md:pb-8">
+      <div className="container mx-auto">
         {/* Section Header */}
         <div className="text-center mb-10 md:mb-14">
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-wareongo-slate font-medium mb-3">
+          <p className="ui-eyebrow text-wareongo-slate font-medium mb-3">
             Our Customers
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-wareongo-blue">
+          <h2 className="ui-section-title text-wareongo-blue">
             Who We Serve
           </h2>
         </div>
@@ -39,15 +39,15 @@ const WhoWeServeSection = () => {
           {SEGMENTS.map((item, i) => (
             <div
               key={i}
-              className="bg-transparent border border-wareongo-blue rounded-2xl p-4 sm:p-8 transition-all duration-300 group flex flex-col items-start text-left hover:bg-wareongo-blue/5"
+              className="bg-ui-surface border border-ui-line rounded-xl p-4 sm:p-8 transition-all duration-300 group flex flex-col items-start text-left"
             >
               {/* Icon */}
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-sky-100/50 border border-wareongo-blue/20 flex items-center justify-center mb-3 sm:mb-5 transition-colors duration-300">
+              <div className="ui-icon mb-3 sm:mb-5 transition-colors duration-300">
                 <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-wareongo-blue transition-colors duration-300" strokeWidth={1.5} />
               </div>
 
               {/* Content */}
-              <h3 className="text-sm sm:text-xl font-semibold text-wareongo-blue">
+              <h3 className="ui-card-title text-wareongo-blue">
                 {item.title}
               </h3>
             </div>

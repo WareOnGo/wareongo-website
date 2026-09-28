@@ -1,64 +1,66 @@
+@import '../styles/ui.tokens.css';
+
 /* Bangalore ad page only. See docs/bangalore-ad-page-style-guide.md.
    The dialog repeats this scope because Radix renders it outside the page. */
 .bangalore-landing, .bangalore-landing-dialog {
-  --landing-font: Montserrat, ui-sans-serif, system-ui, sans-serif;
-  --landing-ink: #0a2239;
-  --landing-accent: #173e5a;
-  --landing-paper: #faf9f5;
-  --landing-card: #fffefa;
+  --landing-font: var(--ui-font);
+  --landing-ink: var(--ui-ink);
+  --landing-accent: var(--ui-accent);
+  --landing-paper: var(--ui-paper);
+  --landing-card: var(--ui-surface);
   --landing-badge-surface: #fffefae6;
-  --landing-muted: #47515b;
-  --landing-tint: #edf2f7;
-  --landing-line: #d5dde5;
-  --landing-outline: #aebdca;
-  --landing-inverse-muted: #d5dde5;
+  --landing-muted: var(--ui-muted);
+  --landing-tint: var(--ui-tint);
+  --landing-line: var(--ui-line);
+  --landing-outline: var(--ui-outline);
+  --landing-inverse-muted: var(--ui-line);
   --landing-inverse-line: #ffffff33;
   --landing-placeholder: #0a223912;
   --landing-photo-shade: linear-gradient(180deg, #0a223900 15%, #0a223933 40%, #0a2239ed 100%);
-  --landing-table-header: #f3f2ee;
-  --landing-table-stripe: #fcfbf8;
+  --landing-table-header: var(--ui-table-header);
+  --landing-table-stripe: var(--ui-table-stripe);
   --landing-table-hover: var(--landing-tint);
   --landing-error: #913c21;
   --landing-error-line: #b3502d;
   --landing-error-surface: #b3502d0a;
 
-  --landing-text-xs: 12px;
-  --landing-text-sm: 14px;
-  --landing-text-base: 16px;
-  --landing-text-card: 18px;
-  --landing-text-panel: 24px;
-  --landing-text-section: 32px;
-  --landing-text-hero: clamp(38px, 4vw, 52px);
-  --landing-text-metric: 24px;
+  --landing-text-xs: var(--ui-text-xs);
+  --landing-text-sm: var(--ui-text-sm);
+  --landing-text-base: var(--ui-text-base);
+  --landing-text-card: var(--ui-text-card);
+  --landing-text-panel: var(--ui-text-panel);
+  --landing-text-section: var(--ui-text-section);
+  --landing-text-hero: var(--ui-text-hero);
+  --landing-text-metric: var(--ui-text-metric);
   --landing-text-compact-metric: 18px;
-  --landing-leading-heading: 1.25;
-  --landing-leading-title: 1.4;
-  --landing-leading-ui: 1.5;
-  --landing-leading-body: 1.6;
+  --landing-leading-heading: var(--ui-leading-heading);
+  --landing-leading-title: var(--ui-leading-title);
+  --landing-leading-ui: var(--ui-leading-ui);
+  --landing-leading-body: var(--ui-leading-body);
 
   --landing-border: 1px solid var(--landing-line);
   --landing-interactive-border: 1px solid var(--landing-outline);
-  --landing-radius: 12px;
-  --landing-control-radius: 8px;
-  --landing-tag-radius: 4px;
+  --landing-radius: var(--ui-radius);
+  --landing-control-radius: var(--ui-control-radius);
+  --landing-tag-radius: var(--ui-tag-radius);
   --landing-pill-radius: 999px;
-  --landing-control-height: 48px;
-  --landing-large-control-height: 56px;
-  --landing-compact-height: 44px;
-  --landing-icon-box: 40px;
-  --landing-icon-size: 20px;
-  --landing-icon-stroke: 1.5;
-  --landing-focus-width: 2px;
-  --landing-motion: 160ms;
+  --landing-control-height: var(--ui-control-height);
+  --landing-large-control-height: var(--ui-large-control-height);
+  --landing-compact-height: var(--ui-compact-height);
+  --landing-icon-box: var(--ui-icon-box);
+  --landing-icon-size: var(--ui-icon-size);
+  --landing-icon-stroke: var(--ui-icon-stroke);
+  --landing-focus-width: var(--ui-focus-width);
+  --landing-motion: var(--ui-motion);
 
   /* 4px spacing rhythm; the 20px mobile gutter also follows this scale. */
-  --landing-card-padding: 24px;
-  --landing-compact-padding: 16px;
-  --landing-nested-gap: 16px;
-  --landing-section-space: 64px;
-  --landing-grid-gap: 24px;
-  --landing-content-width: 1400px;
-  --landing-gutter: 32px;
+  --landing-card-padding: var(--ui-card-padding);
+  --landing-compact-padding: var(--ui-compact-padding);
+  --landing-nested-gap: var(--ui-nested-gap);
+  --landing-section-space: var(--ui-section-space);
+  --landing-grid-gap: var(--ui-grid-gap);
+  --landing-content-width: var(--ui-content-width);
+  --landing-gutter: var(--ui-gutter);
 }
 
 @media (max-width: 1023px) {

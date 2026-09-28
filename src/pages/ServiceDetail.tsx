@@ -38,25 +38,25 @@ export default function ServiceDetail() {
     </PageHead>
     <Navbar />
     <main className="flex-grow" aria-labelledby="service-title">
-      <div className="section-container page-content px-4 sm:px-6 lg:px-8 pb-6 sm:pb-10">
+      <div className="section-container page-content pb-6 sm:pb-10">
         <div className="max-w-3xl mx-auto break-words">
           <Breadcrumbs className="mb-4 sm:mb-6" items={[{ label: 'Home', path: '/' }, { label: page.title }]} />
           <header className="mb-8">
-            <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-wareongo-slate block mb-3">Our services</span>
-            <h1 id="service-title" className="text-2xl sm:text-3xl md:text-4xl font-bold text-wareongo-blue leading-tight mb-4">{page.title}</h1>
-            <p className="text-base sm:text-lg text-wareongo-slate leading-relaxed"><InlineText text={page.summary} /></p>
+            <span className="ui-eyebrow text-wareongo-slate block mb-3">Our services</span>
+            <h1 id="service-title" className="ui-page-title text-wareongo-blue mb-4">{page.title}</h1>
+            <p className="text-base text-wareongo-slate leading-relaxed"><InlineText text={page.summary} /></p>
           </header>
           {page.blocks.map((block, i) => <ContentBlock key={i} block={block} />)}
           {page.faqs.length > 0 && <section aria-labelledby="service-faq" className="mt-10">
-            <h2 id="service-faq" className="text-xl sm:text-2xl font-bold text-wareongo-blue mb-4">Frequently asked questions</h2>
+            <h2 id="service-faq" className="ui-section-title text-wareongo-blue mb-4">Frequently asked questions</h2>
             <FAQAccordion items={page.faqs} />
           </section>}
-          <div className="mt-10 border border-wareongo-blue/20 rounded-2xl p-6 text-center">
+          <div className="mt-10 border border-ui-line rounded-xl p-6 text-center">
             <p className="text-wareongo-charcoal font-semibold mb-4">Tell us what you need</p>
             <div className="flex flex-wrap justify-center gap-3">
               <Link data-analytics-placement="service_footer" to="/request-warehouse"
-                className="inline-flex items-center px-5 h-10 rounded-xl bg-wareongo-blue text-white text-sm font-medium hover:bg-wareongo-blue/90 transition-colors">Discuss your requirement</Link>
-              <a href="mailto:sales@wareongo.com" className="inline-flex items-center px-5 h-10 rounded-xl border border-wareongo-blue/30 text-wareongo-blue text-sm font-medium hover:bg-wareongo-blue/5 transition-colors">Contact us</a>
+                className="ui-button">Discuss your requirement</Link>
+              <a href="mailto:sales@wareongo.com" className="ui-button ui-button--secondary">Contact us</a>
             </div>
           </div>
         </div>

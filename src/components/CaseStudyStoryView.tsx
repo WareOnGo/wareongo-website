@@ -5,11 +5,11 @@ import type { Story, StoryTable } from '@/data/caseStudies';
 // supplies one — the "At a Glance" block is deliberately headerless.
 const Table: React.FC<{ table: StoryTable }> = ({ table }) => (
   <div className="mt-3 overflow-x-auto">
-    <div className="border border-wareongo-blue rounded-xl overflow-hidden">
-      <table className="w-full text-left text-[13px] bg-transparent">
+    <div className="border border-ui-outline rounded-xl overflow-hidden">
+      <table className="w-full text-left text-sm bg-transparent">
         {table.headers && (
           <thead>
-            <tr className="bg-wareongo-blue text-wareongo-ivory text-[10px] font-semibold tracking-[0.12em] uppercase">
+            <tr className="bg-wareongo-blue text-wareongo-ivory text-xs font-semibold tracking-[0.12em] uppercase">
               <th scope="col" className="px-4 py-2.5 w-[42%] border-r border-wareongo-ivory/20">
                 {table.headers[0]}
               </th>
@@ -23,13 +23,13 @@ const Table: React.FC<{ table: StoryTable }> = ({ table }) => (
           {table.rows.map((row, ri) => (
             <tr
               key={ri}
-              className={`${ri > 0 || table.headers ? 'border-t border-wareongo-blue/20' : ''} ${
+              className={`${ri > 0 || table.headers ? 'border-t border-ui-line' : ''} ${
                 ri % 2 === 0 ? 'bg-wareongo-blue/[0.03]' : 'bg-transparent'
               }`}
             >
               <th
                 scope="row"
-                className="px-4 py-2.5 w-[42%] align-top font-medium text-wareongo-slate border-r border-wareongo-blue/20"
+                className="px-4 py-2.5 w-[42%] align-top font-medium text-wareongo-slate border-r border-ui-line"
               >
                 {row.label}
               </th>
@@ -46,15 +46,15 @@ const StoryView: React.FC<{ story: Story }> = ({ story }) => {
   return (
     <div className="space-y-6">
       {/* Story Header */}
-      <div className="border border-wareongo-blue rounded-2xl bg-wareongo-blue overflow-hidden">
+      <div className="border border-ui-outline rounded-xl bg-wareongo-blue overflow-hidden">
         <div className="px-6 sm:px-9 py-7 sm:py-9">
-          <span className="text-[10px] font-medium tracking-[0.18em] uppercase text-white/50 mb-3 block">
+          <span className="text-xs font-medium tracking-[0.18em] uppercase text-ui-line mb-3 block">
             {story.badge}
           </span>
-          <h1 className="text-xl sm:text-2xl md:text-[28px] font-bold text-white leading-[1.15] mb-2">
+          <h1 className="ui-page-title text-ui-surface mb-2">
             {story.title}
           </h1>
-          <p className="text-sm text-white/60 leading-relaxed">{story.meta}</p>
+          <p className="text-sm text-ui-line leading-relaxed">{story.meta}</p>
         </div>
 
         {/* Key Metrics */}
@@ -69,7 +69,7 @@ const StoryView: React.FC<{ story: Story }> = ({ story }) => {
               <div className="text-lg sm:text-xl font-bold text-wareongo-ivory leading-none mb-1">
                 {m.n}
               </div>
-              <div className="text-[10px] uppercase tracking-[0.12em] text-white/60">{m.l}</div>
+              <div className="ui-eyebrow text-ui-line">{m.l}</div>
             </div>
           ))}
         </div>
@@ -79,29 +79,29 @@ const StoryView: React.FC<{ story: Story }> = ({ story }) => {
           referenced by the Article LD's speakable cssSelector. */}
       <div
         id="case-study-summary"
-        className="border-l-4 border-wareongo-blue/40 bg-wareongo-blue/5 rounded-r-xl px-5 py-4"
+        className="border-l-4 border-ui-outline bg-ui-tint rounded-r-xl px-5 py-4"
       >
         <p className="text-sm font-semibold text-wareongo-charcoal mb-1">In short</p>
-        <p className="text-[14.5px] text-wareongo-slate leading-relaxed">{story.summary}</p>
+        <p className="text-sm text-wareongo-slate leading-relaxed">{story.summary}</p>
       </div>
 
       {/* Story Body */}
-      <div className="border border-wareongo-blue rounded-2xl bg-transparent overflow-hidden">
+      <div className="border border-ui-outline rounded-xl bg-transparent overflow-hidden">
         {story.sections.map((sec, si) => (
           <div
             key={si}
             className={`px-6 sm:px-9 py-7 ${
-              si < story.sections.length - 1 ? 'border-b border-wareongo-blue' : ''
+              si < story.sections.length - 1 ? 'border-b border-ui-outline' : ''
             }`}
           >
             {/* Section label */}
-            <span className="text-[10px] font-semibold tracking-[0.18em] uppercase text-wareongo-charcoal block mb-3">
+            <span className="text-xs font-semibold tracking-[0.18em] uppercase text-wareongo-charcoal block mb-3">
               {sec.label}
             </span>
 
             {/* Heading */}
             {sec.heading && (
-              <h2 className="text-lg sm:text-xl font-bold text-wareongo-blue leading-snug mb-4">
+              <h2 className="ui-section-title text-wareongo-blue mb-4">
                 {sec.heading}
               </h2>
             )}
@@ -130,17 +130,17 @@ const StoryView: React.FC<{ story: Story }> = ({ story }) => {
 
             {/* Numbered steps with a bold lead-in */}
             {sec.steps && (
-              <div className="mt-2 divide-y divide-wareongo-blue/20">
+              <div className="mt-2 divide-y divide-ui-line">
                 {sec.steps.map((step, idx) => (
                   <div key={idx} className="flex gap-4 py-3.5">
                     <div className="text-base font-bold text-wareongo-slate leading-none flex-shrink-0 w-7 pt-0.5 font-mono">
                       {String(idx + 1).padStart(2, '0')}
                     </div>
                     <div>
-                      <div className="text-[13.5px] font-semibold text-wareongo-blue mb-1">
+                      <div className="text-sm font-semibold text-wareongo-blue mb-1">
                         {step.title}
                       </div>
-                      <div className="text-[13px] text-wareongo-slate leading-relaxed">
+                      <div className="text-sm text-wareongo-slate leading-relaxed">
                         {step.text}
                       </div>
                     </div>

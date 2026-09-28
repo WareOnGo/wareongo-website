@@ -96,7 +96,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
     <>
       <div
         {...swipe.handlers}
-        className="warehouse-card"
+        className="warehouse-card ui-listing-card"
         ref={impressionRef}
         data-warehouse-card={id}
         onPointerEnter={() => setInteracting(true)}
