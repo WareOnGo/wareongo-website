@@ -79,9 +79,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
   const indexOf = (id: string) => numbered.indexOf(id) + 1;
 
   const ordered = orderForDisplay(warehouses);
-  // Six rows at every breakpoint, so the page is the same length whatever the
-  // column count, plus the scroll-back-to-the-grid behaviour. Shared with the
-  // plain grid in LocationListings — see the hook.
+  // Six listings per page at every breakpoint, with scrolling back to the grid.
   const {
     shown,
     currentPage,

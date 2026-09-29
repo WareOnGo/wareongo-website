@@ -3,7 +3,7 @@ import { useListingsPerPage } from '@/components/micromarket/useListingsPerPage'
 import { useListingSearch } from '@/hooks/useListingSearch';
 import { readPositiveInteger } from '@/lib/listingSearch';
 
-/** A shared page opens on the receiving viewport's page containing its first listing. */
+/** Keep the first shared listing visible, including links with legacy page sizes. */
 export function readLocationPagination(search: URLSearchParams, itemCount: number, perPage: number) {
   const requestedPage = readPositiveInteger(search.get('page'), 1);
   const requestedSize = readPositiveInteger(search.get('pageSize'), perPage);
@@ -32,10 +32,8 @@ export function createLocationPageSearch(search: URLSearchParams, page: number, 
 /**
  * Client-side paging for a grid of listings the page already has in hand.
  *
- * Both listing layouts need this — the editorial template and the plain grid it
- * falls back to — and both page an array the loader delivered rather than
- * refetching, so the arithmetic and the scroll behaviour are the same. This
- * exists so there is one copy of them.
+ * State, city and micromarket overviews page an array the loader delivered
+ * rather than refetching, sharing the arithmetic and scroll behaviour here.
  *
  * Not for /listings, which pages by refetching from the API.
  *
@@ -54,9 +52,9 @@ export function usePagedListings<T>(items: T[], hasData = true) {
    */
   const scrollAfterPaging = useRef<number | null>(null);
 
-  // Canonicalize only after both URL state and the responsive snapshot are live.
+  // Canonicalize only after URL state is live.
   // Replacing preserves browser history while fixing malformed/out-of-range
-  // pages and translating links shared from a different viewport.
+  // pages and translating links shared with a legacy page size.
   useEffect(() => {
     // A missing loader result may render <Navigate>. Do not let URL cleanup
     // cancel that redirect by navigating back to the empty outgoing route.
@@ -72,7 +70,7 @@ export function usePagedListings<T>(items: T[], hasData = true) {
    * once React has committed the new cards.
    *
    * Doing it inline in the pager's handler looked fine and wasn't: the handler
-   * runs before the re-render, and the commit that swaps eighteen cards for six
+   * runs before the re-render, and the commit that swaps the visible cards
    * cancels the in-flight smooth scroll, leaving the reader wherever they were.
    * The eval harness caught it (tests/specs/pagination.spec.ts).
    */
@@ -106,7 +104,7 @@ export function usePagedListings<T>(items: T[], hasData = true) {
     perPage,
     currentPage,
     totalPages,
-    /** Zero-based index of the first item shown, for the "Showing 1–18 of 99" line. */
+    /** Zero-based index of the first item shown, for the "Showing 1–6 of 99" line. */
     start,
     anchorRef,
     goTo,

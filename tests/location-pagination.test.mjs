@@ -39,9 +39,9 @@ new Function('require', 'module', 'exports', outputFiles[0].text)(
   createRequire(import.meta.url), compiled, compiled.exports,
 );
 const { readLocationPagination, createLocationPageSearch, renderPagination } = compiled.exports;
-const read = (query, count = 47, size = 18) => readLocationPagination(new URLSearchParams(query), count, size);
+const read = (query, count = 47, size = 6) => readLocationPagination(new URLSearchParams(query), count, size);
 
-test('bare and page-only links use the local viewport without changing six-row page sizes', () => {
+test('bare and page-only links use the configured page size', () => {
   for (const size of [6, 12, 18]) {
     assert.deepEqual(read('', 47, size), { currentPage: 1, totalPages: Math.ceil(47 / size), start: 0 });
     assert.equal(read('page=2', 47, size).start, size);
@@ -102,11 +102,11 @@ test('translated and clamped links canonicalize once and remain stable on reread
   }
 });
 
-test('server rendering retains the default desktop inventory before URL state hydrates', () => {
+test('server rendering shows six listings before URL state hydrates', () => {
   const plain = renderPagination('/listings/city/bengaluru');
   const shared = renderPagination('/listings/city/bengaluru?page=7&pageSize=6&utm_source=partner#listings');
   assert.equal(shared, plain);
-  assert.match(shared, /data-page="1" data-size="18"/);
-  assert.match(shared, /1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18/);
-  assert.match(shared, /href="\/listings\/city\/bengaluru\?page=2&amp;pageSize=18"/);
+  assert.match(shared, /data-page="1" data-size="6"/);
+  assert.match(shared, /<span>1,2,3,4,5,6<\/span>/);
+  assert.match(shared, /href="\/listings\/city\/bengaluru\?page=2&amp;pageSize=6"/);
 });

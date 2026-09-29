@@ -28,21 +28,19 @@ query parameters (including repeated campaign parameters) and fragments survive
 navigation. An out-of-range page is corrected only after the matching API response
 supplies its totals, never using placeholder totals from a previous query.
 
-## Location and overview grids
+## Overview grids
 
-Example: `/listings/city/bengaluru?page=2&pageSize=18`.
+Example: `/overview/karnataka/bengaluru?page=2&pageSize=6`.
 
-These pages still slice their already-loaded inventory. Their six-row grids show
-6, 12, or 18 cards depending on viewport width. The URL records the originating
-page size so another device can open the page **containing the originally shared
-first warehouse**, while retaining its normal responsive card count. A desktop
-page 2 at size 18 therefore becomes mobile page 4 at size 6. On a larger receiving
-viewport, that warehouse may appear within the page rather than first.
+State, city and micromarket overview pages slice their already-loaded inventory
+into six listings per page at every viewport width, including prerendered HTML
+and loading placeholders. Older links with a page size of 12 or 18 still open
+the page containing the originally shared first warehouse. An old page 2 at size
+18 therefore becomes page 4 at size 6.
 
-Viewport translation and out-of-range correction replace the current URL. A
-page-only link is interpreted using the receiving viewport. Page 1 omits both
-pagination parameters. Existing city/state/type/locality path structure remains
-unchanged.
+Legacy page-size translation and out-of-range correction replace the current
+URL. A page-only link uses six listings per page. Page 1 omits both pagination
+parameters.
 
 ## Data loading and hydration
 
