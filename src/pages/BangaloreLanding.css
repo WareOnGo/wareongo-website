@@ -36,13 +36,10 @@
 .bangalore-landing main .warehouse-card__link:focus-visible::after { outline: var(--landing-focus-width) solid var(--landing-accent); outline-offset: -4px; }
 
 /* The enquiry is next to the intro on desktop, and immediately after it on phones. */
-.bangalore-landing__hero { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); grid-template-areas: "intro enquiry" "featured enquiry" "trust enquiry"; grid-template-rows: max-content max-content 1fr; align-items: start; gap: 24px 48px; padding-block: 36px 48px; }
+.bangalore-landing__hero { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); grid-template-areas: "intro enquiry" "featured enquiry" "trust trust"; grid-template-rows: max-content 1fr max-content; align-items: start; gap: 24px 48px; padding-block: 36px 48px; }
 .bangalore-landing__hero-copy { grid-area: intro; min-width: 0; }
-.bangalore-landing__headline { margin-bottom: 20px; font-size: var(--landing-text-hero); font-weight: 700; line-height: 1.12; letter-spacing: -.04em; }
+.bangalore-landing__headline { margin: 0; font-size: var(--landing-text-hero); font-weight: 700; line-height: 1.12; letter-spacing: -.04em; }
 .bangalore-landing__headline > span { display: block; color: var(--landing-accent); }
-.bangalore-landing__hero-steps { display: flex; flex-wrap: wrap; gap: 8px 12px; color: var(--landing-accent); font-size: var(--landing-text-base); font-weight: 600; line-height: var(--landing-leading-ui); }
-.bangalore-landing__hero-steps > li { display: inline-flex; align-items: center; gap: 12px; }
-.bangalore-landing__hero-steps svg { flex-shrink: 0; color: var(--landing-muted); }
 .bangalore-landing__copy-slot { width: 100%; max-width: 480px; }
 .bangalore-landing__slot-label { display: block; color: var(--landing-muted); font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); }
 .bangalore-landing__copy-lines { display: grid; gap: 8px; margin-top: 10px; }
@@ -74,12 +71,12 @@
 .bangalore-landing__featured-footer > p > span { color: var(--landing-muted); font-size: var(--landing-text-xs); font-weight: 400; }
 .bangalore-landing__featured-footer > svg { flex-shrink: 0; }
 
-.bangalore-landing__enquiry { grid-area: enquiry; min-width: 0; padding: 32px; border: var(--landing-interactive-border); border-radius: var(--landing-radius); background: var(--landing-card); scroll-margin-top: 104px; }
-.bangalore-landing__enquiry > h2 { font-size: var(--landing-text-section); font-weight: 600; line-height: var(--landing-leading-heading); letter-spacing: -.025em; }
-.bangalore-landing__enquiry-intro { margin-block: 8px 20px; color: var(--landing-muted); font-size: var(--landing-text-base); line-height: var(--landing-leading-body); }
-.bangalore-landing__form-fields { display: grid; gap: 16px; min-width: 0; }
+.bangalore-landing__enquiry { grid-area: enquiry; min-width: 0; padding: 20px 24px; border: var(--landing-interactive-border); border-radius: var(--landing-radius); background: var(--landing-card); scroll-margin-top: 104px; }
+.bangalore-landing__enquiry > h2 { font-size: var(--landing-text-form-title); font-weight: 600; line-height: var(--landing-leading-heading); letter-spacing: -.025em; }
+.bangalore-landing__enquiry-intro { margin-block: 8px 16px; color: var(--landing-muted); font-size: var(--landing-text-sm); line-height: var(--landing-leading-body); }
+.bangalore-landing__form-fields { display: grid; gap: 12px; min-width: 0; }
 .bangalore-landing__form-field { min-width: 0; }
-.bangalore-landing__form-field > label { display: block; margin-bottom: 8px; color: var(--landing-muted); font-size: var(--landing-text-sm); font-weight: 500; line-height: var(--landing-leading-ui); }
+.bangalore-landing__form-field > label { display: block; margin-bottom: 4px; color: var(--landing-muted); font-size: var(--landing-text-sm); font-weight: 500; line-height: var(--landing-leading-ui); }
 .bangalore-landing__form-field > label > span { font-weight: 400; }
 .bangalore-landing__input-wrap { position: relative; }
 .bangalore-landing__input-wrap > svg { position: absolute; top: 50%; left: 14px; transform: translateY(-50%); color: var(--landing-accent); pointer-events: none; }
@@ -96,14 +93,14 @@
 .bangalore-landing__enquiry-success > h3 { font-size: var(--landing-text-panel); font-weight: 600; line-height: var(--landing-leading-heading); letter-spacing: -.025em; }
 .bangalore-landing__enquiry-success > p { max-width: 340px; color: var(--landing-muted); font-size: var(--landing-text-base); line-height: var(--landing-leading-body); }
 
-/* Client logos stay below the featured warehouses in the left hero column. */
+/* On desktop, client logos span both columns below the featured warehouses and enquiry. */
 .bangalore-landing__trust { grid-area: trust; min-width: 0; padding-top: 16px; border-top: var(--landing-border); }
+.bangalore-landing__trust-title { margin: 0 0 16px; color: var(--landing-muted); font-size: var(--landing-text-sm); font-weight: 400; line-height: var(--landing-leading-ui); text-align: center; text-wrap: balance; }
 .bangalore-landing__trust .trusted-strip { padding-block: 8px; }
 .bangalore-landing__trust .trusted-item { width: 112px; height: 36px; padding-inline: 14px; }
 .bangalore-landing__trust .trusted-fade { width: 24px; }
 
 .bangalore-landing__available { padding-block: 24px var(--landing-section-space); scroll-margin-top: 104px; }
-.bangalore-landing__available .bangalore-landing__eyebrow { margin-bottom: 8px; }
 .bangalore-landing__size-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
 .bangalore-landing__size-filter { min-height: var(--landing-compact-height); padding: 8px 16px; border: var(--landing-interactive-border); border-radius: var(--landing-pill-radius); background: var(--landing-card); color: var(--landing-ink); font-size: var(--landing-text-sm); font-weight: 500; line-height: var(--landing-leading-ui); }
 .bangalore-landing__size-filter[aria-pressed="true"] { border-color: var(--landing-ink); background: var(--landing-ink); color: var(--landing-card); }
@@ -357,13 +354,10 @@
   .bangalore-landing__location-grid { grid-template-rows: repeat(4, minmax(0, 1fr)); gap: 12px; }
   .bangalore-landing__area-guide { margin-bottom: 0; }
   .bangalore-landing__hero { padding-top: 66px; }
+  .bangalore-landing__featured { align-self: end; }
   .bangalore-landing__enquiry { display: flex; flex-direction: column; align-self: stretch; }
-  .bangalore-landing__enquiry-intro { max-width: 42ch; text-wrap: balance; }
   .bangalore-landing__enquiry > form { display: flex; flex: 1; flex-direction: column; }
   .bangalore-landing__form-fields { flex: 1; align-content: space-between; }
-  .bangalore-landing__input-wrap > input { height: var(--landing-large-control-height); }
-  .bangalore-landing__submit { min-height: var(--landing-large-control-height); }
-  .bangalore-landing__trust { align-self: end; }
   .bangalore-landing__why { padding-top: var(--landing-section-space); }
 }
 
@@ -390,44 +384,35 @@
 }
 
 @media (min-width: 600px) and (max-width: 1023px) {
-  .bangalore-landing__form-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .bangalore-landing__form-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .bangalore-landing__submit { grid-column: 1 / -1; }
   .bangalore-landing__featured-photo { aspect-ratio: 2 / 1; }
 }
 
 @media (max-width: 599px) {
-  .bangalore-landing__hero-steps { column-gap: 8px; font-size: var(--landing-text-sm); }
-  .bangalore-landing__hero-steps > li { gap: 8px; }
   .bangalore-landing__map-stage { aspect-ratio: 18 / 23; }
   .bangalore-landing__map-connectors--desktop { display: none; }
   .bangalore-landing__map-connectors--mobile { display: block; }
   .bangalore-landing__map-bubble { left: var(--map-mobile-x); top: var(--map-mobile-y); gap: 4px; min-height: 44px; padding: 5px 7px 5px 5px; font-size: var(--landing-text-xs); }
   .bangalore-landing__map-count { min-width: 24px; height: 24px; }
-  .bangalore-landing__available-footer { align-items: stretch; flex-direction: column; gap: 16px; }
 }
 
 @media (max-width: 767px) {
   .bangalore-landing-dialog[role="dialog"] { padding: 24px; }
-  .bangalore-landing__available { padding-top: 12px; }
-  .bangalore-landing__size-filters { flex-wrap: nowrap; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; margin: -4px -20px 16px; padding: 4px 20px; scroll-padding-inline: 20px; }
-  .bangalore-landing__size-filters::-webkit-scrollbar { display: none; }
-  .bangalore-landing__size-filter { flex-shrink: 0; padding-inline: 14px; font-size: var(--landing-text-xs); white-space: nowrap; }
-  .bangalore-landing__available-grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(340px, calc(100% - 24px)); gap: 12px; overflow-x: auto; overscroll-behavior-x: contain; overflow-anchor: none; scroll-snap-type: x mandatory; scroll-padding-inline: 20px; scrollbar-width: none; margin-inline: -20px; padding: 2px 20px; }
-  .bangalore-landing__available-grid::-webkit-scrollbar { display: none; }
-  .bangalore-landing__available .warehouse-card { scroll-snap-align: start; }
-  .bangalore-landing__available .warehouse-card__metrics { gap: 10px; }
-  .bangalore-landing__available .warehouse-card__metric dd { gap: 3px; }
+  .bangalore-landing__available { display: none; }
   .bangalore-landing__area-guide, .bangalore-landing__why-image { display: none; }
   .bangalore-landing__why-copy { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-  .bangalore-landing__button--compact, .bangalore-landing__size-filter, .bangalore-landing__area-options button { min-height: 44px; }
+  .bangalore-landing__button--compact, .bangalore-landing__area-options button { min-height: 44px; }
   .bangalore-landing__section-heading { margin-bottom: 24px; }
-  .bangalore-landing__hero { gap: 24px; padding-block: 28px 36px; }
-  .bangalore-landing__headline { margin-bottom: 16px; }
-  .bangalore-landing__enquiry { padding: 24px; scroll-margin-top: 88px; }
-  .bangalore-landing__form-fields { gap: 12px; }
+  .bangalore-landing__hero { grid-template-areas: "intro" "enquiry" "trust" "featured"; gap: 24px; padding-block: 28px 36px; }
+  .bangalore-landing__enquiry { scroll-margin-top: 88px; }
+  .bangalore-landing__trust-title { font-size: var(--landing-text-xs); }
   .bangalore-landing__trust .trusted-item { width: 104px; height: 32px; padding-inline: 12px; }
   .bangalore-landing__featured-body > h3 { font-size: var(--landing-text-sm); }
   .bangalore-landing__locations { scroll-margin-top: 88px; }
+  .bangalore-landing__location-grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(240px, calc(100% - 24px)); gap: 12px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: var(--landing-gutter); scrollbar-width: none; margin-inline: calc(-1 * var(--landing-gutter)); padding: 2px var(--landing-gutter); }
+  .bangalore-landing__location-grid::-webkit-scrollbar { display: none; }
+  .bangalore-landing__location-card { scroll-snap-align: start; }
   .bangalore-landing__location-card .bangalore-landing__listing-count { top: 8px; left: 8px; }
   .bangalore-landing__location-body > h3 { font-size: var(--landing-text-sm); }
   .bangalore-landing__location-link > svg { width: 14px; height: 14px; flex-shrink: 0; }

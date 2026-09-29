@@ -29,6 +29,7 @@
   --landing-text-base: var(--ui-text-base);
   --landing-text-card: var(--ui-text-card);
   --landing-text-panel: var(--ui-text-panel);
+  --landing-text-form-title: 28px;
   --landing-text-section: var(--ui-text-section);
   --landing-text-hero: var(--ui-text-hero);
   --landing-text-metric: var(--ui-text-metric);
@@ -71,6 +72,7 @@
   .bangalore-landing, .bangalore-landing-dialog {
     --landing-text-hero: clamp(30px, 8.2vw, 40px);
     --landing-text-section: 24px;
+    --landing-text-form-title: 22px;
     --landing-text-card: 16px;
     --landing-text-metric: 20px;
     --landing-icon-box: 32px;

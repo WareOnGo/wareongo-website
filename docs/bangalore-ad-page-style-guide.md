@@ -93,35 +93,41 @@ Use the 4px rhythm: 4, 8, 12, 16, 20, 24, 32, 48, 64. Page content caps at
 desktop / 48px phone spacing; nested card grids use 16px / 12px gaps.
 
 Regular content cards use 24px padding. Compact cards use 16px desktop and 12px
-phone padding. Forms use 32px desktop and 24px phone padding. Headings have a
-24px gap before section content; title-to-copy gaps are 8px.
+phone padding. The hero form uses 20px vertical and 24px horizontal padding;
+dialogs use 32px desktop and 24px phone padding. Headings have a 24px gap before
+section content; title-to-copy gaps are 8px.
 
-Inputs and primary form buttons are 48px tall; the prominent desktop hero form
-uses the 56px large-control variant. Card CTAs, chips and arrow
+Inputs and primary form buttons are 48px tall, including the hero form.
+Card CTAs, chips and arrow
 controls have a minimum 44px touch target. Multiline labels may grow; never clip
 copy or shrink controls below the touch target. Do not size buttons by unrelated
 font utilities. Avoid duplicate primary actions inside a card.
 
 ## Component and responsive rules
 
-- **Hero:** process steps, featured cards and company logos stay in the left
-  column on desktop; the four-field form spans their combined height on the right.
-  Align the form and logo strip's bottom edges. The full-width logo strip was
-  explicitly reverted. Keep 24px between the left-column groups when the form
-  does not need more height. Use the 32px form heading, no eyebrow, 56px desktop
-  controls and a balanced description. Field gaps start at 16px; distribute only
-  the remaining height. Keep the 1400px content cap so the hero cannot expand
-  into excessively tall cards. Below 1024px the form follows the heading, uses
-  48px controls and a natural height; phone field gaps are 12px.
+- **Hero:** the heading and featured cards stay in the left column on desktop;
+  the four-field form stretches on the right to align its bottom with the
+  featured cards. Distribute the added height between form fields. The company logo
+  carousel spans the full content width beneath both columns, with the heading
+  “Trusted by 200+ Companies across India” above the logos on every screen size.
+  There is no process-step strip. Keep 24px between hero groups and the 1400px
+  content cap. Use a 28px form heading (22px on phones), no eyebrow, a 14px
+  description, 48px controls and 16px input text. Field gaps are 12px with 4px
+  between labels and inputs. Below 1024px the form follows the heading at its
+  natural height; below 768px, the client carousel follows the form and comes
+  before the featured cards.
 - **Featured cards:** compact version of the listing type scale; horizontal track
   with accessible arrow controls. Photo, title, size, specifications, rent.
-- **Available listings:** 3 columns on desktop, 2 on tablet. Below 768px, a native
-  swipeable row with a visible next-card edge and one scrollable row of size
-  chips. Selecting a size starts the listing row at the first card.
+- **Available listings:** use “Warehouses and Godowns in Bangalore” with no
+  eyebrow. Keep 3 columns on desktop and 2 on tablet. Hide the entire
+  section below 768px, including its heading, size filters, cards and footer.
 - **Micromarkets:** the same photo/gradient/count/title design at every size.
-  Always 2 columns × 4 rows. Desktop stays beside the non-sticky map in one fold;
-  mobile cards are 168px tall. Cards must never establish their width from an
-  aspect ratio or overflow their grid column. Count badges are secondary metadata:
+  Use 2 columns × 4 rows on tablet and desktop; desktop stays beside the
+  non-sticky map in one fold. Below 768px, place the cards in one horizontally
+  scrolling row beneath the map, with native swipe, snap points and a visible
+  next-card edge. Mobile cards are 168px tall and up to 240px wide. Cards must
+  never establish their width from an aspect ratio or overflow their grid column.
+  Count badges are secondary metadata:
   12px/500 muted text, 3px × 6px padding, no border, and 90% surface ivory
   (`--landing-badge-surface`). Keep map labels more prominent as interactive controls.
 - **Area guide:** visible on tablet and desktop; hidden below 768px.

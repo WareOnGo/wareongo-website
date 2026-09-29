@@ -81,15 +81,11 @@ export default function BangaloreLanding({ content = getBangaloreAdPage() }: { c
         <section className="bangalore-landing__hero bangalore-landing__container" aria-labelledby="bangalore-title">
           <div className="bangalore-landing__hero-copy">
             <h1 id="bangalore-title" className="bangalore-landing__headline">{copy.heroHeading} <span>{copy.heroAccent}</span></h1>
-            <ol className="bangalore-landing__hero-steps" aria-label="How it works">
-              {content.heroSteps.map((step, index) => <li key={index}>
-                <span>{step}</span>{index < content.heroSteps.length - 1 && <ArrowRight size={16} strokeWidth={1.5} aria-hidden="true" />}
-              </li>)}
-            </ol>
           </div>
           <BangaloreEnquiryForm copy={copy} />
           <BangaloreFeaturedListings content={content} onContact={openContact} />
-          <section className="bangalore-landing__trust" aria-label="Our clients">
+          <section className="bangalore-landing__trust" aria-labelledby="bangalore-trust-title">
+            <h2 id="bangalore-trust-title" className="bangalore-landing__trust-title">Trusted by 200+ Companies across India</h2>
             <TrustedBySection />
           </section>
         </section>

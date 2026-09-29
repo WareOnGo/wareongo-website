@@ -18,7 +18,7 @@ export const adPages: AdPageContent[] = [{
     "enquirySuccessCta": "Explore locations",
     "featuredHeading": "Featured warehouses",
     "availableEyebrow": "Available now",
-    "availableHeading": "Warehouses and Godowns Available Now in Bangalore",
+    "availableHeading": "Warehouses and Godowns in Bangalore",
     "filterAll": "All sizes",
     "filterSmall": "Under 5,000 sq ft",
     "filterMedium": "5,000 to 20,000 sq ft",

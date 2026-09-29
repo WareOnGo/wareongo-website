@@ -23,6 +23,10 @@ export default function BangaloreAvailableListings({ onContact, totalListings, c
   const [filter, setFilter] = useState<SizeFilter>('all');
   const track = useRef<HTMLDivElement>(null);
   const copy = content.copy;
+  // Keep older approved CMS revisions consistent with the current section title.
+  const heading = copy.availableHeading === 'Warehouses and Godowns Available Now in Bangalore'
+    ? 'Warehouses and Godowns in Bangalore'
+    : copy.availableHeading;
   const sizeFilters = SIZE_FILTERS.map(option => ({ ...option, label: copy[option.labelKey] }));
   const band = sizeFilters.find(option => option.id === filter)!;
   const listings = filter === 'all'
@@ -38,8 +42,7 @@ export default function BangaloreAvailableListings({ onContact, totalListings, c
   return (
     <section className="bangalore-landing__available bangalore-landing__container" aria-labelledby="bangalore-available-title">
       <div className="bangalore-landing__section-heading">
-        <p className="bangalore-landing__eyebrow">{copy.availableEyebrow}</p>
-        <h2 id="bangalore-available-title" className="bangalore-landing__section-title">{copy.availableHeading}</h2>
+        <h2 id="bangalore-available-title" className="bangalore-landing__section-title">{heading}</h2>
       </div>
       <div className="bangalore-landing__size-filters" role="group" aria-label="Filter warehouses by size">
         {sizeFilters.map(({ id, label, min, max }) => (
