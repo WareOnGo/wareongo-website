@@ -98,7 +98,7 @@
 
 /* On desktop, client logos span both columns below the featured warehouses and enquiry. */
 .bangalore-landing__trust { grid-area: trust; min-width: 0; padding-top: 16px; border-top: var(--landing-border); }
-.bangalore-landing__trust-title { margin: 0 0 16px; color: var(--landing-muted); font-size: var(--landing-text-sm); font-weight: 400; line-height: var(--landing-leading-ui); text-align: center; text-wrap: balance; }
+.bangalore-landing__trust-title { margin: 0 0 16px; color: var(--landing-ink); font-size: var(--landing-text-base); font-weight: 700; line-height: var(--landing-leading-ui); letter-spacing: .2em; text-transform: uppercase; text-align: center; text-wrap: balance; }
 .bangalore-landing__trust .trusted-strip { padding-block: 8px; }
 .bangalore-landing__trust .trusted-item { width: 112px; height: 36px; padding-inline: 14px; }
 .bangalore-landing__trust .trusted-fade { width: 24px; }
@@ -214,7 +214,7 @@
 .bangalore-landing__service { position: relative; display: flex; flex-direction: column; align-items: flex-start; min-width: 0; padding: var(--landing-card-padding); border: var(--landing-interactive-border); border-radius: var(--landing-radius); background: var(--landing-card); }
 .bangalore-landing__service-number { margin-top: 16px; color: var(--landing-muted); font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); }
 .bangalore-landing__service h3 { margin-top: 4px; font-size: var(--landing-text-card); font-weight: 600; line-height: 1.4; letter-spacing: 0; }
-.bangalore-landing__service p { margin-block: 8px 24px; color: var(--landing-muted); font-size: var(--landing-text-sm); line-height: var(--landing-leading-body); }
+.bangalore-landing__service p { margin-block: 8px 24px; color: var(--landing-muted); font-size: var(--landing-text-sm); line-height: var(--landing-leading-body); text-wrap: balance; }
 .bangalore-landing__service > button { margin-top: auto; }
 .bangalore-landing__service:hover { border-color: var(--landing-accent); }
 .bangalore-landing__service-image { position: relative; width: 100%; min-width: 0; min-height: 304px; overflow: hidden; border: var(--landing-border); border-radius: var(--landing-radius); background: var(--landing-tint); }
@@ -407,8 +407,12 @@
   .bangalore-landing__button--compact, .bangalore-landing__area-options button { min-height: 44px; }
   .bangalore-landing__section-heading { margin-bottom: 24px; }
   .bangalore-landing__hero { grid-template-areas: "intro" "enquiry" "trust" "featured"; padding-top: 28px; }
-  .bangalore-landing__enquiry { scroll-margin-top: 88px; }
-  .bangalore-landing__trust-title { font-size: var(--landing-text-xs); }
+  .bangalore-landing__enquiry { --landing-text-form-title: 20px; --landing-control-height: var(--landing-compact-height); padding: 16px; scroll-margin-top: 88px; }
+  .bangalore-landing__enquiry-intro { margin-block: 4px 12px; font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); }
+  .bangalore-landing__form-fields { gap: 8px; }
+  .bangalore-landing__form-field > label { font-size: var(--landing-text-xs); }
+  .bangalore-landing__input-wrap > input { padding-block: 8px; }
+  .bangalore-landing__submit { padding-block: 10px; }
   .bangalore-landing__trust .trusted-item { width: 104px; height: 32px; padding-inline: 12px; }
   .bangalore-landing__featured-controls { display: flex; }
   .bangalore-landing__featured-grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(280px, 85%); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: 2px; scrollbar-width: none; }
@@ -459,7 +463,6 @@
 @media (max-width: 359px) {
   .bangalore-landing__proof-metrics dd { font-size: var(--landing-text-compact-metric); }
   .bangalore-landing__benefit { padding: 8px; }
-  .bangalore-landing__enquiry { padding: 20px; }
   .bangalore-landing__market-summary { grid-template-columns: minmax(0, 1fr); }
   .bangalore-landing__stats-content figure { overflow-x: auto; }
   .bangalore-landing__stats-content figure > div { min-width: 280px; }

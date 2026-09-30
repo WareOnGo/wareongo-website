@@ -41,13 +41,22 @@ are not part of this page's decorative palette.
 
 Montserrat throughout, including fields and portaled dialogs. Use 400 for prose,
 500 for labels and secondary table headings, 600 for titles and controls, and
-700 only for the hero. Do not use synthetic bold.
+700 for the hero and trust line. Do not use synthetic bold.
+
+Use title case for page, section, form, and card headings: “Find Your
+Warehouse”, “Featured Warehouses”, and “Our Services”. Capitalize the major
+words; keep articles, conjunctions, and prepositions such as “a”, “the”,
+“and”, “for”, “in”, and “to” lowercase within a heading. Preserve WareOnGo,
+3PLs, PEB, and units such as sqft. Descriptions, helper text, FAQ questions,
+and button copy stay in their written sentence case. Use authored text,
+not CSS `capitalize`, so the wording is consistent for every reader. CMS
+headings also pass through `normalizeHeadingCase` when the page renders.
 
 | Role | Desktop | Phone, below 768px | Weight / leading |
 | --- | --- | --- | --- |
 | Hero | Fluid 38–52px | Fluid 30–40px | 700 / 1.12 |
 | Section heading | 32px | 24px | 600 / 1.25 |
-| Hero form heading | 28px | 22px | 600 / 1.25 |
+| Hero form heading | 28px | 20px | 600 / 1.25 |
 | Dialog heading | 24px | 24px | 600 / 1.25 |
 | Card title | 18px | 16px | 600 / 1.4 |
 | Compact listing / photo-card title | 16px | 14px | 600 / 1.4 |
@@ -98,11 +107,13 @@ same value before the footer. The navy request banner retains its own internal
 padding. Nested card grids use 16px / 12px gaps.
 
 Regular content cards use 24px padding. Compact cards use 16px desktop and 12px
-phone padding. The hero form uses 20px vertical and 24px horizontal padding;
+phone padding. The hero form uses 20px vertical and 24px horizontal padding,
+reduced to 16px on phones;
 dialogs use 32px desktop and 24px phone padding. Headings have a 24px gap before
 section content; title-to-copy gaps are 8px.
 
-Inputs and primary form buttons are 48px tall, including the hero form.
+Inputs and primary form buttons are 48px tall. The mobile hero form uses 44px
+inputs and a 44px submit button, with 16px input text.
 Card CTAs, chips and arrow
 controls have a minimum 44px touch target. Multiline labels may grow; never clip
 copy or shrink controls below the touch target. Do not size buttons by unrelated
@@ -110,15 +121,20 @@ font utilities. Avoid duplicate primary actions inside a card.
 
 ## Component and responsive rules
 
-- **Hero:** the heading and featured cards stay in the left column on desktop;
+- **Hero:** use “Warehouses for Rent in Bangalore” with no trailing period.
+  The heading and featured cards stay in the left column on desktop;
   the four-field form stretches on the right to align its bottom with the
   featured cards. Distribute the added height between form fields. The company logo
   carousel spans the full content width beneath both columns, with the heading
   “Trusted by 200+ Companies across India” above the logos on every screen size.
+  Match the homepage trust line: 16px Montserrat, weight 700, uppercase, 0.2em
+  letter spacing and ink colour, with 16px below it for the logo carousel.
   There is no process-step strip. Keep 24px between hero groups and the 1400px
-  content cap. Use a 28px form heading (22px on phones), no eyebrow, a 14px
-  description, 48px controls and 16px input text. Field gaps are 12px with 4px
-  between labels and inputs. Below 1024px the form follows the heading at its
+  content cap. Use a 28px form heading, no eyebrow, a 14px description,
+  48px controls and 16px input text. Field gaps are 12px with 4px between labels
+  and inputs. Below 768px, use a 20px heading, 12px description and labels,
+  8px field gaps, and 44px controls to bring the client carousel higher.
+  Keep input text at 16px. Below 1024px the form follows the heading at its
   natural height. The benefits section sits outside the hero grid and follows
   the client carousel on desktop, using the shared gap between major sections.
   Below 768px, the order is heading, form, client logos, featured cards, then

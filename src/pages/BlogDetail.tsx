@@ -149,14 +149,14 @@ const BlogDetail = () => {
                 so the SSG HTML always matches the FAQPage JSON-LD. */}
             <section aria-labelledby="blog-faq" className="mt-10">
               <h2 id="blog-faq" className="ui-section-title text-wareongo-blue mb-4">
-                Frequently asked questions
+                Frequently Asked Questions
               </h2>
               <FAQAccordion items={blog.faqs.map(({ q, a }) => ({ q, a }))} />
             </section>
 
             {relatedBlogs.length > 0 && (
               <section aria-label="Related blogs" className="mt-10">
-                <h2 className="ui-section-title text-wareongo-charcoal mb-3">Related blogs</h2>
+                <h2 className="ui-section-title text-wareongo-charcoal mb-3">Related Blogs</h2>
                 <ul className="space-y-2">
                   {relatedBlogs.map((g) => (
                     <li key={g.slug}>

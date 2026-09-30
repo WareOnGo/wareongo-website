@@ -181,7 +181,7 @@ test('catalogue cards still filter documents and retain loading feedback', () =>
 test('approved card leads with area then decimal rent, and keeps the full locality in its link', () => {
   const locality = 'Nelamangala Industrial Area, Tumakuru Road';
   const root = parseFragment(renderCard({ ...fixture, size: 125000, price: 26.25, micromarket: [locality], warehouseType: 'PEB', numberOfDocks: 4 }));
-  assert.deepEqual(elements(root, 'dt').map(textOf), ['Carpet area', 'Rent / month']);
+  assert.deepEqual(elements(root, 'dt').map(textOf), ['Carpet Area', 'Rent / Month']);
   assert.deepEqual(elements(root, 'dd').map(textOf), ['1,25,000 sqft', '₹26.25 /sqft']);
   assert.equal(textOf(elements(root, 'a')[0]), locality);
   assert.deepEqual(elements(root, 'li').map(textOf), ['30 ft Clear Height', '4 Docks', 'Fire NOC: Yes']);

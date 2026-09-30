@@ -15,9 +15,11 @@ import BangaloreMicromarkets from '@/components/city/BangaloreMicromarkets';
 import ContactFormDialog from '@/components/ContactFormDialog';
 import RequestCTASection from '@/components/RequestCTASection';
 import { getBangaloreAdPage, type AdPageContent } from '@/data/adPages';
+import defaults from '@/data/ad-pages/bangalore.json';
 import { MICROMARKETS } from '@/data/locations.generated';
 import type { BangaloreLandingData } from '@/loaders/bangaloreLandingLoader';
 import { trackEvent, type AnalyticsParams } from '@/lib/analytics';
+import { normalizeHeadingCase, titleCase } from '@/lib/headingCase';
 import '@/components/WarehouseCard.css';
 import './BangaloreLanding.css';
 
@@ -28,13 +30,33 @@ const LOCATIONS = LOCATION_SLUGS.map(slug => MICROMARKETS.find(market => market.
   .filter((market): market is (typeof MICROMARKETS)[number] => Boolean(market));
 
 const SERVICE_ICONS = { 'find-warehouse': Search, 'build-to-suit': Warehouse, 'list-space': Truck, 'transaction-management': Handshake };
+const PREVIOUS_SERVICE_COPY = {
+  'find-warehouse': { title: 'Find a warehouse', bodies: ['Verified Bangalore spaces matched to your needs within 4 hours.', 'Verified spaces matched to your needs within 4 hours'] },
+  'build-to-suit': { title: 'Build to suit', bodies: ['We find land and owners to build to your specifications.', 'We find land that fits you, and build to your specs'] },
+  'list-space': { title: 'Find a tenant or buyer', bodies: ['Find tenants or buyers for your warehouse or spare space.', 'Find tenants or buyers for your property, hassle-free'] },
+  'transaction-management': { title: 'End-to-end transaction management', bodies: ['Visits, negotiation, paperwork and compliance, managed through move-in.', 'Visits, Negotiation and Handover, handled end-to-end'] },
+};
 const AUDIENCE_ICONS = { owners: Warehouse, '3pls': Truck, companies: Building2 };
 const AUDIENCE_INTENTS = { owners: ['list-warehouse'], '3pls': ['find-space', 'fill-spare-space'], companies: ['find-warehouse'] };
 
 /** Content slots follow the supplied Google Ads wireframe, top to bottom. */
-export default function BangaloreLanding({ content = getBangaloreAdPage() }: { content?: AdPageContent } = {}) {
-  const copy = content.copy;
-  const services = content.services.map(item => ({ ...item, slug: item.id, description: item.body, icon: SERVICE_ICONS[item.id] }));
+export default function BangaloreLanding({ content: savedContent = getBangaloreAdPage() }: { content?: AdPageContent } = {}) {
+  const copy = normalizeHeadingCase({
+    ...savedContent.copy,
+    heroAccent: savedContent.copy.heroAccent === 'in Bangalore.' ? defaults.copy.heroAccent : savedContent.copy.heroAccent,
+    whyHeading: savedContent.copy.whyHeading === 'Why choose WareOnGo' ? defaults.copy.whyHeading : savedContent.copy.whyHeading,
+  });
+  const content = { ...savedContent, copy };
+  // Refresh previous CMS defaults while retaining later edits to each field.
+  const services = content.services.map(item => {
+    const previous = PREVIOUS_SERVICE_COPY[item.id];
+    const updated = defaults.services.find(service => service.id === item.id) ?? item;
+    return {
+      ...item, slug: item.id, icon: SERVICE_ICONS[item.id],
+      title: item.title === previous?.title ? updated.title : item.title,
+      description: previous?.bodies.includes(item.body) ? updated.body : item.body,
+    };
+  });
   const audiences = content.audiences.map(item => ({ ...item, slug: item.id, description: item.body, icon: AUDIENCE_ICONS[item.id],
     actions: [item.primaryCta, item.secondaryCta].filter(Boolean).map((label, index) => ({ label, intent: AUDIENCE_INTENTS[item.id][index] })),
   }));
@@ -95,7 +117,7 @@ export default function BangaloreLanding({ content = getBangaloreAdPage() }: { c
                 <article key={slug} className="bangalore-landing__service">
                   <div className="bangalore-landing__icon"><Icon size={22} strokeWidth={1.5} aria-hidden="true" /></div>
                   <span className="bangalore-landing__service-number">0{index + 1}</span>
-                  <h3>{title}</h3>
+                  <h3>{titleCase(title)}</h3>
                   <p>{description}</p>
                   <button
                     type="button"
@@ -120,7 +142,7 @@ export default function BangaloreLanding({ content = getBangaloreAdPage() }: { c
             {audiences.map(({ slug, icon: Icon, title, description, actions }) => (
               <article key={slug} className="bangalore-landing__audience-card">
                 <div className="bangalore-landing__icon"><Icon size={23} strokeWidth={1.5} aria-hidden="true" /></div>
-                <h3>{title}</h3>
+                <h3>{titleCase(title)}</h3>
                 <p>{description}</p>
                 <div className="bangalore-landing__audience-actions">
                   {actions.map(({ label, intent }, index) => (

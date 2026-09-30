@@ -17,8 +17,9 @@ export interface LegalContent {
 
 import { legalPages as generated } from './legalPages.generated';
 import { normalizeContentPunctuation } from '@/lib/contentPunctuation';
+import { normalizeHeadingCase } from '@/lib/headingCase';
 
-const legalPages = normalizeContentPunctuation(generated);
+const legalPages = normalizeHeadingCase(normalizeContentPunctuation(generated));
 
 export function getLegalPage(slug: LegalSlug): LegalContent {
   const page = legalPages.find(p => p.slug === slug);

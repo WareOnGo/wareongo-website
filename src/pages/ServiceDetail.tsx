@@ -48,7 +48,7 @@ export default function ServiceDetail() {
           </header>
           {page.blocks.map((block, i) => <ContentBlock key={i} block={block} />)}
           {page.faqs.length > 0 && <section aria-labelledby="service-faq" className="mt-10">
-            <h2 id="service-faq" className="ui-section-title text-wareongo-blue mb-4">Frequently asked questions</h2>
+            <h2 id="service-faq" className="ui-section-title text-wareongo-blue mb-4">Frequently Asked Questions</h2>
             <FAQAccordion items={page.faqs} />
           </section>}
           <div className="mt-10 border border-ui-line rounded-xl p-6 text-center">

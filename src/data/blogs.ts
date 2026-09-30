@@ -72,8 +72,9 @@ export interface Blog {
 
 import { blogs as generated } from './blogs.generated';
 import { normalizeContentPunctuation } from '@/lib/contentPunctuation';
+import { normalizeHeadingCase } from '@/lib/headingCase';
 
-export const blogs: Blog[] = normalizeContentPunctuation(generated);
+export const blogs: Blog[] = normalizeHeadingCase(normalizeContentPunctuation(generated));
 
 export const getBlogBySlug = (slug: string): Blog | undefined =>
   blogs.find((g) => g.slug === slug);

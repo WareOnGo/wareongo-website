@@ -50,6 +50,13 @@ colors remain functional exceptions; brand assets keep their own artwork.
 
 Montserrat uses real font weights, with font synthesis disabled.
 
+Use title case for page, section, form, and card headings, including blog and
+case-study headings. Keep articles, conjunctions, and prepositions lowercase
+inside a heading. Preserve brands, acronyms, and units (WareOnGo, 3PLs, PEB,
+Grade A, sqft, kVA). Body copy, FAQ questions, helper text, and buttons retain
+their written sentence case. CMS editorial headings use `normalizeHeadingCase`
+before rendering and structured-data generation; avoid CSS `capitalize`.
+
 | Class | Desktop | Phone below 768px |
 | --- | --- | --- |
 | `ui-page-title` | 38–52px fluid, 700 | 30–40px fluid, 700 |

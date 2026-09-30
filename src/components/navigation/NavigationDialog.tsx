@@ -151,7 +151,7 @@ export default function NavigationDialog({ view, category, mobileOrigin, account
           </div>
           <div className="wog-nav-directory-results" ref={bodyRef}>
             {results.length ? <LocationLinks locations={results} onNavigate={onNavigate} />
-              : <div className="wog-nav-empty"><h3>No matching locations</h3>
+              : <div className="wog-nav-empty"><h3>No Matching Locations</h3>
                 <p>Try another name or choose a different location type.</p>
                 {query && <button type="button" className="wog-nav-view-all" onClick={() => { setQuery(''); inputRef.current?.focus(); }}>Clear search</button>}
               </div>}

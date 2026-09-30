@@ -156,7 +156,7 @@ const RequestWarehouse = () => {
             <div className="bg-ui-surface border border-ui-outline rounded-xl p-5 sm:p-6 md:p-8">
               {submitted ? (
                 <div className="text-center py-8">
-                  <h2 className="ui-section-title text-wareongo-blue mb-4">Thank you!</h2>
+                  <h2 className="ui-section-title text-wareongo-blue mb-4">Thank You!</h2>
                   <p className="text-wareongo-slate mb-6">
                     Our team is curating the best-fit warehouses for you.
                   </p>

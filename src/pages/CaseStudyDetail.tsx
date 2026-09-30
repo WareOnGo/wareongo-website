@@ -311,7 +311,7 @@ const CaseStudyDetail: React.FC = () => {
 
           {/* Internal links — city listings, related blogs, adjacent case studies */}
           <section aria-label="Related links" className="mt-8">
-            <h2 className="ui-section-title text-wareongo-charcoal mb-3">Internal links</h2>
+            <h2 className="ui-section-title text-wareongo-charcoal mb-3">Internal Links</h2>
             <ul className="space-y-2">
               {cs.story.internalLinks.map((l) => (
                 <li key={l.to + l.label}>
@@ -332,8 +332,8 @@ const CaseStudyDetail: React.FC = () => {
         <div className="container mx-auto max-w-6xl mt-16">
           <div className="border border-ui-outline rounded-xl bg-wareongo-blue px-6 sm:px-10 py-10 sm:py-14 text-center">
             <h2 className="ui-section-title text-ui-surface mb-3">
-              The hard ones are<br />
-              <span className="italic font-normal text-ui-line">our speciality.</span>
+              The Hard Ones Are<br />
+              <span className="italic font-normal text-ui-line">Our Speciality.</span>
             </h2>
             <p className="text-sm sm:text-base text-ui-line leading-relaxed mb-7 max-w-xl mx-auto">
               {cs.story.cta.text}

@@ -17,7 +17,7 @@ import SpecTable from '@/components/micromarket/SpecTable';
 import { CorridorPanel, RentBySize, SpecSizeComparison } from '@/components/city/CityPanels';
 import { usePagedListings } from '@/hooks/usePagedListings';
 import { CHIP, EYEBROW, PANEL, PROSE, SECTION_GAP, SECTION_RULE } from '@/components/micromarket/tokens';
-import { blogSummaries as blogs } from '@/data/blogSummaries.generated';
+import { blogSummaries as blogs } from '@/data/blogSummaries';
 import { specRowsFor } from '@/lib/micromarketStats';
 import type { EditorialPageData } from '@/loaders/locationLoader';
 import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
@@ -192,7 +192,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
               className={`scroll-mt-24 ${SECTION_RULE}`}
             >
               <SectionHeading index={indexOf('listings')} eyebrow="Inventory">
-                {content.inventoryHeading ?? `Warehouses for rent in ${name}`}
+                {content.inventoryHeading ?? `Warehouses for Rent in ${name}`}
               </SectionHeading>
 
               <p className="mb-5 text-sm text-wareongo-slate">
@@ -254,7 +254,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
             {hasMarket && (
               <section id="market" className={SECTION_RULE}>
                 <SectionHeading index={indexOf('market')} eyebrow="Market">
-                  {content.marketHeading ?? `Warehouse space in ${name}: where the stock sits`}
+                  {content.marketHeading ?? `Warehouse Space in ${name}: Where the Stock Sits`}
                 </SectionHeading>
                 {/* Fixed figure width rather than a fraction. The prose caps its
                     own measure at max-w-2xl for readability, so a fractional
@@ -272,7 +272,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
             {hasCorridors && (
               <section id="corridors" className={SECTION_RULE}>
                 <SectionHeading index={indexOf('corridors')} eyebrow="Locations">
-                  {content.corridorHeading ?? `Where to rent in ${name}`}
+                  {content.corridorHeading ?? `Where to Rent in ${name}`}
                 </SectionHeading>
                 {city && city.corridors.length > 0 && <CorridorPanel data={city} />}
                 {content.corridorProse && (
@@ -284,7 +284,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
             {hasRents && (
               <section id="rents" className={SECTION_RULE}>
                 <SectionHeading index={indexOf('rents')} eyebrow="Pricing">
-                  {content.rentsHeading ?? `Warehouse rent in ${name}`}
+                  {content.rentsHeading ?? `Warehouse Rent in ${name}`}
                 </SectionHeading>
                 <div className="grid items-start gap-6 lg:grid-cols-2 lg:gap-10">
                   {peers.length > 0 && <PeerRentChart peers={peers} />}
@@ -299,13 +299,13 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
             )}
 
             <div className={SECTION_GAP}>
-              <InventoryBand stats={stats} heading="What you'll find here" excludedLabel={city ? 'land, build-to-suit or under construction' : undefined} />
+              <InventoryBand stats={stats} heading="What You'll Find Here" excludedLabel={city ? 'land, build-to-suit or under construction' : undefined} />
             </div>
 
             {hasSpec && (
               <section id="specification" className={SECTION_RULE}>
                 <SectionHeading index={indexOf('specification')} eyebrow="Specification">
-                  {content.specHeading ?? `Typical specification in ${name}`}
+                  {content.specHeading ?? `Typical Specification in ${name}`}
                 </SectionHeading>
                 <div className="grid items-start gap-6 lg:grid-cols-2 lg:gap-10">
                   <SpecTable stats={stats} />
@@ -325,7 +325,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
             {hasCompliance && (
               <section id="compliance" className={SECTION_RULE}>
                 <SectionHeading index={indexOf('compliance')} eyebrow="Compliance">
-                  {content.complianceHeading ?? `Warehouse compliance in ${name}`}
+                  {content.complianceHeading ?? `Warehouse Compliance in ${name}`}
                 </SectionHeading>
                 <p className={PROSE}><InlineText text={content.complianceProse ?? ''} /></p>
               </section>
@@ -334,7 +334,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
             {hasFaqs && (
               <section id="faq" className={SECTION_RULE}>
                 <SectionHeading index={indexOf('faq')} eyebrow="FAQ">
-                  Frequently asked questions
+                  Frequently Asked Questions
                 </SectionHeading>
                 <FAQAccordion items={content.faqs.map(({ q, a }) => ({ q, a }))} />
               </section>

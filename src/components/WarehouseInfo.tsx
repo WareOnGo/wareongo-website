@@ -27,7 +27,7 @@ export const specPresent = (v: unknown): boolean => {
 // unknown fields the API may add later stay hidden until given a label here.
 const SPEC_GROUPS: { title: string; icon: React.ElementType; fields: { key: string; label: string }[] }[] = [
   {
-    title: 'Site & access',
+    title: 'Site & Access',
     icon: Route,
     fields: [
       { key: 'land_parcel_size', label: 'Land parcel' },
@@ -55,7 +55,7 @@ const SPEC_GROUPS: { title: string; icon: React.ElementType; fields: { key: stri
     ],
   },
   {
-    title: 'Docking & parking',
+    title: 'Docking & Parking',
     icon: Truck,
     fields: [
       { key: 'gateSizeFt', label: 'Gate size (ft)' },
@@ -68,7 +68,7 @@ const SPEC_GROUPS: { title: string; icon: React.ElementType; fields: { key: stri
     ],
   },
   {
-    title: 'Utilities & interiors',
+    title: 'Utilities & Interiors',
     icon: Zap,
     fields: [
       { key: 'powerKva', label: 'Power (kVA)' },
@@ -260,7 +260,7 @@ const WarehouseInfo: React.FC<WarehouseInfoProps> = ({ specifications, specs }) 
           <div className="flex items-center gap-2 mb-5">
             <CheckCircle className="w-4 h-4 text-wareongo-blue" aria-hidden="true" />
             <h3 className="ui-eyebrow text-wareongo-slate">
-              Additional features
+              Additional Features
             </h3>
           </div>
           <ul

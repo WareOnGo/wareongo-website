@@ -7,7 +7,7 @@ const PHONE = '+917400184225';
 
 interface RequestCopy { heading: string; description: string; details: string; primaryLabel: string; phoneLabel: string }
 const DEFAULT_COPY: RequestCopy = {
-  heading: "Still haven't found the warehouse you want?",
+  heading: "Still Haven't Found the Warehouse You Want?",
   description: "Tell us your requirements. We'll find it for you.",
   details: 'Pan-India inventory\u00a0·\u00a04-hour shortlist\u00a0·\u00a0You only pay when you close.',
   primaryLabel: 'Request a Warehouse', phoneLabel: 'Call Us Now',

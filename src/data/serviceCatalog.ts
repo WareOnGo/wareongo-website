@@ -1,6 +1,6 @@
 export const SERVICE_PAGES = {
   'warehouse-search': 'Warehouse Search',
-  'build-to-suit': 'Build-To-Suit',
+  'build-to-suit': 'Build-to-Suit',
   'lease-negotiation': 'Lease Negotiation',
   'compliance-procurement': 'Compliance Procurement',
 } as const;

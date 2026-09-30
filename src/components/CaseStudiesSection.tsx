@@ -5,7 +5,7 @@ const studies = [
     image:
       'https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1200&q=80',
     eyebrow: 'Case Study 01 · Kochi, Kerala',
-    title: "India's hardest warehouse market. Cracked at ₹22/sqft.",
+    title: "India's Hardest Warehouse Market. Cracked at ₹22/sqft.",
     description:
       '3PL Company · Electrical & Appliances Logistics · Closed ₹2.5–3/sqft below market with 5 follow-on mandates.',
     href: '/casestudies/kochi-3pl-warehouse',
@@ -14,7 +14,7 @@ const studies = [
     image:
       'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80',
     eyebrow: 'Case Study 02 · Hyderabad',
-    title: 'Fire-compliant warehouse. 2 months of failure. Then us.',
+    title: 'Fire-Compliant Warehouse. 2 Months of Failure. Then Us.',
     description:
       'Manufacturer · 22 properties screened · Closed at ₹18.5/sqft for 50,000 sqft fire-compliant. ~₹90L saved.',
     href: '/casestudies/hyderabad-fire-compliant-warehouse',

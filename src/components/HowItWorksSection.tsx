@@ -10,32 +10,32 @@ type Step = {
 const STEPS: Step[] = [
   {
     n: 1,
-    title: 'Share your brief',
+    title: 'Share Your Brief',
     description: 'Tell us your required city, sqft, type, and timeline. Sharper briefs, more relevant shortlists.',
   },
   {
     n: 2,
-    title: 'Get a curated shortlist',
+    title: 'Get a Curated Shortlist',
     description: '3–5 matched options within 4 hours.',
   },
   {
     n: 3,
-    title: 'Site visits for the best options',
+    title: 'Site Visits for the Best Options',
     description: 'Only visit the most relevant options: we prioritise your time and peace of mind.',
   },
   {
     n: 4,
-    title: 'Advice and support from our experts',
+    title: 'Advice and Support from Our Experts',
     description: 'We get hands-on, and use our expertise to get you the best warehouse.',
   },
   {
     n: 5,
-    title: 'Negotiation & terms',
+    title: 'Negotiation & Terms',
     description: 'We negotiate commercials so you save 8–12% on average. Owners get the best clients, and clients get the best commercials.',
   },
   {
     n: 6,
-    title: 'Compliance & handover',
+    title: 'Compliance & Handover',
     description: "End-to-end compliance and legal support. We handle the nitty-gritties, so you don't have to.",
   },
 ];
@@ -93,7 +93,7 @@ const HowItWorksSection = () => {
             How WareOnGo Works
           </p>
           <h2 className="ui-section-title text-wareongo-blue">
-            Get your Warehouse: Faster, Better, Cheaper.
+            Get Your Warehouse: Faster, Better, Cheaper.
           </h2>
         </div>
 

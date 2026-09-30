@@ -125,14 +125,14 @@ const AboutUs = () => {
               id="trusted-by"
               className="ui-eyebrow text-center text-wareongo-slate mb-5"
             >
-              Trusted by 200+ companies
+              Trusted by 200+ Companies
             </h2>
             <TrustedBySection />
           </section>
 
           <section aria-labelledby="what-we-do" className="text-center max-w-2xl mx-auto mb-14 sm:mb-16">
             <h2 id="what-we-do" className="ui-section-title text-wareongo-blue mb-5">
-              What we do
+              What We Do
             </h2>
             <p className="text-base text-wareongo-slate leading-relaxed mb-4 text-left">
               WareOnGo is an end-to-end warehousing platform built for businesses that need space fast and need
@@ -152,7 +152,7 @@ const AboutUs = () => {
 
           <section aria-labelledby="founders" className="text-center mb-14 sm:mb-16">
             <h2 id="founders" className="ui-section-title text-wareongo-blue mb-3">
-              Meet the founders
+              Meet the Founders
             </h2>
             <p className="text-base text-wareongo-slate leading-relaxed max-w-2xl mx-auto mb-8 text-left">
               WareOnGo was founded in 2024 by Jayanth Chunduru and Dhaval Gupta, both graduates of Shri Ram
@@ -207,7 +207,7 @@ const AboutUs = () => {
               id="built-so-far"
               className="ui-eyebrow text-wareongo-slate mb-6"
             >
-              What we've built so far
+              What We've Built So Far
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-3xl mx-auto">
               {STATS.map((s) => (
@@ -227,7 +227,7 @@ const AboutUs = () => {
 
               <div className="relative z-10">
                 <h2 id="lets-talk" className="ui-section-title mb-3">
-                  Let's talk
+                  Let's Talk
                 </h2>
                 <p className="text-ui-line text-base leading-relaxed mb-8 max-w-xl mx-auto">
                   Whether you're looking for warehouse space, listing your property, or exploring partnerships,

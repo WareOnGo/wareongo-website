@@ -3,6 +3,7 @@ import InlineText from '@/components/InlineText';
 import defaults from '@/data/ad-pages/bangalore.json';
 import { CITIES_COVERED, SHORTLIST_HOURS, SQFT_TRANSACTED_M } from '@/data/companyStats';
 import type { AdPageContent } from '@/data/adPages';
+import { titleCase } from '@/lib/headingCase';
 
 const BENEFIT_ICONS = {
   local: MapPinned,
@@ -66,7 +67,7 @@ export default function BangaloreBenefits({ content }: { content: AdPageContent 
               <div className="bangalore-landing__icon" aria-hidden="true"><Icon size={20} strokeWidth={1.5} /></div>
               <div>
                 <h3>
-                  <span className={mobileCopy ? 'bangalore-landing__benefit-full-copy' : undefined}>{title}</span>
+                  <span className={mobileCopy ? 'bangalore-landing__benefit-full-copy' : undefined}>{titleCase(title)}</span>
                   {mobileCopy && <span className="bangalore-landing__benefit-mobile-copy">{mobileCopy.title}</span>}
                 </h3>
                 {body && (

@@ -153,11 +153,11 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
         <div className="warehouse-card__body">
           <dl className="warehouse-card__metrics">
             <div className="warehouse-card__metric warehouse-card__area">
-              <dt>Carpet area</dt>
+              <dt>Carpet Area</dt>
               <dd><strong>{number.format(size)}</strong> <small>sqft</small></dd>
             </div>
             <div className="warehouse-card__metric warehouse-card__rent">
-              <dt>Rent / month</dt>
+              <dt>Rent / Month</dt>
               <dd>{hasRent ? <><strong>₹{number.format(price)}</strong> <small>/sqft</small></> : <strong className="warehouse-card__rent-request">Rent on request</strong>}</dd>
             </div>
           </dl>

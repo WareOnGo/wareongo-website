@@ -102,7 +102,7 @@ export const caseStudies: CaseStudy[] = [
       tabLabel: '01 · Kochi',
       badge: 'Deal 01 · 3PL · Third-Party Logistics · Kerala',
       title: (
-        <>Kochi, Kerala: India's hardest<br />warehouse market. Cracked.</>
+        <>Kochi, Kerala: India's Hardest<br />Warehouse Market. Cracked.</>
       ),
       sub: '3PL Company · Electrical & Appliances Logistics · June 2025 → November 2025 operationally running handover · 5 follow-on deals secured',
       metrics: [
@@ -179,7 +179,7 @@ export const caseStudies: CaseStudy[] = [
           ],
         },
         {
-          label: 'What Made this Hard',
+          label: 'What Made This Hard',
           bullets: [
             'No ready-to-move stock existed under ₹24/sqft anywhere in the city.',
             'Owners refused to hold inventory six months forward, so the timeline itself killed conventional options.',
@@ -189,7 +189,7 @@ export const caseStudies: CaseStudy[] = [
           ],
         },
         {
-          label: 'What WareOnGo did',
+          label: 'What WareOnGo Did',
           prose: [
             "The price and timeline problems had a single answer: stop looking at ready warehouses. WareOnGo shifted the search to under-construction properties scheduled to complete by November. A building that doesn't exist yet has no vacancy cost, so its owner can commit months ahead, and at a rate below the finished-stock floor. The security deposit also helps the liquidity crunch most owners experience towards the end of construction. That one move solved both the ₹22 ceiling and the six-month forward hold at the same time.",
             'An under-construction building brings its own risk: it can be handed over without the paperwork that makes it usable. So while construction ran, WareOnGo tracked every regulatory milestone in parallel. Fire NOC, building number, GST registration, all monitored in real time so nothing surfaced as a surprise at possession. Construction itself can slip behind schedule, so the build timeline was monitored and managed alongside the paperwork.',
@@ -220,22 +220,22 @@ export const caseStudies: CaseStudy[] = [
         },
         {
           label: 'Lessons',
-          heading: "If you're looking for a warehouse in Kochi, this deal teaches us four things",
+          heading: "If You're Looking for a Warehouse in Kochi, This Deal Teaches Us Four Things",
           steps: [
             {
-              title: 'The quoted market rate is the ready-stock rate.',
+              title: 'The Quoted Market Rate Is the Ready-Stock Rate.',
               text: 'Kochi landlords held a ₹24.5 to 25 floor on finished warehouses. Under-construction properties are priced below it because the owner carries no vacancy risk on a pre-committed tenant, and it is honestly a relief for them if the property is leased out even before it is completed. There is the additional incentive of investing the security deposit towards construction and towards the end of it, most owners are strapped for funds.',
             },
             {
-              title: 'When life gives you 6 months, make a warehouse.',
+              title: 'When Life Gives You 6 Months, Make a Warehouse.',
               text: 'Five to six months of runway is exactly what makes the under-construction route possible. Start the search when the requirement is confirmed, not when the deadline is close.',
             },
             {
-              title: 'Compliance must finish before possession.',
+              title: 'Compliance Must Finish before Possession.',
               text: "Fire NOC, building numbering, GST registration and other compliances each have their own government timelines. Run them in parallel with construction or fit-out, because running them after handover means paying rent on a warehouse you can't operate legally.",
             },
             {
-              title: 'In Kerala, labour arrangements are part of the real estate deal.',
+              title: 'In Kerala, Labour Arrangements Are Part of the Real Estate Deal.',
               text: "Settle union issues before taking possession. A warehouse without workable labour terms isn't operational, whatever the lease says.",
             },
           ],
@@ -298,7 +298,7 @@ export const caseStudies: CaseStudy[] = [
       tabLabel: '02 · Hyderabad · Fire NOC',
       badge: 'Deal 02 · Manufacturer · Fire Compliance Mandate · Telangana',
       title: (
-        <>Devarayamjal, Hyderabad: Fire-compliant<br />warehouse. 2 months of failure. Then us.</>
+        <>Devarayamjal, Hyderabad: Fire-Compliant<br />Warehouse. 2 Months of Failure. Then Us.</>
       ),
       sub: 'Consolidating 35,000 sqft (2 warehouses) into 50,000 sqft fire-compliant · 22 properties screened · 3 new city mandates followed',
       metrics: [
@@ -376,7 +376,7 @@ export const caseStudies: CaseStudy[] = [
           ],
         },
         {
-          label: 'What Made this Hard',
+          label: 'What Made This Hard',
           bullets: [
             'Fire NOC was a legal-team mandate, not a preference. Every property without one was dead on arrival regardless of price or location.',
             'They also wanted physical fire safety measures, not just certificates acquired through shady means. This client had already lost everything in a fire, they did not want that to happen again.',
@@ -386,7 +386,7 @@ export const caseStudies: CaseStudy[] = [
           ],
         },
         {
-          label: 'What WareOnGo did',
+          label: 'What WareOnGo Did',
           prose: [
             'First, the screen. WareOnGo evaluated 22 properties in the 50,000 to 60,000 sqft range and eliminated 16 that could never reach compliance economically. That left 6 genuine candidates.',
             'Second, and this is the step most searches skip, WareOnGo went to the fire department directly. Instead of guessing at requirements, the team engaged the department and the inspector to establish exactly what the shortlisted property needed to pass. The gap turned out to be closable: fire hydrants were installed, the inspector visit was arranged, and the NOC was secured for the selected property.',
@@ -420,22 +420,22 @@ export const caseStudies: CaseStudy[] = [
         },
         {
           label: 'Lessons',
-          heading: 'If you need a fire compliant warehouse, this deal teaches us four things:',
+          heading: 'If You Need a Fire Compliant Warehouse, This Deal Teaches Us Four Things:',
           steps: [
             {
-              title: '"Fire compliant" in a listing means nothing without a live NOC.',
+              title: '"Fire Compliant" in a Listing Means Nothing without a Live NOC.',
               text: "The only proof is the certificate itself, with a valid date. This client's two-month independent search failed because claimed compliance kept dissolving under scrutiny.",
             },
             {
-              title: 'Screen for fixability, not just current status.',
+              title: 'Screen for Fixability, Not Just Current Status.',
               text: 'Of 22 properties, 16 could never reach compliance at reasonable cost, but 6 could. The useful question isn\'t "does it have an NOC today" but "what exactly would it take to get one."',
             },
             {
-              title: 'Ask the fire department, not the landlord.',
+              title: 'Ask the Fire Department, Not the Landlord.',
               text: 'Requirements to pass inspection come from the department and the inspector. Engaging them directly turns a vague compliance problem into a checklist: in this case, hydrant installation followed by an arranged inspection.',
             },
             {
-              title: 'Price the compliance premium correctly.',
+              title: 'Price the Compliance Premium Correctly.',
               text: 'A compliant warehouse at ₹18.5/sqft beat the ₹21 asking rate. Compliance and below-market rent are not mutually exclusive when the landlord understands the tenant is long-term and the alternative is vacancy.',
             },
           ],
@@ -596,17 +596,17 @@ export const caseStudies: CaseStudy[] = [
               text: 'Food-grade certification requires chemical treatment, specialized floor specifications, a pest-controlled perimeter, and insulation. Local landlords had never dealt with any of it.',
             },
             {
-              title: 'No logistics team.',
+              title: 'No Logistics Team.',
               text: 'The client had no internal logistics function, so the facility had to be delivered as a full build-to-suit fit-out, designed, executed, and handed over operational.',
             },
             {
-              title: 'Geopolitics, eventually.',
+              title: 'Geopolitics, Eventually.',
               text: "At signing, the client's imported machinery was stuck in the Strait of Hormuz because of the Iran war. A warehouse with no machinery in it, is burning rent for nothing.",
             },
           ],
         },
         {
-          label: 'What WareOnGo did',
+          label: 'What WareOnGo Did',
           prose: [
             "There was no shortcut through a database for this one. WareOnGo's team went fully on-ground, speaking with hundreds of individual warehouse owners across the Devanahalli corridor over months of scouting to find east-facing properties whose owners would even discuss a power upgrade.",
             'The property that emerged checked the orientation box. The rest was negotiated and built. The landlord agreed to install the transformer, an investment of ₹75 lakhs to ₹1 crore, recovered through a rate of ₹27/sqft that folds the 250KW supply into the rent. WareOnGo then oversaw the entire build-to-suit implementation for FSSAI readiness, the chemical treatment, floor specs, pest-controlled perimeter, and insulation, and handed over a fully operational facility rather than an empty shell, because the client had no logistics team to do it themselves.',
@@ -638,18 +638,18 @@ export const caseStudies: CaseStudy[] = [
         },
         {
           label: 'Lessons',
-          heading: 'If you need a food-grade warehouse near Bangalore, this deal teaches three things',
+          heading: 'If You Need a Food-Grade Warehouse near Bangalore, This Deal Teaches Three Things',
           steps: [
             {
-              title: 'FSSAI readiness is a build spec, not a checkbox.',
+              title: 'FSSAI Readiness Is a Build Spec, Not a Checkbox.',
               text: 'Certification needs chemical treatment, specific floor specifications, a pest-controlled perimeter, and insulation. Most landlords have never done it, so plan for a build-to-suit conversation rather than a search for ready stock.',
             },
             {
-              title: 'High power requirements change who you can negotiate with.',
+              title: 'High Power Requirements Change Who You Can Negotiate With.',
               text: 'If you need more than the corridor standard (100 to 200KW in Devanahalli), the real search is for a landlord willing to fund a transformer, and the cleanest structure is folding that investment into the rate, as the ₹27/sqft all-in figure did here.',
             },
             {
-              title: 'Rent-free periods can be reopened when circumstances change.',
+              title: 'Rent-Free Periods Can Be Reopened When Circumstances Change.',
               text: "The 45-day Hormuz extension was negotiated after signing. A landlord who has just invested ₹75 lakhs+ in a transformer has every incentive to keep the tenancy healthy, and that leverage works in the tenant's favour.",
             },
           ],
@@ -716,7 +716,7 @@ export const caseStudies: CaseStudy[] = [
       tabLabel: '04 · Hyderabad · Auto',
       badge: 'Deal 04 · Automobile Manufacturer · Logistics Warehouse · Hyderabad',
       title: (
-        <>Hyderabad: One of India's largest two-wheeler<br />brands mandated the big 4. Then chose us.</>
+        <>Hyderabad: One of India's Largest Two-Wheeler<br />Brands Mandated the Big 4. Then Chose Us.</>
       ),
       sub: "Automobile Manufacturer · 55,000 to 62,500 sqft · Nizamabad Highway · Now an approved vendor alongside India's 4 largest CRE firms",
       metrics: [
@@ -800,7 +800,7 @@ export const caseStudies: CaseStudy[] = [
             { title: 'Size.', text: '55,000 to 62,500 sqft of carpet area. Not built-up, carpet.' },
             { title: 'Commercials.', text: "₹17 to 18/sqft with a security deposit the client's terms could accept." },
             {
-              title: 'Container operations.',
+              title: 'Container Operations.',
               text: 'Full 60-foot container access. The nose of a 60-foot trailer extends 10 to 12 feet, so the real turning requirement is 70 to 72 feet of radius, and it has to work inside the premises: turning, docking, reversing.',
             },
             {
@@ -845,22 +845,22 @@ export const caseStudies: CaseStudy[] = [
         },
         {
           label: 'Lessons',
-          heading: "If you're leasing an automobile warehouse, this deal teaches four things",
+          heading: "If You're Leasing an Automobile Warehouse, This Deal Teaches Four Things",
           steps: [
             {
-              title: 'Verify container movement physically, not on a plan.',
+              title: 'Verify Container Movement Physically, Not on a Plan.',
               text: "A 60-foot container's nose extends 10 to 12 feet, making the true turning requirement 70 to 72 feet. Plenty of warehouses that look right on a layout drawing fail when a real trailer tries to reverse into a dock.",
             },
             {
-              title: 'Measure highway distance in operating cost.',
+              title: 'Measure Highway Distance in Operating Cost.',
               text: 'Options 12+ kilometres from the highway lose money on every truck movement, every day, for the life of the lease. This brief cut everything more than a kilometre off the Nizamabad Highway before discussing rent.',
             },
             {
-              title: 'Truck parking is a lease term, negotiate it like one.',
+              title: 'Truck Parking Is a Lease Term, Negotiate It like One.',
               text: "An acre of adjacent staging space was as important to this operation as the building itself. If an advisor won't put parking on the negotiating table, the operational problem becomes worse.",
             },
             {
-              title: 'Carpet area is the number that matters.',
+              title: 'Carpet Area Is the Number That Matters.',
               text: "The brief specified 55,000 to 62,500 sqft of carpet, not built-up area. The difference between the two can be the difference between an operation that fits and one that doesn't.",
             },
           ],
@@ -927,7 +927,7 @@ export const caseStudies: CaseStudy[] = [
       tabLabel: '05 · Hoskote',
       badge: "Deal 05 · Motorcycle Manufacturer's Logistics Partner · Automobile Spare Parts · Hoskote Bangalore",
       title: (
-        <>Hoskote, Bangalore: A 20,000 sqft deal<br />in a 24-rupee market. Closed at 19.</>
+        <>Hoskote, Bangalore: A 20,000 sqft Deal<br />in a 24-Rupee Market. Closed at 19.</>
       ),
       sub: 'Logistics partner of a leading Indian motorcycle manufacturer · Exact 20,000 sqft · Hoskote · February 2026 → Closed May 2026 · Gate demolished and rebuilt',
       metrics: [
@@ -1006,7 +1006,7 @@ export const caseStudies: CaseStudy[] = [
           ],
         },
         {
-          label: 'What WareOnGo did, multiple things at once',
+          label: 'What WareOnGo Did, Multiple Things at Once',
           prose: [
             'The size problem got the most creative fix. Rather than hunting for a 20,000 sqft unicorn, WareOnGo found a 25,000 sqft facility and negotiated rent on only the 20,000 sqft the client would use. The client occupies more space than they pay for.',
             'Price and deposit came down to landlord work. The rate landed at ₹19/sqft, which is ₹4 to 5 under the ₹23 to 24 market, roughly an 18 to 22% saving, and the owner accepted the 2-month corporate deposit in place of the usual 6 to 10.',
@@ -1041,18 +1041,18 @@ export const caseStudies: CaseStudy[] = [
         },
         {
           label: 'Lessons',
-          heading: "If you're leasing a warehouse in Hoskote, this deal teaches three things",
+          heading: "If You're Leasing a Warehouse in Hoskote, This Deal Teaches Three Things",
           steps: [
             {
-              title: 'Seemingly unreasonable demands can be solved with strong relationships.',
+              title: 'Seemingly Unreasonable Demands Can Be Solved with Strong Relationships.',
               text: 'If your requirement (like 20,000 sqft) sits between market unit sizes, look at larger facilities and negotiate rent on the area you use. Owners with hard-to-let space will structure around a committed tenant. But this depends entirely on the relationship with the owner, and that is where WareOnGo came in: the owner was promised another tenant for the remaining 5,000 sqft, which is what closed the deal. That kind of structure is only possible with cultivated owner relationships.',
             },
             {
-              title: 'Structural modifications belong in the deal, not after it.',
+              title: 'Structural Modifications Belong in the Deal, Not after It.',
               text: 'The 20-foot gate would have quietly killed this operation. It was demolished and rebuilt at 35 feet as a condition of the lease, before possession.',
             },
             {
-              title: 'Fit-out items priced separately add up; fold them into the rate.',
+              title: 'Fit-Out Items Priced Separately Add Up; Fold Them into the Rate.',
               text: 'Labour rooms, washrooms, docks, a scissor lift, and an office all landed inside ₹19/sqft. Every item billed separately would have pushed the effective rate well past the budget the rent was protecting.',
             },
           ],

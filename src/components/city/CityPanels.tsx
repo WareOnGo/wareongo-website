@@ -26,7 +26,7 @@ export function CorridorPanel({ data }: { data: CityOverviewStats }) {
       <div className="overflow-x-auto" role="region" aria-label="Warehouse locations comparison" tabIndex={0}>
         <table className="ui-table min-w-[700px] text-left">
           <caption className="sr-only">{data.corridorMode === 'corridors' ? 'Corridors' : 'Localities'} compared by listing count, asking rent, unit size and construction</caption>
-          <thead><tr>{[data.corridorMode === 'corridors' ? 'Corridor' : 'Locality', 'Listings', 'Median rent', 'Rent range', 'Median size', 'Main build'].map(label => <th key={label} scope="col" className={HEAD}>{label}</th>)}</tr></thead>
+          <thead><tr>{[data.corridorMode === 'corridors' ? 'Corridor' : 'Locality', 'Listings', 'Median Rent', 'Rent Range', 'Median Size', 'Main Build'].map(label => <th key={label} scope="col" className={HEAD}>{label}</th>)}</tr></thead>
           <tbody>{data.corridors.map(c => <tr key={c.slug} className="border-t border-ui-line">
             <th scope="row" className={`${CELL} font-medium text-wareongo-blue`}>{c.name}{c.direction && <span className="mt-1 block text-xs font-normal text-wareongo-slate">{c.direction}</span>}</th>
             <td className={`${CELL} tabular-nums`}>{c.listings}</td><td className={`${CELL} whitespace-nowrap tabular-nums`}>{money(c.rent?.median)}</td>
@@ -43,8 +43,8 @@ export function CorridorPanel({ data }: { data: CityOverviewStats }) {
 export function RentBySize({ bands }: { bands: CityOverviewStats['rentBySize'] }) {
   return <div className={`city-rent-table overflow-hidden ${PANEL}`}>
     <table className="ui-table text-left">
-      <caption className="px-4 py-4 text-left font-semibold text-wareongo-blue">Median asking rent by unit size</caption>
-      <thead><tr><th scope="col" className={HEAD}>Unit size</th><th scope="col" className={HEAD}>₹ / sq ft / mo</th><th scope="col" className={`${HEAD} hidden sm:table-cell`}>Priced listings</th></tr></thead>
+      <caption className="px-4 py-4 text-left font-semibold text-wareongo-blue">Median Asking Rent by Unit Size</caption>
+      <thead><tr><th scope="col" className={HEAD}>Unit Size</th><th scope="col" className={HEAD}>₹ / sq ft / mo</th><th scope="col" className={`${HEAD} hidden sm:table-cell`}>Priced Listings</th></tr></thead>
       <tbody>{bands.map(b => <tr key={b.slug} className="border-t border-ui-line">
         <th scope="row" className={`${CELL} font-medium`}>{b.label}</th><td className={`${CELL} whitespace-nowrap tabular-nums`}>{money(b.rent?.median)}<span className="mt-1 block text-xs text-wareongo-slate sm:hidden">{b.samples.rent} priced listings</span></td><td className={`${CELL} hidden tabular-nums sm:table-cell`}>{b.samples.rent}</td>
       </tr>)}</tbody>
@@ -63,7 +63,7 @@ export function SpecSizeComparison({ cohorts }: { cohorts: CityOverviewStats['sp
   ];
   return <div className={`city-spec-comparison mt-6 overflow-hidden ${PANEL}`}>
       <div className="overflow-x-auto" role="region" aria-label="Specification by unit size" tabIndex={0}><table className="ui-table min-w-[480px] text-left">
-        <caption className="px-4 py-4 text-left font-semibold text-wareongo-blue">Specification by unit size</caption>
+        <caption className="px-4 py-4 text-left font-semibold text-wareongo-blue">Specification by Unit Size</caption>
         <thead><tr><th scope="col" className={HEAD}>Specification</th>{(['large', 'small'] as const).map(key => <th key={key} scope="col" className={HEAD}>{key === 'large' ? '50,000 sq ft and up' : 'Under 20,000 sq ft'}<span className="mt-1 block normal-case tracking-normal">{cohorts[key].listings} listings</span></th>)}</tr></thead>
         <tbody>{comparison.map(([label, value]) => <tr key={label} className="border-t border-ui-line"><th scope="row" className={`${CELL} font-medium`}>{label}</th><td className={CELL}>{value(cohorts.large)}</td><td className={CELL}>{value(cohorts.small)}</td></tr>)}</tbody>
       </table></div>

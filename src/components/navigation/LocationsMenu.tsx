@@ -12,7 +12,7 @@ export default function LocationsMenu({ onDirectory, onNavigate }: {
   const [imageFailed, setImageFailed] = useState(false);
   return <div className="wog-nav-mega">
     <div className="wog-nav-mega-heading">
-      <div><h2>Browse locations</h2><p>Find warehouses by state, city or micromarket.</p></div>
+      <div><h2>Browse Locations</h2><p>Find warehouses by state, city or micromarket.</p></div>
       <button type="button" className="wog-nav-text-action" onClick={() => onDirectory('cities')}>
         Explore every location <ArrowRight aria-hidden="true" size={16} />
       </button>
@@ -39,7 +39,7 @@ export default function LocationsMenu({ onDirectory, onNavigate }: {
           </div>
         </> : <div className="wog-nav-guide-copy wog-nav-guide-help">
           <MapPin aria-hidden="true" size={28} />
-          <h3>Need help choosing a location?</h3>
+          <h3>Need Help Choosing a Location?</h3>
           <p>Tell us where you need space. We'll help you compare your options.</p>
           <HeaderLink {...WAREHOUSE_REQUEST} arrow onNavigate={onNavigate} />
         </div>}

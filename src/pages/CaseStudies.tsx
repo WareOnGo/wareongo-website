@@ -28,8 +28,8 @@ const CaseStudies = () => {
               Case Studies
             </span>
             <h1 className="ui-page-title text-wareongo-blue mb-3">
-              Real deals. Real complexity.{' '}
-              <span className="italic font-normal text-wareongo-slate">Real outcomes.</span>
+              Real Deals. Real Complexity.{' '}
+              <span className="italic font-normal text-wareongo-slate">Real Outcomes.</span>
             </h1>
             <p className="text-wareongo-slate text-base max-w-xl mx-auto">
               Five warehouse requirements that demanded real expertise. Fire mandates, Vastu compliance, geopolitical delays, and one gate that needed demolishing.
@@ -115,8 +115,8 @@ const CaseStudies = () => {
         <div className="container mx-auto max-w-6xl mt-16">
           <div className="border border-ui-outline rounded-xl bg-wareongo-blue px-6 sm:px-10 py-10 sm:py-14 text-center">
             <h2 className="ui-section-title text-ui-surface mb-3">
-              The hard ones are<br />
-              <span className="italic font-normal text-ui-line">our speciality.</span>
+              The Hard Ones Are<br />
+              <span className="italic font-normal text-ui-line">Our Speciality.</span>
             </h2>
             <p className="text-sm sm:text-base text-ui-line leading-relaxed mb-7 max-w-md mx-auto">
               Fire compliance. Vastu mandates. Labour unions. Strait of Hormuz delays. Gates that needed demolishing. If your brief is complex, we're exactly who you need.

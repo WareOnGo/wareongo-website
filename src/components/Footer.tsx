@@ -98,7 +98,7 @@ const ExploreSpacesSection = () => {
           aria-expanded={open}
           className="flex items-center justify-between w-full text-left text-lg font-semibold mb-3 hover:text-wareongo-ivory transition-colors"
         >
-          <span>Explore our spaces</span>
+          <span>Explore Our Spaces</span>
           <ChevronDown
             className={`h-4 w-4 transition-transform ${open ? 'rotate-180' : ''}`}
             aria-hidden="true"
@@ -112,7 +112,7 @@ const ExploreSpacesSection = () => {
             listing count, so every entry is a page worth linking. Each nests
             under its own parent city, hence hrefFor rather than a shared base. */}
         <LocationLinkGrid
-          heading="By Micro-market"
+          heading="By Micro-Market"
           items={MICROMARKETS}
           hrefFor={(m) => `/listings/city/${m.citySlug}/${m.slug}`}
         />

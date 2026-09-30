@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>Bangalore ad page · Style guide</title>
+  <title>Bangalore Ad Page · Style Guide</title>
   <link rel="stylesheet" href="../src/index.css">
   <link rel="stylesheet" href="../src/components/WarehouseCard.css">
   <link rel="stylesheet" href="../src/pages/BangaloreLanding.css">
@@ -27,7 +27,7 @@
     .guide-type, .guide-controls { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
     .guide-control-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
     .guide .bangalore-landing__enquiry { grid-area: auto; width: 100%; max-width: 520px; }
-    .guide .bangalore-landing__form-fields { display: grid; gap: 16px; }
+    .guide .bangalore-landing__form-fields { display: grid; }
     .guide .bangalore-landing__input-wrap input { padding-left: 14px; }
     .guide .bangalore-landing__featured { grid-area: auto; align-self: start; max-width: 280px; }
     .guide .bangalore-landing__service h3 { margin-top: 16px; }
@@ -48,11 +48,11 @@
   <main class="guide">
     <header>
       <p class="bangalore-landing__eyebrow">WareOnGo · Bangalore ad page</p>
-      <h1 class="bangalore-landing__section-title">Style guide</h1>
+      <h1 class="bangalore-landing__section-title">Style Guide</h1>
       <p class="guide-intro">Light ivory, navy typography and restrained outlines. These examples load the page’s actual styles. <a href="bangalore-ad-page-style-guide.md">Read the implementation rules</a>.</p>
     </header>
     <section aria-labelledby="palette">
-      <h2 id="palette" class="bangalore-landing__section-title bangalore-landing__section-heading">Palette and surfaces</h2>
+      <h2 id="palette" class="bangalore-landing__section-title bangalore-landing__section-heading">Palette and Surfaces</h2>
       <div class="guide-grid guide-palette">
         <figure><div class="guide-swatch" style="--swatch:var(--landing-paper)"></div><figcaption><strong>Page ivory</strong>Warm, quiet background</figcaption></figure>
         <figure><div class="guide-swatch" style="--swatch:var(--landing-card)"></div><figcaption><strong>Surface ivory</strong>Cards, forms and dialogs</figcaption></figure>
@@ -68,15 +68,15 @@
     <section aria-labelledby="type">
       <h2 id="type" class="bangalore-landing__section-title bangalore-landing__section-heading">Typography</h2>
       <div class="guide-type">
-        <p class="bangalore-landing__headline">Warehouses for rent<span>in Bangalore.</span></p>
-        <h3 class="bangalore-landing__section-title">Explore spaces in Bangalore</h3>
+        <p class="bangalore-landing__headline">Warehouses for Rent<span>in Bangalore</span></p>
+        <h3 class="bangalore-landing__section-title">Explore Spaces in Bangalore</h3>
         <p style="font-size:var(--landing-text-card);font-weight:600">Verified spaces</p>
         <p>Montserrat body copy uses a comfortable 1.6 line height.</p>
         <p class="bangalore-landing__slot-label">Metadata stays at 12px or larger.</p>
       </div>
     </section>
     <section aria-labelledby="controls">
-      <h2 id="controls" class="bangalore-landing__section-title bangalore-landing__section-heading">Controls and form</h2>
+      <h2 id="controls" class="bangalore-landing__section-title bangalore-landing__section-heading">Controls and Form</h2>
       <div class="guide-controls">
         <div class="guide-control-row">
           <button class="bangalore-landing__button" type="button">Find a warehouse</button>
@@ -85,18 +85,18 @@
           <button class="bangalore-landing__size-filter" type="button" aria-pressed="false">Under 5,000 sq ft</button>
         </div>
         <div class="bangalore-landing__enquiry">
-          <h2>Find your warehouse</h2>
+          <h2>Find Your Warehouse</h2>
           <p class="bangalore-landing__enquiry-intro">Clear labels, comfortable inputs and one primary action.</p>
           <div class="bangalore-landing__form-fields">
             <div class="bangalore-landing__form-field"><label for="guide-name">Name</label><div class="bangalore-landing__input-wrap"><input id="guide-name" autocomplete="off" placeholder="Enter your name"></div></div>
-            <button class="bangalore-landing__button" type="button">Get in touch</button>
+            <button class="bangalore-landing__button bangalore-landing__submit" type="button">Get in touch</button>
           </div>
         </div>
       </div>
       <p class="guide-note">Use Tab to inspect the focus ring. These are visual examples; they do not submit enquiries.</p>
     </section>
     <section aria-labelledby="cards">
-      <h2 id="cards" class="bangalore-landing__section-title bangalore-landing__section-heading">Card hierarchy</h2>
+      <h2 id="cards" class="bangalore-landing__section-title bangalore-landing__section-heading">Card Hierarchy</h2>
       <div class="guide-grid">
         <div class="bangalore-landing__featured">
           <article class="warehouse-card ui-listing-card">
@@ -106,8 +106,8 @@
             </div>
             <div class="warehouse-card__body">
               <dl class="warehouse-card__metrics">
-                <div class="warehouse-card__metric warehouse-card__area"><dt>Carpet area</dt><dd><strong>1,89,000</strong> <small>sqft</small></dd></div>
-                <div class="warehouse-card__metric warehouse-card__rent"><dt>Rent / month</dt><dd><strong>₹28.5</strong> <small>/sqft</small></dd></div>
+                <div class="warehouse-card__metric warehouse-card__area"><dt>Carpet Area</dt><dd><strong>1,89,000</strong> <small>sqft</small></dd></div>
+                <div class="warehouse-card__metric warehouse-card__rent"><dt>Rent / Month</dt><dd><strong>₹28.5</strong> <small>/sqft</small></dd></div>
               </dl>
               <div class="warehouse-card__place">
                 <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -120,16 +120,16 @@
         </div>
         <article class="bangalore-landing__benefit">
           <span class="bangalore-landing__icon" aria-hidden="true"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg></span>
-          <div><h3>Verified spaces</h3><p class="bangalore-landing__benefit-body">Informational cards keep a softer outline and the same ivory surface.</p></div>
+          <div><h3>Verified Spaces</h3><p class="bangalore-landing__benefit-body">Informational cards keep a softer outline and the same ivory surface.</p></div>
         </article>
         <article class="bangalore-landing__service">
           <span class="bangalore-landing__icon" aria-hidden="true"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
-          <h3>Find a warehouse</h3><p>Actionable cards use a slightly more defined outline, with a compact CTA underneath.</p><button class="bangalore-landing__button bangalore-landing__button--compact" type="button">Find my warehouse</button>
+          <h3>Find a Warehouse</h3><p>Actionable cards use a slightly more defined outline, with a compact CTA underneath.</p><button class="bangalore-landing__button bangalore-landing__button--compact" type="button">Find my warehouse</button>
         </article>
       </div>
     </section>
     <section aria-labelledby="tables">
-      <h2 id="tables" class="bangalore-landing__section-title bangalore-landing__section-heading">Quiet table surfaces</h2>
+      <h2 id="tables" class="bangalore-landing__section-title bangalore-landing__section-heading">Quiet Table Surfaces</h2>
       <div class="bangalore-landing__stats-content guide-table">
         <table><caption>Example market table</caption><thead><tr><th scope="col">Unit size</th><th scope="col">Median rent / sq ft</th></tr></thead><tbody><tr><th scope="row">Under 5,000 sq ft</th><td>₹62.5</td></tr><tr><th scope="row">20,000 sq ft and up</th><td>₹25</td></tr></tbody></table>
       </div>

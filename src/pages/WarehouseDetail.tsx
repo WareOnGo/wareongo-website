@@ -113,7 +113,7 @@ const WarehouseDetail = () => {
     return (
       <div className="min-h-screen flex flex-col bg-wareongo-ivory">
         <PageHead
-          title="Warehouse not found | WareOnGo"
+          title="Warehouse Not Found | WareOnGo"
           description="This warehouse listing is no longer available."
           path="/warehouse/not-found"
           noindex
@@ -125,7 +125,7 @@ const WarehouseDetail = () => {
               <div className="text-center max-w-md border border-ui-outline rounded-xl p-8">
                 <AlertCircle className="w-12 h-12 text-wareongo-blue mx-auto mb-4" />
                 <h2 className="ui-section-title text-wareongo-blue mb-2">
-                  Warehouse not found
+                  Warehouse Not Found
                 </h2>
                 <p className="text-wareongo-slate text-sm mb-6">
                   The warehouse you are looking for does not exist or has been removed.
@@ -485,7 +485,7 @@ const WarehouseDetail = () => {
               id="about-this-warehouse-title"
               className="ui-section-title text-wareongo-blue mb-4"
             >
-              About this warehouse
+              About This Warehouse
             </h2>
             <p className="text-sm sm:text-base text-wareongo-slate leading-relaxed">
               This{' '}
@@ -516,7 +516,7 @@ const WarehouseDetail = () => {
               id="warehouse-faq-title"
               className="ui-section-title text-wareongo-blue mb-4"
             >
-              Frequently asked questions
+              Frequently Asked Questions
             </h2>
             <FAQAccordion items={faqs} />
           </section>
@@ -528,7 +528,7 @@ const WarehouseDetail = () => {
                 id="related-warehouses-title"
                 className="ui-section-title text-wareongo-blue mb-2"
               >
-                More warehouses in {loc.city}
+                More Warehouses in {loc.city}
               </h2>
               <p className="text-sm text-wareongo-slate mb-6">
                 Other verified listings nearby.

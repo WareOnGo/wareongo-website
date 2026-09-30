@@ -95,11 +95,11 @@ export function OverviewSkeleton({ pathname }: { pathname: string }) {
       ]} />
       {content ? <MicromarketHero content={content} place={place} onBrowse={city && !micro ? undefined : '#listings'} loading /> : <header className="max-w-3xl">
         <Skeleton className="mb-3 h-[15px] w-48" />
-        <h1 className="ui-page-title mb-4 text-wareongo-blue">Warehouses for rent in {name}</h1>
+        <h1 className="ui-page-title mb-4 text-wareongo-blue">Warehouses for Rent in {name}</h1>
         <Skeleton className="h-24 w-full" />
       </header>}
       <section className={SECTION_RULE}>
-        <SectionHeading index={1} eyebrow="Inventory">{content?.inventoryHeading ?? `Warehouses for rent in ${name}`}</SectionHeading>
+        <SectionHeading index={1} eyebrow="Inventory">{content?.inventoryHeading ?? `Warehouses for Rent in ${name}`}</SectionHeading>
         <Skeleton className="mb-5 h-5 w-52" />
         <WarehouseGridSkeleton count={pageSize} />
       </section>

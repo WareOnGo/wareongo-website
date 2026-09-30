@@ -43,11 +43,11 @@ export const CITY_CONTENT: Record<string, CityContent> = {
       "Raipur has {count} verified warehouse and godown spaces available for rent on WareOnGo, from {min_size} to {max_size} sq ft. Chhattisgarh's commercial capital and the largest warehousing cluster in central-east India, Raipur sits on the NH-53 (GE Road) and Bilaspur Road corridors, with rail-linked EXIM capacity at the Naya Raipur Multi-Modal Logistics Park. Steel, rice-milling and FMCG distribution all stock here to reach a wide central-Indian catchment. Rents run from ₹{min_rent} to ₹{max_rent} per sq ft per month.",
     sections: [
       {
-        heading: 'Warehouse & industrial areas in Raipur',
+        heading: 'Warehouse & Industrial Areas in Raipur',
         body: 'Warehousing in Raipur concentrates in three belts, and the right one depends on the job. The Urla–Birgaon–Bhanpuri belt along the Ring Roads and Bilaspur Road is the established cluster – 3PL, general godowns and cold storage, and the first place most regional distributors look. The Tatibandh–Guma corridor on NH-53 (GE Road) to the west is where the modern large-format sheds and FMCG distribution centres are coming up, with better truck movement and higher clear heights. Naya Raipur (Atal Nagar) hosts the CONCOR Multi-Modal Logistics Park with rail sidings and on-site customs clearance, so it suits EXIM and rail-borne cargo rather than city distribution. Heavy manufacturing storage sits separately around the Siltara steel and sponge-iron zone. In short: Urla for reach into the city and the lowest rents, Tatibandh for modern space, Naya Raipur for rail and export.',
       },
       {
-        heading: 'Typical warehouse rents in Raipur',
+        heading: 'Typical Warehouse Rents in Raipur',
         body: "The median asking rent across our Raipur listings is ₹{median_rent}/sq ft. Smaller godowns ask around ₹{small_rent}, while larger sheds and Grade-A space sit nearer ₹{large_rent}. Raipur works as a regional distribution base for Chhattisgarh, eastern Madhya Pradesh and western Odisha, and its rents sit well below the metros – which is exactly why brands stock here instead of trucking the region daily from Nagpur or Kolkata. The spread on the ground is simple: older RCC godowns in Urla carry the lowest rents, modern sheds on the Tatibandh side ask a premium for the clear height and access, and rail-linked space at Naya Raipur is priced for the customs clearance, not the floor rate. If you're weighing a warehouse for rent in Raipur, the belt you pick moves the number more than the size does.",
       },
     ],

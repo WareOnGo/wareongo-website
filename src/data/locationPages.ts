@@ -20,6 +20,7 @@ export interface LocationPageContent extends EditorialContent, CityOverviewConte
 import { locationPages as generated } from './locationPages.generated';
 import { DEV_LOCATION_PAGES } from './locationPages.dev';
 import { normalizeContentPunctuation } from '@/lib/contentPunctuation';
+import { normalizeHeadingCase } from '@/lib/headingCase';
 
 /**
  * CMS content, plus the dev placeholders when running under `vite dev`.
@@ -33,14 +34,14 @@ import { normalizeContentPunctuation } from '@/lib/contentPunctuation';
  * Real content wins on a collision, so a placeholder can never shadow a page
  * someone has actually written.
  */
-const all: LocationPageContent[] = normalizeContentPunctuation(__DEV_SERVER__
+const all: LocationPageContent[] = normalizeHeadingCase(normalizeContentPunctuation(__DEV_SERVER__
   ? [
       ...generated,
       ...DEV_LOCATION_PAGES.filter(
         (d) => !generated.some((g) => g.kind === d.kind && g.slug === d.slug),
       ),
     ]
-  : generated);
+  : generated));
 
 export { all as locationPages };
 
