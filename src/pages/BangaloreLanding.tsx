@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import { ArrowRight, Building2, Handshake, MapPinned, Search, ShieldCheck, Truck, Warehouse } from 'lucide-react';
+import { ArrowRight, Building2, Handshake, Search, Truck, Warehouse } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PageHead from '@/components/PageHead';
@@ -10,6 +10,7 @@ import BangaloreEnquiryForm from '@/components/city/BangaloreEnquiryForm';
 import BangaloreFeaturedListings from '@/components/city/BangaloreFeaturedListings';
 import BangaloreAvailableListings from '@/components/city/BangaloreAvailableListings';
 import BangaloreAreaGuide from '@/components/city/BangaloreAreaGuide';
+import BangaloreBenefits from '@/components/city/BangaloreBenefits';
 import BangaloreMicromarkets from '@/components/city/BangaloreMicromarkets';
 import ContactFormDialog from '@/components/ContactFormDialog';
 import RequestCTASection from '@/components/RequestCTASection';
@@ -26,27 +27,13 @@ const LOCATION_SLUGS = ['nelamangala', 'whitefield', 'peenya', 'hoskote', 'devan
 const LOCATIONS = LOCATION_SLUGS.map(slug => MICROMARKETS.find(market => market.citySlug === 'bengaluru' && market.slug === slug))
   .filter((market): market is (typeof MICROMARKETS)[number] => Boolean(market));
 
-const BENEFIT_ICONS = { verified: ShieldCheck, local: MapPinned, lease: Handshake };
 const SERVICE_ICONS = { 'find-warehouse': Search, 'build-to-suit': Warehouse, 'list-space': Truck, 'transaction-management': Handshake };
 const AUDIENCE_ICONS = { owners: Warehouse, '3pls': Truck, companies: Building2 };
 const AUDIENCE_INTENTS = { owners: ['list-warehouse'], '3pls': ['find-space', 'fill-spare-space'], companies: ['find-warehouse'] };
 
-/** Static copy slots, ready for the next content pass; these aren't loaders. */
-function CopySlot({ label, lines = 3 }: { label: string; lines?: number }) {
-  return (
-    <div className="bangalore-landing__copy-slot" role="img" aria-label={`${label} placeholder`}>
-      <span className="bangalore-landing__slot-label" aria-hidden="true">{label}</span>
-      <div className="bangalore-landing__copy-lines" aria-hidden="true">
-        {Array.from({ length: lines }, (_, index) => <span key={index} />)}
-      </div>
-    </div>
-  );
-}
-
 /** Content slots follow the supplied Google Ads wireframe, top to bottom. */
 export default function BangaloreLanding({ content = getBangaloreAdPage() }: { content?: AdPageContent } = {}) {
   const copy = content.copy;
-  const highlights = content.benefits.map(item => ({ ...item, icon: BENEFIT_ICONS[item.id] }));
   const services = content.services.map(item => ({ ...item, slug: item.id, description: item.body, icon: SERVICE_ICONS[item.id] }));
   const audiences = content.audiences.map(item => ({ ...item, slug: item.id, description: item.body, icon: AUDIENCE_ICONS[item.id],
     actions: [item.primaryCta, item.secondaryCta].filter(Boolean).map((label, index) => ({ label, intent: AUDIENCE_INTENTS[item.id][index] })),
@@ -77,7 +64,7 @@ export default function BangaloreLanding({ content = getBangaloreAdPage() }: { c
 
       <Navbar contactDialogClassName="bangalore-landing-dialog" />
 
-      <main aria-labelledby="bangalore-title">
+      <main className="bangalore-landing__main" aria-labelledby="bangalore-title">
         <section className="bangalore-landing__hero bangalore-landing__container" aria-labelledby="bangalore-title">
           <div className="bangalore-landing__hero-copy">
             <h1 id="bangalore-title" className="bangalore-landing__headline">{copy.heroHeading} <span>{copy.heroAccent}</span></h1>
@@ -90,28 +77,13 @@ export default function BangaloreLanding({ content = getBangaloreAdPage() }: { c
           </section>
         </section>
 
+        <BangaloreBenefits content={content} />
+
         <BangaloreAvailableListings content={content} onContact={openContact} totalListings={data?.stats.listings} />
 
         <BangaloreMicromarkets content={content} locations={locations} onContact={openContact} />
 
         <BangaloreAreaGuide content={content} onContact={openContact} />
-
-        <section className="bangalore-landing__why bangalore-landing__container" aria-labelledby="bangalore-why-title">
-          <div className="bangalore-landing__section-heading"><h2 id="bangalore-why-title" className="bangalore-landing__section-title">{copy.whyHeading}</h2></div>
-          <div className="bangalore-landing__why-grid">
-            <div className="bangalore-landing__why-image">
-              <img src={content.images.why.url} alt={content.images.why.alt} width={content.images.why.width} height={content.images.why.height} loading="lazy" decoding="async" />
-            </div>
-            <div className="bangalore-landing__why-copy">
-              {highlights.map(({ id, icon: Icon, title, body }, index) => (
-                <article key={id} className="bangalore-landing__benefit" data-benefit={id}>
-                  <div className="bangalore-landing__icon" aria-hidden="true">{Icon ? <Icon size={22} strokeWidth={1.5} /> : <span>{String(index + 1).padStart(2, '0')}</span>}</div>
-                  <div><h3>{title}</h3>{body ? <p className="bangalore-landing__benefit-body">{body}</p> : <CopySlot label="Supporting copy" lines={2} />}</div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
 
         <RequestCTASection className="bangalore-landing__request" content={{ heading: copy.requestHeading, description: copy.requestDescription, details: copy.requestDetails, primaryLabel: copy.requestCta, phoneLabel: copy.requestPhoneCta }} />
 

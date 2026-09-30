@@ -47,7 +47,7 @@ Montserrat throughout, including fields and portaled dialogs. Use 400 for prose,
 | --- | --- | --- | --- |
 | Hero | Fluid 38–52px | Fluid 30–40px | 700 / 1.12 |
 | Section heading | 32px | 24px | 600 / 1.25 |
-| Hero form heading | 32px | 24px | 600 / 1.25 |
+| Hero form heading | 28px | 22px | 600 / 1.25 |
 | Dialog heading | 24px | 24px | 600 / 1.25 |
 | Card title | 18px | 16px | 600 / 1.4 |
 | Compact listing / photo-card title | 16px | 14px | 600 / 1.4 |
@@ -56,9 +56,10 @@ Montserrat throughout, including fields and portaled dialogs. Use 400 for prose,
 | Control labels | 14px | 14px; 12px in compact cards and chips | 600 / 1.5 |
 | Metadata, captions, table headers | 12px | 12px | 400–600 / 1.5 |
 | Main figures | 24px | 20px | 600 / 1.25 |
+| Company proof metrics | 32px | 20px | 600 / 1.25 |
 | Featured-card figures | 18px | 18px | 600 / 1.5 |
 
-The phone's two-column benefit and service cards use 14px titles. Section
+Phone benefit and service cards use 14px titles and 12px descriptions. Section
 headings use `-.025em` tracking; card titles and body copy use normal tracking.
 Eyebrows alone are uppercase, 12px/600 with `.1em` tracking. Preserve the written
 case of form labels. Use tabular numerals for prices, areas, counts, and table data.
@@ -89,8 +90,12 @@ case of form labels. Use tabular numerals for prices, areas, counts, and table d
 ## Spacing and controls
 
 Use the 4px rhythm: 4, 8, 12, 16, 20, 24, 32, 48, 64. Page content caps at
-1400px with 32px desktop gutters and 20px phone gutters. Sections use 64px
-desktop / 48px phone spacing; nested card grids use 16px / 12px gaps.
+1400px with 32px desktop gutters and 20px phone gutters. Major sections use
+one 64px desktop / 48px phone gap, owned by `.bangalore-landing__main`.
+Do not add section margins or outer vertical padding that stacks with this gap.
+Hidden mobile sections contribute no space. The main's bottom padding uses the
+same value before the footer. The navy request banner retains its own internal
+padding. Nested card grids use 16px / 12px gaps.
 
 Regular content cards use 24px padding. Compact cards use 16px desktop and 12px
 phone padding. The hero form uses 20px vertical and 24px horizontal padding;
@@ -114,8 +119,10 @@ font utilities. Avoid duplicate primary actions inside a card.
   content cap. Use a 28px form heading (22px on phones), no eyebrow, a 14px
   description, 48px controls and 16px input text. Field gaps are 12px with 4px
   between labels and inputs. Below 1024px the form follows the heading at its
-  natural height; below 768px, the client carousel follows the form and comes
-  before the featured cards.
+  natural height. The benefits section sits outside the hero grid and follows
+  the client carousel on desktop, using the shared gap between major sections.
+  Below 768px, the order is heading, form, client logos, featured cards, then
+  benefits.
 - **Featured cards:** compact version of the listing type scale; horizontal track
   with accessible arrow controls. Photo, title, size, specifications, rent.
 - **Available listings:** use “Warehouses and Godowns in Bangalore” with no
@@ -131,8 +138,26 @@ font utilities. Avoid duplicate primary actions inside a card.
   12px/500 muted text, 3px × 6px padding, no border, and 90% surface ivory
   (`--landing-badge-surface`). Keep map labels more prominent as interactive controls.
 - **Area guide:** visible on tablet and desktop; hidden below 768px.
-- **Benefits:** image plus six cards on desktop. On phones, hide the image and
-  keep 2 columns × 3 rows. Future copy can grow the rows; it is not truncated.
+- **Benefits:** follows the client carousel on desktop and featured listings on phones, with
+  a centered heading. A navy strip shows three company metrics from
+  `companyStats.ts`, followed by six static cards with real Lucide icons and
+  supporting copy. Keep the shortlist time, area leased and cities covered in
+  three equal columns at every size. Use 3 × 2 benefit cards on desktop and
+  2 × 3 on tablet and phones. Center each metric's
+  value and caption within equal-width cells, with subtle vertical dividers.
+  Below 768px, show all six benefits in a static two-column grid with 8px gaps,
+  12px padding, 14px titles and 12px descriptions. Use brief mobile versions of
+  the reference copy, while preserving authored CMS edits. Hide decorative icons
+  on phones. Informational benefits must not require horizontal
+  scrolling, expansion or another action to read. Compact the metric strip to
+  20px figures, 12px padding and gaps.
+  Aim for roughly half to three-quarters of a typical phone viewport without
+  clipping authored copy or setting a fixed section height. Keep the section,
+  heading, metric strip and card grid centered within the same page gutters. Ivory cards retain the soft
+  line border, 12px corners and no hover effect. Supporting copy accepts the
+  existing safe inline emphasis format. Replace untouched CMS wireframe
+  placeholders with the reference copy while preserving edited titles and text.
+  There is no section photo or placeholder copy. Let content grow without clipping.
 - **Services:** 2 columns × 2 rows, including phones. Keep bottom-aligned CTAs.
 - **Audiences:** match the service-card surface, copy, title and control styles.
 - **Statistics:** neutral table surfaces, right-aligned numerical columns, and

@@ -32,7 +32,7 @@ export const adPages: AdPageContent[] = [{
     "areaHeading": "Which area fits you",
     "areaNeedHeading": "If you need",
     "areaLocationsHeading": "Look at",
-    "whyHeading": "Why choose WareOnGo",
+    "whyHeading": "Why choose WareOnGo?",
     "requestHeading": "Still haven't found the warehouse you want?",
     "requestDescription": "Tell us your requirements. We'll find it for you.",
     "requestDetails": "Pan-India inventory · 4-hour shortlist · You only pay when you close.",
@@ -60,34 +60,34 @@ export const adPages: AdPageContent[] = [{
   ],
   "benefits": [
     {
-      "id": "verified",
-      "title": "Verified spaces",
-      "body": ""
-    },
-    {
       "id": "local",
-      "title": "Local expertise",
-      "body": ""
+      "title": "Local Expertise",
+      "body": "The right locality, specs and paperwork, worked by **our experts**."
     },
     {
       "id": "lease",
-      "title": "Lease support",
-      "body": ""
+      "title": "Better Commercials",
+      "body": "We negotiate the rent, security and lock-in, so that you **get the best deal**."
+    },
+    {
+      "id": "verified",
+      "title": "Verified Listings",
+      "body": "Every space is **verified by our area managers** before it reaches your shortlist."
     },
     {
       "id": "benefit-4",
-      "title": "Benefit 4",
-      "body": ""
+      "title": "Single Point of Contact",
+      "body": "**One expert advisor** from proposal to move-in."
     },
     {
       "id": "benefit-5",
-      "title": "Benefit 5",
-      "body": ""
+      "title": "Compliance and Legal Support",
+      "body": "We take care of **the boring details** for you."
     },
     {
       "id": "benefit-6",
-      "title": "Benefit 6",
-      "body": ""
+      "title": "Built to Suit",
+      "body": "Can't find the best fit? We arrange a **tailored warehouse** for you in 6 months."
     }
   ],
   "services": [

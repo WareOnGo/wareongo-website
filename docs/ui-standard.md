@@ -114,8 +114,11 @@ locking. Shared tokens are at `:root`, so portaled controls inherit them.
   and image-loading colors.
 - The main listings, city and micromarket search pages remain vertical grids.
   The ad page and existing homepage featured track retain their own carousels.
-- The Bangalore phone grids remain 2×4 micromarkets, 2×3 benefits and 2×2
-  services. Its hidden mobile image/area-guide rules remain local.
+- The Bangalore page uses a horizontal micromarket track on phones, with static
+  two-column benefit and service grids. Benefits use brief copy, 14px titles
+  and 12px descriptions on phones; informational reading must not require
+  horizontal scrolling. These layouts and its hidden mobile
+  image/area-guide rules remain local.
 - Use visible 2px focus rings and respect reduced motion. A mobile width change
   can move the browser's scroll anchor; interaction tests should scroll from
   the resulting position when checking scroll direction.
