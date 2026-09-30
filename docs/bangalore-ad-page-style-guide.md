@@ -51,13 +51,14 @@ Montserrat throughout, including fields and portaled dialogs. Use 400 for prose,
 | Dialog heading | 24px | 24px | 600 / 1.25 |
 | Card title | 18px | 16px | 600 / 1.4 |
 | Compact listing / photo-card title | 16px | 14px | 600 / 1.4 |
+| Featured-card title | 12px | 14px | 600 / 1.5 |
 | Main prose and inputs | 16px | 16px | 400 / 1.6 |
 | Card descriptions | 14px | 14px; 12px in two-column cards | 400 / 1.6 |
 | Control labels | 14px | 14px; 12px in compact cards and chips | 600 / 1.5 |
 | Metadata, captions, table headers | 12px | 12px | 400–600 / 1.5 |
 | Main figures | 24px | 20px | 600 / 1.25 |
 | Company proof metrics | 32px | 20px | 600 / 1.25 |
-| Featured-card figures | 18px | 18px | 600 / 1.5 |
+| Featured-card figures | 14px | 16px | 600 / 1.25 |
 
 Phone benefit and service cards use 14px titles and 12px descriptions. Section
 headings use `-.025em` tracking; card titles and body copy use normal tracking.
@@ -67,19 +68,18 @@ case of form labels. Use tabular numerals for prices, areas, counts, and table d
 ## Borders, corners, icons, and states
 
 - Every light card, form, and table: **1px stroke and 12px radius**.
-  Listing cards use the original navy stroke, 2px navy hard shadow and sinking hover;
-  other cards, forms and tables remain flat.
-  Use the outline role for other actionable cards, forms and table frames; the line
+  All cards remain flat, including listings and loading placeholders.
+  Use the outline role for actionable cards, forms and table frames; the line
   role for benefits, summary cards, image frames and internal dividers.
 - Buttons and inputs: **8px radius**. Small fact badges: **4px radius**.
 - Filter chips and map bubbles: pill shape. Their shape distinguishes their role.
 - Primary buttons: navy fill and ivory text. Secondary buttons: surface fill or
   transparent ivory, thin line, navy text. Hover uses accent navy or the light tint.
 - Clickable cards change their border on hover. Informational cards have no
-  hover effect. Listing cards alone retain their navy stroke, press down 2px,
-  reduce their navy hard shadow to 1px and warm the fill to `#F6F4EE` on pointer
-  hover, using the original 180ms ease-out. Reduced motion suppresses movement.
-  Do not add lift, heavy shadows, or a thicker resting outline.
+  hover effect. Listing cards change from the standard outline to accent navy
+  and fill with soft darker ivory (`#F6F4EE`) on pointer hover. Use the shared 160ms color
+  transition and disable it for reduced motion. Do not add lift, sinking,
+  shadows or a thicker stroke.
 - Keyboard focus: a visible **2px accent ring**. On photo or navy backgrounds,
   use an ivory ring. A selected map bubble uses navy fill and an ivory count.
   Focused inputs also use the accent outline in both the hero and dialogs.
@@ -123,8 +123,15 @@ font utilities. Avoid duplicate primary actions inside a card.
   the client carousel on desktop, using the shared gap between major sections.
   Below 768px, the order is heading, form, client logos, featured cards, then
   benefits.
-- **Featured cards:** compact version of the listing type scale; horizontal track
-  with accessible arrow controls. Photo, title, size, specifications, rent.
+- **Featured cards:** reuse `WarehouseCard` with compact 12px padding. From
+  1024px, use 14px figures and 12px locality titles; smaller screens retain
+  16px figures and 14px titles. Metadata/button labels stay at 12px. Keep a 44px “Get details”
+  touch target and the standard photo/type badge,
+  labeled area and rent, locality/city and specification badges. At 768px and
+  above, show all three in equal columns with no horizontal scroll or carousel
+  controls. On phones, retain the swipe track and accessible arrow controls.
+  Narrow desktop cards stack their metrics so values stay readable. Keep the
+  full three-card row within the desktop hero's first fold.
 - **Available listings:** use “Warehouses and Godowns in Bangalore” with no
   eyebrow. Keep 3 columns on desktop and 2 on tablet. Hide the entire
   section below 768px, including its heading, size filters, cards and footer.

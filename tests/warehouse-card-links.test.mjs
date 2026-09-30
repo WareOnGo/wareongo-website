@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
 import { build } from 'esbuild';
 import { parseFragment } from 'parse5';
+import { parseAdPage } from '../scripts/lib/ad-page-content.mjs';
 
 // Render the real components with their real hooks. Server rendering does not
 // run gallery/analytics effects, so this needs no API, browser or hook mocks.
@@ -15,6 +16,8 @@ const { outputFiles } = await build({
       import { renderToString } from 'react-dom/server';
       import WarehouseCard from './src/components/WarehouseCard';
       import FeaturedListingsSection from './src/components/FeaturedListingsSection';
+      import BangaloreFeaturedListings from './src/components/city/BangaloreFeaturedListings';
+      import { getBangaloreAdPage } from './src/data/adPages';
       export { transformWarehouseData } from './src/services/warehouseAPI';
       export * from './src/lib/warehouseCardData';
       export const renderCard = props => renderToString(
@@ -22,6 +25,10 @@ const { outputFiles } = await build({
       );
       export const renderFeatured = () => renderToString(
         <MemoryRouter><FeaturedListingsSection /></MemoryRouter>
+      );
+      export const bangaloreContent = getBangaloreAdPage();
+      export const renderBangaloreFeatured = (content = bangaloreContent) => renderToString(
+        <MemoryRouter><BangaloreFeaturedListings content={content} onContact={() => {}} /></MemoryRouter>
       );
     `,
     resolveDir: fileURLToPath(new URL('..', import.meta.url)),
@@ -43,7 +50,7 @@ const compiled = { exports: {} };
 new Function('require', 'module', 'exports', outputFiles[0].text)(
   createRequire(import.meta.url), compiled, compiled.exports,
 );
-const { renderCard, renderFeatured, transformWarehouseData, parseClearHeight, parseDockCount, cardLocation, cardConstructionLabel, cardUpdateLabel } = compiled.exports;
+const { renderCard, renderFeatured, renderBangaloreFeatured, bangaloreContent, transformWarehouseData, parseClearHeight, parseDockCount, cardLocation, cardConstructionLabel, cardUpdateLabel } = compiled.exports;
 
 const descendants = node => (node.childNodes ?? []).flatMap(child => [child, ...descendants(child)]);
 const elements = (node, tag) => descendants(node).filter(child => child.tagName === tag);
@@ -135,6 +142,40 @@ test('all three featured cards publish property anchors with their visible ident
     assert.ok(elements(anchor, 'h3').some(heading => textOf(heading).trim()), 'each link has a descriptive title');
   }
   assertIndependentControls(root);
+});
+
+test('Bangalore hero photos render before hydration without covering loading indicators', () => {
+  const root = parseFragment(renderBangaloreFeatured());
+  const photos = elements(root, 'img');
+  assert.equal(photos.length, 3);
+  assert.equal(descendants(root).filter(node => attr(node, 'data-image-loading') !== undefined).length, 0);
+  for (const [index, id] of [967, 408, 1226].entries()) {
+    assert.equal(attr(photos[index], 'src'), bangaloreContent.images[`featured-${id}`].url);
+    assert.equal(attr(photos[index], 'alt'), bangaloreContent.images[`featured-${id}`].alt);
+    assert.equal(attr(photos[index], 'loading'), 'eager');
+    assert.equal(attr(photos[index], 'fetchpriority'), 'high');
+  }
+  assertIndependentControls(root);
+});
+
+test('Bangalore featured photos preserve CMS-approved image endpoints without filename extensions', () => {
+  for (const url of ['/media/featured-warehouse?revision=2', 'https://assets.example.test/image/967?width=640', 'https://assets.example.test/image.php?id=967']) {
+    const content = structuredClone(bangaloreContent);
+    content.images['featured-967'].url = url;
+    const root = parseFragment(renderBangaloreFeatured(parseAdPage(content)));
+    assert.equal(elements(root, 'img').length, 3);
+    assert.equal(attr(elements(root, 'img')[0], 'src'), url);
+    assert.ok(!textOf(root).includes('Images available on request'));
+  }
+});
+
+test('catalogue cards still filter documents and retain loading feedback', () => {
+  const root = parseFragment(renderCard({ ...fixture, images: [
+    'https://assets.example.test/brochure.pdf', 'https://assets.example.test/tour.mp4', fixture.images[0],
+  ] }));
+  assert.equal(elements(root, 'img').length, 1);
+  assert.equal(attr(elements(root, 'img')[0], 'src'), fixture.images[0]);
+  assert.equal(descendants(root).filter(node => attr(node, 'data-image-loading') !== undefined).length, 1);
 });
 
 test('approved card leads with area then decimal rent, and keeps the full locality in its link', () => {

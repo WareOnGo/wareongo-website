@@ -18,14 +18,14 @@
   .ui-panel { border-color: var(--ui-outline); }
   .ui-card--action { border-color: var(--ui-outline); transition: border-color var(--ui-motion); }
   .ui-card--action:hover { border-color: var(--ui-accent); }
-  /* Preserve the original listing press: navy hard edge, warm fill, ease-out. */
-  .ui-listing-card, .ui-listing-placeholder { --card-edge: var(--ui-ink); --card-hover: var(--ui-listing-hover); box-shadow: 2px 2px 0 var(--card-edge); }
-  .ui-listing-card { transition: transform .18s ease-out, box-shadow .18s ease-out, background-color .18s ease-out; }
+  /* Listing cards share the site's flat outline and color-only feedback. */
+  .ui-listing-card, .ui-listing-placeholder { --card-edge: var(--ui-outline); --card-hover: var(--ui-listing-hover); box-shadow: none; }
+  .ui-listing-card { transition: border-color var(--ui-motion), background-color var(--ui-motion); }
   @media (hover: hover) and (pointer: fine) {
-    .ui-listing-card:hover { background: var(--card-hover); transform: translateY(2px); box-shadow: 1px 1px 0 var(--card-edge); }
+    .ui-listing-card:hover { border-color: var(--ui-accent); background: var(--card-hover); }
   }
   @media (prefers-reduced-motion: reduce) {
-    .ui-listing-card, .ui-listing-card:hover { transform: none; transition: none; }
+    .ui-listing-card { transition: none; }
   }
   .ui-icon { display: grid; flex-shrink: 0; width: var(--ui-icon-box); height: var(--ui-icon-box); place-items: center; border-radius: var(--ui-control-radius); background: var(--ui-tint); color: var(--ui-accent); }
   .ui-icon > svg { width: var(--ui-icon-size); height: var(--ui-icon-size); }

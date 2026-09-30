@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <title>Bangalore ad page · Style guide</title>
-  <link rel="stylesheet" href="../src/fonts.css">
+  <link rel="stylesheet" href="../src/index.css">
+  <link rel="stylesheet" href="../src/components/WarehouseCard.css">
   <link rel="stylesheet" href="../src/pages/BangaloreLanding.css">
   <style>
     * { box-sizing: border-box; }
@@ -28,7 +29,7 @@
     .guide .bangalore-landing__enquiry { grid-area: auto; width: 100%; max-width: 520px; }
     .guide .bangalore-landing__form-fields { display: grid; gap: 16px; }
     .guide .bangalore-landing__input-wrap input { padding-left: 14px; }
-    .guide .bangalore-landing__featured-card { align-self: start; }
+    .guide .bangalore-landing__featured { grid-area: auto; align-self: start; max-width: 280px; }
     .guide .bangalore-landing__service h3 { margin-top: 16px; }
     .guide .bangalore-landing__service:hover { border-color: var(--landing-outline); }
     .guide-table { overflow: hidden; border: var(--landing-interactive-border); border-radius: var(--landing-radius); }
@@ -62,7 +63,7 @@
         <figure><div class="guide-swatch" style="--swatch:var(--landing-line)"></div><figcaption><strong>Quiet line</strong>Dividers and informational cards</figcaption></figure>
         <figure><div class="guide-swatch" style="--swatch:var(--landing-outline)"></div><figcaption><strong>Defined outline</strong>Actionable cards and controls</figcaption></figure>
       </div>
-      <p class="guide-note">Both outline strengths are 1px. Cards use 12px corners; controls use 8px. No card shadows.</p>
+      <p class="guide-note">Both outline strengths are 1px. Cards use 12px corners; controls use 8px. All cards stay flat. Listing cards respond with an accent border and soft darker ivory fill on pointer hover.</p>
     </section>
     <section aria-labelledby="type">
       <h2 id="type" class="bangalore-landing__section-title bangalore-landing__section-heading">Typography</h2>
@@ -97,10 +98,26 @@
     <section aria-labelledby="cards">
       <h2 id="cards" class="bangalore-landing__section-title bangalore-landing__section-heading">Card hierarchy</h2>
       <div class="guide-grid">
-        <article class="bangalore-landing__featured-card">
-          <div class="bangalore-landing__featured-photo"><img src="/bangalore/hoskote.webp" alt="Hoskote warehouse exterior"></div>
-          <div class="bangalore-landing__featured-body"><h3>Hoskote</h3><p class="bangalore-landing__featured-area">1,89,000 <span>sq ft</span></p><p class="bangalore-landing__featured-specs">PEB · 40 ft height</p><div class="bangalore-landing__featured-footer"><p>₹28.5 <span>/ sq ft</span></p></div></div>
-        </article>
+        <div class="bangalore-landing__featured">
+          <article class="warehouse-card ui-listing-card">
+            <div class="warehouse-card__photo">
+              <img class="warehouse-card__image" src="/bangalore/hoskote.webp" alt="Hoskote warehouse exterior" width="640" height="360">
+              <span class="warehouse-card__type">PEB</span>
+            </div>
+            <div class="warehouse-card__body">
+              <dl class="warehouse-card__metrics">
+                <div class="warehouse-card__metric warehouse-card__area"><dt>Carpet area</dt><dd><strong>1,89,000</strong> <small>sqft</small></dd></div>
+                <div class="warehouse-card__metric warehouse-card__rent"><dt>Rent / month</dt><dd><strong>₹28.5</strong> <small>/sqft</small></dd></div>
+              </dl>
+              <div class="warehouse-card__place">
+                <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <div class="warehouse-card__place-text"><h2><button class="warehouse-card__link" type="button">Hoskote</button></h2><p>Bengaluru</p></div>
+              </div>
+              <ul class="warehouse-card__specs" aria-label="Warehouse specifications"><li class="warehouse-card__spec">40 ft Clear Height</li></ul>
+              <div class="warehouse-card__actions"><button class="warehouse-card__enquiry" type="button">Get details</button></div>
+            </div>
+          </article>
+        </div>
         <article class="bangalore-landing__benefit">
           <span class="bangalore-landing__icon" aria-hidden="true"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg></span>
           <div><h3>Verified spaces</h3><p class="bangalore-landing__benefit-body">Informational cards keep a softer outline and the same ivory surface.</p></div>

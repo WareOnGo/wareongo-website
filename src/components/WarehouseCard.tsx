@@ -20,6 +20,8 @@ interface WarehouseCardProps {
   imageFallbacks?: (string | null)[];
   coverImage?: string;
   imageAlt?: string;
+  /** Single photo validated by the CMS, including extensionless image URLs. */
+  authoredImage?: { url: string; alt: string };
   address: string;
   location: { city: string; state: string };
   micromarket?: string[] | null;
@@ -53,7 +55,7 @@ function UpdatedBadge({ updatedAt }: { updatedAt?: string | null }) {
 }
 
 const WarehouseCard: React.FC<WarehouseCardProps> = ({
-  id, image, images = [], imageFallbacks = [], coverImage, imageAlt, address, location,
+  id, image, images = [], imageFallbacks = [], coverImage, imageAlt, authoredImage, address, location,
   micromarket, postalCode, warehouseType, updatedAt, size, ceilingHeight,
   numberOfDocks, price, fireCompliance, href, index = 0,
   priority = index === 0, analyticsContext = {}, onContact,
@@ -66,13 +68,13 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
   const placeLabel = place && place.primary === address?.trim() && place.primary.length > 28
     ? `${place.primary.slice(0, 27).trimEnd()}…` : place?.primary;
   const construction = cardConstructionLabel(warehouseType);
-  const altText = imageAlt || `${number.format(size)} sqft warehouse${place ? ` in ${[place.city, location.state].filter(Boolean).join(', ')}` : ''}`;
+  const altText = authoredImage?.alt || imageAlt || `${number.format(size)} sqft warehouse${place ? ` in ${[place.city, location.state].filter(Boolean).join(', ')}` : ''}`;
   const [interacting, setInteracting] = useState(false);
   const imageRef = useRef<HTMLDivElement>(null);
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const enquiryRef = useRef<HTMLButtonElement>(null);
   const enquirySource = `warehouse-card-${id}-callback`;
-  const gallery = useWarehouseGallery(id, images.length ? images : (image ? [image] : []), imageFallbacks, interacting);
+  const gallery = useWarehouseGallery(id, images.length ? images : (image ? [image] : []), imageFallbacks, interacting, authoredImage?.url);
   const { index: currentImageIndex, previous: prevImageIndex, direction: slideDirection } = gallery.state;
   const frame = gallery.frames[currentImageIndex];
   const moveImage = (delta: 1 | -1, offset = 0) => {
@@ -128,6 +130,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
                 className={`warehouse-gallery-photo warehouse-card__image ${slideDirection === 'left' ? 'animate-slide-in-left' : slideDirection === 'right' ? 'animate-slide-in-right' : ''}`}
                 onLoaded={url => gallery.loaded(currentImageIndex, url)}
                 onFailed={() => gallery.failed(currentImageIndex)}
+                showLoadingIndicator={!authoredImage}
                 loading={priority ? 'eager' : 'lazy'} decoding="async" fetchPriority={priority ? 'high' : 'auto'}
               />
               {gallery.valid.length > 1 && (

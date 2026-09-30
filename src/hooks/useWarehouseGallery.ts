@@ -26,8 +26,12 @@ function preload(url: string) {
   image.src = url;
 }
 
-export function useWarehouseGallery(id: number, images: string[], fallbacks: (string | null)[], shouldPreload: boolean) {
-  const frames = useMemo(() => warehouseImages(images, fallbacks), [images, fallbacks]);
+export function useWarehouseGallery(id: number, images: string[], fallbacks: (string | null)[], shouldPreload: boolean, authoredImage?: string) {
+  // CMS images have already passed content validation. Let the browser decode
+  // their URLs instead of applying the catalogue's filename/host heuristics.
+  const frames = useMemo(() => authoredImage
+    ? [{ primary: authoredImage, fallback: null }]
+    : warehouseImages(images, fallbacks), [images, fallbacks, authoredImage]);
   const key = JSON.stringify([id, frames]);
   const [stored, setState] = useState(() => initialState(key));
   // Route reuse/photo edits must not inherit the previous warehouse's failures.

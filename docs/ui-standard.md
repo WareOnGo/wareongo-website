@@ -36,13 +36,12 @@ the Git repositories in `../WAREONGO_UI_STYLE_HANDOFF.md`.
 | Line | `#D5DDE5` | Inner dividers and informational cards |
 | Outline | `#AEBDCA` | Interactive cards, fields, panel frames |
 
-Cards use a 1px border and 12px corners. Listing cards have a deliberate
-exception: `ui-listing-card` preserves the original navy stroke and 2px navy
-hard shadow. Pointer hover presses down 2px, reduces the shadow to 1px and
-warms the fill to `#F6F4EE`, with the original 180ms ease-out. Do not replace
-the navy shadow with the lighter outline token. Reduced motion removes
-the movement; touch screens do not inherit hover motion. Other cards remain
-flat. Controls use 8px corners; small badges use 4px. Pills remain appropriate
+Cards use a 1px border and 12px corners, with no offset shadows or hover movement.
+Listing cards use the standard outline (`#AEBDCA`). Pointer hover changes the
+border to accent navy and the fill to a soft darker ivory (`#F6F4EE`), using the
+shared 160ms color transition. Reduced motion removes the transition; touch
+screens retain their resting colors. Loading cards use the same flat outline.
+Controls use 8px corners; small badges use 4px. Pills remain appropriate
 for filters. Informational cards have no whole-card interaction feedback.
 Navy surfaces use ivory text and line-colored secondary text. Status/error
 colors remain functional exceptions; brand assets keep their own artwork.
@@ -63,7 +62,9 @@ Montserrat uses real font weights, with font synthesis disabled.
 | `ui-eyebrow` | 12px / 1.5, 600, uppercase | Same |
 
 Compact descriptions use 14px; metadata uses 12px. Keep inputs at 16px on
-phones. Compact listing figures may use 18px. Do not apply a card-title class
+phones. Compact listing figures may use 18px; Bangalore's hero uses 14px
+figures and 12px titles on desktop, with 16px figures and 14px titles below
+1024px. Its metadata/button labels stay at 12px. Do not apply a card-title class
 to navigation group labels: navigation owns its compact 14px hierarchy.
 Labels preserve written case; uppercase tracking is reserved for eyebrows.
 
@@ -73,8 +74,8 @@ Labels preserve written case; uppercase tracking is reserved for eyebrows.
 | --- | --- |
 | `ui-card` / `Card` | Surface with soft line; supply appropriate padding |
 | `ui-card ui-card--action` | A real link/button card with stronger outline and border hover |
-| `ui-listing-card` | Listing-only hard edge and sinking hover; combine with the listing component |
-| `ui-listing-placeholder` | Same resting listing outline and shadow, without hover feedback |
+| `ui-listing-card` | Flat outline with border/fill color feedback on pointer hover; combine with the listing component |
+| `ui-listing-placeholder` | Same resting listing outline, without hover feedback |
 | `ui-panel` | Stronger framed form/table/panel; no implied clickability |
 | `ui-icon` | 40px desktop / 32px phone tile, 20px icon, 1.5px stroke |
 | `ui-button` | Navy primary action, 48px minimum height, 14px/600 |
@@ -107,13 +108,14 @@ locking. Shared tokens are at `:root`, so portaled controls inherit them.
   squeeze six columns into unreadable phone-sized cells.
 - Grid children need `min-width: 0`. Long chart labels can wrap. Preserve image
   aspect ratios and intrinsic dimensions to avoid loading jumps.
-- Loading cards use the same outline, shadow, photo ratio, and control height
+- Loading cards use the same flat outline, photo ratio, and control height
   as their loaded counterparts. Use `ui-listing-placeholder` to retain the
   resting frame without making a placeholder respond to hover. The darker
   ivory loading-fill experiment was rejected; retain the previous skeleton
   and image-loading colors.
 - The main listings, city and micromarket search pages remain vertical grids.
-  The ad page and existing homepage featured track retain their own carousels.
+  Bangalore's compact featured listing cards use three columns from 768px and
+  a carousel on phones. The existing homepage featured track retains its carousel.
 - The Bangalore page uses a horizontal micromarket track on phones, with static
   two-column benefit and service grids. Benefits use brief copy, 14px titles
   and 12px descriptions on phones; informational reading must not require
