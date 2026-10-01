@@ -13,6 +13,8 @@ const DEFAULT_COPY: RequestCopy = {
   primaryLabel: 'Request a Warehouse', phoneLabel: 'Call Us Now',
 };
 const RequestCTASection = ({ className = '', content = DEFAULT_COPY }: { className?: string; content?: RequestCopy }) => {
+  // Keep authored separators so desktop copy retains its original spacing.
+  const details = content.details.split(/(\s*·\s*)/);
   return (
     <section className={`bg-wareongo-blue text-ui-surface py-12 md:py-16 text-center relative overflow-hidden ${className}`}>
       {/* Subtle background decoration */}
@@ -28,7 +30,12 @@ const RequestCTASection = ({ className = '', content = DEFAULT_COPY }: { classNa
               {content.description}
             </p>
             <p className="text-ui-line text-sm sm:text-base mb-8 sm:mb-10 max-w-2xl mx-auto">
-              {content.details}
+              {details.map((part, index) => (
+                <span
+                  key={index}
+                  className={index === details.length - 1 ? 'request-cta__closing-detail' : index === details.length - 2 ? 'request-cta__closing-separator' : undefined}
+                >{part}</span>
+              ))}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
               <Link

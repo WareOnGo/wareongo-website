@@ -27,13 +27,14 @@
   --landing-text-xs: var(--ui-text-xs);
   --landing-text-sm: var(--ui-text-sm);
   --landing-text-base: var(--ui-text-base);
+  --landing-text-body: var(--landing-text-base);
+  --landing-text-control: var(--landing-text-sm);
   --landing-text-card: var(--ui-text-card);
   --landing-text-panel: var(--ui-text-panel);
   --landing-text-form-title: 28px;
   --landing-text-section: var(--ui-text-section);
   --landing-text-hero: var(--ui-text-hero);
   --landing-text-metric: var(--ui-text-metric);
-  --landing-text-compact-metric: 18px;
   --landing-leading-heading: var(--ui-leading-heading);
   --landing-leading-title: var(--ui-leading-title);
   --landing-leading-ui: var(--ui-leading-ui);
@@ -70,10 +71,14 @@
 
 @media (max-width: 767px) {
   .bangalore-landing, .bangalore-landing-dialog {
-    --landing-text-hero: clamp(30px, 8.2vw, 40px);
-    --landing-text-section: 24px;
-    --landing-text-form-title: 22px;
-    --landing-text-card: 16px;
+    /* One mobile scale: hero, headings, inputs/compact figures, body, small copy. */
+    --landing-text-hero: clamp(30px, 8.2vw, 32px);
+    --landing-text-section: 20px;
+    --landing-text-panel: var(--landing-text-section);
+    --landing-text-form-title: var(--landing-text-section);
+    --landing-text-card: var(--landing-text-sm);
+    --landing-text-body: var(--landing-text-sm);
+    --landing-text-control: var(--landing-text-xs);
     --landing-text-metric: 20px;
     --landing-icon-box: 32px;
     --landing-compact-padding: 12px;

@@ -91,8 +91,8 @@
   "services": [
     {
       "id": "find-warehouse",
-      "title": "Verified Warehouses, Handpicked for You",
-      "body": "Share your size, location, specs and budget. Our team picks the options that fit and sends you a shortlist within 4 hours. All of our warehouses are verified by an area manager.",
+      "title": "Find the Perfect Space for You",
+      "body": "Share your size, location, specs and budget. Our team picks verified options that fit and sends you a shortlist within 4 hours.",
       "cta": "Get my shortlist"
     },
     {
@@ -104,13 +104,13 @@
     {
       "id": "list-space",
       "title": "Find a Tenant or Buyer",
-      "body": "Own a warehouse, or have space left over? We bring you tenants and buyers from the businesses that come to us.",
+      "body": "Own a warehouse, or have space left over? List your property with us; we bring you bona-fide tenants and buyers.",
       "cta": "List my space"
     },
     {
       "id": "transaction-management",
-      "title": "End-to-End Transaction Management",
-      "body": "Site visits, negotiation, documentation and compliance checks, handled by one team until you move in.",
+      "title": "Complete Deal Management",
+      "body": "Site visits, negotiation and compliance checks, all handled by one expert from the proposal till the day you move in.",
       "cta": "Get started"
     }
   ],

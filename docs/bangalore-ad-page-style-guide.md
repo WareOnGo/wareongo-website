@@ -55,25 +55,40 @@ headings also pass through `normalizeHeadingCase` when the page renders.
 
 | Role | Desktop | Phone, below 768px | Weight / leading |
 | --- | --- | --- | --- |
-| Hero | Fluid 38–52px | Fluid 30–40px | 700 / 1.12 |
-| Section heading | 32px | 24px | 600 / 1.25 |
+| Hero | Fluid 38–52px | Fluid 30–32px | 700 / 1.12 |
+| Section heading | 32px | 20px | 600 / 1.25 |
+| Featured section heading | 14px | 20px | 600 / 1.25 |
 | Hero form heading | 28px | 20px | 600 / 1.25 |
-| Dialog heading | 24px | 24px | 600 / 1.25 |
-| Card title | 18px | 16px | 600 / 1.4 |
+| Dialog heading | 24px | 20px | 600 / 1.25 |
+| Card title | 18px | 14px | 600 / 1.4 |
 | Compact listing / photo-card title | 16px | 14px | 600 / 1.4 |
 | Featured-card title | 12px | 14px | 600 / 1.5 |
-| Main prose and inputs | 16px | 16px | 400 / 1.6 |
+| Main prose | 16px | 14px | 400 / 1.6 |
+| Form inputs | 16px | 16px | 400 / 1.6 |
 | Card descriptions | 14px | 14px; 12px in two-column cards | 400 / 1.6 |
-| Control labels | 14px | 14px; 12px in compact cards and chips | 600 / 1.5 |
+| Control labels | 14px | 12px | 600 / 1.5 |
+| Trust line | 16px | 14px | 700 / 1.5 |
 | Metadata, captions, table headers | 12px | 12px | 400–600 / 1.5 |
 | Main figures | 24px | 20px | 600 / 1.25 |
 | Company proof metrics | 32px | 20px | 600 / 1.25 |
 | Featured-card figures | 14px | 16px | 600 / 1.25 |
 
-Phone benefit and service cards use 14px titles and 12px descriptions. Section
-headings use `-.025em` tracking; card titles and body copy use normal tracking.
-Eyebrows alone are uppercase, 12px/600 with `.1em` tracking. Preserve the written
-case of form labels. Use tabular numerals for prices, areas, counts, and table data.
+Keep the phone scale in `BangaloreLanding.tokens.css`: 20px for section,
+form and dialog headings; 14px for card titles and regular prose; 12px for
+compact descriptions, labels, buttons and metadata. Compact benefit/service
+copy uses 1.5 leading; regular prose uses 1.6. Keep inputs at 16px and compact
+listing figures at 16px. Proof and market figures use 20px at every phone width.
+Use `--landing-text-body` and `--landing-text-control` for those roles instead
+of redefining type tokens inside individual sections.
+
+Section headings use `-.025em` tracking; card titles and body copy use normal
+tracking. Eyebrows are uppercase, 12px/600 with `.1em` tracking. The trust line
+retains its uppercase bold treatment, with 14px text and `.1em` tracking on phones.
+Preserve the written case of form labels. Use tabular numerals for prices,
+areas, counts, and table data. Let copy wrap at word boundaries; balance short
+headings and service copy, and use pretty wrapping for longer paragraphs.
+Do not add manual line breaks, clamp prose, force full sentences onto one line,
+or shrink typography for an individual card.
 
 ## Borders, corners, icons, and states
 
@@ -128,8 +143,9 @@ font utilities. Avoid duplicate primary actions inside a card.
   featured cards. Distribute the added height between form fields. The company logo
   carousel spans the full content width beneath both columns, with the heading
   “Trusted by 200+ Companies across India” above the logos on every screen size.
-  Match the homepage trust line: 16px Montserrat, weight 700, uppercase, 0.2em
-  letter spacing and ink colour, with 16px below it for the logo carousel.
+  On desktop, match the homepage trust line: 16px Montserrat, weight 700,
+  uppercase, 0.2em letter spacing and ink colour. Phones use the shared 14px
+  role with 0.1em tracking. Keep 16px below it for the logo carousel.
   There is no process-step strip. Keep 24px between hero groups and the 1400px
   content cap. Use a 28px form heading, no eyebrow, a 14px description,
   48px controls and 16px input text. Field gaps are 12px with 4px between labels
@@ -147,6 +163,8 @@ font utilities. Avoid duplicate primary actions inside a card.
   labeled area and rent, locality/city and specification badges. At 768px and
   above, show all three in equal columns with no horizontal scroll or carousel
   controls. On phones, retain the swipe track and accessible arrow controls.
+  Use the shared 20px section-heading size; let the controls flow onto their
+  own row only when the heading and both 44px controls cannot fit together.
   Narrow desktop cards stack their metrics so values stay readable. Keep the
   full three-card row within the desktop hero's first fold.
 - **Available listings:** use “Warehouses and Godowns in Bangalore” with no
@@ -183,6 +201,10 @@ font utilities. Avoid duplicate primary actions inside a card.
   placeholders and exact previous descriptions with the current copy while
   preserving edited titles and text.
   There is no section photo or placeholder copy. Let content grow without clipping.
+- **Request banner:** below 768px, use a 20px heading, 14px introduction,
+  and 12px supporting copy and button labels. Keep the 48px button height
+  and existing desktop typography. Put “You only pay when you close.” on its
+  own line on phones, with the preceding separator hidden.
 - **Services:** 2 columns × 2 rows, including phones. Keep bottom-aligned CTAs.
   Use detailed desktop headings and descriptions from the approved content.
   Below 768px, show the distinct short headings and descriptions in
@@ -204,7 +226,7 @@ font utilities. Avoid duplicate primary actions inside a card.
   surfaces and right-aligned numbers. Omit the duplicate statistics heading,
   range tiles, corridor comparison, city chart, inventory mix and specification
   tables from this ad page. Keep those shared components on city overview pages.
-- **Dialogs:** the compact 24px heading role, with the same field, label and button styles as the hero form.
+- **Dialogs:** 24px headings on desktop and the shared 20px heading role on phones, with the same field, label and button styles as the hero form.
   Keep focus trapping, close controls, validation and focus restoration intact.
 - **Site chrome:** retain the shared navbar/footer structure and visual roles.
   Keep ad-page layout adaptations local; shared listing and city components

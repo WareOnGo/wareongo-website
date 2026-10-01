@@ -32,8 +32,8 @@ const LOCATIONS = LOCATION_SLUGS.map(slug => MICROMARKETS.find(market => market.
 const SERVICE_ICONS = { 'find-warehouse': Search, 'build-to-suit': Warehouse, 'list-space': Truck, 'transaction-management': Handshake };
 const PREVIOUS_SERVICE_COPY = {
   'find-warehouse': {
-    titles: ['Find a warehouse', 'Find the Perfect Space'],
-    bodies: ['Verified Bangalore spaces matched to your needs within 4 hours.', 'Verified spaces matched to your needs within 4 hours', 'Verified spaces to suit you in 4 hours'],
+    titles: ['Find a warehouse', 'Find the Perfect Space', 'Verified Warehouses, Handpicked for You'],
+    bodies: ['Verified Bangalore spaces matched to your needs within 4 hours.', 'Verified spaces matched to your needs within 4 hours', 'Verified spaces to suit you in 4 hours', 'Share your size, location, specs and budget. Our team picks the options that fit and sends you a shortlist within 4 hours. All of our warehouses are verified by an area manager.'],
     cta: 'Find my warehouse',
   },
   'build-to-suit': {
@@ -43,12 +43,12 @@ const PREVIOUS_SERVICE_COPY = {
   },
   'list-space': {
     titles: ['Find a tenant or buyer', 'Find a Tenant or Buyer'],
-    bodies: ['Find tenants or buyers for your warehouse or spare space.', 'Find tenants or buyers for your property, hassle-free', 'Find tenants or buyers with ease'],
+    bodies: ['Find tenants or buyers for your warehouse or spare space.', 'Find tenants or buyers for your property, hassle-free', 'Find tenants or buyers with ease', 'Own a warehouse, or have space left over? We bring you tenants and buyers from the businesses that come to us.'],
     cta: 'List my space',
   },
   'transaction-management': {
-    titles: ['End-to-end transaction management', 'Complete Deal Management'],
-    bodies: ['Visits, negotiation, paperwork and compliance, managed through move-in.', 'Visits, Negotiation and Handover, handled end-to-end', 'One expert: from search to handover'],
+    titles: ['End-to-end transaction management', 'Complete Deal Management', 'End-to-End Transaction Management'],
+    bodies: ['Visits, negotiation, paperwork and compliance, managed through move-in.', 'Visits, Negotiation and Handover, handled end-to-end', 'One expert: from search to handover', 'Site visits, negotiation, documentation and compliance checks, handled by one team until you move in.'],
     cta: 'Get started',
   },
 };
