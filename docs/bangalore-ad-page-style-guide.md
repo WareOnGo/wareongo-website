@@ -97,7 +97,8 @@ or shrink typography for an individual card.
   Use the outline role for actionable cards, forms and table frames; the line
   role for benefits, summary cards, image frames and internal dividers.
 - Buttons and inputs: **8px radius**. Small fact badges: **4px radius**.
-- Filter chips and map bubbles: pill shape. Their shape distinguishes their role.
+- Filter chips use a pill shape. Desktop map chips use the same 12px corners and ivory
+  surface as their expanded photo cards; compact mobile name labels use 6px corners.
 - Primary buttons: navy fill and ivory text. Secondary buttons: surface fill or
   transparent ivory, thin line, navy text. Hover uses accent navy or the light tint.
 - Clickable cards change their border on hover. Informational cards have no
@@ -106,11 +107,14 @@ or shrink typography for an individual card.
   transition and disable it for reduced motion. Do not add lift, sinking,
   shadows or a thicker stroke.
 - Keyboard focus: a visible **2px accent ring**. On photo or navy backgrounds,
-  use an ivory ring. A selected map bubble uses navy fill and an ivory count.
+  use an ivory ring. A map bubble expands into an in-map photo card on hover,
+  keyboard focus, or tap, keeping the focus ring visible around the preview.
   Focused inputs also use the accent outline in both the hero and dialogs.
 - Lucide icons: **1.5px strokes**, 20px in icon tiles and 16px in controls.
   Tiles are 40px desktop / 32px phone with an 8px radius and the light blue tint.
-- Motion: 160ms for color changes; respect reduced-motion preferences.
+- Motion: 160ms for color changes. Map chips morph into cards over 280ms with
+  a gentle ease-out, a 100ms hover intent delay, and a 140ms leave grace period.
+  Respect reduced-motion preferences; do not scale text or add bounce.
 
 ## Spacing and controls
 
@@ -170,15 +174,35 @@ font utilities. Avoid duplicate primary actions inside a card.
 - **Available listings:** use “Warehouses and Godowns in Bangalore” with no
   eyebrow. Keep 3 columns on desktop and 2 on tablet. Hide the entire
   section below 768px, including its heading, size filters, cards and footer.
-- **Micromarkets:** the same photo/gradient/count/title design at every size.
-  Use 2 columns × 4 rows on tablet and desktop; desktop stays beside the
-  non-sticky map in one fold. Below 768px, place the cards in one horizontally
-  scrolling row beneath the map, with native swipe, snap points and a visible
-  next-card edge. Mobile cards are 168px tall and up to 240px wide. Cards must
-  never establish their width from an aspect ratio or overflow their grid column.
-  Count badges are secondary metadata:
-  12px/500 muted text, 3px × 6px padding, no border, and 90% surface ivory
-  (`--landing-badge-surface`). Keep map labels more prominent as interactive controls.
+- **Micromarkets:** a full-width road map with two accessible views: Warehouse
+  Belts (10 areas) and City Areas (5 groups/areas). Group Bommasandra/Jigani with
+  Hosur Road, and Hebbal/Jakkur with Yelahanka; show Bidadi as Mysore Road / Bidadi.
+  Use the PPT generator's Mapbox `streets-v12` basemap with local images and
+  matching cameras: 7:3 from 1200px, 3:2 from 600–1199px, and square below 600px.
+  Keep the complete image and preserve attribution. Do not add connector lines
+  or endpoint dots.
+  From 768px, retain the in-map ivory chips and photo previews. Position chips
+  over matching map names where practical. Each chip shares its thumbnail,
+  title, metadata, thin outline and 12px corners with its expanded photo card.
+  Use 12px/600 chip titles, 12px/400 metadata, and 16px expanded titles. Hover,
+  keyboard focus, or tap expands one chip into a 264 × 224px card; clamp it
+  inside the map with room for attribution. Keep a preview open while moving
+  into it; support Escape, the close button, and clicking away. The enquiry
+  dialog restores focus to the stable chip.
+  Below 768px, mark the basemap with small, noninteractive name chips and keep
+  the horizontal micromarket photo-card track 16px beneath it. Map annotations
+  use 11px/500 type, 3px × 6px padding, a 1px outline and 6px corners on ivory.
+  Omit thumbnails, counts, connector lines and dots from these small labels.
+  Keep their positions geographically representative and prevent overlap.
+  The detailed cards remain the enquiry targets. Keep both map views; switching views resets the track
+  to its first card. Cards use the original navy-gradient photo treatment,
+  14px titles, 12px metadata/actions, thin outlines and 12px corners. Show a
+  partial next card, use native horizontal scrolling with scroll snapping,
+  and keep the page itself within the viewport. Every card opens the existing
+  enquiry dialog and restores focus to its own visible button on dismissal.
+  Use the city overview's counts with generated inventory as fallback; omit
+  counts for grouped or untagged areas rather than summing overlapping listings.
+  Keep touch targets at least 44px and use no shadows.
 - **Area guide:** visible on tablet and desktop; hidden below 768px.
 - **Benefits:** follows the client carousel on desktop and featured listings on phones, with
   a centered heading. A navy strip shows four metrics: 4 Hour Curated Shortlist,
@@ -239,7 +263,7 @@ instead of stacking breakpoint overrides. The CMS uses the real page renderer,
 so it must match without maintaining a second style implementation.
 
 Review at 320px, 390px, 768px, 1024px, 1440px and 1920px. Check wrapped copy,
-native swiping, the 2×4/2×3/2×2 grids, image loading, keyboard focus, modal
+native swiping, the 2×3/2×2 grids, map previews, image loading, keyboard focus, modal
 triggers, table overflow and the real CMS preview. A fresh-load check alone is
 not enough during development: verify the running page after a full refresh.
 

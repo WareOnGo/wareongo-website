@@ -134,38 +134,53 @@
 .bangalore-landing__available-footer > button { flex-shrink: 0; }
 
 .bangalore-landing__locations { scroll-margin-top: 104px; }
-.bangalore-landing__location-layout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: var(--landing-grid-gap); }
-.bangalore-landing__location-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--landing-grid-gap); min-width: 0; }
-.bangalore-landing .bangalore-landing__location-card { display: grid; min-height: 112px; border-color: var(--landing-outline); border-radius: var(--landing-radius); background: var(--landing-card); box-shadow: none; transition: border-color var(--landing-motion); }
-.bangalore-landing .bangalore-landing__location-card:hover { transform: none; border-color: var(--landing-accent); box-shadow: none; }
-.bangalore-landing .bangalore-landing__location-card[data-active="true"] { border-color: var(--landing-accent); box-shadow: none; }
-.bangalore-landing__location-image { position: absolute; inset: 0; aspect-ratio: auto; background: var(--landing-tint); }
-.bangalore-landing__location-image::after { content: ''; position: absolute; inset: 0; background: var(--landing-photo-shade); pointer-events: none; }
-.bangalore-landing__location-image > .bangalore-landing__listing-count { z-index: 1; top: 10px; left: 12px; padding: 3px 6px; }
 .bangalore-landing__image-tag { position: absolute; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: 6px; padding: 6px 9px; border: var(--landing-border); border-radius: var(--landing-tag-radius); background: var(--landing-card); color: var(--landing-ink); font-size: var(--landing-text-xs); font-weight: 500; line-height: var(--landing-leading-ui); }
 .bangalore-landing__listing-count { border: 0; background: var(--landing-badge-surface); color: var(--landing-muted); font-weight: 500; }
-.bangalore-landing__location-body { z-index: 1; display: flex; flex-direction: column; justify-content: flex-end; min-width: 0; padding: 12px; color: var(--landing-card); }
-.bangalore-landing__location-body > h3 { margin-bottom: 2px; font-size: var(--landing-text-base); font-weight: 600; line-height: 1.4; letter-spacing: 0; }
-.bangalore-landing__location-link { display: flex; width: 100%; min-height: 20px; align-items: center; justify-content: space-between; gap: 10px; padding: 0; border: 0; color: var(--landing-card); font-size: var(--landing-text-xs); font-weight: 600; line-height: var(--landing-leading-ui); text-align: left; }
-.bangalore-landing main .bangalore-landing__location-link:focus-visible::after { outline-color: var(--landing-card); }
 
-/* A local basemap with independent, pre-positioned micromarket overlays. */
-.bangalore-landing__location-map { position: relative; min-width: 0; overflow: hidden; border: var(--landing-border); border-radius: var(--landing-radius); background: var(--landing-card); }
-.bangalore-landing__map-stage { position: relative; width: 100%; aspect-ratio: 1; isolation: isolate; }
-.bangalore-landing__map-stage > picture, .bangalore-landing__map-stage > picture img, .bangalore-landing__map-connectors { position: absolute; inset: 0; width: 100%; height: 100%; }
-.bangalore-landing__map-stage > picture img { object-fit: fill; }
+.bangalore-landing__map-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; }
+.bangalore-landing__map-views { display: flex; flex-shrink: 0; gap: 4px; padding: 4px; border: var(--landing-interactive-border); border-radius: var(--landing-radius); background: var(--landing-card); }
+.bangalore-landing__map-views > button { min-height: var(--landing-compact-height); padding: 8px 16px; border-radius: var(--landing-control-radius); color: var(--landing-ink); font-size: var(--landing-text-xs); font-weight: 600; line-height: var(--landing-leading-ui); }
+.bangalore-landing__map-views > button:hover { background: var(--ui-listing-hover); }
+.bangalore-landing__map-views > button[aria-pressed="true"] { background: var(--landing-ink); color: var(--landing-card); }
+
+/* Full-width local road maps, with matching cameras and unclipped area previews. */
+.bangalore-landing__location-map { position: relative; width: 100%; min-width: 0; overflow: hidden; border: var(--landing-border); border-radius: var(--landing-radius); background: var(--landing-card); }
+.bangalore-landing__map-stage { --map-chip-width: 164px; --map-card-width: 264px; --map-card-height: 224px; --map-photo-height: 112px; --map-morph: 280ms cubic-bezier(.22, 1, .36, 1); position: relative; width: 100%; aspect-ratio: 7 / 3; isolation: isolate; }
+.bangalore-landing__map-stage > picture, .bangalore-landing__map-stage > picture img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.bangalore-landing__map-stage > picture img { object-fit: contain; }
 .bangalore-landing__map-stage > .bangalore-landing__image-tag { z-index: 1; }
-.bangalore-landing__map-connectors { pointer-events: none; }
-.bangalore-landing__map-connectors--mobile { display: none; }
-.bangalore-landing__map-connectors line { stroke: var(--landing-accent); stroke-width: 1.25px; opacity: .65; }
-.bangalore-landing__map-point { fill: var(--landing-accent); stroke: var(--landing-card); stroke-width: 1.5px; }
-.bangalore-landing__map-point-halo { fill: var(--landing-accent); opacity: .08; }
-.bangalore-landing__map-connectors g[data-active="true"] line { stroke: var(--landing-ink); stroke-width: 2px; opacity: 1; }
-.bangalore-landing__map-connectors g[data-active="true"] .bangalore-landing__map-point-halo { opacity: .25; }
-.bangalore-landing__map-bubble { position: absolute; z-index: 2; left: var(--map-x); top: var(--map-y); display: flex; align-items: center; gap: 6px; min-height: 40px; padding: 6px 10px 6px 6px; border: var(--landing-interactive-border); border-radius: var(--landing-pill-radius); background: var(--landing-card); color: var(--landing-ink); box-shadow: none; font-size: var(--landing-text-xs); font-weight: 600; line-height: var(--landing-leading-ui); white-space: nowrap; transform: translate(-50%, -50%); transition: background-color var(--landing-motion), color var(--landing-motion), box-shadow var(--landing-motion); }
-.bangalore-landing__map-count { display: grid; min-width: 26px; height: 26px; padding-inline: 4px; place-items: center; border-radius: var(--landing-pill-radius); background: var(--landing-tint); color: var(--landing-accent); font-variant-numeric: tabular-nums; }
-.bangalore-landing__map-bubble[data-active="true"] { z-index: 3; border-color: var(--landing-ink); background: var(--landing-ink); color: var(--landing-card); box-shadow: none; }
-.bangalore-landing__map-bubble[data-active="true"] .bangalore-landing__map-count { background: var(--landing-card); color: var(--landing-ink); }
+.bangalore-landing__map-marker { --map-label-x: var(--map-x); --map-label-y: var(--map-y); position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.bangalore-landing__map-marker[data-active="true"], .bangalore-landing__map-marker:has(.bangalore-landing__map-surface:hover) { z-index: 3; }
+.bangalore-landing__map-marker[data-wide-chip="true"] { --map-chip-width: 192px; }
+/* One surface grows from the area chip into the photo preview, without scaling text. */
+.bangalore-landing__map-surface { --map-surface-width: var(--map-chip-width); --map-surface-height: 56px; position: absolute; left: clamp(12px, calc(var(--map-label-x) - var(--map-surface-width) / 2), calc(100% - var(--map-surface-width) - 12px)); top: clamp(12px, calc(var(--map-label-y) - var(--map-surface-height) / 2), calc(100% - var(--map-surface-height) - 28px)); width: var(--map-surface-width); height: var(--map-surface-height); overflow: hidden; isolation: isolate; border: var(--landing-interactive-border); border-radius: var(--landing-radius); background: var(--landing-card); color: var(--landing-ink); pointer-events: auto; transition: left var(--map-morph), top var(--map-morph), width var(--map-morph), height var(--map-morph), border-color var(--landing-motion), background-color var(--landing-motion); }
+.bangalore-landing__map-surface:hover { border-color: var(--landing-accent); background: var(--ui-listing-hover); }
+.bangalore-landing__map-marker[data-active="true"] .bangalore-landing__map-surface { --map-surface-width: var(--map-card-width); --map-surface-height: var(--map-card-height); border-color: var(--landing-accent); background: var(--landing-card); }
+.bangalore-landing__map-bubble { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; padding: 0; border: 0; border-radius: inherit; background: transparent; pointer-events: auto; }
+.bangalore-landing__map-bubble[aria-expanded="true"] { pointer-events: none; }
+.bangalore-landing__map-card { position: absolute; inset: 0; pointer-events: none; }
+.bangalore-landing__map-card[aria-hidden="false"] { pointer-events: auto; }
+.bangalore-landing__map-card-image { position: absolute; top: 7px; left: 7px; width: 40px; height: 40px; object-fit: cover; border-radius: 6px; transition: left var(--map-morph), top var(--map-morph), width var(--map-morph), height var(--map-morph), border-radius var(--map-morph); }
+.bangalore-landing__map-marker[data-market="peenya"] .bangalore-landing__map-card-image { object-position: center bottom; }
+.bangalore-landing__map-card-body { position: absolute; top: 8px; left: 56px; right: 8px; min-width: 0; transition: top var(--map-morph), left var(--map-morph), right var(--map-morph); }
+.bangalore-landing__map-card h3 { margin: 0; font-size: var(--landing-text-xs); font-weight: 600; line-height: var(--landing-leading-ui); letter-spacing: 0; white-space: nowrap; transition: font-size var(--map-morph), line-height var(--map-morph); }
+.bangalore-landing__map-card-count { margin: 2px 0 0; color: var(--landing-muted); font-size: var(--landing-text-xs); font-weight: 400; line-height: var(--landing-leading-ui); white-space: nowrap; }
+.bangalore-landing__map-card-count { font-variant-numeric: tabular-nums; }
+.bangalore-landing__map-card-link { position: absolute; right: 12px; bottom: 8px; left: 12px; display: flex; min-height: var(--landing-compact-height); align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0; border-top: var(--landing-border); color: var(--landing-ink); font-size: var(--landing-text-xs); font-weight: 600; line-height: var(--landing-leading-ui); text-align: left; }
+.bangalore-landing__map-card-link:hover { color: var(--landing-accent); }
+.bangalore-landing__map-card-link > svg { flex-shrink: 0; }
+.bangalore-landing__map-card-close { position: absolute; top: 4px; right: 4px; display: grid; width: var(--landing-compact-height); height: var(--landing-compact-height); place-items: center; border-radius: var(--landing-control-radius); color: var(--landing-ink); }
+.bangalore-landing__map-card-close > svg { width: 28px; height: 28px; padding: 6px; border: var(--landing-border); border-radius: var(--landing-control-radius); background: var(--landing-card); }
+.bangalore-landing__map-card-close:hover > svg { background: var(--ui-listing-hover); }
+.bangalore-landing__map-card-link, .bangalore-landing__map-card-close { opacity: 0; visibility: hidden; transition: opacity 120ms ease, visibility 0s 120ms; }
+.bangalore-landing__map-card[aria-hidden="false"] .bangalore-landing__map-card-image { top: 0; left: 0; width: 100%; height: var(--map-photo-height); border-radius: 0; }
+.bangalore-landing__map-card[aria-hidden="false"] .bangalore-landing__map-card-body { top: calc(var(--map-photo-height) + 12px); left: 12px; right: 12px; }
+.bangalore-landing__map-card[aria-hidden="false"] h3 { font-size: var(--landing-text-base); line-height: var(--landing-leading-title); }
+.bangalore-landing__map-card[aria-hidden="false"] .bangalore-landing__map-card-link, .bangalore-landing__map-card[aria-hidden="false"] .bangalore-landing__map-card-close { opacity: 1; visibility: visible; transition: opacity 180ms ease 100ms, visibility 0s; }
+.bangalore-landing main .bangalore-landing__map-card-link:focus-visible { outline-offset: 2px; }
+.bangalore-landing main .bangalore-landing__map-card-close:focus-visible { outline-color: var(--landing-card); outline-offset: -4px; }
+.bangalore-landing__map-surface:has(.bangalore-landing__map-bubble:focus-visible) { outline: var(--landing-focus-width) solid var(--landing-accent); outline-offset: 3px; }
+.bangalore-landing__map-mobile-hint, .bangalore-landing__mobile-markets, .bangalore-landing__mobile-map-labels { display: none; }
 
 .bangalore-landing__area-panel { padding: 24px; border: var(--landing-interactive-border); border-radius: var(--landing-radius); background: var(--landing-card); }
 .bangalore-landing__area-panel > h2 { margin-bottom: 16px; font-size: var(--landing-text-card); font-weight: 600; line-height: var(--landing-leading-heading); }
@@ -185,8 +200,9 @@
 .bangalore-landing__proof-metrics > div + div { border-inline-start: 1px solid var(--landing-inverse-line); }
 .bangalore-landing__proof-metrics dt { color: var(--landing-inverse-muted); font-size: var(--landing-text-xs); font-weight: 400; line-height: var(--landing-leading-body); text-wrap: balance; }
 .bangalore-landing__proof-metrics dd { order: -1; margin: 0; font-size: var(--landing-text-section); font-weight: 600; line-height: var(--landing-leading-heading); font-variant-numeric: tabular-nums; letter-spacing: -.025em; white-space: nowrap; }
-.bangalore-landing__map-caption { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 16px; border-top: var(--landing-border); background: var(--landing-card); color: var(--landing-muted); font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); }
-.bangalore-landing__map-caption > span { width: 8px; height: 8px; flex-shrink: 0; border-radius: 50%; background: var(--landing-accent); box-shadow: none; }
+.bangalore-landing__map-caption { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 12px 16px; border-top: var(--landing-border); background: var(--landing-card); color: var(--landing-muted); font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); }
+.bangalore-landing__map-legend { display: inline-flex; align-items: center; gap: 8px; }
+.bangalore-landing__map-hint > span + span { display: none; }
 .bangalore-landing__why-copy { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--landing-nested-gap); min-width: 0; }
 .bangalore-landing__benefit { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; min-width: 0; padding: var(--landing-card-padding); border: var(--landing-border); border-radius: var(--landing-radius); background: var(--landing-card); text-align: left; }
 .bangalore-landing__benefit > div:last-child { width: 100%; min-width: 0; }
@@ -293,9 +309,6 @@
 .bangalore-landing-dialog > button { top: 12px; right: 12px; display: grid; width: var(--landing-compact-height); height: var(--landing-compact-height); place-items: center; border-radius: var(--landing-control-radius); }
 
 @media (min-width: 1024px) {
-  /* Keep all eight markets beside the square map within a desktop fold. */
-  .bangalore-landing__location-layout { grid-template-columns: minmax(0, 1fr) min(50%, clamp(400px, calc(100svh - 272px), 580px)); align-items: stretch; }
-  .bangalore-landing__location-grid { grid-template-rows: repeat(4, minmax(0, 1fr)); gap: 12px; }
   .bangalore-landing__hero { padding-top: 66px; }
   .bangalore-landing__featured { align-self: end; }
   .bangalore-landing__featured .warehouse-card__metric strong { font-size: var(--landing-text-sm); }
@@ -312,10 +325,6 @@
 
 @media (max-width: 1023px) {
   .bangalore-landing__available-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .bangalore-landing__location-layout { grid-template-columns: minmax(0, 1fr); }
-  .bangalore-landing__location-map { position: relative; top: auto; grid-row: 1; width: 100%; max-width: 600px; justify-self: center; }
-  .bangalore-landing__location-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .bangalore-landing .bangalore-landing__location-card { width: 100%; height: 168px; min-width: 0; }
   .bangalore-landing__hero { grid-template-columns: minmax(0, 1fr); grid-template-areas: "intro" "enquiry" "featured" "trust"; grid-template-rows: auto; gap: 24px; }
   .bangalore-landing__hero-copy { max-width: 640px; }
   .bangalore-landing__featured { align-self: auto; }
@@ -332,12 +341,18 @@
   .bangalore-landing__submit { grid-column: 1 / -1; }
 }
 
+@media (min-width: 600px) and (max-width: 1199px) {
+  .bangalore-landing__map-stage { aspect-ratio: 3 / 2; }
+  .bangalore-landing__map-marker { --map-label-x: var(--map-tablet-x); --map-label-y: var(--map-tablet-y); }
+}
+
 @media (max-width: 599px) {
-  .bangalore-landing__map-stage { aspect-ratio: 18 / 23; }
-  .bangalore-landing__map-connectors--desktop { display: none; }
-  .bangalore-landing__map-connectors--mobile { display: block; }
-  .bangalore-landing__map-bubble { left: var(--map-mobile-x); top: var(--map-mobile-y); gap: 4px; min-height: 44px; padding: 5px 7px 5px 5px; font-size: var(--landing-text-xs); }
-  .bangalore-landing__map-count { min-width: 24px; height: 24px; }
+  .bangalore-landing__map-stage { aspect-ratio: 1; }
+}
+
+@media (hover: none) {
+  .bangalore-landing__map-hint > span:first-child { display: none; }
+  .bangalore-landing__map-hint > span + span { display: inline; }
 }
 
 @media (max-width: 767px) {
@@ -371,12 +386,28 @@
   .bangalore-landing__featured-controls { display: flex; margin-left: auto; }
   .bangalore-landing__featured-grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(280px, 85%); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: 2px; scrollbar-width: none; }
   .bangalore-landing__locations { scroll-margin-top: 88px; }
-  .bangalore-landing__location-grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(240px, calc(100% - 24px)); gap: 12px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: var(--landing-gutter); scrollbar-width: none; margin-inline: calc(-1 * var(--landing-gutter)); padding: 2px var(--landing-gutter); }
-  .bangalore-landing__location-grid::-webkit-scrollbar { display: none; }
-  .bangalore-landing__location-card { scroll-snap-align: start; }
-  .bangalore-landing__location-card .bangalore-landing__listing-count { top: 8px; left: 8px; }
-  .bangalore-landing__location-body > h3 { font-size: var(--landing-text-card); }
-  .bangalore-landing__location-link > svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .bangalore-landing__map-views { width: 100%; }
+  .bangalore-landing__map-views > button { flex: 1; padding-inline: 8px; }
+  .bangalore-landing__map-marker, .bangalore-landing__map-legend, .bangalore-landing__map-hint { display: none; }
+  .bangalore-landing__map-caption { justify-content: center; padding: 12px; text-align: center; }
+  .bangalore-landing__map-mobile-hint { display: inline; }
+  .bangalore-landing__mobile-map-labels { display: block; position: absolute; z-index: 2; inset: 0; pointer-events: none; }
+  .bangalore-landing__mobile-map-chip { position: absolute; left: var(--label-x); top: var(--label-y); transform: translate(-50%, -50%); padding: 3px 6px; border: var(--landing-interactive-border); border-radius: 6px; background: var(--landing-card); color: var(--landing-ink); font-size: 11px; font-weight: 500; line-height: var(--landing-leading-title); white-space: nowrap; }
+  .bangalore-landing__mobile-markets { display: grid; grid-auto-flow: column; grid-auto-columns: min(232px, 78%); gap: 12px; margin-top: 16px; padding: 4px 2px 8px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: 2px; scrollbar-width: thin; scrollbar-color: var(--landing-outline) transparent; }
+  .bangalore-landing__mobile-markets:focus-visible { outline: var(--landing-focus-width) solid var(--landing-accent); outline-offset: 2px; border-radius: var(--landing-radius); }
+  .bangalore-landing__mobile-market { position: relative; min-width: 0; min-height: 208px; overflow: hidden; isolation: isolate; scroll-snap-align: start; border: var(--landing-interactive-border); border-radius: var(--landing-radius); background: var(--landing-ink); color: var(--landing-card); }
+  .bangalore-landing__mobile-market > img, .bangalore-landing__mobile-market::after { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .bangalore-landing__mobile-market > img { object-fit: cover; }
+  .bangalore-landing__mobile-market[data-market="peenya"] > img { object-position: center bottom; }
+  .bangalore-landing__mobile-market::after { content: ""; background: var(--landing-photo-shade); pointer-events: none; }
+  .bangalore-landing__mobile-market > .bangalore-landing__image-tag { z-index: 1; top: 8px; left: 8px; padding: 3px 6px; }
+  .bangalore-landing__mobile-market-body { position: absolute; z-index: 1; right: 12px; bottom: var(--landing-compact-height); left: 12px; }
+  .bangalore-landing__mobile-market h3 { margin: 0; color: inherit; font-size: var(--landing-text-card); font-weight: 600; line-height: var(--landing-leading-title); }
+  .bangalore-landing__mobile-market p { margin: 4px 0 0; color: var(--landing-inverse-muted); font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); }
+  .bangalore-landing__mobile-market-link { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; color: inherit; font-size: var(--landing-text-xs); font-weight: 600; line-height: var(--landing-leading-ui); text-align: left; }
+  .bangalore-landing__mobile-market-link > span { position: absolute; right: 12px; bottom: 0; left: 12px; display: flex; min-height: var(--landing-compact-height); align-items: center; justify-content: space-between; gap: 8px; }
+  .bangalore-landing__mobile-market:has(.bangalore-landing__mobile-market-link:focus-visible) { outline: var(--landing-focus-width) solid var(--landing-accent); outline-offset: 2px; }
+  .bangalore-landing main .bangalore-landing__mobile-market-link:focus-visible { outline: none; }
   .bangalore-landing__benefit { gap: 0; padding: 12px; }
   .bangalore-landing__benefit > .bangalore-landing__icon { display: none; }
   .bangalore-landing__benefit h3 { margin-bottom: 4px; }
@@ -406,7 +437,12 @@
   .bangalore-landing__benefit { padding: 8px; }
 }
 
+@media (min-width: 600px) and (max-width: 767px) {
+  .bangalore-landing__mobile-map-chip { left: var(--label-wide-x); top: var(--label-wide-y); }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .bangalore-landing__button, .bangalore-landing .bangalore-landing__location-card, .bangalore-landing__audience-card, .bangalore-landing__request a, .bangalore-landing__map-bubble { transition: none; }
+  .bangalore-landing__button, .bangalore-landing__audience-card, .bangalore-landing__request a, .bangalore-landing__map-bubble { transition: none; }
   .bangalore-landing__trust .trusted-scroller { animation: none; }
+  .bangalore-landing__map-surface, .bangalore-landing__map-card-image, .bangalore-landing__map-card-body, .bangalore-landing__map-card h3, .bangalore-landing__map-card .bangalore-landing__map-card-link, .bangalore-landing__map-card .bangalore-landing__map-card-close { transition: none; }
 }

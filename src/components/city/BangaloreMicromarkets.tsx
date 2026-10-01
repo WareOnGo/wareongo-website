@@ -1,13 +1,11 @@
-import { useState, type CSSProperties, type HTMLAttributes } from 'react';
-import { ArrowRight, MapPin } from 'lucide-react';
-import { BANGALORE_MAP_AREAS, micromarketMapPoint, type MapView } from '@/data/bangaloreMicromarketMap';
+import { useCallback, useEffect, useRef, useState, type CSSProperties, type HTMLAttributes } from 'react';
+import { ArrowRight, MapPin, X } from 'lucide-react';
+import { BANGALORE_MAP_VIEWS, type BangaloreMapArea, type BangaloreMapScope } from '@/data/bangaloreMicromarketMap';
 import type { AnalyticsParams } from '@/lib/analytics';
 import type { AdPageContent } from '@/data/adPages';
 
-interface Location {
-  slug: string;
-  canonical: string;
-  count: number;
+interface Location extends BangaloreMapArea {
+  count: number | null;
 }
 
 export default function BangaloreMicromarkets({ locations, onContact, content }: {
@@ -15,117 +13,196 @@ export default function BangaloreMicromarkets({ locations, onContact, content }:
   locations: Location[];
   onContact: (trigger: HTMLButtonElement, context: AnalyticsParams) => void;
 }) {
-  const [hovered, setHovered] = useState<string | null>(null);
-  const [focused, setFocused] = useState<string | null>(null);
-  const active = hovered ?? focused;
+  const [scope, setScope] = useState<BangaloreMapScope>('belts');
+  const camera = BANGALORE_MAP_VIEWS[scope];
+  const visibleLocations = locations.filter(location => location.scope === scope);
+  const [active, setActive] = useState<string | null>(null);
+  const [pinned, setPinned] = useState<string | null>(null);
+  const mapRef = useRef<HTMLElement>(null);
+  const markerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const hoverTimer = useRef<ReturnType<typeof setTimeout>>();
+  const leaveTimer = useRef<ReturnType<typeof setTimeout>>();
+  const dismissedPreview = useRef<string | null>(null);
 
-  function highlightHandlers(slug: string): HTMLAttributes<HTMLElement> {
+  const clearTimers = useCallback(() => {
+    clearTimeout(hoverTimer.current);
+    clearTimeout(leaveTimer.current);
+  }, []);
+
+  useEffect(() => clearTimers, [clearTimers]);
+
+  const dismiss = useCallback((slug: string, restoreFocus = false) => {
+    clearTimers();
+    dismissedPreview.current = slug;
+    // Focus first, then collapse, so the marker's focus handler cannot reopen it.
+    if (restoreFocus) markerRefs.current[slug]?.focus({ preventScroll: true });
+    setActive(null);
+    setPinned(null);
+  }, [clearTimers]);
+
+  useEffect(() => {
+    if (!active) return;
+    const onPointerDown = (event: PointerEvent) => {
+      if (!mapRef.current?.contains(event.target as Node)) dismiss(active);
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape' || event.defaultPrevented) return;
+      event.preventDefault();
+      dismiss(active, mapRef.current?.contains(document.activeElement));
+    };
+    document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [active, dismiss]);
+
+  function previewHandlers(slug: string): HTMLAttributes<HTMLDivElement> {
     return {
-      onPointerEnter: event => { if (event.pointerType !== 'touch') setHovered(slug); },
-      onPointerLeave: () => setHovered(current => current === slug ? null : current),
-      onFocus: () => { setFocused(slug); setHovered(null); },
+      onPointerEnter: event => {
+        if (event.pointerType === 'touch') return;
+        clearTimers();
+        if (active === slug || dismissedPreview.current === slug) return;
+        hoverTimer.current = setTimeout(() => {
+          setActive(slug);
+          setPinned(null);
+        }, 100);
+      },
+      onPointerLeave: event => {
+        clearTimers();
+        if (dismissedPreview.current === slug) dismissedPreview.current = null;
+        if (active !== slug || pinned === slug || event.currentTarget.contains(document.activeElement)) return;
+        leaveTimer.current = setTimeout(() => {
+          setActive(current => current === slug ? null : current);
+        }, 140);
+      },
+      onFocus: () => {
+        clearTimers();
+        setActive(slug);
+      },
       onBlur: event => {
-        if (!event.currentTarget.contains(event.relatedTarget)) setFocused(current => current === slug ? null : current);
+        if (!event.currentTarget.contains(event.relatedTarget)) {
+          clearTimers();
+          setActive(current => current === slug ? null : current);
+          setPinned(current => current === slug ? null : current);
+        }
       },
     };
   }
 
-  function enquire(trigger: HTMLButtonElement, location: Location, placement: 'bangalore_locations' | 'bangalore_location_map') {
-    onContact(trigger, { placement, label: location.canonical, market_slug: location.slug, source: `bangalore-landing-${location.slug}` });
-  }
-
-  function connectors(view: MapView) {
-    return (
-      <svg className={`bangalore-landing__map-connectors bangalore-landing__map-connectors--${view}`} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-        {locations.map(({ slug }) => {
-          const area = BANGALORE_MAP_AREAS[slug];
-          if (!area) return null;
-          const [x, y] = micromarketMapPoint(slug, view);
-          const [labelX, labelY] = area.label[view];
-          return (
-            <g key={slug} data-market={slug} data-active={active === slug || undefined}>
-              <line x1={x} y1={y} x2={labelX} y2={labelY} vectorEffect="non-scaling-stroke" />
-              <circle className="bangalore-landing__map-point-halo" cx={x} cy={y} r={2} />
-              <circle className="bangalore-landing__map-point" cx={x} cy={y} r={0.7} vectorEffect="non-scaling-stroke" />
-            </g>
-          );
-        })}
-      </svg>
-    );
+  function enquire(trigger: HTMLButtonElement, location: Location, placement: 'bangalore_location_map' | 'bangalore_locations' = 'bangalore_location_map') {
+    dismiss(location.slug);
+    // Return to the visible trigger: a desktop chip or a mobile card action.
+    onContact(placement === 'bangalore_location_map' ? markerRefs.current[location.slug] ?? trigger : trigger, {
+      placement, label: location.canonical,
+      market_slug: location.slug, source: `bangalore-landing-${location.slug}`,
+    });
   }
 
   return (
     <section id="locations" className="bangalore-landing__locations bangalore-landing__container" aria-labelledby="bangalore-locations-title">
-      <div className="bangalore-landing__section-heading">
+      <div className="bangalore-landing__section-heading bangalore-landing__map-heading">
         <h2 id="bangalore-locations-title" className="bangalore-landing__section-title">{content.copy.locationsHeading}</h2>
-      </div>
-      <div className="bangalore-landing__location-layout">
-        <div className="bangalore-landing__location-grid">
-          {locations.map(location => (
-            <article
-              key={location.slug}
-              className="warehouse-card bangalore-landing__location-card"
-              data-market={location.slug}
-              data-active={active === location.slug || undefined}
-              {...highlightHandlers(location.slug)}
-            >
-              <div className="warehouse-card__photo bangalore-landing__location-image">
-                <img src={content.images[`micromarket-${location.slug}`].url} alt={content.images[`micromarket-${location.slug}`].alt} width={800} height={450} loading="lazy" decoding="async" className="warehouse-card__image" />
-                <span className="bangalore-landing__image-tag bangalore-landing__listing-count">
-                  {location.count.toLocaleString('en-IN')} {location.count === 1 ? 'listing' : 'listings'}
-                </span>
-              </div>
-              <div className="bangalore-landing__location-body">
-                <h3>{location.canonical}</h3>
-                <button
-                  type="button"
-                  className="warehouse-card__link bangalore-landing__location-link"
-                  aria-haspopup="dialog"
-                  aria-label={`Enquire about warehouses in ${location.canonical}`}
-                  onClick={event => enquire(event.currentTarget, location, 'bangalore_locations')}
-                >{content.copy.locationsCta} <ArrowRight size={17} aria-hidden="true" /></button>
-              </div>
-            </article>
+        <div className="bangalore-landing__map-views" role="group" aria-label="Map area view">
+          {(['belts', 'city'] as const).map(view => (
+            <button key={view} type="button" aria-pressed={scope === view} aria-controls="bangalore-area-map bangalore-mobile-markets" onClick={() => {
+              clearTimers();
+              setActive(null);
+              setPinned(null);
+              dismissedPreview.current = null;
+              setScope(view);
+            }}>{view === 'belts' ? 'Warehouse Belts' : 'City Areas'}</button>
           ))}
         </div>
-
-        <figure className="bangalore-landing__location-map" aria-label="Warehouse listings by micromarket in Bangalore">
-          <div className="bangalore-landing__map-stage">
-            <picture>
-              <source media="(max-width: 599px)" srcSet="/bangalore/micromarkets-map-mobile.webp" width={720} height={920} />
-              <img src="/bangalore/micromarkets-map.webp" alt="Bangalore and its surrounding warehouse areas on a street map." width={1200} height={1200} loading="lazy" decoding="async" />
-            </picture>
-            <span className="bangalore-landing__image-tag"><MapPin size={14} aria-hidden="true" />{content.copy.mapLabel}</span>
-            {connectors('desktop')}
-            {connectors('mobile')}
-            {locations.map(location => {
-              const area = BANGALORE_MAP_AREAS[location.slug];
-              if (!area) return null;
-              const style = {
-                '--map-x': `${area.label.desktop[0]}%`, '--map-y': `${area.label.desktop[1]}%`,
-                '--map-mobile-x': `${area.label.mobile[0]}%`, '--map-mobile-y': `${area.label.mobile[1]}%`,
-              } as CSSProperties;
-              return (
-                <button
-                  key={location.slug}
-                  type="button"
-                  className="bangalore-landing__map-bubble"
-                  style={style}
-                  data-market={location.slug}
-                  data-active={active === location.slug || undefined}
-                  aria-label={`${location.canonical}: ${location.count} warehouse listings. Enquire now.`}
-                  aria-haspopup="dialog"
-                  onClick={event => enquire(event.currentTarget, location, 'bangalore_location_map')}
-                  {...highlightHandlers(location.slug)}
-                >
-                  <span className="bangalore-landing__map-count">{location.count.toLocaleString('en-IN')}</span>
-                  <span>{location.canonical}</span>
-                </button>
-              );
-            })}
+      </div>
+      <figure id="bangalore-area-map" ref={mapRef} className="bangalore-landing__location-map" aria-label="Warehouse listings by micromarket in Bangalore">
+        <div className="bangalore-landing__map-stage" data-scope={scope} onPointerDown={event => {
+          if (active && !(event.target as Element).closest('.bangalore-landing__map-marker')) dismiss(active);
+        }}>
+          <picture key={scope}>
+            <source media="(max-width: 599px)" srcSet={camera.mobile.src} width={camera.mobile.width * 2} height={camera.mobile.height * 2} />
+            <source media="(max-width: 1199px)" srcSet={camera.tablet.src} width={camera.tablet.width * 2} height={camera.tablet.height * 2} />
+            <img src={camera.desktop.src} alt={scope === 'belts' ? "Road map of Bangalore and its warehouse belts." : "Road map of Bangalore's city neighbourhoods."} width={camera.desktop.width * 2} height={camera.desktop.height * 2} loading="lazy" decoding="async" />
+          </picture>
+          <span className="bangalore-landing__image-tag"><MapPin size={14} aria-hidden="true" />{content.copy.mapLabel}</span>
+          <div className="bangalore-landing__mobile-map-labels" aria-hidden="true">
+            {visibleLocations.map(location => (
+              <span key={location.slug} className="bangalore-landing__mobile-map-chip" data-market={location.slug} style={{
+                '--label-x': `${location.label.mobile[0]}%`, '--label-y': `${location.label.mobile[1]}%`,
+                '--label-wide-x': `${location.label.tablet[0]}%`, '--label-wide-y': `${location.label.tablet[1]}%`,
+              } as CSSProperties}>{location.mobileLabel ?? location.title ?? location.canonical}</span>
+            ))}
           </div>
-          <figcaption className="bangalore-landing__map-caption"><span aria-hidden="true" />{content.copy.mapCaption}</figcaption>
-        </figure>
+          {visibleLocations.map(location => {
+            const photo = location.imageSlot ? content.images[location.imageSlot] : location.image;
+            const countLabel = location.count === null ? null : `${location.count.toLocaleString('en-IN')} ${location.count === 1 ? 'listing' : 'listings'}`;
+            const chipCaption = location.chipCaption ?? countLabel ?? 'Explore spaces';
+            const cardCaption = location.caption ?? countLabel ?? 'Enquire for availability';
+            const expanded = active === location.slug;
+            const cardId = `bangalore-map-card-${location.slug}`;
+            const style = {
+              '--map-x': `${location.label.desktop[0]}%`, '--map-y': `${location.label.desktop[1]}%`,
+              '--map-tablet-x': `${location.label.tablet[0]}%`, '--map-tablet-y': `${location.label.tablet[1]}%`,
+              '--map-mobile-x': `${location.label.mobile[0]}%`, '--map-mobile-y': `${location.label.mobile[1]}%`,
+            } as CSSProperties;
+            return (
+              <div key={location.slug} className="bangalore-landing__map-marker" style={style} data-market={location.slug} data-wide-chip={location.wideChip || undefined} data-text-chip={location.textChip || undefined} data-active={expanded || undefined} {...previewHandlers(location.slug)}>
+                <div className="bangalore-landing__map-surface">
+                  <button
+                    ref={node => { markerRefs.current[location.slug] = node; }}
+                    type="button"
+                    className="bangalore-landing__map-bubble"
+                    aria-label={`${location.canonical}${countLabel ? `: ${countLabel}` : ''}. View area.`}
+                    aria-expanded={expanded}
+                    aria-controls={cardId}
+                    onClick={() => {
+                      clearTimers();
+                      if (pinned === location.slug) dismiss(location.slug);
+                      else { dismissedPreview.current = null; setActive(location.slug); setPinned(location.slug); }
+                    }}
+                  />
+                  <article id={cardId} className="bangalore-landing__map-card" aria-labelledby={`${cardId}-title`} aria-hidden={!expanded}>
+                    <img src={photo?.url} alt={photo?.alt ?? location.canonical} width={800} height={450} loading="lazy" decoding="async" className="bangalore-landing__map-card-image" />
+                    <div className="bangalore-landing__map-card-body">
+                      <h3 id={`${cardId}-title`}>{expanded ? location.title ?? location.canonical : location.chipLabel ?? location.canonical}</h3>
+                      <p className="bangalore-landing__map-card-count">{expanded ? cardCaption : chipCaption}</p>
+                    </div>
+                    <button type="button" className="bangalore-landing__map-card-link" aria-haspopup="dialog" aria-label={`Enquire about warehouses in ${location.canonical}`} disabled={!expanded} onClick={event => enquire(event.currentTarget, location)}>
+                      {content.copy.locationsCta}<ArrowRight size={16} aria-hidden="true" />
+                    </button>
+                    <button type="button" className="bangalore-landing__map-card-close" aria-label={`Close ${location.canonical} preview`} disabled={!expanded} onClick={() => dismiss(location.slug, true)}><X size={16} aria-hidden="true" /></button>
+                  </article>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <figcaption className="bangalore-landing__map-caption">
+          <span className="bangalore-landing__map-legend">{content.copy.mapCaption}</span>
+          <span className="bangalore-landing__map-hint"><span>Hover or tap a location to explore</span><span>Tap a location to explore</span></span>
+          <span className="bangalore-landing__map-mobile-hint">Swipe the cards below to explore</span>
+        </figcaption>
+      </figure>
+      <div key={scope} id="bangalore-mobile-markets" className="bangalore-landing__mobile-markets" role="region" aria-label={`${scope === 'belts' ? 'Warehouse belt' : 'City area'} cards`} tabIndex={0}>
+        {visibleLocations.map(location => {
+          const photo = location.imageSlot ? content.images[location.imageSlot] : location.image;
+          return (
+            <article key={location.slug} className="bangalore-landing__mobile-market" data-market={location.slug}>
+              <img src={photo?.url} alt={photo?.alt ?? location.canonical} width={800} height={450} loading="lazy" decoding="async" />
+              {location.count !== null && <span className="bangalore-landing__image-tag bangalore-landing__listing-count">
+                {location.count.toLocaleString('en-IN')} {location.count === 1 ? 'listing' : 'listings'}
+              </span>}
+              <div className="bangalore-landing__mobile-market-body">
+                <h3>{location.title ?? location.canonical}</h3>
+                {location.caption && <p>{location.caption}</p>}
+              </div>
+              <button type="button" className="bangalore-landing__mobile-market-link" aria-haspopup="dialog" aria-label={`Enquire about warehouses in ${location.canonical}`} onClick={event => enquire(event.currentTarget, location, 'bangalore_locations')}>
+                <span>{content.copy.locationsCta}<ArrowRight size={16} aria-hidden="true" /></span>
+              </button>
+            </article>
+          );
+        })}
       </div>
     </section>
   );

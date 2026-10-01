@@ -17,17 +17,12 @@ import RequestCTASection from '@/components/RequestCTASection';
 import { getBangaloreAdPage, type AdPageContent } from '@/data/adPages';
 import defaults from '@/data/ad-pages/bangalore.json';
 import { MICROMARKETS } from '@/data/locations.generated';
+import { BANGALORE_MAP_AREAS } from '@/data/bangaloreMicromarketMap';
 import type { BangaloreLandingData } from '@/loaders/bangaloreLandingLoader';
 import { trackEvent, type AnalyticsParams } from '@/lib/analytics';
 import { normalizeHeadingCase, titleCase } from '@/lib/headingCase';
 import '@/components/WarehouseCard.css';
 import './BangaloreLanding.css';
-
-// Eight largest by listing count among the existing and requested localities.
-// See public/bangalore/README.md for the curation date and comparison.
-const LOCATION_SLUGS = ['nelamangala', 'whitefield', 'peenya', 'hoskote', 'devanahalli', 'dobbaspet', 'jigani', 'bommasandra'];
-const LOCATIONS = LOCATION_SLUGS.map(slug => MICROMARKETS.find(market => market.citySlug === 'bengaluru' && market.slug === slug))
-  .filter((market): market is (typeof MICROMARKETS)[number] => Boolean(market));
 
 const SERVICE_ICONS = { 'find-warehouse': Search, 'build-to-suit': Warehouse, 'list-space': Truck, 'transaction-management': Handshake };
 const PREVIOUS_SERVICE_COPY = {
@@ -86,10 +81,14 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
     actions: [item.primaryCta, item.secondaryCta].filter(Boolean).map((label, index) => ({ label, intent: AUDIENCE_INTENTS[item.id][index] })),
   }));
   const data = useLoaderData() as BangaloreLandingData | null;
-  const locations = LOCATIONS.map(location => ({
+  const locations = BANGALORE_MAP_AREAS.map(location => ({
     ...location,
-    count: data?.cityOverview?.micromarkets?.find(market => market.slug === location.slug)?.listings ?? location.count,
-  })).sort((a, b) => b.count - a.count || a.canonical.localeCompare(b.canonical));
+    count: location.countSlug
+      ? data?.cityOverview?.micromarkets?.find(market => market.slug === location.countSlug)?.listings
+        ?? MICROMARKETS.find(market => market.citySlug === 'bengaluru' && market.slug === location.countSlug)?.count
+        ?? null
+      : null,
+  }));
   const [contactContext, setContactContext] = useState<AnalyticsParams | null>(null);
   const contactTrigger = useRef<HTMLButtonElement | null>(null);
 
