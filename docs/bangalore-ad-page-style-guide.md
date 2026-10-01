@@ -162,30 +162,47 @@ font utilities. Avoid duplicate primary actions inside a card.
   (`--landing-badge-surface`). Keep map labels more prominent as interactive controls.
 - **Area guide:** visible on tablet and desktop; hidden below 768px.
 - **Benefits:** follows the client carousel on desktop and featured listings on phones, with
-  a centered heading. A navy strip shows three company metrics from
-  `companyStats.ts`, followed by six static cards with real Lucide icons and
-  supporting copy. Keep the shortlist time, area leased and cities covered in
-  three equal columns at every size. Use 3 × 2 benefit cards on desktop and
+  a centered heading. A navy strip shows four metrics: 4 Hour Curated Shortlist,
+  2.5 Mn+ Sq Ft Leased, 90+ Cities Covered, and 3000+ Verified Spaces across India, followed
+  by six static cards with real Lucide icons and supporting copy. Use four
+  equal metric columns on desktop and a 2 × 2 grid on phones. Use 3 × 2 benefit cards on desktop and
   2 × 3 on tablet and phones. Center each metric's
   value and caption within equal-width cells, with subtle vertical dividers.
   Below 768px, show all six benefits in a static two-column grid with 8px gaps,
-  12px padding, 14px titles and 12px descriptions. Use brief mobile versions of
-  the reference copy, while preserving authored CMS edits. Hide decorative icons
+  12px padding, 14px titles and 12px descriptions. Use the full approved copy
+  on both desktop and mobile, while preserving authored CMS edits. Hide decorative icons
   on phones. Informational benefits must not require horizontal
   scrolling, expansion or another action to read. Compact the metric strip to
-  20px figures, 12px padding and gaps.
+  20px figures, 8px vertical padding and 12px horizontal padding.
   Aim for roughly half to three-quarters of a typical phone viewport without
   clipping authored copy or setting a fixed section height. Keep the section,
   heading, metric strip and card grid centered within the same page gutters. Ivory cards retain the soft
   line border, 12px corners and no hover effect. Supporting copy accepts the
   existing safe inline emphasis format. Replace untouched CMS wireframe
-  placeholders with the reference copy while preserving edited titles and text.
+  placeholders and exact previous descriptions with the current copy while
+  preserving edited titles and text.
   There is no section photo or placeholder copy. Let content grow without clipping.
 - **Services:** 2 columns × 2 rows, including phones. Keep bottom-aligned CTAs.
+  Use detailed desktop headings and descriptions from the approved content.
+  Below 768px, show the distinct short headings and descriptions in
+  `MOBILE_SERVICE_COPY`. Both sizes use the same numbered cards and CTA buttons;
+  the first CTA reads “Get my shortlist”. Switch text with CSS so resizing works
+  without hydration changes and the hidden variant is excluded from accessibility.
 - **Audiences:** match the service-card surface, copy, title and control styles.
-- **Statistics:** neutral table surfaces, right-aligned numerical columns, and
-  the same title, label, metric, stroke and corner roles used above. Wide tables
-  scroll inside their panels on phones.
+- **Bangalore market:** keep one “Warehouse Rent in Bangalore” section with the
+  highway-corridor paragraph, a four-stat strip, and the five-row rent-by-size
+  table. The strip shows Bangalore listings, median rent for units at least
+  20,000 sq ft, median rent below 20,000 sq ft, and the standard deposit.
+  Counts, both medians and rent prose come from the same city inventory response
+  as the table; never use static CMS counts or rent claims as a fallback. The
+  CMS still owns the first corridor paragraph and fourth deposit stat. Legacy
+  numeric copy slots remain in the schema for compatibility only. Missing
+  measures show a dash; unavailable rent data offers a retry, not old figures.
+  Keep 24px between paragraph, strip and table; use four stat columns on desktop
+  and two on phones. The table fits without horizontal scrolling, with neutral
+  surfaces and right-aligned numbers. Omit the duplicate statistics heading,
+  range tiles, corridor comparison, city chart, inventory mix and specification
+  tables from this ad page. Keep those shared components on city overview pages.
 - **Dialogs:** the compact 24px heading role, with the same field, label and button styles as the hero form.
   Keep focus trapping, close controls, validation and focus restoration intact.
 - **Site chrome:** retain the shared navbar/footer structure and visual roles.

@@ -60,57 +60,57 @@
     {
       "id": "local",
       "title": "Local Expertise",
-      "body": "The right locality, specs and paperwork, worked by **our experts**."
+      "body": "Our experts match you with options whose location, size and specs suit your operations."
     },
     {
       "id": "lease",
       "title": "Better Commercials",
-      "body": "We negotiate the rent, security and lock-in, so that you **get the best deal**."
+      "body": "We negotiate for you, and we’re good at it: our clients end up saving ~20% on their lease."
     },
     {
       "id": "verified",
       "title": "Verified Listings",
-      "body": "Every space is **verified by our area managers** before it reaches your shortlist."
+      "body": "Every space is verified by our area managers before it reaches your curated shortlist."
     },
     {
       "id": "benefit-4",
       "title": "Single Point of Contact",
-      "body": "**One expert advisor** from proposal to move-in."
+      "body": "No being bounced around teams. One expert advisor from proposal to move-in, Pan-India."
     },
     {
       "id": "benefit-5",
       "title": "Compliance and Legal Support",
-      "body": "We take care of **the boring details** for you."
+      "body": "Agreements, approvals and paperwork: we take care of the boring details for you."
     },
     {
       "id": "benefit-6",
       "title": "Built to Suit",
-      "body": "Can't find the best fit? We arrange a **tailored warehouse** for you in 6 months."
+      "body": "Can't find the best fit? We arrange a warehouse tailored to your operations in 6 months."
     }
   ],
   "services": [
     {
       "id": "find-warehouse",
-      "title": "Find the Perfect Space",
-      "body": "Verified spaces to suit you in 4 hours",
-      "cta": "Find my warehouse"
+      "title": "Verified Warehouses, Handpicked for You",
+      "body": "Share your size, location, specs and budget. Our team picks the options that fit and sends you a shortlist within 4 hours. All of our warehouses are verified by an area manager.",
+      "cta": "Get my shortlist"
     },
     {
       "id": "build-to-suit",
-      "title": "Built-to-Suit Warehouses",
-      "body": "We find land and build to your specs",
+      "title": "Build-to-Suit Warehouses",
+      "body": "If the building you need doesn't exist yet, we match you with land and an owner who will build to your specification.",
       "cta": "Start a build to suit"
     },
     {
       "id": "list-space",
       "title": "Find a Tenant or Buyer",
-      "body": "Find tenants or buyers with ease",
+      "body": "Own a warehouse, or have space left over? We bring you tenants and buyers from the businesses that come to us.",
       "cta": "List my space"
     },
     {
       "id": "transaction-management",
-      "title": "Complete Deal Management",
-      "body": "One expert: from search to handover",
+      "title": "End-to-End Transaction Management",
+      "body": "Site visits, negotiation, documentation and compliance checks, handled by one team until you move in.",
       "cta": "Get started"
     }
   ],
@@ -184,19 +184,19 @@
   ],
   "overviewParagraphs": [
     "Bangalore’s warehousing sits along four highway corridors rather than in one estate. NH-48 runs north-west through Nelamangala to Dobbaspet and Tumakuru. NH-44 runs north past the airport at Devanahalli and south through Bommasandra, Jigani and Attibele to Hosur. NH-75, the Old Madras Road, runs east through Hoskote towards Kolar and Chennai.",
-    "Rent depends more on unit size than on area. Units under 5,000 sq ft ask a median ₹32.5 per sq ft a month; from 20,000 sq ft the median falls to about ₹25. Six months’ rent as deposit is standard, with lock-ins of [X] years and escalation of [X]% a year."
+    "Rent varies by unit size, location and specification. Use the median asking rents below to plan your budget."
   ],
   "overviewStats": [
     {
-      "value": "611",
-      "label": "live listings"
+      "value": "—",
+      "label": "Bangalore listings"
     },
     {
-      "value": "₹25",
+      "value": "—",
       "label": "median, 20,000 sq ft and up"
     },
     {
-      "value": "₹40",
+      "value": "—",
       "label": "median, under 20,000 sq ft"
     },
     {

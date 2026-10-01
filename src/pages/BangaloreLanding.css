@@ -180,7 +180,7 @@
 .bangalore-landing__area-options button:focus-visible { outline: var(--landing-focus-width) solid var(--landing-accent); outline-offset: 3px; border-radius: var(--landing-tag-radius); }
 
 .bangalore-landing__why-heading { max-width: 720px; margin-inline: auto; text-align: center; }
-.bangalore-landing__proof-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0 0 24px; padding: 32px 24px; border-radius: var(--landing-radius); background: var(--landing-ink); color: var(--landing-card); }
+.bangalore-landing__proof-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0 0 24px; padding: 32px 24px; border-radius: var(--landing-radius); background: var(--landing-ink); color: var(--landing-card); }
 .bangalore-landing__proof-metrics > div { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 0; padding-inline: 12px; text-align: center; }
 .bangalore-landing__proof-metrics > div + div { border-inline-start: 1px solid var(--landing-inverse-line); }
 .bangalore-landing__proof-metrics dt { color: var(--landing-inverse-muted); font-size: var(--landing-text-xs); font-weight: 400; line-height: var(--landing-leading-body); text-wrap: balance; }
@@ -190,11 +190,10 @@
 .bangalore-landing__why-copy { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--landing-nested-gap); min-width: 0; }
 .bangalore-landing__benefit { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; min-width: 0; padding: var(--landing-card-padding); border: var(--landing-border); border-radius: var(--landing-radius); background: var(--landing-card); text-align: left; }
 .bangalore-landing__benefit > div:last-child { width: 100%; min-width: 0; }
-.bangalore-landing__benefit h3 { margin: 0 0 8px; font-size: var(--landing-text-card); font-weight: 600; line-height: var(--landing-leading-title); letter-spacing: 0; }
+.bangalore-landing__benefit h3 { margin: 0 0 8px; font-size: var(--landing-text-card); font-weight: 600; line-height: var(--landing-leading-title); letter-spacing: 0; text-wrap: balance; }
 .bangalore-landing__benefit-body { margin: 0; color: var(--landing-muted); font-size: var(--landing-text-sm); font-weight: 400; line-height: var(--landing-leading-body); white-space: pre-line; overflow-wrap: anywhere; }
 
 .bangalore-landing__benefit-body strong { color: var(--landing-ink); font-weight: 600; }
-.bangalore-landing__benefit-mobile-copy { display: none; }
 
 /* Keep the homepage CTA, sized to the landing page's typographic scale. */
 .bangalore-landing__request { padding-block: var(--landing-section-space); background: var(--landing-ink); color: var(--landing-card); }
@@ -215,6 +214,7 @@
 .bangalore-landing__service-number { margin-top: 16px; color: var(--landing-muted); font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); }
 .bangalore-landing__service h3 { margin-top: 4px; font-size: var(--landing-text-card); font-weight: 600; line-height: 1.4; letter-spacing: 0; }
 .bangalore-landing__service p { margin-block: 8px 24px; color: var(--landing-muted); font-size: var(--landing-text-sm); line-height: var(--landing-leading-body); text-wrap: balance; }
+.bangalore-landing__service-mobile-copy { display: none; }
 .bangalore-landing__service > button { margin-top: auto; }
 .bangalore-landing__service:hover { border-color: var(--landing-accent); }
 .bangalore-landing__service-image { position: relative; width: 100%; min-width: 0; min-height: 304px; overflow: hidden; border: var(--landing-border); border-radius: var(--landing-radius); background: var(--landing-tint); }
@@ -232,87 +232,32 @@
 .bangalore-landing__audience-card:hover .bangalore-landing__audience-cta:not(.bangalore-landing__button--outline) { background: var(--landing-accent); }
 .bangalore-landing__content-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; color: var(--landing-muted); }
 .bangalore-landing__content-columns > p { margin: 0; }
-.bangalore-landing__market-summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 24px; }
+.bangalore-landing__market-summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin: 0; }
 .bangalore-landing__market-summary > div { display: flex; flex-direction: column; gap: 6px; padding: 16px; border: var(--landing-border); border-radius: var(--landing-radius); background: var(--landing-card); }
 .bangalore-landing__market-summary dt { color: var(--landing-muted); font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); }
 .bangalore-landing__market-summary dd { order: -1; font-size: var(--landing-text-metric); font-weight: 600; line-height: var(--landing-leading-heading); font-variant-numeric: tabular-nums; letter-spacing: -.025em; }
 
-/* Retain the full city data, with the same panel and heading hierarchy. */
-.bangalore-landing__stats-content { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; }
+/* Keep the market summary and rent table together, using one data source. */
+.bangalore-landing__stats-content { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; --stats-rule: var(--landing-line); --stats-header: var(--landing-table-header); --stats-stripe: var(--landing-table-stripe); }
 .bangalore-landing__stats-content > * { min-width: 0; }
-.bangalore-landing__stats-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--landing-grid-gap); }
-.bangalore-landing__stats-summary > div { padding: var(--landing-card-padding); border: var(--landing-border); border-radius: var(--landing-radius); background: var(--landing-card); }
-.bangalore-landing__stats-summary dt { color: var(--landing-muted); font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); }
-.bangalore-landing__stats-summary dd { margin-top: 8px; font-size: var(--landing-text-metric); font-weight: 600; line-height: var(--landing-leading-heading); font-variant-numeric: tabular-nums; letter-spacing: -.025em; }
-.bangalore-landing__stats-subtitle { margin-bottom: 16px; font-size: var(--landing-text-card); font-weight: 600; line-height: 1.4; letter-spacing: 0; }
-.bangalore-landing__stats-content .border-wareongo-blue { border-color: var(--landing-outline); border-radius: var(--landing-radius); background: var(--landing-card); }
-.bangalore-landing__stats-content .bg-wareongo-green { background-color: var(--landing-accent); }
 .bangalore-landing__stats-content .text-wareongo-slate { color: var(--landing-muted); }
 .bangalore-landing__stats-content .text-wareongo-blue { color: var(--landing-ink); }
-.bangalore-landing__stats-content > .bg-wareongo-blue { border-radius: var(--landing-radius); background: var(--landing-ink); color: var(--landing-card); }
-.bangalore-landing__stats-content .text-white { color: var(--landing-card); }
-.bangalore-landing__stats-content :is(.text-wareongo-ivory\/70, .text-wareongo-ivory\/80) { color: var(--landing-inverse-muted); }
-.bangalore-landing__stats-content table { font-size: var(--landing-text-sm); line-height: var(--landing-leading-body); }
-.bangalore-landing__stats-content thead th { font-size: var(--landing-text-xs); font-weight: 500; line-height: var(--landing-leading-ui); letter-spacing: 0; text-transform: none; }
-
-/* Apply the same scale to the shared city statistics on this page. */
-.bangalore-landing__stats-content :is(.text-xs, .text-\[10px\], .text-\[11px\]) { font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); }
-.bangalore-landing__stats-content .ui-eyebrow { font-weight: 500; letter-spacing: 0; text-transform: none; }
-.bangalore-landing__stats-content .ui-metric,
-.bangalore-landing__stats-content dd > span:first-child { font-size: var(--landing-text-metric); font-weight: 600; line-height: var(--landing-leading-heading); }
-.bangalore-landing__stats-content caption:not(.sr-only),
-.bangalore-landing__stats-content figcaption > span:first-child { color: var(--landing-ink); font-size: var(--landing-text-sm); font-weight: 600; line-height: var(--landing-leading-ui); letter-spacing: 0; text-transform: none; }
-.bangalore-landing__stats-content figure .text-center { white-space: nowrap; }
-.bangalore-landing__stats-content #inventory-band { font-size: var(--landing-text-base); font-weight: 600; line-height: var(--landing-leading-ui); }
-
-/* Treat the tables as part of the same report, with clear headers and aligned data. */
-.bangalore-landing__stats-content { --stats-rule: var(--landing-line); --stats-header: var(--landing-table-header); --stats-stripe: var(--landing-table-stripe); }
-.bangalore-landing__stats-content :is(.city-corridor-table, .city-rent-table, .city-spec-comparison),
-.bangalore-landing__spec-overview { box-shadow: none; }
-.bangalore-landing__stats-content .city-corridor-segment { padding: 24px; background: var(--landing-card); border-color: var(--landing-line); }
-.bangalore-landing__stats-content .city-corridor-segment > p:first-child { font-size: var(--landing-text-sm); font-weight: 600; color: var(--landing-ink); }
-.bangalore-landing__stats-content .city-corridor-segment > .ui-metric { margin-block: 12px 8px; }
-.bangalore-landing__stats-content .city-corridor-panel > p { max-width: 960px; line-height: var(--landing-leading-body); }
-.bangalore-landing__stats-content table { width: 100%; border-collapse: separate; border-spacing: 0; }
+.bangalore-landing__stats-content .text-xs { font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); }
+.bangalore-landing__stats-content table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: var(--landing-text-sm); line-height: var(--landing-leading-body); }
 .bangalore-landing__stats-content :is(th, td) { padding: 16px 20px; vertical-align: middle; }
-.bangalore-landing__stats-content thead th { padding-block: 16px; background: var(--stats-header); color: var(--landing-ink); font-weight: 600; border-bottom: var(--landing-border); }
+.bangalore-landing__stats-content thead th { background: var(--stats-header); color: var(--landing-ink); font-size: var(--landing-text-xs); font-weight: 600; line-height: var(--landing-leading-ui); letter-spacing: 0; text-transform: none; border-bottom: var(--landing-border); }
 .bangalore-landing__stats-content tbody tr { --stats-row: var(--landing-card); border: 0; }
 .bangalore-landing__stats-content tbody tr:nth-child(even) { --stats-row: var(--stats-stripe); }
 .bangalore-landing__stats-content tbody :is(th, td) { background: var(--stats-row); border-bottom: 1px solid var(--stats-rule); }
 .bangalore-landing__stats-content tbody tr:last-child :is(th, td) { border-bottom: 0; }
 .bangalore-landing__stats-content tbody th { color: var(--landing-ink); font-weight: 500; }
 .bangalore-landing__stats-content td { color: var(--landing-muted); font-variant-numeric: tabular-nums; }
-.bangalore-landing__stats-content caption:not(.sr-only),
-.bangalore-landing__table-title { padding: 20px; border-bottom: var(--landing-border); color: var(--landing-ink); font-size: var(--landing-text-sm); font-weight: 600; line-height: var(--landing-leading-ui); text-align: left; }
-.bangalore-landing__stats-content :is(.city-corridor-table, .city-spec-comparison) .overflow-x-auto { scrollbar-width: thin; scrollbar-color: var(--landing-line) var(--stats-header); }
-.bangalore-landing__stats-content [role="region"]:focus-visible { outline: var(--landing-focus-width) solid var(--landing-accent); outline-offset: -3px; }
-.bangalore-landing__stats-content .city-corridor-table table { min-width: 840px; }
-.bangalore-landing__stats-content .city-corridor-table th:first-child { width: 29%; }
-.bangalore-landing__stats-content .city-corridor-table :is(th, td):nth-child(n+2):nth-child(-n+5) { text-align: right; }
-.bangalore-landing__stats-content .city-corridor-table td:nth-child(3) { color: var(--landing-ink); font-weight: 600; }
-.bangalore-landing__stats-content .city-corridor-table :is(th, td):last-child { text-align: center; }
-.bangalore-landing__stats-content .city-corridor-build { display: inline-flex; min-width: 48px; justify-content: center; padding: 4px 8px; border-radius: var(--landing-tag-radius); background: var(--landing-table-header); color: var(--landing-muted); font-size: var(--landing-text-xs); font-weight: 600; line-height: var(--landing-leading-ui); }
-.bangalore-landing__rent-grid,
-.bangalore-landing__specs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); align-items: stretch; gap: var(--landing-grid-gap); }
-.bangalore-landing__rent-grid > *,
-.bangalore-landing__specs-grid > * { min-width: 0; }
-.bangalore-landing__rent-grid figure { display: flex; flex-direction: column; padding: 24px; }
-.bangalore-landing__rent-grid figure > div { margin-block: auto; padding-top: 24px; padding-bottom: 12px; }
-.bangalore-landing__rent-grid figure .h-32 { height: 240px; }
-.bangalore-landing__rent-grid figure .text-center { margin-top: 12px; }
+.bangalore-landing__stats-content caption { padding: 20px; border-bottom: var(--landing-border); color: var(--landing-ink); font-size: var(--landing-text-sm); font-weight: 600; line-height: var(--landing-leading-ui); letter-spacing: 0; text-align: left; text-transform: none; }
 .bangalore-landing__stats-content .city-rent-table :is(th, td):nth-child(n+2) { text-align: right; }
 .bangalore-landing__stats-content .city-rent-table td:nth-child(2) { color: var(--landing-ink); font-weight: 600; }
 .bangalore-landing__stats-content .city-rent-table td > span { font-weight: 400; }
 .bangalore-landing__stats-content .city-rent-table > p { padding: 16px 20px; border-top: var(--landing-border); background: var(--stats-stripe); line-height: var(--landing-leading-body); }
-.bangalore-landing__spec-overview { display: flex; flex-direction: column; overflow: hidden; border: var(--landing-interactive-border); border-radius: var(--landing-radius); background: var(--landing-card); }
-.bangalore-landing__spec-overview .warehouse-spec-table { flex: 1; border: 0; border-radius: 0; }
-.bangalore-landing__spec-overview table { height: 100%; }
-.bangalore-landing__spec-overview th { width: 36%; }
-.bangalore-landing__spec-overview td { text-align: left; color: var(--landing-ink); }
-.bangalore-landing__stats-content .city-spec-comparison { margin-top: 0; }
-.bangalore-landing__stats-content .city-spec-comparison table { min-width: 540px; }
-.bangalore-landing__stats-content .city-spec-comparison thead span { font-weight: 400; color: var(--landing-muted); }
-.bangalore-landing__stats-content .city-spec-comparison td { color: var(--landing-ink); }
+.bangalore-landing__market-unavailable { display: grid; justify-items: center; gap: 16px; padding: 24px; border: var(--landing-border); border-radius: var(--landing-radius); color: var(--landing-muted); text-align: center; font-size: var(--landing-text-sm); }
 @media (hover: hover) {
   .bangalore-landing__stats-content tbody tr:hover { --stats-row: var(--landing-table-hover); }
   .bangalore-landing__area-panel tbody tr:hover { background: var(--landing-table-hover); }
@@ -400,8 +345,10 @@
   .bangalore-landing__available { display: none; }
   .bangalore-landing__area-guide { display: none; }
   .bangalore-landing__why-heading.bangalore-landing__section-heading { margin-bottom: 12px; }
-  .bangalore-landing__proof-metrics { margin-bottom: 16px; padding: 12px; }
-  .bangalore-landing__proof-metrics > div { gap: 4px; padding-inline: 4px; }
+  .bangalore-landing__proof-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 16px; padding: 8px 12px; }
+  .bangalore-landing__proof-metrics > div { gap: 4px; padding: 8px 4px; }
+  .bangalore-landing__proof-metrics > div:nth-child(odd) { border-inline-start: 0; }
+  .bangalore-landing__proof-metrics > div:nth-child(n + 3) { border-block-start: 1px solid var(--landing-inverse-line); }
   .bangalore-landing__proof-metrics dd { font-size: var(--landing-text-metric); }
   .bangalore-landing__why-copy { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
   .bangalore-landing__button--compact, .bangalore-landing__area-options button { min-height: 44px; }
@@ -427,13 +374,13 @@
   .bangalore-landing__benefit > .bangalore-landing__icon { display: none; }
   .bangalore-landing__benefit h3 { margin-bottom: 4px; font-size: var(--landing-text-sm); }
   .bangalore-landing__benefit-body { font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); }
-  .bangalore-landing__benefit-full-copy { display: none; }
-  .bangalore-landing__benefit-mobile-copy { display: inline; }
   .bangalore-landing__service-copy { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .bangalore-landing__service { padding: var(--landing-compact-padding); }
   .bangalore-landing__service-number { margin-top: 12px; }
   .bangalore-landing__service h3 { margin-top: 4px; font-size: var(--landing-text-sm); overflow-wrap: anywhere; }
   .bangalore-landing__service p { margin-block: 8px 16px; font-size: var(--landing-text-xs); overflow-wrap: anywhere; }
+  .bangalore-landing__service-full-copy { display: none; }
+  .bangalore-landing__service-mobile-copy { display: inline; }
   .bangalore-landing__service > button { width: 100%; padding: 8px; font-size: var(--landing-text-xs); text-align: center; }
   .bangalore-landing__service > button svg { display: none; }
   .bangalore-landing__service-image { min-height: 200px; }
@@ -441,31 +388,16 @@
   .bangalore-landing__audience-card { padding: 24px; }
   .bangalore-landing__audience-cta { padding-inline: 18px; }
   .bangalore-landing__content-columns { grid-template-columns: minmax(0, 1fr); gap: 24px; }
-  .bangalore-landing__market-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .bangalore-landing__stats-content { gap: 28px; }
-  .bangalore-landing__stats-summary { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-  .bangalore-landing__stats-summary > div { padding: 16px 20px; }
+  .bangalore-landing__market-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .bangalore-landing__market-summary > div { padding: 12px; }
   .bangalore-landing__stats-content :is(th, td) { padding: 16px; }
-  .bangalore-landing__stats-content caption:not(.sr-only),
-  .bangalore-landing__table-title { padding: 18px 16px; }
-  .bangalore-landing__stats-content .city-corridor-segment { padding: 20px; }
-  .bangalore-landing__stats-content .city-corridor-table table { table-layout: fixed; min-width: 800px; }
-  .bangalore-landing__stats-content .city-corridor-table th:first-child { width: 168px; }
-  .bangalore-landing__stats-content :is(.city-corridor-table, .city-spec-comparison) th:first-child { position: sticky; left: 0; z-index: 1; box-shadow: 1px 0 0 var(--landing-line); }
-  .bangalore-landing__stats-content :is(.city-corridor-table, .city-spec-comparison) thead th:first-child { z-index: 2; }
-  .bangalore-landing__stats-content .city-spec-comparison table { table-layout: fixed; }
-  .bangalore-landing__stats-content .city-spec-comparison th:first-child { width: 156px; }
-  .bangalore-landing__rent-grid figure { padding: 16px; }
-  .bangalore-landing__rent-grid figure .h-32 { height: 180px; }
+  .bangalore-landing__stats-content caption { padding: 16px; }
   .bangalore-landing__stats-content .city-rent-table > p { padding-inline: 16px; }
 }
 
 @media (max-width: 359px) {
   .bangalore-landing__proof-metrics dd { font-size: var(--landing-text-compact-metric); }
   .bangalore-landing__benefit { padding: 8px; }
-  .bangalore-landing__market-summary { grid-template-columns: minmax(0, 1fr); }
-  .bangalore-landing__stats-content figure { overflow-x: auto; }
-  .bangalore-landing__stats-content figure > div { min-width: 280px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

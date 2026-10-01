@@ -124,10 +124,12 @@ locking. Shared tokens are at `:root`, so portaled controls inherit them.
   Bangalore's compact featured listing cards use three columns from 768px and
   a carousel on phones. The existing homepage featured track retains its carousel.
 - The Bangalore page uses a horizontal micromarket track on phones, with static
-  two-column benefit and service grids. Benefits use brief copy, 14px titles
+  two-column benefit and service grids. Benefits keep the full approved copy, 14px titles
   and 12px descriptions on phones; informational reading must not require
   horizontal scrolling. These layouts and its hidden mobile
   image/area-guide rules remain local.
+  Service cards use separate concise mobile headings and descriptions below
+  768px, while desktop shows the detailed copy. CTA actions remain shared.
 - Use visible 2px focus rings and respect reduced motion. A mobile width change
   can move the browser's scroll anchor; interaction tests should scroll from
   the resulting position when checking scroll direction.
