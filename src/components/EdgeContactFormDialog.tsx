@@ -103,7 +103,7 @@ const EdgeContactFormDialog = ({ open, onOpenChange, source }: EdgeContactFormDi
     }
   };
 
-  const inputClass = "w-full h-11 pl-10 pr-3.5 bg-transparent border border-ui-outline rounded-xl text-sm text-wareongo-blue placeholder:text-wareongo-slate focus:outline-none focus:ring-2 focus:ring-wareongo-blue/20 focus:border-ui-outline transition-colors";
+  const inputClass = "w-full h-11 pl-10 pr-3.5 bg-transparent border border-ui-outline rounded-xl text-sm text-wareongo-blue placeholder:text-ui-placeholder focus:outline-none focus:ring-2 focus:ring-wareongo-blue/20 focus:border-ui-outline transition-colors";
   const labelClass = "ui-eyebrow font-medium text-wareongo-slate block";
   const iconWrapClass = "absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-ui-accent";
 

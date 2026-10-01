@@ -24,7 +24,7 @@
     --secondary-foreground: 209 70% 13%;
 
     --muted: 210 40% 96.1%;
-    --muted-foreground: 210 12% 32%;
+    --muted-foreground: var(--foreground);
 
     --accent: 210 38% 95%;
     --accent-foreground: 205 59% 22%;

@@ -16,11 +16,12 @@ tokens and component styles together.
 
 | Role | Color | Use |
 | --- | --- | --- |
-| Ink | `#0A2239` | Headings, primary buttons, dark sections |
+| Ink | `#0A2239` | Headings, body text, primary buttons, dark sections |
 | Accent | `#173E5A` | Links, icons, active and hover states |
 | Page | `#FAF9F5` | Light ivory background |
 | Surface | `#FFFEFA` | Cards, form fields, dialogs |
-| Secondary text | `#47515B` | Descriptions, labels, metadata |
+| Secondary text | `#0A2239` | Descriptions, labels, metadata; shares ink |
+| Placeholder | `#47515B` | Form placeholders |
 | Tint | `#EDF2F7` | Icon tiles and quiet interaction feedback |
 | Line | `#D5DDE5` | Dividers and informational card outlines |
 | Outline | `#AEBDCA` | Actionable cards, forms, controls and table frames |

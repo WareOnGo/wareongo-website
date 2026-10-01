@@ -84,7 +84,7 @@
 .bangalore-landing__input-wrap { position: relative; }
 .bangalore-landing__input-wrap > svg { position: absolute; top: 50%; left: 14px; transform: translateY(-50%); color: var(--landing-accent); pointer-events: none; }
 .bangalore-landing__input-wrap > input { display: block; width: 100%; height: var(--landing-control-height); padding: 10px 14px 10px 40px; border: var(--landing-interactive-border); border-radius: var(--landing-control-radius); background: var(--landing-card); color: var(--landing-ink); font-size: var(--landing-text-base); line-height: var(--landing-leading-body); }
-.bangalore-landing__input-wrap > input::placeholder { color: var(--landing-muted); opacity: 1; }
+.bangalore-landing__input-wrap > input::placeholder { color: var(--ui-placeholder); opacity: 1; }
 .bangalore-landing__input-wrap > input:focus, .bangalore-landing-dialog input:focus { border-color: var(--landing-accent); }
 .bangalore-landing__input-wrap > input:focus-visible { outline: var(--landing-focus-width) solid var(--landing-accent); outline-offset: 2px; }
 .bangalore-landing__form-fields:disabled { opacity: .65; }
@@ -283,7 +283,7 @@
 .bangalore-landing-dialog > div:first-child > p:last-child { color: var(--landing-muted); font-size: var(--landing-text-sm); line-height: var(--landing-leading-body); }
 .bangalore-landing-dialog label { color: var(--landing-muted); font-size: var(--landing-text-sm); font-weight: 500; line-height: var(--landing-leading-ui); letter-spacing: 0; text-transform: none; }
 .bangalore-landing-dialog input { display: block; height: var(--landing-control-height); border: var(--landing-interactive-border); border-radius: var(--landing-control-radius); background: var(--landing-card); color: var(--landing-ink); font-size: var(--landing-text-base); line-height: var(--landing-leading-body); }
-.bangalore-landing-dialog input::placeholder { color: var(--landing-muted); opacity: 1; }
+.bangalore-landing-dialog input::placeholder { color: var(--ui-placeholder); opacity: 1; }
 .bangalore-landing-dialog form .pointer-events-none { color: var(--landing-accent); }
 .bangalore-landing-dialog form button { min-height: var(--landing-control-height); height: auto; padding: 12px 20px; border: var(--landing-interactive-border); border-radius: var(--landing-control-radius); color: var(--landing-ink); background: var(--landing-card); font-size: var(--landing-text-sm); font-weight: 600; line-height: var(--landing-leading-ui); }
 .bangalore-landing-dialog form button[type="submit"] { border-color: var(--landing-ink); background: var(--landing-ink); color: var(--landing-card); }

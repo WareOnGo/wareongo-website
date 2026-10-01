@@ -61,7 +61,7 @@ export const BreadcrumbTrail = ({ items, className = '', pendingAncestorAt }: Br
           <li key={`${item.label}-${idx}`} className="flex items-center gap-1">
             {idx === pendingAncestorAt && <>
               <ChevronRight className="w-3.5 h-3.5 text-wareongo-slate/50" aria-hidden="true" />
-              <span className="inline-block h-4 w-20 rounded bg-wareongo-slate/10 motion-safe:animate-pulse" aria-label="Loading state" />
+              <span className="inline-block h-4 w-20 rounded bg-ui-placeholder/10 motion-safe:animate-pulse" aria-label="Loading state" />
             </>}
             {idx > 0 && (
               <ChevronRight className="w-3.5 h-3.5 text-wareongo-slate/50" aria-hidden="true" />

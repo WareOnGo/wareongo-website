@@ -34,6 +34,7 @@ export default {
 					paper: 'rgb(var(--ui-paper-rgb) / <alpha-value>)',
 					surface: 'rgb(var(--ui-surface-rgb) / <alpha-value>)',
 					muted: 'rgb(var(--ui-muted-rgb) / <alpha-value>)',
+					placeholder: 'rgb(var(--ui-placeholder-rgb) / <alpha-value>)',
 					tint: 'rgb(var(--ui-tint-rgb) / <alpha-value>)',
 					line: 'rgb(var(--ui-line-rgb) / <alpha-value>)',
 					outline: 'rgb(var(--ui-outline-rgb) / <alpha-value>)',
@@ -88,10 +89,10 @@ export default {
 					sienna: '#B3502D',
 					purple: '#4A2E50',
 					ivory: 'rgb(var(--ui-paper-rgb) / <alpha-value>)',
-					// 7.49:1 on ivory and 8.09:1 on white. Keep readable text
-					// opaque and keep the CMS palette in globals.css in sync.
+					// Legacy text aliases share the site's dark ink color.
+					// Use ui.placeholder for grey form hints.
 					slate: 'rgb(var(--ui-muted-rgb) / <alpha-value>)',
-					charcoal: '#343A40',
+					charcoal: 'rgb(var(--ui-ink-rgb) / <alpha-value>)',
 				}
 			},
 			borderRadius: {

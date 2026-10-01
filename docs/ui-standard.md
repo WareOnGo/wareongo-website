@@ -29,9 +29,10 @@ the Git repositories in `../WAREONGO_UI_STYLE_HANDOFF.md`.
 | --- | --- | --- |
 | Paper | `#FAF9F5` | Page background |
 | Surface | `#FFFEFA` | Cards, fields, dialogs |
-| Ink | `#0A2239` | Headings, primary controls |
+| Ink | `#0A2239` | Headings, body text, primary controls |
 | Accent | `#173E5A` | Links, icons, active borders |
-| Muted | `#47515B` | Supporting text; keep it opaque |
+| Muted | `#0A2239` | Supporting text, labels and metadata; aliases ink |
+| Placeholder | `#47515B` | Form placeholders and loading placeholders |
 | Tint | `#EDF2F7` | Menu/table hover and icon backgrounds |
 | Line | `#D5DDE5` | Inner dividers and informational cards |
 | Outline | `#AEBDCA` | Interactive cards, fields, panel frames |
@@ -45,6 +46,9 @@ Controls use 8px corners; small badges use 4px. Pills remain appropriate
 for filters. Informational cards have no whole-card interaction feedback.
 Navy surfaces use ivory text and line-colored secondary text. Status/error
 colors remain functional exceptions; brand assets keep their own artwork.
+Keep text on light surfaces opaque and use weight and size for hierarchy.
+Form placeholders use `--ui-placeholder` / `placeholder:text-ui-placeholder`
+so labels, entered values and supporting copy retain the dark ink color.
 
 ## Typography and classes
 

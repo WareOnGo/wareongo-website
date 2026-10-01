@@ -42,7 +42,7 @@
   .ui-button:disabled { opacity: .5; cursor: not-allowed; }
   .ui-button > svg { width: 16px; height: 16px; flex-shrink: 0; }
   .ui-field { display: block; width: 100%; min-height: var(--ui-control-height); padding: 11px 14px; border: 1px solid var(--ui-outline); border-radius: var(--ui-control-radius); background: var(--ui-surface); color: var(--ui-ink); font-size: var(--ui-text-base); font-weight: 400; line-height: var(--ui-leading-ui); transition: border-color var(--ui-motion); }
-  .ui-field::placeholder { color: var(--ui-muted); opacity: 1; }
+  .ui-field::placeholder { color: var(--ui-placeholder); opacity: 1; }
   .ui-field:focus-visible { border-color: var(--ui-accent); outline: 2px solid var(--ui-accent); outline-offset: 2px; }
   .ui-field:disabled { opacity: .5; cursor: not-allowed; }
   .ui-label { display: block; font-size: var(--ui-text-sm); font-weight: 500; line-height: var(--ui-leading-ui); color: var(--ui-muted); }

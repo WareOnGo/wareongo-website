@@ -22,7 +22,7 @@ const Unauthorized = () => {
             <p className="text-xl text-wareongo-charcoal mb-6">
               You don't have permission to access this page.
             </p>
-            <p className="text-gray-600 mb-8">
+            <p className="text-ui-ink mb-8">
               This area is restricted to administrators only. If you believe you should have access, please contact your system administrator.
             </p>
             <Link to="/">
