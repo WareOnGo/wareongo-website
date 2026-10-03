@@ -1,6 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
+import { build } from 'esbuild';
+import { JSDOM } from 'jsdom';
 import { generateAdPages } from '../scripts/generate-ad-pages.mjs';
 
 const original = JSON.parse(fs.readFileSync(new URL('../src/data/ad-pages/bangalore.json', import.meta.url), 'utf8'));
@@ -48,3 +52,42 @@ test('an older approved revision builds with process steps and drops removed her
   assert.deepEqual(pages, [original]);
   assert.doesNotMatch(generated, /heroIntro|heroPoints|Previous introduction/);
 });
+
+const { outputFiles } = await build({
+  stdin: {
+    contents: `
+      import { renderToStaticMarkup } from 'react-dom/server';
+      import BangaloreBenefits from './src/components/city/BangaloreBenefits';
+      export const render = content => renderToStaticMarkup(<BangaloreBenefits content={content} />);
+    `,
+    resolveDir: fileURLToPath(new URL('../', import.meta.url)),
+    loader: 'tsx',
+  },
+  bundle: true, write: false, platform: 'node', format: 'cjs', jsx: 'automatic',
+  define: { 'process.env.NODE_ENV': '"production"' },
+});
+const compiled = { exports: {} };
+new Function('require', 'module', 'exports', outputFiles[0].text)(createRequire(import.meta.url), compiled, compiled.exports);
+const renderBenefits = content => new JSDOM(compiled.exports.render(content)).window.document;
+
+test('standard benefits retain full titles and their compact mobile labels', () => {
+  const document = renderBenefits(original);
+  for (const [id, compact] of [['benefit-4', 'Single PoC'], ['benefit-5', 'Compliance Support'], ['benefit-6', 'Built-to-Suit']]) {
+    const heading = document.querySelector(`[data-benefit="${id}"] h3`);
+    assert.equal(heading.querySelector('.bangalore-landing__benefit-full-title').textContent, original.benefits.find(item => item.id === id).title);
+    assert.equal(heading.querySelector('.bangalore-landing__benefit-mobile-title').textContent, compact);
+  }
+});
+
+for (const [id, title] of [['benefit-4', 'Dedicated Launch Advisor'], ['benefit-5', 'Local Clearance Advice'], ['benefit-6', 'Custom Fit-Out Options']]) {
+  test(`a custom CMS title for ${id} stays visible at every viewport`, () => {
+    const content = structuredClone(original);
+    const benefit = content.benefits.find(item => item.id === id);
+    benefit.title = title;
+    benefit.body = 'Independently approved supporting copy.';
+    const card = renderBenefits(content).querySelector(`[data-benefit="${id}"]`);
+    assert.equal(card.querySelector('h3').textContent, title);
+    assert.equal(card.querySelector('.bangalore-landing__benefit-body').textContent, benefit.body);
+    assert.equal(card.querySelector('.bangalore-landing__benefit-full-title, .bangalore-landing__benefit-mobile-title'), null);
+  });
+}

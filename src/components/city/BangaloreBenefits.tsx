@@ -14,6 +14,13 @@ const BENEFIT_ICONS = {
   'benefit-6': Warehouse,
 };
 
+// Shorten known copy without replacing independently authored CMS titles.
+const MOBILE_BENEFIT_TITLES = new Map([
+  ['Single Point of Contact', 'Single PoC'],
+  ['Compliance and Legal Support', 'Compliance Support'],
+  ['Built to Suit', 'Built-to-Suit'],
+]);
+
 const PLACEHOLDER_TITLES = {
   verified: 'Verified spaces', local: 'Local expertise', lease: 'Lease support',
   'benefit-4': 'Benefit 4', 'benefit-5': 'Benefit 5', 'benefit-6': 'Benefit 6',
@@ -61,11 +68,19 @@ export default function BangaloreBenefits({ content }: { content: AdPageContent 
       <div className="bangalore-landing__why-copy">
         {benefits.map(({ id, title, body }) => {
           const Icon = BENEFIT_ICONS[id];
+          const mobileTitle = MOBILE_BENEFIT_TITLES.get(titleCase(title));
           return (
             <article key={id} className="bangalore-landing__benefit" data-benefit={id}>
               <div className="bangalore-landing__icon" aria-hidden="true"><Icon size={20} strokeWidth={1.5} /></div>
               <div>
-                <h3>{titleCase(title)}</h3>
+                <h3>
+                  {mobileTitle ? (
+                    <>
+                      <span className="bangalore-landing__benefit-full-title">{titleCase(title)}</span>
+                      <span className="bangalore-landing__benefit-mobile-title">{mobileTitle}</span>
+                    </>
+                  ) : titleCase(title)}
+                </h3>
                 {body && (
                   <p className="bangalore-landing__benefit-body">
                     <InlineText text={body} />

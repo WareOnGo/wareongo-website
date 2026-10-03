@@ -102,7 +102,7 @@ const BlogDetail = () => {
 
       <main className="flex-grow" role="main" aria-labelledby="blog-title">
         <div className="section-container page-content pb-6 sm:pb-10">
-          <article className="max-w-3xl mx-auto">
+          <article className="w-full">
             <Breadcrumbs
               className="mb-4 sm:mb-6"
               items={

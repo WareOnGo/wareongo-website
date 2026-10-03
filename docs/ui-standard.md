@@ -106,8 +106,9 @@ locking. Shared tokens are at `:root`, so portaled controls inherit them.
 
 - General sections use 64px vertical spacing on desktop and 48px on phones;
   gutters are 32px/20px. `.section-container` allows 1400px of content plus its
-  gutters. Existing narrow articles/forms stay narrow. The navbar retains its
-  independent 1600px cap and existing desktop breakpoint. Its restored 1px
+  gutters. The blog index and articles use this shared width without an inner
+  reading-column cap. Other narrow articles/forms keep their local widths.
+  The navbar retains its independent 1600px cap and existing desktop breakpoint. Its restored 1px
   outline uses the lighter `--ui-line`; adjusted inner padding preserves header height.
 - Use 24px standard card padding and 16px/12px for compact cards. Keep title,
   copy and action spacing on the 4px rhythm.
