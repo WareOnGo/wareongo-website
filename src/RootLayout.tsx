@@ -1,6 +1,6 @@
 import { LocationListingsSkeleton, OverviewSkeleton } from '@/components/LocationPageSkeletons';
 import { Outlet, useLocation, useNavigation } from "react-router-dom";
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/context/AuthContext";
 import AnalyticsInteractions from "@/components/AnalyticsInteractions";
@@ -27,10 +27,22 @@ const ClientToaster = () => {
 const queryClient = new QueryClient();
 
 const ScrollToTop = () => {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
+  const previous = useRef({ pathname, hash });
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    // The browser owns the initial document position. A reader may already be
+    // using the static cards before hydration; never jump away from that click.
+    const unchanged = previous.current.pathname === pathname && previous.current.hash === hash;
+    previous.current = { pathname, hash };
+    if (unchanged && !hash) return;
+    // Run after the destination has mounted, including its own mount effects.
+    const frame = requestAnimationFrame(() => {
+      const target = hash ? document.getElementById(hash.slice(1)) : null;
+      if (target) target.scrollIntoView();
+      else if (!hash) window.scrollTo(0, 0);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [pathname, hash]);
   return null;
 };
 

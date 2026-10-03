@@ -14,14 +14,14 @@ const { outputFiles } = await build({
       import { usePagedListings } from './src/hooks/usePagedListings';
       export { readLocationPagination, createLocationPageSearch } from './src/hooks/usePagedListings';
       const inventory = Array.from({ length: 47 }, (_, i) => i + 1);
-      function Fixture() {
-        const { shown, currentPage, perPage, hrefForPage } = usePagedListings(inventory);
+      function Fixture({ seedSearch }) {
+        const { shown, currentPage, perPage, hrefForPage } = usePagedListings(inventory, true, seedSearch);
         return <div data-page={currentPage} data-size={perPage}>
           <span>{shown.join(',')}</span><a href={hrefForPage(2)}>Next</a>
         </div>;
       }
-      export const renderPagination = location => renderToString(
-        <StaticRouter location={location}><Fixture /></StaticRouter>
+      export const renderPagination = (location, seedSearch) => renderToString(
+        <StaticRouter location={location}><Fixture seedSearch={seedSearch} /></StaticRouter>
       );
     `,
     resolveDir: directory,
@@ -109,4 +109,11 @@ test('server rendering shows six listings before URL state hydrates', () => {
   assert.match(shared, /data-page="1" data-size="6"/);
   assert.match(shared, /<span>1,2,3,4,5,6<\/span>/);
   assert.match(shared, /href="\/listings\/city\/bengaluru\?page=2&amp;pageSize=6"/);
+});
+
+test('an explicit static page seed renders that page before hydration without adopting arbitrary URL filters', () => {
+  const html = renderPagination('/overview/karnataka?page=2', 'page=2');
+  assert.match(html, /data-page="2" data-size="6"/);
+  assert.match(html, /<span>7,8,9,10,11,12<\/span>/);
+  assert.equal(renderPagination('/overview/karnataka?page=999&fire=yes', 'page=2'), html);
 });

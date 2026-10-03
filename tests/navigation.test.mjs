@@ -18,8 +18,12 @@ const { outputFiles } = await build({
     import { renderToString } from 'react-dom/server';
     import { AuthProvider } from './src/context/AuthContext';
     import Navbar from './src/components/Navbar';
+    import Footer from './src/components/Footer';
     export const renderNavigation = () => renderToString(<RouterProvider router={createMemoryRouter([
       { path: '*', element: <AuthProvider><Navbar /><Navbar /></AuthProvider> }
+    ])} />);
+    export const renderFooter = () => renderToString(<RouterProvider router={createMemoryRouter([
+      { path: '*', element: <AuthProvider><Footer /></AuthProvider> }
     ])} />);
   `, resolveDir: root, loader: 'tsx' },
   bundle: true, write: false, platform: 'node', format: 'cjs', jsx: 'automatic',
@@ -31,7 +35,7 @@ const compiled = { exports: {} };
 new Function('require', 'module', 'exports', outputFiles[0].text)(createRequire(import.meta.url), compiled, compiled.exports);
 const { createLocationCatalogue, featuredLocations, searchLocations, locationCatalogue,
   CITIES, STATES, MICROMARKETS, CITY_MIN_LISTINGS, POPULAR_LOCATION_IDS, popularLocations,
-  renderNavigation, navigationGuide } = compiled.exports;
+  renderNavigation, renderFooter, navigationGuide } = compiled.exports;
 
 const place = (canonical, slug, count = 3) => ({ canonical, slug, count });
 const fixture = () => createLocationCatalogue({ cityMinListings: 3,
@@ -130,12 +134,13 @@ test('guide selection is stable and missing photographs never become broken imag
 
 const descendants = node => (node.childNodes ?? []).flatMap(child => [child, ...descendants(child)]);
 const attr = (node, name) => node.attrs?.find(a => a.name === name)?.value;
+const insideHidden = node => !!node && (attr(node, 'hidden') !== undefined || insideHidden(node.parentNode));
 
 test('navbar server-renders with native links, closed disclosures and unique IDs when a loading header coexists', () => {
   const nodes = descendants(parseFragment(renderNavigation()));
   const anchors = nodes.filter(n => n.tagName === 'a');
   for (const href of ['/', '/listings', '/blogs', '/about-us', '/request-warehouse']) {
-    assert.equal(anchors.filter(n => attr(n, 'href') === href).length, 2);
+    assert.equal(anchors.filter(n => !insideHidden(n) && attr(n, 'href') === href).length, 2);
   }
   assert.equal(anchors.filter(n => attr(n, 'href') === '/casestudies').length, 0);
   assert.ok(!nodes.some(n => attr(n, 'role') === 'menu'), 'ordinary navigation keeps native link semantics');
@@ -149,4 +154,20 @@ test('navbar server-renders with native links, closed disclosures and unique IDs
     assert.ok(nodes.some(n => attr(n, 'id') === attr(trigger, 'aria-controls') && attr(n, 'hidden') !== undefined));
   }
   for (const anchor of anchors) assert.ok(!descendants(anchor).some(n => ['a', 'button'].includes(n.tagName)));
+});
+
+test('closed location disclosures expose their featured destinations as crawlable anchors', () => {
+  const nodes = descendants(parseFragment(renderNavigation()));
+  const links = nodes.filter(n => n.tagName === 'a').map(n => attr(n, 'href'));
+  for (const category of ['states', 'cities', 'micromarkets']) {
+    for (const place of popularLocations[category]) assert.ok(links.includes(place.href), place.href);
+  }
+});
+
+test('all footer shortcuts are native links, including the homepage section', () => {
+  const nodes = descendants(parseFragment(renderFooter()));
+  const links = nodes.filter(n => n.tagName === 'a').map(n => attr(n, 'href'));
+  for (const href of ['/', '/#how-it-works', '/listings', '/request-warehouse', '/about-us']) {
+    assert.ok(links.includes(href), href);
+  }
 });

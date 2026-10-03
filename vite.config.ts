@@ -1,6 +1,16 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import Beasties from 'beasties';
+import { createCatalogueBuild } from './scripts/lib/catalogue-build.mjs';
+
+const criticalCss = {
+  preload: 'media' as const, noscriptFallback: true, pruneSource: false,
+  reduceInlineStyles: false, inlineFonts: true,
+  allowRules: [/\.wog-nav-header:has\(/], preloadFonts: false,
+};
+const catalogueCss = new Beasties({ path: 'dist', logLevel: 'warn', ...criticalCss });
+const catalogueBuild = createCatalogueBuild({ processCss: (html: string) => catalogueCss.process(html) });
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, command }) => ({
@@ -26,6 +36,8 @@ export default defineConfig(({ mode, command }) => ({
     __DEV_SERVER__: JSON.stringify(command === "serve"),
   },
   ssgOptions: {
+    onPageRendered: catalogueBuild.onPageRendered,
+    onFinished: catalogueBuild.onFinished,
     // Each warehouse render reads details and specifications from the backend.
     // Keep build traffic within its small shared Supabase connection budget.
     concurrency: 5,
@@ -34,18 +46,6 @@ export default defineConfig(({ mode, command }) => ({
     formatting: "none",
     // Paint prerendered pages without waiting for the shared stylesheet. Keep
     // that stylesheet intact for hydrated controls and client-side navigation.
-    beastiesOptions: {
-      preload: "media",
-      noscriptFallback: true,
-      pruneSource: false,
-      reduceInlineStyles: false,
-      inlineFonts: true,
-      // Preserve keyboard-focus motion overrides: this extractor version
-      // cannot match :has(:focus-visible) against the static document.
-      allowRules: [/\.wog-nav-header:has\(/],
-      // index.html preloads only the Montserrat Latin face; other subsets
-      // should load only when the page actually uses them.
-      preloadFonts: false,
-    },
+    beastiesOptions: criticalCss,
   },
 }));

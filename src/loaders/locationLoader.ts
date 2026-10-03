@@ -123,6 +123,7 @@ export interface LocationListingsLoaderData {
 
 /** Only overview loaders return editorial content. */
 export type EditorialPageData = LocationListingsLoaderData & {
+  seedSearch?: string;
   imageVariants?: Record<string, EditorialImageVariant[]>;
   coverImages?: Record<string, string>;
   content: EditorialContent & CityOverviewContent;

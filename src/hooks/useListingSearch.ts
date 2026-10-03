@@ -6,13 +6,14 @@ const subscribe = () => () => {};
 const clientSnapshot = () => true;
 const serverSnapshot = () => false;
 
-export function useListingSearch(preset?: WarehouseFilters) {
+export function useListingSearch(preset?: WarehouseFilters, seedSearch = '') {
   const location = useLocation();
   const navigate = useNavigate();
-  // A built document contains the default page. Its first React render must
-  // match that HTML; later client navigations can use the URL immediately.
+  // The first React render must match the explicit page baked into this HTML.
+  // Filtered/legacy URLs can still receive page one and adopt their URL after
+  // hydration. Never infer a static seed from an arbitrary browser query.
   const hydrated = useSyncExternalStore(subscribe, clientSnapshot, serverSnapshot);
-  const searchParams = useMemo(() => new URLSearchParams(hydrated ? location.search : ''), [hydrated, location.search]);
+  const searchParams = useMemo(() => new URLSearchParams(hydrated ? location.search : seedSearch), [hydrated, location.search, seedSearch]);
   const hash = hydrated ? location.hash : '';
   const hrefFor = useCallback((next: URLSearchParams) => {
     if (preset) return listingSearchHref(location.pathname, next, hash, preset);

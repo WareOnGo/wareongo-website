@@ -24,6 +24,7 @@ import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
 import { trackEvent } from '@/lib/analytics';
 import { useListingResults } from '@/hooks/useListingAnalytics';
 import { warehousePath } from '@/lib/warehouseSlug';
+import { catalogueSeo } from '@/lib/catalogueSeo';
 
 /** Shared CMS wireframe for state, city and micromarket /overview pages. */
 
@@ -90,7 +91,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
     goTo,
     hrefForPage,
     hydrated,
-  } = usePagedListings(ordered);
+  } = usePagedListings(ordered, true, data.seedSearch);
 
   const listId = `overview:${path}`;
   useListingResults({ list_id: listId, placement: 'overview_grid', market_slug: path.split('/').pop(),
@@ -108,7 +109,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
     name: content.h1,
     alternateName: `Godowns for Rent in ${name}`,
     description: content.metaDescription,
-    url: `${SITE_URL}${path}`,
+    url: `${SITE_URL}${catalogueSeo(path, currentPage > 1 ? `page=${currentPage}` : '').path}`,
     isPartOf: { '@id': WEBSITE_ID },
     provider: { '@id': ORG_ID },
     keywords: [
@@ -122,9 +123,9 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
     mainEntity: {
       '@type': 'ItemList',
       numberOfItems: warehouses.length,
-      itemListElement: warehouses.slice(0, 50).map((w, idx) => ({
+      itemListElement: shown.map((w, idx) => ({
         '@type': 'ListItem',
-        position: idx + 1,
+        position: pageStart + idx + 1,
         url: `${SITE_URL}${warehousePath({ id: w.id, size: w.size, warehouseType: w.warehouseType, city: w.location.city })}`,
         name: `Warehouse ${w.id}, ${w.location.city}, ${w.location.state}`,
       })),

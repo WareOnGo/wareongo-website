@@ -6,8 +6,8 @@
   "scripts": {
     "test:formatting": "node tests/formatting.test.mjs",
     "dev": "vite",
-    "build": "node scripts/generate-locations.mjs && node scripts/generate-blogs.mjs && node scripts/generate-service-pages.mjs && node scripts/generate-ad-pages.mjs && node scripts/generate-legal-pages.mjs && node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs && node scripts/generate-logo-variants.mjs && vite-react-ssg build && node scripts/stabilize-loader-data.mjs && node scripts/publish-listing-covers.mjs && node scripts/publish-overview-images.mjs && node scripts/generate-warehouse-route-map.mjs && node scripts/generate-sitemap.mjs && node scripts/indexnow-ping.mjs",
-    "build:dev": "node scripts/generate-locations.mjs && node scripts/generate-blogs.mjs && node scripts/generate-service-pages.mjs && node scripts/generate-ad-pages.mjs && node scripts/generate-legal-pages.mjs && node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs && node scripts/generate-logo-variants.mjs && vite-react-ssg build --mode development && node scripts/stabilize-loader-data.mjs && node scripts/publish-listing-covers.mjs && node scripts/publish-overview-images.mjs && node scripts/generate-warehouse-route-map.mjs && node scripts/generate-sitemap.mjs",
+    "build": "node scripts/generate-locations.mjs && node scripts/generate-blogs.mjs && node scripts/generate-service-pages.mjs && node scripts/generate-ad-pages.mjs && node scripts/generate-legal-pages.mjs && node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs && node scripts/generate-logo-variants.mjs && vite-react-ssg build && node scripts/stabilize-loader-data.mjs && node scripts/publish-listing-covers.mjs && node scripts/publish-overview-images.mjs && node scripts/generate-warehouse-route-map.mjs && node scripts/generate-sitemap.mjs && node scripts/finalize-catalogue.mjs && node scripts/indexnow-ping.mjs",
+    "build:dev": "node scripts/generate-locations.mjs && node scripts/generate-blogs.mjs && node scripts/generate-service-pages.mjs && node scripts/generate-ad-pages.mjs && node scripts/generate-legal-pages.mjs && node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs && node scripts/generate-logo-variants.mjs && vite-react-ssg build --mode development && node scripts/stabilize-loader-data.mjs && node scripts/publish-listing-covers.mjs && node scripts/publish-overview-images.mjs && node scripts/generate-warehouse-route-map.mjs && node scripts/generate-sitemap.mjs && node scripts/finalize-catalogue.mjs",
     "build:spa": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -22,7 +22,8 @@
     "test:card-links": "node tests/warehouse-card-links.test.mjs",
     "test:listing-covers": "node tests/listing-cover.test.mjs",
     "test:listing-url": "node tests/listing-search.test.mjs && node tests/location-pagination.test.mjs && node tests/micromarket-listings.test.mjs && node tests/location-listing-seed.test.mjs && node tests/prerender-errors.test.mjs",
-    "test:ad-pages": "node tests/ad-pages-content.test.mjs"
+    "test:ad-pages": "node tests/ad-pages-content.test.mjs",
+    "test:crawling": "node tests/catalogue-rendering.test.mjs && node tests/catalogue-build.test.mjs && node tests/catalogue-hydration.test.mjs && node tests/catalogue-routing.test.mjs"
   },
   "dependencies": {
     "@radix-ui/react-aspect-ratio": "^1.1.0",
@@ -56,6 +57,7 @@
     "@types/node": "^22.5.5",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "@vercel/routing-utils": "^6.6.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.20",
     "beasties": "0.1.0",
@@ -63,11 +65,17 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
+    "jsdom": "^24.1.3",
     "postcss": "^8.4.47",
     "sharp": "0.34.5",
     "tailwindcss": "^3.4.11",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1"
+  },
+  "overrides": {
+    "@vercel/routing-utils": {
+      "path-to-regexp": "6.3.0"
+    }
   }
 }

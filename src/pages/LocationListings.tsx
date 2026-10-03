@@ -8,12 +8,13 @@ import { warehousePath } from '@/lib/warehouseSlug';
 import type { LocationListingSeed } from '@/loaders/locationLoader';
 import { readLocationListingSeed } from '@/lib/locationListingSeed';
 import { ListingsView } from './Listings';
+import { catalogueSeo } from '@/lib/catalogueSeo';
 
 export default function LocationListings() {
   const loaded = useLoaderData() as LocationListingSeed | null;
   if (!loaded) return <Navigate to="/listings" replace />;
   const data = readLocationListingSeed(loaded);
-  const { type, canonical, slug, warehouses, warehouseType, typeCounts, parentCity } = data;
+  const { type, canonical, slug, warehouseType, typeCounts, parentCity } = data;
   const total = data.pagination.totalItems;
   const isMicromarket = type === 'micromarket';
   const noun = type === 'state' ? `${canonical} state` : canonical;
@@ -98,32 +99,32 @@ export default function LocationListings() {
         ...keywordPlaces.map((p) => `warehouse for rent in ${p}`),
       ].join(', ');
 
-  const collectionLd = {
+  const collectionLd = ({ warehouses, pagination, search }: Pick<LocationListingSeed, 'warehouses' | 'pagination'> & { search: string }) => ({
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: heading,
     ...(warehouseType ? {} : { alternateName: `Godowns for Rent in ${canonical}` }),
     ...(ldKeywords ? { keywords: ldKeywords } : {}),
     description: seoDescription,
-    url: `${SITE_URL}${path}`,
+    url: `${SITE_URL}${catalogueSeo(path, search).path}`,
     isPartOf: { '@id': WEBSITE_ID },
     provider: { '@id': ORG_ID },
     mainEntity: {
       '@type': 'ItemList',
-      numberOfItems: total,
+      numberOfItems: pagination.totalItems,
       itemListElement: warehouses.slice(0, 50).map((w, idx) => ({
         '@type': 'ListItem',
-        position: idx + 1,
+        position: (pagination.currentPage - 1) * pagination.pageSize + idx + 1,
         url: `${SITE_URL}${warehousePath({ id: w.id, size: w.size, warehouseType: w.warehouseType, city: w.location.city })}`,
         name: `Warehouse ${w.id}, ${w.location.city}, ${w.location.state}`,
       })),
     },
-  };
+  });
 
   return <ListingsView key={path} initialData={data} preset={data.filters}
     listId={`location:${type}:${slug}:${warehouseType || 'all'}`}
-    head={<PageHead title={seoTitle} description={seoDescription} path={path}>
-      <script type="application/ld+json">{JSON.stringify(collectionLd)}</script>
+    head={results => <PageHead title={seoTitle} description={seoDescription} path={path}>
+      <script type="application/ld+json">{JSON.stringify(collectionLd(results))}</script>
     </PageHead>}
     header={<>
           <Breadcrumbs

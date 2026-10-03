@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Phone, Mail, ChevronDown } from 'lucide-react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { trackEvent } from '@/lib/analytics';
 import { SERVICE_PAGES, servicePath } from '@/data/serviceCatalog';
 import { getServiceBySlug } from '@/data/servicePages';
@@ -151,43 +151,7 @@ const ExploreSpacesSection = () => {
 };
 
 const Footer = () => {
-  const navigate = useNavigate();
   const location = useLocation();
-
-  const handleFooterNav = (label: string, destination: string, action: () => void) => {
-    trackEvent('nav_click', { label, destination, position: 'footer' });
-    action();
-  };
-
-  const scrollToSection = (id: string) => {
-    // If not on homepage, navigate to homepage first
-    if (window.location.pathname !== '/') {
-      navigate('/');
-      // Add a small delay to ensure navigation happens before scrolling
-      setTimeout(() => {
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    } else {
-      // If already on homepage, just scroll
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  };
-
-  const handleAboutUsClick = () => {
-    // Navigate to About Us page
-    if (location.pathname !== '/about-us') {
-      navigate('/about-us');
-    } else {
-      // If already on About Us page, just scroll to top
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
 
   return (
     <footer className="bg-wareongo-blue text-ui-surface">
@@ -203,46 +167,20 @@ const Footer = () => {
           <div>
             <h2 className="ui-card-title mb-4">Quick Links</h2>
             <ul className="space-y-2">
-              <li>
-                <button
-                  onClick={() => handleFooterNav('Home', '/', () => navigate('/'))}
-                  className="text-ui-line hover:text-ui-surface transition-colors cursor-pointer"
-                >
-                  Home
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleFooterNav('How It Works', '#how-it-works', () => scrollToSection('how-it-works'))}
-                  className="text-ui-line hover:text-ui-surface transition-colors cursor-pointer"
-                >
-                  How It Works
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleFooterNav('Listings', '/listings', () => navigate('/listings'))}
-                  className="text-ui-line hover:text-ui-surface transition-colors cursor-pointer"
-                >
-                  Listings
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleFooterNav('Request a Warehouse', '/request-warehouse', () => navigate('/request-warehouse'))}
-                  className="text-ui-line hover:text-ui-surface transition-colors cursor-pointer"
-                >
-                  Request a Warehouse
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleFooterNav('About Us', '/about-us', handleAboutUsClick)}
-                  className="text-ui-line hover:text-ui-surface transition-colors cursor-pointer"
-                >
-                  About Us
-                </button>
-              </li>
+              {[
+                ['Home', '/'], ['How It Works', '/#how-it-works'], ['Listings', '/listings'],
+                ['Request a Warehouse', '/request-warehouse'], ['About Us', '/about-us'],
+              ].map(([label, href]) => <li key={href}>
+                <Link to={href} className="text-ui-line hover:text-ui-surface transition-colors"
+                  onClick={event => {
+                    trackEvent('nav_click', { label, destination: href, position: 'footer' });
+                    if (event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
+                      if (href === '/#how-it-works' && location.pathname === '/') {
+                        document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
+                      } else if (location.pathname === href) window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                  }}>{label}</Link>
+              </li>)}
               <li>
                 <Link
                   to="/casestudies"

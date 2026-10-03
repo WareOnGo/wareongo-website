@@ -1,0 +1,107 @@
+{
+  "date": "2026-10-03",
+  "status": "local_validation",
+  "deployed": false,
+  "websiteBaseCommit": "d170ddb5014849ac29b79cc3acdf04f06a338f57",
+  "sourceSha256": {
+    "package.json": "352637e69c0490ebf3ac29a5fb592f1b1a93f83526ee23c44470e2f890230d18",
+    "package-lock.json": "3c43134f5a2c33b5af124777be6a89bf8f4109e9c124051bd484cd5b9895d4a5",
+    "vite.config.ts": "d970ff0586d52104577dcbef49a5ea0e5e93a71b0e38c5df483c1e41607f7b7f",
+    "vercel.json": "7e8031a66a17f9511bc35be3cc52f001f5b84c7921f0b400d19ee68015acc2e7",
+    "src/RootLayout.tsx": "935cf8e025351103c73b68deca526bf97d9573f5229904cd8d6e09c9f065d385",
+    "src/components/Footer.tsx": "463c8050abc9a69ce985223c54a95b28570de47a3e0f30d16c9eb759706ca0ae",
+    "src/components/Navbar.tsx": "ffdf7751e56606d5e6c21f44491778ff06928758e932102b03616673adddd9c3",
+    "src/components/navigation/LocationsMenu.tsx": "d3f12d40fbe7204de36f1c663ef6d2c07bbd1ef9e55810ceff4c464b8174914e",
+    "src/components/PageHead.tsx": "271155e3dbd82bdc1db12170fdabc4ae7901effc887efa607fc8017a09874652",
+    "src/hooks/useListingSearch.ts": "a107ae7674afb43ba3f8433d7bd5442ee35adf32ed303f43cdace5fa33d84ee5",
+    "src/hooks/usePagedListings.ts": "f02c2ee4daa0a2910a66f526e61f79c0a4d49f67eba5dc8e2e08bebbb5441bc1",
+    "src/loaders/locationLoader.ts": "df19778877f8aeb84d7dfb2fd2e99f90e25588c5ef9b7a8ff6646877627af432",
+    "src/loaders/warehouseLoader.ts": "345999f89565aaad0491b03f037086281a3c8d7635e405b210258a7048880437",
+    "src/main.tsx": "a96ce920f395231adf70d83c6ad234bd4ec4d1ebd0614fee07cfdb8a7970db9e",
+    "src/pages/EditorialLocationPage.tsx": "ea9205d89bb3b623a45b73e9b54841e43410d6bc9da386294daf1d3545256dc0",
+    "src/pages/Listings.tsx": "4086ddeb1b6892218d090809807222c036a4beebb4f6bf6f9a9880caed8a1e0c",
+    "src/pages/LocationListings.tsx": "10b9afbcb5fa2a041171d86b78f017047ca0f0103e592efc1e10de2dd72a7228",
+    "src/lib/catalogueBuild.server.ts": "608c6705e0445091cb48181d808be338833ce2586cca6bc14358f2f66c87b58e",
+    "src/lib/catalogueHydration.ts": "dbe8043be7718b9021a116e5b69b1d825ff11530b73bd198f72e58e4c237789b",
+    "src/lib/catalogueSeo.ts": "2f10a0c065ec08ba52d8bf5e04ec23cd9cdda0c1132634c8c931f43a1f393c95",
+    "scripts/lib/catalogue-build.mjs": "74de33f05c83db381dbccd979be6189022766c10b402098a6ecbdcc5f139c5d3",
+    "scripts/lib/static-routing.mjs": "55cf0a0554d1a79e1c22c1866460acf17e285cb1e8c5630ba7d2b4f526d462ee",
+    "scripts/finalize-catalogue.mjs": "3eb73ff9e93e458cf1b66db024373807afa011472f338d61846af85993b8e51c"
+  },
+  "integration": {
+    "startTime": "2026-10-02T21:42:42.295Z",
+    "duration": 213241.002,
+    "expected": 249,
+    "skipped": 3,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "browserBuild": "/tmp/wog-listing-integration-jMMS8J/site",
+  "integrationArtifacts": "/tmp/wog-listing-integration-nZa4GI",
+  "backendTestsPassed": 14,
+  "navigationTestsPassed": 74,
+  "prefetchTestsPassed": 40,
+  "urlStateTestsPassed": 48,
+  "catalogueUnitTestsPassed": 13,
+  "listingUnitTestsPassed": 33,
+  "vercelCompiledRules": 39,
+  "liveBuild": {
+    "start": {
+      "site": "/tmp/wog-live-backend-build-lbsd19/site",
+      "api": "https://wareongo-website-backend.onrender.com",
+      "startedAt": "2026-10-02T21:03:53.945Z"
+    },
+    "finish": {
+      "site": "/tmp/wog-live-backend-build-lbsd19/site",
+      "api": "https://wareongo-website-backend.onrender.com",
+      "finishedAt": "2026-10-02T21:16:04.208Z",
+      "sitemapUrls": 2570
+    },
+    "durationSeconds": 730.263,
+    "warmImageCache": true,
+    "note": "Final generator; initial-scroll guard was subsequently tested in a fresh fixture production build."
+  },
+  "artifactAudit": {
+    "status": "passed",
+    "root": "/tmp/wog-live-backend-build-lbsd19/site/dist",
+    "categories": 411,
+    "cataloguePagesChecked": 1094,
+    "structuredDataPagesChecked": 987,
+    "paginationLinksChecked": 5842,
+    "manifestEntriesChecked": 2668,
+    "sitemapUrls": 2570,
+    "files": 7748,
+    "totalBytes": 643908537,
+    "extraPages": 683,
+    "extraHtmlBytes": 118886538,
+    "sharedFiles": 6,
+    "sharedBytes": 2325995,
+    "largestHtmlBytes": 282844
+  },
+  "logs": {
+    "integration": "/tmp/wareongo-crawl-integration-complete.log",
+    "navigation": "/tmp/wareongo-crawl-navigation-complete.log",
+    "prefetch": "/tmp/wareongo-crawl-prefetch-complete.log",
+    "urlState": "/tmp/wareongo-crawl-url-complete.log",
+    "micromarketLifecycle": "/tmp/wareongo-crawl-lifecycle-green.log",
+    "locationLifecycle": "/tmp/wareongo-crawl-location-lifecycle-green.log",
+    "scrollRegressionRed": "/tmp/wareongo-crawl-scroll-red2.log"
+  },
+  "urlStateSpecs": [
+    "tests/specs/listings-url-native.spec.ts",
+    "tests/specs/listings-url-state.spec.ts",
+    "tests/specs/pagination.spec.ts",
+    "tests/specs/fallback-pagination.spec.ts",
+    "tests/specs/analytics.spec.ts"
+  ],
+  "micromarketLifecycle": {
+    "passed": 5,
+    "artifacts": "/tmp/wareongo-overview-rebuild-vgy2eO"
+  },
+  "locationLifecycle": {
+    "passed": 6,
+    "artifacts": "/tmp/wareongo-location-rebuild-efWa5J"
+  },
+  "totalBrowserChecksPassed": 411,
+  "browserContainerStopped": true
+}

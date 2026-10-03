@@ -3,40 +3,46 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
-  "images": {
-    "sizes": [384, 640, 960, 1080, 1600],
-    "remotePatterns": [{ "protocol": "https", "hostname": "*.r2.dev" }],
-    "formats": ["image/avif", "image/webp"],
-    "minimumCacheTTL": 2678400
-  },
+  "images": {"sizes":[384,640,960,1080,1600],"remotePatterns":[{"protocol":"https","hostname":"*.r2.dev"}],"formats":["image/avif","image/webp"],"minimumCacheTTL":2678400},
   "redirects": [
-    { "source": "/guides", "destination": "/blogs", "permanent": true },
-    { "source": "/guides/:slug", "destination": "/blogs/:slug", "permanent": true }
+    {"source":"/guides","destination":"/blogs","permanent":true},
+    {"source":"/guides/:slug","destination":"/blogs/:slug","permanent":true}
   ],
   "rewrites": [
-    {
-      "source": "/static-loader-data-manifest-(.*).json",
-      "destination": "/static-loader-data-manifest-stable.json"
-    }
+    {"source":"/static-loader-data-manifest-(.*).json","destination":"/static-loader-data-manifest-stable.json"},
+    {"source":"/listings","has":[{"type":"query","key":"page","value":"(?<cataloguePage>[1-9][0-9]*)"}],"missing":[{"type":"query","key":"city"},{"type":"query","key":"state"},{"type":"query","key":"micromarket"},{"type":"query","key":"fire"},{"type":"query","key":"type"},{"type":"query","key":"area"},{"type":"query","key":"minSqft"},{"type":"query","key":"maxSqft"},{"type":"query","key":"pageSize"}],"destination":"/__catalogue/listings/:cataloguePage"},
+    {"source":"/listings","has":[{"type":"query","key":"page","value":"(?<cataloguePage>[1-9][0-9]*)"},{"type":"query","key":"pageSize","value":"21"}],"missing":[{"type":"query","key":"city"},{"type":"query","key":"state"},{"type":"query","key":"micromarket"},{"type":"query","key":"fire"},{"type":"query","key":"type"},{"type":"query","key":"area"},{"type":"query","key":"minSqft"},{"type":"query","key":"maxSqft"}],"destination":"/__catalogue/listings/:cataloguePage"},
+    {"source":"/listings","destination":"/__catalogue/listings/1"},
+    {"source":"/listings/:cataloguePath+","has":[{"type":"query","key":"page","value":"(?<cataloguePage>[1-9][0-9]*)"}],"missing":[{"type":"query","key":"city"},{"type":"query","key":"state"},{"type":"query","key":"micromarket"},{"type":"query","key":"fire"},{"type":"query","key":"type"},{"type":"query","key":"area"},{"type":"query","key":"minSqft"},{"type":"query","key":"maxSqft"},{"type":"query","key":"pageSize"}],"destination":"/__catalogue/listings/:cataloguePath*/:cataloguePage"},
+    {"source":"/listings/:cataloguePath+","has":[{"type":"query","key":"page","value":"(?<cataloguePage>[1-9][0-9]*)"},{"type":"query","key":"pageSize","value":"21"}],"missing":[{"type":"query","key":"city"},{"type":"query","key":"state"},{"type":"query","key":"micromarket"},{"type":"query","key":"fire"},{"type":"query","key":"type"},{"type":"query","key":"area"},{"type":"query","key":"minSqft"},{"type":"query","key":"maxSqft"}],"destination":"/__catalogue/listings/:cataloguePath*/:cataloguePage"},
+    {"source":"/listings/:cataloguePath+","destination":"/__catalogue/listings/:cataloguePath*/1"},
+    {"source":"/overview/:cataloguePath+","has":[{"type":"query","key":"page","value":"(?<cataloguePage>[1-9][0-9]*)"}],"missing":[{"type":"query","key":"city"},{"type":"query","key":"state"},{"type":"query","key":"micromarket"},{"type":"query","key":"fire"},{"type":"query","key":"type"},{"type":"query","key":"area"},{"type":"query","key":"minSqft"},{"type":"query","key":"maxSqft"},{"type":"query","key":"pageSize"}],"destination":"/__catalogue/overview/:cataloguePath*/:cataloguePage"},
+    {"source":"/overview/:cataloguePath+","has":[{"type":"query","key":"page","value":"(?<cataloguePage>[1-9][0-9]*)"},{"type":"query","key":"pageSize","value":"6"}],"missing":[{"type":"query","key":"city"},{"type":"query","key":"state"},{"type":"query","key":"micromarket"},{"type":"query","key":"fire"},{"type":"query","key":"type"},{"type":"query","key":"area"},{"type":"query","key":"minSqft"},{"type":"query","key":"maxSqft"}],"destination":"/__catalogue/overview/:cataloguePath*/:cataloguePage"},
+    {"source":"/overview/:cataloguePath+","destination":"/__catalogue/overview/:cataloguePath*/1"}
   ],
   "headers": [
-    {
-      "source": "/(.*).(js|css|woff|woff2|jpg|jpeg|png|webp|avif|svg|ico|mp4)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    },
-    {
-      "source": "/(warehouse|listings|overview|casestudies)/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=86400, stale-while-revalidate=604800" }
-      ]
-    },
-    {
-      "source": "/sitemap.xml",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=3600" }
-      ]
-    }
+    {"source":"/(.*).(js|css|woff|woff2|jpg|jpeg|png|webp|avif|svg|ico|mp4)","headers":[{"key":"Cache-Control","value":"public, max-age=31536000, immutable"}]},
+    {"source":"/(warehouse|listings|overview|casestudies)/(.*)","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=86400, stale-while-revalidate=604800"}]},
+    {"source":"/sitemap.xml","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=3600"}]},
+    {"source":"/listings/:path*","has":[{"type":"query","key":"city"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
+    {"source":"/listings/:path*","has":[{"type":"query","key":"state"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
+    {"source":"/listings/:path*","has":[{"type":"query","key":"micromarket"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
+    {"source":"/listings/:path*","has":[{"type":"query","key":"fire"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
+    {"source":"/listings/:path*","has":[{"type":"query","key":"type"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
+    {"source":"/listings/:path*","has":[{"type":"query","key":"area"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
+    {"source":"/listings/:path*","has":[{"type":"query","key":"minSqft"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
+    {"source":"/listings/:path*","has":[{"type":"query","key":"maxSqft"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
+    {"source":"/listings/:path*","has":[{"type":"query","key":"pageSize"}],"missing":[{"type":"query","key":"pageSize","value":"21"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
+    {"source":"/overview/:path*","has":[{"type":"query","key":"city"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
+    {"source":"/overview/:path*","has":[{"type":"query","key":"state"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
+    {"source":"/overview/:path*","has":[{"type":"query","key":"micromarket"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
+    {"source":"/overview/:path*","has":[{"type":"query","key":"fire"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
+    {"source":"/overview/:path*","has":[{"type":"query","key":"type"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
+    {"source":"/overview/:path*","has":[{"type":"query","key":"area"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
+    {"source":"/overview/:path*","has":[{"type":"query","key":"minSqft"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
+    {"source":"/overview/:path*","has":[{"type":"query","key":"maxSqft"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
+    {"source":"/overview/:path*","has":[{"type":"query","key":"pageSize"}],"missing":[{"type":"query","key":"pageSize","value":"6"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
+    {"source":"/__catalogue/:path*","headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
+    {"source":"/static-loader-data/catalogue/:file","headers":[{"key":"Cache-Control","value":"public, max-age=31536000, immutable"}]}
   ]
 }

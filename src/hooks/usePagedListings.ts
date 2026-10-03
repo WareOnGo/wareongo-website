@@ -41,9 +41,9 @@ export function createLocationPageSearch(search: URLSearchParams, page: number, 
  * where the reader should land. Attach `anchorRef` to the element that should be
  * scrolled back to.
  */
-export function usePagedListings<T>(items: T[], hasData = true) {
+export function usePagedListings<T>(items: T[], hasData = true, seedSearch = '') {
   const perPage = useListingsPerPage();
-  const { searchParams, hydrated, setSearchParams, hrefFor } = useListingSearch();
+  const { searchParams, hydrated, setSearchParams, hrefFor } = useListingSearch(undefined, seedSearch);
   const { currentPage, totalPages, start } = readLocationPagination(searchParams, items.length, perPage);
   const anchorRef = useRef<HTMLElement | null>(null);
   /**

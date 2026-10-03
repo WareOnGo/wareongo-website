@@ -14,6 +14,7 @@ export interface WarehouseLoaderData extends DetailData {
   breadcrumbAncestors?: BreadcrumbItem[];
 }
 export type ListingsLoaderData = {
+  seedSearch?: string;
   fetchedAt?: number;
   coverImage?: { source: string; src: string };
   warehouses: ReturnType<typeof transformWarehouseData>[];

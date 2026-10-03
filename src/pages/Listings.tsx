@@ -39,10 +39,10 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
   initialData: ListingsLoaderData | null;
   preset?: WarehouseFilters;
   header?: ReactNode;
-  head?: ReactNode;
+  head?: ReactNode | ((results: Pick<ListingsLoaderData, 'warehouses' | 'pagination'> & { search: string }) => ReactNode);
   listId?: string;
 }) {
-  const { searchParams, setSearchParams, hrefFor, hydrated } = useListingSearch(preset);
+  const { searchParams, setSearchParams, hrefFor, hydrated } = useListingSearch(preset, initialData?.seedSearch);
   const writeListingSearch = (search: URLSearchParams, state: ReturnType<typeof readListingSearch>) =>
     serializeListingSearch(search, state, preset);
   const location = useLocation();
@@ -86,15 +86,21 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
   }, [currentPage, pageSize]);
 
   const apiFilters = useMemo(() => toApiFilters(appliedFilters), [appliedFilters]);
-  // Use the SSG-baked data only when the user hasn't filtered or paged.
-  const isInitialQuery = JSON.stringify(apiFilters) === JSON.stringify(toApiFilters(preset)) && currentPage === 1 && pageSize === DEFAULT_PAGE_SIZE;
+  // A seed belongs to one exact filter/page/size query. Later API requests,
+  // history and prefetch continue to use their existing independent cache keys.
+  const isInitialQuery = JSON.stringify(apiFilters) === JSON.stringify(toApiFilters(preset))
+    && currentPage === (initialData?.pagination.currentPage ?? 1)
+    && pageSize === (initialData?.pagination.pageSize ?? DEFAULT_PAGE_SIZE);
 
   const { data, isPending, isPlaceholderData, isFetching, isError, isLoadingError, isRefetchError, refetch } = useQuery({
     ...listingsQueryOptions(currentPage, pageSize, apiFilters),
     enabled: hydrated,
     // An older build's seed paints immediately, then refreshes in the
     // background before we preload more pages from the current inventory.
-    initialDataUpdatedAt: initialData?.fetchedAt ?? 0,
+    // Deep links previously always read the API on entry. Mark their static
+    // seed stale so enabling the query after hydration preserves that behavior.
+    // An existing prefetched query keeps its own timestamp and remains instant.
+    initialDataUpdatedAt: (initialData?.pagination.currentPage ?? 1) > 1 ? 0 : initialData?.fetchedAt ?? 0,
     initialData: isInitialQuery && initialData
       ? {
           warehouses: initialData.warehouses,
@@ -203,7 +209,8 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
         {firstSource && <link rel="preconnect" href={new URL(firstSource).origin} />}
         {firstPhoto && <link rel="preload" as="image" href={firstPhoto} fetchPriority="high" />}
       </Head>
-      {head ?? <PageHead
+      {(typeof head === 'function' ? head({ warehouses: loadingResults || isLoadingError ? [] : warehouses,
+        pagination, search: searchParams.toString() }) : head) ?? <PageHead
         title="Warehouse & Godown for Rent in India | Verified Listings | WareOnGo"
         description={`Find warehouse & godown space for rent across India, ${verifiedWarehousesLabel} verified listings with transparent pricing. Get custom options, expert guidance & site visit within 48 hours.`}
         path="/listings"

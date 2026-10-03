@@ -29,7 +29,7 @@ export default function LocationsMenu({ onDirectory, onNavigate }: {
         {navigationGuide ? <>
           {navigationGuide.image && !imageFailed ? <img src={navigationGuide.image.url}
             alt={navigationGuide.image.alt} width={navigationGuide.image.width} height={navigationGuide.image.height}
-            decoding="async" onError={() => setImageFailed(true)} />
+            loading="lazy" decoding="async" onError={() => setImageFailed(true)} />
             : <div className="wog-nav-guide-placeholder"><MapPin aria-hidden="true" size={32} /></div>}
           <div className="wog-nav-guide-copy">
             <p className="wog-nav-eyebrow">Market guide</p>

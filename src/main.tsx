@@ -2,6 +2,7 @@ import { ViteReactSSG } from "vite-react-ssg";
 import { routes } from "./routes";
 import { claimReloadAttempt } from "./lib/staleDeployReload";
 import { createWebsiteRouter } from "./lib/createWebsiteRouter";
+import { startWebsite } from './lib/catalogueHydration';
 import "./index.css";
 // Keep homepage styles available to SSG's critical-CSS extraction while its
 // interactive components are loaded as a separate route chunk.
@@ -50,4 +51,11 @@ if (typeof window !== "undefined") {
   });
 }
 
-export const createRoot = ViteReactSSG({ routes, customCreateRouter: createWebsiteRouter(routes) });
+const start = () => ViteReactSSG({ routes, customCreateRouter: createWebsiteRouter(routes) }, async context => {
+  if (import.meta.env.SSR) {
+    Object.assign(context, { fetchCataloguePage: (await import('./lib/catalogueBuild.server')).fetchCataloguePage });
+  }
+});
+
+export const createRoot = import.meta.env.SSR ? start() : undefined;
+if (!import.meta.env.SSR) void startWebsite(start);

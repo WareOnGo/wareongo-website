@@ -150,7 +150,7 @@ const Navbar = ({ scrollLocked = false, contactDialogClassName }: { scrollLocked
             Locations <ChevronDown aria-hidden="true" size={14} />
           </button>
           <div id={`${id}-locations`} hidden={panel !== 'locations'} className="wog-nav-mega-container">
-            {panel === 'locations' && <LocationsMenu onDirectory={openDirectory} onNavigate={desktopNavigate} />}
+            <LocationsMenu onDirectory={openDirectory} onNavigate={desktopNavigate} />
           </div>
         </div>
         {PRIMARY_LINKS.slice(1).map(link => <HeaderLink {...link} key={link.href} className="wog-nav-item" onNavigate={desktopNavigate} />)}
