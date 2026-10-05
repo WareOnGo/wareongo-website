@@ -12,6 +12,7 @@ import BangaloreAvailableListings from '@/components/city/BangaloreAvailableList
 import BangaloreAreaGuide from '@/components/city/BangaloreAreaGuide';
 import BangaloreBenefits from '@/components/city/BangaloreBenefits';
 import BangaloreMicromarkets from '@/components/city/BangaloreMicromarkets';
+import BangaloreMarketGuide from '@/components/city/BangaloreMarketGuide';
 import ContactFormDialog from '@/components/ContactFormDialog';
 import RequestCTASection from '@/components/RequestCTASection';
 import { getBangaloreAdPage, type AdPageContent } from '@/data/adPages';
@@ -129,7 +130,7 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
 
         <BangaloreMicromarkets content={content} locations={locations} onContact={openContact} />
 
-        <BangaloreAreaGuide content={content} onContact={openContact} />
+        <BangaloreAreaGuide />
 
         <RequestCTASection className="bangalore-landing__request" content={{ heading: copy.requestHeading, description: copy.requestDescription, details: copy.requestDetails, primaryLabel: copy.requestCta, phoneLabel: copy.requestPhoneCta }} />
 
@@ -199,6 +200,8 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
           </div>
           <BangaloreLandingStats data={data} content={content} />
         </section>
+
+        <BangaloreMarketGuide />
       </main>
       <Footer />
       <ContactFormDialog

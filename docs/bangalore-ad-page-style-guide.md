@@ -203,7 +203,9 @@ font utilities. Avoid duplicate primary actions inside a card.
   Use the city overview's counts with generated inventory as fallback; omit
   counts for grouped or untagged areas rather than summing overlapping listings.
   Keep touch targets at least 44px and use no shadows.
-- **Area guide:** visible on tablet and desktop; hidden below 768px.
+- **Area guide:** follows the micromarket map on all screen sizes. The Highway
+  Belts and Inside the City tables sit side by side on desktop and stack below
+  1024px. Keep area names intact on narrow phones and use the shared table styles.
 - **Benefits:** follows the client carousel on desktop and featured listings on phones, with
   a centered heading. A navy strip shows four metrics: 4 Hour Curated Shortlist,
   2.5 Mn+ Sq Ft Leased, 90+ Cities Covered, and 3000+ Verified Spaces across India, followed
