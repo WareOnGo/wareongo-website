@@ -5,7 +5,6 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PageHead from '@/components/PageHead';
 import TrustedBySection from '@/components/TrustedBySection';
-import BangaloreLandingStats from '@/components/city/BangaloreLandingStats';
 import BangaloreEnquiryForm from '@/components/city/BangaloreEnquiryForm';
 import BangaloreFeaturedListings from '@/components/city/BangaloreFeaturedListings';
 import BangaloreAvailableListings from '@/components/city/BangaloreAvailableListings';
@@ -198,14 +197,6 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
               </article>
             ))}
           </div>
-        </section>
-
-        <section id="bangalore-stats" className="bangalore-landing__content bangalore-landing__container" aria-labelledby="bangalore-content-title">
-          <div className="bangalore-landing__section-heading">
-            <p className="bangalore-landing__eyebrow">{copy.overviewEyebrow}</p>
-            <h2 id="bangalore-content-title" className="bangalore-landing__section-title">{copy.overviewHeading}</h2>
-          </div>
-          <BangaloreLandingStats data={data} content={content} />
         </section>
 
         <BangaloreMarketGuide />
