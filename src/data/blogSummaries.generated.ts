@@ -2,41 +2,77 @@
 // Indexes and related links need metadata, not complete article bodies.
 import type { Blog } from './blogs';
 import { normalizeContentPunctuation } from '@/lib/contentPunctuation';
-export const blogSummaries: Pick<Blog, 'slug' | 'title' | 'description' | 'updated'>[] = normalizeContentPunctuation([
+export const blogSummaries: Pick<Blog, 'slug' | 'title' | 'description' | 'updated' | 'thumbnail'>[] = normalizeContentPunctuation([
   {
     "slug": "peb-vs-rcc-warehouse",
     "title": "PEB vs RCC Warehouse - Which Should You Lease in India?",
     "description": "PEB (pre-engineered building) vs RCC warehouse compared: construction, clear height, cost, fire safety, and which suits 3PL, e-commerce, manufacturing or cold storage.",
-    "updated": "2026-06-05"
+    "updated": "2026-06-05",
+    "thumbnail": {
+      "url": "/blog-thumbnails/warehouse-2854.webp",
+      "alt": "Warehouse loading dock exterior with trucks, workers, open dock doors and a paved apron.",
+      "width": 320,
+      "height": 240
+    }
   },
   {
     "slug": "grade-a-warehouse-india",
     "title": "What Is a Grade A Warehouse in India? Grade A vs B vs C Explained",
     "description": "What qualifies as a Grade A warehouse in India: clear height, FM2 flooring, docks, fire systems. Grade A vs Grade B vs Grade C compared, with typical rent impact.",
-    "updated": "2026-06-05"
+    "updated": "2026-06-05",
+    "thumbnail": {
+      "url": "/blog-thumbnails/warehouse-298.webp",
+      "alt": "Empty warehouse interior with a concrete floor, white walls, steel roof trusses, skylight panels, and a few small objects on the floor.",
+      "width": 320,
+      "height": 240
+    }
   },
   {
     "slug": "warehouse-compliance-checklist-india",
     "title": "Warehouse Compliance Checklist for India: Licences, NOCs & Lease Paperwork",
     "description": "Every licence and document needed to lease and operate a warehouse in India: fire NOC, building OC, land-use conversion, GST additional place of business, FSSAI, pollution consents, lease registration.",
-    "updated": "2026-06-05"
+    "updated": "2026-06-05",
+    "thumbnail": {
+      "url": "/blog-thumbnails/warehouse-2768.webp",
+      "alt": "Empty warehouse interior with concrete floor, white walls, small windows, electrical wiring, and corrugated metal roof trusses.",
+      "width": 320,
+      "height": 240
+    }
   },
   {
     "slug": "warehouse-rent-india-guide",
     "title": "Warehouse Rent in India: What Drives the ₹/sqft and Typical Lease Terms",
     "description": "What determines warehouse rent per sqft in India: micro-market, grade, size, compliance. Typical lease terms — security deposit, lock-in, escalation, CAM — and how to negotiate.",
-    "updated": "2026-07-03"
+    "updated": "2026-07-03",
+    "thumbnail": {
+      "url": "/blog-thumbnails/warehouse-2863.webp",
+      "alt": "Exterior view of a steel-frame warehouse under construction with partial roof sheets, concrete foundation, dirt ground and blue sky.",
+      "width": 320,
+      "height": 240
+    }
   },
   {
     "slug": "carpet-area-vs-built-up-area-warehouse",
     "title": "Carpet Area vs Built-Up Area in a Warehouse: Which One Are You Paying Rent On?",
     "description": "Carpet, built-up and super built-up area in warehouse leases: what each includes, the loading factor, why RERA's carpet-area rule doesn't apply, and how to compare quotes on effective rate per usable sqft.",
-    "updated": "2026-07-03"
+    "updated": "2026-07-03",
+    "thumbnail": {
+      "url": "/blog-thumbnails/warehouse-1878.webp",
+      "alt": "Large empty warehouse interior with concrete floor, steel columns, roof trusses, roller shutters, fire equipment and a worker in a safety vest.",
+      "width": 320,
+      "height": 240
+    }
   },
   {
     "slug": "dabaspet-multimodal-logistics-park",
     "title": "Dabaspet Multimodal Logistics Park: What Bengaluru's Rs 1,770 Crore MMLP Means for Warehousing",
     "description": "Bangalore's 400-acre Dabaspet MMLP runs in phases to 2039. What the Rs 1,770 crore park changes for warehouse and godowns.",
-    "updated": "2026-08-13"
+    "updated": "2026-08-13",
+    "thumbnail": {
+      "alt": "Image Credits: Deccan Herald",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/deccanherald-import-sites-dh-files-articleimages-2022-06-24--33d26d9c577f0e43.webp",
+      "width": 1200,
+      "height": 738
+    }
   }
 ]);

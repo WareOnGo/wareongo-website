@@ -21,7 +21,7 @@ export interface BlogTable {
 }
 
 export interface BlogImage {
-  /** Absolute URL on the R2 public host — uploaded through the CMS. */
+  /** CMS uploads use the R2 public host; generated thumbnails may use local assets. */
   url: string;
   alt: string;
   /** Intrinsic size of the stored file, so the img reserves its box before loading. */
@@ -58,6 +58,8 @@ export interface Blog {
    * Person; absent falls back to crediting the WareOnGo organisation.
    */
   author?: string;
+  /** Optional CMS upload for the blog index; otherwise use a warehouse thumbnail. */
+  thumbnail?: BlogImage;
   /** ISO date — rendered on page and used as Article dateModified. */
   updated: string;
   /** ISO date first published — defaults to `updated` in the Article LD when absent. */

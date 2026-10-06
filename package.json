@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "test:blogs": "node --test tests/blog-summaries.test.mjs",
     "test:formatting": "node tests/formatting.test.mjs",
     "dev": "vite",
     "build": "node scripts/generate-locations.mjs && node scripts/generate-blogs.mjs && node scripts/generate-service-pages.mjs && node scripts/generate-ad-pages.mjs && node scripts/generate-legal-pages.mjs && node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs && node scripts/generate-logo-variants.mjs && vite-react-ssg build && node scripts/stabilize-loader-data.mjs && node scripts/publish-listing-covers.mjs && node scripts/publish-overview-images.mjs && node scripts/generate-warehouse-route-map.mjs && node scripts/generate-sitemap.mjs && node scripts/finalize-catalogue.mjs && node scripts/indexnow-ping.mjs",
