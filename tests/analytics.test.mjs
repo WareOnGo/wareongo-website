@@ -69,6 +69,37 @@ test('service navigation retains its page identity and strips private query valu
   assert.equal(a.safeUrl('https://wareongo.com/services/private-token'), 'https://wareongo.com/other');
 });
 
+test('Bangalore ad page retains its identity and campaign while private paths and queries stay filtered', async () => {
+  const a = await analytics();
+  for (const path of ['/bangalore', '/bangalore/']) {
+    assert.equal(a.safeUrl(`https://wareongo.com${path}?utm_source=google&gclid=test-click-id&email=private%40example.com#enquiry`),
+      `https://wareongo.com${path}?utm_source=google&gclid=test-click-id`);
+    assert.equal(a.pageType(path), 'bangalore');
+  }
+  assert.equal(a.safeUrl('https://wareongo.com/bangalore/private-token'), 'https://wareongo.com/other');
+  assert.equal(a.safeUrl('https://wareongo.com/preview/ad-pages/bangalore'), 'https://wareongo.com/other');
+});
+
+test('Bangalore lead events and request CTA origin retain the ad landing page', async () => {
+  const a = await analytics({ productionBundle: true });
+  const page = 'https://wareongo.com/bangalore?utm_source=google&utm_medium=cpc&utm_campaign=bangalore';
+  window.location.href = page; window.location.pathname = '/bangalore';
+  a.recordAnalyticsPage('Warehouses in Bangalore | WareOnGo');
+  a.trackEvent('generate_lead', { form_id: 'bangalore_hero_enquiry', lead_type: 'warehouse_enquiry' });
+  assert.equal(a.calls().at(-1)[2].page_location, page);
+  assert.equal(a.calls().at(-1)[2].page_path, new URL(page).pathname + new URL(page).search);
+  assert.equal(a.calls().at(-1)[2].page_type, 'bangalore');
+  a.trackEvent('cta_click', { destination: '/request-warehouse', placement: 'request_cta_section' });
+  const origin = a.takeLeadOrigin();
+  assert.equal(origin.origin_page_path, '/bangalore');
+  window.location.href = 'https://wareongo.com/request-warehouse'; window.location.pathname = '/request-warehouse';
+  a.recordAnalyticsPage('Request a Warehouse');
+  a.trackEvent('form_open', { ...origin, form_id: 'warehouse_request' });
+  assert.equal(a.calls().at(-1)[2].page_referrer, page);
+  assert.equal(a.calls().at(-1)[2].origin_page_path, '/bangalore');
+  assert.equal(a.calls().filter(call => call[0] === 'config').length, 1);
+});
+
 test('normalization separates placement and rank, normalizes markets, and drops raw values/errors', async () => {
   const a = await analytics();
   const p = a.normalizeAnalytics({ warehouse_id: 12, city: 'Bangalore', position: 2, contact_type: 'email', value: 'sales@wareongo.com', location: 'footer', error_message: 'secret', companyName: 'private', arbitrary: 42 });

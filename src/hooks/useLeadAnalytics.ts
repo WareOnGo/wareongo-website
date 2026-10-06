@@ -28,9 +28,12 @@ export function useLeadAnalytics(open: boolean, context: LeadContext, inheritOri
   };
   const invalid = (field = 'required_fields', code = 'validation_required') => {
     attempt();
-    if (session.current) trackEvent('form_validation_error', { ...session.current.context, field_id: field, error_code: code });
-    // Native validity fires for each invalid field during one browser task.
-    queueMicrotask(() => { if (session.current) session.current.attempted = false; });
+    const s = session.current;
+    if (!s) return;
+    trackEvent('form_validation_error', { ...s.context, field_id: field, error_code: code });
+    // Browsers run microtasks between native invalid events. Reset in the next
+    // task so all invalid fields from one submission share a single attempt.
+    setTimeout(() => { s.attempted = false; }, 0);
   };
   const success = (leadId?: string) => {
     const s = session.current;

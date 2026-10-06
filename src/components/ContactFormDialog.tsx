@@ -48,7 +48,7 @@ const ContactFormDialog = ({
   const [error, setError] = useState<string | null>(null);
 
   const placement = analyticsContext?.placement || analyticsContext?.cta_location || 'header';
-  const isWarehouseEnquiry = placement === 'warehouse_card' || placement === 'warehouse_detail';
+  const isWarehouseEnquiry = analyticsContext?.warehouse_id != null || placement === 'warehouse_card' || placement === 'warehouse_detail';
   const analytics = useLeadAnalytics(open, {
     ...analyticsContext,
     placement,

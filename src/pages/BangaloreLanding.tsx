@@ -96,7 +96,14 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
   function openContact(trigger: HTMLButtonElement, context: AnalyticsParams) {
     contactTrigger.current = trigger;
     const enquiry = { city: 'Bengaluru', state: 'Karnataka', market_slug: 'bengaluru', ...context };
-    trackEvent('cta_click', { ...enquiry, cta_id: 'contact_us', form_id: 'header_contact', lead_type: 'general_contact', action: 'open_enquiry_modal' });
+    const isWarehouseEnquiry = enquiry.warehouse_id != null;
+    trackEvent('cta_click', {
+      ...enquiry,
+      cta_id: isWarehouseEnquiry ? 'raise_enquiry' : 'contact_us',
+      form_id: isWarehouseEnquiry ? 'warehouse_card_enquiry' : 'header_contact',
+      lead_type: isWarehouseEnquiry ? 'warehouse_enquiry' : 'general_contact',
+      action: 'open_enquiry_modal',
+    });
     setContactContext(enquiry);
   }
 
