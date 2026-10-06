@@ -20,6 +20,10 @@ export default function BangaloreMicromarkets({ locations, onContact, content }:
   const [pinned, setPinned] = useState<string | null>(null);
   const mapRef = useRef<HTMLElement>(null);
   const markerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const mobileMarketsRef = useRef<HTMLDivElement>(null);
+  const mobileCardRefs = useRef<Record<string, HTMLElement | null>>({});
+  const hasNudged = useRef(false);
+  const cancelNudge = useRef<() => void>(() => {});
   const hoverTimer = useRef<ReturnType<typeof setTimeout>>();
   const leaveTimer = useRef<ReturnType<typeof setTimeout>>();
   const dismissedPreview = useRef<string | null>(null);
@@ -30,6 +34,70 @@ export default function BangaloreMicromarkets({ locations, onContact, content }:
   }, []);
 
   useEffect(() => clearTimers, [clearTimers]);
+  useEffect(() => () => cancelNudge.current(), [scope]);
+
+  function showMobileLocation(slug: string) {
+    cancelNudge.current();
+    const track = mobileMarketsRef.current;
+    const card = mobileCardRefs.current[slug];
+    if (!track || !card) return;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    card.querySelector('button')?.focus({ preventScroll: true });
+    card.scrollIntoView({ behavior: reducedMotion.matches ? 'instant' : 'smooth', block: 'start', inline: 'start' });
+    if (reducedMotion.matches || hasNudged.current) return;
+
+    let idleTimer: ReturnType<typeof setTimeout>;
+    let frame = 0;
+    const originalSnap = track.style.scrollSnapType;
+    const cleanup = () => {
+      clearTimeout(idleTimer);
+      cancelAnimationFrame(frame);
+      document.removeEventListener('scroll', waitForScroll, true);
+      document.removeEventListener('pointerdown', cleanup);
+      document.removeEventListener('wheel', cleanup);
+      document.removeEventListener('keydown', cleanup);
+      window.removeEventListener('resize', cleanup);
+      reducedMotion.removeEventListener('change', cleanup);
+      track.style.scrollSnapType = originalSnap;
+    };
+    const nudge = () => {
+      document.removeEventListener('scroll', waitForScroll, true);
+      const bounds = card.getBoundingClientRect();
+      if (!track.clientWidth || bounds.bottom <= 0 || bounds.top >= window.innerHeight || reducedMotion.matches) {
+        cleanup();
+        return;
+      }
+      const start = track.scrollLeft;
+      const remaining = track.scrollWidth - track.clientWidth - start;
+      const distance = remaining >= 24 ? 24 : -Math.min(24, start);
+      if (!distance) { cleanup(); return; }
+      hasNudged.current = true;
+      // Temporarily release snapping for one short out-and-back scroll.
+      track.style.scrollSnapType = 'none';
+      const startedAt = performance.now();
+      const animate = (now: number) => {
+        const progress = Math.min((now - startedAt) / 600, 1);
+        track.scrollLeft = start + distance * (1 - Math.cos(progress * Math.PI * 2)) / 2;
+        if (progress < 1) frame = requestAnimationFrame(animate);
+        else cleanup();
+      };
+      frame = requestAnimationFrame(animate);
+    };
+    // Wait for both the page and the horizontal cards to finish scrolling.
+    const waitForScroll = () => {
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(nudge, 140);
+    };
+    cancelNudge.current = cleanup;
+    document.addEventListener('scroll', waitForScroll, true);
+    document.addEventListener('pointerdown', cleanup, { passive: true });
+    document.addEventListener('wheel', cleanup, { passive: true });
+    document.addEventListener('keydown', cleanup);
+    window.addEventListener('resize', cleanup);
+    reducedMotion.addEventListener('change', cleanup);
+    waitForScroll();
+  }
 
   const dismiss = useCallback((slug: string, restoreFocus = false) => {
     clearTimers();
@@ -126,12 +194,14 @@ export default function BangaloreMicromarkets({ locations, onContact, content }:
             <img src={camera.desktop.src} alt={scope === 'belts' ? "Road map of Bangalore and its warehouse belts." : "Road map of Bangalore's city neighbourhoods."} width={camera.desktop.width * 2} height={camera.desktop.height * 2} loading="lazy" decoding="async" />
           </picture>
           <span className="bangalore-landing__image-tag"><MapPin size={14} aria-hidden="true" />{content.copy.mapLabel}</span>
-          <div className="bangalore-landing__mobile-map-labels" aria-hidden="true">
+          <div className="bangalore-landing__mobile-map-labels">
             {visibleLocations.map(location => (
-              <span key={location.slug} className="bangalore-landing__mobile-map-chip" data-market={location.slug} style={{
+              <button key={location.slug} type="button" className="bangalore-landing__mobile-map-chip" data-market={location.slug}
+                aria-label={`Show ${location.canonical} warehouse card`} aria-controls={`bangalore-mobile-market-${location.slug}`}
+                onClick={() => showMobileLocation(location.slug)} style={{
                 '--label-x': `${location.label.mobile[0]}%`, '--label-y': `${location.label.mobile[1]}%`,
                 '--label-wide-x': `${location.label.tablet[0]}%`, '--label-wide-y': `${location.label.tablet[1]}%`,
-              } as CSSProperties}>{location.mobileLabel ?? location.title ?? location.canonical}</span>
+              } as CSSProperties}>{location.mobileLabel ?? location.title ?? location.canonical}</button>
             ))}
           </div>
           {visibleLocations.map(location => {
@@ -181,14 +251,14 @@ export default function BangaloreMicromarkets({ locations, onContact, content }:
         <figcaption className="bangalore-landing__map-caption">
           <span className="bangalore-landing__map-legend">{content.copy.mapCaption}</span>
           <span className="bangalore-landing__map-hint"><span>Hover or tap a location to explore</span><span>Tap a location to explore</span></span>
-          <span className="bangalore-landing__map-mobile-hint">Swipe the cards below to explore</span>
+          <span className="bangalore-landing__map-mobile-hint">Tap a location or swipe the cards below</span>
         </figcaption>
       </figure>
-      <div key={scope} id="bangalore-mobile-markets" className="bangalore-landing__mobile-markets" role="region" aria-label={`${scope === 'belts' ? 'Warehouse belt' : 'City area'} cards`} tabIndex={0}>
+      <div key={scope} ref={mobileMarketsRef} id="bangalore-mobile-markets" className="bangalore-landing__mobile-markets" role="region" aria-label={`${scope === 'belts' ? 'Warehouse belt' : 'City area'} cards`} tabIndex={0}>
         {visibleLocations.map(location => {
           const photo = location.imageSlot ? content.images[location.imageSlot] : location.image;
           return (
-            <article key={location.slug} className="bangalore-landing__mobile-market" data-market={location.slug}>
+            <article key={location.slug} id={`bangalore-mobile-market-${location.slug}`} ref={node => { mobileCardRefs.current[location.slug] = node; }} className="bangalore-landing__mobile-market" data-market={location.slug}>
               <img src={photo?.url} alt={photo?.alt ?? location.canonical} width={800} height={450} loading="lazy" decoding="async" />
               {location.count !== null && <span className="bangalore-landing__image-tag bangalore-landing__listing-count">
                 {location.count.toLocaleString('en-IN')} {location.count === 1 ? 'listing' : 'listings'}
