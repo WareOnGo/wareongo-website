@@ -17,7 +17,7 @@ import RequestCTASection from '@/components/RequestCTASection';
 import { getBangaloreAdPage, type AdPageContent } from '@/data/adPages';
 import defaults from '@/data/ad-pages/bangalore.json';
 import { MICROMARKETS } from '@/data/locations.generated';
-import { BANGALORE_MAP_AREAS } from '@/data/bangaloreMicromarketMap';
+import { BANGALORE_MAP_AREAS, type BangaloreMapScope } from '@/data/bangaloreMicromarketMap';
 import type { BangaloreLandingData } from '@/loaders/bangaloreLandingLoader';
 import { trackEvent, type AnalyticsParams } from '@/lib/analytics';
 import { normalizeHeadingCase, titleCase } from '@/lib/headingCase';
@@ -89,6 +89,7 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
         ?? null
       : null,
   }));
+  const [mapScope, setMapScope] = useState<BangaloreMapScope>('belts');
   const [contactContext, setContactContext] = useState<AnalyticsParams | null>(null);
   const contactTrigger = useRef<HTMLButtonElement | null>(null);
 
@@ -134,9 +135,9 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
 
         <BangaloreAvailableListings content={content} onContact={openContact} totalListings={data?.stats.listings} />
 
-        <BangaloreMicromarkets content={content} locations={locations} onContact={openContact} />
+        <BangaloreMicromarkets content={content} locations={locations} onContact={openContact} scope={mapScope} onScopeChange={setMapScope} />
 
-        <BangaloreAreaGuide />
+        <BangaloreAreaGuide scope={mapScope} />
 
         <RequestCTASection className="bangalore-landing__request" content={{ heading: copy.requestHeading, description: copy.requestDescription, details: copy.requestDetails, primaryLabel: copy.requestCta, phoneLabel: copy.requestPhoneCta }} />
 

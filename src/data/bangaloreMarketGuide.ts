@@ -3,6 +3,7 @@
 export const BANGALORE_AREA_FIT_GROUPS = [
   {
     id: 'highway-belts',
+    scope: 'belts',
     title: 'Highway Belts',
     rows: [
       { need: 'Large distribution centres on the Mumbai highway', areas: 'Nelamangala, Dobbaspet' },
@@ -15,6 +16,7 @@ export const BANGALORE_AREA_FIT_GROUPS = [
   },
   {
     id: 'inside-the-city',
+    scope: 'city',
     title: 'Inside the City',
     rows: [
       { need: 'Small godowns for north Bangalore', areas: 'Yelahanka, Jakkur, Hebbal' },

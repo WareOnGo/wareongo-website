@@ -8,12 +8,13 @@ interface Location extends BangaloreMapArea {
   count: number | null;
 }
 
-export default function BangaloreMicromarkets({ locations, onContact, content }: {
+export default function BangaloreMicromarkets({ locations, onContact, content, scope, onScopeChange }: {
   content: AdPageContent;
   locations: Location[];
   onContact: (trigger: HTMLButtonElement, context: AnalyticsParams) => void;
+  scope: BangaloreMapScope;
+  onScopeChange: (scope: BangaloreMapScope) => void;
 }) {
-  const [scope, setScope] = useState<BangaloreMapScope>('belts');
   const camera = BANGALORE_MAP_VIEWS[scope];
   const visibleLocations = locations.filter(location => location.scope === scope);
   const [active, setActive] = useState<string | null>(null);
@@ -174,12 +175,12 @@ export default function BangaloreMicromarkets({ locations, onContact, content }:
         <h2 id="bangalore-locations-title" className="bangalore-landing__section-title">{content.copy.locationsHeading}</h2>
         <div className="bangalore-landing__map-views" role="group" aria-label="Map area view">
           {(['belts', 'city'] as const).map(view => (
-            <button key={view} type="button" aria-pressed={scope === view} aria-controls="bangalore-area-map bangalore-mobile-markets" onClick={() => {
+            <button key={view} type="button" aria-pressed={scope === view} aria-controls="bangalore-area-map bangalore-mobile-markets bangalore-area-fit" onClick={() => {
               clearTimers();
               setActive(null);
               setPinned(null);
               dismissedPreview.current = null;
-              setScope(view);
+              onScopeChange(view);
             }}>{view === 'belts' ? 'Warehouse Belts' : 'City Areas'}</button>
           ))}
         </div>
