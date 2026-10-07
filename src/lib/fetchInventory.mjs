@@ -22,5 +22,10 @@ export async function fetchInventory(url, init = {}, fresh = false) {
     await response.body?.cancel().catch(() => {});
     throw new Error('Deploy the backend listing-filter change before rebuilding the website. Multi-select area and type filtering was not confirmed.');
   }
+  if (response.ok && new URL(url).pathname.endsWith('/warehouses') && new URL(url).searchParams.has('maxId')
+    && !(Number(response.headers.get('X-Wareongo-Listing-Filters')) >= 3)) {
+    await response.body?.cancel().catch(() => {});
+    throw new Error('Deploy backend maxId support before rebuilding the website. The warehouse cutoff was not acknowledged.');
+  }
   return response;
 }

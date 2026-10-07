@@ -6,7 +6,7 @@ const { outputFiles } = await build({
   stdin: { contents: `export { listingsQueryOptions } from './src/lib/listingsQuery.ts';
     export { warehouseAPI } from './src/services/warehouseAPI.ts';
     export { QueryClient } from '@tanstack/react-query';`, resolveDir: process.cwd() },
-  bundle: true, write: false, platform: 'node', format: 'cjs', define: { 'import.meta.env': '{}' },
+  bundle: true, write: false, platform: 'node', format: 'cjs', define: { 'import.meta.env': '{}', '__DEV_SERVER__': 'true' },
 });
 const compiled = { exports: {} };
 new Function('module', 'exports', outputFiles[0].text)(compiled, compiled.exports);

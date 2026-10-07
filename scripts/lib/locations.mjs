@@ -5,6 +5,7 @@
 
 import { API_BASE, fetchMicromarkets } from './api.mjs';
 import { fetchInventory } from '../../src/lib/fetchInventory.mjs';
+import { highestWarehouseId } from './warehouse-build.mjs';
 import { canonicalListingLocation as canonicalize, matchesListingType } from '../../src/lib/listingLocation.mjs';
 
 export { canonicalize };
@@ -69,14 +70,18 @@ export const slugify = (name) =>
     .replace(/\s+/g, '-')
     .replace(/[^a-z0-9-]/g, '');
 
-export async function fetchAllWarehouses() {
+export async function fetchAllWarehouses(maxId) {
   const all = [];
   let page = 1;
   const pageSize = 500;
   while (true) {
-    const resp = await fetchInventory(`${API_BASE}/warehouses?page=${page}&pageSize=${pageSize}`, {}, true);
+    const cutoff = maxId === undefined ? '' : `&maxId=${maxId}`;
+    const resp = await fetchInventory(`${API_BASE}/warehouses?page=${page}&pageSize=${pageSize}${cutoff}`, {}, true);
     if (!resp.ok) throw new Error(`Failed to fetch warehouses page ${page}: ${resp.status}`);
     const json = await resp.json();
+    // The first descending page fixes this build's ceiling. Later inserts
+    // cannot shift subsequent pages or enter a build already in progress.
+    if (maxId === undefined) maxId = highestWarehouseId(json.data);
     all.push(...json.data);
     if (page >= json.pagination.totalPages || json.data.length === 0) break;
     page += 1;

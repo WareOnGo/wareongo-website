@@ -41,6 +41,20 @@ test('fresh listing builds also require multi-select support before publishing t
   await assert.rejects(fetchInventory('https://backend.example/warehouses', {}, true), /Multi-select area and type filtering was not confirmed/);
 });
 
+test('capped builds reject backends that would silently ignore maxId', async t => {
+  const legacy = Response.json({ data: [] }, { headers: { 'X-Wareongo-Cache': 'bypass', 'X-Wareongo-Listing-Filters': '2' } });
+  t.mock.method(globalThis, 'fetch', async () => legacy);
+  await assert.rejects(fetchInventory('https://backend.example/warehouses?maxId=2893', {}, true), /maxId/);
+  assert.equal(legacy.bodyUsed, true);
+});
+
+test('capped builds accept a backend that supports the cutoff', async t => {
+  t.mock.method(globalThis, 'fetch', async () => Response.json({ data: [] }, {
+    headers: { 'X-Wareongo-Cache': 'bypass', 'X-Wareongo-Listing-Filters': '3' },
+  }));
+  assert.equal((await fetchInventory('https://backend.example/warehouses?maxId=2893', {}, true)).status, 200);
+});
+
 test('fresh reads retain bounded retries and the bypass on every attempt', async t => {
   const timer = setTimeout;
   t.mock.method(globalThis, 'setTimeout', callback => timer(callback, 0));

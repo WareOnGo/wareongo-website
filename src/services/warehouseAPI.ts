@@ -1,4 +1,5 @@
 import { fetchInventory } from '@/lib/fetchInventory.mjs';
+import { warehouseBuildMaxId } from '@/lib/warehouseBuild';
 /**
  * Warehouse API service for fetching warehouse data from backend
  */
@@ -110,6 +111,7 @@ class WarehouseAPI {
       const params = new URLSearchParams();
       params.append('page', page.toString());
       params.append('pageSize', pageSize.toString());
+      if (warehouseBuildMaxId !== undefined) params.append('maxId', String(warehouseBuildMaxId));
 
       // Add filters if provided
       if (filters) {

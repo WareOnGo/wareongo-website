@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fetchLocations, fetchMicromarkets } from './lib/api.mjs';
 import { popularLocationIds } from './lib/navigation-popularity.mjs';
+import { highestWarehouseId, WAREHOUSE_BUILD_FILE } from './lib/warehouse-build.mjs';
 import {
   fetchAllWarehouses,
   summarize,
@@ -33,6 +34,7 @@ async function main() {
     fetchAllWarehouses(), fetchLocations(), fetchMicromarkets(),
   ]);
   const cities = summarize(warehouses, 'city');
+  const maxId = highestWarehouseId(warehouses);
   const states = summarize(warehouses, 'state');
   const micromarkets = await summarizeMicromarkets(allMicromarkets);
   const filterMarkets = filterMicromarkets(warehouses, allMicromarkets);
@@ -89,6 +91,8 @@ export const POPULAR_LOCATION_IDS: Record<'states' | 'cities' | 'micromarkets', 
   const outPath = path.join(outDir, 'locations.generated.ts');
   await fs.mkdir(outDir, { recursive: true });
   await fs.writeFile(outPath, body, 'utf8');
+  await fs.writeFile(WAREHOUSE_BUILD_FILE, JSON.stringify({ maxId }) + '\n');
+  console.log(`[warehouse-build] fixed maximum ID ${maxId}`);
   console.log(
     `[locations] wrote ${outPath} — ${cities.length} cities, ${states.length} states, ${cityByType.PEB.length}+${cityByType.RCC.length} city×type, ${stateByType.PEB.length}+${stateByType.RCC.length} state×type, ${micromarkets.length} micromarkets (from ${warehouses.length} listings)`,
   );

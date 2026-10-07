@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import { readWarehouseBuildMaxId } from './lib/warehouse-build.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
@@ -112,7 +113,7 @@ async function main() {
   // Straight from the CMS, so a newly published blog reaches the sitemap
   // without anyone remembering to edit a hardcoded list here.
   const blogSlugs = (await fetchBlogs()).map((g) => g.slug);
-  const warehouses = await fetchAllWarehouses();
+  const warehouses = await fetchAllWarehouses(await readWarehouseBuildMaxId());
   const warehouseEntries = warehouses.map((w) =>
     warehouseUrlEntry(`/warehouse/${warehouseSlug(w)}`, warehousePhotos(w), w.updatedAt),
   );

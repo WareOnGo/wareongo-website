@@ -2,11 +2,15 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { indexWarehousePaths } from '../src/lib/warehouseRoutes.mjs';
+import { highestWarehouseId, readWarehouseBuildMaxId } from './lib/warehouse-build.mjs';
 
-export async function generateWarehouseRouteMap(dist = 'dist') {
+export async function generateWarehouseRouteMap(dist = 'dist', maxId) {
   const manifest = JSON.parse(await fs.readFile(path.join(dist, 'static-loader-data-manifest-stable.json'), 'utf8'));
   const index = indexWarehousePaths(Object.keys(manifest));
   if (!Object.keys(index).length) throw new Error('No published warehouses; refusing to emit an empty redirect map');
+  if (maxId !== undefined && highestWarehouseId(Object.keys(index).map(id => ({ id: Number(id) }))) !== maxId) {
+    throw new Error('Built warehouse pages do not match the build cutoff; refusing to publish');
+  }
 
   // Verify both sides of every target. A missing page/payload must fail the
   // build rather than ship a redirect to another 404 or a null detail page.
@@ -30,7 +34,7 @@ export async function generateWarehouseRouteMap(dist = 'dist') {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
-  generateWarehouseRouteMap().catch((error) => {
+  readWarehouseBuildMaxId().then(maxId => generateWarehouseRouteMap('dist', maxId)).catch((error) => {
     console.error('[warehouse-routes]', error.message);
     process.exitCode = 1;
   });

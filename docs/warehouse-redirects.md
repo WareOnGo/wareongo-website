@@ -79,3 +79,50 @@ This resolves aliases for published warehouses. New inventory and changed slugs
 become public after the next successful build (including the scheduled 2 am IST
 build). Until then, an existing warehouse continues to resolve to its previously
 published page. Unpublished or deleted IDs are not redirected to another warehouse.
+
+Listing results use the maximum warehouse ID captured by the deployed build.
+`generate-locations.mjs` starts with an uncapped inventory read and writes
+`src/data/warehouse-build.generated.json`. Later inventory pages, SSG loaders,
+the sitemap and browser listing requests use that same `maxId`. The backend
+applies `id <= maxId` before counting and pagination; both API and browser query
+caches include the cutoff. New higher IDs appear after the next successful
+deployment. Vite development keeps its live detail loaders and uncapped inventory.
+
+Deploy backend `maxId` support before rebuilding the frontend. Capped build reads
+require `X-Wareongo-Listing-Filters: 3`; an older backend fails the build rather
+than silently ignoring the cutoff. The generated route map also verifies that
+the cutoff matches the highest rendered warehouse, with valid HTML and payload.
+The cutoff ships inside the frontend deployment, so a failed build does not
+advance the live site's limit. No scheduled task or manually maintained setting
+is needed beyond the existing nightly build.
+
+This ceiling covers newly allocated IDs. An older, previously hidden ID becoming
+visible after a build can still need the next build before its detail page exists.
+
+Run `npm run test:warehouse-cutoff` and `npm run test:build-cache` here, and
+`npm run test:warehouse-cutoff` plus `npm run test:warehouse-filters` in the
+backend (the latter requires its dedicated local PostgreSQL test database).
+The sibling eval harness's `npm run test:warehouse-cutoff -- --project=desktop
+--project=mobile` provisions local PostgreSQL/Redis, runs the database tests and
+full SSG build, tests browsing, adds matching warehouses across all type, area,
+Fire NOC and geography filters, verifies they stay excluded, then rebuilds and
+verifies their listings and detail pages. Artifacts stay
+under the printed `/tmp/wog-listing-integration-*` directory. Set
+`LISTING_POSTGRES_PORT` if its default port 55439 is already occupied.
+
+Adversarial review on 7 October 2026 found no cutoff-related filtering regression.
+The PostgreSQL suite now checks all 768 type/area/Fire NOC combinations at five
+cutoffs (including no cutoff and a cutoff excluding every match), with independent
+expected IDs, totals, every page and the empty page after the end. It also checks
+every supported API filter individually and combined, controller forwarding and
+separate cached results for different cutoffs. Legacy budget/height text comparison
+and `hasCoordinates=false` behavior remain unchanged; those are not website controls.
+
+The local review passed 20 PostgreSQL tests, 112 desktop/mobile browser checks and
+two full SSG builds. Eight new warehouses were excluded at cutoff 2007, including
+new city/state/micromarket matches, then appeared with pages after the rebuild
+advanced the cutoff to 2015. The browser checks also cover custom ranges, hybrid
+types, empty results, reset/history, counts, paging, reload, prefetch and attempted
+URL overrides of `maxId`. The production readiness check requires capability 3
+and tests an actual `maxId=1` request; production deployment has not been tested
+as part of this local review.
