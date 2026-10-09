@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "test:city-localities": "node tests/city-localities.test.mjs",
     "test:blogs": "node --test tests/blog-summaries.test.mjs",
     "test:formatting": "node tests/formatting.test.mjs",
     "dev": "vite",

@@ -46,7 +46,9 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
   // and a heading over an empty section is worse than no section — same rule the
   // location content templates follow: never publish half-filled copy.
   const hasMarket = Boolean(content.marketProse);
-  const hasCorridors = isCity && (Boolean(content.corridorProse) || Boolean(city?.corridors.length));
+  const hasCityPanel = Boolean(city && (city.segments.large.listings > 0 || city.segments.small.listings > 0
+    || (city.localityTable?.eligible && city.corridors.length > 0)));
+  const hasCorridors = isCity && (Boolean(content.corridorProse) || hasCityPanel);
   const hasRents = Boolean(content.rentsProse) || peers.length > 0 || Boolean(city?.rentBySize.length);
   const hasSpec = Boolean(content.specProse) || specRowsFor(stats).length > 0;
   const hasCities = stateCities.length > 0;
@@ -293,7 +295,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
                 <SectionHeading index={indexOf('corridors')} eyebrow="Locations">
                   {content.corridorHeading ?? `Where to Rent in ${name}`}
                 </SectionHeading>
-                {city && city.corridors.length > 0 && <CorridorPanel data={city} />}
+                {city && hasCityPanel && <CorridorPanel data={city} />}
                 {content.corridorProse && (
                   <p className={`mt-6 ${PROSE}`}><InlineText text={content.corridorProse} /></p>
                 )}
