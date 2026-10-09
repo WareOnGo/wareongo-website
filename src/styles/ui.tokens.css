@@ -23,6 +23,8 @@
   --ui-listing-hover: #f6f4ee;
   --ui-table-header: #f3f2ee;
   --ui-table-stripe: #fcfbf8;
+  /* Legibility shade over photo cards, from the approved Bangalore cards. */
+  --ui-photo-shade: linear-gradient(180deg, #0a223900 15%, #0a223933 40%, #0a2239ed 100%);
   --ui-error: #913c21;
   --ui-font: Montserrat, ui-sans-serif, system-ui, sans-serif;
   --ui-text-xs: 12px;
@@ -55,6 +57,7 @@
   --ui-grid-gap: 24px;
   --ui-content-width: 1400px;
   --ui-gutter: 32px;
+  --ui-photo-card-height: 208px;
 }
 @media (max-width: 767px) {
   :root {
@@ -68,6 +71,7 @@
     --ui-section-space: 48px;
     --ui-grid-gap: 16px;
     --ui-gutter: 20px;
+    --ui-photo-card-height: 176px;
   }
 }
 @media (prefers-reduced-motion: reduce) { :root { --ui-motion: 0ms; } }

@@ -20,6 +20,7 @@ const MicromarketHero = ({
   stats,
   place,
   onBrowse,
+  listings,
   loading = false,
 }: {
   content: EditorialContent;
@@ -27,6 +28,8 @@ const MicromarketHero = ({
   /** "Nelamangala, Bengaluru" — the fully qualified place, for the eyebrow default. */
   place: string;
   onBrowse?: string;
+  /** States: the secondary action leaves for the full listing page instead. */
+  listings?: { path: string; name: string };
 } & ({ loading: true; stats?: never } | { loading?: false; stats: DerivedStats })) => {
   // Built from live inventory, and each one is dropped when the data behind it
   // isn't there — a rent tile reading "₹0" would be worse than three tiles.
@@ -109,6 +112,13 @@ const MicromarketHero = ({
           >
             Browse the listings ↓
           </a>}
+          {listings && (loading
+            ? <a data-analytics-placement="overview_hero" aria-disabled className="ui-button ui-button--secondary">
+              See available warehouses in {listings.name} →
+            </a>
+            : <Link data-analytics-placement="overview_hero" to={listings.path} className="ui-button ui-button--secondary">
+              See available warehouses in {listings.name} →
+            </Link>)}
         </div>
       </div>
 

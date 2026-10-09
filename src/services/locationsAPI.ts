@@ -33,6 +33,11 @@ export interface LocationStats extends DerivedStats {
    * whatever the count.
    */
   hasPage: boolean;
+  /**
+   * States only: land-border neighbours present in this list, busiest first.
+   * Absent from older backends, which keeps the "Other states" peer links.
+   */
+  nearbyStates?: { name: string; slug: string }[];
 }
 
 export interface LocationGates {

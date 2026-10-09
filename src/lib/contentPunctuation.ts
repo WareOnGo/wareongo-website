@@ -5,7 +5,7 @@ const COPY_FIELDS = new Set([
   'text', 'items', 'headers', 'rows', 'q', 'a', 'alt', 'caption', 'notice',
   'metaDescription', 'h1', 'heroEyebrow', 'heroProse', 'marketHeading',
   'marketProse', 'rentsHeading', 'rentsProse', 'specHeading', 'specProse',
-  'inventoryHeading',
+  'inventoryHeading', 'citiesHeading', 'complianceHeading', 'complianceProse',
 ]);
 
 export function normalizeCopyText(text: string, separator = ', '): string {

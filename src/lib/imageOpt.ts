@@ -32,3 +32,15 @@ export const optimizedSrc = (url: string, width: number, quality = 75): string =
 
 export const optimizedSrcSet = (url: string, widths: number[]): string | undefined =>
   isOptimizable(url) ? widths.map((w) => `${optimizedSrc(url, w)} ${w}w`).join(', ') : undefined;
+
+/**
+ * Build-generated overview variants carry the original photo in `data-raw`. If
+ * a variant is unavailable, retry that original once, without srcset/sizes.
+ */
+export const fallbackToRaw = (img: HTMLImageElement) => {
+  const raw = img.dataset.raw;
+  if (!raw || img.src === raw) return;
+  img.removeAttribute('srcset');
+  img.removeAttribute('sizes');
+  img.src = raw;
+};

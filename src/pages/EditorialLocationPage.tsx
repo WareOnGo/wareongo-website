@@ -14,7 +14,7 @@ import EditorialImage, { EDITORIAL_HERO_SIZES } from '@/components/micromarket/E
 import PeerRentChart from '@/components/micromarket/PeerRentChart';
 import InventoryBand from '@/components/micromarket/InventoryBand';
 import SpecTable from '@/components/micromarket/SpecTable';
-import { CorridorPanel, RentBySize, SpecSizeComparison } from '@/components/city/CityPanels';
+import { CorridorPanel, RentBySize, SpecSizeComparison, StateCitiesTable, StateCityCards, OtherCities } from '@/components/city/CityPanels';
 import { usePagedListings } from '@/hooks/usePagedListings';
 import { CHIP, EYEBROW, PANEL, PROSE, SECTION_GAP, SECTION_RULE } from '@/components/micromarket/tokens';
 import { blogSummaries as blogs } from '@/data/blogSummaries';
@@ -25,31 +25,21 @@ import { trackEvent } from '@/lib/analytics';
 import { useListingResults } from '@/hooks/useListingAnalytics';
 import { warehousePath } from '@/lib/warehouseSlug';
 import { catalogueSeo } from '@/lib/catalogueSeo';
+import { orderForDisplay } from '@/lib/warehouseCardData';
 
 /** Shared CMS wireframe for state, city and micromarket /overview pages. */
-
-type Listing = EditorialPageData['warehouses'][number];
-
-/**
- * Best first: listings with a photo ahead of those without, then largest first.
- *
- * The API returns newest-id-first, which puts photo-less listings wherever they
- * happen to fall. A row of placeholder cards at the top of the grid reads as a
- * broken page rather than as listings without photos, so page one earns the
- * stock that actually shows well.
- */
-const orderForDisplay = (warehouses: Listing[]): Listing[] =>
-  [...warehouses].sort((a, b) => {
-    const photos = Number(Boolean(b.image)) - Number(Boolean(a.image));
-    return photos !== 0 ? photos : (b.size ?? 0) - (a.size ?? 0);
-  });
 
 const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
   const { content, stats, warehouses, editorial } = data;
   const peers = data.peers ?? [];
   const { name, path, place, scope } = editorial;
   const isCity = scope === 'city';
+  const isState = scope === 'state';
   const city = isCity ? data.cityOverview : undefined;
+  const state = isState ? data.stateOverview : undefined;
+  const stateCities = state?.cities ?? [];
+  // A state's market figure falls back to a listing photo; other scopes show uploads only.
+  const marketImage = content.marketImage ?? state?.marketImage ?? null;
   const heroVariants = content.heroImage && data.imageVariants?.[content.heroImage.url];
 
   // Which sections have something to say. Prose slots are optional in the CMS,
@@ -59,7 +49,8 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
   const hasCorridors = isCity && (Boolean(content.corridorProse) || Boolean(city?.corridors.length));
   const hasRents = Boolean(content.rentsProse) || peers.length > 0 || Boolean(city?.rentBySize.length);
   const hasSpec = Boolean(content.specProse) || specRowsFor(stats).length > 0;
-  const hasCompliance = isCity && Boolean(content.complianceProse);
+  const hasCities = stateCities.length > 0;
+  const hasCompliance = (isCity || isState) && Boolean(content.complianceProse);
   const hasFaqs = content.faqs.length > 0;
 
   // Numbered as rendered, so a page without rents copy reads 01, 02, 03 rather
@@ -68,9 +59,11 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
   // landed here from a search for warehouses in this belt wants the warehouses,
   // and making them scroll past four sections of prose to reach the grid gets
   // the priority backwards. The prose then explains what they have just seen.
+  // A state is the exception: too broad to browse first, it introduces its
+  // market and its cities, then the listings.
+  const intro = [...(hasMarket ? ['market'] : []), ...(hasCities ? ['cities'] : [])];
   const numbered = [
-    'listings',
-    ...(hasMarket ? ['market'] : []),
+    ...(isState ? [...intro, 'listings'] : ['listings', ...intro]),
     ...(hasCorridors ? ['corridors'] : []),
     ...(hasRents ? ['rents'] : []),
     ...(hasSpec ? ['specification'] : []),
@@ -98,7 +91,9 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
     page: currentPage, page_size: perPage, result_count: shown.length, total_count: warehouses.length,
     result_status: shown.length ? 'success' : 'empty' }, hydrated);
 
-  const siblings = city?.nearbyCities ?? peers.filter((p) => !p.isSelf);
+  const siblings = city?.nearbyCities ?? state?.nearbyStates ?? peers.filter((p) => !p.isSelf);
+  // The state's list in order, less the cities outside our listings.
+  const cityLinks = stateCities.flatMap(({ name, path }) => path ? [{ name, path }] : []);
   const relatedBlogs = content.relatedBlogs
     .map((s) => blogs.find((b) => b.slug === s))
     .filter((b): b is NonNullable<typeof b> => Boolean(b));
@@ -144,6 +139,37 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
     })),
   };
 
+  // Defined here because a state renders them ahead of the listings.
+  const marketSection = hasMarket && (
+    <section id="market" className={SECTION_RULE}>
+      <SectionHeading index={indexOf('market')} eyebrow="Market">
+        {content.marketHeading ?? (isState ? `Why ${name} for Warehousing` : `Warehouse Space in ${name}: Where the Stock Sits`)}
+      </SectionHeading>
+      {/* Fixed figure width rather than a fraction. The prose caps its
+          own measure at max-w-2xl for readability, so a fractional
+          column just left a gap between where the text stopped and
+          where the figure began — and a 5:4 figure in it came out
+          482px tall against 192px of prose. At 22rem the figure's 4:3
+          lands near the paragraph's own height. */}
+      <div className="grid items-start gap-6 lg:grid-cols-[1fr_22rem] lg:gap-10">
+        <p className={`max-w-2xl ${PROSE}`}><InlineText text={content.marketProse ?? ''} /></p>
+        {marketImage && <EditorialImage image={marketImage} variants={data.imageVariants?.[marketImage.url]} />}
+      </div>
+    </section>
+  );
+
+  // State only: its chosen cities, as a table and as photo cards.
+  const citiesSection = hasCities && (
+    <section id="cities" className={SECTION_RULE}>
+      <SectionHeading index={indexOf('cities')} eyebrow="Cities">
+        {content.citiesHeading ?? `Where Warehouse Stock Sits in ${name}`}
+      </SectionHeading>
+      <StateCitiesTable cities={stateCities} place={name} />
+      <StateCityCards cities={stateCities} imageVariants={data.imageVariants} />
+      <OtherCities names={state.otherCities} />
+    </section>
+  );
+
   return (
     <div className="flex min-h-screen flex-col bg-wareongo-ivory font-sans">
       <PageHead
@@ -183,10 +209,13 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
           />
 
           <section id="overview">
-            <MicromarketHero content={content} imageVariants={heroVariants} stats={stats} place={place} onBrowse={isCity ? undefined : '#listings'} />
+            <MicromarketHero content={content} imageVariants={heroVariants} stats={stats} place={place}
+              onBrowse={isCity || isState ? undefined : '#listings'}
+              listings={isState ? { path: editorial.listingPath, name } : undefined} />
           </section>
 
           <div>
+            {isState && <>{marketSection}{citiesSection}</>}
             <section
               id="listings"
               ref={listingsRef as React.RefObject<HTMLElement>}
@@ -251,24 +280,13 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
                   goTo(next);
                 }}
               />
+              {isState && (
+                <Link to={editorial.listingPath} className="mt-6 inline-block text-sm font-semibold text-wareongo-blue hover:underline">
+                  View all warehouses in {name} →
+                </Link>
+              )}
             </section>
-            {hasMarket && (
-              <section id="market" className={SECTION_RULE}>
-                <SectionHeading index={indexOf('market')} eyebrow="Market">
-                  {content.marketHeading ?? `Warehouse Space in ${name}: Where the Stock Sits`}
-                </SectionHeading>
-                {/* Fixed figure width rather than a fraction. The prose caps its
-                    own measure at max-w-2xl for readability, so a fractional
-                    column just left a gap between where the text stopped and
-                    where the figure began — and a 5:4 figure in it came out
-                    482px tall against 192px of prose. At 22rem the figure's 4:3
-                    lands near the paragraph's own height. */}
-                <div className="grid items-start gap-6 lg:grid-cols-[1fr_22rem] lg:gap-10">
-                  <p className={`max-w-2xl ${PROSE}`}><InlineText text={content.marketProse ?? ''} /></p>
-                  {content.marketImage && <EditorialImage image={content.marketImage} variants={data.imageVariants?.[content.marketImage.url]} />}
-                </div>
-              </section>
-            )}
+            {!isState && marketSection}
 
             {hasCorridors && (
               <section id="corridors" className={SECTION_RULE}>
@@ -366,10 +384,22 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
                     </dd>
                   </div>
                 )}
+                {cityLinks.length > 0 && (
+                  <div className="sm:flex sm:gap-6">
+                    <dt className={`mb-2 min-w-[9rem] ${EYEBROW} text-wareongo-slate sm:mb-0`}>Cities</dt>
+                    <dd className="flex flex-wrap gap-2">
+                      {cityLinks.map((c) => (
+                        <Link key={c.path} to={c.path} className={`inline-flex items-center gap-1.5 ${CHIP} px-3 py-1.5 text-wareongo-blue hover:bg-ui-tint`}>
+                          {c.name}
+                        </Link>
+                      ))}
+                    </dd>
+                  </div>
+                )}
                 {siblings.length > 0 && (
                   <div className="sm:flex sm:gap-6">
                     <dt className={`mb-2 min-w-[9rem] ${EYEBROW} text-wareongo-slate sm:mb-0`}>
-                      {city?.nearbyLabel ?? (scope === 'state' ? 'Other states' : 'Nearby markets')}
+                      {city?.nearbyLabel ?? (scope === 'state' ? (state?.nearbyStates ? 'Nearby states' : 'Other states') : 'Nearby markets')}
                     </dt>
                     <dd className="flex flex-wrap gap-2">
                       {siblings.map((s) => (

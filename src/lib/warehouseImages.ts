@@ -1,3 +1,5 @@
+import type { PagePhoto } from '@/data/editorial';
+
 const IMAGE_EXTENSIONS = /\.(?:avif|bmp|gif|jpe?g|png|svg|webp)$/i;
 const IMAGE_HOSTS = ['r2.dev', 'cloudinary.com', 'imgur.com', 'amazonaws.com', 'googleusercontent.com', 'imagekit.io', 'picsum.photos', 'unsplash.com'];
 
@@ -62,6 +64,20 @@ export interface ImageRecord {
   caption: string | null;
 }
 
+/**
+ * Website-only gallery metadata, sent beside `images` in the same order (the
+ * images themselves stay the shared contract). Older backends omit it.
+ */
+export interface ImageQuality {
+  /** The graded quality after the resolution ceiling. */
+  qualityTier: 'T1' | 'T2' | 'T3' | null;
+  coverSuitable: boolean | null;
+  width: number | null;
+  height: number | null;
+}
+
+type Gallery = { images?: ImageRecord[]; imageQuality?: (ImageQuality | null)[] };
+
 /** API rows carry explicit original/variant pairs, including pending images. */
 export function preferredWarehouseImages(warehouse: {
   images?: ImageRecord[]; photos?: unknown; photosWebp?: unknown;
@@ -78,6 +94,43 @@ export function preferredWarehouseImages(warehouse: {
     fallbacks.push(primary !== row.originalUrl ? row.originalUrl : null);
   }
   return { images, fallbacks };
+}
+
+/** Whether any of these listings' photos carry a quality tier; older backends report none. */
+export const reportsQualityTiers = (listings: Gallery[]): boolean =>
+  listings.some(listing => Array.isArray(listing.imageQuality) && listing.imageQuality.some(q => typeof q?.qualityTier === 'string'));
+
+const dimension = (value: unknown): number | undefined =>
+  typeof value === 'number' && Number.isFinite(value) && value > 0 ? value : undefined;
+
+/**
+ * The best T1 gallery photo among some listings: cover-suitable first, then
+ * landscape, then from the larger listing, then the lower listing id, then
+ * gallery order. `used` holds original URLs already on the page, so one page
+ * never shows a photo twice. The caption is the alt text when there is one.
+ */
+export function bestTierOnePhoto(
+  listings: ({ id: number; size: number | null | undefined } & Gallery)[],
+  used: ReadonlySet<string>,
+  alt: string,
+): PagePhoto | null {
+  const candidates = listings.flatMap(listing => (listing.images ?? []).flatMap((row, order) => {
+    const quality = Array.isArray(listing.imageQuality) ? listing.imageQuality[order] : undefined;
+    if (quality?.qualityTier !== 'T1' || typeof row?.originalUrl !== 'string' || used.has(row.originalUrl)) return [];
+    const url = isWarehouseImageUrl(row.webpUrl) ? row.webpUrl : row.originalUrl;
+    if (!isWarehouseImageUrl(url)) return [];
+    const width = dimension(quality.width), height = dimension(quality.height);
+    return [{ row, url, width, height, order, id: listing.id, size: listing.size ?? 0,
+      cover: Number(quality.coverSuitable === true), landscape: Number(Boolean(width && height && width >= height)) }];
+  }));
+  const best = candidates.sort((a, b) => b.cover - a.cover || b.landscape - a.landscape
+    || b.size - a.size || a.id - b.id || a.order - b.order)[0];
+  if (!best) return null;
+  return {
+    url: best.url, alt: best.row.caption?.trim() || alt,
+    ...(best.width && best.height ? { width: best.width, height: best.height } : {}),
+    ...(best.url !== best.row.originalUrl ? { fallback: best.row.originalUrl } : {}),
+  };
 }
 
 export interface WarehouseImage { primary: string; fallback: string | null }

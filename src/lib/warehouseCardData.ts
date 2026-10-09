@@ -61,3 +61,18 @@ export function cardUpdateLabel(value: string | null | undefined, now: number): 
   cutoff.setUTCFullYear(cutoff.getUTCFullYear() - 1);
   return `${time >= cutoff.getTime() ? 'Updated' : 'Last updated'} ${updateDate.format(time)}`;
 }
+
+/**
+ * Best first: listings with a photo ahead of those without, then largest first.
+ *
+ * The API returns newest-id-first, which puts photo-less listings wherever they
+ * happen to fall. A row of placeholder cards at the top of the grid reads as a
+ * broken page rather than as listings without photos, so page one earns the
+ * stock that actually shows well. State overviews use the same rule to pick a
+ * listing cover for a card or figure when no graded T1 photo is available.
+ */
+export const orderForDisplay = <T extends { image: string | null; size?: number | null }>(warehouses: T[]): T[] =>
+  [...warehouses].sort((a, b) => {
+    const photos = Number(Boolean(b.image)) - Number(Boolean(a.image));
+    return photos !== 0 ? photos : (b.size ?? 0) - (a.size ?? 0);
+  });

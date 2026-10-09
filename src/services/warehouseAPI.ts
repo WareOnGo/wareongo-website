@@ -6,7 +6,7 @@ import { warehouseBuildMaxId } from '@/lib/warehouseBuild';
 
 import { config, getApiUrl } from '@/config/config';
 import { fetchRead } from '@/lib/fetchRead.mjs';
-import { preferredWarehouseImages, photoUrls, type ImageRecord } from '@/lib/warehouseImages';
+import { preferredWarehouseImages, photoUrls, type ImageRecord, type ImageQuality } from '@/lib/warehouseImages';
 import { parseClearHeight, parseDockCount } from '@/lib/warehouseCardData';
 
 // Type definitions for the API response
@@ -24,6 +24,8 @@ export interface Warehouse {
   photos: string[] | string | null;
   photosWebp?: string[] | string | null;
   images?: ImageRecord[];
+  /** Website-only quality metadata for `images`, same order; absent from older backends. */
+  imageQuality?: (ImageQuality | null)[];
   fireNocAvailable: boolean | null;
   fireSafetyMeasures: string | null;
   // The listings endpoint includes warehouseType too, even though it's not in

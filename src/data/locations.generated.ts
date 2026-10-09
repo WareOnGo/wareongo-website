@@ -3019,3 +3019,827 @@ export const POPULAR_LOCATION_IDS: Record<'states' | 'cities' | 'micromarkets', 
     "micromarkets/bengaluru/peenya"
   ]
 };
+
+// Per state slug, all its cities, busiest first. The state overview's loading
+// layout resolves the same city list as the loader from these, so it can
+// reserve the cities section.
+export const STATE_CITIES: Record<string, { name: string; slug: string; listings: number; hasPage: boolean }[]> = {
+  "karnataka": [
+    {
+      "name": "Bengaluru",
+      "slug": "bengaluru",
+      "listings": 635,
+      "hasPage": true
+    },
+    {
+      "name": "Dharwad",
+      "slug": "dharwad",
+      "listings": 30,
+      "hasPage": true
+    },
+    {
+      "name": "Mangaluru",
+      "slug": "mangaluru",
+      "listings": 30,
+      "hasPage": true
+    },
+    {
+      "name": "Hubli",
+      "slug": "hubli",
+      "listings": 16,
+      "hasPage": true
+    },
+    {
+      "name": "Kolar",
+      "slug": "kolar",
+      "listings": 16,
+      "hasPage": true
+    },
+    {
+      "name": "Tumakuru",
+      "slug": "tumakuru",
+      "listings": 12,
+      "hasPage": true
+    },
+    {
+      "name": "Mysore",
+      "slug": "mysore",
+      "listings": 8,
+      "hasPage": true
+    },
+    {
+      "name": "Ballari",
+      "slug": "ballari",
+      "listings": 5,
+      "hasPage": true
+    },
+    {
+      "name": "Shivamogga",
+      "slug": "shivamogga",
+      "listings": 5,
+      "hasPage": true
+    },
+    {
+      "name": "Vijayapura",
+      "slug": "vijayapura",
+      "listings": 4,
+      "hasPage": false
+    },
+    {
+      "name": "Belagavi",
+      "slug": "belagavi",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Kumta",
+      "slug": "kumta",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Tumkur",
+      "slug": "tumkur",
+      "listings": 1,
+      "hasPage": false
+    }
+  ],
+  "telangana": [
+    {
+      "name": "Hyderabad",
+      "slug": "hyderabad",
+      "listings": 166,
+      "hasPage": true
+    },
+    {
+      "name": "Medchal",
+      "slug": "medchal",
+      "listings": 2,
+      "hasPage": false
+    },
+    {
+      "name": "Bhongir",
+      "slug": "bhongir",
+      "listings": 1,
+      "hasPage": false
+    }
+  ],
+  "haryana": [
+    {
+      "name": "Gurugram",
+      "slug": "gurugram",
+      "listings": 137,
+      "hasPage": true
+    },
+    {
+      "name": "Sonipat",
+      "slug": "sonipat",
+      "listings": 7,
+      "hasPage": true
+    },
+    {
+      "name": "Dharuhera",
+      "slug": "dharuhera",
+      "listings": 5,
+      "hasPage": true
+    },
+    {
+      "name": "Karnal",
+      "slug": "karnal",
+      "listings": 5,
+      "hasPage": true
+    },
+    {
+      "name": "Palwal",
+      "slug": "palwal",
+      "listings": 4,
+      "hasPage": false
+    },
+    {
+      "name": "Faridabad",
+      "slug": "faridabad",
+      "listings": 3,
+      "hasPage": false
+    },
+    {
+      "name": "Bilaspur",
+      "slug": "bilaspur",
+      "listings": 2,
+      "hasPage": false
+    },
+    {
+      "name": "Manesar",
+      "slug": "manesar",
+      "listings": 2,
+      "hasPage": false
+    },
+    {
+      "name": "Rewari",
+      "slug": "rewari",
+      "listings": 2,
+      "hasPage": false
+    },
+    {
+      "name": "Ambala",
+      "slug": "ambala",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Mahendragarh",
+      "slug": "mahendragarh",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Rohtak",
+      "slug": "rohtak",
+      "listings": 1,
+      "hasPage": false
+    }
+  ],
+  "uttar-pradesh": [
+    {
+      "name": "Lucknow",
+      "slug": "lucknow",
+      "listings": 82,
+      "hasPage": true
+    },
+    {
+      "name": "Ghaziabad",
+      "slug": "ghaziabad",
+      "listings": 45,
+      "hasPage": true
+    },
+    {
+      "name": "Noida",
+      "slug": "noida",
+      "listings": 24,
+      "hasPage": true
+    },
+    {
+      "name": "Dadri",
+      "slug": "dadri",
+      "listings": 9,
+      "hasPage": true
+    },
+    {
+      "name": "Kanpur",
+      "slug": "kanpur",
+      "listings": 5,
+      "hasPage": true
+    },
+    {
+      "name": "Varanasi",
+      "slug": "varanasi",
+      "listings": 4,
+      "hasPage": false
+    },
+    {
+      "name": "Aligarh",
+      "slug": "aligarh",
+      "listings": 2,
+      "hasPage": false
+    },
+    {
+      "name": "Hapur",
+      "slug": "hapur",
+      "listings": 2,
+      "hasPage": false
+    },
+    {
+      "name": "Barabanki",
+      "slug": "barabanki",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Chandauli",
+      "slug": "chandauli",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Shamli",
+      "slug": "shamli",
+      "listings": 1,
+      "hasPage": false
+    }
+  ],
+  "tamil-nadu": [
+    {
+      "name": "Chennai",
+      "slug": "chennai",
+      "listings": 61,
+      "hasPage": true
+    },
+    {
+      "name": "Hosur",
+      "slug": "hosur",
+      "listings": 38,
+      "hasPage": true
+    },
+    {
+      "name": "Coimbatore",
+      "slug": "coimbatore",
+      "listings": 30,
+      "hasPage": true
+    },
+    {
+      "name": "Madurai",
+      "slug": "madurai",
+      "listings": 10,
+      "hasPage": true
+    },
+    {
+      "name": "Salem",
+      "slug": "salem",
+      "listings": 5,
+      "hasPage": true
+    },
+    {
+      "name": "Tiruppur",
+      "slug": "tiruppur",
+      "listings": 2,
+      "hasPage": false
+    },
+    {
+      "name": "Krishnagiri",
+      "slug": "krishnagiri",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Perambalur",
+      "slug": "perambalur",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Sivaganga",
+      "slug": "sivaganga",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Villupuram",
+      "slug": "villupuram",
+      "listings": 1,
+      "hasPage": false
+    }
+  ],
+  "gujarat": [
+    {
+      "name": "Ahmedabad",
+      "slug": "ahmedabad",
+      "listings": 60,
+      "hasPage": true
+    },
+    {
+      "name": "Rajkot",
+      "slug": "rajkot",
+      "listings": 27,
+      "hasPage": true
+    },
+    {
+      "name": "Surat",
+      "slug": "surat",
+      "listings": 15,
+      "hasPage": true
+    },
+    {
+      "name": "Dahej",
+      "slug": "dahej",
+      "listings": 3,
+      "hasPage": false
+    },
+    {
+      "name": "Mundra",
+      "slug": "mundra",
+      "listings": 3,
+      "hasPage": false
+    },
+    {
+      "name": "Vadodara",
+      "slug": "vadodara",
+      "listings": 3,
+      "hasPage": false
+    },
+    {
+      "name": "Valsad",
+      "slug": "valsad",
+      "listings": 3,
+      "hasPage": false
+    },
+    {
+      "name": "Bhavnagar",
+      "slug": "bhavnagar",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Gandhidham",
+      "slug": "gandhidham",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Gandhinagar",
+      "slug": "gandhinagar",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Jamnagar",
+      "slug": "jamnagar",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Kheda",
+      "slug": "kheda",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Mehsana",
+      "slug": "mehsana",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Morbi",
+      "slug": "morbi",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Nadiad",
+      "slug": "nadiad",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Sanand",
+      "slug": "sanand",
+      "listings": 1,
+      "hasPage": false
+    }
+  ],
+  "maharashtra": [
+    {
+      "name": "Bhiwandi",
+      "slug": "bhiwandi",
+      "listings": 58,
+      "hasPage": true
+    },
+    {
+      "name": "Pune",
+      "slug": "pune",
+      "listings": 56,
+      "hasPage": true
+    },
+    {
+      "name": "Navi Mumbai",
+      "slug": "navi-mumbai",
+      "listings": 39,
+      "hasPage": true
+    },
+    {
+      "name": "Nagpur",
+      "slug": "nagpur",
+      "listings": 21,
+      "hasPage": true
+    },
+    {
+      "name": "Mumbai",
+      "slug": "mumbai",
+      "listings": 11,
+      "hasPage": true
+    },
+    {
+      "name": "Aurangabad",
+      "slug": "aurangabad",
+      "listings": 6,
+      "hasPage": true
+    },
+    {
+      "name": "Kolhapur",
+      "slug": "kolhapur",
+      "listings": 6,
+      "hasPage": true
+    },
+    {
+      "name": "Chhatrapati Sambhajinagar / Aurangabad",
+      "slug": "chhatrapati-sambhajinagar--aurangabad",
+      "listings": 3,
+      "hasPage": false
+    },
+    {
+      "name": "Solapur",
+      "slug": "solapur",
+      "listings": 3,
+      "hasPage": false
+    },
+    {
+      "name": "Ahmednagar",
+      "slug": "ahmednagar",
+      "listings": 2,
+      "hasPage": false
+    },
+    {
+      "name": "Ahilyanagar",
+      "slug": "ahilyanagar",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Jalgaon",
+      "slug": "jalgaon",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Yavatmal",
+      "slug": "yavatmal",
+      "listings": 1,
+      "hasPage": false
+    }
+  ],
+  "delhi": [
+    {
+      "name": "Delhi",
+      "slug": "delhi",
+      "listings": 58,
+      "hasPage": true
+    },
+    {
+      "name": "New Delhi",
+      "slug": "new-delhi",
+      "listings": 2,
+      "hasPage": false
+    }
+  ],
+  "west-bengal": [
+    {
+      "name": "Kolkata",
+      "slug": "kolkata",
+      "listings": 51,
+      "hasPage": true
+    },
+    {
+      "name": "Kharagpur",
+      "slug": "kharagpur",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Siliguri",
+      "slug": "siliguri",
+      "listings": 1,
+      "hasPage": false
+    }
+  ],
+  "andhra-pradesh": [
+    {
+      "name": "Vijayawada",
+      "slug": "vijayawada",
+      "listings": 50,
+      "hasPage": true
+    },
+    {
+      "name": "Visakhapatnam",
+      "slug": "visakhapatnam",
+      "listings": 28,
+      "hasPage": true
+    },
+    {
+      "name": "Guntur",
+      "slug": "guntur",
+      "listings": 9,
+      "hasPage": true
+    },
+    {
+      "name": "Anantapur",
+      "slug": "anantapur",
+      "listings": 8,
+      "hasPage": true
+    },
+    {
+      "name": "Tirupati",
+      "slug": "tirupati",
+      "listings": 3,
+      "hasPage": false
+    },
+    {
+      "name": "Nellore",
+      "slug": "nellore",
+      "listings": 2,
+      "hasPage": false
+    },
+    {
+      "name": "Anakapalli",
+      "slug": "anakapalli",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Ananthapuramu",
+      "slug": "ananthapuramu",
+      "listings": 1,
+      "hasPage": false
+    }
+  ],
+  "bihar": [
+    {
+      "name": "Patna",
+      "slug": "patna",
+      "listings": 42,
+      "hasPage": true
+    }
+  ],
+  "madhya-pradesh": [
+    {
+      "name": "Indore",
+      "slug": "indore",
+      "listings": 35,
+      "hasPage": true
+    },
+    {
+      "name": "Bhopal",
+      "slug": "bhopal",
+      "listings": 7,
+      "hasPage": true
+    },
+    {
+      "name": "Gwalior",
+      "slug": "gwalior",
+      "listings": 2,
+      "hasPage": false
+    },
+    {
+      "name": "Jabalpur",
+      "slug": "jabalpur",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Narmadapuram",
+      "slug": "narmadapuram",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Sagar",
+      "slug": "sagar",
+      "listings": 1,
+      "hasPage": false
+    },
+    {
+      "name": "Satna",
+      "slug": "satna",
+      "listings": 1,
+      "hasPage": false
+    }
+  ],
+  "rajasthan": [
+    {
+      "name": "Jaipur",
+      "slug": "jaipur",
+      "listings": 33,
+      "hasPage": true
+    },
+    {
+      "name": "Bhiwadi",
+      "slug": "bhiwadi",
+      "listings": 8,
+      "hasPage": true
+    },
+    {
+      "name": "Jodhpur",
+      "slug": "jodhpur",
+      "listings": 6,
+      "hasPage": true
+    }
+  ],
+  "odisha": [
+    {
+      "name": "Bhubaneswar",
+      "slug": "bhubaneswar",
+      "listings": 23,
+      "hasPage": true
+    },
+    {
+      "name": "Cuttack",
+      "slug": "cuttack",
+      "listings": 8,
+      "hasPage": true
+    }
+  ],
+  "chhattisgarh": [
+    {
+      "name": "Raipur",
+      "slug": "raipur",
+      "listings": 20,
+      "hasPage": true
+    }
+  ],
+  "assam": [
+    {
+      "name": "Guwahati",
+      "slug": "guwahati",
+      "listings": 13,
+      "hasPage": true
+    },
+    {
+      "name": "Jorhat",
+      "slug": "jorhat",
+      "listings": 2,
+      "hasPage": false
+    }
+  ],
+  "jharkhand": [
+    {
+      "name": "Ranchi",
+      "slug": "ranchi",
+      "listings": 12,
+      "hasPage": true
+    },
+    {
+      "name": "Jamshedpur",
+      "slug": "jamshedpur",
+      "listings": 6,
+      "hasPage": true
+    }
+  ],
+  "kerala": [
+    {
+      "name": "Ernakulam",
+      "slug": "ernakulam",
+      "listings": 10,
+      "hasPage": true
+    },
+    {
+      "name": "Kochi",
+      "slug": "kochi",
+      "listings": 10,
+      "hasPage": true
+    },
+    {
+      "name": "Kollam",
+      "slug": "kollam",
+      "listings": 2,
+      "hasPage": false
+    },
+    {
+      "name": "Palakkad",
+      "slug": "palakkad",
+      "listings": 1,
+      "hasPage": false
+    }
+  ],
+  "punjab": [
+    {
+      "name": "Ludhiana",
+      "slug": "ludhiana",
+      "listings": 9,
+      "hasPage": true
+    },
+    {
+      "name": "Mohali",
+      "slug": "mohali",
+      "listings": 6,
+      "hasPage": true
+    },
+    {
+      "name": "Jalandhar",
+      "slug": "jalandhar",
+      "listings": 4,
+      "hasPage": false
+    },
+    {
+      "name": "Tepla",
+      "slug": "tepla",
+      "listings": 4,
+      "hasPage": false
+    },
+    {
+      "name": "Rajpura",
+      "slug": "rajpura",
+      "listings": 2,
+      "hasPage": false
+    },
+    {
+      "name": "Patiala",
+      "slug": "patiala",
+      "listings": 1,
+      "hasPage": false
+    }
+  ],
+  "goa": [
+    {
+      "name": "North Goa",
+      "slug": "north-goa",
+      "listings": 9,
+      "hasPage": true
+    },
+    {
+      "name": "Goa",
+      "slug": "goa",
+      "listings": 2,
+      "hasPage": false
+    },
+    {
+      "name": "Mapusa",
+      "slug": "mapusa",
+      "listings": 2,
+      "hasPage": false
+    },
+    {
+      "name": "Margao",
+      "slug": "margao",
+      "listings": 1,
+      "hasPage": false
+    }
+  ],
+  "puducherry": [
+    {
+      "name": "Puducherry",
+      "slug": "puducherry",
+      "listings": 5,
+      "hasPage": true
+    }
+  ],
+  "chandigarh": [
+    {
+      "name": "Chandigarh",
+      "slug": "chandigarh",
+      "listings": 4,
+      "hasPage": false
+    }
+  ],
+  "uttarakhand": [
+    {
+      "name": "Rudrapur",
+      "slug": "rudrapur",
+      "listings": 3,
+      "hasPage": false
+    }
+  ],
+  "jammu-and-kashmir": [
+    {
+      "name": "Jammu",
+      "slug": "jammu",
+      "listings": 2,
+      "hasPage": false
+    }
+  ],
+  "dadra-and-nagar-haveli-and-daman-and-diu": [
+    {
+      "name": "Silvassa",
+      "slug": "silvassa",
+      "listings": 1,
+      "hasPage": false
+    }
+  ]
+};

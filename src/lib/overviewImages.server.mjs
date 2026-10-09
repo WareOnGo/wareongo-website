@@ -74,8 +74,9 @@ export function createEditorialImagePreparer({ cacheDir = OVERVIEW_IMAGE_CACHE, 
 
 const prepareEditorialImage = createEditorialImagePreparer();
 
-export async function prepareOverviewImages(content, warehouses) {
-  const editorial = [content.heroImage, content.marketImage].filter(Boolean);
+/** `extra` adds other page photos, e.g. a state page's city cards, to the same variant map. */
+export async function prepareOverviewImages(content, warehouses, extra = []) {
+  const editorial = [content.heroImage, content.marketImage, ...extra].filter(Boolean);
   const imageVariants = Object.fromEntries((await Promise.all(editorial.map(async image => {
     const variants = await prepareEditorialImage(image.url);
     return variants ? [image.url, variants] : null;

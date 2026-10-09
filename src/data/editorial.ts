@@ -24,6 +24,19 @@ export interface EditorialImage {
   height: number;
 }
 
+/**
+ * Any photo a page figure or card shows: an upload, or a listing photo chosen
+ * at build time. Listing covers may not know their size; `fallback` is the
+ * original upload when `url` is its WebP.
+ */
+export interface PagePhoto {
+  url: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  fallback?: string;
+}
+
 export interface EditorialFaq {
   q: string;
   a: string;

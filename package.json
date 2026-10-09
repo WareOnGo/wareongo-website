@@ -12,7 +12,7 @@
     "build:spa": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test:overviews": "node tests/overview-content-fetch.test.mjs",
+    "test:overviews": "node tests/overview-content-fetch.test.mjs && node --test tests/state-overview.test.mjs",
     "test:breadcrumbs": "node tests/breadcrumbs.test.mjs",
     "test:navigation": "node --test tests/navigation.test.mjs tests/navigation-popularity.test.mjs",
     "test:reads": "node tests/fetch-read.test.mjs",

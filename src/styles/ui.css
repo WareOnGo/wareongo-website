@@ -54,4 +54,18 @@
   .ui-table tbody tr:nth-child(even) { background: var(--ui-table-stripe); }
   .ui-table tbody tr:hover { background: var(--ui-tint); }
   .ui-table :is(th, td) { padding: 12px 16px; }
+  /* A whole-card link over a real photo. Fixed height, never an aspect ratio,
+     so the grid column sets the width. Border-only hover; an ivory focus ring
+     sits on the photo inside the standard outer ring. `--static` is the same
+     card when it is not a link: no hover feedback. */
+  .ui-photo-card { position: relative; isolation: isolate; display: block; min-width: 0; height: var(--ui-photo-card-height); overflow: hidden; border: 1px solid var(--ui-outline); border-radius: var(--ui-radius); background: var(--ui-ink); color: var(--ui-surface); transition: border-color var(--ui-motion); }
+  .ui-photo-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--ui-photo-shade); pointer-events: none; }
+  .ui-photo-card:focus-visible::after { outline: var(--ui-focus-width) solid var(--ui-surface); outline-offset: -6px; }
+  @media (hover: hover) {
+    .ui-photo-card:not(.ui-photo-card--static):hover { border-color: var(--ui-accent); }
+  }
+  .ui-photo-card__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .ui-photo-card__body { position: absolute; z-index: 1; right: var(--ui-compact-padding); bottom: var(--ui-compact-padding); left: var(--ui-compact-padding); display: grid; gap: 4px; }
+  .ui-photo-card__title { margin: 0; color: inherit; font-size: var(--ui-text-card); font-weight: 600; line-height: var(--ui-leading-title); }
+  .ui-photo-card__meta { margin: 0; color: var(--ui-line); font-size: var(--ui-text-sm); font-weight: 600; line-height: var(--ui-leading-ui); }
 }

@@ -96,6 +96,7 @@ Labels preserve written case; uppercase tracking is reserved for eyebrows.
 | `ui-button--compact` | 44px minimum; use with `ui-button` |
 | `ui-field` / `Input` / `Textarea` | Surface, defined border, block layout, 16px type |
 | `ui-table` | Neutral header/stripes, blue row hover, soft dividers, tabular figures |
+| `ui-photo-card` | Whole-card link over a real photo: `--ui-photo-card-height` (208px / 176px phone), `--ui-photo-shade` gradient, ivory `__title`/`__meta` in `__body`, `__img` cover. Border-only pointer hover; an ivory focus ring on the photo inside the standard ring. Without a photo it keeps the ink surface. `ui-photo-card--static` is the same card when it is not a link, without hover feedback |
 
 Retain the real DOM semantics, destinations, secondary actions, labels,
 validation and focus behavior. A styled `div` is not an interactive card.

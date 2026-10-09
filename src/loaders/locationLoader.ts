@@ -2,8 +2,8 @@ import type { LoaderFunctionArgs } from 'react-router-dom';
 import { warehouseAPI, transformWarehouseData, type Warehouse } from '@/services/warehouseAPI';
 import { getMicromarketContent } from '@/data/micromarkets';
 import { applyStatOverrides } from '@/lib/micromarketStats';
-import type { EditorialContent, EditorialImageVariant } from '@/data/editorial';
-import type { DerivedStats } from '@/services/derivedStats';
+import type { EditorialContent, EditorialImageVariant, PagePhoto } from '@/data/editorial';
+import type { DerivedStats, Spread } from '@/services/derivedStats';
 import type { CityOverviewStats, CityOverviewContent } from '@/services/cityOverview';
 import { createListingBreadcrumbs } from '@/lib/listingBreadcrumbs';
 import type { BreadcrumbItem } from '@/components/Breadcrumbs';
@@ -11,8 +11,11 @@ import { DEFAULT_PAGE_SIZE, toApiFilters, type WarehouseFilters } from '@/lib/li
 import { canonicalListingLocation as canonicalize, matchesListingType } from '@/lib/listingLocation.mjs';
 import { createLocationListingSeed, locationListingPreset } from '@/lib/locationListingSeed';
 import type { ListingsLoaderData } from './warehouseLoader';
-import { getLocationPageContent, locationPages } from '@/data/locationPages';
-import { getLocations, locationStats, locationOverviewPath, locationPath, type LocationKind } from '@/services/locationsAPI';
+import { getLocationPageContent, locationPages, type LocationPageContent } from '@/data/locationPages';
+import { getLocations, locationStats, locationOverviewPath, locationPath, type LocationKind, type LocationStats } from '@/services/locationsAPI';
+import { orderForDisplay } from '@/lib/warehouseCardData';
+import { bestTierOnePhoto, reportsQualityTiers } from '@/lib/warehouseImages';
+import { resolveStateCities } from '@/lib/stateCities';
 import {
   buildableMicromarkets,
   micromarketPath,
@@ -121,6 +124,37 @@ export interface LocationListingsLoaderData {
   overviewPath?: string;
 }
 
+/**
+ * One city on its state's overview. One of ours carries the figures its own
+ * page shows and a link; a city outside our listings has a name, at most an
+ * uploaded photo, and nothing else.
+ */
+export interface StateCity {
+  name: string;
+  /** Null for a city outside our listings. */
+  slug: string | null;
+  /** The published overview, else the city's listing page. Null without listings. */
+  path: string | null;
+  /** Whether `path` is the city overview rather than its listing page. */
+  overview: boolean;
+  listings: number | null;
+  rent: Spread | null;
+  sizeMedian: number | null;
+  build: string | null;
+  /** The editor's upload, else the city's best T1 listing photo, else its best listing cover. */
+  image: PagePhoto | null;
+}
+
+export interface StateOverviewData {
+  cities: StateCity[];
+  /** Names of the state's other cities with listing pages, busiest first. */
+  otherCities: string[];
+  /** Published neighbouring state overviews; null when the backend predates them. */
+  nearbyStates: { name: string; slug: string; path: string }[] | null;
+  /** The market figure when no image was uploaded: a listing photo not already on a city card. */
+  marketImage: PagePhoto | null;
+}
+
 /** Only overview loaders return editorial content. */
 export type EditorialPageData = LocationListingsLoaderData & {
   seedSearch?: string;
@@ -128,6 +162,7 @@ export type EditorialPageData = LocationListingsLoaderData & {
   coverImages?: Record<string, string>;
   content: EditorialContent & CityOverviewContent;
   cityOverview?: CityOverviewStats;
+  stateOverview?: StateOverviewData;
   stats: DerivedStats;
   peers: PeerRent[];
   overviewPath: string;
@@ -285,10 +320,12 @@ async function locationOverviewFor(kind: LocationKind, stateSlug: string, citySl
   }
   const stats = applyStatOverrides(cityOverview
     ? { ...match, ...cityOverview.summary, peers: cityOverview.comparisonCities } : match, content.statOverrides);
+  const stateOverview = kind === 'STATE' ? await stateOverviewFor(match, content) : undefined;
+  const statePhotos = stateOverview ? [...stateOverview.cities.map(c => c.image), stateOverview.marketImage] : [];
   return {
     type: kind === 'CITY' ? 'city' : 'state', canonical: match.name, slug: match.slug,
-    warehouses, content, stats, peers: stats.peers, overviewPath: path, cityOverview,
-    ...await overviewImages(content, warehouses),
+    warehouses, content, stats, peers: stats.peers, overviewPath: path, cityOverview, stateOverview,
+    ...await overviewImages(content, warehouses, statePhotos.flatMap(photo => photo ? [photo] : [])),
     editorial: {
       scope: kind === 'CITY' ? 'city' : 'state', name: match.name, path,
       listingPath: locationPath(match), place: match.name,
@@ -298,12 +335,76 @@ async function locationOverviewFor(kind: LocationKind, stateSlug: string, citySl
   };
 }
 
+/**
+ * The state page's cities, neighbours and market figure. Each of our cities
+ * repeats exactly what its own page shows: its overview summary, with the city
+ * overview's overrides on top once one is published. Photos are the editor's
+ * uploads or real listing photos from that place, and never one twice a page.
+ */
+async function stateOverviewFor(state: LocationStats, content: LocationPageContent): Promise<StateOverviewData> {
+  const [{ cities, states }, all] = await Promise.all([getLocations(), getAllWarehouses()]);
+  const { list, others } = resolveStateCities(content.stateCities, cities.filter(c => c.stateSlug === state.slug));
+  const used = new Set<string>();
+  const rows = list.map(({ name, image, city }): StateCity => {
+    if (image) used.add(image.url);
+    if (!city) return { name, slug: null, path: null, overview: false, listings: null, rent: null, sizeMedian: null, build: null, image };
+    const page = getLocationPageContent('CITY', city.slug);
+    const overviewPath = page ? locationOverviewPath(city) : null;
+    const stats = applyStatOverrides(city.cityOverview ? { ...city, ...city.cityOverview.summary } : city,
+      overviewPath ? page?.statOverrides : undefined);
+    return {
+      name, slug: city.slug, path: overviewPath ?? locationPath(city), overview: Boolean(overviewPath),
+      listings: stats.listings, rent: stats.rent, sizeMedian: stats.size?.median ?? null, build: stats.construction[0]?.label ?? null,
+      image: image ?? listingPhoto(listingPool(all, city.listingIds), used, `Warehouse in ${name}`, true),
+    };
+  });
+  // Only when the market section renders without an uploaded figure. Listing
+  // covers stand in only for a backend that does not grade photos yet.
+  const market = content.marketProse && !content.marketImage ? listingPool(all, state.listingIds) : [];
+  const marketImage = market.length
+    ? listingPhoto(market, used, `Warehouse in ${state.name}`, !reportsQualityTiers(market.map(l => l.raw))) : null;
+  const nearbyStates = state.nearbyStates?.flatMap(({ name, slug }) => {
+    const target = states.find(s => s.slug === slug);
+    const path = target && getLocationPageContent('STATE', slug) ? locationOverviewPath(target) : null;
+    return path ? [{ name, slug, path }] : [];
+  }) ?? null;
+  return { cities: rows, otherCities: others.map(c => c.name), nearbyStates, marketImage };
+}
+
+/** Listings by id: raw for their graded gallery, as cards for the grid's own order and size. */
+type PooledListing = { raw: Warehouse; card: ReturnType<typeof transformWarehouseData> };
+const listingPool = (all: Warehouse[], ids: number[]): PooledListing[] => {
+  const set = new Set(ids);
+  return all.filter(w => set.has(w.id)).map(raw => ({ raw, card: transformWarehouseData(raw) }));
+};
+
+/**
+ * A real photo from these listings that the page does not show yet: the best
+ * T1 gallery photo, else (with `covers`) the cover of the first listing in the
+ * grid's order whose cover is unused. Marks the pick as used.
+ */
+function listingPhoto(listings: PooledListing[], used: Set<string>, alt: string, covers: boolean): PagePhoto | null {
+  const photo = bestTierOnePhoto(listings.map(({ raw, card }) => ({ id: raw.id, size: card.size, images: raw.images, imageQuality: raw.imageQuality })), used, alt)
+    ?? (covers ? coverPhoto(listings.map(l => l.card), used, alt) : null);
+  if (photo) used.add(photo.fallback ?? photo.url);
+  return photo;
+}
+
+function coverPhoto(cards: PooledListing['card'][], used: Set<string>, alt: string): PagePhoto | null {
+  for (const card of orderForDisplay(cards)) {
+    const original = card.imageFallbacks[0] ?? card.image;
+    if (!card.image || !original || used.has(original)) continue;
+    return { url: card.image, alt, ...(original !== card.image ? { fallback: original } : {}) };
+  }
+  return null;
+}
+
 export const stateOverviewLoader = ({ params }: LoaderFunctionArgs) => locationOverviewFor('STATE', params.state ?? '');
 export const cityOverviewLoader = ({ params }: LoaderFunctionArgs) => locationOverviewFor('CITY', params.state ?? '', params.city ?? '');
 
-async function overviewImages(content: EditorialContent, warehouses: EditorialPageData['warehouses']) {
+async function overviewImages(content: EditorialContent, warehouses: EditorialPageData['warehouses'], extra: { url: string }[] = []) {
   return import.meta.env.SSR
-    ? (await import('@/lib/overviewImages.server.mjs')).prepareOverviewImages(content, warehouses)
+    ? (await import('@/lib/overviewImages.server.mjs')).prepareOverviewImages(content, warehouses, extra)
     : {};
 }
 

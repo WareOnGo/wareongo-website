@@ -7,6 +7,8 @@ specification table, FAQ and footer links are retained. There is no section nav.
 City heroes omit the secondary "Browse the listings" button. The shared template
 and CMS preview use Montserrat consistently, and the corridor/compliance copy
 uses the full section width in one column.
+State overviews add their own sections to this template; see
+[state-overview.md](state-overview.md).
 
 Cities add:
 
@@ -46,7 +48,7 @@ Before deploying the backend or CMS, apply the additive backend SQL script
 `scripts/sql/city-overview-v2.sql`. It adds four nullable columns to `LocationPage`;
 existing content needs no backfill. Both Prisma schemas include the fields.
 Do not use `prisma db push` from the CMS, which intentionally has a partial
-schema. The location cache uses `locations:v2` to avoid stale response shapes.
+schema. The location cache uses `locations:v3` to avoid stale response shapes.
 Deploy the backend, then the CMS. Publish the intended city content through the
 CMS before building/deploying the website. Dev fixtures are not production CMS
 content and do not create production overview URLs on their own.

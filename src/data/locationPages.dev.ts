@@ -12,7 +12,12 @@ import type { LocationPageContent } from './locationPages';
 //
 // The city has review copy for its additional sections; the state keeps the
 // existing lorem ipsum fixture. Inventory figures are computed by the loader.
-// These examples help compare the shared layout across the two scopes.
+// These examples help compare the shared layout across the two scopes. The
+// other Karnataka cities are minimal: Karnataka keeps the default city list
+// (the four with the most listings), so its rows and cards link to these
+// overviews or, for a city without one, to its listing page, and Kolar falls
+// to the "other cities" line. Tamil Nadu shows an editor's list instead, with
+// an uploaded card photo and a city outside our listings.
 //
 // Slugs have to match a city or state the site actually builds, or the loader
 // never finds this and the overview does not exist.
@@ -28,6 +33,22 @@ const RENTS =
 
 const SPEC =
   'Reprehenderit in voluptate velit esse cillum dolore eu fugiat, nulla pariatur Excepteur sint occaecat cupidatat non proident sunt, in. Culpa qui officia deserunt mollit anim id est, laborum Sed ut perspiciatis unde omnis iste natus error, sit voluptatem. Accusantium doloremque laudantium totam rem aperiam eaque, ipsa quae ab illo inventore veritatis et quasi architecto, beatae vitae dicta. Sunt explicabo nemo enim ipsam voluptatem, quia voluptas sit.';
+
+const COMPLIANCE =
+  'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum, dolore eu fugiat nulla pariatur Excepteur sint occaecat cupidatat. Non proident sunt in culpa qui officia deserunt mollit anim id est, laborum Sed ut perspiciatis unde omnis iste natus error sit. Voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta. Sunt explicabo nemo enim ipsam voluptatem quia voluptas sit aspernatur, aut odit aut fugit sed quia consequuntur magni dolores eos qui. Ratione voluptatem sequi nesciunt neque porro quisquam est qui dolorem, ipsum quia dolor sit amet consectetur adipisci velit sed quia non. Numquam eius modi tempora incidunt ut labore et dolore magnam, aliquam quaerat voluptatem.';
+
+/** Just enough for a published city overview to link from the Karnataka page. */
+const devCity = (slug: string, name: string, heroImage?: LocationPageContent['heroImage']): LocationPageContent => ({
+  kind: 'CITY',
+  slug,
+  seoTitle: `[dev] Warehouses for Rent in ${name}`,
+  metaDescription: `[dev] Placeholder meta description for the ${name} city overview. Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
+  h1: `[dev] Warehouse for Rent in ${name}`,
+  heroProse: HERO,
+  ...(heroImage ? { heroImage } : {}),
+  faqs: [],
+  relatedBlogs: [],
+});
 
 const FAQS = [
   {
@@ -102,9 +123,52 @@ export const DEV_LOCATION_PAGES: LocationPageContent[] = [
       height: 900,
     },
     marketProse: MARKET,
+    citiesHeading: 'Where Warehouse Stock Sits in Karnataka',
     rentsProse: RENTS,
     specProse: SPEC,
+    complianceHeading: 'Compliance and Approvals in Karnataka',
+    complianceProse: COMPLIANCE,
     faqs: FAQS,
+    relatedBlogs: [],
+  },
+  devCity('hubli', 'Hubli', {
+    url: 'https://picsum.photos/seed/wog-city-hubli/1200/900',
+    alt: '[dev] Placeholder Hubli hero image',
+    width: 1200,
+    height: 900,
+  }),
+  devCity('mangaluru', 'Mangaluru', {
+    url: 'https://picsum.photos/seed/wog-city-mangaluru/1200/900',
+    alt: '[dev] Placeholder Mangaluru hero image',
+    width: 1200,
+    height: 900,
+  }),
+  devCity('kolar', 'Kolar'),
+  {
+    kind: 'STATE',
+    slug: 'tamil-nadu',
+    seoTitle: '[dev] Warehouses for Rent in Tamil Nadu',
+    metaDescription:
+      '[dev] Placeholder meta description for a state with an edited city list. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+    h1: '[dev] Warehouse for Rent in Tamil Nadu',
+    heroProse: HERO,
+    marketProse: MARKET,
+    stateCities: [
+      {
+        name: 'Chennai',
+        slug: 'chennai',
+        image: {
+          url: 'https://picsum.photos/seed/wog-state-chennai/1200/675',
+          alt: '[dev] Placeholder Chennai card image',
+          width: 1200,
+          height: 675,
+        },
+      },
+      { name: 'Coimbatore', slug: 'coimbatore', image: null },
+      { name: 'Sriperumbudur', slug: null, image: null },
+      { name: 'Hosur', slug: 'hosur', image: null },
+    ],
+    faqs: [],
     relatedBlogs: [],
   },
 ];

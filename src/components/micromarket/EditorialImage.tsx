@@ -1,6 +1,6 @@
-import type { EditorialImage as ImageData, EditorialImageVariant } from '@/data/editorial';
+import type { EditorialImageVariant, PagePhoto } from '@/data/editorial';
 import { useEffect, useRef } from 'react';
-import { optimizedSrc, optimizedSrcSet, BLOG_TILE_WIDTHS } from '@/lib/imageOpt';
+import { optimizedSrc, optimizedSrcSet, BLOG_TILE_WIDTHS, fallbackToRaw } from '@/lib/imageOpt';
 
 export const EDITORIAL_HERO_SIZES = '(min-width: 1400px) 516px, (min-width: 1280px) 468px, (min-width: 1024px) 365px, (min-width: 768px) 720px, (min-width: 640px) 592px, calc(100vw - 32px)';
 
@@ -10,15 +10,9 @@ export const EDITORIAL_HERO_SIZES = '(min-width: 1400px) 516px, (min-width: 1280
  *
  * Build-generated variants avoid per-request image optimization. If a variant
  * is unavailable, retry the original CMS photo once without changing its crop.
+ * A state's market figure can be a listing photo instead; its WebP falls back
+ * to the original upload.
  */
-const fallbackToRaw = (img: HTMLImageElement) => {
-  const raw = img.dataset.raw;
-  if (!raw || img.src === raw) return;
-  img.removeAttribute('srcset');
-  img.removeAttribute('sizes');
-  img.src = raw;
-};
-
 const EditorialImage = ({
   image,
   variants,
@@ -27,7 +21,7 @@ const EditorialImage = ({
   priority = false,
   className = '',
 }: {
-  image: ImageData;
+  image: PagePhoto;
   variants?: EditorialImageVariant[];
   sizes?: string;
   /**
@@ -55,7 +49,7 @@ const EditorialImage = ({
         src={variants?.at(-1)?.src ?? optimizedSrc(image.url, 960)}
         srcSet={variants?.map(v => `${v.src} ${v.width}w`).join(', ') || optimizedSrcSet(image.url, BLOG_TILE_WIDTHS)}
         sizes={sizes}
-        data-raw={image.url}
+        data-raw={image.fallback ?? image.url}
         alt={image.alt}
         width={image.width}
         height={image.height}
