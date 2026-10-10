@@ -22,10 +22,18 @@ export default function ServiceDetail({ content }: { content?: ServicePage } = {
   const image = page.blocks.flatMap(b => b.kind === 'images' ? b.images : [])[0]?.url;
   const serviceLd = {
     '@context': 'https://schema.org', '@type': 'Service',
+    '@id': `${SITE_URL}${path}#service`,
     name: page.title, serviceType: SERVICE_PAGES[page.slug], description: page.description,
     url: `${SITE_URL}${path}`, provider: { '@id': ORG_ID },
     areaServed: { '@type': 'Country', name: 'India' },
     ...(image ? { image } : {}),
+  };
+  const webPageLd = {
+    '@context': 'https://schema.org', '@type': 'WebPage',
+    '@id': `${SITE_URL}${path}#webpage`, url: `${SITE_URL}${path}`,
+    name: page.title, description: page.description,
+    mainEntity: { '@id': serviceLd['@id'] },
+    ...(page.keywords.length ? { keywords: page.keywords.join(', ') } : {}),
   };
   const faqLd = {
     '@context': 'https://schema.org', '@type': 'FAQPage',
@@ -34,6 +42,7 @@ export default function ServiceDetail({ content }: { content?: ServicePage } = {
   return <div className="min-h-screen flex flex-col bg-wareongo-ivory">
     <PageHead title={page.seoTitle} description={page.description} path={path} image={image}>
       <script type="application/ld+json">{jsonLd(serviceLd)}</script>
+      <script type="application/ld+json">{jsonLd(webPageLd)}</script>
       {page.faqs.length > 0 && <script type="application/ld+json">{jsonLd(faqLd)}</script>}
     </PageHead>
     <Navbar />

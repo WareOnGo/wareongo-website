@@ -30,8 +30,7 @@ export interface BangaloreMapArea {
   caption?: string;
   textChip?: boolean;
   wideChip?: boolean;
-  imageSlot?: keyof AdPageContent['images'];
-  image?: { url: string; alt: string };
+  imageSlot: keyof AdPageContent['images'];
   label: Record<MapView, Point>;
 }
 
@@ -40,18 +39,18 @@ export interface BangaloreMapArea {
 // Grouped areas deliberately omit totals: their inventory tags can overlap.
 export const BANGALORE_MAP_AREAS: BangaloreMapArea[] = [
   { slug: 'dobbaspet', canonical: 'Dobbaspet', scope: 'belts', countSlug: 'dobbaspet', imageSlot: 'micromarket-dobbaspet', label: { desktop: [33, 18], tablet: [18, 19], mobile: [18, 32] } },
-  { slug: 'doddaballapur', canonical: 'Doddaballapur', scope: 'belts', textChip: true, imageSlot: 'warehouse-2255', label: { desktop: [48, 8.5], tablet: [50, 8], mobile: [49, 21.5] } },
+  { slug: 'doddaballapur', canonical: 'Doddaballapur', scope: 'belts', textChip: true, imageSlot: 'micromarket-doddaballapur', label: { desktop: [48, 8.5], tablet: [50, 8], mobile: [49, 21.5] } },
   { slug: 'devanahalli', canonical: 'Devanahalli', scope: 'belts', countSlug: 'devanahalli', imageSlot: 'micromarket-devanahalli', label: { desktop: [64, 17], tablet: [82, 19], mobile: [71, 31.5] } },
   { slug: 'nelamangala', canonical: 'Nelamangala', scope: 'belts', countSlug: 'nelamangala', imageSlot: 'micromarket-nelamangala', label: { desktop: [41, 36], tablet: [32, 37], mobile: [29, 45] } },
   { slug: 'hoskote', canonical: 'Hoskote', scope: 'belts', countSlug: 'hoskote', imageSlot: 'micromarket-hoskote', label: { desktop: [66, 40], tablet: [80, 40], mobile: [79, 47] } },
   { slug: 'peenya', canonical: 'Peenya', scope: 'belts', countSlug: 'peenya', imageSlot: 'micromarket-peenya', label: { desktop: [43, 53], tablet: [30, 55], mobile: [42, 56] } },
   { slug: 'whitefield', canonical: 'Whitefield', scope: 'belts', countSlug: 'whitefield', imageSlot: 'micromarket-whitefield', label: { desktop: [68, 57], tablet: [80, 58], mobile: [79, 60] } },
-  { slug: 'bidadi', canonical: 'Mysore Road / Bidadi', scope: 'belts', countSlug: 'bidadi', chipLabel: 'Mysore Road', mobileLabel: 'Bidadi', chipCaption: 'Bidadi', image: { url: '/bangalore/micromarket-bidadi.webp', alt: 'Warehouse interior in Bidadi Industrial Area, Mysore Road' }, label: { desktop: [41, 79], tablet: [14, 80], mobile: [29, 77] } },
-  { slug: 'sarjapura', canonical: 'Sarjapur', scope: 'belts', countSlug: 'sarjapura', image: { url: '/bangalore/micromarket-sarjapur.webp', alt: 'Warehouse buildings on Sarjapura Road in Dommasandra' }, label: { desktop: [64, 72], tablet: [86, 76], mobile: [80, 74] } },
+  { slug: 'bidadi', canonical: 'Mysore Road / Bidadi', scope: 'belts', countSlug: 'bidadi', chipLabel: 'Mysore Road', mobileLabel: 'Bidadi', chipCaption: 'Bidadi', imageSlot: 'micromarket-bidadi', label: { desktop: [41, 79], tablet: [14, 80], mobile: [29, 77] } },
+  { slug: 'sarjapura', canonical: 'Sarjapur', scope: 'belts', countSlug: 'sarjapura', imageSlot: 'micromarket-sarjapur', label: { desktop: [64, 72], tablet: [86, 76], mobile: [80, 74] } },
   { slug: 'hosur-road', canonical: 'Hosur Road / Bommasandra / Jigani', scope: 'belts', chipLabel: 'Bommasandra', chipCaption: 'Jigani · Hosur Rd', title: 'Bommasandra / Jigani', caption: 'Hosur Road', textChip: true, wideChip: true, imageSlot: 'micromarket-bommasandra', label: { desktop: [59, 87], tablet: [50, 87], mobile: [58, 87] } },
-  { slug: 'north-bangalore', canonical: 'Jakkur / Hebbal / Yelahanka', scope: 'city', chipLabel: 'Hebbal / Jakkur', mobileLabel: 'Hebbal / Jakkur / Yelahanka', chipCaption: 'Yelahanka', title: 'Hebbal / Jakkur', caption: 'Yelahanka', wideChip: true, image: { url: '/bangalore/micromarket-north-bangalore.webp', alt: 'Warehouse interior in Sri Venkateshwara Nagar, Jakkur' }, label: { desktop: [49, 11], tablet: [45, 11], mobile: [43, 22] } },
-  { slug: 'indiranagar', canonical: 'Indiranagar', scope: 'city', image: { url: '/bangalore/micromarket-indiranagar.webp', alt: 'Commercial property entrance on CMH Road, Indiranagar' }, label: { desktop: [53, 50], tablet: [56, 47], mobile: [58, 49] } },
-  { slug: 'marathalli', canonical: 'Marathahalli', scope: 'city', countSlug: 'marathalli', image: { url: '/bangalore/micromarket-marathalli.webp', alt: 'Commercial interior in Thubarahalli, near Marathahalli' }, label: { desktop: [66, 64], tablet: [81, 65], mobile: [78, 67] } },
-  { slug: 'jp-nagar', canonical: 'JP Nagar', scope: 'city', image: { url: '/bangalore/micromarket-jp-nagar.webp', alt: 'Warehouse interior in JP Nagar 7th Phase' }, label: { desktop: [39, 84], tablet: [31, 85], mobile: [31, 82] } },
-  { slug: 'hsr', canonical: 'HSR Layout', scope: 'city', countSlug: 'hsr', image: { url: '/bangalore/micromarket-hsr.webp', alt: 'Commercial space in Muneswara Nagar, HSR Layout' }, label: { desktop: [57, 85], tablet: [64, 85], mobile: [70, 83] } },
+  { slug: 'north-bangalore', canonical: 'Jakkur / Hebbal / Yelahanka', scope: 'city', chipLabel: 'Hebbal / Jakkur', mobileLabel: 'Hebbal / Jakkur / Yelahanka', chipCaption: 'Yelahanka', title: 'Hebbal / Jakkur', caption: 'Yelahanka', wideChip: true, imageSlot: 'micromarket-north-bangalore', label: { desktop: [49, 11], tablet: [45, 11], mobile: [43, 22] } },
+  { slug: 'indiranagar', canonical: 'Indiranagar', scope: 'city', imageSlot: 'micromarket-indiranagar', label: { desktop: [53, 50], tablet: [56, 47], mobile: [58, 49] } },
+  { slug: 'marathalli', canonical: 'Marathahalli', scope: 'city', countSlug: 'marathalli', imageSlot: 'micromarket-marathalli', label: { desktop: [66, 64], tablet: [81, 65], mobile: [78, 67] } },
+  { slug: 'jp-nagar', canonical: 'JP Nagar', scope: 'city', imageSlot: 'micromarket-jp-nagar', label: { desktop: [39, 84], tablet: [31, 85], mobile: [31, 82] } },
+  { slug: 'hsr', canonical: 'HSR Layout', scope: 'city', countSlug: 'hsr', imageSlot: 'micromarket-hsr', label: { desktop: [57, 85], tablet: [64, 85], mobile: [70, 83] } },
 ];

@@ -1,6 +1,7 @@
 import { Component, useEffect, useState, type ReactNode } from 'react';
 import PageHead from '@/components/PageHead';
 import BlogDetail from './BlogDetail';
+import Blogs from './Blogs';
 import ServiceDetail from './ServiceDetail';
 import PrivacyPolicy from './PrivacyPolicy';
 import TermsOfService from './TermsOfService';
@@ -21,7 +22,7 @@ class PreviewBoundary extends Component<{ origin: string; children: ReactNode },
 }
 
 export function PreviewPage({ value, editorial }: Pick<Draft, 'value' | 'editorial'>) {
-  if (value.type === 'blog') return <BlogDetail content={value.content} />;
+  if (value.type === 'blog') return value.indexEntries ? <Blogs entries={value.indexEntries} /> : <BlogDetail content={value.content} />;
   if (value.type === 'service') return <ServiceDetail content={value.content} />;
   if (value.type === 'legal') return value.content.slug === 'privacy-policy'
     ? <PrivacyPolicy content={value.content} /> : <TermsOfService content={value.content} />;
@@ -46,7 +47,7 @@ export default function CmsPreview() {
       if (event.data.action !== 'content') return;
       const current = ++revision;
       try {
-        const value = readCmsPreview(event.data.content);
+        const value = readCmsPreview(event.data.content, event.data.view);
         const editorial = ['city', 'state', 'micromarket'].includes(value.type)
           ? await previewEditorialPage(value) : undefined;
         if (mounted && current === revision) setDraft({ value, editorial, origin: event.origin, revision: current });

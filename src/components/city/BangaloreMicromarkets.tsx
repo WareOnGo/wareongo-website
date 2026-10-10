@@ -206,7 +206,7 @@ export default function BangaloreMicromarkets({ locations, onContact, content, s
             ))}
           </div>
           {visibleLocations.map(location => {
-            const photo = location.imageSlot ? content.images[location.imageSlot] : location.image;
+            const photo = content.images[location.imageSlot];
             const countLabel = location.count === null ? null : `${location.count.toLocaleString('en-IN')} ${location.count === 1 ? 'listing' : 'listings'}`;
             const chipCaption = location.chipCaption ?? countLabel ?? 'Explore spaces';
             const cardCaption = location.caption ?? countLabel ?? 'Enquire for availability';
@@ -257,7 +257,7 @@ export default function BangaloreMicromarkets({ locations, onContact, content, s
       </figure>
       <div key={scope} ref={mobileMarketsRef} id="bangalore-mobile-markets" className="bangalore-landing__mobile-markets" role="region" aria-label={`${scope === 'belts' ? 'Warehouse belt' : 'City area'} cards`} tabIndex={0}>
         {visibleLocations.map(location => {
-          const photo = location.imageSlot ? content.images[location.imageSlot] : location.image;
+          const photo = content.images[location.imageSlot];
           return (
             <article key={location.slug} id={`bangalore-mobile-market-${location.slug}`} ref={node => { mobileCardRefs.current[location.slug] = node; }} className="bangalore-landing__mobile-market" data-market={location.slug}>
               <img src={photo?.url} alt={photo?.alt ?? location.canonical} width={800} height={450} loading="lazy" decoding="async" />

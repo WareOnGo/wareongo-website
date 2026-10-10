@@ -4,11 +4,14 @@ import PageHead from '@/components/PageHead';
 import BangaloreLanding from './BangaloreLanding';
 import type { AdPageContent } from '@/data/adPages';
 import { parseAdPage } from '../../scripts/lib/ad-page-content.mjs';
+import { toast } from '@/hooks/use-toast';
 
 const MESSAGE = 'wareongo:ad-page-preview';
+const VIEWS = ['page', 'hero-success', 'contact', 'contact-success'] as const;
+export type AdPreviewView = typeof VIEWS[number];
 /** No draft URL, API or storage: only the authenticated CMS supplies this frame. */
 export default function BangaloreAdPreview() {
-  const [draft, setDraft] = useState<{ content: AdPageContent; origin: string } | null>(null);
+  const [draft, setDraft] = useState<{ content: AdPageContent; origin: string; view: AdPreviewView } | null>(null);
 
   useEffect(() => {
     const receive = (event: MessageEvent) => {
@@ -18,7 +21,9 @@ export default function BangaloreAdPreview() {
       } else if (event.data.action === 'content') {
         try {
           const content = parseAdPage(event.data.content, { draft: true }) as AdPageContent;
-          setDraft({ content, origin: event.origin });
+          const view = event.data.view ?? 'page';
+          if (!VIEWS.includes(view)) throw new Error('Unknown preview state');
+          setDraft({ content, origin: event.origin, view });
         } catch { window.parent.postMessage({ type: MESSAGE, action: 'error' }, event.origin); }
       }
     };
@@ -37,9 +42,16 @@ export default function BangaloreAdPreview() {
     if (draft) window.parent.postMessage({ type: MESSAGE, action: 'rendered' }, draft.origin);
   }, [draft]);
 
+  useEffect(() => {
+    if (draft?.view !== 'contact-success') return;
+    // Use the website's actual notification without submitting a lead.
+    const notification = toast({ title: 'Success', description: draft.content.copy.contactSuccess, duration: Infinity });
+    return () => { notification.dismiss(); };
+  }, [draft?.view, draft?.content.copy.contactSuccess]);
+
   if (!draft) return <>
     <PageHead title="Bangalore page preview | WareOnGo" description="CMS page preview" path="/preview/ad-pages/bangalore" noindex />
     <p className="p-8 text-center text-sm text-wareongo-slate">Open this preview from Ad pages in the CMS.</p>
   </>;
-  return <BangaloreLanding content={draft.content} />;
+  return <BangaloreLanding key={draft.view} content={draft.content} previewState={draft.view} />;
 }

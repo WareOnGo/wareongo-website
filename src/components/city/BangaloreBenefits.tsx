@@ -38,25 +38,27 @@ export default function BangaloreBenefits({ content }: { content: AdPageContent 
         ))}
       </dl>
       <div className="bangalore-landing__why-copy">
-        {benefits.map(({ id, title, body, mobileTitle }) => {
+        {benefits.map(({ id, title, body, mobileTitle, mobileBody }) => {
           const Icon = BENEFIT_ICONS[id];
+          const mobileDescription = mobileBody.trim();
           return (
             <article key={id} className="bangalore-landing__benefit" data-benefit={id}>
               <div className="bangalore-landing__icon" aria-hidden="true"><Icon size={20} strokeWidth={1.5} /></div>
               <div>
                 <h3>
-                  {mobileTitle ? (
+                  {mobileTitle.trim() ? (
                     <>
                       <span className="bangalore-landing__benefit-full-title">{titleCase(title)}</span>
                       <span className="bangalore-landing__benefit-mobile-title">{mobileTitle}</span>
                     </>
                   ) : titleCase(title)}
                 </h3>
-                {body && (
-                  <p className="bangalore-landing__benefit-body">
+                {body.trim() && (
+                  <p className={`bangalore-landing__benefit-body${mobileDescription ? ' bangalore-landing__desktop-copy' : ''}`}>
                     <InlineText text={body} />
                   </p>
                 )}
+                {mobileDescription && <p className="bangalore-landing__benefit-body bangalore-landing__mobile-copy"><InlineText text={mobileDescription} /></p>}
               </div>
             </article>
           );

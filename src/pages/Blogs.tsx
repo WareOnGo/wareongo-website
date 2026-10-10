@@ -3,7 +3,7 @@ import PageHead from '@/components/PageHead';
 import Breadcrumbs, { type BreadcrumbItem } from '@/components/Breadcrumbs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { blogSummaries as blogs } from '@/data/blogSummaries';
+import { blogSummaries, type BlogSummary } from '@/data/blogSummaries';
 import thumbnailFallbacks from '@/data/blogThumbnailFallbacks.json';
 import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
 
@@ -15,7 +15,7 @@ const updatedDate = new Intl.DateTimeFormat('en-IN', {
 });
 const fallbackThumbnail = thumbnailFallbacks[0];
 
-const Blogs = () => {
+const Blogs = ({ entries: blogs = blogSummaries }: { entries?: BlogSummary[] } = {}) => {
   const collectionLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
@@ -39,7 +39,7 @@ const Blogs = () => {
   return (
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
       <PageHead title={TITLE} description={DESCRIPTION} path="/blogs">
-        <script type="application/ld+json">{JSON.stringify(collectionLd)}</script>
+        <script type="application/ld+json">{JSON.stringify(collectionLd).replace(/</g, '\\u003c')}</script>
       </PageHead>
       <Navbar />
 
@@ -67,7 +67,7 @@ const Blogs = () => {
 
             <ul className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4">
               {blogs.map((g, index) => (
-                <li key={g.slug} className="min-w-0">
+                <li key={g.slug} className="min-w-0" data-blog-slug={g.slug}>
                   <Link
                     to={`/blogs/${g.slug}`}
                     aria-labelledby={`blog-${g.slug}`}
@@ -92,7 +92,7 @@ const Blogs = () => {
                     </div>
                     <div className="min-w-0">
                       <p className="mb-2 text-xs leading-normal text-wareongo-charcoal">
-                        Updated <time dateTime={g.updated}>{updatedDate.format(new Date(`${g.updated}T00:00:00Z`))}</time>
+                        Updated <time dateTime={g.updated}>{Number.isFinite(Date.parse(g.updated)) ? updatedDate.format(new Date(g.updated)) : 'Not specified'}</time>
                       </p>
                       <h2 id={`blog-${g.slug}`} className="ui-card-title text-wareongo-blue">
                         {g.title}

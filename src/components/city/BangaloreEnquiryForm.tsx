@@ -14,7 +14,7 @@ const FIELDS = [
 ] as const;
 
 /** The contact form's four fields and submission service, inline in the hero. */
-export default function BangaloreEnquiryForm({ copy }: { copy: AdPageCopy }) {
+export default function BangaloreEnquiryForm({ copy, previewSubmitted = false }: { copy: AdPageCopy; previewSubmitted?: boolean }) {
   const [values, setValues] = useState(EMPTY_FIELDS);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -75,7 +75,7 @@ export default function BangaloreEnquiryForm({ copy }: { copy: AdPageCopy }) {
       <h2 id="bangalore-enquiry-title">{copy.enquiryHeading}</h2>
       <p className="bangalore-landing__enquiry-intro">{copy.enquiryDescription}</p>
 
-      {submitted ? (
+      {submitted || previewSubmitted ? (
         <div ref={successRef} className="bangalore-landing__enquiry-success" role="status" tabIndex={-1}>
           <CheckCircle2 size={42} strokeWidth={1.5} aria-hidden="true" />
           <h3>{copy.enquirySuccessHeading}</h3>

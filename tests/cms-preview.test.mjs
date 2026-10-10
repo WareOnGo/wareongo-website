@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { build } from 'esbuild';
 import { JSDOM } from 'jsdom';
 import { parseAdPage } from '../scripts/lib/ad-page-content.mjs';
+import { buildBlogSummaries } from '../scripts/lib/blog-summaries.mjs';
 
 process.env.NODE_ENV = 'production';
 globalThis.__wogPreviewSsr = true;
@@ -24,6 +25,8 @@ const { outputFiles } = await build({
     import Terms from './src/pages/TermsOfService';
     import Editorial from './src/pages/EditorialLocationPage';
     import Bangalore from './src/pages/BangaloreLanding';
+    import BangaloreMicromarkets from './src/components/city/BangaloreMicromarkets';
+    import {BANGALORE_MAP_AREAS} from './src/data/bangaloreMicromarketMap';
     import {normalizeHeadingCase} from './src/lib/headingCase';
     import {normalizeContentPunctuation} from './src/lib/contentPunctuation';
     import {transformWarehouseData} from './src/services/warehouseAPI';
@@ -44,6 +47,7 @@ const { outputFiles } = await build({
       return wrap(preview ? <PreviewPage value={value} editorial={editorial}/> : <Component content={value.content} data={editorial}/>, preview?'/preview/cms':'/overview/karnataka/bengaluru');
     };
     export const ad = content => wrap(<Bangalore content={content}/>, '/bangalore');
+    export const map = (content,scope) => wrap(<BangaloreMicromarkets content={content} scope={scope} locations={BANGALORE_MAP_AREAS.map(area=>({...area,count:null}))} onContact={()=>{}} onScopeChange={()=>{}}/>, '/bangalore');
   ` },
   bundle: true, write: false, platform: 'node', format: 'cjs', packages: 'external', jsx: 'automatic',
   loader: { '.css': 'empty' },
@@ -164,4 +168,54 @@ test('preview accepts native edits beyond the AI import limit and bounds oversiz
   assert.equal(app.readCmsPreview({ type: 'blog', content }).content.blocks[0].text.length, 800_000);
   content.blocks[0].text = 'a'.repeat(1_048_576);
   assert.throws(() => app.readCmsPreview({ type: 'blog', content }), /Invalid preview/);
+});
+
+test('the blog index preview uses production thumbnail selection, including body-photo legacy fallback', () => {
+  const image = { url:'https://example.test/cover.webp', alt:'Cover', width:800, height:600 };
+  const entries = ['first', 'second', 'dabaspet-multimodal-logistics-park', 'uploaded'].map((slug,i) => ({
+    slug, title:'Card Title', description:'Card description', updated:'2026-10-10', thumbnail:i===3?image:null,
+    firstImage:i===2?image:null,
+  }));
+  const content = { ...app.blogs[0], dateModified:'2026-10-10' };
+  const value = app.readCmsPreview({type:'blog',content,indexEntries:entries}, 'index');
+  const built = buildBlogSummaries(entries.map(entry=>({...entry,blocks:entry.firstImage?[{kind:'images',images:[entry.firstImage]}]:[]})));
+  assert.deepEqual(value.indexEntries, built);
+  assert.notEqual(value.indexEntries[0].thumbnail.url, value.indexEntries[1].thumbnail.url);
+  assert.deepEqual(value.indexEntries[2].thumbnail, image);
+  assert.equal(document(app.render(value, undefined, true)).querySelectorAll('[data-blog-slug]').length, 4);
+  assert.throws(()=>app.readCmsPreview({type:'blog',content,indexEntries:{}},'index'), /Invalid blog index/);
+  assert.throws(()=>app.readCmsPreview({type:'blog',content},'unknown'), /Unknown preview view/);
+});
+
+test('every Bangalore map area renders its independent CMS photo on desktop and mobile', () => {
+  const page = JSON.parse(fs.readFileSync(new URL('../src/data/ad-pages/bangalore.json', import.meta.url), 'utf8'));
+  for (const [key, photo] of Object.entries(page.images)) if (key.startsWith('micromarket-')) {
+    photo.url = `https://example.test/${key}.webp`; photo.alt = `Edited ${key}`;
+  }
+  const used = new Set();
+  for (const scope of ['belts','city']) {
+    const doc = document(app.map(page, scope));
+    for (const card of doc.querySelectorAll('.bangalore-landing__mobile-market')) {
+      const img = card.querySelector('img');
+      assert.match(img.src, /^https:\/\/example.test\/micromarket-/);
+      assert.match(img.alt, /^Edited micromarket-/);
+      assert.equal(doc.querySelector(`#bangalore-map-card-${card.dataset.market} img`).src, img.src);
+      used.add(img.src);
+    }
+  }
+  assert.equal(used.size, 15, 'All 15 areas have separate editable photos');
+});
+
+test('blank mobile overrides fall back to the desktop audience and benefit copy', () => {
+  const page = JSON.parse(fs.readFileSync(new URL('../src/data/ad-pages/bangalore.json', import.meta.url), 'utf8'));
+  page.benefits[0].body = 'Benefit desktop fallback'; page.benefits[0].mobileBody = '  ';
+  page.audiences[0].body = 'Audience desktop fallback'; page.audiences[0].mobileBody = '  ';
+  page.audiences[0].title = 'Audience Heading'; page.audiences[0].mobileTitle = '  ';
+  const doc = document(app.ad(page));
+  const benefit = doc.querySelector('.bangalore-landing__benefit-body');
+  assert.equal(benefit.textContent, 'Benefit desktop fallback');
+  assert.ok(!benefit.classList.contains('bangalore-landing__desktop-copy'));
+  const audience = doc.querySelector('.bangalore-landing__audience-card');
+  assert.equal(audience.querySelector('h3 .bangalore-landing__mobile-copy').textContent, 'Audience Heading');
+  assert.equal(audience.querySelector('p .bangalore-landing__mobile-copy').textContent, 'Audience desktop fallback');
 });

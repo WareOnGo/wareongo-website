@@ -96,3 +96,25 @@ for (const [id, title] of [['benefit-4', 'Dedicated Launch Advisor'], ['benefit-
     assert.equal(card.querySelector('.bangalore-landing__benefit-full-title, .bangalore-landing__benefit-mobile-title'), null);
   });
 }
+
+for (const version of [1, 2]) test(`version ${version} upgrades mobile copy and independent map photos without mutating history`, () => {
+  const saved = JSON.parse(fs.readFileSync(new URL(`./fixtures/bangalore-v${version}.json`, import.meta.url), 'utf8'));
+  saved.images['warehouse-2255'].url = 'https://example.test/approved-doddaballapur.webp';
+  const before = structuredClone(saved);
+  const upgraded = parseAdPage(saved);
+  assert.equal(upgraded.version, 3);
+  assert.equal(upgraded.benefits[0].mobileBody, '');
+  assert.equal(upgraded.audiences[0].mobileTitle, '');
+  assert.equal(upgraded.audiences[0].mobileBody, '');
+  assert.equal(upgraded.images['micromarket-doddaballapur'].url, saved.images['warehouse-2255'].url);
+  for (const area of ['bidadi', 'sarjapur', 'north-bangalore', 'indiranagar', 'marathalli', 'jp-nagar', 'hsr']) {
+    assert.ok(upgraded.images[`micromarket-${area}`].url.endsWith(`micromarket-${area}.webp`));
+  }
+  upgraded.benefits[0].mobileBody = 'Approved mobile benefit';
+  upgraded.audiences[0].mobileTitle = 'Approved mobile audience';
+  upgraded.audiences[0].mobileBody = 'Approved audience description';
+  upgraded.images['micromarket-doddaballapur'].url = 'https://example.test/independent-photo.webp';
+  assert.equal(saved.images['warehouse-2255'].url, before.images['warehouse-2255'].url);
+  assert.deepEqual(parseAdPage(upgraded), upgraded);
+  assert.deepEqual(saved, before);
+});

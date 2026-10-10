@@ -220,7 +220,7 @@
 .bangalore-landing__service-number { margin-top: 16px; color: var(--landing-muted); font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); }
 .bangalore-landing__service h3 { margin-top: 4px; font-size: var(--landing-text-card); font-weight: 600; line-height: 1.4; letter-spacing: 0; }
 .bangalore-landing__service p { margin-block: 8px 24px; color: var(--landing-muted); font-size: var(--landing-text-sm); line-height: var(--landing-leading-body); text-wrap: balance; }
-.bangalore-landing__service-mobile-copy { display: none; }
+.bangalore-landing__service-mobile-copy, .bangalore-landing__mobile-copy { display: none; }
 .bangalore-landing__service > button { margin-top: auto; }
 .bangalore-landing__service:hover { border-color: var(--landing-accent); }
 .bangalore-landing__service-image { position: relative; width: 100%; min-width: 0; min-height: 304px; overflow: hidden; border: var(--landing-border); border-radius: var(--landing-radius); background: var(--landing-tint); }
@@ -442,6 +442,9 @@
   .bangalore-landing__service p { margin-block: 8px 16px; font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); overflow-wrap: break-word; }
   .bangalore-landing__service-full-copy { display: none; }
   .bangalore-landing__service-mobile-copy { display: inline; }
+  .bangalore-landing__desktop-copy { display: none; }
+  .bangalore-landing__mobile-copy { display: inline; }
+  p.bangalore-landing__mobile-copy { display: block; }
   .bangalore-landing__service > button { width: 100%; padding: 8px; text-align: center; }
   .bangalore-landing__service > button svg { display: none; }
   .bangalore-landing__service-image { min-height: 200px; }

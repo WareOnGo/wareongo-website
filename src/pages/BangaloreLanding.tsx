@@ -4,6 +4,7 @@ import { ArrowRight, Building2, Handshake, Search, Truck, Warehouse } from 'luci
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PageHead from '@/components/PageHead';
+import InlineText from '@/components/InlineText';
 import TrustedBySection from '@/components/TrustedBySection';
 import BangaloreEnquiryForm from '@/components/city/BangaloreEnquiryForm';
 import BangaloreFeaturedListings from '@/components/city/BangaloreFeaturedListings';
@@ -18,6 +19,7 @@ import { getBangaloreAdPage, type AdPageContent } from '@/data/adPages';
 import { MICROMARKETS } from '@/data/locations.generated';
 import { BANGALORE_MAP_AREAS, type BangaloreMapScope } from '@/data/bangaloreMicromarketMap';
 import type { BangaloreLandingData } from '@/loaders/bangaloreLandingLoader';
+import type { AdPreviewView } from './BangaloreAdPreview';
 import { trackEvent, type AnalyticsParams } from '@/lib/analytics';
 import { normalizeHeadingCase, titleCase } from '@/lib/headingCase';
 import '@/components/WarehouseCard.css';
@@ -28,7 +30,7 @@ const AUDIENCE_ICONS = { owners: Warehouse, '3pls': Truck, companies: Building2 
 const AUDIENCE_INTENTS = { owners: ['list-warehouse'], '3pls': ['find-space', 'fill-spare-space'], companies: ['find-warehouse'] };
 
 /** Content slots follow the supplied Google Ads wireframe, top to bottom. */
-export default function BangaloreLanding({ content: savedContent = getBangaloreAdPage() }: { content?: AdPageContent } = {}) {
+export default function BangaloreLanding({ content: savedContent = getBangaloreAdPage(), previewState = 'page' }: { content?: AdPageContent; previewState?: AdPreviewView } = {}) {
   const copy = normalizeHeadingCase(savedContent.copy);
   const content = { ...savedContent, copy };
   const services = content.services.map(item => ({ ...item, slug: item.id, icon: SERVICE_ICONS[item.id], description: item.body, mobileCopy: { title: item.mobileTitle, body: item.mobileBody } }));
@@ -45,7 +47,7 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
       : null,
   }));
   const [mapScope, setMapScope] = useState<BangaloreMapScope>('belts');
-  const [contactContext, setContactContext] = useState<AnalyticsParams | null>(null);
+  const [contactContext, setContactContext] = useState<AnalyticsParams | null>(previewState === 'contact' ? { source: 'cms-preview' } : null);
   const contactTrigger = useRef<HTMLButtonElement | null>(null);
 
   function openContact(trigger: HTMLButtonElement, context: AnalyticsParams) {
@@ -78,7 +80,7 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
           <div className="bangalore-landing__hero-copy">
             <h1 id="bangalore-title" className="bangalore-landing__headline">{copy.heroHeading} <span>{copy.heroAccent}</span></h1>
           </div>
-          <BangaloreEnquiryForm copy={copy} />
+          <BangaloreEnquiryForm copy={copy} previewSubmitted={previewState === 'hero-success'} />
           <BangaloreFeaturedListings content={content} onContact={openContact} />
           <section className="bangalore-landing__trust" aria-labelledby="bangalore-trust-title">
             <h2 id="bangalore-trust-title" className="bangalore-landing__trust-title">Trusted by 200+ Companies across India</h2>
@@ -109,8 +111,8 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
                     <span className="bangalore-landing__service-mobile-copy">{mobileCopy.title}</span>
                   </h3>
                   <p>
-                    <span className="bangalore-landing__service-full-copy">{description}</span>
-                    <span className="bangalore-landing__service-mobile-copy">{mobileCopy.body}</span>
+                    <span className="bangalore-landing__service-full-copy"><InlineText text={description} /></span>
+                    <span className="bangalore-landing__service-mobile-copy"><InlineText text={mobileCopy.body} /></span>
                   </p>
                   <button
                     type="button"
@@ -132,11 +134,11 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
             <h2 id="bangalore-audiences-title" className="bangalore-landing__section-title">{copy.audiencesHeading}</h2>
           </div>
           <div className="bangalore-landing__audience-grid">
-            {audiences.map(({ slug, icon: Icon, title, description, actions }) => (
+            {audiences.map(({ slug, icon: Icon, title, description, mobileTitle, mobileBody, actions }) => (
               <article key={slug} className="bangalore-landing__audience-card">
                 <div className="bangalore-landing__icon"><Icon size={23} strokeWidth={1.5} aria-hidden="true" /></div>
-                <h3>{titleCase(title)}</h3>
-                <p>{description}</p>
+                <h3><span className="bangalore-landing__desktop-copy">{titleCase(title)}</span><span className="bangalore-landing__mobile-copy">{mobileTitle.trim() || titleCase(title)}</span></h3>
+                <p><span className="bangalore-landing__desktop-copy"><InlineText text={description} /></span><span className="bangalore-landing__mobile-copy"><InlineText text={mobileBody.trim() || description} /></span></p>
                 <div className="bangalore-landing__audience-actions">
                   {actions.map(({ label, intent }, index) => (
                     <button
