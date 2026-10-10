@@ -65,7 +65,7 @@ export function StateCitiesTable({ cities, place, loading = false }: { cities: S
     : value;
   const name = (c: StateCity) => !c.path ? c.name
     : loading ? <span className="text-wareongo-blue">{c.name}</span>
-    : <Link to={c.path} className="text-wareongo-blue hover:underline">{c.name}</Link>;
+    : <Link to={c.path} className="text-wareongo-blue underline underline-offset-2">{c.name}</Link>;
   return <>
     {/* The panel is the scroll region itself: a clipping wrapper around it
         would hide the region's keyboard focus ring. */}

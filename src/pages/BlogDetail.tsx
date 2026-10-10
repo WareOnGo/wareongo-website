@@ -160,7 +160,7 @@ const BlogDetail = ({ content }: { content?: Blog } = {}) => {
                 <ul className="space-y-2">
                   {relatedBlogs.map((g) => (
                     <li key={g.slug}>
-                      <Link to={`/blogs/${g.slug}`} className="text-wareongo-blue hover:underline">
+                      <Link to={`/blogs/${g.slug}`} className="text-wareongo-blue underline underline-offset-2">
                         {g.title}
                       </Link>
                     </li>

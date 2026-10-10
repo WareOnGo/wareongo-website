@@ -504,8 +504,8 @@ const WarehouseDetail = () => {
                 ? ` Compliances on record: ${warehouseData.specifications.compliance.compliances}.`
                 : ''}{' '}
               Spaces like this are also commonly listed as godowns for rent in {loc.city}.{' '}
-              Browse more <Link to={`/listings/city/${loc.city.toLowerCase().replace(/\s+/g, '-')}`} className="text-wareongo-blue underline-offset-2 hover:underline">warehouses in {loc.city}</Link>{' '}
-              or <Link data-analytics-placement="warehouse_detail_inline" to="/request-warehouse" className="text-wareongo-blue underline-offset-2 hover:underline">request a custom space</Link> if this doesn't fit your requirements.
+              Browse more <Link to={`/listings/city/${loc.city.toLowerCase().replace(/\s+/g, '-')}`} className="text-wareongo-blue underline underline-offset-2">warehouses in {loc.city}</Link>{' '}
+              or <Link data-analytics-placement="warehouse_detail_inline" to="/request-warehouse" className="text-wareongo-blue underline underline-offset-2">request a custom space</Link> if this doesn't fit your requirements.
             </p>
           </section>
 

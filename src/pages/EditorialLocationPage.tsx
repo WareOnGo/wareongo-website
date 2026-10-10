@@ -441,7 +441,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
                         <Link
                           key={b.slug}
                           to={`/blogs/${b.slug}`}
-                          className="block text-wareongo-blue hover:underline"
+                          className="block text-wareongo-blue underline underline-offset-2"
                         >
                           {b.title} →
                         </Link>

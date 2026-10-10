@@ -317,7 +317,7 @@ const CaseStudyDetail: React.FC = () => {
                 <li key={l.to + l.label}>
                   <Link
                     to={l.to}
-                    className="inline-flex items-center gap-1.5 text-sm font-medium text-wareongo-blue hover:underline underline-offset-2"
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-wareongo-blue underline underline-offset-2"
                   >
                     {l.label}
                     <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />

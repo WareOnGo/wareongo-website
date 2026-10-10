@@ -62,7 +62,7 @@ const FAQAccordion = ({ items, defaultOpenIndex = 0 }: FAQAccordionProps) => {
                       {' '}
                       <Link
                         to={item.link.to}
-                        className="text-wareongo-blue underline-offset-2 hover:underline whitespace-nowrap"
+                        className="text-wareongo-blue underline underline-offset-2 whitespace-nowrap"
                       >
                         {item.link.label}
                       </Link>
