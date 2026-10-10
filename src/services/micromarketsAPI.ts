@@ -90,7 +90,7 @@ export const micromarketOverviewPath = (
   m: Pick<Micromarket, 'stateSlug' | 'citySlug' | 'slug'>,
 ): string | null => {
   const segments = [m.stateSlug, m.citySlug, m.slug];
-  return segments.every((segment) => segment && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(segment))
+  return segments.every((segment) => segment && /^[a-z0-9]+(?:-+[a-z0-9]+)*$/.test(segment))
     ? `/overview/${segments.join('/')}`
     : null;
 };

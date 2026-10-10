@@ -1,6 +1,7 @@
 import type { LoaderFunctionArgs } from 'react-router-dom';
-import { warehouseAPI, transformWarehouseData, type Warehouse } from '@/services/warehouseAPI';
-import { getMicromarketContent } from '@/data/micromarkets';
+import { warehouseAPI, transformWarehouseData, type Warehouse, type WarehouseInventory } from '@/services/warehouseAPI';
+import { getMicromarketContent, type MicromarketContent } from '@/data/micromarkets';
+import type { CmsPreviewContent } from '@/lib/cmsPreviewContent';
 import { applyStatOverrides } from '@/lib/micromarketStats';
 import type { EditorialContent, EditorialImageVariant, PagePhoto } from '@/data/editorial';
 import type { DerivedStats, Spread } from '@/services/derivedStats';
@@ -33,14 +34,14 @@ export const slugify = (name: string): string =>
 
 // ----- cached warehouse fetch -----------------------------------------------
 
-let warehousesCache: Promise<Warehouse[]> | null = null;
+const warehousesCache = new Map<WarehouseInventory, Promise<Warehouse[]>>();
 
 /**
  * Listings per request while walking the whole catalogue.
  *
- * Large on purpose. This function runs in exactly two places, and neither is a
- * visitor's browser: the SSG prerender (where its module-level cache means one
- * walk per build) and the dev server, where vite-react-ssg leaves the real
+ * Large on purpose. This function runs in the CMS preview, the SSG prerender
+ * (where its module-level cache means one walk per build) and the dev server,
+ * where vite-react-ssg leaves the real
  * loader in place because there is no prerendered data to read instead. In a
  * production page the loader is swapped for one that reads the static manifest,
  * so nothing here is on the critical path for a real user.
@@ -52,23 +53,26 @@ let warehousesCache: Promise<Warehouse[]> | null = null;
  */
 const FETCH_PAGE_SIZE = 500;
 
-export function getAllWarehouses(): Promise<Warehouse[]> {
-  if (!warehousesCache) {
+export function getAllWarehouses(inventory: WarehouseInventory = 'published'): Promise<Warehouse[]> {
+  let cached = warehousesCache.get(inventory);
+  if (!cached) {
     // Share in-flight work as well as the result: concurrent route enumeration
     // must not launch duplicate uncached walks of the inventory.
-    warehousesCache = fetchAllWarehouses().catch((error) => {
-      warehousesCache = null;
+    // Keep previews separate so neither cache can change the other's inventory.
+    cached = fetchAllWarehouses(inventory).catch((error) => {
+      warehousesCache.delete(inventory);
       throw error;
     });
+    warehousesCache.set(inventory, cached);
   }
-  return warehousesCache;
+  return cached;
 }
 
-async function fetchAllWarehouses(): Promise<Warehouse[]> {
+async function fetchAllWarehouses(inventory: WarehouseInventory): Promise<Warehouse[]> {
   const all: Warehouse[] = [];
   let page = 1;
   while (true) {
-    const resp = await warehouseAPI.getWarehouses(page, FETCH_PAGE_SIZE);
+    const resp = await warehouseAPI.getWarehouses(page, FETCH_PAGE_SIZE, undefined, undefined, inventory);
     all.push(...resp.data);
     if (page >= resp.pagination.totalPages || resp.data.length === 0) break;
     page += 1;
@@ -209,8 +213,8 @@ const countTypes = (scoped: Warehouse[]) =>
     { PEB: 0, RCC: 0 },
   );
 
-async function summariesFor(type: 'city' | 'state'): Promise<LocationSummary[]> {
-  const all = await getAllWarehouses();
+async function summariesFor(type: 'city' | 'state', inventory: WarehouseInventory = 'published'): Promise<LocationSummary[]> {
+  const all = await getAllWarehouses(inventory);
   const counts = new Map<string, number>();
   for (const w of all) {
     const c = canonicalize(type === 'city' ? w.city : w.state, type);
@@ -226,16 +230,17 @@ async function summariesFor(type: 'city' | 'state'): Promise<LocationSummary[]> 
 export const getCityList = () => summariesFor('city');
 export const getStateList = () => summariesFor('state');
 
-let breadcrumbCache: Promise<ReturnType<typeof createListingBreadcrumbs>> | null = null;
+const breadcrumbCache = new Map<WarehouseInventory, Promise<ReturnType<typeof createListingBreadcrumbs>>>();
 
-export function getListingBreadcrumbs() {
-  if (!breadcrumbCache) {
-    breadcrumbCache = (async () => {
+export function getListingBreadcrumbs(inventory: WarehouseInventory = 'published') {
+  let cached = breadcrumbCache.get(inventory);
+  if (!cached) {
+    cached = (async () => {
       // Breadcrumb metadata is auxiliary: unavailable geography must not make
       // an otherwise valid warehouse inaccessible. Retain whichever levels we
       // can verify, with /listings always supplied by the page itself.
       const [locations, markets, cities, states] = await Promise.allSettled([
-        getLocations(), buildableMicromarkets(), getCityList(), getStateList(),
+        getLocations(), buildableMicromarkets(), summariesFor('city', inventory), summariesFor('state', inventory),
       ]);
       for (const result of [locations, markets, cities, states]) {
         if (result.status === 'rejected') console.warn('[breadcrumbs] parent lookup unavailable:', result.reason);
@@ -249,8 +254,9 @@ export function getListingBreadcrumbs() {
         },
       );
     })();
+    breadcrumbCache.set(inventory, cached);
   }
-  return breadcrumbCache;
+  return cached;
 }
 
 // ----- loaders + static paths -----------------------------------------------
@@ -298,14 +304,15 @@ async function ancestor(kind: LocationKind, name: string, slug: string) {
   return { label: name, path: await publishedLocationPath(kind, slug) ?? locationPath({ kind, slug }) };
 }
 
-async function locationOverviewFor(kind: LocationKind, stateSlug: string, citySlug?: string): Promise<EditorialPageData | null> {
+async function locationOverviewFor(kind: LocationKind, stateSlug: string, citySlug?: string, draft?: LocationPageContent): Promise<EditorialPageData | null> {
   const match = await locationStats(kind, kind === 'CITY' ? citySlug ?? '' : stateSlug);
   if (!match || (kind === 'CITY' && match.stateSlug !== stateSlug)) return null;
-  const content = getLocationPageContent(kind, match.slug);
+  const content = draft ?? getLocationPageContent(kind, match.slug);
   const path = locationOverviewPath(match);
   if (!content || !path) return null;
   const ids = new Set(match.listingIds);
-  const warehouses = (await getAllWarehouses()).filter(w => ids.has(w.id)).map(transformWarehouseData);
+  const all = await getAllWarehouses(draft ? 'live' : 'published');
+  const warehouses = all.filter(w => ids.has(w.id)).map(transformWarehouseData);
   if (warehouses.length === 0) throw new Error(`Overview inventory missing: ${path}`);
   const parent = kind === 'CITY' && match.stateSlug && match.parentState
     ? await ancestor('STATE', match.parentState, match.stateSlug) : null;
@@ -320,7 +327,7 @@ async function locationOverviewFor(kind: LocationKind, stateSlug: string, citySl
   }
   const stats = applyStatOverrides(cityOverview
     ? { ...match, ...cityOverview.summary, peers: cityOverview.comparisonCities } : match, content.statOverrides);
-  const stateOverview = kind === 'STATE' ? await stateOverviewFor(match, content) : undefined;
+  const stateOverview = kind === 'STATE' ? await stateOverviewFor(match, content, all) : undefined;
   const statePhotos = stateOverview ? [...stateOverview.cities.map(c => c.image), stateOverview.marketImage] : [];
   return {
     type: kind === 'CITY' ? 'city' : 'state', canonical: match.name, slug: match.slug,
@@ -341,8 +348,8 @@ async function locationOverviewFor(kind: LocationKind, stateSlug: string, citySl
  * overview's overrides on top once one is published. Photos are the editor's
  * uploads or real listing photos from that place, and never one twice a page.
  */
-async function stateOverviewFor(state: LocationStats, content: LocationPageContent): Promise<StateOverviewData> {
-  const [{ cities, states }, all] = await Promise.all([getLocations(), getAllWarehouses()]);
+async function stateOverviewFor(state: LocationStats, content: LocationPageContent, all: Warehouse[]): Promise<StateOverviewData> {
+  const { cities, states } = await getLocations();
   const { list, others } = resolveStateCities(content.stateCities, cities.filter(c => c.stateSlug === state.slug));
   const used = new Set<string>();
   const rows = list.map(({ name, image, city }): StateCity => {
@@ -510,6 +517,7 @@ export type MicromarketSummary = LocationSummary & {
 async function micromarketLoader(
   citySlug: string,
   micromarketSlug: string,
+  inventory: WarehouseInventory = 'published',
 ): Promise<LocationListingsLoaderData | null> {
   const micromarkets = await buildableMicromarkets();
   const match = micromarkets.find((m) => m.slug === micromarketSlug && m.citySlug === citySlug);
@@ -518,7 +526,7 @@ async function micromarketLoader(
   // Which listings belong to the belt is the backend's answer too, so a locality
   // spelled two ways cannot lose half its inventory to a slug comparison here.
   const ids = new Set(match.listingIds);
-  const all = await getAllWarehouses();
+  const all = await getAllWarehouses(inventory);
   const scoped = all.filter((w) => ids.has(w.id));
 
   const base: LocationListingsLoaderData = {
@@ -528,7 +536,7 @@ async function micromarketLoader(
     parentCity: { canonical: match.parentCity as string, slug: citySlug },
     typeCounts: countTypes(scoped),
     warehouses: scoped.map(transformWarehouseData),
-    breadcrumbAncestors: (await getListingBreadcrumbs()).micromarket(citySlug, match.slug, match.name),
+    breadcrumbAncestors: (await getListingBreadcrumbs(inventory)).micromarket(citySlug, match.slug, match.name),
   };
 
   const content = getMicromarketContent(citySlug, match.slug);
@@ -537,15 +545,15 @@ async function micromarketLoader(
 }
 
 /** A wrong state/city or an unpublished overview must not resolve as a grid. */
-export async function micromarketOverviewLoader({ params }: LoaderFunctionArgs): Promise<MicromarketPageData | null> {
+export async function micromarketOverviewLoader({ params }: LoaderFunctionArgs, draft?: MicromarketContent): Promise<MicromarketPageData | null> {
   const match = (await buildableMicromarkets()).find((m) =>
     m.stateSlug === params.state && m.citySlug === params.city && m.slug === params.micromarket,
   );
   if (!match?.parentState || !match.stateSlug || !match.citySlug) return null;
-  const content = getMicromarketContent(match.citySlug, match.slug);
+  const content = draft ?? getMicromarketContent(match.citySlug, match.slug);
   const overviewPath = micromarketOverviewPath(match);
   if (!content || !overviewPath) return null;
-  const base = await micromarketLoader(match.citySlug, match.slug);
+  const base = await micromarketLoader(match.citySlug, match.slug, draft ? 'live' : 'published');
   if (!base) return null;
 
   // Derived once by the backend, then corrected by whatever the editor set — so
@@ -565,6 +573,25 @@ export async function micromarketOverviewLoader({ params }: LoaderFunctionArgs):
       ancestors: [state, ...(match.name === match.parentCity ? [] : [city])],
       up: { label: `All of ${city.label}`, linkLabel: `Warehouses in ${city.label} →`, path: city.path },
     } };
+}
+
+/** Resolve unsaved copy through the public page's inventory and layout rules. */
+export async function previewEditorialPage(value: CmsPreviewContent): Promise<EditorialPageData> {
+  let data: EditorialPageData | null = null;
+  if (value.type === 'city' || value.type === 'state') {
+    const content = value.content;
+    const match = await locationStats(content.kind, content.slug);
+    if (match) data = await locationOverviewFor(content.kind, content.kind === 'STATE' ? match.slug : match.stateSlug ?? '', match.slug, content);
+  } else if (value.type === 'micromarket') {
+    const content = value.content;
+    const match = (await buildableMicromarkets()).find(m => m.citySlug === content.citySlug && m.slug === content.slug);
+    if (match) data = await micromarketOverviewLoader({
+      params: { state: match.stateSlug ?? '', city: content.citySlug, micromarket: content.slug },
+      request: new Request('https://wareongo.com/preview/cms'), context: {},
+    }, content);
+  }
+  if (!data) throw new Error('Choose a location with eligible inventory to preview.');
+  return data;
 }
 
 export async function micromarketOverviewStaticPaths(): Promise<string[]> {

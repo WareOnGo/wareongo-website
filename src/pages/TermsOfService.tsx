@@ -3,11 +3,10 @@ import React, { useEffect } from 'react';
 import PageHead from '@/components/PageHead';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { getLegalPage } from '@/data/legalPages';
+import { getLegalPage, type LegalContent } from '@/data/legalPages';
 import { LegalDates, LegalBody } from '@/components/LegalContent';
 
-const TermsOfService = () => {
-  const content = getLegalPage('terms-of-service');
+const TermsOfService = ({ content = getLegalPage('terms-of-service') }: { content?: LegalContent } = {}) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

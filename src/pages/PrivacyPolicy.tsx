@@ -5,19 +5,18 @@ import PageHead from '@/components/PageHead';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { getLegalPage } from '@/data/legalPages';
+import { getLegalPage, type LegalContent } from '@/data/legalPages';
 import { LegalDates, LegalBody } from '@/components/LegalContent';
 
-const PrivacyPolicy = () => {
+const PrivacyPolicy = ({ content = getLegalPage('privacy-policy') }: { content?: LegalContent } = {}) => {
   const navigate = useNavigate();
-  const content = getLegalPage('privacy-policy');
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const handleBackClick = () => {
-    navigate(-1);
+    if (!window.location.pathname.startsWith('/preview/')) navigate(-1);
   };
 
   return (

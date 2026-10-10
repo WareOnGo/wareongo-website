@@ -21,6 +21,7 @@
     {"source":"/overview/:cataloguePath+","destination":"/__catalogue/overview/:cataloguePath*/1"}
   ],
   "headers": [
+    {"source":"/preview/:path*","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow"},{"key":"Cache-Control","value":"no-store"}]},
     {"source":"/(.*).(js|css|woff|woff2|jpg|jpeg|png|webp|avif|svg|ico|mp4)","headers":[{"key":"Cache-Control","value":"public, max-age=31536000, immutable"}]},
     {"source":"/(warehouse|listings|overview|casestudies)/(.*)","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=86400, stale-while-revalidate=604800"}]},
     {"source":"/sitemap.xml","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=3600"}]},

@@ -6,7 +6,7 @@ import Breadcrumbs, { type BreadcrumbItem } from '@/components/Breadcrumbs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FAQAccordion from '@/components/FAQAccordion';
-import { getBlogBySlug, blogs, type BlogBlock, type BlogImage } from '@/data/blogs';
+import { getBlogBySlug, blogs, type Blog, type BlogBlock, type BlogImage } from '@/data/blogs';
 import { ContentBlock as Block } from '@/components/ContentBlock';
 import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
 
@@ -36,9 +36,9 @@ const bylineName = (author: string) => author.replace(/^\s*by\s+/i, '').trim();
 const imagesIn = (blocks: BlogBlock[]): BlogImage[] =>
   blocks.flatMap((b) => (b.kind === 'images' ? b.images : []));
 
-const BlogDetail = () => {
+const BlogDetail = ({ content }: { content?: Blog } = {}) => {
   const { slug } = useParams<{ slug: string }>();
-  const blog = slug ? getBlogBySlug(slug) : undefined;
+  const blog = content ?? (slug ? getBlogBySlug(slug) : undefined);
 
   if (!blog) {
     return <Navigate to="/blogs" replace />;
@@ -96,7 +96,7 @@ const BlogDetail = () => {
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
       <PageHead title={blog.seoTitle} description={blog.description} path={path} image={leadImage} ogType="article">
         <script type="application/ld+json">{JSON.stringify(articleLd)}</script>
-        <script type="application/ld+json">{JSON.stringify(faqLd)}</script>
+        {blog.faqs.length > 0 && <script type="application/ld+json">{JSON.stringify(faqLd)}</script>}
       </PageHead>
       <Navbar />
 
@@ -147,12 +147,12 @@ const BlogDetail = () => {
 
             {/* Accordion answers stay in the DOM when collapsed (see FAQAccordion),
                 so the SSG HTML always matches the FAQPage JSON-LD. */}
-            <section aria-labelledby="blog-faq" className="mt-10">
+            {blog.faqs.length > 0 && <section aria-labelledby="blog-faq" className="mt-10">
               <h2 id="blog-faq" className="ui-section-title text-wareongo-blue mb-4">
                 Frequently Asked Questions
               </h2>
               <FAQAccordion items={blog.faqs.map(({ q, a }) => ({ q, a }))} />
-            </section>
+            </section>}
 
             {relatedBlogs.length > 0 && (
               <section aria-label="Related blogs" className="mt-10">

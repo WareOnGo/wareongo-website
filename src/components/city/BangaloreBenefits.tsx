@@ -1,6 +1,5 @@
 import { Handshake, Headset, MapPinned, Scale, ShieldCheck, Warehouse } from 'lucide-react';
 import InlineText from '@/components/InlineText';
-import defaults from '@/data/ad-pages/bangalore.json';
 import { CITIES_COVERED, SHORTLIST_HOURS, SQFT_TRANSACTED_M } from '@/data/companyStats';
 import type { AdPageContent } from '@/data/adPages';
 import { titleCase } from '@/lib/headingCase';
@@ -14,27 +13,6 @@ const BENEFIT_ICONS = {
   'benefit-6': Warehouse,
 };
 
-// Shorten known copy without replacing independently authored CMS titles.
-const MOBILE_BENEFIT_TITLES = new Map([
-  ['Single Point of Contact', 'Single PoC'],
-  ['Compliance and Legal Support', 'Compliance Support'],
-  ['Built to Suit', 'Built-to-Suit'],
-]);
-
-const PLACEHOLDER_TITLES = {
-  verified: 'Verified spaces', local: 'Local expertise', lease: 'Lease support',
-  'benefit-4': 'Benefit 4', 'benefit-5': 'Benefit 5', 'benefit-6': 'Benefit 6',
-};
-
-const PREVIOUS_BENEFIT_BODIES = {
-  local: 'The right locality, specs and paperwork, worked by **our experts**.',
-  lease: 'We negotiate the rent, security and lock-in, so that you **get the best deal**.',
-  verified: 'Every space is **verified by our area managers** before it reaches your shortlist.',
-  'benefit-4': '**One expert advisor** from proposal to move-in.',
-  'benefit-5': 'We take care of **the boring details** for you.',
-  'benefit-6': "Can't find the best fit? We arrange a **tailored warehouse** for you in 6 months.",
-};
-
 const METRICS = [
   { value: `${SHORTLIST_HOURS} Hour`, label: 'Curated Shortlist' },
   { value: `${SQFT_TRANSACTED_M} Mn+`, label: 'Sq Ft Leased' },
@@ -43,14 +21,8 @@ const METRICS = [
 ];
 
 export default function BangaloreBenefits({ content }: { content: AdPageContent }) {
-  // Refresh known previous copy and wireframe placeholders in older approved
-  // CMS revisions while retaining independently edited titles and descriptions.
-  const benefits = defaults.benefits.map(fallback => {
-    const saved = content.benefits.find(item => item.id === fallback.id);
-    if (!saved || (saved.title === PLACEHOLDER_TITLES[saved.id] && !saved.body.trim())) return fallback;
-    return { ...saved, body: saved.body === PREVIOUS_BENEFIT_BODIES[saved.id] ? fallback.body : saved.body };
-  });
-  const heading = content.copy.whyHeading === 'Why choose WareOnGo' ? defaults.copy.whyHeading : content.copy.whyHeading;
+  const benefits = content.benefits;
+  const heading = content.copy.whyHeading;
 
   return (
     <section className="bangalore-landing__why bangalore-landing__container" aria-labelledby="bangalore-why-title">
@@ -66,9 +38,8 @@ export default function BangaloreBenefits({ content }: { content: AdPageContent 
         ))}
       </dl>
       <div className="bangalore-landing__why-copy">
-        {benefits.map(({ id, title, body }) => {
+        {benefits.map(({ id, title, body, mobileTitle }) => {
           const Icon = BENEFIT_ICONS[id];
-          const mobileTitle = MOBILE_BENEFIT_TITLES.get(titleCase(title));
           return (
             <article key={id} className="bangalore-landing__benefit" data-benefit={id}>
               <div className="bangalore-landing__icon" aria-hidden="true"><Icon size={20} strokeWidth={1.5} /></div>

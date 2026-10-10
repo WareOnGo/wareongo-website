@@ -1,6 +1,7 @@
 import { trackEvent } from '@/lib/analytics';
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
+import { useLocation } from 'react-router-dom';
 
 // Create the AuthContext
 const AuthContext = createContext(null);
@@ -14,8 +15,24 @@ export const useAuth = () => {
   return context;
 };
 
-// AuthProvider component
+const previewAuth = Object.freeze({
+  user: null,
+  token: null,
+  isAuthenticated: false,
+  login: () => {},
+  logout: () => {},
+});
+
+// Do not mount the storage-backed provider on previews, even for an invalid token.
+// Switching routes mounts the appropriate provider afresh without changing the session.
 export const AuthProvider = ({ children }) => {
+  const { pathname } = useLocation();
+  return pathname.startsWith('/preview/')
+    ? <AuthContext.Provider value={previewAuth}>{children}</AuthContext.Provider>
+    : <SessionAuthProvider>{children}</SessionAuthProvider>;
+};
+
+const SessionAuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(() => {
     // Initialize token from localStorage (guarded for SSG / server-side render)

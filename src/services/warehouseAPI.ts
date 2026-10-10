@@ -86,6 +86,8 @@ export class WarehouseAPIError extends Error {
   }
 }
 
+export type WarehouseInventory = 'published' | 'live';
+
 class WarehouseAPI {
   private baseURL: string;
 
@@ -108,12 +110,14 @@ class WarehouseAPI {
       spaceRanges?: string;
     },
     signal?: AbortSignal,
+    inventory: WarehouseInventory = 'published',
   ): Promise<WarehouseAPIResponse> {
     try {
       const params = new URLSearchParams();
       params.append('page', page.toString());
       params.append('pageSize', pageSize.toString());
-      if (warehouseBuildMaxId !== undefined) params.append('maxId', String(warehouseBuildMaxId));
+      // CMS previews include current inventory; visitor requests keep the build's publication cutoff.
+      if (inventory === 'published' && warehouseBuildMaxId !== undefined) params.append('maxId', String(warehouseBuildMaxId));
 
       // Add filters if provided
       if (filters) {

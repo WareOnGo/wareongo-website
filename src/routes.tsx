@@ -156,6 +156,11 @@ export const routes: RouteRecord[] = [
             loader: bangaloreLandingLoader,
           },
           {
+            path: "preview/cms",
+            lazy: lazyDefault(() => import("./pages/CmsPreview")),
+            entry: "src/pages/CmsPreview.tsx",
+          },
+          {
             path: "preview/ad-pages/bangalore",
             lazy: lazyDefault(() => import("./pages/BangaloreAdPreview")),
             entry: "src/pages/BangaloreAdPreview.tsx",

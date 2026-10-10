@@ -100,7 +100,7 @@ export const locationPath = (l: Pick<LocationStats, 'kind' | 'slug'>) =>
 export const locationOverviewPath = (l: Pick<LocationStats, 'kind' | 'slug' | 'stateSlug' | 'hasPage'>): string | null => {
   if (!l.hasPage) return null;
   const segments = l.kind === 'STATE' ? [l.slug] : [l.stateSlug, l.slug];
-  if (!segments.every(segment => segment && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(segment))) return null;
+  if (!segments.every(segment => segment && /^[a-z0-9]+(?:-+[a-z0-9]+)*$/.test(segment))) return null;
   if (l.kind === 'STATE') return `/overview/${l.slug}`;
   return l.stateSlug ? `/overview/${l.stateSlug}/${l.slug}` : null;
 };

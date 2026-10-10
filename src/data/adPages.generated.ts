@@ -1,7 +1,7 @@
 // Initial import of the existing Bangalore ad page. Replaced by the approved CMS revision during builds.
 import type { AdPageContent } from './adPages';
 export const adPages: AdPageContent[] = [{
-  "version": 1,
+  "version": 2,
   "slug": "bangalore",
   "name": "Bangalore",
   "copy": {
@@ -9,7 +9,6 @@ export const adPages: AdPageContent[] = [{
     "metaDescription": "Explore warehouse spaces in Bangalore with WareOnGo.",
     "heroHeading": "Warehouses for Rent",
     "heroAccent": "in Bangalore",
-    "enquiryEyebrow": "Get in touch",
     "enquiryHeading": "Find Your Warehouse",
     "enquiryDescription": "Share your details. We’ll help you find a space in Bangalore.",
     "enquirySubmit": "Get in touch",
@@ -17,7 +16,6 @@ export const adPages: AdPageContent[] = [{
     "enquirySuccessDescription": "Our team will get in touch to help with your Bangalore warehouse search.",
     "enquirySuccessCta": "Explore locations",
     "featuredHeading": "Featured Warehouses",
-    "availableEyebrow": "Available now",
     "availableHeading": "Warehouses and Godowns in Bangalore",
     "filterAll": "All sizes",
     "filterSmall": "Under 5,000 sq ft",
@@ -40,54 +38,51 @@ export const adPages: AdPageContent[] = [{
     "requestPhoneCta": "Call Us Now",
     "servicesHeading": "Our Services",
     "audiencesHeading": "Who We Serve",
-    "overviewEyebrow": "The Bangalore market",
-    "overviewHeading": "Warehouse Rent in Bangalore",
-    "statsHeading": "Bangalore Warehouse Statistics",
-    "statsLocationsHeading": "Warehouse Locations in Bangalore",
-    "statsRentHeading": "Warehouse Rent in Bangalore",
-    "statsInventoryHeading": "What You'll Find Here",
-    "statsSpecificationsHeading": "Typical Specification in Bangalore",
-    "statsCityHeading": "City Overview",
     "contactHeading": "Contact Us",
     "contactDescription": "Share your details, and we'll get back to you!",
-    "contactSuccess": "We will reach out within 2 hours."
+    "contactSuccess": "We will reach out within 2 hours.",
+    "rentHeading": "Warehouse Rent in Bangalore",
+    "rentAreaHeading": "Area",
+    "rentRateHeading": "Rent",
+    "rentUnit": "(₹/sq ft a month)",
+    "faqHeading": "Frequently Asked Questions"
   },
-  "heroSteps": [
-    "Enquire",
-    "Visit",
-    "Sign",
-    "Move In"
-  ],
   "benefits": [
     {
       "id": "local",
       "title": "Local Expertise",
-      "body": "Our experts match you with options whose location, size and specs suit your operations."
+      "body": "Our experts match you with options whose location, size and specs suit your operations.",
+      "mobileTitle": ""
     },
     {
       "id": "lease",
       "title": "Better Commercials",
-      "body": "We negotiate for you, and we’re good at it: our clients end up saving ~20% on their lease."
+      "body": "We negotiate for you, and we’re good at it: our clients end up saving ~20% on their lease.",
+      "mobileTitle": ""
     },
     {
       "id": "verified",
       "title": "Verified Listings",
-      "body": "Every space is verified by our area managers before it reaches your curated shortlist."
+      "body": "Every space is verified by our area managers before it reaches your curated shortlist.",
+      "mobileTitle": ""
     },
     {
       "id": "benefit-4",
       "title": "Single Point of Contact",
-      "body": "No being bounced around teams. One expert advisor from proposal to move-in, Pan-India."
+      "body": "No being bounced around teams. One expert advisor from proposal to move-in, Pan-India.",
+      "mobileTitle": "Single PoC"
     },
     {
       "id": "benefit-5",
       "title": "Compliance and Legal Support",
-      "body": "Agreements, approvals and paperwork: we take care of the boring details for you."
+      "body": "Agreements, approvals and paperwork: we take care of the boring details for you.",
+      "mobileTitle": "Compliance Support"
     },
     {
       "id": "benefit-6",
       "title": "Built to Suit",
-      "body": "Can't find the best fit? We arrange a warehouse tailored to your operations in 6 months."
+      "body": "Can't find the best fit? We arrange a warehouse tailored to your operations in 6 months.",
+      "mobileTitle": "Built-to-Suit"
     }
   ],
   "services": [
@@ -95,25 +90,33 @@ export const adPages: AdPageContent[] = [{
       "id": "find-warehouse",
       "title": "Find the Perfect Space for You",
       "body": "Share your size, location, specs and budget. Our team picks verified options that fit and sends you a shortlist within 4 hours.",
-      "cta": "Get my shortlist"
+      "cta": "Get my shortlist",
+      "mobileTitle": "Find the Perfect Space",
+      "mobileBody": "Verified spaces that suit you in 4 hrs"
     },
     {
       "id": "build-to-suit",
       "title": "Build-to-Suit Warehouses",
       "body": "If the building you need doesn't exist yet, we match you with land and an owner who will build to your specification.",
-      "cta": "Start a build to suit"
+      "cta": "Start a build to suit",
+      "mobileTitle": "Built-to-Suit Warehouses",
+      "mobileBody": "Custom-built warehouses, just for you"
     },
     {
       "id": "list-space",
       "title": "Find a Tenant or Buyer",
       "body": "Own a warehouse, or have space left over? List your property with us; we bring you bona-fide tenants and buyers.",
-      "cta": "List my space"
+      "cta": "List my space",
+      "mobileTitle": "Find a Tenant or Buyer",
+      "mobileBody": "Rent or sell your property with ease"
     },
     {
       "id": "transaction-management",
       "title": "Complete Deal Management",
       "body": "Site visits, negotiation and compliance checks, all handled by one expert from the proposal till the day you move in.",
-      "cta": "Get started"
+      "cta": "Get started",
+      "mobileTitle": "Complete Deal Management",
+      "mobileBody": "One expert: from search to handover"
     }
   ],
   "audiences": [
@@ -137,73 +140,6 @@ export const adPages: AdPageContent[] = [{
       "body": "Find the right warehouse for your inventory, fulfilment or manufacturing operations. We’ll help you shortlist spaces that match your business.",
       "primaryCta": "Find a warehouse",
       "secondaryCta": ""
-    }
-  ],
-  "areaRows": [
-    {
-      "need": "Quick access into east Bangalore, with road links to Chennai and Andhra Pradesh",
-      "areas": [
-        "Hoskote"
-      ]
-    },
-    {
-      "need": "Large-format space on the Mumbai highway, with access into the city and north Karnataka",
-      "areas": [
-        "Nelamangala"
-      ]
-    },
-    {
-      "need": "Road and rail freight links, next to the planned Multimodal Logistics Park",
-      "areas": [
-        "Dobbaspet"
-      ]
-    },
-    {
-      "need": "Space beside south Bangalore’s pharma, electronics and engineering plants",
-      "areas": [
-        "Jigani",
-        "Bommasandra"
-      ]
-    },
-    {
-      "need": "A link between the Bangalore market and the Hosur industrial belt",
-      "areas": [
-        "Attibele"
-      ]
-    },
-    {
-      "need": "Automotive and electronics manufacturing supply chains",
-      "areas": [
-        "Hosur"
-      ]
-    },
-    {
-      "need": "Air cargo and high-value goods, next to the airport",
-      "areas": [
-        "Devanahalli"
-      ]
-    }
-  ],
-  "overviewParagraphs": [
-    "Bangalore’s warehousing sits along four highway corridors rather than in one estate. NH-48 runs north-west through Nelamangala to Dobbaspet and Tumakuru. NH-44 runs north past the airport at Devanahalli and south through Bommasandra, Jigani and Attibele to Hosur. NH-75, the Old Madras Road, runs east through Hoskote towards Kolar and Chennai.",
-    "Rent varies by unit size, location and specification. Use the median asking rents below to plan your budget."
-  ],
-  "overviewStats": [
-    {
-      "value": "—",
-      "label": "Bangalore listings"
-    },
-    {
-      "value": "—",
-      "label": "median, 20,000 sq ft and up"
-    },
-    {
-      "value": "—",
-      "label": "median, under 20,000 sq ft"
-    },
-    {
-      "value": "6 months",
-      "label": "standard deposit"
     }
   ],
   "images": {
@@ -386,12 +322,122 @@ export const adPages: AdPageContent[] = [{
       "alt": "Warehouse exterior near Jigani, Bangalore",
       "width": 900,
       "height": 675
-    },
-    "why": {
-      "url": "/bangalore/available-1121.webp",
-      "alt": "Bright warehouse interior with polished floors in Dobbaspet, Bangalore",
-      "width": 800,
-      "height": 450
     }
-  }
+  },
+  "areaGroups": [
+    {
+      "id": "highway-belts",
+      "scope": "belts",
+      "title": "Highway Belts",
+      "rows": [
+        {
+          "need": "Large distribution centres on the Mumbai highway",
+          "areas": "Nelamangala, Dobbaspet"
+        },
+        {
+          "need": "Air cargo and north-bound despatch",
+          "areas": "Devanahalli, Doddaballapur"
+        },
+        {
+          "need": "Chennai and Andhra-bound despatch on Old Madras Road",
+          "areas": "Hoskote, Soukya Road"
+        },
+        {
+          "need": "Storage for the factories on Hosur Road",
+          "areas": "Bommasandra, Jigani"
+        },
+        {
+          "need": "West-bound despatch on Mysore Road",
+          "areas": "Bidadi, Kumbalgodu"
+        },
+        {
+          "need": "South-bound despatch on Kanakapura Road",
+          "areas": "Harohalli"
+        }
+      ]
+    },
+    {
+      "id": "inside-the-city",
+      "scope": "city",
+      "title": "Inside the City",
+      "rows": [
+        {
+          "need": "Small godowns for north Bangalore",
+          "areas": "Yelahanka, Jakkur, Hebbal"
+        },
+        {
+          "need": "Last-mile delivery in east Bangalore",
+          "areas": "Whitefield, Marathahalli, Indiranagar"
+        },
+        {
+          "need": "Last-mile delivery in south and south-east Bangalore",
+          "areas": "HSR Layout, JP Nagar, Sarjapur"
+        },
+        {
+          "need": "Small industrial godowns close to the city",
+          "areas": "Peenya"
+        }
+      ]
+    }
+  ],
+  "rentGuide": {
+    "intro": "Warehouses and godowns for rent in Bangalore sit on four highways: Tumkur Road (NH-48), Old Madras Road (NH-75), Hosur Road and the airport road. Smaller godowns sit inside the city.",
+    "description": "Warehouse rent in Bangalore follows the land, not the unit size. On Tumkur Road and Old Madras Road, where land is plentiful, large sheds start from ₹17 per sq ft a month. Closer to the city, land gets scarcer, units get smaller and rent rises: godowns in Whitefield, Marathahalli, Sarjapur and HSR Layout ask up to ₹200 to ₹250. On the highway belts, a small unit costs about the same per sq ft as a large one, so choose the area first, then the size.",
+    "rows": [
+      {
+        "area": "Nelamangala, Dobbaspet, Makali",
+        "rent": "₹17 to ₹40"
+      },
+      {
+        "area": "Hoskote, Budigere, Soukya Road",
+        "rent": "₹18 to ₹80"
+      },
+      {
+        "area": "Peenya",
+        "rent": "₹17 to ₹65"
+      },
+      {
+        "area": "Hosur Road: Bommasandra, Jigani, Attibele",
+        "rent": "₹22 to ₹205"
+      },
+      {
+        "area": "Bidadi, Harohalli",
+        "rent": "₹22 to ₹40"
+      },
+      {
+        "area": "Kumbalgodu",
+        "rent": "₹14 to ₹30"
+      },
+      {
+        "area": "Devanahalli",
+        "rent": "₹25 to ₹70"
+      },
+      {
+        "area": "Whitefield",
+        "rent": "₹60 to ₹200"
+      },
+      {
+        "area": "Marathahalli, Sarjapur",
+        "rent": "₹60 to ₹200"
+      },
+      {
+        "area": "HSR Layout",
+        "rent": "₹100 to ₹250"
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "What does WareOnGo charge?",
+      "a": "You pay nothing to search, visit or shortlist. Our fee is one month's rent, charged only when you sign the lease, so you only pay when you close."
+    },
+    {
+      "q": "Are the listings verified?",
+      "a": "Yes. Our area managers verify every space on-site before it reaches your shortlist, so the size, specifications and availability you see are what you'll find on the visit."
+    },
+    {
+      "q": "Can WareOnGo find a small godown for rent in Bangalore?",
+      "a": "Yes. We find warehouses and godowns for rent in Bangalore of every size, from small godowns under 5,000 sq ft in Yelahanka, HSR Layout and Marathahalli to large distribution warehouses on Tumkur Road and Hosur Road. Share your size and area, and we shortlist only spaces that fit."
+    }
+  ]
 }];

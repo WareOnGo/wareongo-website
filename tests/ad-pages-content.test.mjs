@@ -5,15 +5,18 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { build } from 'esbuild';
 import { JSDOM } from 'jsdom';
+import { parseAdPage } from '../scripts/lib/ad-page-content.mjs';
 import { generateAdPages } from '../scripts/generate-ad-pages.mjs';
 
 const original = JSON.parse(fs.readFileSync(new URL('../src/data/ad-pages/bangalore.json', import.meta.url), 'utf8'));
 test('an approved CMS revision becomes the website snapshot', async () => {
   const approved = structuredClone(original);
   approved.copy.heroHeading = 'CMS-approved warehouse heading';
-  approved.heroSteps[0] = 'Share your requirement';
+  approved.areaGroups[0].rows[0].need = 'Share your requirement';
+  approved.rentGuide.intro = 'Approved market introduction';
+  approved.faqs[0].a = 'Approved FAQ answer';
+  approved.services[0].mobileBody = 'Approved mobile description';
   approved.benefits[3] = { ...approved.benefits[3], title: 'Approved fourth benefit', body: 'Approved supporting copy.' };
-  approved.images.why = { ...approved.images.why, url: 'https://images.example.test/why.webp', alt: 'Approved benefit section image' };
   approved.images.services = { ...approved.images.services, url: 'https://images.example.test/service.webp', alt: 'Approved warehouse image' };
   const writes = [];
   const pages = await generateAdPages({ read: async (url, options) => {
@@ -40,8 +43,8 @@ for (const [label, response] of [
   assert.equal(wrote, false);
 });
 
-test('an older approved revision builds with process steps and drops removed hero copy', async () => {
-  const older = structuredClone(original);
+test('an older approved revision builds with current guides and drops retired fields', async () => {
+  const older = JSON.parse(fs.readFileSync(new URL('./fixtures/bangalore-v1.json', import.meta.url), 'utf8'));
   delete older.heroSteps;
   older.benefits = older.benefits.slice(0, 3);
   delete older.images.why;
@@ -49,8 +52,9 @@ test('an older approved revision builds with process steps and drops removed her
   older.heroPoints = [{ value: '611', label: 'live listings' }];
   let generated = '';
   const pages = await generateAdPages({ read: async () => Response.json({ data: [older] }), write: async (_path, value) => { generated = value; } });
-  assert.deepEqual(pages, [original]);
-  assert.doesNotMatch(generated, /heroIntro|heroPoints|Previous introduction/);
+  assert.deepEqual(pages, [parseAdPage(older)]);
+  assert.deepEqual(pages[0].rentGuide, original.rentGuide);
+  assert.doesNotMatch(generated, /heroIntro|heroPoints|heroSteps|overviewStats|Previous introduction/);
 });
 
 const { outputFiles } = await build({
@@ -84,6 +88,7 @@ for (const [id, title] of [['benefit-4', 'Dedicated Launch Advisor'], ['benefit-
     const content = structuredClone(original);
     const benefit = content.benefits.find(item => item.id === id);
     benefit.title = title;
+    benefit.mobileTitle = ''; // Explicitly opt into the main heading on mobile.
     benefit.body = 'Independently approved supporting copy.';
     const card = renderBenefits(content).querySelector(`[data-benefit="${id}"]`);
     assert.equal(card.querySelector('h3').textContent, title);

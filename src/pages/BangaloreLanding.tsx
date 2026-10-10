@@ -15,7 +15,6 @@ import BangaloreMarketGuide from '@/components/city/BangaloreMarketGuide';
 import ContactFormDialog from '@/components/ContactFormDialog';
 import RequestCTASection from '@/components/RequestCTASection';
 import { getBangaloreAdPage, type AdPageContent } from '@/data/adPages';
-import defaults from '@/data/ad-pages/bangalore.json';
 import { MICROMARKETS } from '@/data/locations.generated';
 import { BANGALORE_MAP_AREAS, type BangaloreMapScope } from '@/data/bangaloreMicromarketMap';
 import type { BangaloreLandingData } from '@/loaders/bangaloreLandingLoader';
@@ -25,58 +24,14 @@ import '@/components/WarehouseCard.css';
 import './BangaloreLanding.css';
 
 const SERVICE_ICONS = { 'find-warehouse': Search, 'build-to-suit': Warehouse, 'list-space': Truck, 'transaction-management': Handshake };
-const PREVIOUS_SERVICE_COPY = {
-  'find-warehouse': {
-    titles: ['Find a warehouse', 'Find the Perfect Space', 'Verified Warehouses, Handpicked for You'],
-    bodies: ['Verified Bangalore spaces matched to your needs within 4 hours.', 'Verified spaces matched to your needs within 4 hours', 'Verified spaces to suit you in 4 hours', 'Share your size, location, specs and budget. Our team picks the options that fit and sends you a shortlist within 4 hours. All of our warehouses are verified by an area manager.'],
-    cta: 'Find my warehouse',
-  },
-  'build-to-suit': {
-    titles: ['Build to suit', 'Built-to-Suit Warehouses'],
-    bodies: ['We find land and owners to build to your specifications.', 'We find land that fits you, and build to your specs', 'We find land and build to your specs'],
-    cta: 'Start a build to suit',
-  },
-  'list-space': {
-    titles: ['Find a tenant or buyer', 'Find a Tenant or Buyer'],
-    bodies: ['Find tenants or buyers for your warehouse or spare space.', 'Find tenants or buyers for your property, hassle-free', 'Find tenants or buyers with ease', 'Own a warehouse, or have space left over? We bring you tenants and buyers from the businesses that come to us.'],
-    cta: 'List my space',
-  },
-  'transaction-management': {
-    titles: ['End-to-end transaction management', 'Complete Deal Management', 'End-to-End Transaction Management'],
-    bodies: ['Visits, negotiation, paperwork and compliance, managed through move-in.', 'Visits, Negotiation and Handover, handled end-to-end', 'One expert: from search to handover', 'Site visits, negotiation, documentation and compliance checks, handled by one team until you move in.'],
-    cta: 'Get started',
-  },
-};
-// These intentionally differ from the detailed desktop copy managed by the CMS.
-const MOBILE_SERVICE_COPY = {
-  'find-warehouse': { title: 'Find the Perfect Space', body: 'Verified spaces that suit you in 4 hrs' },
-  'build-to-suit': { title: 'Built-to-Suit Warehouses', body: 'Custom-built warehouses, just for you' },
-  'list-space': { title: 'Find a Tenant or Buyer', body: 'Rent or sell your property with ease' },
-  'transaction-management': { title: 'Complete Deal Management', body: 'One expert: from search to handover' },
-};
 const AUDIENCE_ICONS = { owners: Warehouse, '3pls': Truck, companies: Building2 };
 const AUDIENCE_INTENTS = { owners: ['list-warehouse'], '3pls': ['find-space', 'fill-spare-space'], companies: ['find-warehouse'] };
 
 /** Content slots follow the supplied Google Ads wireframe, top to bottom. */
 export default function BangaloreLanding({ content: savedContent = getBangaloreAdPage() }: { content?: AdPageContent } = {}) {
-  const copy = normalizeHeadingCase({
-    ...savedContent.copy,
-    heroAccent: savedContent.copy.heroAccent === 'in Bangalore.' ? defaults.copy.heroAccent : savedContent.copy.heroAccent,
-    whyHeading: savedContent.copy.whyHeading === 'Why choose WareOnGo' ? defaults.copy.whyHeading : savedContent.copy.whyHeading,
-  });
+  const copy = normalizeHeadingCase(savedContent.copy);
   const content = { ...savedContent, copy };
-  // Refresh previous CMS defaults while retaining later edits to each field.
-  const services = content.services.map(item => {
-    const previous = PREVIOUS_SERVICE_COPY[item.id];
-    const updated = defaults.services.find(service => service.id === item.id) ?? item;
-    return {
-      ...item, slug: item.id, icon: SERVICE_ICONS[item.id],
-      title: previous?.titles.includes(item.title) ? updated.title : item.title,
-      description: previous?.bodies.includes(item.body) ? updated.body : item.body,
-      cta: item.cta === previous?.cta ? updated.cta : item.cta,
-      mobileCopy: MOBILE_SERVICE_COPY[item.id],
-    };
-  });
+  const services = content.services.map(item => ({ ...item, slug: item.id, icon: SERVICE_ICONS[item.id], description: item.body, mobileCopy: { title: item.mobileTitle, body: item.mobileBody } }));
   const audiences = content.audiences.map(item => ({ ...item, slug: item.id, description: item.body, icon: AUDIENCE_ICONS[item.id],
     actions: [item.primaryCta, item.secondaryCta].filter(Boolean).map((label, index) => ({ label, intent: AUDIENCE_INTENTS[item.id][index] })),
   }));
@@ -137,7 +92,7 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
 
         <BangaloreMicromarkets content={content} locations={locations} onContact={openContact} scope={mapScope} onScopeChange={setMapScope} />
 
-        <BangaloreAreaGuide scope={mapScope} />
+        <BangaloreAreaGuide scope={mapScope} content={content} />
 
         <RequestCTASection className="bangalore-landing__request" content={{ heading: copy.requestHeading, description: copy.requestDescription, details: copy.requestDetails, primaryLabel: copy.requestCta, phoneLabel: copy.requestPhoneCta }} />
 
@@ -200,7 +155,7 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
           </div>
         </section>
 
-        <BangaloreMarketGuide />
+        <BangaloreMarketGuide content={content} />
       </main>
       <Footer />
       <ContactFormDialog

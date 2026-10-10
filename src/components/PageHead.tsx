@@ -30,7 +30,7 @@ const PageHead = ({ title, description, path, image, noindex, ogType = 'website'
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={url} />
-      {(noindex || catalogue.noindex) && <meta name="robots" content="noindex,follow" />}
+      {(noindex || catalogue.noindex || location.pathname.startsWith('/preview/')) && <meta name="robots" content="noindex,follow" />}
       <meta property="og:type" content={ogType} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />

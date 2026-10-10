@@ -18,7 +18,8 @@ Cities add:
 - Optional authored compliance copy, followed by the existing FAQ section.
 - Micromarket links and counts within the existing related-pages block.
 
-The CMS uses the shared `EditorialPreview` with these same conditional sections.
+The CMS embeds the website's actual `EditorialLocationPage` through `/preview/cms`,
+with unsaved copy and current inventory. It does not maintain a second template.
 Its only new content fields are `corridorHeading`, `corridorProse`,
 `complianceHeading` and `complianceProse`, all optional and city-only. They are
 included in saving, validation, deployment snapshots and revert. Old snapshots
@@ -87,12 +88,16 @@ Preview content and authentication helpers live under
 - CMS: `npm run test:locations` covers save, clear, revert, legacy snapshots,
   state scope, authentication and stale-save protection.
 - Website: `npx tsc --noEmit -p tsconfig.app.json`; CMS: `npx tsc --noEmit`.
-- Website and CMS: `npm run test:city-localities` checks table visibility,
+- Website: `npm run test:city-localities` checks table visibility,
   retained size cards and count-only rows against rendered markup.
+- Website and CMS: `npm run test:previews` covers the shared renderer, draft
+  normalization, sparse inventory, preview isolation and canonical location slugs.
 - Evals: `npm run test:city-localities` derives synthetic inventory through the
-  backend and checks the complete website and CMS page templates at 1440 and
+  backend and checks the shared website page renderer at 1440 and
   390 pixels, with JavaScript both disabled and enabled. It also exercises
   threshold changes after hydration and saves screenshots in a temporary folder.
+- CMS: `npm run test:previews:browser` checks the actual website frames in the
+  native editors, including sparse inventory and the locality gate.
 - Backend locality tests include 400 deterministic generated inventories,
   checked against independent membership sets and medians, plus fresh API reads
   that cross the threshold as visibility and tagging change.

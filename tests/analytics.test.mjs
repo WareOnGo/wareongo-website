@@ -40,10 +40,10 @@ test('automatic page views have one config owner and resolved context on SPA eve
   assert.equal(document.title, 'Home');
 });
 
-test('CMS ad-page previews never send analytics, including on the production domain', async () => {
+for (const path of ['/preview/cms', '/preview/ad-pages/bangalore']) test(`${path} never sends analytics, including on the production domain`, async () => {
   const a = await analytics({ productionBundle: true });
-  window.location.pathname = '/preview/ad-pages/bangalore';
-  window.location.href = 'https://wareongo.com/preview/ad-pages/bangalore';
+  window.location.pathname = path;
+  window.location.href = 'https://wareongo.com' + path;
   a.recordAnalyticsPage('Unsaved draft heading');
   a.trackEvent('listing_impression', { warehouse_id: 967 });
   a.trackEvent('form_open', { form_id: 'header_contact' });

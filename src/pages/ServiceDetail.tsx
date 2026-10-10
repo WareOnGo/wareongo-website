@@ -7,16 +7,16 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FAQAccordion from '@/components/FAQAccordion';
 import { ContentBlock } from '@/components/ContentBlock';
-import { getServiceBySlug } from '@/data/servicePages';
+import { getServiceBySlug, type ServicePage } from '@/data/servicePages';
 import { SERVICE_PAGES, servicePath } from '@/data/serviceCatalog';
 import { SITE_URL, ORG_ID } from '@/config/config';
 import NotFound from './NotFound';
 
 const jsonLd = (value: unknown) => JSON.stringify(value).replace(/</g, '\\u003c');
 
-export default function ServiceDetail() {
+export default function ServiceDetail({ content }: { content?: ServicePage } = {}) {
   const { slug } = useParams<{ slug: string }>();
-  const page = slug ? getServiceBySlug(slug) : undefined;
+  const page = content ?? (slug ? getServiceBySlug(slug) : undefined);
   if (!page) return <NotFound />;
   const path = servicePath(page.slug);
   const image = page.blocks.flatMap(b => b.kind === 'images' ? b.images : [])[0]?.url;

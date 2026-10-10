@@ -81,6 +81,8 @@ test('legal copy keeps safe links and formats their labels and surrounding words
 test('blog index metadata stays identical to normalized article metadata', () => {
   const { blogs } = load('src/data/blogs.ts');
   const { blogSummaries } = load('src/data/blogSummaries.generated.ts');
-  const expected = blogs.map(({ slug, title, description, updated }) => ({ slug, title, description, updated }));
-  assert.equal(JSON.stringify(blogSummaries), JSON.stringify(expected));
+  const metadata = ({ slug, title, description, updated }) => ({ slug, title, description, updated });
+  // Index cards also carry resolved thumbnail fallbacks, covered separately in
+  // blog-summaries.test.mjs. Compare the shared article metadata here.
+  assert.equal(JSON.stringify(blogSummaries.map(metadata)), JSON.stringify(blogs.map(metadata)));
 });

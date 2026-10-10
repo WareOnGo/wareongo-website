@@ -3,8 +3,8 @@
 State overview pages (`/overview/{state}`) use `EditorialLocationPage`, the
 same template as city and micromarket overviews. Everything below applies to
 the state scope only. City and micromarket overviews render as before, and the
-CMS `EditorialPreview` mirrors the same markup, conditions and defaults with
-unsaved edits applied.
+CMS preview renders this website component directly, with unsaved edits and
+current inventory supplied through the website preview route.
 
 States add:
 

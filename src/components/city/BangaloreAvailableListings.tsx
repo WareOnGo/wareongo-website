@@ -23,10 +23,7 @@ export default function BangaloreAvailableListings({ onContact, totalListings, c
   const [filter, setFilter] = useState<SizeFilter>('all');
   const track = useRef<HTMLDivElement>(null);
   const copy = content.copy;
-  // Keep older approved CMS revisions consistent with the current section title.
-  const heading = copy.availableHeading === 'Warehouses and Godowns Available Now in Bangalore'
-    ? 'Warehouses and Godowns in Bangalore'
-    : copy.availableHeading;
+  const heading = copy.availableHeading;
   const sizeFilters = SIZE_FILTERS.map(option => ({ ...option, label: copy[option.labelKey] }));
   const band = sizeFilters.find(option => option.id === filter)!;
   const listings = filter === 'all'

@@ -26,7 +26,8 @@
     "test:listing-covers": "node tests/listing-cover.test.mjs",
     "test:listing-url": "node tests/listing-search.test.mjs && node tests/location-pagination.test.mjs && node tests/micromarket-listings.test.mjs && node tests/location-listing-seed.test.mjs && node tests/prerender-errors.test.mjs",
     "test:ad-pages": "node tests/ad-pages-content.test.mjs",
-    "test:crawling": "node tests/catalogue-rendering.test.mjs && node tests/catalogue-build.test.mjs && node tests/catalogue-hydration.test.mjs && node tests/catalogue-routing.test.mjs"
+    "test:crawling": "node tests/catalogue-rendering.test.mjs && node tests/catalogue-build.test.mjs && node tests/catalogue-hydration.test.mjs && node tests/catalogue-routing.test.mjs",
+    "test:previews": "node tests/cms-preview.test.mjs && node tests/preview-runtime.test.mjs"
   },
   "dependencies": {
     "@radix-ui/react-aspect-ratio": "^1.1.0",

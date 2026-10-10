@@ -1,6 +1,6 @@
 /** Emit a small card, not the complete CMS article, into the shared header. */
 export function selectNavigationGuide(pages, markets) {
-  const segment = value => typeof value === 'string' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
+  const segment = value => typeof value === 'string' && /^[a-z0-9]+(?:-+[a-z0-9]+)*$/.test(value);
   const eligible = markets.filter(m => m.hasPage && m.name && m.parentCity
     && [m.stateSlug, m.citySlug, m.slug].every(segment)
     && !['peb', 'rcc'].includes(m.slug)
