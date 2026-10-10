@@ -4,6 +4,7 @@ import path from "path";
 import type { ViteReactSSGOptions } from 'vite-react-ssg';
 import { createCatalogueBuild } from './scripts/lib/catalogue-build.mjs';
 import { createCriticalCssProcessor, prioritizeAdPageHtml } from './scripts/lib/critical-css.mjs';
+import { analyticsBootstrapPlugin } from './scripts/lib/analytics-bootstrap.mjs';
 
 const processCriticalCss = createCriticalCssProcessor();
 const catalogueBuild = createCatalogueBuild({ processCss: processCriticalCss });
@@ -14,7 +15,7 @@ export default defineConfig(({ mode, command }) => ({
     host: "::",
     port: 8080,
   },
-  plugins: [react()],
+  plugins: [react(), analyticsBootstrapPlugin()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

@@ -32,6 +32,11 @@ declare global {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
     __WAREONGO_ANALYTICS_TEST__?: boolean;
+    __WAREONGO_ANALYTICS__?: {
+      context: AnalyticsParams;
+      lastUrl: string;
+      initialized: boolean;
+    };
   }
 }
 const ID = 'G-X1FJP93CV6';
@@ -62,9 +67,11 @@ export function safeUrl(raw: string, query = true): string {
   } catch { return ''; }
 }
 const slug = (s: string) => s.toLowerCase().replace(/bangalore/g, 'bengaluru').replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '').slice(0, 100);
-let context: AnalyticsParams = {};
-let lastUrl = '';
-let initialized = false;
+// The inline HTML bootstrap and React bundle share one owner per document.
+// Module-local state would initialize GA twice when React starts later.
+const pageState = () => window.__WAREONGO_ANALYTICS__ ||= {
+  context: {}, lastUrl: '', initialized: false,
+};
 let clickHandled = false;
 export const beginAnalyticsClick = () => { clickHandled = false; };
 export const wasAnalyticsClickHandled = () => clickHandled;
@@ -82,45 +89,32 @@ function command(...args: unknown[]) {
 }
 
 function loadAnalyticsScript() {
-  const append = () => {
-    const script = document.createElement('script');
-    script.async = true;
-    script.fetchPriority = 'low';
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${ID}`;
-    document.head.appendChild(script);
-  };
-  if (pageType(window.location.pathname) !== 'bangalore' || !window.requestAnimationFrame) { append(); return; }
+  const script = document.createElement('script');
+  script.async = true;
+  // Start from the HTML, but let the page's font and visible images win bandwidth.
+  script.fetchPriority = 'low';
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${ID}`;
+  document.head.appendChild(script);
+}
 
-  // Queue attribution and lead events immediately, but give the ad page a paint
-  // before Google's download/parse work. An early interaction starts it sooner.
-  let loaded = false;
-  const events = ['pointerdown', 'keydown', 'pagehide'] as const;
-  const load = () => {
-    if (loaded) return;
-    loaded = true;
-    events.forEach(event => window.removeEventListener(event, load, true));
-    append();
-  };
-  events.forEach(event => window.addEventListener(event, load, { once: true, capture: true }));
-  window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
-    if (loaded) return;
-    if (window.requestIdleCallback) window.requestIdleCallback(load, { timeout: 1000 });
-    else window.setTimeout(load, 0);
-  }));
+/** Runs after the SSG head is parsed, without waiting for React or route data. */
+export function bootstrapAnalytics() {
+  if (analyticsEnabled() && document.title) recordAnalyticsPage(document.title);
 }
 export function recordAnalyticsPage(title: string) {
   if (typeof window === 'undefined') return;
+  const state = pageState();
   const url = safeUrl(window.location.href);
-  if (lastUrl === url) { context.page_title = title; command('set', { page_title: title }); return; }
-  const previous = lastUrl || safeUrl(document.referrer, false);
-  lastUrl = url;
+  if (state.lastUrl === url) { state.context.page_title = title; command('set', { page_title: title }); return; }
+  const previous = state.lastUrl || safeUrl(document.referrer, false);
+  state.lastUrl = url;
   const parsed = new URL(url);
-  context = { page_location: url, page_path: parsed.pathname + parsed.search, page_title: title, page_referrer: previous, page_type: pageType(parsed.pathname) };
+  state.context = { page_location: url, page_path: parsed.pathname + parsed.search, page_title: title, page_referrer: previous, page_type: pageType(parsed.pathname) };
   // Update the DOM and gtag defaults before Enhanced Measurement's history callback.
   document.title = title;
-  command('set', context);
-  if (!initialized) {
-    initialized = true;
+  command('set', state.context);
+  if (!state.initialized) {
+    state.initialized = true;
     command('js', new Date());
     command('config', ID, { send_page_view: true });
     if (analyticsEnabled() && !isTest()) {
@@ -175,7 +169,7 @@ export function trackEvent(event: AnalyticsEvent, params: AnalyticsParams = {}) 
   if (p.destination?.endsWith('/request-warehouse')) { event = 'cta_click'; p.cta_id ||= 'request_warehouse'; rememberLeadOrigin(p); }
   if (event === 'cta_click') p.cta_id ||= slug(p.label || 'contact');
   // PageHead owns resolved metadata. Never derive a title from the previous route.
-  command('event', event, { ...context, ...p, transport_type: 'beacon' });
+  command('event', event, { ...pageState().context, ...p, transport_type: 'beacon' });
 }
 
 /** Stable, non-PII content key; changing editorial text intentionally creates a new question. */
@@ -184,4 +178,4 @@ export function stableContentId(text: string) {
   for (let i = 0; i < text.length; i++) hash = Math.imul(hash ^ text.charCodeAt(i), 16777619);
   return `content_${(hash >>> 0).toString(36)}`;
 }
-export const analyticsPageContext = () => ({ ...context });
+export const analyticsPageContext = () => typeof window === 'undefined' ? {} : ({ ...pageState().context });

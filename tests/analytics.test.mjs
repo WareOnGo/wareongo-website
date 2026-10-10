@@ -12,9 +12,10 @@ async function analytics({ prod = true, hostname = 'wareongo.com', testMode = fa
     console: { log: (...args) => logs.push(args) }, __WAREONGO_ANALYTICS_TEST__: testMode, ...browser };
   globalThis.document = { title: '', referrer: 'https://www.google.com/search?q=private', createElement: () => ({}), head: { appendChild: el => scripts.push(el) } };
   globalThis.sessionStorage = { getItem: () => null, setItem() {}, removeItem() {} };
-  const mod = await import('data:text/javascript;base64,' + Buffer.from(outputFiles[0].text + `\n// instance ${Math.random()}`).toString('base64'));
+  const loadModule = () => import('data:text/javascript;base64,' + Buffer.from(outputFiles[0].text + `\n// instance ${Math.random()}`).toString('base64'));
+  const mod = await loadModule();
   const calls = () => (window.dataLayer || []).map(x => Array.from(x));
-  return { ...mod, calls, scripts, logs };
+  return { ...mod, calls, scripts, logs, loadModule };
 }
 
 test('production tag only loads on approved hosts; dev and previews never send', async () => {
@@ -40,45 +41,41 @@ test('automatic page views have one config owner and resolved context on SPA eve
   assert.equal(document.title, 'Home');
 });
 
-test('Bangalore queues campaign and lead context before loading the tag after a paint', async () => {
-  const frames = [], idle = [];
-  const events = new EventTarget();
-  const a = await analytics({ browser: {
-    requestAnimationFrame: callback => frames.push(callback),
-    requestIdleCallback: callback => idle.push(callback),
-    addEventListener: events.addEventListener.bind(events), removeEventListener: events.removeEventListener.bind(events),
-  } });
+test('SSG bootstrap starts immediately and React reuses its owner and acquisition context', async () => {
+  const a = await analytics();
   window.location.href = 'https://wareongo.com/bangalore?utm_source=google&utm_campaign=warehouses';
   window.location.pathname = '/bangalore';
-  a.recordAnalyticsPage('Bangalore');
-  a.trackEvent('generate_lead', { form_id: 'bangalore_hero_enquiry', lead_id: 'enquiry_42' });
-  assert.equal(a.scripts.length, 0);
-  assert.equal(a.calls().filter(call => call[0] === 'config').length, 1);
-  assert.equal(a.calls().at(-1)[2].page_path, '/bangalore?utm_source=google&utm_campaign=warehouses');
-  frames.shift()();
-  frames.shift()();
-  assert.equal(a.scripts.length, 0);
-  idle.shift()();
+  document.title = 'Bangalore';
+  a.bootstrapAnalytics();
   assert.equal(a.scripts.length, 1);
+  assert.equal(a.scripts[0].async, true);
   assert.equal(a.scripts[0].fetchPriority, 'low');
-  events.dispatchEvent(new Event('pointerdown'));
+  const app = await a.loadModule();
+  app.recordAnalyticsPage('Bangalore');
+  app.bootstrapAnalytics();
+  app.trackEvent('generate_lead', { form_id: 'bangalore_hero_enquiry', lead_id: 'enquiry_42' });
+  assert.equal(a.calls().filter(call => call[0] === 'config').length, 1);
+  assert.equal(a.calls().filter(call => call[0] === 'js').length, 1);
+  assert.equal(a.calls().filter(call => call[1] === 'page_view').length, 0);
+  assert.equal(a.calls().at(-1)[2].page_path, '/bangalore?utm_source=google&utm_campaign=warehouses');
+  assert.equal(a.calls().at(-1)[2].page_referrer, 'https://www.google.com/other');
   assert.equal(a.scripts.length, 1);
+  window.location.href = 'https://wareongo.com/request-warehouse';
+  window.location.pathname = '/request-warehouse';
+  app.recordAnalyticsPage('Request a Warehouse');
+  app.trackEvent('form_open', { form_id: 'warehouse_request' });
+  assert.equal(a.calls().at(-1)[2].page_referrer, 'https://wareongo.com/bangalore?utm_source=google&utm_campaign=warehouses');
+  assert.equal(a.calls().at(-1)[2].page_title, 'Request a Warehouse');
 });
 
-test('an early ad-page interaction loads analytics once without waiting for idle', async () => {
-  const frames = [];
-  const events = new EventTarget();
-  const a = await analytics({ browser: {
-    requestAnimationFrame: callback => frames.push(callback),
-    addEventListener: events.addEventListener.bind(events), removeEventListener: events.removeEventListener.bind(events),
-  } });
-  window.location.href = 'https://wareongo.com/bangalore'; window.location.pathname = '/bangalore';
-  a.recordAnalyticsPage('Bangalore');
-  events.dispatchEvent(new Event('keydown'));
+test('an unrendered SPA shell waits for resolved metadata and still initializes once', async () => {
+  const a = await analytics();
+  a.bootstrapAnalytics();
+  assert.equal(a.scripts.length, 0);
+  a.recordAnalyticsPage('Resolved route');
+  a.bootstrapAnalytics();
   assert.equal(a.scripts.length, 1);
-  frames.shift()(); frames.shift()();
-  events.dispatchEvent(new Event('pagehide'));
-  assert.equal(a.scripts.length, 1);
+  assert.equal(a.calls().filter(call => call[0] === 'config').length, 1);
 });
 
 for (const path of ['/preview/cms', '/preview/ad-pages/bangalore']) test(`${path} never sends analytics, including on the production domain`, async () => {

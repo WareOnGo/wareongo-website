@@ -34,6 +34,11 @@ Implementation: [analytics.ts](../src/lib/analytics.ts) and
 `window.console.log` so the production build retains these logs while continuing
 to strip ordinary console calls elsewhere.
 
+Production SSG pages now initialize the shared analytics owner directly from
+their HTML. PageHead reuses it after React starts. Google still owns page views;
+keep automatic history measurement enabled. See [startup behavior and current
+validation](ga4-startup.md) for duplicate-prevention checks and remaining limits.
+
 Validation: all 10 `npm run test:analytics` checks, TypeScript app checking,
 focused ESLint, and a production SPA build passed. Two Chromium checks loaded
 that bundle with the real Google tag and intercepted collection requests. They
