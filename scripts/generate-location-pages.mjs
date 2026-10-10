@@ -9,6 +9,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fetchLocationPages } from './lib/api.mjs';
+import { skeletonModule } from './lib/editorial-skeletons.mjs';
 
 // The API omits unset optional slots rather than sending null, but drop
 // undefined keys anyway so the emitted literal stays clean whatever it sends.
@@ -32,6 +33,7 @@ export const locationPages: LocationPageContent[] = ${JSON.stringify(pages, null
   const outPath = path.join('src', 'data', 'locationPages.generated.ts');
   await fs.mkdir(path.dirname(outPath), { recursive: true });
   await fs.writeFile(outPath, body, 'utf8');
+  await fs.writeFile(path.join('src', 'data', 'locationSkeletons.generated.ts'), skeletonModule(pages, 'LocationSkeletonContent', 'locationSkeletons'), 'utf8');
   const byKind = pages.reduce((acc, p) => ({ ...acc, [p.kind]: (acc[p.kind] ?? 0) + 1 }), {});
   console.log(
     `[locations] wrote ${outPath} — ${pages.length} editorial pages (${byKind.CITY ?? 0} city, ${byKind.STATE ?? 0} state)`,

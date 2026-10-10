@@ -1,0 +1,277 @@
+{
+  "date": "2026-10-10",
+  "route": "/bangalore",
+  "changes": [
+    "Serialize critical CSS extraction for every SSG and paginated catalogue document because Beasties 0.1 shares selector caches across instances.",
+    "Match ordinary slashless SSG route names when applying the Bangalore module script priority.",
+    "Generate compact editorial snapshots for shared loading screens, preserving their markup without including full guides in the startup bundle."
+  ],
+  "productionDiagnosis": {
+    "earlierCommit": "68f9e50f9390ffb11d91e22593be2d1fe4785718",
+    "userAuditTime": "2026-10-10T22:18:00+05:30",
+    "earlierDeploymentReady": "2026-10-10T17:03:15Z",
+    "explanation": "The pasted 80-point audit preceded deployment of the image changes. A later live audit of 68f9e50 also exposed missing inline layout CSS and oversized production editorial data, both absent from the earlier fixture build.",
+    "liveAudit": [
+      {
+        "run": 1,
+        "url": "https://wareongo.com/bangalore",
+        "fetchTime": "2026-10-10T17:28:48.672Z",
+        "version": "13.5.0",
+        "benchmarkIndex": 2056.5,
+        "score": 68,
+        "first-contentful-paint": 1378.904,
+        "largest-contentful-paint": 2451.4934999999996,
+        "total-blocking-time": 257,
+        "cumulative-layout-shift": 0.9223858070271976,
+        "speed-index": 1833.29997394889,
+        "transferBytes": 926551,
+        "scripts": [
+          {
+            "url": "https://wareongo.com/assets/app-BSn3PArZ.js",
+            "bytes": 230789
+          },
+          {
+            "url": "https://wareongo.com/assets/BangaloreLanding-Ccp1OBx4.js",
+            "bytes": 17415
+          },
+          {
+            "url": "https://wareongo.com/assets/TrustedBySection-Dxmy2PB8.js",
+            "bytes": 2580
+          },
+          {
+            "url": "https://wareongo.com/assets/useLeadAnalytics-BOkKvSlK.js",
+            "bytes": 809
+          },
+          {
+            "url": "https://wareongo.com/assets/formSubmission-b_78qGDA.js",
+            "bytes": 868
+          },
+          {
+            "url": "https://wareongo.com/assets/WarehouseCard-DI_Txh5W.js",
+            "bytes": 6369
+          },
+          {
+            "url": "https://wareongo.com/assets/warehouseCardData-BlX93IE8.js",
+            "bytes": 2407
+          },
+          {
+            "url": "https://wareongo.com/assets/useListingAnalytics-53u-NW1R.js",
+            "bytes": 779
+          },
+          {
+            "url": "https://wareongo.com/assets/warehouseSlug-vlW5Dfgd.js",
+            "bytes": 999
+          },
+          {
+            "url": "https://wareongo.com/assets/arrow-left-DX8EJsIB.js",
+            "bytes": 467
+          },
+          {
+            "url": "https://wareongo.com/assets/companyStats-DklBG2iP.js",
+            "bytes": 258
+          },
+          {
+            "url": "https://wareongo.com/assets/warehouse-CWywQvBN.js",
+            "bytes": 642
+          },
+          {
+            "url": "https://wareongo.com/assets/RequestCTASection-DVFpvsQ4.js",
+            "bytes": 1455
+          },
+          {
+            "url": "https://wareongo.com/assets/FAQAccordion-Clx6kax7.js",
+            "bytes": 930
+          },
+          {
+            "url": "https://wareongo.com/assets/search-BPxHA3uu.js",
+            "bytes": 480
+          },
+          {
+            "url": "https://www.googletagmanager.com/gtag/js?id=G-X1FJP93CV6",
+            "bytes": 198220
+          }
+        ],
+        "errors": [],
+        "warnings": []
+      }
+    ]
+  },
+  "validation": {
+    "nodeTestFilesPassed": 36,
+    "typecheckApp": "passed",
+    "changedSourceLint": "passed",
+    "productionModeBuild": "passed with actual published editorial collections (37 location pages and 50 micromarkets), ordinary SSG routes and catalogue pagination",
+    "startupBundle": {
+      "beforeRawBytes": 866907,
+      "beforeGzipBytes": 223490,
+      "afterRawBytes": 486509,
+      "afterGzipBytes": 146534
+    },
+    "criticalCss": "All hero layout rules now present. Holding external CSS and JS at 390/768/1440px produced identical section geometry before and after release.",
+    "visual": [
+      {
+        "width": 320,
+        "comparedElements": 1797,
+        "geometryAndDesignStyleDifferences": 0,
+        "interactiveStates": {
+          "faq": 0,
+          "contact": 0,
+          "navigation": 0
+        }
+      },
+      {
+        "width": 390,
+        "comparedElements": 1797,
+        "geometryAndDesignStyleDifferences": 0,
+        "interactiveStates": {
+          "faq": 0,
+          "contact": 0,
+          "navigation": 0
+        }
+      },
+      {
+        "width": 412,
+        "comparedElements": 1797,
+        "geometryAndDesignStyleDifferences": 0,
+        "interactiveStates": {
+          "faq": 0,
+          "contact": 0,
+          "navigation": 0
+        }
+      },
+      {
+        "width": 768,
+        "comparedElements": 1797,
+        "geometryAndDesignStyleDifferences": 0,
+        "interactiveStates": {
+          "faq": 0,
+          "filter": 0,
+          "map": 0,
+          "contact": 0,
+          "navigation": 0
+        }
+      },
+      {
+        "width": 1024,
+        "comparedElements": 1797,
+        "geometryAndDesignStyleDifferences": 0,
+        "interactiveStates": {
+          "faq": 0,
+          "filter": 0,
+          "map": 0,
+          "contact": 0,
+          "navigation": 0
+        }
+      },
+      {
+        "width": 1440,
+        "comparedElements": 1797,
+        "geometryAndDesignStyleDifferences": 0,
+        "interactiveStates": {
+          "faq": 0,
+          "filter": 0,
+          "map": 0,
+          "contact": 0,
+          "navigation": 0
+        }
+      }
+    ],
+    "ssg": "Page content, cards, FAQ answers, tables, form and statistics present before JavaScript.",
+    "backendReadsDuringLoadAndPageInteractions": 0,
+    "forms": "Only POST /enquiries on submission; browser verification mocked the response.",
+    "browser": "Responsive image recovery, mobile carousel, filters, enquiries, lazy dialogs, navigation search, focus restoration and preserved form drafts passed on mobile and desktop."
+  },
+  "localLighthouse": {
+    "method": "Three sequential fresh-browser runs; Lighthouse 13.5.0, default simulated mobile Slow 4G; compressed local HTTP/2 production-mode build with production editorial content. Production GA4 script loaded; collection blocked. These are not live or PageSpeed Insights scores.",
+    "medians": {
+      "score": 97,
+      "first-contentful-paint": 1154,
+      "largest-contentful-paint": 2273.1960000000004,
+      "total-blocking-time": 155,
+      "cumulative-layout-shift": 0
+    },
+    "runs": [
+      {
+        "name": "production-fix-bangalore-1",
+        "label": "production-fix",
+        "round": 1,
+        "version": "13.5.0",
+        "benchmarkIndex": 1855.5,
+        "score": 97,
+        "first-contentful-paint": 1219.1770000000001,
+        "largest-contentful-paint": 2273.1960000000004,
+        "total-blocking-time": 159,
+        "cumulative-layout-shift": 0,
+        "speed-index": 1219.1770000000001,
+        "transferBytes": 761560,
+        "scriptBytes": 379017,
+        "ga": [
+          {
+            "url": "https://www.googletagmanager.com/gtag/js?id=G-X1FJP93CV6",
+            "status": 200,
+            "bytes": 199029
+          }
+        ],
+        "documentProtocol": "h2",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "name": "production-fix-bangalore-2",
+        "label": "production-fix",
+        "round": 2,
+        "version": "13.5.0",
+        "benchmarkIndex": 2040,
+        "score": 96,
+        "first-contentful-paint": 1154,
+        "largest-contentful-paint": 2430,
+        "total-blocking-time": 134,
+        "cumulative-layout-shift": 0,
+        "speed-index": 1154,
+        "transferBytes": 760728,
+        "scriptBytes": 378185,
+        "ga": [
+          {
+            "url": "https://www.googletagmanager.com/gtag/js?id=G-X1FJP93CV6",
+            "status": 200,
+            "bytes": 198220
+          }
+        ],
+        "documentProtocol": "h2",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "name": "production-fix-bangalore-3",
+        "label": "production-fix",
+        "round": 3,
+        "version": "13.5.0",
+        "benchmarkIndex": 2061,
+        "score": 97,
+        "first-contentful-paint": 1126.3775,
+        "largest-contentful-paint": 2250.3775,
+        "total-blocking-time": 155,
+        "cumulative-layout-shift": 0,
+        "speed-index": 1126.3775,
+        "transferBytes": 761553,
+        "scriptBytes": 378987,
+        "ga": [
+          {
+            "url": "https://www.googletagmanager.com/gtag/js?id=G-X1FJP93CV6",
+            "status": 200,
+            "bytes": 199022
+          }
+        ],
+        "documentProtocol": "h2",
+        "errors": [],
+        "warnings": []
+      }
+    ]
+  },
+  "liveAfterDeployment": "Pending measurement of the new production deployment; do not substitute local scores.",
+  "artifacts": {
+    "localLighthouse": "/tmp/bangalore-http2-audits/summary-production-fix-bangalore.json",
+    "visual": "/tmp/bangalore-visual-comparison/summary-baseline-production-fix.json",
+    "ssgAndNetwork": "/tmp/bangalore-production-fix-yACs85/ssg-network-audit.json"
+  }
+}

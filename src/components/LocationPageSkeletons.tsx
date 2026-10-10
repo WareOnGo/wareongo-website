@@ -15,8 +15,7 @@ import { resolveStateCities } from '@/lib/stateCities';
 import { locationOverviewPath, locationPath } from '@/services/locationsAPI';
 import { useListingsPerPage } from './micromarket/useListingsPerPage';
 import { CITIES, STATES, MICROMARKETS, CITIES_BY_TYPE, STATES_BY_TYPE, STATE_CITIES } from '@/data/locations.generated';
-import { getLocationPageContent } from '@/data/locationPages';
-import { getMicromarketContent } from '@/data/micromarkets';
+import { getLocationSkeletonContent, getMicromarketSkeletonContent } from '@/data/locationSkeletonContent';
 
 const nameFromSlug = (slug: string) => slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 const cityName = (slug: string) => CITIES.find(c => c.slug === slug)?.canonical ?? nameFromSlug(slug);
@@ -41,8 +40,8 @@ export function LocationListingsSkeleton({ pathname }: { pathname: string }) {
   const mobileLines = hasStats ? hasMix ? 5 : 4 : 3;
   const desktopLines = 2;
   const hasOverview = !warehouseType && (isMicro
-    ? getMicromarketContent(slug, variant)
-    : getLocationPageContent(kind === 'state' ? 'STATE' : 'CITY', slug));
+    ? getMicromarketSkeletonContent(slug, variant)
+    : getLocationSkeletonContent(kind === 'state' ? 'STATE' : 'CITY', slug));
 
   return <main className="flex-grow" data-testid="location-listings-skeleton">
     <div className="section-container page-content">
@@ -85,8 +84,8 @@ export function LocationListingsSkeleton({ pathname }: { pathname: string }) {
 export function OverviewSkeleton({ pathname }: { pathname: string }) {
   const pageSize = useListingsPerPage();
   const [, , state = '', city, micro] = pathname.split('/');
-  const content = micro ? getMicromarketContent(city, micro)
-    : getLocationPageContent(city ? 'CITY' : 'STATE', city ?? state);
+  const content = micro ? getMicromarketSkeletonContent(city, micro)
+    : getLocationSkeletonContent(city ? 'CITY' : 'STATE', city ?? state);
   const name = micro ? MICROMARKETS.find(m => m.citySlug === city && m.slug === micro)?.canonical ?? nameFromSlug(micro)
     : city ? cityName(city) : stateName(state);
   const place = micro && cityName(city) !== name ? `${name}, ${cityName(city)}` : name;
@@ -95,11 +94,11 @@ export function OverviewSkeleton({ pathname }: { pathname: string }) {
   // loaded page. Both are known before the loader: the market copy and the
   // editor's city list are bundled, and the build's city list (STATE_CITIES)
   // resolves the default and each city's link the way the loader does.
-  const stateContent = city ? undefined : getLocationPageContent('STATE', state);
+  const stateContent = city ? undefined : getLocationSkeletonContent('STATE', state);
   const { list, others } = stateContent ? resolveStateCities(stateContent.stateCities, STATE_CITIES[state] ?? []) : { list: [], others: [] };
   const cityRows = list.map((entry): StateCity => {
     const c = entry.city && { kind: 'CITY' as const, slug: entry.city.slug, stateSlug: state, hasPage: entry.city.hasPage };
-    const overviewPath = c && getLocationPageContent('CITY', c.slug) ? locationOverviewPath(c) : null;
+    const overviewPath = c && getLocationSkeletonContent('CITY', c.slug) ? locationOverviewPath(c) : null;
     return { name: entry.name, slug: c ? c.slug : null, path: c ? overviewPath ?? locationPath(c) : null, overview: Boolean(overviewPath),
       listings: null, rent: null, sizeMedian: null, build: null, image: null };
   });

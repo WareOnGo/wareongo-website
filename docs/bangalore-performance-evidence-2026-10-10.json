@@ -2,6 +2,15 @@
   "date": "2026-10-10",
   "route": "/bangalore",
   "lighthouseVersion": "13.5.0",
+  "productionFollowUp": {
+    "status": "These historical local scores did not predict production performance.",
+    "limitationsFound": [
+      "The fixture build omitted the full production editorial collections, underestimating the shared startup bundle.",
+      "Explicit slash-prefixed fixture routes hid a mismatch with ordinary SSG route names, so production did not receive the ad-page script priority change.",
+      "The small route set did not expose overlapping Beasties CSS extraction between SSG and paginated catalogue pages. Production could omit critical layout rules."
+    ],
+    "correctedValidation": "The follow-up build includes the production editorial collections, ordinary SSG route names and concurrent catalogue generation. It checks the page layout with both external CSS and JavaScript held back. Live deployment results must be measured separately."
+  },
   "method": {
     "build": "Isolated production-mode SSG snapshots of the current working tree; city statistics use the same fixture in both snapshots.",
     "serving": "Compressed local HTTPS/HTTP2 assets mapped to wareongo.com inside each fresh audit browser.",

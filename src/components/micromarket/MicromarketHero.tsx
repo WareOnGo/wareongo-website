@@ -2,7 +2,8 @@ import InlineText from '../InlineText';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Link } from 'react-router-dom';
 import EditorialImage, { EDITORIAL_HERO_SIZES } from './EditorialImage';
-import type { EditorialContent, EditorialImageVariant } from '@/data/editorial';
+import type { EditorialImageVariant } from '@/data/editorial';
+import type { EditorialHeroContent } from '@/data/locationSkeletonContent';
 import { formatRentRange, formatSqftRange } from '@/lib/micromarketStats';
 import type { DerivedStats } from '@/services/derivedStats';
 import { EYEBROW, LEAD, METRIC } from './tokens';
@@ -23,7 +24,7 @@ const MicromarketHero = ({
   listings,
   loading = false,
 }: {
-  content: EditorialContent;
+  content: EditorialHeroContent;
   imageVariants?: EditorialImageVariant[];
   /** "Nelamangala, Bengaluru" — the fully qualified place, for the eyebrow default. */
   place: string;
