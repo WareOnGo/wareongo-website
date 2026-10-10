@@ -15,7 +15,7 @@ import { submitContactForm } from '@/services/formSubmission';
 import type { AnalyticsParams } from '@/lib/analytics';
 import { useLeadAnalytics } from '@/hooks/useLeadAnalytics';
 
-interface ContactFormDialogProps {
+export interface ContactFormDialogProps {
   className?: string;
   open: boolean;
   onOpenChange: (open: boolean) => void;

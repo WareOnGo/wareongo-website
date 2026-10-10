@@ -152,8 +152,10 @@ test('Bangalore hero photos render before hydration without covering loading ind
   for (const [index, id] of [967, 408, 1226].entries()) {
     assert.equal(attr(photos[index], 'src'), bangaloreContent.images[`featured-${id}`].url);
     assert.equal(attr(photos[index], 'alt'), bangaloreContent.images[`featured-${id}`].alt);
-    assert.equal(attr(photos[index], 'loading'), 'eager');
-    assert.equal(attr(photos[index], 'fetchpriority'), 'high');
+    assert.equal(attr(photos[index], 'loading'), index === 0 ? 'eager' : 'lazy');
+    assert.equal(attr(photos[index], 'fetchpriority'), index === 0 ? 'high' : 'auto');
+    assert.ok(attr(photos[index], 'srcset')?.includes('.webp 512w'));
+    assert.ok(attr(photos[index], 'sizes'));
   }
   assertIndependentControls(root);
 });
@@ -165,6 +167,7 @@ test('Bangalore featured photos preserve CMS-approved image endpoints without fi
     const root = parseFragment(renderBangaloreFeatured(parseAdPage(content)));
     assert.equal(elements(root, 'img').length, 3);
     assert.equal(attr(elements(root, 'img')[0], 'src'), url);
+    assert.equal(attr(elements(root, 'img')[0], 'srcset'), undefined, 'CMS replacement must not inherit old photo candidates');
     assert.ok(!textOf(root).includes('Images available on request'));
   }
 });

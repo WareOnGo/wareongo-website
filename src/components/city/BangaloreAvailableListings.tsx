@@ -6,6 +6,7 @@ import { useListingResults } from '@/hooks/useListingAnalytics';
 import { trackEvent, type AnalyticsParams } from '@/lib/analytics';
 import { warehousePath } from '@/lib/warehouseSlug';
 import type { AdPageContent } from '@/data/adPages';
+import { adImageSources, AVAILABLE_IMAGE_SIZES } from '@/lib/adImageSources';
 
 const SIZE_FILTERS = [
   { id: 'all', labelKey: 'filterAll', min: 0, max: Infinity },
@@ -78,6 +79,8 @@ export default function BangaloreAvailableListings({ onContact, totalListings, c
             image={content.images[`warehouse-${listing.id}`].url}
             imageFallbacks={[listing.imageFallback]}
             imageAlt={content.images[`warehouse-${listing.id}`].alt}
+            imageSrcSet={adImageSources(content.images[`warehouse-${listing.id}`].url, AVAILABLE_IMAGE_SIZES).srcSet}
+            imageSizes={AVAILABLE_IMAGE_SIZES}
             href={warehousePath({ ...listing, city: 'Bengaluru' })}
             index={index}
             priority={false}

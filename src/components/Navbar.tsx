@@ -1,7 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { ChevronDown, LogOut, Menu, User } from 'lucide-react';
 import { useLocation, useNavigation } from 'react-router-dom';
-import ContactFormDialog from '@/components/ContactFormDialog';
+import ContactFormDialog from '@/components/DeferredContactFormDialog';
 import { useAuth } from '@/context/AuthContext';
 import { trackEvent } from '@/lib/analytics';
 import { useScrollHeader } from '@/hooks/useScrollHeader';
@@ -9,7 +9,8 @@ import type { LocationCategory } from '@/lib/locationNavigation';
 import { NAVIGATION_DESKTOP_QUERY, PRIMARY_LINKS, WAREHOUSE_REQUEST } from '@/data/navigation';
 import { HeaderLink, NavigationBrand } from './navigation/NavigationLinks';
 import LocationsMenu from './navigation/LocationsMenu';
-import NavigationDialog, { type NavigationView } from './navigation/NavigationDialog';
+import NavigationDialog from './navigation/DeferredNavigationDialog';
+import type { NavigationView } from './navigation/NavigationDialog';
 import './navigation/navigation.css';
 
 type Variant = 'desktop' | 'mobile';

@@ -7,7 +7,7 @@ import { JSDOM } from 'jsdom';
 const { outputFiles } = await build({ entryPoints: ['src/lib/catalogueHydration.ts'], bundle: true, write: false, platform: 'node', format: 'cjs' });
 const compiled = { exports: {} };
 new Function('require', 'module', 'exports', outputFiles[0].text)(createRequire(import.meta.url), compiled, compiled.exports);
-const { restoreCatalogueHydration } = compiled.exports;
+const { restoreCatalogueHydration, startWebsite } = compiled.exports;
 const doc = (src = '/static-loader-data/catalogue/abc.json') => new JSDOM(`<div id="root">Server-rendered cards</div><script type="application/json" id="catalogue-hydration">${JSON.stringify({ src, routeId: '0-0-22', seedSearch: 'page=2' })}</script>`).window.document;
 
 test('a shared overview snapshot restores its complete inventory and only the document page seed', async () => {
@@ -23,6 +23,38 @@ test('a shared overview snapshot restores its complete inventory and only the do
 test('ordinary pages need no catalogue request', async () => {
   const document = new JSDOM('<div id="root">Page</div>').window.document;
   assert.equal(await restoreCatalogueHydration(document, () => { throw new Error('Unexpected fetch'); }), undefined);
+});
+
+test('the visible ad can paint its SSG HTML before hydration starts', async () => {
+  const dom = new JSDOM('<div id="root"><h1 id="bangalore-title">Find a warehouse</h1></div>', { pretendToBeVisual: true });
+  await new Promise(resolve => dom.window.addEventListener('load', resolve, { once: true }));
+  const previous = { document: globalThis.document, requestAnimationFrame: globalThis.requestAnimationFrame };
+  globalThis.document = dom.window.document;
+  let paint, started = false;
+  globalThis.requestAnimationFrame = callback => { paint = callback; return 1; };
+  try {
+    const pending = startWebsite(() => { started = true; });
+    assert.equal(started, false);
+    assert.equal(dom.window.document.querySelector('h1').textContent, 'Find a warehouse');
+    paint();
+    await pending;
+    assert.equal(started, true);
+  } finally { Object.assign(globalThis, previous); dom.window.close(); }
+});
+
+test('hidden tabs and other pages do not wait for an animation frame', async () => {
+  const dom = new JSDOM('<h1 id="bangalore-title">Find a warehouse</h1>');
+  await new Promise(resolve => dom.window.addEventListener('load', resolve, { once: true }));
+  const previous = { document: globalThis.document, requestAnimationFrame: globalThis.requestAnimationFrame };
+  globalThis.document = dom.window.document;
+  globalThis.requestAnimationFrame = () => { throw new Error('A hidden tab cannot paint'); };
+  try {
+    let starts = 0;
+    await startWebsite(() => { starts++; });
+    dom.window.document.querySelector('h1').removeAttribute('id');
+    await startWebsite(() => { starts++; });
+    assert.equal(starts, 2);
+  } finally { Object.assign(globalThis, previous); dom.window.close(); }
 });
 
 test('failed or invalid shared data never replaces the server-rendered cards', async () => {

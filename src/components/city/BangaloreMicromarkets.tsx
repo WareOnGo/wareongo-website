@@ -3,6 +3,7 @@ import { ArrowRight, MapPin, X } from 'lucide-react';
 import { BANGALORE_MAP_VIEWS, type BangaloreMapArea, type BangaloreMapScope } from '@/data/bangaloreMicromarketMap';
 import type { AnalyticsParams } from '@/lib/analytics';
 import type { AdPageContent } from '@/data/adPages';
+import { adImageSources, MARKET_IMAGE_SIZES } from '@/lib/adImageSources';
 
 interface Location extends BangaloreMapArea {
   count: number | null;
@@ -234,7 +235,7 @@ export default function BangaloreMicromarkets({ locations, onContact, content, s
                     }}
                   />
                   <article id={cardId} className="bangalore-landing__map-card" aria-labelledby={`${cardId}-title`} aria-hidden={!expanded}>
-                    <img src={photo?.url} alt={photo?.alt ?? location.canonical} width={800} height={450} loading="lazy" decoding="async" className="bangalore-landing__map-card-image" />
+                    <img {...adImageSources(photo?.url, expanded ? '264px' : '40px')} alt={photo?.alt ?? location.canonical} width={800} height={450} loading="lazy" decoding="async" className="bangalore-landing__map-card-image" />
                     <div className="bangalore-landing__map-card-body">
                       <h3 id={`${cardId}-title`}>{expanded ? location.title ?? location.canonical : location.chipLabel ?? location.canonical}</h3>
                       <p className="bangalore-landing__map-card-count">{expanded ? cardCaption : chipCaption}</p>
@@ -260,7 +261,7 @@ export default function BangaloreMicromarkets({ locations, onContact, content, s
           const photo = content.images[location.imageSlot];
           return (
             <article key={location.slug} id={`bangalore-mobile-market-${location.slug}`} ref={node => { mobileCardRefs.current[location.slug] = node; }} className="bangalore-landing__mobile-market" data-market={location.slug}>
-              <img src={photo?.url} alt={photo?.alt ?? location.canonical} width={800} height={450} loading="lazy" decoding="async" />
+              <img {...adImageSources(photo?.url, MARKET_IMAGE_SIZES)} alt={photo?.alt ?? location.canonical} width={800} height={450} loading="lazy" decoding="async" />
               {location.count !== null && <span className="bangalore-landing__image-tag bangalore-landing__listing-count">
                 {location.count.toLocaleString('en-IN')} {location.count === 1 ? 'listing' : 'listings'}
               </span>}

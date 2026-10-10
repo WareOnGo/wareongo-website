@@ -1,0 +1,190 @@
+{
+  "date": "2026-10-10",
+  "route": "/bangalore",
+  "lighthouseVersion": "13.5.0",
+  "method": {
+    "build": "Isolated production-mode SSG snapshots of the current working tree; city statistics use the same fixture in both snapshots.",
+    "serving": "Compressed local HTTPS/HTTP2 assets mapped to wareongo.com inside each fresh audit browser.",
+    "throttling": "Default simulated mobile Slow 4G, 4x CPU, 412x823 viewport, DPR 1.75.",
+    "sequence": "Three alternating before/after pairs for the initial optimization, followed by three final runs after visual-preservation adjustments; no concurrent builds or browser tests.",
+    "analytics": "Production GA4 script downloaded and executed; analytics collection requests blocked.",
+    "baseline": "First WebP pass before the JavaScript/hydration optimizations. Includes logo variants subsequently reverted to preserve exact logo rendering. Earlier 85-point HTTP/1.1 results are not this baseline.",
+    "productionStatus": "Local lab results; no deployment or live PageSpeed measurement."
+  },
+  "before": {
+    "medians": {
+      "score": 96,
+      "first-contentful-paint": 1184,
+      "largest-contentful-paint": 2309.2585,
+      "total-blocking-time": 170.5,
+      "cumulative-layout-shift": 0,
+      "transferBytes": 732675,
+      "scriptBytes": 383435
+    },
+    "runs": [
+      {
+        "round": 1,
+        "benchmarkIndex": 1866,
+        "score": 94,
+        "first-contentful-paint": 1172.6695,
+        "largest-contentful-paint": 2309.2585,
+        "total-blocking-time": 226,
+        "cumulative-layout-shift": 0,
+        "transferBytes": 732675,
+        "scriptBytes": 383435,
+        "warnings": []
+      },
+      {
+        "round": 2,
+        "benchmarkIndex": 2013,
+        "score": 97,
+        "first-contentful-paint": 1230,
+        "largest-contentful-paint": 2280,
+        "total-blocking-time": 119.5,
+        "cumulative-layout-shift": 0,
+        "transferBytes": 732675,
+        "scriptBytes": 383435,
+        "warnings": []
+      },
+      {
+        "round": 3,
+        "benchmarkIndex": 1809.5,
+        "score": 96,
+        "first-contentful-paint": 1184,
+        "largest-contentful-paint": 2355,
+        "total-blocking-time": 170.5,
+        "cumulative-layout-shift": 0,
+        "transferBytes": 732728,
+        "scriptBytes": 383429,
+        "warnings": []
+      }
+    ]
+  },
+  "after": {
+    "medians": {
+      "score": 98,
+      "first-contentful-paint": 1202.537,
+      "largest-contentful-paint": 2130,
+      "total-blocking-time": 132.5,
+      "cumulative-layout-shift": 0,
+      "transferBytes": 745262,
+      "scriptBytes": 362719
+    },
+    "runs": [
+      {
+        "round": 1,
+        "benchmarkIndex": 1995,
+        "score": 98,
+        "first-contentful-paint": 1210.783,
+        "largest-contentful-paint": 2110.783,
+        "total-blocking-time": 132.5,
+        "cumulative-layout-shift": 0,
+        "transferBytes": 745284,
+        "scriptBytes": 362727,
+        "warnings": []
+      },
+      {
+        "round": 2,
+        "benchmarkIndex": 2065,
+        "score": 98,
+        "first-contentful-paint": 1156,
+        "largest-contentful-paint": 2130,
+        "total-blocking-time": 120.5,
+        "cumulative-layout-shift": 0,
+        "transferBytes": 745262,
+        "scriptBytes": 362719,
+        "warnings": []
+      },
+      {
+        "round": 3,
+        "benchmarkIndex": 2110.5,
+        "score": 96,
+        "first-contentful-paint": 1202.537,
+        "largest-contentful-paint": 2327.5370000000003,
+        "total-blocking-time": 151,
+        "cumulative-layout-shift": 0,
+        "transferBytes": 745262,
+        "scriptBytes": 362719,
+        "warnings": []
+      }
+    ]
+  },
+  "changes": [
+    "Load contact and navigation dialogs on first use, retaining their state after closing.",
+    "Load inventory route loaders and static-path discovery on demand instead of in the shared entry bundle.",
+    "Use content already validated by the build; keep ad-page validation and migration in build/CMS preview code.",
+    "Yield a frame before ad-page hydration so the existing static HTML can paint.",
+    "Serve responsive WebP warehouse photos with the original image URLs available as fallbacks."
+  ],
+  "validation": {
+    "nodeTestFiles": {
+      "passed": 34,
+      "failed": 0
+    },
+    "typecheck": "passed",
+    "changedSourceLint": "passed",
+    "diffWhitespace": "passed",
+    "browser": "Passed at 390/768/1440px: SSG before JS, stable headline hydration, responsive image/fallback/resize recovery, filters, carousel and mocked enquiries. Shared homepage/Bangalore navigation and dialogs passed on mobile and desktop, including delayed chunks, search, focus restoration, preserved form drafts and exactly one GA4 lead event.",
+    "staticOutput": "Main content, link labels/destinations and title match the baseline. Initial cards, tables, FAQ answers, form markup and statistics remain in SSG HTML.",
+    "backendReadsDuringAdLoadAndInteractions": 0,
+    "enquiry": "POST /enquiries only on submission; browser verification mocked the response.",
+    "clientNavigation": "Generated static loader manifest and route JSON.",
+    "visualPreservation": {
+      "reference": "Production SSG snapshot from before all performance changes, with identical approved page content and fixture statistics.",
+      "viewportHeight": 900,
+      "viewportWidths": [
+        320,
+        390,
+        412,
+        768,
+        1024,
+        1440
+      ],
+      "comparedElementsPerViewport": 1797,
+      "geometryToleranceCssPx": 0.1,
+      "geometryAndComputedDesignStyleDifferences": 0,
+      "pageHeights": [
+        {
+          "width": 320,
+          "before": 8738,
+          "after": 8738
+        },
+        {
+          "width": 390,
+          "before": 8180,
+          "after": 8180
+        },
+        {
+          "width": 412,
+          "before": 8089,
+          "after": 8089
+        },
+        {
+          "width": 768,
+          "before": 9710,
+          "after": 9710
+        },
+        {
+          "width": 1024,
+          "before": 7926,
+          "after": 7926
+        },
+        {
+          "width": 1440,
+          "before": 7646,
+          "after": 7646
+        }
+      ],
+      "interactiveStates": "FAQ toggle, listing filter, expanded map preview, contact dialog and navigation dialog match the original geometry and design styles.",
+      "screenshots": "Text-only sections match pixel-for-pixel. Photo pixels differ because of responsive resizing/WebP compression; image identity, proportions, object-fit, object-position and frame geometry are preserved. Photo rendering was also inspected at 2x pixel density on mobile and desktop.",
+      "preservedSource": "Landing-page CSS, trusted-logo component and logo source manifest are byte-identical to the original.",
+      "adjustments": "Removed content-visibility/estimated section heights and restored original logo source selection to eliminate changed initial page heights and subpixel logo sizing.",
+      "localArtifacts": "/tmp/bangalore-visual-comparison/summary-baseline-visual-preserved.json"
+    }
+  },
+  "detailedLocalArtifacts": {
+    "lighthouse": "/tmp/bangalore-http2-audits/summary-visual-preserved-bangalore.json",
+    "visual": "/tmp/bangalore-visual-comparison/",
+    "productionBuild": "/tmp/bangalore-visual-preserved-he6Bng/site/dist/"
+  }
+}

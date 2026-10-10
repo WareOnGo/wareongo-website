@@ -13,7 +13,7 @@ import BangaloreAreaGuide from '@/components/city/BangaloreAreaGuide';
 import BangaloreBenefits from '@/components/city/BangaloreBenefits';
 import BangaloreMicromarkets from '@/components/city/BangaloreMicromarkets';
 import BangaloreMarketGuide from '@/components/city/BangaloreMarketGuide';
-import ContactFormDialog from '@/components/ContactFormDialog';
+import ContactFormDialog from '@/components/DeferredContactFormDialog';
 import RequestCTASection from '@/components/RequestCTASection';
 import { getBangaloreAdPage, type AdPageContent } from '@/data/adPages';
 import { MICROMARKETS } from '@/data/locations.generated';
@@ -22,6 +22,7 @@ import type { BangaloreLandingData } from '@/loaders/bangaloreLandingLoader';
 import type { AdPreviewView } from './BangaloreAdPreview';
 import { trackEvent, type AnalyticsParams } from '@/lib/analytics';
 import { normalizeHeadingCase, titleCase } from '@/lib/headingCase';
+import { adImageSources, FEATURED_IMAGE_SIZES, SERVICE_IMAGE_SIZES } from '@/lib/adImageSources';
 import '@/components/WarehouseCard.css';
 import './BangaloreLanding.css';
 
@@ -33,6 +34,7 @@ const AUDIENCE_INTENTS = { owners: ['list-warehouse'], '3pls': ['find-space', 'f
 export default function BangaloreLanding({ content: savedContent = getBangaloreAdPage(), previewState = 'page' }: { content?: AdPageContent; previewState?: AdPreviewView } = {}) {
   const copy = normalizeHeadingCase(savedContent.copy);
   const content = { ...savedContent, copy };
+  const featuredImage = adImageSources(content.images['featured-967'].url, FEATURED_IMAGE_SIZES);
   const services = content.services.map(item => ({ ...item, slug: item.id, icon: SERVICE_ICONS[item.id], description: item.body, mobileCopy: { title: item.mobileTitle, body: item.mobileBody } }));
   const audiences = content.audiences.map(item => ({ ...item, slug: item.id, description: item.body, icon: AUDIENCE_ICONS[item.id],
     actions: [item.primaryCta, item.secondaryCta].filter(Boolean).map((label, index) => ({ label, intent: AUDIENCE_INTENTS[item.id][index] })),
@@ -71,7 +73,9 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
         description={copy.metaDescription}
         path="/bangalore"
         noindex
-      />
+      >
+        <link rel="preload" as="image" href={featuredImage.src} imageSrcSet={featuredImage.srcSet} imageSizes={featuredImage.sizes} media="(min-width: 1024px)" fetchPriority="high" />
+      </PageHead>
 
       <Navbar contactDialogClassName="bangalore-landing-dialog" />
 
@@ -124,7 +128,7 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
               ))}
             </div>
             <div className="bangalore-landing__service-image">
-              <img src={content.images.services.url} alt={content.images.services.alt} width={content.images.services.width} height={content.images.services.height} loading="lazy" decoding="async" />
+              <img {...adImageSources(content.images.services.url, SERVICE_IMAGE_SIZES)} alt={content.images.services.alt} width={content.images.services.width} height={content.images.services.height} loading="lazy" decoding="async" />
             </div>
           </div>
         </section>

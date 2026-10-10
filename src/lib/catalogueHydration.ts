@@ -26,6 +26,12 @@ export async function startWebsite(start: () => unknown) {
   if (document.readyState === 'loading') await new Promise<void>(resolve => {
     document.addEventListener('DOMContentLoaded', () => resolve(), { once: true });
   });
+  // The ad's headline and enquiry are already in HTML. Give the browser a paint
+  // before React walks the long page. This yields one frame, without waiting for
+  // interaction or imposing a timer on when the form becomes usable.
+  if (document.getElementById('bangalore-title') && document.visibilityState === 'visible') {
+    await new Promise<void>(resolve => requestAnimationFrame(() => setTimeout(resolve, 0)));
+  }
   try {
     const hydration = await restoreCatalogueHydration(document);
     if (hydration) Object.assign(window, { __staticRouterHydrationData: hydration });

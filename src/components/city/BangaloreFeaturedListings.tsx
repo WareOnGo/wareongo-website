@@ -5,6 +5,7 @@ import { useListingResults } from '@/hooks/useListingAnalytics';
 import type { AnalyticsParams } from '@/lib/analytics';
 import { warehousePath } from '@/lib/warehouseSlug';
 import type { AdPageContent } from '@/data/adPages';
+import { adImageSources, FEATURED_IMAGE_SIZES } from '@/lib/adImageSources';
 
 interface BangaloreFeaturedListingsProps {
   content: AdPageContent;
@@ -21,6 +22,7 @@ const FEATURED_LISTINGS = [
 
 function FeaturedWarehouseCard({ listing, index, onContact, content }: BangaloreFeaturedListingsProps & { listing: (typeof FEATURED_LISTINGS)[number]; index: number }) {
   const image = content.images[`featured-${listing.id}`];
+  const sources = adImageSources(image.url, FEATURED_IMAGE_SIZES);
   const context = { list_id: 'bangalore_featured', placement: 'bangalore_featured', warehouse_id: listing.id, list_position: index + 1, page: 1, page_size: FEATURED_LISTINGS.length };
   return (
     <WarehouseCard
@@ -34,9 +36,11 @@ function FeaturedWarehouseCard({ listing, index, onContact, content }: Bangalore
       warehouseType="PEB"
       fireCompliance={null}
       authoredImage={image}
+      imageSrcSet={sources.srcSet}
+      imageSizes={sources.sizes}
       href={warehousePath({ ...listing, warehouseType: 'PEB', city: 'Bengaluru' })}
       index={index}
-      priority
+      priority={index === 0}
       analyticsContext={context}
       onContact={(trigger, enquiry) => onContact(trigger, { ...enquiry, source: `bangalore-landing-warehouse-${listing.id}` })}
     />

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, ImageIcon, ChevronLeft, ChevronRight } from 'lucide-react';
-import ContactFormDialog from '@/components/ContactFormDialog';
+import ContactFormDialog from '@/components/DeferredContactFormDialog';
 import WarehousePhoto from '@/components/WarehousePhoto';
 import { useWarehouseGallery } from '@/hooks/useWarehouseGallery';
 import { useGallerySwipe } from '@/hooks/useGallerySwipe';
@@ -20,6 +20,8 @@ interface WarehouseCardProps {
   imageFallbacks?: (string | null)[];
   coverImage?: string;
   imageAlt?: string;
+  imageSrcSet?: string;
+  imageSizes?: string;
   /** Single photo validated by the CMS, including extensionless image URLs. */
   authoredImage?: { url: string; alt: string };
   address: string;
@@ -55,7 +57,7 @@ function UpdatedBadge({ updatedAt }: { updatedAt?: string | null }) {
 }
 
 const WarehouseCard: React.FC<WarehouseCardProps> = ({
-  id, image, images = [], imageFallbacks = [], coverImage, imageAlt, authoredImage, address, location,
+  id, image, images = [], imageFallbacks = [], coverImage, imageAlt, imageSrcSet, imageSizes, authoredImage, address, location,
   micromarket, postalCode, warehouseType, updatedAt, size, ceilingHeight,
   numberOfDocks, price, fireCompliance, href, index = 0,
   priority = index === 0, analyticsContext = {}, onContact,
@@ -127,6 +129,7 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
                 primary={frame.primary} initialSrc={gallery.source(currentImageIndex)}
                 preview={currentImageIndex === 0 && (!gallery.state.resolved[0] || gallery.state.resolved[0] === coverImage) ? coverImage : undefined}
                 fallback={frame.fallback} alt={altText} width={640} height={360} draggable={false}
+                srcSet={currentImageIndex === 0 ? imageSrcSet : undefined} sizes={imageSizes}
                 className={`warehouse-gallery-photo warehouse-card__image ${slideDirection === 'left' ? 'animate-slide-in-left' : slideDirection === 'right' ? 'animate-slide-in-right' : ''}`}
                 onLoaded={url => gallery.loaded(currentImageIndex, url)}
                 onFailed={() => gallery.failed(currentImageIndex)}

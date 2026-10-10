@@ -40,6 +40,47 @@ test('automatic page views have one config owner and resolved context on SPA eve
   assert.equal(document.title, 'Home');
 });
 
+test('Bangalore queues campaign and lead context before loading the tag after a paint', async () => {
+  const frames = [], idle = [];
+  const events = new EventTarget();
+  const a = await analytics({ browser: {
+    requestAnimationFrame: callback => frames.push(callback),
+    requestIdleCallback: callback => idle.push(callback),
+    addEventListener: events.addEventListener.bind(events), removeEventListener: events.removeEventListener.bind(events),
+  } });
+  window.location.href = 'https://wareongo.com/bangalore?utm_source=google&utm_campaign=warehouses';
+  window.location.pathname = '/bangalore';
+  a.recordAnalyticsPage('Bangalore');
+  a.trackEvent('generate_lead', { form_id: 'bangalore_hero_enquiry', lead_id: 'enquiry_42' });
+  assert.equal(a.scripts.length, 0);
+  assert.equal(a.calls().filter(call => call[0] === 'config').length, 1);
+  assert.equal(a.calls().at(-1)[2].page_path, '/bangalore?utm_source=google&utm_campaign=warehouses');
+  frames.shift()();
+  frames.shift()();
+  assert.equal(a.scripts.length, 0);
+  idle.shift()();
+  assert.equal(a.scripts.length, 1);
+  assert.equal(a.scripts[0].fetchPriority, 'low');
+  events.dispatchEvent(new Event('pointerdown'));
+  assert.equal(a.scripts.length, 1);
+});
+
+test('an early ad-page interaction loads analytics once without waiting for idle', async () => {
+  const frames = [];
+  const events = new EventTarget();
+  const a = await analytics({ browser: {
+    requestAnimationFrame: callback => frames.push(callback),
+    addEventListener: events.addEventListener.bind(events), removeEventListener: events.removeEventListener.bind(events),
+  } });
+  window.location.href = 'https://wareongo.com/bangalore'; window.location.pathname = '/bangalore';
+  a.recordAnalyticsPage('Bangalore');
+  events.dispatchEvent(new Event('keydown'));
+  assert.equal(a.scripts.length, 1);
+  frames.shift()(); frames.shift()();
+  events.dispatchEvent(new Event('pagehide'));
+  assert.equal(a.scripts.length, 1);
+});
+
 for (const path of ['/preview/cms', '/preview/ad-pages/bangalore']) test(`${path} never sends analytics, including on the production domain`, async () => {
   const a = await analytics({ productionBundle: true });
   window.location.pathname = path;

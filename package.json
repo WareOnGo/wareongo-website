@@ -8,8 +8,8 @@
     "test:blogs": "node --test tests/blog-summaries.test.mjs",
     "test:formatting": "node tests/formatting.test.mjs",
     "dev": "vite",
-    "build": "node scripts/generate-locations.mjs && node scripts/generate-blogs.mjs && node scripts/generate-service-pages.mjs && node scripts/generate-ad-pages.mjs && node scripts/generate-legal-pages.mjs && node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs && node scripts/generate-logo-variants.mjs && vite-react-ssg build && node scripts/stabilize-loader-data.mjs && node scripts/publish-listing-covers.mjs && node scripts/publish-overview-images.mjs && node scripts/generate-warehouse-route-map.mjs && node scripts/generate-sitemap.mjs && node scripts/finalize-catalogue.mjs && node scripts/indexnow-ping.mjs",
-    "build:dev": "node scripts/generate-locations.mjs && node scripts/generate-blogs.mjs && node scripts/generate-service-pages.mjs && node scripts/generate-ad-pages.mjs && node scripts/generate-legal-pages.mjs && node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs && node scripts/generate-logo-variants.mjs && vite-react-ssg build --mode development && node scripts/stabilize-loader-data.mjs && node scripts/publish-listing-covers.mjs && node scripts/publish-overview-images.mjs && node scripts/generate-warehouse-route-map.mjs && node scripts/generate-sitemap.mjs && node scripts/finalize-catalogue.mjs",
+    "build": "node scripts/generate-locations.mjs && node scripts/generate-blogs.mjs && node scripts/generate-service-pages.mjs && node scripts/generate-ad-pages.mjs && node scripts/generate-legal-pages.mjs && node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs && node scripts/generate-logo-variants.mjs && node scripts/generate-ad-image-variants.mjs && vite-react-ssg build && node scripts/stabilize-loader-data.mjs && node scripts/publish-listing-covers.mjs && node scripts/publish-overview-images.mjs && node scripts/generate-warehouse-route-map.mjs && node scripts/generate-sitemap.mjs && node scripts/finalize-catalogue.mjs && node scripts/indexnow-ping.mjs",
+    "build:dev": "node scripts/generate-locations.mjs && node scripts/generate-blogs.mjs && node scripts/generate-service-pages.mjs && node scripts/generate-ad-pages.mjs && node scripts/generate-legal-pages.mjs && node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs && node scripts/generate-logo-variants.mjs && node scripts/generate-ad-image-variants.mjs && vite-react-ssg build --mode development && node scripts/stabilize-loader-data.mjs && node scripts/publish-listing-covers.mjs && node scripts/publish-overview-images.mjs && node scripts/generate-warehouse-route-map.mjs && node scripts/generate-sitemap.mjs && node scripts/finalize-catalogue.mjs",
     "build:spa": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -27,7 +27,8 @@
     "test:listing-url": "node tests/listing-search.test.mjs && node tests/location-pagination.test.mjs && node tests/micromarket-listings.test.mjs && node tests/location-listing-seed.test.mjs && node tests/prerender-errors.test.mjs",
     "test:ad-pages": "node tests/ad-pages-content.test.mjs",
     "test:crawling": "node tests/catalogue-rendering.test.mjs && node tests/catalogue-build.test.mjs && node tests/catalogue-hydration.test.mjs && node tests/catalogue-routing.test.mjs",
-    "test:previews": "node tests/cms-preview.test.mjs && node tests/preview-runtime.test.mjs"
+    "test:previews": "node tests/cms-preview.test.mjs && node tests/preview-runtime.test.mjs",
+    "images:ad-pages": "node scripts/generate-ad-image-variants.mjs"
   },
   "dependencies": {
     "@radix-ui/react-aspect-ratio": "^1.1.0",

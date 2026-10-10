@@ -4,24 +4,13 @@ import { listingShouldRevalidate } from "./lib/listingSearch";
 import RouteErrorBoundary from "./components/RouteErrorBoundary";
 import { servicePages } from "./data/servicePages";
 import { servicePath } from "./data/serviceCatalog";
-import { warehouseLoader, warehouseStaticPaths, listingsLoader } from "./loaders/warehouseLoader";
-import { bangaloreLandingLoader } from "./loaders/bangaloreLandingLoader";
-import {
-  cityListingsLoader,
-  stateListingsLoader,
-  cityStaticPaths,
-  stateStaticPaths,
-  cityTypeListingsLoader,
-  stateTypeListingsLoader,
-  cityTypeStaticPaths,
-  stateTypeStaticPaths,
-  cityOverviewLoader,
-  stateOverviewLoader,
-  cityOverviewStaticPaths,
-  stateOverviewStaticPaths,
-  micromarketOverviewLoader,
-  micromarketOverviewStaticPaths,
-} from "./loaders/locationLoader";
+
+// SSG replaces these loaders with generated JSON readers in production. Keep
+// inventory fetching and build-only path discovery out of the entry bundle;
+// development and static generation still run the original loaders on demand.
+const warehouseLoaders = () => import('./loaders/warehouseLoader');
+const locationLoaders = () => import('./loaders/locationLoader');
+const bangaloreLoader = async () => (await import('./loaders/bangaloreLandingLoader')).bangaloreLandingLoader();
 
 // vite-react-ssg's `lazy` accepts a function returning a module with a `Component` field.
 // Wrap default-exported pages so we don't have to rename exports across the codebase.
@@ -65,46 +54,46 @@ export const routes: RouteRecord[] = [
           {
             path: "listings",
             lazy: lazyDefault(() => import("./pages/Listings")),
-            loader: listingsLoader,
+            loader: async () => (await warehouseLoaders()).listingsLoader(),
             shouldRevalidate: listingShouldRevalidate,
           },
           {
             path: "listings/city/:city",
             lazy: lazyDefault(() => import("./pages/LocationListings")),
-            loader: cityListingsLoader,
+            loader: async args => (await locationLoaders()).cityListingsLoader(args),
             shouldRevalidate: listingShouldRevalidate,
-            getStaticPaths: cityStaticPaths,
+            getStaticPaths: async () => (await locationLoaders()).cityStaticPaths(),
           },
           {
             // Shared slot: "peb"/"rcc" plus the micromarket (locality) pages
             // that nest under a city — cityTypeListingsLoader resolves both.
             path: "listings/city/:city/:type",
             lazy: lazyDefault(() => import("./pages/LocationListings")),
-            loader: cityTypeListingsLoader,
+            loader: async args => (await locationLoaders()).cityTypeListingsLoader(args),
             shouldRevalidate: listingShouldRevalidate,
-            getStaticPaths: cityTypeStaticPaths,
+            getStaticPaths: async () => (await locationLoaders()).cityTypeStaticPaths(),
           },
           {
             path: "listings/state/:state",
             lazy: lazyDefault(() => import("./pages/LocationListings")),
-            loader: stateListingsLoader,
+            loader: async args => (await locationLoaders()).stateListingsLoader(args),
             shouldRevalidate: listingShouldRevalidate,
-            getStaticPaths: stateStaticPaths,
+            getStaticPaths: async () => (await locationLoaders()).stateStaticPaths(),
           },
           {
             path: "listings/state/:state/:type",
             lazy: lazyDefault(() => import("./pages/LocationListings")),
-            loader: stateTypeListingsLoader,
+            loader: async args => (await locationLoaders()).stateTypeListingsLoader(args),
             shouldRevalidate: listingShouldRevalidate,
-            getStaticPaths: stateTypeStaticPaths,
+            getStaticPaths: async () => (await locationLoaders()).stateTypeStaticPaths(),
           },
           {
             // :slug carries the descriptive SEO slug with the warehouse ID at the end.
             // The loader parses the trailing number to do the actual lookup.
             path: "warehouse/:slug",
             lazy: lazyDefault(() => import("./pages/WarehouseDetail")),
-            loader: warehouseLoader,
-            getStaticPaths: warehouseStaticPaths,
+            loader: async args => (await warehouseLoaders()).warehouseLoader(args),
+            getStaticPaths: async () => (await warehouseLoaders()).warehouseStaticPaths(),
           },
           // Auth-gated routes — pre-rendered as unauthenticated shells, hydrate client-side
           { path: "user-dashboard", lazy: lazyDefault(() => import("./pages/UserDashboard")) },
@@ -124,23 +113,23 @@ export const routes: RouteRecord[] = [
             // Router specificity ranks this above '*', regardless of position.
             path: "overview/:state/:city/:micromarket",
             lazy: lazyDefault(() => import("./pages/MicromarketOverview")),
-            loader: micromarketOverviewLoader,
+            loader: async args => (await locationLoaders()).micromarketOverviewLoader(args),
             shouldRevalidate: listingShouldRevalidate,
-            getStaticPaths: micromarketOverviewStaticPaths,
+            getStaticPaths: async () => (await locationLoaders()).micromarketOverviewStaticPaths(),
           },
           {
             path: "overview/:state",
             lazy: lazyDefault(() => import("./pages/MicromarketOverview")),
-            loader: stateOverviewLoader,
+            loader: async args => (await locationLoaders()).stateOverviewLoader(args),
             shouldRevalidate: listingShouldRevalidate,
-            getStaticPaths: stateOverviewStaticPaths,
+            getStaticPaths: async () => (await locationLoaders()).stateOverviewStaticPaths(),
           },
           {
             path: "overview/:state/:city",
             lazy: lazyDefault(() => import("./pages/MicromarketOverview")),
-            loader: cityOverviewLoader,
+            loader: async args => (await locationLoaders()).cityOverviewLoader(args),
             shouldRevalidate: listingShouldRevalidate,
-            getStaticPaths: cityOverviewStaticPaths,
+            getStaticPaths: async () => (await locationLoaders()).cityOverviewStaticPaths(),
           },
           {
             path: "services/:slug",
@@ -153,7 +142,7 @@ export const routes: RouteRecord[] = [
             // lazyDefault hides the import from SSG's asset detection. Include
             // the page's styles in the initial HTML, before hydration.
             entry: "src/pages/BangaloreLanding.tsx",
-            loader: bangaloreLandingLoader,
+            loader: bangaloreLoader,
           },
           {
             path: "preview/cms",
@@ -164,7 +153,7 @@ export const routes: RouteRecord[] = [
             path: "preview/ad-pages/bangalore",
             lazy: lazyDefault(() => import("./pages/BangaloreAdPreview")),
             entry: "src/pages/BangaloreAdPreview.tsx",
-            loader: bangaloreLandingLoader,
+            loader: bangaloreLoader,
           },
         ],
       },

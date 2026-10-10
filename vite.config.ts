@@ -36,7 +36,14 @@ export default defineConfig(({ mode, command }) => ({
     __DEV_SERVER__: JSON.stringify(command === "serve"),
   },
   ssgOptions: {
-    onPageRendered: catalogueBuild.onPageRendered,
+    onPageRendered: async (route, html, context) => {
+      const rendered = await catalogueBuild.onPageRendered(route, html, context) || html;
+      // The ad page is already rendered in HTML. Let its font and visible images
+      // win bandwidth, and finish parsing the document before hydration runs.
+      return route === '/bangalore'
+        ? rendered.replace(/<script type="module" async(?:="")?/g, '<script type="module" defer fetchpriority="low"')
+        : rendered;
+    },
     onFinished: catalogueBuild.onFinished,
     // Each warehouse render reads details and specifications from the backend.
     // Keep build traffic within its small shared Supabase connection budget.

@@ -80,6 +80,34 @@ function command(...args: unknown[]) {
   window.gtag ||= function () { window.dataLayer!.push(arguments); };
   window.gtag(...args);
 }
+
+function loadAnalyticsScript() {
+  const append = () => {
+    const script = document.createElement('script');
+    script.async = true;
+    script.fetchPriority = 'low';
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${ID}`;
+    document.head.appendChild(script);
+  };
+  if (pageType(window.location.pathname) !== 'bangalore' || !window.requestAnimationFrame) { append(); return; }
+
+  // Queue attribution and lead events immediately, but give the ad page a paint
+  // before Google's download/parse work. An early interaction starts it sooner.
+  let loaded = false;
+  const events = ['pointerdown', 'keydown', 'pagehide'] as const;
+  const load = () => {
+    if (loaded) return;
+    loaded = true;
+    events.forEach(event => window.removeEventListener(event, load, true));
+    append();
+  };
+  events.forEach(event => window.addEventListener(event, load, { once: true, capture: true }));
+  window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+    if (loaded) return;
+    if (window.requestIdleCallback) window.requestIdleCallback(load, { timeout: 1000 });
+    else window.setTimeout(load, 0);
+  }));
+}
 export function recordAnalyticsPage(title: string) {
   if (typeof window === 'undefined') return;
   const url = safeUrl(window.location.href);
@@ -96,10 +124,7 @@ export function recordAnalyticsPage(title: string) {
     command('js', new Date());
     command('config', ID, { send_page_view: true });
     if (analyticsEnabled() && !isTest()) {
-      const script = document.createElement('script');
-      script.async = true;
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${ID}`;
-      document.head.appendChild(script);
+      loadAnalyticsScript();
     }
   }
   // Subsequent page_view events belong exclusively to Enhanced Measurement.

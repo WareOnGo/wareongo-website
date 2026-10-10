@@ -9,7 +9,7 @@ export type NavigationView = 'menu' | 'directory' | null;
 
 const useBrowserLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 
-interface Props {
+export interface NavigationDialogProps {
   view: NavigationView;
   category: LocationCategory;
   mobileOrigin: boolean;
@@ -24,7 +24,7 @@ interface Props {
 
 /** One modal owns both mobile browsing and the directory, so focus never crosses nested traps. */
 export default function NavigationDialog({ view, category, mobileOrigin, account, onCategory, onView,
-  onCloseAutoFocus, onContact, onLogout, onNavigate }: Props) {
+  onCloseAutoFocus, onContact, onLogout, onNavigate }: NavigationDialogProps) {
   const id = useId();
   const [expanded, setExpanded] = useState<LocationCategory | null>(null);
   const [query, setQuery] = useState('');
