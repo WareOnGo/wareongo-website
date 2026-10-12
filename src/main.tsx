@@ -3,6 +3,7 @@ import { routes } from "./routes";
 import { claimReloadAttempt } from "./lib/staleDeployReload";
 import { createWebsiteRouter } from "./lib/createWebsiteRouter";
 import { startWebsite } from './lib/catalogueHydration';
+import { getLeadAttribution } from './lib/leadAttribution';
 import "./index.css";
 // Keep homepage styles available to SSG's critical-CSS extraction while its
 // interactive components are loaded as a separate route chunk.
@@ -16,6 +17,7 @@ import "./components/SpotlightCard.css";
 // on initial hydration is thrown by vite-react-ssg outside React entirely, so no
 // error boundary can catch it. Vite fires this event for exactly that case.
 if (typeof window !== "undefined") {
+  getLeadAttribution();
   window.addEventListener("vite:preloadError", (event) => {
     // Only swallow the error if we're actually reloading. Suppressing it after
     // the guard has been spent would leave the page hanging with nothing

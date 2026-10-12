@@ -1,6 +1,7 @@
 /** Public-site analytics. Never pass form values or raw API errors here. */
 import { SERVICE_PAGES, servicePath } from '../data/serviceCatalog';
 import { installAnalyticsConsole, logAnalyticsCommand } from './analyticsConsole';
+import { getLeadAttribution } from './leadAttribution';
 
 export type AnalyticsEvent = 'page_view' | 'nav_click' | 'cta_click' | 'contact_click'
   | 'listing_open' | 'view_listing' | 'listing_impression' | 'listing_results'
@@ -103,6 +104,7 @@ export function bootstrapAnalytics() {
 }
 export function recordAnalyticsPage(title: string) {
   if (typeof window === 'undefined') return;
+  getLeadAttribution();
   const state = pageState();
   const url = safeUrl(window.location.href);
   if (state.lastUrl === url) { state.context.page_title = title; command('set', { page_title: title }); return; }

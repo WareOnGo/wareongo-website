@@ -1,4 +1,5 @@
 import { getApiUrl, config } from '@/config/config';
+import { getLeadAttribution } from '@/lib/leadAttribution';
 
 interface WarehouseRequestData {
   name: string;
@@ -6,7 +7,7 @@ interface WarehouseRequestData {
   company: string;
   location: string;
   requirements: string | null;
-  email: string | null;
+  email?: string | null;
 }
 
 /**
@@ -20,6 +21,8 @@ export const submitWarehouseRequest = async (formData: WarehouseRequestData): Pr
       company_name: formData.company.trim(),
       preferred_location: formData.location.trim(),
       additional_requirements: formData.requirements ? formData.requirements.trim() : '',
+      ...(formData.email?.trim() ? { email: formData.email.trim() } : {}),
+      ...getLeadAttribution(),
     };
 
 

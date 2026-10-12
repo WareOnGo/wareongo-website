@@ -1,11 +1,12 @@
 import { getApiUrl, config } from '@/config/config';
+import { getLeadAttribution } from '@/lib/leadAttribution';
 
 interface ContactFormData {
   name: string;
   phone: string;
-  email: string | null;
+  email?: string | null;
   source: string;
-  companyName?: string;
+  companyName?: string | null;
 }
 
 /**
@@ -18,7 +19,8 @@ export const submitContactForm = async (formData: ContactFormData): Promise<{ su
       phoneNumber: formData.phone.trim(),
       email: formData.email ? formData.email.trim() : null,
       source: formData.source.trim(),
-      ...(formData.companyName !== undefined ? { companyName: formData.companyName.trim() } : {}),
+      ...(formData.companyName != null ? { companyName: formData.companyName.trim() } : {}),
+      ...getLeadAttribution(),
     };
 
     const response = await fetch(getApiUrl(config.api.enquiries), {

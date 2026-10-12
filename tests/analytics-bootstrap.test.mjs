@@ -22,6 +22,7 @@ test('built HTML starts one tag with its rendered title and filtered acquisition
     assert.equal(command[0][1].page_referrer, 'https://www.google.com/');
     assert.equal(command[0][1].page_type, 'bangalore');
     assert.doesNotMatch(JSON.stringify(command), /private|email|#form/);
+    assert.equal(dom.window.sessionStorage.getItem('wareongo:lead:gclid'), 'campaign-click');
     assert.equal(dom.window.document.querySelectorAll('script[src*="googletagmanager.com"]').length, 1);
     assert.equal(dom.window.__VITE_REACT_SSG_CONTEXT__, undefined);
     // A repeated entry (or later independently bundled code) must reuse ownership.

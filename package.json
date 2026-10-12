@@ -21,6 +21,7 @@
     "test:warehouse-cutoff": "node tests/warehouse-cutoff.test.mjs",
     "test:legal": "node --test tests/legal-content.test.mjs",
     "test:analytics": "node --test tests/analytics.test.mjs tests/analytics-bootstrap.test.mjs",
+    "test:lead-submissions": "node --test tests/lead-submissions.test.mjs tests/analytics.test.mjs tests/analytics-bootstrap.test.mjs",
     "test:services": "node --test tests/service-content.test.mjs",
     "test:card-links": "node tests/warehouse-card-links.test.mjs",
     "test:listing-covers": "node tests/listing-cover.test.mjs",
