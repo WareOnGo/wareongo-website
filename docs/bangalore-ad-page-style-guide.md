@@ -1,7 +1,7 @@
 # Bangalore ad page style guide
 
-Applies to `/bangalore`, its real CMS preview, and contact dialogs opened from
-this page. The shared visual roles now live in
+Applies to `/bangalore`, `/bangalore/:micromarket`, their shared components,
+the real CMS preview, and contact dialogs opened from these pages. The shared visual roles now live in
 [`ui.tokens.css`](../src/styles/ui.tokens.css).
 [`BangaloreLanding.tokens.css`](../src/pages/BangaloreLanding.tokens.css) aliases
 them and retains the ad page's exceptions; [`BangaloreLanding.css`](../src/pages/BangaloreLanding.css)
@@ -11,6 +11,13 @@ implementation.
 Open the [visual guide](bangalore-ad-page-style-guide.html) through the website's
 dev server at `/docs/bangalore-ad-page-style-guide.html` to review the real
 tokens and component styles together.
+
+City and micromarket ad pages share `BangaloreLanding` and the components in
+`src/components/city/`. Local copy and inventory are configuration inputs; do
+not fork the layout or responsive CSS for another market. The compact
+`src/components/ad/AdFooter.tsx` is shared across all ad pages: navy background,
+WareOnGo, three legal/account links, and copyright. Its mobile
+spacing leaves room for the floating WhatsApp contact.
 
 ## Palette
 
@@ -80,6 +87,17 @@ copy uses 1.5 leading; regular prose uses 1.6. Keep inputs at 16px and compact
 listing figures at 16px. Proof and market figures use 20px at every phone width.
 Use `--landing-text-body` and `--landing-text-control` for those roles instead
 of redefining type tokens inside individual sections.
+
+Micromarket ad headings use a compact variant for longer local copy: a balanced
+hero at 22–30px on phones and 32–48px on larger screens, with the location accent
+inline. Peenya targets three hero lines on phones and two on desktop. Its short
+map heading scales from 16–20px on phones to fit one line. The shared city page
+and other section headings retain the scale above.
+
+Micromarket configs can supply `heroSummaryCompact` and `callbackNoteCompact`.
+The shared components show these shorter versions in narrow containers at 12px,
+keeping the summary and callback hours on one line without clipping the copy.
+Use `{compactRentRange}` for the same live rent range with an en dash.
 
 Section headings use `-.025em` tracking; card titles and body copy use normal
 tracking. Eyebrows are uppercase, 12px/600 with `.1em` tracking. The trust line
@@ -254,7 +272,8 @@ font utilities. Avoid duplicate primary actions inside a card.
   tables from this ad page. Keep those shared components on city overview pages.
 - **Dialogs:** 24px headings on desktop and the shared 20px heading role on phones, with the same field, label and button styles as the hero form.
   Keep focus trapping, close controls, validation and focus restoration intact.
-- **Site chrome:** retain the shared navbar/footer structure and visual roles.
+- **Site chrome:** retain the shared navbar and use `AdFooter` on every ad page.
+  Its brand, legal/account links and copyright use the existing visual roles.
   Keep ad-page layout adaptations local; shared listing and city components
   now consume the same standard at their source.
 

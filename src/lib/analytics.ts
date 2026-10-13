@@ -2,6 +2,7 @@
 import { SERVICE_PAGES, servicePath } from '../data/serviceCatalog';
 import { installAnalyticsConsole, logAnalyticsCommand } from './analyticsConsole';
 import { getLeadAttribution } from './leadAttribution';
+import { isMicromarketAdPath } from '../data/micromarketAdRoutes';
 
 export type AnalyticsEvent = 'page_view' | 'nav_click' | 'cta_click' | 'contact_click'
   | 'listing_open' | 'view_listing' | 'listing_impression' | 'listing_results'
@@ -49,6 +50,7 @@ export const analyticsEnabled = () => typeof window !== 'undefined' && !window.l
 export const pageType = (path: string) => path === '/' ? 'home' : path.startsWith('/warehouse/') ? 'warehouse_detail'
   : path.startsWith('/overview/') ? 'overview' : path.startsWith('/listings/') ? 'location_listings'
   : /^\/bangalore\/?$/.test(path) ? 'bangalore'
+  : isMicromarketAdPath(path) ? 'micromarket_ad'
   : path === '/request-warehouse' ? 'request' : path.startsWith('/blogs/') ? 'blog'
   : path.startsWith('/casestudies/') ? 'case_study' : isServicePath(path) ? 'service' : path.slice(1).replace(/[^a-z0-9_]/gi, '_') || 'home';
 // Only known discovery/acquisition keys; never forward arbitrary query values.
@@ -63,7 +65,7 @@ export function safeUrl(raw: string, query = true): string {
       if (!query || !queryKeys.has(key) || value.length > 100 || /@|%40|\b\d{10,}\b/i.test(value)) u.searchParams.delete(key);
     }
     // Unknown paths can contain private values. Keep only known public path shapes.
-    if (!isServicePath(u.pathname) && !/^\/(?:$|(?:warehouse|listings|overview|blogs|casestudies)(?:\/[a-z0-9-]+)*\/?$|(?:bangalore|request-warehouse|about-us|privacy-policy|terms-of-service|login|unauthorized|404)\/?$)/i.test(u.pathname)) u.pathname = '/other';
+    if (!isServicePath(u.pathname) && !isMicromarketAdPath(u.pathname) && !/^\/(?:$|(?:warehouse|listings|overview|blogs|casestudies)(?:\/[a-z0-9-]+)*\/?$|(?:bangalore|request-warehouse|about-us|privacy-policy|terms-of-service|login|unauthorized|404)\/?$)/i.test(u.pathname)) u.pathname = '/other';
     return u.toString();
   } catch { return ''; }
 }
@@ -100,9 +102,10 @@ function loadAnalyticsScript() {
 
 /** Runs after the SSG head is parsed, without waiting for React or route data. */
 export function bootstrapAnalytics() {
-  if (analyticsEnabled() && document.title) recordAnalyticsPage(document.title);
+  const title = document.currentScript?.getAttribute('data-page-title') || document.title;
+  if (analyticsEnabled() && title) recordAnalyticsPage(title, Boolean(document.title));
 }
-export function recordAnalyticsPage(title: string) {
+export function recordAnalyticsPage(title: string, updateDocumentTitle = true) {
   if (typeof window === 'undefined') return;
   getLeadAttribution();
   const state = pageState();
@@ -113,7 +116,9 @@ export function recordAnalyticsPage(title: string) {
   const parsed = new URL(url);
   state.context = { page_location: url, page_path: parsed.pathname + parsed.search, page_title: title, page_referrer: previous, page_type: pageType(parsed.pathname) };
   // Update the DOM and gtag defaults before Enhanced Measurement's history callback.
-  document.title = title;
+  // A head-first ad bootstrap knows the SSG title before its element is parsed.
+  // Do not create a second <title>; React navigation still updates the real one.
+  if (updateDocumentTitle) document.title = title;
   command('set', state.context);
   if (!state.initialized) {
     state.initialized = true;

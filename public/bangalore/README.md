@@ -26,6 +26,14 @@ Peenya and Dobbaspet photos were added after reviewing 12 candidate photographs.
 
 ## Micromarket map
 
+The Peenya ad page uses its own three `streets-v12` images, rendered on
+2026-10-14 under `peenya/`. They center the Peenya–Nelamangala–Dobbaspet corridor
+at 77.385, 13.13: desktop/tablet zoom 10.15 and mobile zoom 9.3. Image dimensions,
+aspect ratios, attribution and interactions match the city map. Cameras and
+approximate area coordinates live in `src/data/micromarket-ad-pages/peenya.json`;
+marker positions are projected from those cameras. Regenerate with
+`npm run maps:ad-pages -- peenya` using the configured `MAPBOX_ACCESS_TOKEN`.
+
 The full-width micromarket map uses local static Mapbox `streets-v12` road basemaps rendered on 2026-10-01, matching the PPT generator's overview-map style. Mapbox and OpenStreetMap attribution is retained in each image. The existing map-rendering credential was used only during asset generation; the page makes no Mapbox requests and contains no token.
 
 | File | Image pixels | Mapbox viewport | Zoom | Center (longitude, latitude) |

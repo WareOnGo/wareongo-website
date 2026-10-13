@@ -3,7 +3,7 @@ import { ChevronDown, LogOut, Menu, User } from 'lucide-react';
 import { useLocation, useNavigation } from 'react-router-dom';
 import ContactFormDialog from '@/components/DeferredContactFormDialog';
 import { useAuth } from '@/context/AuthContext';
-import { trackEvent } from '@/lib/analytics';
+import { trackEvent, type AnalyticsParams } from '@/lib/analytics';
 import { useScrollHeader } from '@/hooks/useScrollHeader';
 import type { LocationCategory } from '@/lib/locationNavigation';
 import { NAVIGATION_DESKTOP_QUERY, PRIMARY_LINKS, WAREHOUSE_REQUEST } from '@/data/navigation';
@@ -16,7 +16,11 @@ import './navigation/navigation.css';
 type Variant = 'desktop' | 'mobile';
 type Panel = 'locations' | 'account' | null;
 
-const Navbar = ({ scrollLocked = false, contactDialogClassName }: { scrollLocked?: boolean; contactDialogClassName?: string }) => {
+const Navbar = ({ scrollLocked = false, contactDialogClassName, contactPage }: {
+  scrollLocked?: boolean;
+  contactDialogClassName?: string;
+  contactPage?: { source: string; description: string; success: string; analytics: AnalyticsParams };
+}) => {
   const id = useId();
   const { user, logout, isAuthenticated } = useAuth();
   const location = useLocation();
@@ -191,9 +195,9 @@ const Navbar = ({ scrollLocked = false, contactDialogClassName }: { scrollLocked
         event.preventDefault();
         transferringToContact.current = false;
         (window.matchMedia(NAVIGATION_DESKTOP_QUERY).matches ? contactButton : mobileButton).current?.focus({ preventScroll: true });
-      }} title="Contact Us" description="Share your details, and we'll get back to you!"
-      successMessage="We will reach out within 2 hours." source="homepage" requireCompanyName
-      analyticsContext={{ placement: 'header', navigation_variant: contactVariant }} />
+      }} title="Contact Us" description={contactPage?.description ?? "Share your details, and we'll get back to you!"}
+      successMessage={contactPage?.success ?? "We will reach out within 2 hours."} source={contactPage?.source ?? 'homepage'} requireCompanyName
+      analyticsContext={{ placement: 'header', navigation_variant: contactVariant, ...contactPage?.analytics }} />
   </header>;
 };
 

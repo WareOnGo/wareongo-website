@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type CSSProperties, type HTMLAttributes } from 'react';
 import { ArrowRight, MapPin, X } from 'lucide-react';
-import { BANGALORE_MAP_VIEWS, type BangaloreMapArea, type BangaloreMapScope } from '@/data/bangaloreMicromarketMap';
+import { BANGALORE_MAP_VIEWS, type BangaloreMapArea, type BangaloreMapScope, type BangaloreMapViews } from '@/data/bangaloreMicromarketMap';
 import type { AnalyticsParams } from '@/lib/analytics';
 import type { AdPageContent } from '@/data/adPages';
 import { adImageSources, MARKET_IMAGE_SIZES } from '@/lib/adImageSources';
@@ -9,14 +9,17 @@ interface Location extends BangaloreMapArea {
   count: number | null;
 }
 
-export default function BangaloreMicromarkets({ locations, onContact, content, scope, onScopeChange }: {
+export default function BangaloreMicromarkets({ locations, onContact, content, scope, onScopeChange, showScopeToggle = true, mapViews, mapAlt }: {
   content: AdPageContent;
   locations: Location[];
   onContact: (trigger: HTMLButtonElement, context: AnalyticsParams) => void;
   scope: BangaloreMapScope;
   onScopeChange: (scope: BangaloreMapScope) => void;
+  showScopeToggle?: boolean;
+  mapViews?: BangaloreMapViews;
+  mapAlt?: string;
 }) {
-  const camera = BANGALORE_MAP_VIEWS[scope];
+  const camera = mapViews ?? BANGALORE_MAP_VIEWS[scope];
   const visibleLocations = locations.filter(location => location.scope === scope);
   const [active, setActive] = useState<string | null>(null);
   const [pinned, setPinned] = useState<string | null>(null);
@@ -174,7 +177,7 @@ export default function BangaloreMicromarkets({ locations, onContact, content, s
     <section id="locations" className="bangalore-landing__locations bangalore-landing__container" aria-labelledby="bangalore-locations-title">
       <div className="bangalore-landing__section-heading bangalore-landing__map-heading">
         <h2 id="bangalore-locations-title" className="bangalore-landing__section-title">{content.copy.locationsHeading}</h2>
-        <div className="bangalore-landing__map-views" role="group" aria-label="Map area view">
+        {showScopeToggle && <div className="bangalore-landing__map-views" role="group" aria-label="Map area view">
           {(['belts', 'city'] as const).map(view => (
             <button key={view} type="button" aria-pressed={scope === view} aria-controls="bangalore-area-map bangalore-mobile-markets bangalore-area-fit" onClick={() => {
               clearTimers();
@@ -184,16 +187,16 @@ export default function BangaloreMicromarkets({ locations, onContact, content, s
               onScopeChange(view);
             }}>{view === 'belts' ? 'Warehouse Belts' : 'City Areas'}</button>
           ))}
-        </div>
+        </div>}
       </div>
-      <figure id="bangalore-area-map" ref={mapRef} className="bangalore-landing__location-map" aria-label="Warehouse listings by micromarket in Bangalore">
+      <figure id="bangalore-area-map" ref={mapRef} className="bangalore-landing__location-map" aria-label={content.copy.locationsHeading}>
         <div className="bangalore-landing__map-stage" data-scope={scope} onPointerDown={event => {
           if (active && !(event.target as Element).closest('.bangalore-landing__map-marker')) dismiss(active);
         }}>
           <picture key={scope}>
             <source media="(max-width: 599px)" srcSet={camera.mobile.src} width={camera.mobile.width * 2} height={camera.mobile.height * 2} />
             <source media="(max-width: 1199px)" srcSet={camera.tablet.src} width={camera.tablet.width * 2} height={camera.tablet.height * 2} />
-            <img src={camera.desktop.src} alt={scope === 'belts' ? "Road map of Bangalore and its warehouse belts." : "Road map of Bangalore's city neighbourhoods."} width={camera.desktop.width * 2} height={camera.desktop.height * 2} loading="lazy" decoding="async" />
+            <img src={camera.desktop.src} alt={mapAlt ?? (scope === 'belts' ? "Road map of Bangalore and its warehouse belts." : "Road map of Bangalore's city neighbourhoods.")} width={camera.desktop.width * 2} height={camera.desktop.height * 2} loading="lazy" decoding="async" />
           </picture>
           <span className="bangalore-landing__image-tag"><MapPin size={14} aria-hidden="true" />{content.copy.mapLabel}</span>
           <div className="bangalore-landing__mobile-map-labels">
@@ -240,7 +243,7 @@ export default function BangaloreMicromarkets({ locations, onContact, content, s
                       <h3 id={`${cardId}-title`}>{expanded ? location.title ?? location.canonical : location.chipLabel ?? location.canonical}</h3>
                       <p className="bangalore-landing__map-card-count">{expanded ? cardCaption : chipCaption}</p>
                     </div>
-                    <button type="button" className="bangalore-landing__map-card-link" aria-haspopup="dialog" aria-label={`Enquire about warehouses in ${location.canonical}`} disabled={!expanded} onClick={event => enquire(event.currentTarget, location)}>
+                    <button type="button" className="bangalore-landing__map-card-link" aria-haspopup="dialog" aria-label={`${content.copy.locationsCta} about warehouses in ${location.canonical}`} disabled={!expanded} onClick={event => enquire(event.currentTarget, location)}>
                       {content.copy.locationsCta}<ArrowRight size={16} aria-hidden="true" />
                     </button>
                     <button type="button" className="bangalore-landing__map-card-close" aria-label={`Close ${location.canonical} preview`} disabled={!expanded} onClick={() => dismiss(location.slug, true)}><X size={16} aria-hidden="true" /></button>
@@ -269,7 +272,7 @@ export default function BangaloreMicromarkets({ locations, onContact, content, s
                 <h3>{location.title ?? location.canonical}</h3>
                 {location.caption && <p>{location.caption}</p>}
               </div>
-              <button type="button" className="bangalore-landing__mobile-market-link" aria-haspopup="dialog" aria-label={`Enquire about warehouses in ${location.canonical}`} onClick={event => enquire(event.currentTarget, location, 'bangalore_locations')}>
+              <button type="button" className="bangalore-landing__mobile-market-link" aria-haspopup="dialog" aria-label={`${content.copy.locationsCta} about warehouses in ${location.canonical}`} onClick={event => enquire(event.currentTarget, location, 'bangalore_locations')}>
                 <span>{content.copy.locationsCta}<ArrowRight size={16} aria-hidden="true" /></span>
               </button>
             </article>

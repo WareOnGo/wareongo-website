@@ -7,6 +7,7 @@ import { trackEvent, type AnalyticsParams } from '@/lib/analytics';
 import { warehousePath } from '@/lib/warehouseSlug';
 import type { AdPageContent } from '@/data/adPages';
 import { adImageSources, AVAILABLE_IMAGE_SIZES } from '@/lib/adImageSources';
+import type { AdLandingWarehouse } from '@/data/micromarketAdPages';
 
 const SIZE_FILTERS = [
   { id: 'all', labelKey: 'filterAll', min: 0, max: Infinity },
@@ -16,10 +17,12 @@ const SIZE_FILTERS = [
 ] as const;
 type SizeFilter = (typeof SIZE_FILTERS)[number]['id'];
 
-export default function BangaloreAvailableListings({ onContact, totalListings, content }: {
+export default function BangaloreAvailableListings({ onContact, totalListings, content, inventory, marketSlug }: {
   content: AdPageContent;
   onContact: (trigger: HTMLButtonElement, context: AnalyticsParams) => void;
   totalListings?: number;
+  inventory?: AdLandingWarehouse[];
+  marketSlug?: string;
 }) {
   const [filter, setFilter] = useState<SizeFilter>('all');
   const track = useRef<HTMLDivElement>(null);
@@ -27,15 +30,16 @@ export default function BangaloreAvailableListings({ onContact, totalListings, c
   const heading = copy.availableHeading;
   const sizeFilters = SIZE_FILTERS.map(option => ({ ...option, label: copy[option.labelKey] }));
   const band = sizeFilters.find(option => option.id === filter)!;
-  const listings = filter === 'all'
+  const listings = inventory ? inventory.filter(listing => listing.size >= band.min && listing.size < band.max).slice(0, 6) : filter === 'all'
     ? BANGALORE_ALL_SIZES_IDS.flatMap(id => BANGALORE_AVAILABLE_WAREHOUSES.filter(listing => listing.id === id))
     : BANGALORE_AVAILABLE_WAREHOUSES.filter(listing => listing.size >= band.min && listing.size < band.max);
   const listContext: AnalyticsParams = {
     list_id: 'bangalore_available', placement: 'bangalore_available', content_type: 'warehouse_size', content_id: filter,
+    market_slug: marketSlug,
     page: 1, page_size: 6, min_sqft: band.min || undefined,
     max_sqft: Number.isFinite(band.max) ? band.max - 1 : undefined, filter_count: filter === 'all' ? 0 : 1,
   };
-  useListingResults({ ...listContext, result_count: listings.length, total_count: BANGALORE_AVAILABLE_WAREHOUSES.length, result_status: 'success' });
+  useListingResults({ ...listContext, result_count: listings.length, total_count: inventory?.length ?? BANGALORE_AVAILABLE_WAREHOUSES.length, result_status: 'success' });
 
   return (
     <section className="bangalore-landing__available bangalore-landing__container" aria-labelledby="bangalore-available-title">
@@ -74,12 +78,13 @@ export default function BangaloreAvailableListings({ onContact, totalListings, c
             price={listing.price}
             ceilingHeight={listing.ceilingHeight}
             warehouseType={listing.warehouseType}
+            warehouseTypeLabel={marketSlug && /^shed$/i.test(listing.warehouseType ?? '') ? 'Shed' : undefined}
             numberOfDocks={listing.numberOfDocks}
-            fireCompliance={listing.fireCompliance}
-            image={content.images[`warehouse-${listing.id}`].url}
-            imageFallbacks={[listing.imageFallback]}
-            imageAlt={content.images[`warehouse-${listing.id}`].alt}
-            imageSrcSet={adImageSources(content.images[`warehouse-${listing.id}`].url, AVAILABLE_IMAGE_SIZES).srcSet}
+            fireCompliance={listing.fireCompliance ?? null}
+            image={content.images[`warehouse-${listing.id}`]?.url ?? listing.image}
+            imageFallbacks={[listing.imageFallback ?? null]}
+            imageAlt={content.images[`warehouse-${listing.id}`]?.alt ?? `Warehouse for rent in ${listing.locality}`}
+            imageSrcSet={adImageSources(content.images[`warehouse-${listing.id}`]?.url ?? listing.image, AVAILABLE_IMAGE_SIZES).srcSet}
             imageSizes={AVAILABLE_IMAGE_SIZES}
             href={warehousePath({ ...listing, city: 'Bengaluru' })}
             index={index}
@@ -89,6 +94,7 @@ export default function BangaloreAvailableListings({ onContact, totalListings, c
           />
         ))}
       </div>
+      {!listings.length && <p>No spaces in this size band are currently listed. Tell us what you need and we’ll help you find a match.</p>}
       <div className="bangalore-landing__available-footer">
         <p>{copy.availableFooter.split('{listings}').join( totalListings ? `all ${totalListings.toLocaleString('en-IN')} listings` : 'Bangalore’s listings')}</p>
         <button

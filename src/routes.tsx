@@ -155,6 +155,18 @@ export const routes: RouteRecord[] = [
             entry: "src/pages/BangaloreAdPreview.tsx",
             loader: bangaloreLoader,
           },
+          {
+            path: "bangalore/:micromarket",
+            lazy: lazyDefault(() => import("./pages/MicromarketLanding")),
+            // SSG must discover the shared renderer's CSS before hydration;
+            // the thin route wrapper has no stylesheet of its own.
+            entry: "src/pages/BangaloreLanding.tsx",
+            loader: async args => (await import('./loaders/micromarketLandingLoader')).micromarketLandingLoader(args),
+            getStaticPaths: async () => {
+              const { MICROMARKET_AD_PAGES, micromarketAdPath } = await import('./data/micromarketAdPages');
+              return MICROMARKET_AD_PAGES.map(page => micromarketAdPath(page.slug));
+            },
+          },
         ],
       },
     ],

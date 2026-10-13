@@ -21,6 +21,7 @@ export default function BangaloreMarketGuide({ content }: { content: AdPageConte
               {content.rentGuide.rows.map(({ area, rent }) => (
                 <tr key={area}><th scope="row">{area}</th><td>{rent}</td></tr>
               ))}
+              {!content.rentGuide.rows.length && <tr><td colSpan={2}>Share your requirements for current asking rents.</td></tr>}
             </tbody>
           </table>
         </div>

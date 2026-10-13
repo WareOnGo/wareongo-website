@@ -6,24 +6,27 @@ import type { AnalyticsParams } from '@/lib/analytics';
 import { warehousePath } from '@/lib/warehouseSlug';
 import type { AdPageContent } from '@/data/adPages';
 import { adImageSources, FEATURED_IMAGE_SIZES } from '@/lib/adImageSources';
+import type { AdLandingWarehouse } from '@/data/micromarketAdPages';
 
 interface BangaloreFeaturedListingsProps {
   content: AdPageContent;
   onContact: (trigger: HTMLButtonElement, context: AnalyticsParams) => void;
+  listings?: AdLandingWarehouse[];
+  marketSlug?: string;
 }
 
 // Curated from the public listing details. Image sources and listing IDs are
 // recorded in public/bangalore/README.md, alongside the location card photos.
-const FEATURED_LISTINGS = [
+const FEATURED_LISTINGS: AdLandingWarehouse[] = [
   { id: 967, locality: 'Hoskote', address: 'Karapanahalli, Hoskote-Chintamani Road', size: 189000, price: 28.5, ceilingHeight: 40 },
   { id: 408, locality: 'Devanahalli', address: 'Devanahalli', size: 100000, price: 33, ceilingHeight: 40 },
   { id: 1226, locality: 'Jigani', address: 'Jigani-Anekal Road', size: 100183, price: 30, ceilingHeight: 40 },
-];
+].map(listing => ({ ...listing, warehouseType: 'PEB' }));
 
-function FeaturedWarehouseCard({ listing, index, onContact, content }: BangaloreFeaturedListingsProps & { listing: (typeof FEATURED_LISTINGS)[number]; index: number }) {
+function FeaturedWarehouseCard({ listing, index, onContact, content, listings = FEATURED_LISTINGS, marketSlug }: BangaloreFeaturedListingsProps & { listing: AdLandingWarehouse; index: number }) {
   const image = content.images[`featured-${listing.id}`];
-  const sources = adImageSources(image.url, FEATURED_IMAGE_SIZES);
-  const context = { list_id: 'bangalore_featured', placement: 'bangalore_featured', warehouse_id: listing.id, list_position: index + 1, page: 1, page_size: FEATURED_LISTINGS.length };
+  const sources = adImageSources(image?.url ?? listing.image, FEATURED_IMAGE_SIZES);
+  const context = { list_id: 'bangalore_featured', placement: 'bangalore_featured', market_slug: marketSlug, warehouse_id: listing.id, list_position: index + 1, page: 1, page_size: listings.length };
   return (
     <WarehouseCard
       id={listing.id}
@@ -33,12 +36,17 @@ function FeaturedWarehouseCard({ listing, index, onContact, content }: Bangalore
       size={listing.size}
       price={listing.price}
       ceilingHeight={listing.ceilingHeight}
-      warehouseType="PEB"
-      fireCompliance={null}
+      warehouseType={listing.warehouseType}
+      warehouseTypeLabel={marketSlug && /^shed$/i.test(listing.warehouseType ?? '') ? 'Shed' : undefined}
+      fireCompliance={listing.fireCompliance ?? null}
+      numberOfDocks={listing.numberOfDocks}
       authoredImage={image}
+      image={sources.src}
+      imageFallbacks={[listing.imageFallback ?? null]}
+      imageAlt={image?.alt ?? `Warehouse for rent in ${listing.locality}`}
       imageSrcSet={sources.srcSet}
       imageSizes={sources.sizes}
-      href={warehousePath({ ...listing, warehouseType: 'PEB', city: 'Bengaluru' })}
+      href={warehousePath({ ...listing, city: 'Bengaluru' })}
       index={index}
       priority={index === 0}
       analyticsContext={context}
@@ -47,10 +55,10 @@ function FeaturedWarehouseCard({ listing, index, onContact, content }: Bangalore
   );
 }
 
-export default function BangaloreFeaturedListings({ onContact, content }: BangaloreFeaturedListingsProps) {
+export default function BangaloreFeaturedListings({ onContact, content, listings = FEATURED_LISTINGS, marketSlug }: BangaloreFeaturedListingsProps) {
   const track = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ start: true, end: true });
-  useListingResults({ list_id: 'bangalore_featured', placement: 'bangalore_featured', page: 1, page_size: FEATURED_LISTINGS.length, result_count: FEATURED_LISTINGS.length, total_count: FEATURED_LISTINGS.length, result_status: 'success' });
+  useListingResults({ list_id: 'bangalore_featured', placement: 'bangalore_featured', market_slug: marketSlug, page: 1, page_size: listings.length, result_count: listings.length, total_count: listings.length, result_status: 'success' });
 
   useEffect(() => {
     const element = track.current;
@@ -83,8 +91,9 @@ export default function BangaloreFeaturedListings({ onContact, content }: Bangal
         </div>
       </div>
       <div ref={track} id="bangalore-featured-grid" className="bangalore-landing__featured-grid" role="region" aria-label="Featured warehouse cards" tabIndex={position.start && position.end ? undefined : 0}>
-        {FEATURED_LISTINGS.map((listing, index) => <FeaturedWarehouseCard key={listing.id} listing={listing} index={index} onContact={onContact} content={content} />)}
+        {listings.map((listing, index) => <FeaturedWarehouseCard key={listing.id} listing={listing} listings={listings} index={index} onContact={onContact} content={content} marketSlug={marketSlug} />)}
       </div>
+      {!listings.length && <p>Share your requirements for current spaces in {content.name}.</p>}
     </section>
   );
 }

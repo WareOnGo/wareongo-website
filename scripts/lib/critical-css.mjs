@@ -22,6 +22,19 @@ export function createCriticalCssProcessor({ path = 'dist', ...overrides } = {})
 export function prioritizeAdPageHtml(route, html) {
   // Ordinary SSG routes omit the leading slash; explicitly included routes
   // and dynamic paths may include it. Both must get the same production HTML.
-  if (route.replace(/^\/+|\/+$/g, '') !== 'bangalore') return html;
-  return html.replace(/<script type="module" async(?:="")?/g, '<script type="module" defer fetchpriority="low"');
+  const path = route.replace(/^\/+|\/+$/g, '');
+  if (!/^bangalore(?:\/[a-z0-9-]+)?$/.test(path)) return html;
+  let result = html.replace(/<script type="module" async(?:="")?/g, '<script type="module" defer fetchpriority="low"');
+  if (path !== 'bangalore') {
+    const title = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1];
+    const bootstrap = html.match(/<script\b[^>]*\bid="wareongo-analytics-bootstrap"[^>]*>[\s\S]*?<\/script>/i)?.[0];
+    if (title && bootstrap) {
+      const early = bootstrap.replace('<script', `<script data-page-title="${title.replace(/"/g, '&quot;').replace(/</g, '&lt;')}"`);
+      result = result.replace(bootstrap, '').replace(/<head\b[^>]*>/i, head => `${head}${early}`);
+    }
+  }
+  // Encoding must precede large preloads, inline CSS and the analytics entry.
+  const charset = result.match(/<meta\b[^>]*\bcharset\s*=[^>]*>/i)?.[0];
+  if (charset) result = result.replace(charset, '').replace(/<head\b[^>]*>/i, head => `${head}${charset}`);
+  return result;
 }

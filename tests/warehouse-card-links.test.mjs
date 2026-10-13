@@ -112,13 +112,15 @@ test('gallery and enquiry remain independent controls beside the property link',
 });
 
 test('landing-page card actions use native dialog buttons without property links', () => {
-  const root = parseFragment(renderCard({ ...fixture, images: [], onContact: () => {} }));
+  const root = parseFragment(renderCard({ ...fixture, images: [], micromarket: ['Peenya'], onContact: () => {} }));
   assert.equal(elements(root, 'a').length, 0, 'an enquiry-only card must not navigate to a listing');
   const buttons = elements(root, 'button');
   const title = buttons.find(button => attr(button, 'class') === 'warehouse-card__link');
-  assert.equal(textOf(title), fixture.address);
+  assert.equal(textOf(title), 'Peenya');
   assert.equal(attr(title, 'aria-haspopup'), 'dialog');
   assert.ok(attr(title, 'aria-label').includes(String(fixture.id)));
+  assert.ok(attr(title, 'aria-label').includes(textOf(title)), 'the accessible name must include the visible micromarket');
+  assert.ok(attr(title, 'aria-label').includes(fixture.address));
   assert.ok(buttons.some(button => textOf(button) === 'Get details' && attr(button, 'aria-haspopup') === 'dialog'));
   assertIndependentControls(root);
 });
@@ -187,6 +189,7 @@ test('approved card leads with area then decimal rent, and keeps the full locali
   assert.deepEqual(elements(root, 'dt').map(textOf), ['Carpet Area', 'Rent / Month']);
   assert.deepEqual(elements(root, 'dd').map(textOf), ['1,25,000 sqft', '₹26.25 /sqft']);
   assert.equal(textOf(elements(root, 'a')[0]), locality);
+  assert.ok(attr(elements(root, 'a')[0], 'aria-label').includes(locality));
   assert.deepEqual(elements(root, 'li').map(textOf), ['30 ft Clear Height', '4 Docks', 'Fire NOC: Yes']);
   assert.equal(elements(root, 'button').filter(node => textOf(node) === 'Raise enquiry').length, 1);
   assert.equal(elements(root, 'button').length, 3, 'only previous, next and enquiry controls');

@@ -42,6 +42,32 @@
 .bangalore-landing__hero-copy { grid-area: intro; min-width: 0; }
 .bangalore-landing__headline { margin: 0; font-size: var(--landing-text-hero); font-weight: 700; line-height: 1.12; letter-spacing: -.04em; }
 .bangalore-landing__headline > span { display: block; color: var(--landing-accent); }
+.bangalore-landing[data-micromarket] .bangalore-landing__headline { font-size: clamp(32px, calc(3.5vw - 3px), 48px); text-wrap: balance; }
+.bangalore-landing[data-micromarket] .bangalore-landing__headline > span { display: inline; }
+.bangalore-landing__hero-summary { container: ad-summary / inline-size; margin-top: 12px; font-size: var(--landing-text-sm); font-weight: 600; line-height: var(--landing-leading-ui); }
+.bangalore-landing__callback-note { container: ad-callback / inline-size; margin-top: 12px; color: var(--landing-muted); font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); text-align: center; }
+.bangalore-landing__note-compact { display: none; }
+/* Switch copy by the space available, including the narrow desktop form. */
+@container ad-summary (max-width: 639px) {
+  [data-compact] > .bangalore-landing__note-full { display: none; }
+  [data-compact] > .bangalore-landing__note-compact { display: inline; font-size: var(--landing-text-xs); }
+}
+@container ad-summary (max-width: 319px) {
+  [data-compact] > .bangalore-landing__note-compact { letter-spacing: -.02em; }
+}
+@container ad-callback (max-width: 499px) {
+  [data-compact] > .bangalore-landing__note-full { display: none; }
+  [data-compact] > .bangalore-landing__note-compact { display: inline; }
+}
+
+/* Micromarket additions use the city page's spacing, cards and breakpoints. */
+.bangalore-landing__area-card > h3 { padding: 20px; border-bottom: var(--landing-border); font-size: var(--landing-text-card); font-weight: 600; line-height: var(--landing-leading-title); }
+.bangalore-landing__area-card > p { margin: 0; padding: 16px 20px 20px; text-wrap: pretty; }
+.bangalore-landing__area-card > p strong { font-weight: 600; }
+.bangalore-landing__whatsapp { position: fixed; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 40; display: grid; place-items: center; width: 52px; height: 52px; border: var(--landing-interactive-border); border-radius: 50%; background: var(--landing-card); color: var(--landing-ink); }
+.bangalore-landing__whatsapp > svg { width: 28px; height: 28px; fill: currentColor; }
+.bangalore-landing__whatsapp:hover { background: var(--landing-tint); border-color: var(--landing-accent); }
+.bangalore-landing__whatsapp:focus-visible { outline: var(--landing-focus-width) solid var(--landing-accent); outline-offset: 3px; }
 
 .bangalore-landing__featured { grid-area: featured; min-width: 0; }
 .bangalore-landing__featured-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
@@ -301,12 +327,6 @@
 .bangalore-landing .wog-nav-page-links .wog-nav-item { color: var(--landing-muted); font-size: var(--landing-text-sm); }
 .bangalore-landing .wog-nav-page-links .wog-nav-item:is(:hover, [aria-expanded=true], [aria-current=page]) { color: var(--landing-ink); }
 .bangalore-landing .wog-nav-contact { border-radius: var(--landing-control-radius); color: var(--landing-card); }
-.bangalore-landing footer { background: var(--landing-ink); color: var(--landing-card); font-size: var(--landing-text-sm); line-height: var(--landing-leading-body); }
-.bangalore-landing footer > .container { width: min(100% - 2 * var(--landing-gutter), var(--landing-content-width)); max-width: var(--landing-content-width); padding-inline: 0; }
-.bangalore-landing footer h2 { font-size: var(--landing-text-card); font-weight: 600; line-height: var(--landing-leading-title); }
-.bangalore-landing footer :is(.text-gray-300, .text-gray-400) { color: var(--landing-inverse-muted); }
-.bangalore-landing footer .border-t { border-color: var(--landing-inverse-line); }
-.bangalore-landing footer :is(a, button):focus-visible { outline: var(--landing-focus-width) solid var(--landing-card); outline-offset: 3px; }
 
 /* Same form language as the hero, including the navbar's portaled contact form. */
 .bangalore-landing-dialog[role="dialog"] { width: min(460px, calc(100% - 32px)); padding: 32px; border: var(--landing-interactive-border); border-radius: var(--landing-radius); background: var(--landing-card); color: var(--landing-ink); font-family: var(--landing-font); font-size: var(--landing-text-body); line-height: var(--landing-leading-body); font-synthesis: none; box-shadow: none; }
@@ -326,6 +346,7 @@
 
 @media (min-width: 1024px) {
   .bangalore-landing__hero { padding-top: 66px; }
+  .bangalore-landing[data-micromarket] .bangalore-landing__hero-copy { padding-top: 16px; }
   .bangalore-landing__featured { align-self: end; }
   .bangalore-landing__featured .warehouse-card__metric strong { font-size: var(--landing-text-sm); }
   .bangalore-landing__featured .warehouse-card__place h2 { font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); }
@@ -373,6 +394,9 @@
 }
 
 @media (max-width: 767px) {
+  .bangalore-landing[data-micromarket] .bangalore-landing__headline { max-width: 14em; font-size: clamp(22px, 7vw, 30px); }
+  .bangalore-landing[data-micromarket] .bangalore-landing__map-heading .bangalore-landing__section-title { font-size: clamp(16px, 5vw, 20px); }
+  .bangalore-landing__area-card > h3, .bangalore-landing__area-card > p { padding: 12px; }
   .bangalore-landing__area-fit-grid > [data-mobile-active="false"] { display: none; }
   .bangalore-landing__guide-table :is(th, td), .bangalore-landing__guide-table caption { padding: 12px; }
   .bangalore-landing__rent-guide-table th:last-child { width: 44%; }

@@ -29,6 +29,8 @@ interface WarehouseCardProps {
   micromarket?: string[] | null;
   postalCode?: string | null;
   warehouseType?: string | null;
+  /** An explicit label for an additional construction type on an ad page. */
+  warehouseTypeLabel?: string;
   updatedAt?: string | null;
   size: number;
   ceilingHeight: number | null;
@@ -58,7 +60,7 @@ function UpdatedBadge({ updatedAt }: { updatedAt?: string | null }) {
 
 const WarehouseCard: React.FC<WarehouseCardProps> = ({
   id, image, images = [], imageFallbacks = [], coverImage, imageAlt, imageSrcSet, imageSizes, authoredImage, address, location,
-  micromarket, postalCode, warehouseType, updatedAt, size, ceilingHeight,
+  micromarket, postalCode, warehouseType, warehouseTypeLabel, updatedAt, size, ceilingHeight,
   numberOfDocks, price, fireCompliance, href, index = 0,
   priority = index === 0, analyticsContext = {}, onContact,
 }) => {
@@ -69,7 +71,8 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
   // still handles narrower cards; the title and accessible name retain it all.
   const placeLabel = place && place.primary === address?.trim() && place.primary.length > 28
     ? `${place.primary.slice(0, 27).trimEnd()}…` : place?.primary;
-  const construction = cardConstructionLabel(warehouseType);
+  const placeDescription = [...new Set([place?.primary, address, place?.city, location.state].filter(Boolean))].join(', ');
+  const construction = warehouseTypeLabel ?? cardConstructionLabel(warehouseType);
   const altText = authoredImage?.alt || imageAlt || `${number.format(size)} sqft warehouse${place ? ` in ${[place.city, location.state].filter(Boolean).join(', ')}` : ''}`;
   const [interacting, setInteracting] = useState(false);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -171,14 +174,14 @@ const WarehouseCard: React.FC<WarehouseCardProps> = ({
                 {onContact ? <button
                   type="button"
                   aria-haspopup="dialog"
-                  aria-label={`Enquire about warehouse ${id}: ${[address, place?.city, location.state].filter(Boolean).join(', ')}`}
+                  aria-label={`Enquire about warehouse ${id}: ${placeDescription}`}
                   onClick={event => onContact(event.currentTarget, { ...listingContext, label: `Warehouse ${id}`, source: enquirySource })}
                   className="warehouse-card__link"
                 >
                   <span className={place ? undefined : 'sr-only'}>{placeLabel ?? `Enquire about warehouse ${id}`}</span>
                 </button> : <Link
                   to={href}
-                  aria-label={`View warehouse ${id}: ${[address, place?.city, location.state].filter(Boolean).join(', ')}`}
+                  aria-label={`View warehouse ${id}: ${placeDescription}`}
                   onClick={() => trackEvent('listing_open', listingContext)}
                   onAuxClick={event => { if (event.button === 1) trackEvent('listing_open', listingContext); }}
                   className="warehouse-card__link"

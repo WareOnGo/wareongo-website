@@ -4,6 +4,28 @@ type Point = readonly [number, number];
 export type MapView = 'desktop' | 'tablet' | 'mobile';
 export type BangaloreMapScope = 'belts' | 'city';
 
+export interface BangaloreMapCamera {
+  width: number;
+  height: number;
+  zoom: number;
+  center: readonly number[];
+  src: string;
+}
+export type BangaloreMapViews = Record<MapView, BangaloreMapCamera>;
+
+/** Match the north-up, unpitched Web Mercator cameras used by Mapbox static images. */
+export function mapLabelsForCoordinates(point: readonly number[], views: BangaloreMapViews): Record<MapView, Point> {
+  const mercatorY = (latitude: number) => Math.log(Math.tan(Math.PI / 4 + latitude * Math.PI / 360));
+  const project = (camera: BangaloreMapCamera): Point => {
+    const worldSize = 512 * 2 ** camera.zoom;
+    return [
+      50 + (point[0] - camera.center[0]) / 360 * worldSize / camera.width * 100,
+      50 - (mercatorY(point[1]) - mercatorY(camera.center[1])) / (2 * Math.PI) * worldSize / camera.height * 100,
+    ];
+  };
+  return { desktop: project(views.desktop), tablet: project(views.tablet), mobile: project(views.mobile) };
+}
+
 // Cameras match the complete local streets-v12 images, including attribution.
 export const BANGALORE_MAP_VIEWS = {
   belts: {

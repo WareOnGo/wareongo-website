@@ -14,7 +14,9 @@ const FIELDS = [
 ] as const;
 
 /** The contact form's four fields and submission service, inline in the hero. */
-export default function BangaloreEnquiryForm({ copy, previewSubmitted = false }: { copy: AdPageCopy; previewSubmitted?: boolean }) {
+export default function BangaloreEnquiryForm({ copy, previewSubmitted = false, marketSlug = 'bengaluru', source = 'bangalore-landing', callbackNote, callbackNoteCompact }: {
+  copy: AdPageCopy; previewSubmitted?: boolean; marketSlug?: string; source?: string; callbackNote?: string; callbackNoteCompact?: string;
+}) {
   const [values, setValues] = useState(EMPTY_FIELDS);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -25,7 +27,7 @@ export default function BangaloreEnquiryForm({ copy, previewSubmitted = false }:
     form_id: 'bangalore_hero_enquiry',
     lead_type: 'warehouse_enquiry',
     placement: 'bangalore_hero',
-    market_slug: 'bengaluru',
+    market_slug: marketSlug,
   });
 
   useEffect(() => {
@@ -54,7 +56,7 @@ export default function BangaloreEnquiryForm({ copy, previewSubmitted = false }:
         companyName: values.companyName,
         phone: values.phone,
         email: values.email.trim() || null,
-        source: 'bangalore-landing',
+        source,
       });
       if (!result.success) {
         analytics.failure(result.errorCode || 'server');
@@ -110,6 +112,10 @@ export default function BangaloreEnquiryForm({ copy, previewSubmitted = false }:
               {submitting ? <><LoaderCircle size={17} className="animate-spin motion-reduce:animate-none" aria-hidden="true" /> Sending…</> : <>{copy.enquirySubmit} <ArrowRight size={17} aria-hidden="true" /></>}
             </button>
           </fieldset>
+          {callbackNote && <p className="bangalore-landing__callback-note" data-compact={callbackNoteCompact ? true : undefined}>
+            <span className="bangalore-landing__note-full">{callbackNote}</span>
+            {callbackNoteCompact && <span className="bangalore-landing__note-compact">{callbackNoteCompact}</span>}
+          </p>}
         </form>
       )}
     </section>
