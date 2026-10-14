@@ -55,17 +55,17 @@ test('development builds do not inject the production tag bootstrap', async () =
   assert.deepEqual(await dev.transformIndexHtml.handler(), []);
 });
 
-test('micromarket ads start one tag first in the head with resolved metadata before hydration', () => {
-  const html = prioritizeAdPageHtml('/bangalore/peenya/', `<!doctype html><html><head><title>Peenya &amp; WareOnGo</title><meta charset="UTF-8"></head><body><script id="wareongo-analytics-bootstrap">${tag.children}</script><script type="module" async src="/app.js"></script></body></html>`);
+for (const path of ['/bangalore/peenya', '/bangalore/hoskote', '/bangalore/nelamangala', '/bangalore/electronic-city-jigani-bommasandra', '/hosur']) test(path + ' starts one tag first in the head with resolved metadata before hydration', () => {
+  const html = prioritizeAdPageHtml(path + '/', `<!doctype html><html><head><title>Peenya &amp; WareOnGo</title><meta charset="UTF-8"></head><body><script id="wareongo-analytics-bootstrap">${tag.children}</script><script type="module" async src="/app.js"></script></body></html>`);
   assert.match(html, /<head><meta charset="UTF-8"><script data-page-title=/);
   assert.match(html, /defer fetchpriority="low"/);
-  const dom = new JSDOM(html, { url: 'https://wareongo.com/bangalore/peenya?utm_source=google&email=private%40example.com', runScripts: 'dangerously', virtualConsole: new VirtualConsole() });
+  const dom = new JSDOM(html, { url: 'https://wareongo.com' + path + '?utm_source=google&email=private%40example.com', runScripts: 'dangerously', virtualConsole: new VirtualConsole() });
   try {
     const command = calls(dom);
     assert.equal(command.filter(call => call[0] === 'config').length, 1);
     assert.equal(command[0][1].page_title, 'Peenya & WareOnGo');
     assert.equal(command[0][1].page_type, 'micromarket_ad');
-    assert.equal(command[0][1].page_location, 'https://wareongo.com/bangalore/peenya?utm_source=google');
+    assert.equal(command[0][1].page_location, 'https://wareongo.com' + path + '?utm_source=google');
     assert.equal(dom.window.document.querySelectorAll('title').length, 1);
     dom.window.eval(tag.children);
     assert.equal(calls(dom).filter(call => call[0] === 'config').length, 1);

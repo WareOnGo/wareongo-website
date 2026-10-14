@@ -1,0 +1,57 @@
+{
+  "mapScope": "belts",
+  "mapMarkets": [
+    "hoskote",
+    "whitefield",
+    "devanahalli"
+  ],
+  "inventory": {
+    "market": "Hoskote",
+    "exclude": [
+      "Narsapura"
+    ]
+  },
+  "rentMarkets": [
+    {
+      "slug": "hoskote",
+      "name": "Hoskote",
+      "label": "Hoskote",
+      "inventory": {
+        "market": "Hoskote",
+        "exclude": [
+          "Narsapura"
+        ]
+      }
+    },
+    {
+      "slug": "soukya-road",
+      "name": "Soukya Road",
+      "label": "Soukya Road",
+      "inventory": {
+        "market": "Hoskote",
+        "includeAll": [
+          "Soukya Road"
+        ]
+      }
+    },
+    {
+      "slug": "ekarajapura",
+      "name": "Ekarajapura",
+      "label": "Ekarajapura",
+      "inventory": {
+        "market": "Hoskote",
+        "includeAll": [
+          "Ekarajapura"
+        ]
+      }
+    },
+    {
+      "slug": "narsapura",
+      "name": "Narsapura",
+      "label": "Narsapura (next to Hoskote)",
+      "inventory": {
+        "market": "Narsapura"
+      }
+    }
+  ]
+}

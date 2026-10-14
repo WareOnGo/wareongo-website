@@ -31,7 +31,8 @@ function FeaturedWarehouseCard({ listing, index, onContact, content, listings = 
     <WarehouseCard
       id={listing.id}
       address={listing.address}
-      location={{ city: 'Bengaluru', state: 'Karnataka' }}
+      location={{ city: listing.city ?? 'Bengaluru', state: listing.state ?? 'Karnataka' }}
+      displayLocation={marketSlug ? { primary: listing.locality, city: listing.region ?? 'Bengaluru' } : undefined}
       micromarket={[listing.locality]}
       size={listing.size}
       price={listing.price}
@@ -46,7 +47,7 @@ function FeaturedWarehouseCard({ listing, index, onContact, content, listings = 
       imageAlt={image?.alt ?? `Warehouse for rent in ${listing.locality}`}
       imageSrcSet={sources.srcSet}
       imageSizes={sources.sizes}
-      href={warehousePath({ ...listing, city: 'Bengaluru' })}
+      href={warehousePath({ ...listing, city: listing.city ?? 'Bengaluru' })}
       index={index}
       priority={index === 0}
       analyticsContext={context}

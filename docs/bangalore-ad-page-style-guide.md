@@ -1,6 +1,6 @@
 # Bangalore ad page style guide
 
-Applies to `/bangalore`, `/bangalore/:micromarket`, their shared components,
+Applies to `/bangalore`, `/bangalore/:micromarket`, `/hosur`, their shared components,
 the real CMS preview, and contact dialogs opened from these pages. The shared visual roles now live in
 [`ui.tokens.css`](../src/styles/ui.tokens.css).
 [`BangaloreLanding.tokens.css`](../src/pages/BangaloreLanding.tokens.css) aliases
@@ -89,9 +89,11 @@ Use `--landing-text-body` and `--landing-text-control` for those roles instead
 of redefining type tokens inside individual sections.
 
 Micromarket ad headings use a compact variant for longer local copy: a balanced
-hero at 22–30px on phones and 32–48px on larger screens, with the location accent
-inline. Peenya targets three hero lines on phones and two on desktop. Its short
-map heading scales from 16–20px on phones to fit one line. The shared city page
+hero at 22–30px on phones and 32–44px on larger screens, scaled to the actual
+intro column with container units and the location accent inline. Peenya targets
+three hero lines on phones and two on desktop. Standard local map headings use
+“Explore [area] & Nearby” at 16–20px on phones to fit one line; custom CMS headings
+remain as authored at both sizes. The shared city page
 and other section headings retain the scale above.
 
 Micromarket configs can supply `heroSummaryCompact` and `callbackNoteCompact`.
@@ -162,7 +164,8 @@ font utilities. Avoid duplicate primary actions inside a card.
 - **Hero:** use “Warehouses for Rent in Bangalore” with no trailing period.
   The heading and featured cards stay in the left column on desktop;
   the four-field form stretches on the right to align its bottom with the
-  featured cards. Distribute the added height between form fields. The company logo
+  featured cards. Keep field gaps at 12px and distribute any added height above
+  and below the form body. The company logo
   carousel spans the full content width beneath both columns, with the heading
   “Trusted by 200+ Companies across India” above the logos on every screen size.
   On desktop, match the homepage trust line: 16px Montserrat, weight 700,
@@ -187,7 +190,10 @@ font utilities. Avoid duplicate primary actions inside a card.
   controls. On phones, retain the swipe track and accessible arrow controls.
   Use the shared 20px section-heading size; let the controls flow onto their
   own row only when the heading and both 44px controls cannot fit together.
-  Narrow desktop cards stack their metrics so values stay readable. Keep the
+  Narrow cards keep area and rent in equal columns, with one-line labels and
+  units below both figures at widths up to 225px. Desktop cards show up to two
+  whole specification badges, or one at widths up to 240px; allow longer badges
+  to wrap instead of clipping them. Keep the
   full three-card row within the desktop hero's first fold.
 - **Available listings:** use “Warehouses and Godowns in Bangalore” with no
   eyebrow. Keep 3 columns on desktop and 2 on tablet. Hide the entire

@@ -4,6 +4,7 @@ import { listingShouldRevalidate } from "./lib/listingSearch";
 import RouteErrorBoundary from "./components/RouteErrorBoundary";
 import { servicePages } from "./data/servicePages";
 import { servicePath } from "./data/serviceCatalog";
+import { isMicromarketAdPath } from "./data/micromarketAdRoutes";
 
 // SSG replaces these loaders with generated JSON readers in production. Keep
 // inventory fetching and build-only path discovery out of the entry bundle;
@@ -164,7 +165,7 @@ export const routes: RouteRecord[] = [
             loader: async args => (await import('./loaders/micromarketLandingLoader')).micromarketLandingLoader(args),
             getStaticPaths: async () => {
               const { MICROMARKET_AD_PAGES, micromarketAdPath } = await import('./data/micromarketAdPages');
-              return MICROMARKET_AD_PAGES.map(page => micromarketAdPath(page.slug));
+              return MICROMARKET_AD_PAGES.filter(page => page.citySlug === 'bengaluru').map(page => micromarketAdPath(page.slug, page.citySlug));
             },
           },
           {
@@ -172,6 +173,12 @@ export const routes: RouteRecord[] = [
             lazy: lazyDefault(() => import("./pages/MicromarketAdPreview")),
             entry: "src/pages/MicromarketAdPreview.tsx",
           },
+          ...(isMicromarketAdPath('/hosur') ? [{
+            path: "hosur",
+            lazy: lazyDefault(() => import("./pages/MicromarketLanding")),
+            entry: "src/pages/BangaloreLanding.tsx",
+            loader: async args => (await import('./loaders/micromarketLandingLoader')).micromarketLandingLoader({ ...args, params: { ...args.params, citySlug: 'hosur', micromarket: 'hosur' } }),
+          } satisfies RouteRecord] : []),
         ],
       },
     ],

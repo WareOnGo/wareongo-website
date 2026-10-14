@@ -1,0 +1,80 @@
+{
+  "mapScope": "belts",
+  "mapMarkets": [
+    "hosur-road",
+    "sarjapura"
+  ],
+  "map": {
+    "alt": "Map of Electronic City, Jigani, Bommasandra and nearby Sarjapur in south Bangalore",
+    "views": {
+      "desktop": { "width": 1260, "height": 540, "zoom": 11.5, "center": [77.727, 12.837], "src": "/bangalore/electronic-city-jigani-bommasandra/micromarkets-map.webp" },
+      "tablet": { "width": 810, "height": 540, "zoom": 11.1, "center": [77.727, 12.837], "src": "/bangalore/electronic-city-jigani-bommasandra/micromarkets-map-tablet.webp" },
+      "mobile": { "width": 360, "height": 360, "zoom": 10.4, "center": [77.727, 12.837], "src": "/bangalore/electronic-city-jigani-bommasandra/micromarkets-map-mobile.webp" }
+    },
+    "coordinates": {
+      "hosur-road": [77.684155, 12.817744],
+      "sarjapura": [77.786573, 12.859848]
+    }
+  },
+  "inventory": {
+    "includeAny": [
+      "Hosur Road",
+      "Jigani",
+      "Bommasandra"
+    ],
+    "exclude": [
+      "Attibele",
+      "Bannerghatta",
+      "Bannerghatta Road"
+    ]
+  },
+  "rentFloor": 22,
+  "rentMarkets": [
+    {
+      "slug": "electronic-city-stretch",
+      "name": "Electronic City stretch",
+      "label": "Electronic City stretch",
+      "inventory": {
+        "market": "Hosur Road",
+        "exclude": [
+          "Jigani",
+          "Bommasandra",
+          "Attibele",
+          "Bannerghatta",
+          "Bannerghatta Road"
+        ]
+      },
+      "floor": 22
+    },
+    {
+      "slug": "jigani",
+      "name": "Jigani",
+      "label": "Jigani",
+      "inventory": {
+        "market": "Hosur Road",
+        "includeAll": [
+          "Jigani"
+        ]
+      }
+    },
+    {
+      "slug": "bommasandra",
+      "name": "Bommasandra",
+      "label": "Bommasandra",
+      "inventory": {
+        "market": "Hosur Road",
+        "includeAll": [
+          "Bommasandra"
+        ]
+      }
+    },
+    {
+      "slug": "attibele",
+      "name": "Attibele",
+      "label": "Attibele (nearby, towards Hosur)",
+      "inventory": {
+        "market": "Attibele"
+      }
+    }
+  ]
+}

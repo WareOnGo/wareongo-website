@@ -72,7 +72,8 @@ export default function BangaloreAvailableListings({ onContact, totalListings, c
             key={`${filter}-${listing.id}`}
             id={listing.id}
             address={listing.address}
-            location={{ city: 'Bengaluru', state: 'Karnataka' }}
+            location={{ city: listing.city ?? 'Bengaluru', state: listing.state ?? 'Karnataka' }}
+            displayLocation={marketSlug ? { primary: listing.locality, city: listing.region ?? 'Bengaluru' } : undefined}
             micromarket={[listing.locality]}
             size={listing.size}
             price={listing.price}
@@ -86,7 +87,7 @@ export default function BangaloreAvailableListings({ onContact, totalListings, c
             imageAlt={content.images[`warehouse-${listing.id}`]?.alt ?? `Warehouse for rent in ${listing.locality}`}
             imageSrcSet={adImageSources(content.images[`warehouse-${listing.id}`]?.url ?? listing.image, AVAILABLE_IMAGE_SIZES).srcSet}
             imageSizes={AVAILABLE_IMAGE_SIZES}
-            href={warehousePath({ ...listing, city: 'Bengaluru' })}
+            href={warehousePath({ ...listing, city: listing.city ?? 'Bengaluru' })}
             index={index}
             priority={false}
             analyticsContext={{ ...listContext, list_position: index + 1 }}

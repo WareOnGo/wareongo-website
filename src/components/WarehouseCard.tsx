@@ -26,6 +26,8 @@ interface WarehouseCardProps {
   authoredImage?: { url: string; alt: string };
   address: string;
   location: { city: string; state: string };
+  /** Ad pages show a locality and region without exposing a street address. */
+  displayLocation?: { primary: string; city: string };
   micromarket?: string[] | null;
   postalCode?: string | null;
   warehouseType?: string | null;
@@ -59,19 +61,19 @@ function UpdatedBadge({ updatedAt }: { updatedAt?: string | null }) {
 }
 
 const WarehouseCard: React.FC<WarehouseCardProps> = ({
-  id, image, images = [], imageFallbacks = [], coverImage, imageAlt, imageSrcSet, imageSizes, authoredImage, address, location,
+  id, image, images = [], imageFallbacks = [], coverImage, imageAlt, imageSrcSet, imageSizes, authoredImage, address, location, displayLocation,
   micromarket, postalCode, warehouseType, warehouseTypeLabel, updatedAt, size, ceilingHeight,
   numberOfDocks, price, fireCompliance, href, index = 0,
   priority = index === 0, analyticsContext = {}, onContact,
 }) => {
   const listingContext = { ...analyticsContext, warehouse_id: id, warehouse_city: location.city, warehouse_state: location.state, size_sqft: size, price_per_sqft: price ?? undefined };
   const impressionRef = useListingImpression(listingContext);
-  const place = cardLocation({ ...location, address, micromarket, postalCode, markets: FILTER_MICROMARKETS });
+  const place = displayLocation ?? cardLocation({ ...location, address, micromarket, postalCode, markets: FILTER_MICROMARKETS });
   // Keep address fallbacks shorter than a full locality name. CSS ellipsis
   // still handles narrower cards; the title and accessible name retain it all.
   const placeLabel = place && place.primary === address?.trim() && place.primary.length > 28
     ? `${place.primary.slice(0, 27).trimEnd()}…` : place?.primary;
-  const placeDescription = [...new Set([place?.primary, address, place?.city, location.state].filter(Boolean))].join(', ');
+  const placeDescription = [...new Set([place?.primary, displayLocation ? null : address, place?.city, location.state].filter(Boolean))].join(', ');
   const construction = warehouseTypeLabel ?? cardConstructionLabel(warehouseType);
   const altText = authoredImage?.alt || imageAlt || `${number.format(size)} sqft warehouse${place ? ` in ${[place.city, location.state].filter(Boolean).join(', ')}` : ''}`;
   const [interacting, setInteracting] = useState(false);

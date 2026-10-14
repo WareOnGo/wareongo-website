@@ -1,0 +1,140 @@
+{
+  "mapScope": "belts",
+  "mapMarkets": [
+    "hosur",
+    "attibele",
+    "bommasandra"
+  ],
+  "inventory": {
+    "city": "Hosur"
+  },
+  "rentMarkets": [
+    {
+      "slug": "hosur",
+      "name": "Hosur",
+      "label": "Hosur",
+      "inventory": {
+        "city": "Hosur"
+      }
+    },
+    {
+      "slug": "attibele",
+      "name": "Attibele",
+      "label": "Attibele (next to Hosur)",
+      "inventory": {
+        "city": "Bengaluru",
+        "market": "Attibele"
+      }
+    }
+  ],
+  "map": {
+    "alt": "Road map of Hosur, Attibele and Bommasandra on NH-44.",
+    "credit": "© OpenFreeMap © OpenMapTiles, data © OpenStreetMap contributors",
+    "views": {
+      "desktop": {
+        "width": 1260,
+        "height": 540,
+        "zoom": 0,
+        "center": [
+          0,
+          0
+        ],
+        "src": "/hosur/hosur-map-desktop.webp"
+      },
+      "tablet": {
+        "width": 810,
+        "height": 540,
+        "zoom": 0,
+        "center": [
+          0,
+          0
+        ],
+        "src": "/hosur/hosur-map-tablet.webp"
+      },
+      "mobile": {
+        "width": 360,
+        "height": 360,
+        "zoom": 0,
+        "center": [
+          0,
+          0
+        ],
+        "src": "/hosur/hosur-map-mobile.webp"
+      }
+    }
+  },
+  "mapLocations": [
+    {
+      "slug": "hosur",
+      "canonical": "Hosur",
+      "scope": "belts",
+      "countSlug": "hosur",
+      "label": {
+        "desktop": [
+          63.7,
+          65.9
+        ],
+        "tablet": [
+          68.5,
+          63.8
+        ],
+        "mobile": [
+          79.4,
+          64.6
+        ]
+      },
+      "inventory": {
+        "city": "Hosur"
+      }
+    },
+    {
+      "slug": "attibele",
+      "canonical": "Attibele",
+      "scope": "belts",
+      "countSlug": "attibele",
+      "label": {
+        "desktop": [
+          53.2,
+          48.3
+        ],
+        "tablet": [
+          54.3,
+          48.5
+        ],
+        "mobile": [
+          56.8,
+          48.5
+        ]
+      },
+      "inventory": {
+        "city": "Bengaluru",
+        "market": "Attibele"
+      }
+    },
+    {
+      "slug": "bommasandra",
+      "canonical": "Bommasandra",
+      "scope": "belts",
+      "countSlug": "bommasandra",
+      "label": {
+        "desktop": [
+          38.8,
+          30.7
+        ],
+        "tablet": [
+          34.9,
+          33.2
+        ],
+        "mobile": [
+          25.9,
+          32.1
+        ]
+      },
+      "inventory": {
+        "city": "Bengaluru",
+        "market": "Bommasandra"
+      },
+      "imageSlot": "micromarket-bommasandra"
+    }
+  ]
+}

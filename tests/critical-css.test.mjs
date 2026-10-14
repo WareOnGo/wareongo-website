@@ -32,7 +32,7 @@ test('the actual Vite hook prioritizes the ordinary production route and explici
   const { config } = await loadConfigFromFile({ command: 'build', mode: 'production' }, 'vite.config.ts');
   assert.equal(config.ssgOptions.beastiesOptions, false, 'SSG must not start a second, independent CSS queue');
   const input = `<!doctype html><html><head><!--${'x'.repeat(2048)}--><meta charset="UTF-8"><script type="module" async crossorigin src="/assets/app.js"></script></head><body><h1>Bangalore</h1></body></html>`;
-  for (const route of ['bangalore', '/bangalore', '/bangalore/', 'bangalore/peenya', '/bangalore/peenya/']) {
+  for (const route of ['bangalore', '/bangalore', '/bangalore/', 'bangalore/peenya', '/bangalore/peenya/', 'hosur', '/hosur/']) {
     const html = await config.ssgOptions.onPageRendered(route, input, {});
     const dom = new JSDOM(html);
     const script = dom.window.document.querySelector('script');

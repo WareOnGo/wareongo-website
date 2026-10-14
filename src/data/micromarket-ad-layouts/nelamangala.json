@@ -1,0 +1,69 @@
+{
+  "mapScope": "belts",
+  "mapMarkets": [
+    "nelamangala",
+    "dobbaspet",
+    "peenya"
+  ],
+  "inventory": {
+    "market": "Nelamangala",
+    "exclude": [
+      "Dobbaspet",
+      "Makali",
+      "Peenya"
+    ]
+  },
+  "rentMarkets": [
+    {
+      "slug": "nelamangala",
+      "name": "Nelamangala",
+      "label": "Nelamangala",
+      "inventory": {
+        "market": "Nelamangala",
+        "exclude": [
+          "Dobbaspet",
+          "Makali",
+          "Peenya"
+        ]
+      }
+    },
+    {
+      "slug": "budihal",
+      "name": "Budihal",
+      "label": "Budihal",
+      "inventory": {
+        "market": "Nelamangala",
+        "includeAll": [
+          "Budihal"
+        ]
+      }
+    },
+    {
+      "slug": "t-begur",
+      "name": "T Begur",
+      "label": "T Begur",
+      "inventory": {
+        "market": "Nelamangala",
+        "includeAll": [
+          "T Begur"
+        ]
+      }
+    },
+    {
+      "slug": "dobbaspet",
+      "name": "Dobbaspet",
+      "label": "Dobbaspet (next to Nelamangala)",
+      "inventory": {
+        "market": "Dobbaspet"
+      }
+    },
+    {
+      "slug": "makali",
+      "name": "Makali",
+      "label": "Makali (next to Nelamangala)",
+      "inventory": {
+        "market": "Makali"
+      }
+    }
+  ]
+}

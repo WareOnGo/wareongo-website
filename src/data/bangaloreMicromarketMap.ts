@@ -52,7 +52,8 @@ export interface BangaloreMapArea {
   caption?: string;
   textChip?: boolean;
   wideChip?: boolean;
-  imageSlot: keyof AdPageContent['images'];
+  imageSlot?: keyof AdPageContent['images'];
+  image?: { url: string; fallback?: string | null; alt: string; width: number; height: number };
   label: Record<MapView, Point>;
 }
 

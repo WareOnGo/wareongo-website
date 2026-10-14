@@ -39,10 +39,10 @@
 
 /* The enquiry is next to the intro on desktop, and immediately after it on phones. */
 .bangalore-landing__hero { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); grid-template-areas: "intro enquiry" "featured enquiry" "trust trust"; grid-template-rows: max-content 1fr max-content; align-items: start; gap: 24px 48px; padding-top: 36px; }
-.bangalore-landing__hero-copy { grid-area: intro; min-width: 0; }
+.bangalore-landing__hero-copy { grid-area: intro; min-width: 0; container: ad-intro / inline-size; }
 .bangalore-landing__headline { margin: 0; font-size: var(--landing-text-hero); font-weight: 700; line-height: 1.12; letter-spacing: -.04em; }
 .bangalore-landing__headline > span { display: block; color: var(--landing-accent); }
-.bangalore-landing[data-micromarket] .bangalore-landing__headline { font-size: clamp(32px, calc(3.5vw - 3px), 48px); text-wrap: balance; }
+.bangalore-landing[data-micromarket] .bangalore-landing__headline { font-size: clamp(32px, 5.8cqw, 44px); text-wrap: balance; }
 .bangalore-landing[data-micromarket] .bangalore-landing__headline > span { display: inline; }
 .bangalore-landing__hero-summary { container: ad-summary / inline-size; margin-top: 12px; font-size: var(--landing-text-sm); font-weight: 600; line-height: var(--landing-leading-ui); }
 .bangalore-landing__callback-note { container: ad-callback / inline-size; margin-top: 12px; color: var(--landing-muted); font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); text-align: center; }
@@ -82,7 +82,8 @@
 /* Standard listing cards, with compact spacing and figures for the hero. */
 .bangalore-landing__featured .warehouse-card { scroll-snap-align: start; }
 .bangalore-landing__featured .warehouse-card__body { padding: 12px; }
-.bangalore-landing__featured .warehouse-card__metrics { gap: 8px; margin-bottom: 8px; }
+.bangalore-landing__featured .warehouse-card__metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 8px; }
+.bangalore-landing__featured .warehouse-card__metric dt { white-space: nowrap; }
 .bangalore-landing__featured .warehouse-card__metric strong { font-size: var(--landing-text-base); }
 .bangalore-landing__featured .warehouse-card__metric dd { flex-wrap: wrap; gap: 0 4px; }
 .bangalore-landing__featured .warehouse-card__place-text { flex-wrap: wrap; }
@@ -92,8 +93,13 @@
 .bangalore-landing__featured .warehouse-card__enquiry { min-height: var(--landing-compact-height); padding: 8px 12px; font-size: var(--landing-text-xs); }
 
 @container (max-width: 225px) {
-  .bangalore-landing__featured .warehouse-card__metrics { grid-template-columns: minmax(0, 1fr); }
-  .bangalore-landing__featured .warehouse-card__rent { align-items: flex-start; text-align: left; }
+  .bangalore-landing__featured .warehouse-card__metrics { gap: 4px; }
+  .bangalore-landing__featured .warehouse-card__metric dt { font-size: 10px; }
+  /* Stack both units together so the two figures keep the same baseline. */
+  .bangalore-landing__featured .warehouse-card__metric dd { flex-direction: column; gap: 0; }
+  .bangalore-landing__featured .warehouse-card__rent dd { align-items: flex-end; }
+  .bangalore-landing__featured .warehouse-card__metric dd strong { font-size: 12px; }
+  .bangalore-landing__featured .warehouse-card__metric small { font-size: 10px; }
   .bangalore-landing__featured .warehouse-card__place { align-items: flex-start; }
   .bangalore-landing__featured .warehouse-card__place > svg { margin-top: 4px; }
   .bangalore-landing__featured .warehouse-card__place-text { flex-direction: column; align-items: flex-start; }
@@ -216,6 +222,7 @@
 .bangalore-landing__proof-metrics dd { order: -1; margin: 0; font-size: var(--landing-text-section); font-weight: 600; line-height: var(--landing-leading-heading); font-variant-numeric: tabular-nums; letter-spacing: -.025em; white-space: nowrap; }
 .bangalore-landing__map-caption { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 12px 16px; border-top: var(--landing-border); background: var(--landing-card); color: var(--landing-muted); font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); }
 .bangalore-landing__map-legend { display: inline-flex; align-items: center; gap: 8px; }
+.bangalore-landing__map-credit { flex-basis: 100%; font-size: 11px; }
 .bangalore-landing__map-hint > span + span { display: none; }
 .bangalore-landing__why-copy { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--landing-nested-gap); min-width: 0; }
 .bangalore-landing__benefit { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; min-width: 0; padding: var(--landing-card-padding); border: var(--landing-border); border-radius: var(--landing-radius); background: var(--landing-card); text-align: left; }
@@ -350,9 +357,14 @@
   .bangalore-landing__featured { align-self: end; }
   .bangalore-landing__featured .warehouse-card__metric strong { font-size: var(--landing-text-sm); }
   .bangalore-landing__featured .warehouse-card__place h2 { font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); }
+  .bangalore-landing__featured .warehouse-card__specs { flex-wrap: wrap; }
+  .bangalore-landing__featured .warehouse-card__spec:nth-child(n+3) { display: none; }
+  @container (max-width: 240px) {
+    .bangalore-landing__featured .warehouse-card__spec:nth-child(n+2) { display: none; }
+  }
   .bangalore-landing__enquiry { display: flex; flex-direction: column; align-self: stretch; }
-  .bangalore-landing__enquiry > form { display: flex; flex: 1; flex-direction: column; }
-  .bangalore-landing__form-fields { flex: 1; align-content: space-between; }
+  /* A longer local title may grow the panel, but must not spread its fields. */
+  .bangalore-landing__enquiry > form { margin-block: auto; }
 }
 
 @media (max-width: 1100px) and (min-width: 1024px) {

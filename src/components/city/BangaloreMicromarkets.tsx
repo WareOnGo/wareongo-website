@@ -4,12 +4,24 @@ import { BANGALORE_MAP_VIEWS, type BangaloreMapArea, type BangaloreMapScope, typ
 import type { AnalyticsParams } from '@/lib/analytics';
 import type { AdPageContent } from '@/data/adPages';
 import { adImageSources, MARKET_IMAGE_SIZES } from '@/lib/adImageSources';
+import WarehousePhoto from '@/components/WarehousePhoto';
 
 interface Location extends BangaloreMapArea {
   count: number | null;
 }
 
-export default function BangaloreMicromarkets({ locations, onContact, content, scope, onScopeChange, showScopeToggle = true, mapViews, mapAlt }: {
+/** Live area photos use the same original-image recovery as listing cards. */
+function MapPhoto({ photo, sizes, className }: { photo?: { url: string; alt: string; fallback?: string | null }; sizes: string; className?: string }) {
+  const [failed, setFailed] = useState(false);
+  if (!photo?.url || failed) return null;
+  const { srcSet } = adImageSources(photo.url, sizes);
+  return <WarehousePhoto primary={photo.url} initialSrc={photo.url} fallback={photo.fallback ?? null}
+    srcSet={srcSet} sizes={srcSet ? sizes : undefined} alt={photo.alt} width={800} height={450}
+    loading="lazy" decoding="async" className={className} showLoadingIndicator={false}
+    onLoaded={() => {}} onFailed={() => setFailed(true)} />;
+}
+
+export default function BangaloreMicromarkets({ locations, onContact, content, scope, onScopeChange, showScopeToggle = true, mapViews, mapAlt, mapCredit, mobileHeading }: {
   content: AdPageContent;
   locations: Location[];
   onContact: (trigger: HTMLButtonElement, context: AnalyticsParams) => void;
@@ -18,6 +30,8 @@ export default function BangaloreMicromarkets({ locations, onContact, content, s
   showScopeToggle?: boolean;
   mapViews?: BangaloreMapViews;
   mapAlt?: string;
+  mapCredit?: string;
+  mobileHeading?: string;
 }) {
   const camera = mapViews ?? BANGALORE_MAP_VIEWS[scope];
   const visibleLocations = locations.filter(location => location.scope === scope);
@@ -176,7 +190,12 @@ export default function BangaloreMicromarkets({ locations, onContact, content, s
   return (
     <section id="locations" className="bangalore-landing__locations bangalore-landing__container" aria-labelledby="bangalore-locations-title">
       <div className="bangalore-landing__section-heading bangalore-landing__map-heading">
-        <h2 id="bangalore-locations-title" className="bangalore-landing__section-title">{content.copy.locationsHeading}</h2>
+        <h2 id="bangalore-locations-title" className="bangalore-landing__section-title">
+          {mobileHeading ? <>
+            <span className="bangalore-landing__desktop-copy">{content.copy.locationsHeading}</span>
+            <span className="bangalore-landing__mobile-copy">{mobileHeading}</span>
+          </> : content.copy.locationsHeading}
+        </h2>
         {showScopeToggle && <div className="bangalore-landing__map-views" role="group" aria-label="Map area view">
           {(['belts', 'city'] as const).map(view => (
             <button key={view} type="button" aria-pressed={scope === view} aria-controls="bangalore-area-map bangalore-mobile-markets bangalore-area-fit" onClick={() => {
@@ -210,7 +229,7 @@ export default function BangaloreMicromarkets({ locations, onContact, content, s
             ))}
           </div>
           {visibleLocations.map(location => {
-            const photo = content.images[location.imageSlot];
+            const photo = location.image ?? (location.imageSlot ? content.images[location.imageSlot] : undefined);
             const countLabel = location.count === null ? null : `${location.count.toLocaleString('en-IN')} ${location.count === 1 ? 'listing' : 'listings'}`;
             const chipCaption = location.chipCaption ?? countLabel ?? 'Explore spaces';
             const cardCaption = location.caption ?? countLabel ?? 'Enquire for availability';
@@ -238,7 +257,7 @@ export default function BangaloreMicromarkets({ locations, onContact, content, s
                     }}
                   />
                   <article id={cardId} className="bangalore-landing__map-card" aria-labelledby={`${cardId}-title`} aria-hidden={!expanded}>
-                    <img {...adImageSources(photo?.url, expanded ? '264px' : '40px')} alt={photo?.alt ?? location.canonical} width={800} height={450} loading="lazy" decoding="async" className="bangalore-landing__map-card-image" />
+                    <MapPhoto key={photo?.url} photo={photo} sizes={expanded ? '264px' : '40px'} className="bangalore-landing__map-card-image" />
                     <div className="bangalore-landing__map-card-body">
                       <h3 id={`${cardId}-title`}>{expanded ? location.title ?? location.canonical : location.chipLabel ?? location.canonical}</h3>
                       <p className="bangalore-landing__map-card-count">{expanded ? cardCaption : chipCaption}</p>
@@ -254,6 +273,7 @@ export default function BangaloreMicromarkets({ locations, onContact, content, s
           })}
         </div>
         <figcaption className="bangalore-landing__map-caption">
+          {mapCredit && <span className="bangalore-landing__map-credit">{mapCredit}</span>}
           <span className="bangalore-landing__map-legend">{content.copy.mapCaption}</span>
           <span className="bangalore-landing__map-hint"><span>Hover or tap a location to explore</span><span>Tap a location to explore</span></span>
           <span className="bangalore-landing__map-mobile-hint">Tap a location or swipe the cards below</span>
@@ -261,10 +281,10 @@ export default function BangaloreMicromarkets({ locations, onContact, content, s
       </figure>
       <div key={scope} ref={mobileMarketsRef} id="bangalore-mobile-markets" className="bangalore-landing__mobile-markets" role="region" aria-label={`${scope === 'belts' ? 'Warehouse belt' : 'City area'} cards`} tabIndex={0}>
         {visibleLocations.map(location => {
-          const photo = content.images[location.imageSlot];
+          const photo = location.image ?? (location.imageSlot ? content.images[location.imageSlot] : undefined);
           return (
             <article key={location.slug} id={`bangalore-mobile-market-${location.slug}`} ref={node => { mobileCardRefs.current[location.slug] = node; }} className="bangalore-landing__mobile-market" data-market={location.slug}>
-              <img {...adImageSources(photo?.url, MARKET_IMAGE_SIZES)} alt={photo?.alt ?? location.canonical} width={800} height={450} loading="lazy" decoding="async" />
+              <MapPhoto key={photo?.url} photo={photo} sizes={MARKET_IMAGE_SIZES} />
               {location.count !== null && <span className="bangalore-landing__image-tag bangalore-landing__listing-count">
                 {location.count.toLocaleString('en-IN')} {location.count === 1 ? 'listing' : 'listings'}
               </span>}

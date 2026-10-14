@@ -23,7 +23,7 @@ import type { AdPreviewView } from './BangaloreAdPreview';
 import { trackEvent, type AnalyticsParams } from '@/lib/analytics';
 import { normalizeHeadingCase, titleCase } from '@/lib/headingCase';
 import { adImageSources, FEATURED_IMAGE_SIZES, SERVICE_IMAGE_SIZES } from '@/lib/adImageSources';
-import { marketText, micromarketAdPath, type MicromarketAdPage, type MicromarketLandingData } from '@/data/micromarketAdPages';
+import { marketText, type MicromarketAdPage, type MicromarketLandingData } from '@/data/micromarketAdPages';
 import { ORG_ID, SITE_URL } from '@/config/config';
 import '@/components/WarehouseCard.css';
 import './BangaloreLanding.css';
@@ -41,17 +41,21 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
   // the approved local copy (including its authored heading capitalization).
   const copy = market ? savedContent.copy : normalizeHeadingCase(savedContent.copy);
   const content = { ...savedContent, copy };
+  // Compact the standard local map title; authored CMS alternatives stay intact.
+  const mobileMapHeading = market && copy.locationsHeading === `Explore Spaces in & Around ${market.page.name.replace(' and ', ' & ')}`
+    ? `Explore ${copy.mapLabel} & Nearby` : undefined;
   const featuredImage = adImageSources(market ? market.data.featured[0]?.image : content.images['featured-967'].url, FEATURED_IMAGE_SIZES);
   const services = content.services.map(item => ({ ...item, slug: item.id, icon: SERVICE_ICONS[item.id], description: item.body, mobileCopy: { title: item.mobileTitle, body: item.mobileBody } }));
   const audiences = content.audiences.map(item => ({ ...item, slug: item.id, description: item.body, icon: AUDIENCE_ICONS[item.id],
     actions: [item.primaryCta, item.secondaryCta].filter(Boolean).map((label, index) => ({ label, intent: AUDIENCE_INTENTS[item.id][index] })),
   }));
   const data = useLoaderData() as BangaloreLandingData | null;
-  const mapAreas = market ? market.page.mapMarkets.flatMap(slug => BANGALORE_MAP_AREAS.filter(location => location.slug === slug)) : BANGALORE_MAP_AREAS;
+  const mapAreas = market ? market.page.mapLocations : BANGALORE_MAP_AREAS;
   const locations = mapAreas.map(location => ({
     ...location,
+    image: !location.imageSlot && market?.data.marketImages?.[location.slug] ? { ...market.data.marketImages[location.slug], alt: `Warehouse in ${location.canonical}`, width: 800, height: 450 } : location.image,
     caption: market?.page.mapBylines[location.slug] ? marketText(market.page.mapBylines[location.slug], market.data) : location.caption,
-    label: market?.page.map?.coordinates[location.slug]
+    label: market?.page.map?.coordinates?.[location.slug]
       ? mapLabelsForCoordinates(market.page.map.coordinates[location.slug], market.page.map.views)
       : location.label,
     count: market ? market.data.marketCounts[location.countSlug ?? location.slug] ?? null : location.countSlug
@@ -63,11 +67,11 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
   const [mapScope, setMapScope] = useState<BangaloreMapScope>(market?.page.mapScope ?? 'belts');
   const [contactContext, setContactContext] = useState<AnalyticsParams | null>(previewState === 'contact' ? { source: 'cms-preview' } : null);
   const contactTrigger = useRef<HTMLButtonElement | null>(null);
-  const source = market ? `bangalore-${market.page.slug}-landing` : 'bangalore-landing';
+  const source = market ? market.page.citySlug === 'hosur' ? 'hosur-landing' : `bangalore-${market.page.slug}-landing` : 'bangalore-landing';
 
   function openContact(trigger: HTMLButtonElement, context: AnalyticsParams) {
     contactTrigger.current = trigger;
-    const enquiry = { city: 'Bengaluru', state: 'Karnataka', market_slug: market?.page.slug ?? 'bengaluru', ...context,
+    const enquiry = { city: market?.page.city ?? 'Bengaluru', state: market?.page.state ?? 'Karnataka', market_slug: market?.page.slug ?? 'bengaluru', ...context,
       ...(market ? { source: `${source}-${context.warehouse_id ?? context.content_id ?? context.market_slug ?? 'contact'}` } : {}),
     };
     const isWarehouseEnquiry = enquiry.warehouse_id != null;
@@ -86,7 +90,7 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
       <PageHead
         title={copy.seoTitle}
         description={copy.metaDescription}
-        path={market ? micromarketAdPath(market.page.slug) : '/bangalore'}
+        path={market?.page.path ?? '/bangalore'}
         noindex
       >
         {featuredImage.src && <link rel="preload" as="image" href={featuredImage.src} imageSrcSet={featuredImage.srcSet} imageSizes={featuredImage.sizes} media="(min-width: 1024px)" fetchPriority="high" />}
@@ -123,7 +127,7 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
 
         <BangaloreAvailableListings content={content} onContact={openContact} totalListings={market ? market.data.listingCount : data?.stats.listings} inventory={market?.data.listings} marketSlug={market?.page.slug} />
 
-        <BangaloreMicromarkets content={content} locations={locations} onContact={openContact} scope={mapScope} onScopeChange={setMapScope} showScopeToggle={!market} mapViews={market?.page.map?.views} mapAlt={market?.page.map?.alt} />
+        <BangaloreMicromarkets content={content} locations={locations} onContact={openContact} scope={mapScope} onScopeChange={setMapScope} showScopeToggle={!market} mapViews={market?.page.map?.views} mapAlt={market?.page.map?.alt} mapCredit={market?.page.map?.credit} mobileHeading={mobileMapHeading} />
 
         <BangaloreAreaGuide scope={mapScope} content={content} cards={market?.page.areaCards.map(card => ({ ...card, body: marketText(card.body, market.data) }))} />
 
@@ -193,7 +197,7 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
       <AdFooter />
       {market && <a className="bangalore-landing__whatsapp" href={`https://wa.me/917400184225?text=${encodeURIComponent(market.page.whatsappMessage)}`}
         target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp"
-        onClick={() => trackEvent('contact_click', { placement: 'micromarket_whatsapp', contact_method: 'whatsapp', contact_target: 'sales_whatsapp', market_slug: market.page.slug })}>
+        onClick={() => trackEvent('contact_click', { placement: 'micromarket_whatsapp', contact_method: 'whatsapp', contact_target: 'sales_whatsapp', market_slug: market.page.slug, label: market.page.name, city: market.page.city, state: market.page.state })}>
         <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6c-2 0-3.9-.5-5.6-1.5l-.4-.2-3.9 1 1-3.8-.3-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0a8.7 8.7 0 0 1-4.3-3.7c-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.6 3.6 0 0 0-1.1 2.7 6.3 6.3 0 0 0 1.3 3.3 14.4 14.4 0 0 0 5.5 4.9c2 .9 2.8 1 3.9.8a3.3 3.3 0 0 0 2.1-1.5 2.7 2.7 0 0 0 .2-1.5c-.1-.1-.3-.2-.6-.4z" /></svg>
       </a>}
       <ContactFormDialog

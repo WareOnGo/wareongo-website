@@ -23,7 +23,7 @@ export function prioritizeAdPageHtml(route, html) {
   // Ordinary SSG routes omit the leading slash; explicitly included routes
   // and dynamic paths may include it. Both must get the same production HTML.
   const path = route.replace(/^\/+|\/+$/g, '');
-  if (!/^bangalore(?:\/[a-z0-9-]+)?$/.test(path)) return html;
+  if (!/^(?:bangalore(?:\/[a-z0-9-]+)?|hosur)$/.test(path)) return html;
   let result = html.replace(/<script type="module" async(?:="")?/g, '<script type="module" defer fetchpriority="low"');
   if (path !== 'bangalore') {
     const title = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1];

@@ -77,7 +77,7 @@ responsive styles. Local copy comes from approved CMS `MicromarketAdPage` record
 via `GET /ad-pages/micromarkets`. Common benefits, services, audiences, images,
 fee FAQ and request CTA copy continue to come from the approved Bangalore CMS content.
 
-Both routes use one component library: `BangaloreLanding` composes the components
+All ad routes use one component library: `BangaloreLanding` composes the components
 in `src/components/city/`, the shared `WarehouseCard`, `Navbar`,
 `TrustedBySection`, `RequestCTASection`, `ad/AdFooter` and contact dialog. Keep visual and
 interaction changes in those components and `BangaloreLanding.css`; new market
@@ -101,8 +101,8 @@ are editable. Identity is fixed from inventory. Use `{listings}` and
 numeric overrides are rejected by the CMS and build validators.
 
 `src/data/micromarketAdPages.ts` combines that local copy with the shared template.
-Peenya's code-owned camera and comparison markets live in
-`src/data/micromarket-ad-layouts/peenya.json`. New markets default to their city
+Code-owned inventory filters, map cameras and comparison markets live in
+`src/data/micromarket-ad-layouts/{slug}.json`. New markets default to their city
 map and their own inventory rent range. Custom maps remain a developer task;
 map markers reference `BANGALORE_MAP_AREAS`.
 
@@ -114,9 +114,14 @@ slug with a code-owned layout). Commit the generated WebP assets with the config
 the shared desktop/tablet/mobile dimensions and embedded attribution; no token
 or Mapbox request is sent from the page. Omit `map` to reuse the city basemaps.
 
+The southern page centres its cameras on the Hosur Road/Bommasandra and Sarjapur
+area. Its approximate marker coordinates use the [GeoNames locality records](https://www.geonames.org/advanced-search.html?country=IN&q=Bengaluru+Urban&startRow=50).
+Standard local map headings have a short mobile label; custom CMS headings are
+shown as authored on both desktop and mobile.
+
 The loader reads every inventory page per rent market. Cards show built stock,
 prefer sheds, and retain real listing photos. Featured cards cover the three
-size bands where available and cannot undercut the displayed rent floor. Counts
+size bands where available. Both grid and featured cards enforce the displayed rent floor and show locality names instead of street addresses. Counts
 and the rent guide use the full tagged inventory; Peenya's displayed cards also
 require an explicit Peenya address and an asking rent of at least ₹25. Rent ranges exclude land/BTS and missing rates,
 require at least ten rates, and use the lowest +10% and highest +15%, rounded
@@ -134,6 +139,23 @@ Privacy Policy, Terms of Service, Login and copyright. Deploy the backend migrat
 the generator fails if the approved Peenya seed is missing or content is invalid.
 The preview at `/preview/ad-pages/micromarket` accepts authenticated CMS messages
 in memory, reads fresh inventory, and blocks lead submissions and navigation.
+The 14 October handoff adds `/bangalore/hoskote`, `/bangalore/nelamangala`,
+`/bangalore/electronic-city-jigani-bommasandra` and `/hosur` through the same
+renderer. Hoskote excludes Narsapura; Nelamangala excludes Dobbaspet, Makali and
+Peenya. The combined southern page reads the union of Hosur Road, Jigani and
+Bommasandra tags, deduplicates listing IDs and excludes Attibele/Bannerghatta.
+Hosur reads city-wide stock and renders Tamil Nadu, with its supplied map and
+visible OpenFreeMap/OpenMapTiles/OpenStreetMap credit. Its route is registered
+only when approved content includes it. A separate city page does not require
+a second design or form implementation.
+
+The backend migration `scripts/sql/20261014_area_ad_pages.sql` creates these
+four as private drafts without changing Peenya. Approve them after deploying
+the compatible backend and preview. The committed content snapshot allows
+local review; a production build regenerates routes from approved CMS content.
+The handoff's static counts/rents are examples: current inventory drives the
+headline, cards and rent table. The mini footer remains on every ad page.
+
 Run `npm run test:ad-pages` and
 `npm run test:lead-submissions` when changing this template.
 
