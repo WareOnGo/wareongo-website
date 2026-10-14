@@ -17,7 +17,7 @@ const METRICS = [
   { value: `${SHORTLIST_HOURS} Hour`, label: 'Curated Shortlist' },
   { value: `${SQFT_TRANSACTED_M} Mn+`, label: 'Sq Ft Leased' },
   { value: `${CITIES_COVERED}+`, label: 'Cities Covered' },
-  { value: '3000+', label: 'Verified Spaces across India' },
+  { value: '3000+', label: 'Verified Spaces' },
 ];
 
 export default function BangaloreBenefits({ content }: { content: AdPageContent }) {

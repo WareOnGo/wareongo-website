@@ -50,6 +50,7 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
   const mapAreas = market ? market.page.mapMarkets.flatMap(slug => BANGALORE_MAP_AREAS.filter(location => location.slug === slug)) : BANGALORE_MAP_AREAS;
   const locations = mapAreas.map(location => ({
     ...location,
+    caption: market?.page.mapBylines[location.slug] ? marketText(market.page.mapBylines[location.slug], market.data) : location.caption,
     label: market?.page.map?.coordinates[location.slug]
       ? mapLabelsForCoordinates(market.page.map.coordinates[location.slug], market.page.map.views)
       : location.label,
@@ -124,7 +125,7 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
 
         <BangaloreMicromarkets content={content} locations={locations} onContact={openContact} scope={mapScope} onScopeChange={setMapScope} showScopeToggle={!market} mapViews={market?.page.map?.views} mapAlt={market?.page.map?.alt} />
 
-        <BangaloreAreaGuide scope={mapScope} content={content} cards={market?.page.areaCards} />
+        <BangaloreAreaGuide scope={mapScope} content={content} cards={market?.page.areaCards.map(card => ({ ...card, body: marketText(card.body, market.data) }))} />
 
         <RequestCTASection className="bangalore-landing__request" content={{ heading: copy.requestHeading, description: copy.requestDescription, details: copy.requestDetails, primaryLabel: copy.requestCta, phoneLabel: copy.requestPhoneCta }} />
 

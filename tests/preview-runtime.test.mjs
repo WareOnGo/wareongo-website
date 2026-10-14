@@ -108,7 +108,7 @@ function browser(t, path, token) {
   return dom;
 }
 
-for (const path of ['/preview/cms', '/preview/ad-pages/bangalore'])
+for (const path of ['/preview/cms', '/preview/ad-pages/bangalore', '/preview/ad-pages/micromarket'])
   for (const token of [validToken, 'invalid-token']) test(`${path}: preview auth never reads or writes ${token === validToken ? 'valid' : 'invalid'} website credentials`, async t => {
     const dom = browser(t, path, token), storage = dom.window.Storage.prototype;
     const read = storage.getItem, calls = [];

@@ -50,7 +50,7 @@
 /* Switch copy by the space available, including the narrow desktop form. */
 @container ad-summary (max-width: 639px) {
   [data-compact] > .bangalore-landing__note-full { display: none; }
-  [data-compact] > .bangalore-landing__note-compact { display: inline; font-size: var(--landing-text-xs); }
+  [data-compact] > .bangalore-landing__note-compact { display: inline; font-size: clamp(10px, 3.4cqw, var(--landing-text-xs)); }
 }
 @container ad-summary (max-width: 319px) {
   [data-compact] > .bangalore-landing__note-compact { letter-spacing: -.02em; }

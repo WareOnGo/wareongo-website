@@ -167,6 +167,11 @@ export const routes: RouteRecord[] = [
               return MICROMARKET_AD_PAGES.map(page => micromarketAdPath(page.slug));
             },
           },
+          {
+            path: "preview/ad-pages/micromarket",
+            lazy: lazyDefault(() => import("./pages/MicromarketAdPreview")),
+            entry: "src/pages/MicromarketAdPreview.tsx",
+          },
         ],
       },
     ],

@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs } from 'react-router-dom';
-import { getMicromarketAdPage, type AdLandingWarehouse, type MicromarketLandingData } from '@/data/micromarketAdPages';
-import { getMicromarkets } from '@/services/micromarketsAPI';
+import { getMicromarketAdPage, type MicromarketAdPage, type AdLandingWarehouse, type MicromarketLandingData } from '@/data/micromarketAdPages';
+import { getMicromarkets, fetchMicromarkets } from '@/services/micromarketsAPI';
 import { warehouseAPI, transformWarehouseData, parseRatePerSqft, type Warehouse } from '@/services/warehouseAPI';
 
 const isBuilt = (warehouse: Warehouse) => !/\b(land|plot|bts)\b|build[\s-]*to[\s-]*suit/i.test(warehouse.warehouseType ?? '');
@@ -30,13 +30,14 @@ export function marketRentRange(warehouses: Warehouse[], floor = 0) {
   return max >= min ? { min, max, label: `₹${min} to ₹${max}` } : null;
 }
 
-export function marketListings(warehouses: Warehouse[], name: string): AdLandingWarehouse[] {
-  return warehouses.filter(isBuilt).map(warehouse => {
+export function marketListings(warehouses: Warehouse[], name: string, policy?: MicromarketAdPage['listingPolicy']): AdLandingWarehouse[] {
+  const addressPattern = policy ? new RegExp('\\b' + policy.addressTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i') : null;
+  return warehouses.filter(isBuilt).filter(warehouse => !addressPattern || addressPattern.test(warehouse.address ?? '')).map(warehouse => {
     const card = transformWarehouseData(warehouse);
     return { id: card.id, locality: name, address: card.address, size: card.size, price: card.price,
       ceilingHeight: card.ceilingHeight, warehouseType: card.warehouseType, numberOfDocks: card.numberOfDocks,
       fireCompliance: card.fireCompliance, image: card.image, imageFallback: card.imageFallbacks[0] ?? null };
-  }).filter(card => card.size > 0).sort((a, b) =>
+  }).filter(card => card.size > 0 && (!policy || (card.price !== null && card.price >= policy.minimumRent))).sort((a, b) =>
     Number(/shed/i.test(b.warehouseType ?? '')) - Number(/shed/i.test(a.warehouseType ?? ''))
     || Number(Boolean(b.image)) - Number(Boolean(a.image)) || b.id - a.id);
 }
@@ -57,16 +58,20 @@ export function featuredMarketListings(listings: AdLandingWarehouse[], floor: nu
 export async function micromarketLandingLoader({ params, request }: LoaderFunctionArgs): Promise<MicromarketLandingData> {
   const page = getMicromarketAdPage(params.micromarket ?? '');
   if (!page) throw new Response('Not found', { status: 404 });
+  return loadMicromarketAdInventory(page, request.signal);
+}
+
+export async function loadMicromarketAdInventory(page: MicromarketAdPage, signal?: AbortSignal, preview = false): Promise<MicromarketLandingData> {
   const [markets, inventories] = await Promise.all([
-    getMicromarkets(),
+    preview ? fetchMicromarkets(signal) : getMicromarkets(),
     Promise.all(page.rentGuide.markets.map(async market => ({
-      ...market, warehouses: await readMarketInventory(page.city, market.name, request.signal),
+      ...market, warehouses: await readMarketInventory(page.city, market.name, signal),
     }))),
   ]);
   const own = inventories.find(market => market.slug === page.slug);
   if (!own) throw new Error(`Missing inventory configuration for ${page.name}.`);
   const ownRange = marketRentRange(own.warehouses, own.floor);
-  const listings = marketListings(own.warehouses, page.name);
+  const listings = marketListings(own.warehouses, page.name, page.listingPolicy);
   return {
     slug: page.slug, listings, featured: featuredMarketListings(listings, ownRange?.min ?? own.floor ?? 0),
     listingCount: own.warehouses.length,

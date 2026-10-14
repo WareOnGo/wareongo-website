@@ -1,0 +1,79 @@
+{
+  "mapScope": "belts",
+  "mapMarkets": [
+    "peenya",
+    "nelamangala",
+    "dobbaspet"
+  ],
+  "map": {
+    "alt": "Road map of Peenya, Nelamangala and Dobbaspet along Tumkur Road in north-west Bangalore.",
+    "views": {
+      "desktop": {
+        "width": 1260,
+        "height": 540,
+        "zoom": 10.15,
+        "center": [
+          77.385,
+          13.13
+        ],
+        "src": "/bangalore/peenya/micromarkets-map.webp"
+      },
+      "tablet": {
+        "width": 810,
+        "height": 540,
+        "zoom": 10.15,
+        "center": [
+          77.385,
+          13.13
+        ],
+        "src": "/bangalore/peenya/micromarkets-map-tablet.webp"
+      },
+      "mobile": {
+        "width": 360,
+        "height": 360,
+        "zoom": 9.3,
+        "center": [
+          77.385,
+          13.13
+        ],
+        "src": "/bangalore/peenya/micromarkets-map-mobile.webp"
+      }
+    },
+    "coordinates": {
+      "peenya": [
+        77.518,
+        13.028
+      ],
+      "nelamangala": [
+        77.394,
+        13.096
+      ],
+      "dobbaspet": [
+        77.241,
+        13.234
+      ]
+    }
+  },
+  "rentMarkets": [
+    {
+      "slug": "peenya",
+      "name": "Peenya",
+      "label": "Peenya",
+      "floor": 25
+    },
+    {
+      "slug": "makali",
+      "name": "Makali",
+      "label": "Makali (next to Peenya)"
+    },
+    {
+      "slug": "nelamangala",
+      "name": "Nelamangala",
+      "label": "Nelamangala (next to Peenya)"
+    }
+  ],
+  "listingPolicy": {
+    "minimumRent": 25,
+    "addressTerm": "Peenya"
+  }
+}

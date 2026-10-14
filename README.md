@@ -73,9 +73,9 @@ We don't support custom domains (yet). If you want to deploy your project under 
 ### Micromarket ad pages
 
 `/bangalore/peenya` uses `BangaloreLanding` and all its existing components and
-responsive styles. Micromarket differences live in
-`src/data/micromarket-ad-pages/peenya.json`; common benefits, services, audiences,
-images and request CTA copy continue to come from the approved Bangalore CMS content.
+responsive styles. Local copy comes from approved CMS `MicromarketAdPage` records
+via `GET /ad-pages/micromarkets`. Common benefits, services, audiences, images,
+fee FAQ and request CTA copy continue to come from the approved Bangalore CMS content.
 
 Both routes use one component library: `BangaloreLanding` composes the components
 in `src/components/city/`, the shared `WarehouseCard`, `Navbar`,
@@ -86,25 +86,39 @@ The local summary, callback note, area cards and WhatsApp button are the additio
 elements specified in the Peenya sample. The existing responsive grids, card
 sizes, controls, typography and section order remain shared.
 
-To add another Bangalore micromarket, copy that JSON, register its slug in
-`src/data/micromarketAdRoutes.ts`, and import/register its configuration in
-`src/data/micromarketAdPages.ts`. Set the exact inventory tag, map scope/nearby
-markers, local copy, area cards and rent comparison markets. The same route,
-loader, layout, forms, analytics allowlist and static path generation then apply.
-Map markers reference `BANGALORE_MAP_AREAS`; add a marker there if it is new.
+To add a Bangalore micromarket, open **CMS → Ad pages → Micromarket ad pages →
+New micromarket ad page**, select the inventory market, fill in the local copy,
+preview at desktop/mobile sizes, and choose **Save for next build**. Drafts never
+create public routes. The build generates both `micromarketAdPages.generated.ts`
+and the tiny `micromarketAdPaths.generated.ts` analytics allowlist from approved
+records; adding a page requires no route, JSX or CSS registration.
+
+The CMS provides a downloadable JSON Schema and a blank writing template. The
+strict contract is mirrored in `scripts/lib/micromarket-ad-content.mjs`: only
+local headings, metadata, two area paragraphs, map-card bylines, rent-guide prose and local FAQs
+are editable. Identity is fixed from inventory. Use `{listings}` and
+`{rentRange}` for live values. Shared settings, callbacks, forms, images and
+numeric overrides are rejected by the CMS and build validators.
+
+`src/data/micromarketAdPages.ts` combines that local copy with the shared template.
+Peenya's code-owned camera and comparison markets live in
+`src/data/micromarket-ad-layouts/peenya.json`. New markets default to their city
+map and their own inventory rent range. Custom maps remain a developer task;
+map markers reference `BANGALORE_MAP_AREAS`.
 
 The optional `map` configuration supplies local Mapbox cameras and each marker's
 longitude/latitude. Labels project from those coordinates for all three views.
 Set the cameras around the selected markets, then provide `MAPBOX_ACCESS_TOKEN`
 in the environment and run `npm run maps:ad-pages -- peenya` (substitute the new
-slug). Commit the generated WebP assets with the configuration. Rendering keeps
+slug with a code-owned layout). Commit the generated WebP assets with the configuration. Rendering keeps
 the shared desktop/tablet/mobile dimensions and embedded attribution; no token
 or Mapbox request is sent from the page. Omit `map` to reuse the city basemaps.
 
 The loader reads every inventory page per rent market. Cards show built stock,
 prefer sheds, and retain real listing photos. Featured cards cover the three
 size bands where available and cannot undercut the displayed rent floor. Counts
-include every tagged listing. Rent ranges exclude land/BTS and missing rates,
+and the rent guide use the full tagged inventory; Peenya's displayed cards also
+require an explicit Peenya address and an asking rent of at least ₹25. Rent ranges exclude land/BTS and missing rates,
 require at least ten rates, and use the lowest +10% and highest +15%, rounded
 down to whole rupees. Peenya retains the requested ₹25 floor. Its upper limit
 comes from current inventory (₹80 at implementation), and the hero, table and
@@ -116,7 +130,11 @@ schema and a single GA bootstrap first in the generated head. They retain the
 shared navbar and add a fixed WhatsApp contact. They are
 intentionally excluded from the SEO sitemap. `/bangalore` retains its existing
 city layout and content. All ad pages use the compact `AdFooter`: brand,
-Privacy Policy, Terms of Service, Login and copyright. Run `npm run test:ad-pages` and
+Privacy Policy, Terms of Service, Login and copyright. Deploy the backend migration/API before enabling the CMS and website builds;
+the generator fails if the approved Peenya seed is missing or content is invalid.
+The preview at `/preview/ad-pages/micromarket` accepts authenticated CMS messages
+in memory, reads fresh inventory, and blocks lead submissions and navigation.
+Run `npm run test:ad-pages` and
 `npm run test:lead-submissions` when changing this template.
 
 ### Editorial overview pages

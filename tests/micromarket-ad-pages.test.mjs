@@ -75,7 +75,23 @@ test('hero, rent table and FAQ share one inventory snapshot while city content s
   assert.match(content.copy.availableFooter, /all 62 Peenya listings/);
   assert.deepEqual(content.services, base.services);
   assert.deepEqual(content.benefits, base.benefits);
+  assert.equal(content.copy.requestDetails, base.copy.requestDetails);
+  assert.doesNotMatch(content.benefits.find(item => item.id === 'benefit-4').body, /Pan-India/);
+  assert.doesNotMatch(content.copy.requestDetails, /Pan-India/);
   assert.deepEqual(base, before);
   const sparse = micromarketAdContent(base, page, { ...data, rentRange: null, rentRows: [] });
   assert.doesNotMatch(sparse.faqs[1].a, /₹|from Rent on request/);
+});
+
+test('Peenya cards require an explicit Peenya address and an asking rent of at least ₹25 in every size band', () => {
+  const page = getMicromarketAdPage('peenya');
+  const stock = [warehouse(1, 2000, '25'), warehouse(2, 8000, '24.99'), warehouse(3, 65000, '30'),
+    { ...warehouse(4, 8000, '27'), address: 'Nelamangala, Tumkur Road' },
+    { ...warehouse(5, 8000, '27'), address: 'PEENYA 2nd Stage, Bengaluru' },
+    warehouse(6, 8000, 'Not disclosed'), { ...warehouse(7, 8000, '27'), address: 'Newpeenya Road' }];
+  const cards = marketListings(stock, 'Peenya', page.listingPolicy);
+  assert.deepEqual(cards.map(card => card.id).sort(), [1, 3, 5]);
+  assert.deepEqual(featuredMarketListings(cards, 25).map(card => card.id), [1, 5, 3]);
+  assert.match(page.heroSummaryCompact, /Options within 4 hours/);
+  assert.deepEqual(page.mapBylines, { peenya: 'North-West Bangalore', nelamangala: 'Tumkur Road, NH-48', dobbaspet: 'Tumkur Road, NH-48' });
 });

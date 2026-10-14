@@ -30,7 +30,7 @@ The Peenya ad page uses its own three `streets-v12` images, rendered on
 2026-10-14 under `peenya/`. They center the Peenya–Nelamangala–Dobbaspet corridor
 at 77.385, 13.13: desktop/tablet zoom 10.15 and mobile zoom 9.3. Image dimensions,
 aspect ratios, attribution and interactions match the city map. Cameras and
-approximate area coordinates live in `src/data/micromarket-ad-pages/peenya.json`;
+approximate area coordinates live in `src/data/micromarket-ad-layouts/peenya.json`;
 marker positions are projected from those cameras. Regenerate with
 `npm run maps:ad-pages -- peenya` using the configured `MAPBOX_ACCESS_TOKEN`.
 

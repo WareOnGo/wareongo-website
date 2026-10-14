@@ -12,7 +12,7 @@ const fail = message => { console.error(message); process.exit(1); };
 if (!slug || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) fail('Usage: npm run maps:ad-pages -- <micromarket-slug>');
 if (!token) fail('Set MAPBOX_ACCESS_TOKEN in the environment before rendering maps.');
 
-const page = JSON.parse(await readFile(path.join(root, 'src/data/micromarket-ad-pages', `${slug}.json`), 'utf8'));
+const page = JSON.parse(await readFile(path.join(root, 'src/data/micromarket-ad-layouts', `${slug}.json`), 'utf8'));
 const validPoint = value => Array.isArray(value) && value.length === 2 && value.every(Number.isFinite)
   && Math.abs(value[0]) <= 180 && Math.abs(value[1]) <= 85;
 if (!page.map || page.mapMarkets.some(market => !validPoint(page.map.coordinates[market]))) {
