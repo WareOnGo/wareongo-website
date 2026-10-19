@@ -1,5 +1,5 @@
 import type { LoaderFunctionArgs } from 'react-router-dom';
-import { getMicromarketAdPage, type MicromarketAdPage, type AdLandingWarehouse, type MicromarketLandingData, type AdInventoryRule } from '@/data/micromarketAdPages';
+import { AD_MIN_SIZE, getMicromarketAdPage, type MicromarketAdPage, type AdLandingWarehouse, type MicromarketLandingData, type AdInventoryRule } from '@/data/micromarketAdPages';
 import { getMicromarkets, fetchMicromarkets } from '@/services/micromarketsAPI';
 import { warehouseAPI, transformWarehouseData, parseRatePerSqft, type Warehouse } from '@/services/warehouseAPI';
 
@@ -62,7 +62,8 @@ export function marketListings(warehouses: Warehouse[], name: string, policy?: M
 
 export function featuredMarketListings(listings: AdLandingWarehouse[], floor: number): AdLandingWarehouse[] {
   const eligible = listings.filter(item => item.price !== null && item.price >= floor && item.image);
-  const selected = [[0, 5000], [5000, 20000], [20000, Infinity]].flatMap(([min, max]) => {
+  // Same bands as the /bangalore featured cards; empty bands fill in listing order.
+  const selected = [[5000, 15000], [15000, 30000], [50000, Infinity]].flatMap(([min, max]) => {
     const listing = eligible.find(item => item.size >= min && item.size < max);
     return listing ? [listing] : [];
   });
@@ -97,7 +98,8 @@ export async function loadMicromarketAdInventory(page: MicromarketAdPage, signal
   ]);
   const ownRange = marketRentRange(own, page.rentFloor);
   const floor = Math.max(page.listingPolicy?.minimumRent ?? 0, ownRange?.min ?? page.rentFloor);
-  const listings = marketListings(own, page.name, { ...page.listingPolicy, minimumRent: floor }, page);
+  // Counts and rents use the full inventory; the cards stop at the ad pages' size floor.
+  const listings = marketListings(own, page.name, { ...page.listingPolicy, minimumRent: floor }, page).filter(listing => listing.size >= AD_MIN_SIZE);
   return {
     slug: page.slug, citySlug: page.citySlug, listings, featured: featuredMarketListings(listings, floor),
     listingCount: own.length,

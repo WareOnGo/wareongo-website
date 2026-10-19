@@ -23,6 +23,9 @@ export default function BangaloreEnquiryForm({ copy, previewSubmitted = false, m
   const [error, setError] = useState<string | null>(null);
   const inFlight = useRef(false);
   const successRef = useRef<HTMLDivElement>(null);
+  // Phones drop the opening instruction and the closing full stop (17 Oct review).
+  const shortIntro = copy.enquiryDescription.replace(/^Share your details\.\s+/, '').replace(/\.$/, '');
+  const compactIntro = shortIntro && shortIntro !== copy.enquiryDescription ? shortIntro : null;
   const analytics = useLeadAnalytics(true, {
     form_id: 'bangalore_hero_enquiry',
     lead_type: 'warehouse_enquiry',
@@ -75,7 +78,10 @@ export default function BangaloreEnquiryForm({ copy, previewSubmitted = false, m
   return (
     <section id="bangalore-enquiry" className="bangalore-landing__enquiry" aria-labelledby="bangalore-enquiry-title" tabIndex={-1}>
       <h2 id="bangalore-enquiry-title">{copy.enquiryHeading}</h2>
-      <p className="bangalore-landing__enquiry-intro">{copy.enquiryDescription}</p>
+      <p className="bangalore-landing__enquiry-intro" data-compact={compactIntro ? true : undefined}>
+        <span className="bangalore-landing__note-full">{copy.enquiryDescription}</span>
+        {compactIntro && <span className="bangalore-landing__note-compact">{compactIntro}</span>}
+      </p>
 
       {submitted || previewSubmitted ? (
         <div ref={successRef} className="bangalore-landing__enquiry-success" role="status" tabIndex={-1}>

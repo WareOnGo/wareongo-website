@@ -15,7 +15,7 @@ const { outputFiles } = await build({
 });
 const compiled = { exports: {} };
 new Function('require', 'module', 'exports', outputFiles[0].text)(createRequire(import.meta.url), compiled, compiled.exports);
-const { marketRentRange, marketListings, featuredMarketListings, readMarketInventory,
+const { marketRentRange, marketListings, featuredMarketListings, readMarketInventory, AD_MIN_SIZE,
   micromarketLandingLoader, warehouseAPI, getMicromarketAdPage, micromarketAdContent, marketText, selectAdInventory, loadMicromarketAdInventory } = compiled.exports;
 
 const warehouse = (id, size, rate, type = 'Shed') => ({ id, totalSpaceSqft: [size], ratePerSqft: rate,
@@ -30,15 +30,16 @@ test('rent uses every measured asking rate, excludes BTS, respects the floor and
   assert.equal(marketRentRange(Array.from({ length: 10 }, (_, id) => warehouse(id, 6000, '180'))).max, 207);
 });
 
-test('featured spaces use local photos, prefer sheds and cover size boundaries above the rent floor', () => {
+test('featured spaces use local photos, prefer sheds and cover the size bands above the size and rent floors', () => {
   const stock = [warehouse(1, 4999, '25'), warehouse(2, 5000, '30', 'PEB'), warehouse(3, 20000, '28', 'RCC'),
     warehouse(4, 8000, '20'), warehouse(5, 7000, '27'), warehouse(6, 40000, '26', 'BTS')];
   const listings = marketListings(stock, 'Peenya');
   assert.equal(listings.length, 5);
-  const featured = featuredMarketListings(listings, 25);
-  assert.deepEqual(featured.map(item => item.id), [1, 5, 3]);
+  const shown = listings.filter(item => item.size >= AD_MIN_SIZE);
+  const featured = featuredMarketListings(shown, 25);
+  assert.deepEqual(featured.map(item => item.id), [5, 3, 2]);
   assert.ok(featured.every(item => item.locality === 'Peenya' && item.image.includes(`warehouse-${item.id}`)));
-  assert.deepEqual(featuredMarketListings(listings.filter(item => item.size < 20000), 25).map(item => item.id), [1, 5, 2]);
+  assert.deepEqual(featuredMarketListings(shown.filter(item => item.size < 20000), 25).map(item => item.id), [5, 2]);
 });
 
 test('inventory reads all pages with exact city/tag filters and refuses an incomplete snapshot', async () => {
@@ -108,7 +109,7 @@ test('Hosur uses city-wide inventory, a standalone route, Tamil Nadu cards and l
   assert.doesNotMatch(page.callbackNote, /Bangalore/);
 });
 
-test('every grid and featured card obeys the computed headline rent floor', async () => {
+test('every grid and featured card obeys the computed headline rent floor and the size floor', async () => {
   const previous = warehouseAPI.getWarehouses;
   const previousFetch = globalThis.fetch;
   try {
@@ -118,8 +119,9 @@ test('every grid and featured card obeys the computed headline rent floor', asyn
     const data = await loadMicromarketAdInventory(getMicromarketAdPage('electronic-city-jigani-bommasandra'), undefined, true);
     assert.equal(data.listingCount, 12);
     assert.equal(data.rentRange, '₹22 to ₹34');
-    assert.equal(data.listings.length, 11);
-    assert.ok(data.listings.every(item => item.price >= 22));
+    // Counts keep every listing; cards drop the ₹20 listing and everything under 5,000 sq ft.
+    assert.equal(data.listings.length, 8);
+    assert.ok(data.listings.every(item => item.price >= 22 && item.size >= AD_MIN_SIZE));
     assert.ok(data.featured.every(item => item.price >= 22));
     assert.equal(data.featured.length, 3);
   } finally { warehouseAPI.getWarehouses = previous; globalThis.fetch = previousFetch; }
@@ -159,7 +161,7 @@ test('Peenya cards require an explicit Peenya address and an asking rent of at l
     warehouse(6, 8000, 'Not disclosed'), { ...warehouse(7, 8000, '27'), address: 'Newpeenya Road' }];
   const cards = marketListings(stock, 'Peenya', page.listingPolicy);
   assert.deepEqual(cards.map(card => card.id).sort(), [1, 3, 5]);
-  assert.deepEqual(featuredMarketListings(cards, 25).map(card => card.id), [1, 5, 3]);
+  assert.deepEqual(featuredMarketListings(cards, 25).map(card => card.id), [5, 3, 1]);
   assert.match(page.heroSummaryCompact, /Options within 4 hours/);
   assert.deepEqual(page.mapBylines, { peenya: 'North-West Bangalore', nelamangala: 'Tumkur Road, NH-48', dobbaspet: 'Tumkur Road, NH-48' });
 });

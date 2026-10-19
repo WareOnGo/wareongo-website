@@ -7,6 +7,7 @@ import { warehousePath } from '@/lib/warehouseSlug';
 import type { AdPageContent } from '@/data/adPages';
 import { adImageSources, FEATURED_IMAGE_SIZES } from '@/lib/adImageSources';
 import type { AdLandingWarehouse } from '@/data/micromarketAdPages';
+import { BANGALORE_FEATURED_LISTINGS as FEATURED_LISTINGS } from '@/data/bangaloreAvailableWarehouses';
 
 interface BangaloreFeaturedListingsProps {
   content: AdPageContent;
@@ -15,16 +16,11 @@ interface BangaloreFeaturedListingsProps {
   marketSlug?: string;
 }
 
-// Curated from the public listing details. Image sources and listing IDs are
-// recorded in public/bangalore/README.md, alongside the location card photos.
-const FEATURED_LISTINGS: AdLandingWarehouse[] = [
-  { id: 967, locality: 'Hoskote', address: 'Karapanahalli, Hoskote-Chintamani Road', size: 189000, price: 28.5, ceilingHeight: 40 },
-  { id: 408, locality: 'Devanahalli', address: 'Devanahalli', size: 100000, price: 33, ceilingHeight: 40 },
-  { id: 1226, locality: 'Jigani', address: 'Jigani-Anekal Road', size: 100183, price: 30, ceilingHeight: 40 },
-].map(listing => ({ ...listing, warehouseType: 'PEB' }));
-
 function FeaturedWarehouseCard({ listing, index, onContact, content, listings = FEATURED_LISTINGS, marketSlug }: BangaloreFeaturedListingsProps & { listing: AdLandingWarehouse; index: number }) {
-  const image = content.images[`featured-${listing.id}`];
+  // CMS photos first, shared with the listing's grid card. Curated covers hosted on the site render the same way, without a loading state.
+  const slot = content.images[`warehouse-${listing.id}`];
+  const image = slot?.url ? slot
+    : listing.image?.startsWith('/') ? { url: listing.image, alt: `Warehouse for rent in ${listing.locality}` } : undefined;
   const sources = adImageSources(image?.url ?? listing.image, FEATURED_IMAGE_SIZES);
   const context = { list_id: 'bangalore_featured', placement: 'bangalore_featured', market_slug: marketSlug, warehouse_id: listing.id, list_position: index + 1, page: 1, page_size: listings.length };
   return (

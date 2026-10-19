@@ -6,25 +6,25 @@ export const adPages: AdPageContent[] = [
     "slug": "bangalore",
     "name": "Bangalore",
     "copy": {
-      "seoTitle": "Warehouses in Bangalore | WareOnGo",
-      "metaDescription": "Explore warehouse spaces in Bangalore with WareOnGo.",
-      "heroHeading": "Warehouses for Rent",
+      "seoTitle": "Warehouses and Godowns for Rent in Bangalore | WareOnGo",
+      "metaDescription": "640+ warehouses and godowns for rent in Bangalore, from ₹14 to ₹250 per sq ft a month. Share your requirement and get a curated shortlist in 4 hours. You only pay when you close.",
+      "heroHeading": "Warehouses and Godowns for Rent",
       "heroAccent": "in Bangalore",
-      "enquiryHeading": "Find Your Warehouse",
-      "enquiryDescription": "Share your details. We’ll help you find a space in Bangalore.",
+      "enquiryHeading": "Find your warehouse",
+      "enquiryDescription": "Share your details. We find the best warehouse or godown space near you.",
       "enquirySubmit": "Get in touch",
-      "enquirySuccessHeading": "Thanks for Your Enquiry.",
+      "enquirySuccessHeading": "Thanks for your enquiry.",
       "enquirySuccessDescription": "Our team will get in touch to help with your Bangalore warehouse search.",
       "enquirySuccessCta": "Explore locations",
-      "featuredHeading": "Featured Warehouses",
-      "availableHeading": "Warehouses and Godowns in Bangalore",
+      "featuredHeading": "Featured warehouses",
+      "availableHeading": "Warehouses and Godowns Available Now in Bangalore",
       "filterAll": "All sizes",
       "filterSmall": "Under 5,000 sq ft",
       "filterMedium": "5,000 to 20,000 sq ft",
       "filterLarge": "20,000 sq ft and up",
       "availableFooter": "Not seeing your size? We’ll search {listings} for you.",
       "availableCta": "Tell us what you need",
-      "locationsHeading": "Explore Spaces in Bangalore",
+      "locationsHeading": "Explore spaces in Bangalore",
       "locationsCta": "Enquire now",
       "mapLabel": "Bangalore",
       "mapCaption": "Approximate micromarket locations",
@@ -32,20 +32,20 @@ export const adPages: AdPageContent[] = [
       "areaNeedHeading": "If You Need",
       "areaLocationsHeading": "Look At",
       "whyHeading": "Why Choose WareOnGo?",
-      "requestHeading": "Still Haven't Found the Warehouse You Want?",
+      "requestHeading": "Still haven't found the warehouse you want?",
       "requestDescription": "Tell us your requirements. We'll find it for you.",
       "requestDetails": "4-hour shortlist · You only pay when you close.",
       "requestCta": "Request a Warehouse",
       "requestPhoneCta": "Call Us Now",
-      "servicesHeading": "Our Services",
-      "audiencesHeading": "Who We Serve",
+      "servicesHeading": "Our services",
+      "audiencesHeading": "Who we serve",
       "contactHeading": "Contact Us",
       "contactDescription": "Share your details, and we'll get back to you!",
       "contactSuccess": "We will reach out within 2 hours.",
       "rentHeading": "Warehouse Rent in Bangalore",
       "rentAreaHeading": "Area",
-      "rentRateHeading": "Rent",
-      "rentUnit": "(₹/sq ft a month)",
+      "rentRateHeading": "Rent per Sq Ft",
+      "rentUnit": "(₹ a month)",
       "faqHeading": "Frequently Asked Questions"
     },
     "benefits": [
@@ -96,7 +96,7 @@ export const adPages: AdPageContent[] = [
       {
         "id": "find-warehouse",
         "title": "Find the Perfect Space for You",
-        "body": "Share your size, location, specs and budget. Our team picks verified options that fit and sends you a shortlist within 4 hours.",
+        "body": "We shortlist from our verified Bangalore listings against your size, location, specs and budget, and share options within 4 hours.",
         "cta": "Get my shortlist",
         "mobileTitle": "Find the Perfect Space",
         "mobileBody": "Verified spaces that suit you in 4 hrs"
@@ -104,7 +104,7 @@ export const adPages: AdPageContent[] = [
       {
         "id": "build-to-suit",
         "title": "Build-to-Suit Warehouses",
-        "body": "If the building you need doesn't exist yet, we match you with land and an owner who will build to your specification.",
+        "body": "If the building you need doesn’t exist yet, we match you with land and an owner who will build to your specification.",
         "cta": "Start a build to suit",
         "mobileTitle": "Built-to-Suit Warehouses",
         "mobileBody": "Custom-built warehouses, just for you"
@@ -139,7 +139,7 @@ export const adPages: AdPageContent[] = [
       {
         "id": "3pls",
         "title": "3PLs",
-        "body": "Find space that fits your clients’ storage and distribution needs. Have space left over in a warehouse you run? We’ll find a customer for it.",
+        "body": "Find logistics space that fits your clients’ storage and distribution needs. Have space left over in a warehouse you run? We’ll find a customer for it.",
         "primaryCta": "Find space",
         "secondaryCta": "Fill spare space",
         "mobileTitle": "",
@@ -432,7 +432,7 @@ export const adPages: AdPageContent[] = [
           },
           {
             "need": "Last-mile delivery in south and south-east Bangalore",
-            "areas": "HSR Layout, JP Nagar, Sarjapur"
+            "areas": "HSR Layout, Bommanahalli, Electronic City, JP Nagar, Sarjapur"
           },
           {
             "need": "Small industrial godowns close to the city",
@@ -442,11 +442,11 @@ export const adPages: AdPageContent[] = [
       }
     ],
     "rentGuide": {
-      "intro": "Warehouses and godowns for rent in Bangalore sit on four highways: Tumkur Road (NH-48), Old Madras Road (NH-75), Hosur Road and the airport road. Smaller godowns sit inside the city.",
+      "intro": "Commercial warehouses and godowns for rent, lease or to let in Bangalore sit on four highways: Tumkur Road (NH-48), Old Madras Road (NH-75), Hosur Road and the airport road. Smaller godowns sit inside the city.",
       "description": "Warehouse rent in Bangalore follows the land, not the unit size. On Tumkur Road and Old Madras Road, where land is plentiful, large sheds start from ₹17 per sq ft a month. Closer to the city, land gets scarcer, units get smaller and rent rises: godowns in Whitefield, Marathahalli, Sarjapur and HSR Layout ask up to ₹200 to ₹250. On the highway belts, a small unit costs about the same per sq ft as a large one, so choose the area first, then the size.",
       "rows": [
         {
-          "area": "Nelamangala, Dobbaspet, Makali",
+          "area": "Nelamangala, Dobbaspet, or Dabaspet, Makali",
           "rent": "₹17 to ₹40"
         },
         {
@@ -489,16 +489,24 @@ export const adPages: AdPageContent[] = [
     },
     "faqs": [
       {
-        "q": "What does WareOnGo charge?",
+        "q": "What Does WareOnGo Charge?",
         "a": "You pay nothing to search, visit or shortlist. Our fee is one month's rent, charged only when you sign the lease, so you only pay when you close."
       },
       {
-        "q": "Are the listings verified?",
+        "q": "Do I Need a Warehouse Broker in Bangalore?",
+        "a": "No. WareOnGo lists verified warehouses and godowns and sends you a shortlist within 4 hours. One person handles your visits, paperwork and lease."
+      },
+      {
+        "q": "Are the Listings Verified?",
         "a": "Yes. Our area managers verify every space on-site before it reaches your shortlist, so the size, specifications and availability you see are what you'll find on the visit."
       },
       {
-        "q": "Can WareOnGo find a small godown for rent in Bangalore?",
-        "a": "Yes. We find warehouses and godowns for rent in Bangalore of every size, from small godowns under 5,000 sq ft in Yelahanka, HSR Layout and Marathahalli to large distribution warehouses on Tumkur Road and Hosur Road. Share your size and area, and we shortlist only spaces that fit."
+        "q": "How Do I Find a Warehouse or Godown Near Me?",
+        "a": "Share your area and the size you need in the form above, or call us. We shortlist verified warehouses and godowns near you and share options within 4 hours."
+      },
+      {
+        "q": "What Sizes of Warehouse Can I Rent in Bangalore?",
+        "a": "Commercial warehouses and godowns from 5,000 sq ft to over 1 lakh sq ft, including 15,000, 25,000, 30,000 and 50,000 sq ft warehouses for rent. Share your size and area, and we shortlist only spaces that fit."
       }
     ]
   }

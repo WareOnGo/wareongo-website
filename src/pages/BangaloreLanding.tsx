@@ -23,7 +23,8 @@ import type { AdPreviewView } from './BangaloreAdPreview';
 import { trackEvent, type AnalyticsParams } from '@/lib/analytics';
 import { normalizeHeadingCase, titleCase } from '@/lib/headingCase';
 import { adImageSources, FEATURED_IMAGE_SIZES, SERVICE_IMAGE_SIZES } from '@/lib/adImageSources';
-import { marketText, type MicromarketAdPage, type MicromarketLandingData } from '@/data/micromarketAdPages';
+import { AD_CALLBACK_NOTE, AD_CALLBACK_NOTE_COMPACT, marketText, type MicromarketAdPage, type MicromarketLandingData } from '@/data/micromarketAdPages';
+import { BANGALORE_FEATURED_LISTINGS } from '@/data/bangaloreAvailableWarehouses';
 import { ORG_ID, SITE_URL } from '@/config/config';
 import '@/components/WarehouseCard.css';
 import './BangaloreLanding.css';
@@ -31,6 +32,18 @@ import './BangaloreLanding.css';
 const SERVICE_ICONS = { 'find-warehouse': Search, 'build-to-suit': Warehouse, 'list-space': Truck, 'transaction-management': Handshake };
 const AUDIENCE_ICONS = { owners: Warehouse, '3pls': Truck, companies: Building2 };
 const AUDIENCE_INTENTS = { owners: ['list-warehouse'], '3pls': ['find-space', 'fill-spare-space'], companies: ['find-warehouse'] };
+
+/** The /bangalore offer line: the city count rounded down, and the rent table's lowest and highest rents. */
+function citySummary(listings: number | undefined, rows: AdPageContent['rentGuide']['rows']) {
+  const rents = rows.flatMap(row => [...row.rent.matchAll(/₹\s*([\d,]+)/g)].map(match => Number(match[1].replace(/,/g, ''))));
+  if (!listings || !rents.length) return null;
+  const count = `${Math.floor(listings / 10) * 10}+`;
+  const [min, max] = [Math.min(...rents), Math.max(...rents)];
+  return {
+    full: `${count} warehouses in Bangalore · ₹${min} to ₹${max} per sq ft · Options within 4 hours`,
+    compact: `${count} warehouses · ₹${min}–₹${max}/sq ft · Options within 4 hours`,
+  };
+}
 
 /** Content slots follow the supplied Google Ads wireframe, top to bottom. */
 export default function BangaloreLanding({ content: savedContent = getBangaloreAdPage(), previewState = 'page', market }: {
@@ -44,25 +57,34 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
   // Compact the standard local map title; authored CMS alternatives stay intact.
   const mobileMapHeading = market && copy.locationsHeading === `Explore Spaces in & Around ${market.page.name.replace(' and ', ' & ')}`
     ? `Explore ${copy.mapLabel} & Nearby` : undefined;
-  const featuredImage = adImageSources(market ? market.data.featured[0]?.image : content.images['featured-967'].url, FEATURED_IMAGE_SIZES);
+  const cityFeatured = BANGALORE_FEATURED_LISTINGS[0];
+  const featuredImage = adImageSources(market ? market.data.featured[0]?.image : content.images[`featured-${cityFeatured.id}`]?.url ?? cityFeatured.image, FEATURED_IMAGE_SIZES);
   const services = content.services.map(item => ({ ...item, slug: item.id, icon: SERVICE_ICONS[item.id], description: item.body, mobileCopy: { title: item.mobileTitle, body: item.mobileBody } }));
   const audiences = content.audiences.map(item => ({ ...item, slug: item.id, description: item.body, icon: AUDIENCE_ICONS[item.id],
     actions: [item.primaryCta, item.secondaryCta].filter(Boolean).map((label, index) => ({ label, intent: AUDIENCE_INTENTS[item.id][index] })),
   }));
   const data = useLoaderData() as BangaloreLandingData | null;
+  const heroSummary = market
+    ? { full: marketText(market.page.heroSummary, market.data), compact: market.page.heroSummaryCompact && marketText(market.page.heroSummaryCompact, market.data) }
+    : citySummary(data?.stats.listings, content.rentGuide.rows);
+  const cityListings = (slug?: string) => slug
+    ? data?.cityOverview?.micromarkets?.find(item => item.slug === slug)?.listings
+      ?? MICROMARKETS.find(item => item.citySlug === 'bengaluru' && item.slug === slug)?.count
+      ?? null
+    : null;
   const mapAreas = market ? market.page.mapLocations : BANGALORE_MAP_AREAS;
   const locations = mapAreas.map(location => ({
     ...location,
     image: !location.imageSlot && market?.data.marketImages?.[location.slug] ? { ...market.data.marketImages[location.slug], alt: `Warehouse in ${location.canonical}`, width: 800, height: 450 } : location.image,
     caption: market?.page.mapBylines[location.slug] ? marketText(market.page.mapBylines[location.slug], market.data) : location.caption,
+    // Micromarket pages take their card sub-lines from the CMS bylines above.
+    byline: market ? undefined : location.byline,
     label: market?.page.map?.coordinates?.[location.slug]
       ? mapLabelsForCoordinates(market.page.map.coordinates[location.slug], market.page.map.views)
       : location.label,
-    count: market ? market.data.marketCounts[location.countSlug ?? location.slug] ?? null : location.countSlug
-      ? data?.cityOverview?.micromarkets?.find(market => market.slug === location.countSlug)?.listings
-        ?? MICROMARKETS.find(market => market.citySlug === 'bengaluru' && market.slug === location.countSlug)?.count
-        ?? null
-      : null,
+    count: market ? market.data.marketCounts[location.countSlug ?? location.slug] ?? null : cityListings(location.countSlug),
+    // The city's phone cards run by listings, most first; grouped areas rank by their main tag.
+    rank: market ? undefined : cityListings(location.countSlug ?? location.rankSlug) ?? 0,
   }));
   const [mapScope, setMapScope] = useState<BangaloreMapScope>(market?.page.mapScope ?? 'belts');
   const [contactContext, setContactContext] = useState<AnalyticsParams | null>(previewState === 'contact' ? { source: 'cms-preview' } : null);
@@ -110,12 +132,13 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
         <section className="bangalore-landing__hero bangalore-landing__container" aria-labelledby="bangalore-title">
           <div className="bangalore-landing__hero-copy">
             <h1 id="bangalore-title" className="bangalore-landing__headline">{copy.heroHeading} <span>{copy.heroAccent}</span></h1>
-            {market && <p className="bangalore-landing__hero-summary" data-compact={market.page.heroSummaryCompact ? true : undefined}>
-              <span className="bangalore-landing__note-full">{marketText(market.page.heroSummary, market.data)}</span>
-              {market.page.heroSummaryCompact && <span className="bangalore-landing__note-compact">{marketText(market.page.heroSummaryCompact, market.data)}</span>}
+            {heroSummary && <p className="bangalore-landing__hero-summary" data-compact={heroSummary.compact ? true : undefined}>
+              <span className="bangalore-landing__note-full">{heroSummary.full}</span>
+              {heroSummary.compact && <span className="bangalore-landing__note-compact">{heroSummary.compact}</span>}
             </p>}
           </div>
-          <BangaloreEnquiryForm copy={copy} previewSubmitted={previewState === 'hero-success'} marketSlug={market?.page.slug} source={source} callbackNote={market?.page.callbackNote} callbackNoteCompact={market?.page.callbackNoteCompact} />
+          <BangaloreEnquiryForm copy={copy} previewSubmitted={previewState === 'hero-success'} marketSlug={market?.page.slug} source={source}
+            callbackNote={market?.page.callbackNote ?? AD_CALLBACK_NOTE} callbackNoteCompact={market?.page.callbackNoteCompact ?? AD_CALLBACK_NOTE_COMPACT} />
           <BangaloreFeaturedListings content={content} onContact={openContact} listings={market?.data.featured} marketSlug={market?.page.slug} />
           <section className="bangalore-landing__trust" aria-labelledby="bangalore-trust-title">
             <h2 id="bangalore-trust-title" className="bangalore-landing__trust-title">{market ? 'Trusted by 200+ Companies Across India' : 'Trusted by 200+ Companies across India'}</h2>

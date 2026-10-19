@@ -120,8 +120,11 @@ Standard local map headings have a short mobile label; custom CMS headings are
 shown as authored on both desktop and mobile.
 
 The loader reads every inventory page per rent market. Cards show built stock,
-prefer sheds, and retain real listing photos. Featured cards cover the three
-size bands where available. Both grid and featured cards enforce the displayed rent floor and show locality names instead of street addresses. Counts
+prefer sheds, and retain real listing photos. Featured cards cover the 5,000 to
+15,000, 15,000 to 30,000 and 50,000+ sq ft bands where available. Both grid and featured cards enforce the displayed rent floor and the shared 5,000 sq ft
+size floor (`AD_MIN_SIZE`), and show locality names instead of street addresses. The size chips (5,000 to 15,000,
+15,000 to 30,000, 30,000 to 50,000 and 50,000+ sq ft) are labelled in code from their bands on every ad page;
+the CMS chip-label fields other than "All sizes" are no longer shown. Counts
 and the rent guide use the full tagged inventory; Peenya's displayed cards also
 require an explicit Peenya address and an asking rent of at least ₹25. Rent ranges exclude land/BTS and missing rates,
 require at least ten rates, and use the lowest +10% and highest +15%, rounded
@@ -134,7 +137,10 @@ Micromarket ads have their own canonical/OG URLs, `noindex,follow`, Organization
 schema and a single GA bootstrap first in the generated head. They retain the
 shared navbar and add a fixed WhatsApp contact. They are
 intentionally excluded from the SEO sitemap. `/bangalore` retains its existing
-city layout and content. All ad pages use the compact `AdFooter`: brand,
+city layout and content, plus the offer line under the H1 (city count rounded
+down, and the lowest and highest rents in its CMS rent table). Every ad page shares
+the callback line and the form intro's phone wording (the intro without "Share
+your details." or its closing full stop), shown below 600px. All ad pages use the compact `AdFooter`: brand,
 Privacy Policy, Terms of Service, Login and copyright. Deploy the backend migration/API before enabling the CMS and website builds;
 the generator fails if the approved Peenya seed is missing or content is invalid.
 The preview at `/preview/ad-pages/micromarket` accepts authenticated CMS messages

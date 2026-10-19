@@ -9,13 +9,15 @@ import type { AdPageContent } from '@/data/adPages';
 import { adImageSources, AVAILABLE_IMAGE_SIZES } from '@/lib/adImageSources';
 import type { AdLandingWarehouse } from '@/data/micromarketAdPages';
 
+// Labels follow the bands, so a chip always names the sizes it shows. Listings
+// start at AD_MIN_SIZE (5,000 sq ft), so "All sizes" needs no lower bound.
+const SIZE_BANDS = [[5000, 15000], [15000, 30000], [30000, 50000], [50000, Infinity]] as const;
 const SIZE_FILTERS = [
-  { id: 'all', labelKey: 'filterAll', min: 0, max: Infinity },
-  { id: 'small', labelKey: 'filterSmall', min: 0, max: 5000 },
-  { id: 'medium', labelKey: 'filterMedium', min: 5000, max: 20000 },
-  { id: 'large', labelKey: 'filterLarge', min: 20000, max: Infinity },
-] as const;
-type SizeFilter = (typeof SIZE_FILTERS)[number]['id'];
+  { id: 'all', min: 0, max: Infinity },
+  ...SIZE_BANDS.map(([min, max]) => ({ id: `${min}-${Number.isFinite(max) ? max : 'plus'}`, min, max })),
+];
+const sqft = (value: number) => value.toLocaleString('en-IN');
+const bandLabel = (min: number, max: number) => Number.isFinite(max) ? `${sqft(min)} to ${sqft(max)} sq ft` : `${sqft(min)} sq ft and up`;
 
 export default function BangaloreAvailableListings({ onContact, totalListings, content, inventory, marketSlug }: {
   content: AdPageContent;
@@ -24,11 +26,11 @@ export default function BangaloreAvailableListings({ onContact, totalListings, c
   inventory?: AdLandingWarehouse[];
   marketSlug?: string;
 }) {
-  const [filter, setFilter] = useState<SizeFilter>('all');
+  const [filter, setFilter] = useState('all');
   const track = useRef<HTMLDivElement>(null);
   const copy = content.copy;
   const heading = copy.availableHeading;
-  const sizeFilters = SIZE_FILTERS.map(option => ({ ...option, label: copy[option.labelKey] }));
+  const sizeFilters = SIZE_FILTERS.map(option => ({ ...option, label: option.id === 'all' ? copy.filterAll : bandLabel(option.min, option.max) }));
   const band = sizeFilters.find(option => option.id === filter)!;
   const listings = inventory ? inventory.filter(listing => listing.size >= band.min && listing.size < band.max).slice(0, 6) : filter === 'all'
     ? BANGALORE_ALL_SIZES_IDS.flatMap(id => BANGALORE_AVAILABLE_WAREHOUSES.filter(listing => listing.id === id))

@@ -40,24 +40,19 @@
 /* The enquiry is next to the intro on desktop, and immediately after it on phones. */
 .bangalore-landing__hero { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); grid-template-areas: "intro enquiry" "featured enquiry" "trust trust"; grid-template-rows: max-content 1fr max-content; align-items: start; gap: 24px 48px; padding-top: 36px; }
 .bangalore-landing__hero-copy { grid-area: intro; min-width: 0; container: ad-intro / inline-size; }
-.bangalore-landing__headline { margin: 0; font-size: var(--landing-text-hero); font-weight: 700; line-height: 1.12; letter-spacing: -.04em; }
-.bangalore-landing__headline > span { display: block; color: var(--landing-accent); }
-.bangalore-landing[data-micromarket] .bangalore-landing__headline { font-size: clamp(32px, 5.8cqw, 44px); text-wrap: balance; }
-.bangalore-landing[data-micromarket] .bangalore-landing__headline > span { display: inline; }
+.bangalore-landing__headline { margin: 0; font-size: var(--landing-text-hero); font-weight: 700; line-height: 1.12; letter-spacing: -.04em; text-wrap: balance; }
+.bangalore-landing__headline > span { color: var(--landing-accent); }
+.bangalore-landing[data-micromarket] .bangalore-landing__headline { font-size: clamp(32px, 5.8cqw, 44px); }
 .bangalore-landing__hero-summary { container: ad-summary / inline-size; margin-top: 12px; font-size: var(--landing-text-sm); font-weight: 600; line-height: var(--landing-leading-ui); }
-.bangalore-landing__callback-note { container: ad-callback / inline-size; margin-top: 12px; color: var(--landing-muted); font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); text-align: center; }
+.bangalore-landing__callback-note { margin-top: 12px; color: var(--landing-muted); font-size: var(--landing-text-xs); line-height: var(--landing-leading-ui); text-align: center; }
 .bangalore-landing__note-compact { display: none; }
-/* Switch copy by the space available, including the narrow desktop form. */
+/* Switch the hero summary by the space available. */
 @container ad-summary (max-width: 639px) {
   [data-compact] > .bangalore-landing__note-full { display: none; }
   [data-compact] > .bangalore-landing__note-compact { display: inline; font-size: clamp(10px, 3.4cqw, var(--landing-text-xs)); }
 }
 @container ad-summary (max-width: 319px) {
   [data-compact] > .bangalore-landing__note-compact { letter-spacing: -.02em; }
-}
-@container ad-callback (max-width: 499px) {
-  [data-compact] > .bangalore-landing__note-full { display: none; }
-  [data-compact] > .bangalore-landing__note-compact { display: inline; }
 }
 
 /* Micromarket additions use the city page's spacing, cards and breakpoints. */
@@ -198,17 +193,20 @@
 .bangalore-landing__map-card h3 { margin: 0; font-size: var(--landing-text-xs); font-weight: 600; line-height: var(--landing-leading-ui); letter-spacing: 0; white-space: nowrap; transition: font-size var(--map-morph), line-height var(--map-morph); }
 .bangalore-landing__map-card-count { margin: 2px 0 0; color: var(--landing-muted); font-size: var(--landing-text-xs); font-weight: 400; line-height: var(--landing-leading-ui); white-space: nowrap; }
 .bangalore-landing__map-card-count { font-variant-numeric: tabular-nums; }
+.bangalore-landing__map-card[aria-hidden="true"] .bangalore-landing__map-card-byline { display: none; }
 .bangalore-landing__map-card-link { position: absolute; right: 12px; bottom: 8px; left: 12px; display: flex; min-height: var(--landing-compact-height); align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0; border-top: var(--landing-border); color: var(--landing-ink); font-size: var(--landing-text-xs); font-weight: 600; line-height: var(--landing-leading-ui); text-align: left; }
 .bangalore-landing__map-card-link:hover { color: var(--landing-accent); }
 .bangalore-landing__map-card-link > svg { flex-shrink: 0; }
 .bangalore-landing__map-card-close { position: absolute; top: 4px; right: 4px; display: grid; width: var(--landing-compact-height); height: var(--landing-compact-height); place-items: center; border-radius: var(--landing-control-radius); color: var(--landing-ink); }
 .bangalore-landing__map-card-close > svg { width: 28px; height: 28px; padding: 6px; border: var(--landing-border); border-radius: var(--landing-control-radius); background: var(--landing-card); }
 .bangalore-landing__map-card-close:hover > svg { background: var(--ui-listing-hover); }
-.bangalore-landing__map-card-link, .bangalore-landing__map-card-close { opacity: 0; visibility: hidden; transition: opacity 120ms ease, visibility 0s 120ms; }
+/* The open card's listing count, beside the close button. */
+.bangalore-landing__map-card-chip { position: absolute; top: calc(4px + (var(--landing-compact-height) - 28px) / 2); right: calc(4px + (var(--landing-compact-height) + 28px) / 2 + 6px); display: flex; height: 28px; align-items: center; padding: 0 10px; border: var(--landing-border); border-radius: var(--landing-pill-radius); background: var(--landing-card); color: var(--landing-ink); font-size: var(--landing-text-xs); font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.bangalore-landing__map-card-link, .bangalore-landing__map-card-close, .bangalore-landing__map-card-chip { opacity: 0; visibility: hidden; transition: opacity 120ms ease, visibility 0s 120ms; }
 .bangalore-landing__map-card[aria-hidden="false"] .bangalore-landing__map-card-image { top: 0; left: 0; width: 100%; height: var(--map-photo-height); border-radius: 0; }
 .bangalore-landing__map-card[aria-hidden="false"] .bangalore-landing__map-card-body { top: calc(var(--map-photo-height) + 12px); left: 12px; right: 12px; }
 .bangalore-landing__map-card[aria-hidden="false"] h3 { font-size: var(--landing-text-base); line-height: var(--landing-leading-title); }
-.bangalore-landing__map-card[aria-hidden="false"] .bangalore-landing__map-card-link, .bangalore-landing__map-card[aria-hidden="false"] .bangalore-landing__map-card-close { opacity: 1; visibility: visible; transition: opacity 180ms ease 100ms, visibility 0s; }
+.bangalore-landing__map-card[aria-hidden="false"] :is(.bangalore-landing__map-card-link, .bangalore-landing__map-card-close, .bangalore-landing__map-card-chip) { opacity: 1; visibility: visible; transition: opacity 180ms ease 100ms, visibility 0s; }
 .bangalore-landing main .bangalore-landing__map-card-link:focus-visible { outline-offset: 2px; }
 .bangalore-landing main .bangalore-landing__map-card-close:focus-visible { outline-color: var(--landing-card); outline-offset: -4px; }
 .bangalore-landing__map-surface:has(.bangalore-landing__map-bubble:focus-visible) { outline: var(--landing-focus-width) solid var(--landing-accent); outline-offset: 3px; }
@@ -495,6 +493,13 @@
   .bangalore-landing__stats-content .city-rent-table > p { padding-inline: 16px; }
 }
 
+/* Phones show the form's shorter intro and callback wording (17 Oct review). */
+@media (max-width: 599px) {
+  .bangalore-landing__enquiry [data-compact] > .bangalore-landing__note-full { display: none; }
+  .bangalore-landing__enquiry [data-compact] > .bangalore-landing__note-compact { display: inline; }
+  .bangalore-landing__enquiry-intro { font-size: 10.6px; }
+}
+
 @media (max-width: 359px) {
   .bangalore-landing__benefit { padding: 8px; }
 }
@@ -506,5 +511,5 @@
 @media (prefers-reduced-motion: reduce) {
   .bangalore-landing__button, .bangalore-landing__audience-card, .bangalore-landing__request a, .bangalore-landing__map-bubble { transition: none; }
   .bangalore-landing__trust .trusted-scroller { animation: none; }
-  .bangalore-landing__map-surface, .bangalore-landing__map-card-image, .bangalore-landing__map-card-body, .bangalore-landing__map-card h3, .bangalore-landing__map-card .bangalore-landing__map-card-link, .bangalore-landing__map-card .bangalore-landing__map-card-close { transition: none; }
+  .bangalore-landing__map-surface, .bangalore-landing__map-card-image, .bangalore-landing__map-card-body, .bangalore-landing__map-card h3, .bangalore-landing__map-card .bangalore-landing__map-card-link, .bangalore-landing__map-card .bangalore-landing__map-card-close, .bangalore-landing__map-card .bangalore-landing__map-card-chip { transition: none; }
 }

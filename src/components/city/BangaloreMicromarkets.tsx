@@ -8,6 +8,8 @@ import WarehousePhoto from '@/components/WarehousePhoto';
 
 interface Location extends BangaloreMapArea {
   count: number | null;
+  /** When set, phone cards run by this, highest first. */
+  rank?: number;
 }
 
 /** Live area photos use the same original-image recovery as listing cards. */
@@ -35,6 +37,8 @@ export default function BangaloreMicromarkets({ locations, onContact, content, s
 }) {
   const camera = mapViews ?? BANGALORE_MAP_VIEWS[scope];
   const visibleLocations = locations.filter(location => location.scope === scope);
+  const mobileLocations = visibleLocations.some(location => location.rank !== undefined)
+    ? [...visibleLocations].sort((a, b) => (b.rank ?? 0) - (a.rank ?? 0)) : visibleLocations;
   const [active, setActive] = useState<string | null>(null);
   const [pinned, setPinned] = useState<string | null>(null);
   const mapRef = useRef<HTMLElement>(null);
@@ -232,7 +236,8 @@ export default function BangaloreMicromarkets({ locations, onContact, content, s
             const photo = location.image ?? (location.imageSlot ? content.images[location.imageSlot] : undefined);
             const countLabel = location.count === null ? null : `${location.count.toLocaleString('en-IN')} ${location.count === 1 ? 'listing' : 'listings'}`;
             const chipCaption = location.chipCaption ?? countLabel ?? 'Explore spaces';
-            const cardCaption = location.caption ?? countLabel ?? 'Enquire for availability';
+            // The open card shows the count as a chip, so its sub-line keeps only the place.
+            const cardCaption = location.caption ?? (countLabel ? null : 'Enquire for availability');
             const expanded = active === location.slug;
             const cardId = `bangalore-map-card-${location.slug}`;
             const style = {
@@ -260,8 +265,10 @@ export default function BangaloreMicromarkets({ locations, onContact, content, s
                     <MapPhoto key={photo?.url} photo={photo} sizes={expanded ? '264px' : '40px'} className="bangalore-landing__map-card-image" />
                     <div className="bangalore-landing__map-card-body">
                       <h3 id={`${cardId}-title`}>{expanded ? location.title ?? location.canonical : location.chipLabel ?? location.canonical}</h3>
-                      <p className="bangalore-landing__map-card-count">{expanded ? cardCaption : chipCaption}</p>
+                      {location.byline && <p className="bangalore-landing__map-card-count bangalore-landing__map-card-byline">{location.byline}</p>}
+                      {(expanded ? cardCaption : chipCaption) && <p className="bangalore-landing__map-card-count">{expanded ? cardCaption : chipCaption}</p>}
                     </div>
+                    {countLabel && <span className="bangalore-landing__map-card-chip">{countLabel}</span>}
                     <button type="button" className="bangalore-landing__map-card-link" aria-haspopup="dialog" aria-label={`${content.copy.locationsCta} about warehouses in ${location.canonical}`} disabled={!expanded} onClick={event => enquire(event.currentTarget, location)}>
                       {content.copy.locationsCta}<ArrowRight size={16} aria-hidden="true" />
                     </button>
@@ -280,8 +287,9 @@ export default function BangaloreMicromarkets({ locations, onContact, content, s
         </figcaption>
       </figure>
       <div key={scope} ref={mobileMarketsRef} id="bangalore-mobile-markets" className="bangalore-landing__mobile-markets" role="region" aria-label={`${scope === 'belts' ? 'Warehouse belt' : 'City area'} cards`} tabIndex={0}>
-        {visibleLocations.map(location => {
+        {mobileLocations.map(location => {
           const photo = location.image ?? (location.imageSlot ? content.images[location.imageSlot] : undefined);
+          const subline = [location.caption, location.byline].filter(Boolean).join(', ');
           return (
             <article key={location.slug} id={`bangalore-mobile-market-${location.slug}`} ref={node => { mobileCardRefs.current[location.slug] = node; }} className="bangalore-landing__mobile-market" data-market={location.slug}>
               <MapPhoto key={photo?.url} photo={photo} sizes={MARKET_IMAGE_SIZES} />
@@ -290,7 +298,7 @@ export default function BangaloreMicromarkets({ locations, onContact, content, s
               </span>}
               <div className="bangalore-landing__mobile-market-body">
                 <h3>{location.title ?? location.canonical}</h3>
-                {location.caption && <p>{location.caption}</p>}
+                {subline && <p>{subline}</p>}
               </div>
               <button type="button" className="bangalore-landing__mobile-market-link" aria-haspopup="dialog" aria-label={`${content.copy.locationsCta} about warehouses in ${location.canonical}`} onClick={event => enquire(event.currentTarget, location, 'bangalore_locations')}>
                 <span>{content.copy.locationsCta}<ArrowRight size={16} aria-hidden="true" /></span>

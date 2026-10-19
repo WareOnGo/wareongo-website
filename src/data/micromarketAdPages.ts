@@ -29,6 +29,12 @@ interface AdPageLayout {
   mapLocations?: { slug: string; canonical: string; scope: string; countSlug: string; imageSlot?: string; inventory: AdInventoryRule; label: Record<MapView, number[]> }[];
   rentMarkets: { slug: string; name: string; label: string; floor?: number; inventory?: AdInventoryRule }[];
 }
+/** Shared by every ad page, including /bangalore. The compact line shows on phones. */
+export const AD_CALLBACK_NOTE = 'Our team calls you within 4 hours, 9:30 AM to 7:30 PM.';
+export const AD_CALLBACK_NOTE_COMPACT = 'Our team calls you between 9:30 AM to 7:30 PM';
+/** Ad pages show nothing smaller: the campaigns exclude small-godown searches. */
+export const AD_MIN_SIZE = 5000;
+
 const LAYOUTS: Record<string, AdPageLayout> = {
   'bengaluru/peenya': peenyaLayout, 'bengaluru/hoskote': hoskoteLayout,
   'bengaluru/nelamangala': nelamangalaLayout, 'bengaluru/electronic-city-jigani-bommasandra': southLayout,
@@ -118,7 +124,7 @@ export function configureMicromarketAdPage(content: MicromarketAdContent): Micro
   const city = hosur ? 'Hosur' : 'Bengaluru';
   const team = hosur ? 'Our team' : 'Our Bangalore team';
   const mapScope = layout?.mapScope ?? BANGALORE_MAP_AREAS.find(area => area.slug === slug)?.scope ?? 'belts';
-  const callbackNote = team + ' calls you within 4 hours, 9:30 AM to 7:30 PM.';
+  const callbackNote = AD_CALLBACK_NOTE;
   const mapMarkets = layout?.mapMarkets ?? BANGALORE_MAP_AREAS.filter(area => area.scope === mapScope).map(area => area.slug);
   const mapLocations: MicromarketAdPage['mapLocations'] = layout?.mapLocations
     ? layout.mapLocations.map(location => ({ ...location, scope: 'belts', imageSlot: location.imageSlot as keyof AdPageContent['images'],
@@ -135,14 +141,14 @@ export function configureMicromarketAdPage(content: MicromarketAdContent): Micro
     mapBylines: Object.fromEntries(content.mapBylines.map(item => [item.slug, item.byline])),
     listingPolicy: layout?.listingPolicy,
     map: layout?.map,
-    callbackNote, callbackNoteCompact: 'We call within 4 hours · 9:30am–7:30pm',
+    callbackNote, callbackNoteCompact: AD_CALLBACK_NOTE_COMPACT,
     heroSummary: '{listings} warehouses' + (grouped ? '' : ' in ' + name) + ' · {rentRange} per sq ft · Options within 4 hours',
     heroSummaryCompact: '{listings} warehouses · {compactRentRange}/sq ft · Options within 4 hours',
     whatsappMessage: "Hi, I'm looking for a warehouse in " + name + '. (From the ' + name + ' page)',
     copy: {
       ...content.copy,
       heroAccent: 'in ' + name.replace(' and ', ' & '),
-      enquiryDescription: 'Share your details. We’ll help you find a space ' + (grouped ? 'here' : 'in ' + name) + '.',
+      enquiryDescription: 'Share your details. We find the best warehouse or godown space ' + (grouped ? 'here' : 'in ' + name) + '.',
       enquirySuccessDescription: team + ' will call you within 4 hours, 9:30 AM to 7:30 PM, to help with your ' + name + ' warehouse search.',
       availableFooter: 'Not seeing your size? We’ll search all {listings} ' + (grouped ? 'listings in ' + name : name + ' listings') + ' for you.',
       mapLabel: grouped ? 'Hosur Road' : name,

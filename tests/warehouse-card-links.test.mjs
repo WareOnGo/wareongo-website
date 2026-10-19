@@ -27,6 +27,7 @@ const { outputFiles } = await build({
         <MemoryRouter><FeaturedListingsSection /></MemoryRouter>
       );
       export const bangaloreContent = getBangaloreAdPage();
+      export { BANGALORE_FEATURED_LISTINGS } from './src/data/bangaloreAvailableWarehouses';
       export const renderBangaloreFeatured = (content = bangaloreContent) => renderToString(
         <MemoryRouter><BangaloreFeaturedListings content={content} onContact={() => {}} /></MemoryRouter>
       );
@@ -50,7 +51,7 @@ const compiled = { exports: {} };
 new Function('require', 'module', 'exports', outputFiles[0].text)(
   createRequire(import.meta.url), compiled, compiled.exports,
 );
-const { renderCard, renderFeatured, renderBangaloreFeatured, bangaloreContent, transformWarehouseData, parseClearHeight, parseDockCount, cardLocation, cardConstructionLabel, cardUpdateLabel } = compiled.exports;
+const { renderCard, renderFeatured, renderBangaloreFeatured, bangaloreContent, BANGALORE_FEATURED_LISTINGS, transformWarehouseData, parseClearHeight, parseDockCount, cardLocation, cardConstructionLabel, cardUpdateLabel } = compiled.exports;
 
 const descendants = node => (node.childNodes ?? []).flatMap(child => [child, ...descendants(child)]);
 const elements = (node, tag) => descendants(node).filter(child => child.tagName === tag);
@@ -150,12 +151,16 @@ test('Bangalore hero photos render before hydration without covering loading ind
   const root = parseFragment(renderBangaloreFeatured());
   const photos = elements(root, 'img');
   assert.equal(photos.length, 3);
-  assert.equal(descendants(root).filter(node => attr(node, 'data-image-loading') !== undefined).length, 0);
-  for (const [index, id] of [967, 408, 1226].entries()) {
-    assert.equal(attr(photos[index], 'src'), bangaloreContent.images[`featured-${id}`].url);
-    assert.equal(attr(photos[index], 'alt'), bangaloreContent.images[`featured-${id}`].alt);
+  // Site-hosted covers render immediately; a live listing photo keeps its loading state.
+  const live = BANGALORE_FEATURED_LISTINGS.filter(listing => !listing.image.startsWith('/'));
+  assert.equal(descendants(root).filter(node => attr(node, 'data-image-loading') !== undefined).length, live.length);
+  for (const [index, listing] of BANGALORE_FEATURED_LISTINGS.entries()) {
+    const slot = bangaloreContent.images[`warehouse-${listing.id}`];
+    assert.equal(attr(photos[index], 'src'), slot?.url ?? listing.image);
+    assert.equal(attr(photos[index], 'alt'), slot?.alt ?? `Warehouse for rent in ${listing.locality}`);
     assert.equal(attr(photos[index], 'loading'), index === 0 ? 'eager' : 'lazy');
     assert.equal(attr(photos[index], 'fetchpriority'), index === 0 ? 'high' : 'auto');
+    if (live.includes(listing)) continue;
     assert.ok(attr(photos[index], 'srcset')?.includes('.webp 512w'));
     assert.ok(attr(photos[index], 'sizes'));
   }
@@ -163,9 +168,11 @@ test('Bangalore hero photos render before hydration without covering loading ind
 });
 
 test('Bangalore featured photos preserve CMS-approved image endpoints without filename extensions', () => {
-  for (const url of ['/media/featured-warehouse?revision=2', 'https://assets.example.test/image/967?width=640', 'https://assets.example.test/image.php?id=967']) {
+  const [first] = BANGALORE_FEATURED_LISTINGS;
+  for (const url of ['/media/featured-warehouse?revision=2', `https://assets.example.test/image/${first.id}?width=640`, `https://assets.example.test/image.php?id=${first.id}`]) {
+    // Featured cards share the photo slot of the listing's grid card.
     const content = structuredClone(bangaloreContent);
-    content.images['featured-967'].url = url;
+    content.images[`warehouse-${first.id}`].url = url;
     const root = parseFragment(renderBangaloreFeatured(parseAdPage(content)));
     assert.equal(elements(root, 'img').length, 3);
     assert.equal(attr(elements(root, 'img')[0], 'src'), url);
