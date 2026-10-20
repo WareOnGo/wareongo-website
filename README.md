@@ -82,8 +82,9 @@ in `src/components/city/`, the shared `WarehouseCard`, `Navbar`,
 `TrustedBySection`, `RequestCTASection`, `ad/AdFooter` and contact dialog. Keep visual and
 interaction changes in those components and `BangaloreLanding.css`; new market
 pages should provide configuration and inventory, without copying JSX or styles.
-The local summary, callback note, area cards and WhatsApp button are the additional
-elements specified in the Peenya sample. The existing responsive grids, card
+The local summary, callback note and area cards are the additional
+elements specified in the Peenya sample. All ad pages share the bottom-right
+WhatsApp button, with a message for the current location. The existing responsive grids, card
 sizes, controls, typography and section order remain shared.
 
 To add a Bangalore micromarket, open **CMS → Ad pages → Micromarket ad pages →
@@ -135,7 +136,7 @@ with the other generated inventory pages; failed/incomplete reads fail the build
 
 Micromarket ads have their own canonical/OG URLs, `noindex,follow`, Organization
 schema and a single GA bootstrap first in the generated head. They retain the
-shared navbar and add a fixed WhatsApp contact. They are
+shared navbar and the fixed WhatsApp contact used on every ad page. They are
 intentionally excluded from the SEO sitemap. `/bangalore` retains its existing
 city layout and content, plus the offer line under the H1 (city count rounded
 down, and the lowest and highest rents in its CMS rent table). Every ad page shares
