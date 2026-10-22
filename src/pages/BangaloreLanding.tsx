@@ -55,7 +55,7 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
   const copy = market ? savedContent.copy : normalizeHeadingCase(savedContent.copy);
   const content = { ...savedContent, copy };
   // Compact the standard local map title; authored CMS alternatives stay intact.
-  const mobileMapHeading = market && copy.locationsHeading === `Explore Spaces in & Around ${market.page.name.replace(' and ', ' & ')}`
+  const mobileMapHeading = market && copy.locationsHeading === `Explore Spaces in & Around ${market.page.place.replace(' and ', ' & ')}`
     ? `Explore ${copy.mapLabel} & Nearby` : undefined;
   const cityFeatured = BANGALORE_FEATURED_LISTINGS[0];
   const featuredImage = adImageSources(market ? market.data.featured[0]?.image : content.images[`featured-${cityFeatured.id}`]?.url ?? cityFeatured.image, FEATURED_IMAGE_SIZES);
@@ -82,14 +82,14 @@ export default function BangaloreLanding({ content: savedContent = getBangaloreA
     label: market?.page.map?.coordinates?.[location.slug]
       ? mapLabelsForCoordinates(market.page.map.coordinates[location.slug], market.page.map.views)
       : location.label,
-    count: market ? market.data.marketCounts[location.countSlug ?? location.slug] ?? null : cityListings(location.countSlug),
+    count: location.showCount === false ? null : market ? market.data.marketCounts[location.countSlug ?? location.slug] ?? null : cityListings(location.countSlug),
     // The city's phone cards run by listings, most first; grouped areas rank by their main tag.
     rank: market ? undefined : cityListings(location.countSlug ?? location.rankSlug) ?? 0,
   }));
   const [mapScope, setMapScope] = useState<BangaloreMapScope>(market?.page.mapScope ?? 'belts');
   const [contactContext, setContactContext] = useState<AnalyticsParams | null>(previewState === 'contact' ? { source: 'cms-preview' } : null);
   const contactTrigger = useRef<HTMLButtonElement | null>(null);
-  const source = market ? market.page.citySlug === 'hosur' ? 'hosur-landing' : `bangalore-${market.page.slug}-landing` : 'bangalore-landing';
+  const source = market ? market.page.citySlug !== 'bengaluru' ? `${market.page.citySlug}-landing` : `bangalore-${market.page.slug}-landing` : 'bangalore-landing';
   const whatsappMessage = market?.page.whatsappMessage ?? "Hi, I'm looking for a warehouse in Bangalore. (From the Bangalore page)";
 
   function openContact(trigger: HTMLButtonElement, context: AnalyticsParams) {

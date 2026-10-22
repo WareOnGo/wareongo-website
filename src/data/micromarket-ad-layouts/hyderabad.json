@@ -1,0 +1,181 @@
+{
+  "mapScope": "belts",
+  "mapMarkets": [
+    "medchal",
+    "kompally-devaryamjal",
+    "shamshabad",
+    "patancheru"
+  ],
+  "inventory": {
+    "city": "Hyderabad"
+  },
+  "rentMarkets": [
+    {
+      "slug": "hyderabad",
+      "name": "Hyderabad",
+      "label": "All Hyderabad",
+      "inventory": {
+        "city": "Hyderabad"
+      }
+    },
+    {
+      "slug": "kompally",
+      "name": "Kompally",
+      "label": "Kompally",
+      "inventory": {
+        "city": "Hyderabad",
+        "includeAny": [
+          "Kompally"
+        ]
+      }
+    },
+    {
+      "slug": "devaryamjal",
+      "name": "Devaryamjal",
+      "label": "Devaryamjal",
+      "inventory": {
+        "city": "Hyderabad",
+        "includeAny": [
+          "Devaryamjal"
+        ]
+      }
+    },
+    {
+      "slug": "shamshabad",
+      "name": "Shamshabad",
+      "label": "Shamshabad",
+      "inventory": {
+        "city": "Hyderabad",
+        "includeAny": [
+          "Shamshabad"
+        ]
+      }
+    },
+    {
+      "slug": "medchal",
+      "name": "Medchal",
+      "label": "Medchal",
+      "inventory": {
+        "city": "Hyderabad",
+        "includeAny": [
+          "Medchal"
+        ]
+      }
+    }
+  ],
+  "cardLocalities": [
+    "Kompally",
+    "Devaryamjal",
+    "Medchal",
+    "Shamshabad",
+    "Gundlapochampally",
+    "Patancheru"
+  ],
+  "cardRegion": "city",
+  "map": {
+    "alt": "Road map of Hyderabad and its warehouse belts.",
+    "views": {
+      "desktop": {
+        "width": 1260,
+        "height": 540,
+        "zoom": 9,
+        "center": [
+          78.429,
+          17.45
+        ],
+        "src": "/hyderabad/micromarkets-map.webp"
+      },
+      "tablet": {
+        "width": 810,
+        "height": 540,
+        "zoom": 9,
+        "center": [
+          78.429,
+          17.45
+        ],
+        "src": "/hyderabad/micromarkets-map-tablet.webp"
+      },
+      "mobile": {
+        "width": 360,
+        "height": 360,
+        "zoom": 9,
+        "center": [
+          78.429,
+          17.45
+        ],
+        "src": "/hyderabad/micromarkets-map-mobile.webp"
+      }
+    },
+    "coordinates": {
+      "medchal": [
+        78.481,
+        17.63
+      ],
+      "kompally-devaryamjal": [
+        78.5,
+        17.552
+      ],
+      "shamshabad": [
+        78.396,
+        17.26
+      ],
+      "patancheru": [
+        78.264,
+        17.533
+      ]
+    }
+  },
+  "mapLocations": [
+    {
+      "slug": "medchal",
+      "canonical": "Medchal",
+      "scope": "belts",
+      "countSlug": "medchal",
+      "inventory": {
+        "city": "Hyderabad",
+        "includeAny": [
+          "Medchal"
+        ]
+      }
+    },
+    {
+      "slug": "kompally-devaryamjal",
+      "canonical": "Kompally / Devaryamjal",
+      "chipLabel": "Kompally",
+      "scope": "belts",
+      "countSlug": "kompally-devaryamjal",
+      "inventory": {
+        "city": "Hyderabad",
+        "includeAny": [
+          "Kompally",
+          "Devaryamjal"
+        ]
+      }
+    },
+    {
+      "slug": "shamshabad",
+      "canonical": "Shamshabad",
+      "scope": "belts",
+      "countSlug": "shamshabad",
+      "inventory": {
+        "city": "Hyderabad",
+        "includeAny": [
+          "Shamshabad"
+        ]
+      }
+    },
+    {
+      "slug": "patancheru",
+      "canonical": "Patancheru",
+      "scope": "belts",
+      "countSlug": "patancheru",
+      "showCount": false,
+      "inventory": {
+        "city": "Hyderabad",
+        "includeAny": [
+          "Patancheru"
+        ]
+      }
+    }
+  ]
+}

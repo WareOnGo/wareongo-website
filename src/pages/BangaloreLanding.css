@@ -59,6 +59,7 @@
 .bangalore-landing__area-card > h3 { padding: 20px; border-bottom: var(--landing-border); font-size: var(--landing-text-card); font-weight: 600; line-height: var(--landing-leading-title); }
 .bangalore-landing__area-card > p { margin: 0; padding: 16px 20px 20px; text-wrap: pretty; }
 .bangalore-landing__area-card > p strong { font-weight: 600; }
+.bangalore-landing__area-card[data-single] { grid-column: 1 / -1; }
 .bangalore-landing__whatsapp { position: fixed; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 40; display: grid; place-items: center; width: 52px; height: 52px; border: var(--landing-interactive-border); border-radius: 50%; background: var(--landing-card); color: var(--landing-ink); }
 .bangalore-landing__whatsapp > svg { width: 28px; height: 28px; fill: currentColor; }
 .bangalore-landing__whatsapp:hover { background: var(--landing-tint); border-color: var(--landing-accent); }
@@ -310,6 +311,9 @@
 .bangalore-landing__area-fit-table td { font-weight: 500; }
 .bangalore-landing__rent-guide-copy { display: grid; gap: 16px; max-width: 90ch; margin-bottom: 24px; font-size: var(--landing-text-body); line-height: var(--landing-leading-body); text-wrap: pretty; }
 .bangalore-landing__rent-guide-copy p { margin: 0; }
+.bangalore-landing__rent-guide-section { display: grid; gap: 8px; margin-top: 8px; }
+.bangalore-landing__rent-guide-section > h3 { font-size: var(--landing-text-card); font-weight: 600; line-height: var(--landing-leading-title); }
+.bangalore-landing__rent-guide-section strong { font-weight: 600; }
 .bangalore-landing__rent-guide-table th:last-child { width: 32%; }
 .bangalore-landing__rent-guide-table :is(th, td):last-child { text-align: right; }
 .bangalore-landing__rent-guide-table thead span { display: block; font-weight: 400; }

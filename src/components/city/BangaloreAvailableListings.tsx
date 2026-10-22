@@ -30,8 +30,12 @@ export default function BangaloreAvailableListings({ onContact, totalListings, c
   const track = useRef<HTMLDivElement>(null);
   const copy = content.copy;
   const heading = copy.availableHeading;
-  const sizeFilters = SIZE_FILTERS.map(option => ({ ...option, label: option.id === 'all' ? copy.filterAll : bandLabel(option.min, option.max) }));
-  const band = sizeFilters.find(option => option.id === filter)!;
+  // Area pages offer only the bands their inventory has; /bangalore keeps every band.
+  const sizeFilters = SIZE_FILTERS
+    .filter(option => !inventory || option.id === 'all' || inventory.some(listing => listing.size >= option.min && listing.size < option.max))
+    .map(option => ({ ...option, label: option.id === 'all' ? copy.filterAll : bandLabel(option.min, option.max) }));
+  // A band can disappear with new inventory; fall back to "All sizes".
+  const band = sizeFilters.find(option => option.id === filter) ?? sizeFilters[0];
   const listings = inventory ? inventory.filter(listing => listing.size >= band.min && listing.size < band.max).slice(0, 6) : filter === 'all'
     ? BANGALORE_ALL_SIZES_IDS.flatMap(id => BANGALORE_AVAILABLE_WAREHOUSES.filter(listing => listing.id === id))
     : BANGALORE_AVAILABLE_WAREHOUSES.filter(listing => listing.size >= band.min && listing.size < band.max);
@@ -54,7 +58,7 @@ export default function BangaloreAvailableListings({ onContact, totalListings, c
             key={id}
             type="button"
             className="bangalore-landing__size-filter"
-            aria-pressed={filter === id}
+            aria-pressed={band.id === id}
             aria-controls="bangalore-available-grid"
             onClick={() => {
               setFilter(id);

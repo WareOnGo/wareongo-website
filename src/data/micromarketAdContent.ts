@@ -7,8 +7,10 @@ export interface MicromarketAdContent {
   slug: string;
   name: string;
   copy: Pick<AdPageCopy, 'heroHeading' | 'availableHeading' | 'locationsHeading' | 'areaHeading' | 'rentHeading' | 'seoTitle' | 'metaDescription'>;
-  area: { whereItIs: string; whoItSuits: string };
+  /** Without whoItSuits the page shows a single area card. */
+  area: { whereItIs: string; whoItSuits?: string };
   mapBylines: { slug: string; byline: string }[];
-  rentGuide: { intro: string; description: string };
+  /** At least one of description or titled sections. */
+  rentGuide: { intro: string; description?: string; sections?: { title: string; body: string }[] };
   faqs: { q: string; a: string }[];
 }

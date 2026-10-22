@@ -165,3 +165,109 @@ test('Peenya cards require an explicit Peenya address and an asking rent of at l
   assert.match(page.heroSummaryCompact, /Options within 4 hours/);
   assert.deepEqual(page.mapBylines, { peenya: 'North-West Bangalore', nelamangala: 'Tumkur Road, NH-48', dobbaspet: 'Tumkur Road, NH-48' });
 });
+
+test('Hyderabad is a standalone city page with its own map, Telangana cards, one area card and a sectioned rent guide', () => {
+  const page = getMicromarketAdPage('hyderabad', 'hyderabad');
+  assert.equal(getMicromarketAdPage('hyderabad'), undefined);
+  assert.equal(page.path, '/hyderabad');
+  assert.equal(page.state, 'Telangana');
+  assert.deepEqual(page.inventory, { city: 'Hyderabad' });
+  assert.doesNotMatch(page.callbackNote, /Bangalore/);
+  assert.equal(page.map.views.desktop.src, '/hyderabad/micromarkets-map.webp');
+  // Markers project from coordinates onto the rendered cameras and stay on the map.
+  for (const location of page.mapLocations) for (const [x, y] of Object.values(location.label)) assert.ok(x > 0 && x < 100 && y > 0 && y < 100, location.slug);
+  assert.equal(page.mapLocations.find(location => location.slug === 'patancheru').showCount, false);
+  const pair = page.mapLocations.find(location => location.slug === 'kompally-devaryamjal');
+  assert.deepEqual(selectAdInventory([
+    { ...warehouse(1, 8000, '25'), city: 'Hyderabad', micromarket: ['Kompally'] },
+    { ...warehouse(2, 8000, '25'), city: 'Hyderabad', micromarket: ['Kompally', 'Devaryamjal'] },
+    { ...warehouse(3, 8000, '25'), city: 'Hyderabad', micromarket: ['Medchal'] },
+  ], pair.inventory).map(item => item.id), [1, 2]);
+  const cards = marketListings([{ ...warehouse(1, 9000, '25'), city: 'Hyderabad', state: 'Telangana', micromarket: ['Kompally', 'Devaryamjal'] },
+    { ...warehouse(2, 9000, '25'), city: 'Hyderabad', state: 'Telangana', micromarket: [] }], page.place, { minimumRent: 17 }, page);
+  // A named area shows its city, as in the review ("Kompally · Hyderabad"); the city itself shows the state.
+  assert.deepEqual(cards.map(card => [card.locality, card.region]), [['Hyderabad', 'Telangana'], ['Kompally', 'Hyderabad']]);
+  const hosur = getMicromarketAdPage('hosur', 'hosur');
+  assert.equal(marketListings([{ ...warehouse(3, 9000, '25'), city: 'Hosur', micromarket: ['Kelamangalam'] }], hosur.place, { minimumRent: 18 }, hosur)[0].region, 'Tamil Nadu');
+  assert.deepEqual(page.areaCards, [{ title: '', body: page.areaCards[0].body }]);
+  const base = JSON.parse(readFileSync(new URL('../src/data/ad-pages/bangalore.json', import.meta.url)));
+  const content = micromarketAdContent(base, page, { listingCount: 184, rentRange: '₹17 to ₹126', rentRows: [] });
+  assert.equal(content.slug, 'hyderabad');
+  assert.equal(content.rentGuide.description, '');
+  assert.deepEqual(content.rentGuide.sections.map(section => section.title), ['Where the Stock Sits', 'What Drives the Rent', 'What to Check']);
+  assert.match(content.faqs[1].a, /₹17 to ₹126/);
+  assert.match(content.copy.metaDescription, /^184 live/);
+  assert.doesNotMatch(JSON.stringify(content.services), /Bangalore/);
+  assert.doesNotMatch(JSON.stringify(content.audiences.find(item => item.id === 'owners')), /Bangalore/);
+  assert.equal(content.copy.heroAccent, 'in Hyderabad');
+  assert.doesNotMatch(content.images.services.alt, /Bangalore/);
+  const titled = micromarketAdContent(base, { ...page, rentGuide: { ...page.rentGuide, sections: [{ title: 'Rents From {rentRange}', body: '**Bold** {listings}.' }] } }, { listingCount: 184, rentRange: '₹17 to ₹126', rentRows: [] });
+  assert.deepEqual(titled.rentGuide.sections, [{ title: 'Rents From ₹17 to ₹126', body: '**Bold** 184.' }]);
+});
+
+test('industrial sheds select every Bangalore shed by listing type and name Bangalore as their place', () => {
+  const page = getMicromarketAdPage('sheds');
+  assert.equal(page.path, '/bangalore/sheds');
+  assert.equal(page.place, 'Bangalore');
+  assert.equal(page.map, undefined, 'the shed page reuses the city belt map');
+  const stock = [
+    { ...warehouse(1, 8000, '25'), micromarket: ['Budigere', 'Bidrahalli'] },
+    { ...warehouse(2, 8000, '25', 'PEB'), micromarket: ['Budigere'] },
+    { ...warehouse(3, 8000, '25', ' shed '), micromarket: [] },
+    { ...warehouse(4, 8000, '25', 'Shed'), micromarket: ['Peenya'] },
+    { ...warehouse(5, 8000, '25', 'BTS'), micromarket: ['Peenya'] },
+  ];
+  assert.deepEqual(selectAdInventory(stock, page.inventory).map(item => item.id), [1, 3, 4]);
+  const budigere = page.rentGuide.markets.find(row => row.slug === 'budigere');
+  assert.deepEqual(selectAdInventory(stock, budigere.inventory).map(item => item.id), [1]);
+  assert.deepEqual(page.mapLocations.map(location => location.slug), ['budigere', 'whitefield', 'jakkur-yelahanka', 'peenya', 'jigani-bommasandra', 'nelamangala', 'hoskote', 'kumbalgodu']);
+  assert.ok(page.mapLocations.every(location => location.inventory.type === 'Shed'));
+  const cards = marketListings(selectAdInventory(stock, page.inventory), page.place, { minimumRent: 13 }, page);
+  assert.deepEqual(cards.map(card => card.locality).sort(), ['Bangalore', 'Budigere', 'Peenya']);
+  const data = { listingCount: 57, rentRange: '₹13 to ₹80', rentRows: [] };
+  assert.equal(marketText(page.heroSummary, data), '57 industrial sheds in Bangalore · ₹13 to ₹80 per sq ft · Options within 4 hours');
+  assert.deepEqual(page.areaCards.map(card => card.title), ['Where They Are', 'Who They Suit']);
+  const base = JSON.parse(readFileSync(new URL('../src/data/ad-pages/bangalore.json', import.meta.url)));
+  const content = micromarketAdContent(base, page, data);
+  assert.equal(content.copy.heroAccent, 'in Bangalore');
+  assert.equal(content.copy.mapLabel, 'Bangalore');
+  assert.match(content.copy.availableFooter, /all 57 industrial sheds for you/);
+  assert.match(content.copy.enquiryDescription, /industrial shed in Bangalore/);
+  assert.match(content.faqs[1].a, /₹13 to ₹80/);
+  assert.equal(content.rentGuide.sections, undefined);
+  assert.deepEqual(content.services, base.services);
+  const sparse = micromarketAdContent(base, page, { ...data, rentRange: null });
+  assert.match(sparse.faqs[1].a, /current asking rents in Bangalore/);
+  assert.equal(content.name, 'Bangalore', 'the empty featured state names the place, not "Industrial Sheds"');
+  assert.equal(page.whatsappMessage, "Hi, I'm looking for an industrial shed in Bangalore. (From the industrial sheds page)");
+});
+
+test('the shed loader reads Bangalore once, counts only sheds and labels untagged cards Bangalore', async () => {
+  const previous = warehouseAPI.getWarehouses;
+  const previousFetch = globalThis.fetch;
+  const calls = [];
+  try {
+    // The micromarket feed counts every listing type; shed markers must not use it.
+    globalThis.fetch = async () => Response.json({ data: [{ citySlug: 'bengaluru', slug: 'peenya', listings: 999 }] });
+    const stock = [
+      // The lowest rent sets the floor (₹22), so the ₹20 listing is counted but not shown.
+      ...Array.from({ length: 10 }, (_, index) => ({ ...warehouse(index + 1, 8000 + index * 1000, index ? '30' : '20'), micromarket: ['Budigere', 'Bidrahalli'] })),
+      { ...warehouse(20, 9000, '30'), micromarket: ['Peenya'] },
+      { ...warehouse(21, 60000, '30'), micromarket: [] },
+      { ...warehouse(22, 9000, '30', 'PEB'), micromarket: ['Peenya'] },
+      { ...warehouse(23, 9000, '30', 'RCC'), micromarket: ['Budigere'] },
+    ];
+    warehouseAPI.getWarehouses = async (...args) => { calls.push(args); return { data: stock, pagination: { totalItems: stock.length, totalPages: 1 } }; };
+    const page = getMicromarketAdPage('sheds');
+    const data = await loadMicromarketAdInventory(page, undefined, true);
+    assert.equal(calls.length, 1, 'one city-wide read serves the page, its rent rows and its markers');
+    assert.deepEqual(calls[0][2], { city: 'Bengaluru', locationMatch: 'exact' });
+    assert.equal(data.listingCount, 12);
+    assert.equal(data.marketCounts.peenya, 1);
+    assert.equal(data.marketCounts.budigere, 10);
+    assert.deepEqual(data.rentRows.map(row => row.area), ['All Bangalore sheds', 'Budigere (Old Madras Road)']);
+    assert.ok(data.listings.every(listing => listing.warehouseType === 'Shed' && listing.region === 'Bengaluru'));
+    assert.equal(data.listings.length, 11);
+    assert.deepEqual(data.listings.find(listing => listing.id === 21).locality, 'Bangalore');
+  } finally { warehouseAPI.getWarehouses = previous; globalThis.fetch = previousFetch; }
+});

@@ -1,0 +1,294 @@
+{
+  "mapScope": "belts",
+  "mapMarkets": [
+    "budigere",
+    "whitefield",
+    "jakkur-yelahanka",
+    "peenya",
+    "jigani-bommasandra",
+    "nelamangala",
+    "hoskote",
+    "kumbalgodu"
+  ],
+  "inventory": {
+    "city": "Bengaluru",
+    "type": "Shed"
+  },
+  "rentMarkets": [
+    {
+      "slug": "sheds",
+      "name": "Bangalore sheds",
+      "label": "All Bangalore sheds",
+      "inventory": {
+        "city": "Bengaluru",
+        "type": "Shed"
+      }
+    },
+    {
+      "slug": "budigere",
+      "name": "Budigere",
+      "label": "Budigere (Old Madras Road)",
+      "inventory": {
+        "city": "Bengaluru",
+        "type": "Shed",
+        "includeAny": [
+          "Budigere",
+          "Bidrahalli",
+          "Cheemasandra",
+          "Rampura"
+        ]
+      }
+    }
+  ],
+  "cardLocalities": [
+    "Budigere",
+    "Peenya",
+    "Nelamangala",
+    "Hoskote",
+    "Whitefield",
+    "Varthur",
+    "Yelahanka",
+    "Jigani",
+    "Bommasandra",
+    "Kumbalgodu",
+    "Bommanahalli",
+    "Dasanapura",
+    "Hosur Road"
+  ],
+  "mapLocations": [
+    {
+      "slug": "budigere",
+      "canonical": "Budigere",
+      "scope": "belts",
+      "countSlug": "budigere",
+      "inventory": {
+        "city": "Bengaluru",
+        "type": "Shed",
+        "includeAny": [
+          "Budigere",
+          "Bidrahalli",
+          "Cheemasandra",
+          "Rampura"
+        ]
+      },
+      "label": {
+        "desktop": [
+          62,
+          28
+        ],
+        "tablet": [
+          70,
+          29
+        ],
+        "mobile": [
+          72,
+          40
+        ]
+      }
+    },
+    {
+      "slug": "whitefield",
+      "canonical": "Whitefield",
+      "scope": "belts",
+      "countSlug": "whitefield",
+      "imageSlot": "micromarket-whitefield",
+      "inventory": {
+        "city": "Bengaluru",
+        "type": "Shed",
+        "includeAny": [
+          "Whitefield",
+          "Varthur",
+          "Marathalli",
+          "Sarjapura"
+        ]
+      },
+      "label": {
+        "desktop": [
+          68,
+          57
+        ],
+        "tablet": [
+          80,
+          58
+        ],
+        "mobile": [
+          79,
+          60
+        ]
+      }
+    },
+    {
+      "slug": "jakkur-yelahanka",
+      "canonical": "Jakkur / Yelahanka",
+      "scope": "belts",
+      "countSlug": "jakkur-yelahanka",
+      "imageSlot": "micromarket-north-bangalore",
+      "wideChip": true,
+      "inventory": {
+        "city": "Bengaluru",
+        "type": "Shed",
+        "includeAny": [
+          "Jakkur",
+          "Yelahanka"
+        ]
+      },
+      "label": {
+        "desktop": [
+          48,
+          22
+        ],
+        "tablet": [
+          54,
+          25
+        ],
+        "mobile": [
+          47,
+          32
+        ]
+      }
+    },
+    {
+      "slug": "peenya",
+      "canonical": "Peenya",
+      "scope": "belts",
+      "countSlug": "peenya",
+      "imageSlot": "micromarket-peenya",
+      "inventory": {
+        "city": "Bengaluru",
+        "type": "Shed",
+        "includeAny": [
+          "Peenya"
+        ]
+      },
+      "label": {
+        "desktop": [
+          43,
+          53
+        ],
+        "tablet": [
+          30,
+          55
+        ],
+        "mobile": [
+          42,
+          56
+        ]
+      }
+    },
+    {
+      "slug": "jigani-bommasandra",
+      "canonical": "Jigani / Bommasandra",
+      "chipLabel": "Bommasandra",
+      "scope": "belts",
+      "countSlug": "jigani-bommasandra",
+      "imageSlot": "micromarket-jigani",
+      "wideChip": true,
+      "inventory": {
+        "city": "Bengaluru",
+        "type": "Shed",
+        "includeAny": [
+          "Jigani",
+          "Bommasandra",
+          "Hosur Road"
+        ]
+      },
+      "label": {
+        "desktop": [
+          59,
+          87
+        ],
+        "tablet": [
+          50,
+          87
+        ],
+        "mobile": [
+          58,
+          87
+        ]
+      }
+    },
+    {
+      "slug": "nelamangala",
+      "canonical": "Nelamangala",
+      "scope": "belts",
+      "countSlug": "nelamangala",
+      "imageSlot": "micromarket-nelamangala",
+      "inventory": {
+        "city": "Bengaluru",
+        "type": "Shed",
+        "includeAny": [
+          "Nelamangala"
+        ]
+      },
+      "label": {
+        "desktop": [
+          41,
+          36
+        ],
+        "tablet": [
+          32,
+          37
+        ],
+        "mobile": [
+          29,
+          45
+        ]
+      }
+    },
+    {
+      "slug": "hoskote",
+      "canonical": "Hoskote",
+      "scope": "belts",
+      "countSlug": "hoskote",
+      "imageSlot": "micromarket-hoskote",
+      "inventory": {
+        "city": "Bengaluru",
+        "type": "Shed",
+        "includeAny": [
+          "Hoskote"
+        ]
+      },
+      "label": {
+        "desktop": [
+          66,
+          40
+        ],
+        "tablet": [
+          80,
+          40
+        ],
+        "mobile": [
+          81,
+          49
+        ]
+      }
+    },
+    {
+      "slug": "kumbalgodu",
+      "canonical": "Kumbalgodu",
+      "scope": "belts",
+      "countSlug": "kumbalgodu",
+      "inventory": {
+        "city": "Bengaluru",
+        "type": "Shed",
+        "includeAny": [
+          "Kumbalgodu"
+        ]
+      },
+      "label": {
+        "desktop": [
+          42,
+          69
+        ],
+        "tablet": [
+          22,
+          68
+        ],
+        "mobile": [
+          33,
+          67
+        ]
+      }
+    }
+  ]
+}

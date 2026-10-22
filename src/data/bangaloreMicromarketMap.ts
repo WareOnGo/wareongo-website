@@ -54,6 +54,8 @@ export interface BangaloreMapArea {
   byline?: string;
   /** Ranks a grouped area's phone card when it shows no total of its own. */
   rankSlug?: string;
+  /** False keeps the card's count hidden, as for an area with too few listings to quote. */
+  showCount?: boolean;
   textChip?: boolean;
   wideChip?: boolean;
   imageSlot?: keyof AdPageContent['images'];

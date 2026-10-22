@@ -10,8 +10,8 @@ export default function BangaloreAreaGuide({ scope, content, cards }: { scope: B
       </div>
       <div className="bangalore-landing__area-fit-grid">
         {cards ? cards.map(({ title, body }) => (
-          <article key={title} className="bangalore-landing__guide-table-frame bangalore-landing__area-card">
-            <h3>{title}</h3>
+          <article key={title} className="bangalore-landing__guide-table-frame bangalore-landing__area-card" data-single={cards.length === 1 || undefined}>
+            {title && <h3>{title}</h3>}
             <p><InlineText text={body} /></p>
           </article>
         )) : content.areaGroups.map(({ id, scope: groupScope, title, rows }) => (

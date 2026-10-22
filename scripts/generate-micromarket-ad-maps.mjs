@@ -2,6 +2,7 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
+import { AD_CITY_PAGES } from './lib/micromarket-ad-content.mjs';
 
 // Run with MAPBOX_ACCESS_TOKEN in the process environment (never a VITE_* key).
 // Cameras are shared with the page so images and interactive labels stay aligned.
@@ -19,12 +20,14 @@ if (!page.map || page.mapMarkets.some(market => !validPoint(page.map.coordinates
   fail('The page needs map cameras and coordinates for every selected market.');
 }
 const formats = { desktop: [1260, 540], tablet: [810, 540], mobile: [360, 360] };
+// City pages (e.g. /hyderabad) keep their maps under their own folder.
+const folder = Object.hasOwn(AD_CITY_PAGES, slug) ? `/${slug}/` : `/bangalore/${slug}/`;
 for (const [view, [width, height]] of Object.entries(formats)) {
   const camera = page.map.views[view];
   if (!camera || camera.width !== width || camera.height !== height || !validPoint(camera.center)
     || !Number.isFinite(camera.zoom) || camera.zoom < 0 || camera.zoom > 22
-    || !camera.src.startsWith(`/bangalore/${slug}/`) || camera.src.includes('..') || !camera.src.endsWith('.webp')) {
-    fail(`Invalid ${view} map camera. Preserve the shared map dimensions and use /bangalore/${slug}/*.webp.`);
+    || !camera.src.startsWith(folder) || camera.src.includes('..') || !camera.src.endsWith('.webp')) {
+    fail(`Invalid ${view} map camera. Preserve the shared map dimensions and use ${folder}*.webp.`);
   }
 }
 

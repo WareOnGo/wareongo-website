@@ -1,4 +1,5 @@
 import FAQAccordion from '@/components/FAQAccordion';
+import InlineText from '@/components/InlineText';
 import type { AdPageContent } from '@/data/adPages';
 
 export default function BangaloreMarketGuide({ content }: { content: AdPageContent }) {
@@ -10,7 +11,13 @@ export default function BangaloreMarketGuide({ content }: { content: AdPageConte
         </div>
         <div className="bangalore-landing__rent-guide-copy">
           <p>{content.rentGuide.intro}</p>
-          <p>{content.rentGuide.description}</p>
+          {content.rentGuide.description && <p>{content.rentGuide.description}</p>}
+          {content.rentGuide.sections?.map(({ title, body }, index) => (
+            <div key={index} className="bangalore-landing__rent-guide-section">
+              <h3>{title}</h3>
+              <p><InlineText text={body} /></p>
+            </div>
+          ))}
         </div>
         <div className="bangalore-landing__guide-table-frame">
           <table className="ui-table bangalore-landing__guide-table bangalore-landing__rent-guide-table" aria-labelledby="bangalore-rent-guide-title">

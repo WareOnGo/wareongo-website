@@ -125,7 +125,7 @@ prefer sheds, and retain real listing photos. Featured cards cover the 5,000 to
 15,000, 15,000 to 30,000 and 50,000+ sq ft bands where available. Both grid and featured cards enforce the displayed rent floor and the shared 5,000 sq ft
 size floor (`AD_MIN_SIZE`), and show locality names instead of street addresses. The size chips (5,000 to 15,000,
 15,000 to 30,000, 30,000 to 50,000 and 50,000+ sq ft) are labelled in code from their bands on every ad page;
-the CMS chip-label fields other than "All sizes" are no longer shown. Counts
+micromarket pages show only the bands their inventory has. The CMS chip-label fields other than "All sizes" are no longer shown. Counts
 and the rent guide use the full tagged inventory; Peenya's displayed cards also
 require an explicit Peenya address and an asking rent of at least ₹25. Rent ranges exclude land/BTS and missing rates,
 require at least ten rates, and use the lowest +10% and highest +15%, rounded
@@ -162,6 +162,34 @@ the compatible backend and preview. The committed content snapshot allows
 local review; a production build regenerates routes from approved CMS content.
 The handoff's static counts/rents are examples: current inventory drives the
 headline, cards and rent table. The mini footer remains on every ad page.
+
+The 17 October review adds `/hyderabad` and `/bangalore/sheds` to the same
+renderer. Hyderabad is a city page like Hosur: city-wide stock, Telangana under
+each card, "Hyderabad" in the shared service and owner cards, and its own
+`streets-v12` map (`public/hyderabad/README.md`). Kompally and Devaryamjal share
+one marker; Patancheru's marker hides its count (`showCount: false`). Its local
+copy has a single untitled area card (no `area.whoItSuits`) and a rent guide in
+titled sections (`rentGuide.sections` instead of `description`). Its cards read
+"Kompally · Hyderabad", or "Hyderabad · Telangana" when no area tag applies
+(`cardRegion: "city"`); Hosur keeps the state under every card. The shed page
+(CMS identity `bengaluru/sheds`) selects every Bangalore listing whose type is
+Shed (`inventory.type`), names Bangalore as its place in the template copy, and
+reuses the city belt map with eight markers placed by hand. The review's positions
+overlapped, so Budigere, Jakkur / Yelahanka and (on phones) Hoskote sit slightly
+apart from them, and the Jigani / Bommasandra chip reads "Bommasandra" on desktop,
+as on `/bangalore`, because the full name does not fit. Budigere and Kumbalgodu,
+which have no curated area photo, show a photo from one of their shed listings.
+Its Budigere marker and rent row cover the Budigere, Bidrahalli, Cheemasandra and
+Rampura tags. Both layouts set `cardLocalities`, the tags that name a card's
+locality. The backend migration `scripts/sql/20261022_hyderabad_sheds_ad_pages.sql`
+adds both as private drafts.
+
+Roll these two out in this order: deploy the backend, then the website, apply the
+migration, deploy the CMS, and only then approve the drafts. An older backend or
+website rejects approved Hyderabad copy, which fails every website build; an older
+website renders an approved shed page without its layout (no listings, "in Industrial
+Sheds"); and a CMS deployed before the migration can create a blank shed or
+Hyderabad record that the migration then leaves in place.
 
 Run `npm run test:ad-pages` and
 `npm run test:lead-submissions` when changing this template.

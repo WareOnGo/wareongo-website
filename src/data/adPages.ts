@@ -1,7 +1,11 @@
 import type initialContent from './ad-pages/bangalore.json';
 import { adPages } from './adPages.generated';
 
-export type AdPageContent = typeof initialContent;
+type CityAdContent = typeof initialContent;
+/** Micromarket pages may follow the rent introduction with titled sections. */
+export type AdPageContent = Omit<CityAdContent, 'rentGuide'> & {
+  rentGuide: CityAdContent['rentGuide'] & { sections?: { title: string; body: string }[] };
+};
 export type AdPageCopy = AdPageContent['copy'];
 export function getBangaloreAdPage(): AdPageContent {
   const content = adPages.find(page => page.slug === 'bangalore');

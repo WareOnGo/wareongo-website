@@ -21,11 +21,22 @@ test('approved Hosur generates its standalone route without a Bangalore alias', 
   assert.match(writes[1][1], /"\/hosur"/);
   assert.doesNotMatch(writes[1][1], /bangalore\/hosur/);
 });
+test('approved Hyderabad and industrial sheds generate their routes; a single area card and sectioned rent guide validate', async () => {
+  const writes = [];
+  const pages = ['hyderabad', 'sheds'].map(slug => micromarketAdPages.find(page => page.slug === slug));
+  await generateMicromarketAdPages({ read: async () => Response.json({ data: [page, ...pages] }), write: async (...args) => writes.push(args) });
+  assert.match(writes[1][1], /\["\/bangalore\/peenya","\/hyderabad","\/bangalore\/sheds"\]/);
+  assert.equal('whoItSuits' in pages[0].area, false);
+  assert.equal(pages[0].rentGuide.sections.length, 3);
+});
 for (const [name, response] of [
   ['outage', new Response('', { status: 500 })],
   ['missing Peenya', Response.json({ data: [] })],
   ['bad local schema', Response.json({ data: [{ ...page, services: [] }] })],
   ['private/incomplete copy', Response.json({ data: [{ ...page, area: { whereItIs: '', whoItSuits: '' } }] })],
+  ['rent guide without a description or sections', Response.json({ data: [{ ...page, rentGuide: { intro: page.rentGuide.intro } }] })],
+  ['empty rent section', Response.json({ data: [{ ...page, rentGuide: { intro: page.rentGuide.intro, sections: [{ title: 'Where', body: '' }] } }] })],
+  ['unsupported city slug', Response.json({ data: [page, { ...micromarketAdPages.find(item => item.slug === 'hyderabad'), slug: 'kompally' }] })],
 ]) test(`${name} leaves the generated snapshot untouched and fails the build`, async () => {
   const writes = [];
   await assert.rejects(generateMicromarketAdPages({ read: async () => response, write: async (...args) => writes.push(args) }));

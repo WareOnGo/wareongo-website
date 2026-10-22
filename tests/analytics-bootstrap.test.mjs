@@ -55,7 +55,7 @@ test('development builds do not inject the production tag bootstrap', async () =
   assert.deepEqual(await dev.transformIndexHtml.handler(), []);
 });
 
-for (const path of ['/bangalore/peenya', '/bangalore/hoskote', '/bangalore/nelamangala', '/bangalore/electronic-city-jigani-bommasandra', '/hosur']) test(path + ' starts one tag first in the head with resolved metadata before hydration', () => {
+for (const path of ['/bangalore/peenya', '/bangalore/hoskote', '/bangalore/nelamangala', '/bangalore/electronic-city-jigani-bommasandra', '/bangalore/sheds', '/hosur', '/hyderabad']) test(path + ' starts one tag first in the head with resolved metadata before hydration', () => {
   const html = prioritizeAdPageHtml(path + '/', `<!doctype html><html><head><title>Peenya &amp; WareOnGo</title><meta charset="UTF-8"></head><body><script id="wareongo-analytics-bootstrap">${tag.children}</script><script type="module" async src="/app.js"></script></body></html>`);
   assert.match(html, /<head><meta charset="UTF-8"><script data-page-title=/);
   assert.match(html, /defer fetchpriority="low"/);

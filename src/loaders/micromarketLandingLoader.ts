@@ -26,6 +26,7 @@ export function selectAdInventory(warehouses: Warehouse[], rule: AdInventoryRule
   const unique = new Map<number, Warehouse>();
   for (const warehouse of warehouses) {
     const tags = new Set((warehouse.micromarket ?? []).map(tagKey));
+    if (rule.type && tagKey(warehouse.warehouseType ?? '') !== tagKey(rule.type)) continue;
     if (rule.includeAny?.length && !rule.includeAny.some(tag => tags.has(tagKey(tag)))) continue;
     if (rule.includeAll?.some(tag => !tags.has(tagKey(tag)))) continue;
     if (rule.exclude?.some(tag => tags.has(tagKey(tag)))) continue;
@@ -50,8 +51,10 @@ export function marketListings(warehouses: Warehouse[], name: string, policy?: M
     const card = transformWarehouseData(warehouse);
     const tags = new Set((warehouse.micromarket ?? []).map(tagKey));
     const locality = page && page.slug !== 'peenya'
-      ? ['Chokkahalli', 'Soukya Road', 'Ekarajapura', 'Budihal', 'T Begur', 'Kelamangalam', 'Uddanapalli', 'Jigani', 'Bommasandra', 'Hosur Road'].find(tag => tags.has(tagKey(tag))) ?? name : name;
-    return { id: card.id, locality, address: card.address, city: page?.city, state: page?.state, region: page?.citySlug === 'hosur' ? 'Tamil Nadu' : page?.city,
+      ? (page.cardLocalities ?? ['Chokkahalli', 'Soukya Road', 'Ekarajapura', 'Budihal', 'T Begur', 'Kelamangalam', 'Uddanapalli', 'Jigani', 'Bommasandra', 'Hosur Road']).find(tag => tags.has(tagKey(tag))) ?? name : name;
+    // City pages outside Bangalore show their state under the locality, or their city under a named area if the layout asks.
+    const region = page && page.citySlug !== 'bengaluru' ? page.cardRegion === 'city' && locality !== name ? page.city : page.state : page?.city;
+    return { id: card.id, locality, address: card.address, city: page?.city, state: page?.state, region,
       size: card.size, price: card.price,
       ceilingHeight: card.ceilingHeight, warehouseType: card.warehouseType, numberOfDocks: card.numberOfDocks,
       fireCompliance: card.fireCompliance, image: card.image, imageFallback: card.imageFallbacks[0] ?? null };
@@ -99,7 +102,7 @@ export async function loadMicromarketAdInventory(page: MicromarketAdPage, signal
   const ownRange = marketRentRange(own, page.rentFloor);
   const floor = Math.max(page.listingPolicy?.minimumRent ?? 0, ownRange?.min ?? page.rentFloor);
   // Counts and rents use the full inventory; the cards stop at the ad pages' size floor.
-  const listings = marketListings(own, page.name, { ...page.listingPolicy, minimumRent: floor }, page).filter(listing => listing.size >= AD_MIN_SIZE);
+  const listings = marketListings(own, page.place, { ...page.listingPolicy, minimumRent: floor }, page).filter(listing => listing.size >= AD_MIN_SIZE);
   return {
     slug: page.slug, citySlug: page.citySlug, listings, featured: featuredMarketListings(listings, floor),
     listingCount: own.length,
