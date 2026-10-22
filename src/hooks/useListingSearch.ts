@@ -20,9 +20,14 @@ export function useListingSearch(preset?: WarehouseFilters, seedSearch = '') {
     const search = next.toString();
     return `${location.pathname}${search ? `?${search}` : ''}${hash}`;
   }, [location.pathname, hash, preset]);
-  const setSearchParams = useCallback((next: URLSearchParams, options: { replace?: boolean } = {}) => {
+  const setSearchParams = useCallback((next: URLSearchParams, options: { replace?: boolean; state?: { listingStartPage: number } } = {}) => {
     const href = hrefFor(next);
     if (href === `${location.pathname}${location.search}${location.hash}`) return;
+    // A queued scroll/normalization effect can outlive its render during Back
+    // or Forward. Never let that automatic replacement undo the user's newer
+    // navigation while React is still committing the destination.
+    if (options.replace && typeof window !== 'undefined'
+      && `${window.location.pathname}${window.location.search}${window.location.hash}` !== `${location.pathname}${location.search}${location.hash}`) return;
     // User paging used to be a discrete local-state update. Keep that commit
     // priority: a router transition otherwise adds a frame to cached clicks.
     // Canonical replacements run in effects and must not force a sync flush.

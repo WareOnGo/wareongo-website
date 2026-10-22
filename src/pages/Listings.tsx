@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { useLoaderData, useLocation, useNavigationType } from 'react-router-dom';
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { Link, useLoaderData, useLocation, useNavigationType } from 'react-router-dom';
+import { Loader2 } from 'lucide-react';
 import { Head } from 'vite-react-ssg';
 import PageHead from '@/components/PageHead';
 import Pagination from '@/components/Pagination';
@@ -11,8 +11,9 @@ import { WarehouseGridSkeleton } from '@/components/PageSkeletons';
 import ListingFilterChips from '@/components/ListingFilterChips';
 import ListingFilters from '@/components/ListingFilters';
 import ListingsHeader from '@/components/ListingsHeader';
-import { listingsQueryOptions } from '@/lib/listingsQuery';
 import { useListingsPrefetch } from '@/hooks/useListingsPrefetch';
+import { useInfiniteListings } from '@/hooks/useInfiniteListings';
+import { useAutoLoadListings, useListingScroll } from '@/hooks/useListingScroll';
 import { trackEvent } from '@/lib/analytics';
 import { useListingResults } from '@/hooks/useListingAnalytics';
 import { warehousePath } from '@/lib/warehouseSlug';
@@ -35,10 +36,11 @@ const analyticsFilters = (filters: WarehouseFilters) => {
     max_sqft: api.maxSpace as number | undefined, filter_count: Object.keys(api).filter(key => key !== 'locationMatch').length };
 };
 
-export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, head, listId = 'all_warehouses' }: {
+export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, head, content, listId = 'all_warehouses' }: {
   initialData: ListingsLoaderData | null;
   preset?: WarehouseFilters;
   header?: ReactNode;
+  content?: ReactNode;
   head?: ReactNode | ((results: Pick<ListingsLoaderData, 'warehouses' | 'pagination'> & { search: string }) => ReactNode);
   listId?: string;
 }) {
@@ -83,60 +85,87 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
     // instant scroll also cannot be cancelled when a short final page arrives.
     resultsRef.current?.focus({ preventScroll: true });
     resultsRef.current?.scrollIntoView({ behavior: 'instant', block: 'start' });
-  }, [currentPage, pageSize]);
+  }, [currentPage, pageSize, filterKey]);
 
   const apiFilters = useMemo(() => toApiFilters(appliedFilters), [appliedFilters]);
   // A seed belongs to one exact filter/page/size query. Later API requests,
   // history and prefetch continue to use their existing independent cache keys.
   const isInitialQuery = JSON.stringify(apiFilters) === JSON.stringify(toApiFilters(preset))
-    && currentPage === (initialData?.pagination.currentPage ?? 1)
     && pageSize === (initialData?.pagination.pageSize ?? DEFAULT_PAGE_SIZE);
 
-  const { data, isPending, isPlaceholderData, isFetching, isError, isLoadingError, isRefetchError, refetch } = useQuery({
-    ...listingsQueryOptions(currentPage, pageSize, apiFilters),
-    enabled: hydrated,
-    // An older build's seed paints immediately, then refreshes in the
-    // background before we preload more pages from the current inventory.
-    // Deep links previously always read the API on entry. Mark their static
-    // seed stale so enabling the query after hydration preserves that behavior.
-    // An existing prefetched query keeps its own timestamp and remains instant.
-    initialDataUpdatedAt: (initialData?.pagination.currentPage ?? 1) > 1 ? 0 : initialData?.fetchedAt ?? 0,
-    initialData: isInitialQuery && initialData
-      ? {
-          warehouses: initialData.warehouses,
-          pagination: initialData.pagination,
-        }
-      : undefined,
-    placeholderData: keepPreviousData,
+  const { data, isPending, isPlaceholderData, isFetching, isPaused, isError, isLoadingError, isRefetchError, refetch,
+    startPage, hasNextPage, fetchNextPage, isFetchingNextPage, isFetchNextPageError } = useInfiniteListings({
+    page: currentPage, pageSize, filters: apiFilters, hydrated,
+    seed: isInitialQuery ? initialData ?? undefined : undefined,
   });
 
-  // Previous data keeps the pager's totals stable, but its cards belong to a
-  // different page/filter. Background refreshes of the same page keep its cards.
+  const lastPage = data?.pages[data.pages.length - 1];
   const outOfRange = !isPending && !isPlaceholderData && !isError && data &&
-    currentPage > Math.max(1, data.pagination.totalPages);
+    currentPage > Math.max(1, lastPage.pagination.totalPages);
   const loadingResults = isPending || isPlaceholderData || !!outOfRange;
-  const warehouses = data?.warehouses ?? [];
+  // Inventory may change between requests; keep the first occurrence of a card.
+  const chunks = useMemo(() => {
+    const seen = new Set<number>();
+    return (data?.pages ?? []).map(chunk => ({ ...chunk, warehouses: chunk.warehouses.filter(w => {
+      if (seen.has(w.id)) return false;
+      seen.add(w.id);
+      return true;
+    }) }));
+  }, [data]);
+  const warehouses = chunks.flatMap(chunk => chunk.warehouses);
+  const visiblePage = data?.pages.find(chunk => chunk.pagination.currentPage === currentPage) ?? lastPage;
   const firstWarehouse = !loadingResults && !isLoadingError ? warehouses[0] : undefined;
   const firstSource = firstWarehouse ? warehouseImages(firstWarehouse.images.length
     ? firstWarehouse.images : [firstWarehouse.image])[0]?.primary : undefined;
   const coverImage = initialData?.coverImage;
   const firstPhoto = coverImage && coverImage.source === firstSource ? coverImage.src : firstSource;
-  const pagination = data?.pagination ?? {
-    currentPage: 1,
-    totalPages: 1,
-    totalItems: 0,
+  const pagination = {
+    currentPage: visiblePage?.pagination.currentPage ?? currentPage,
+    // Counts can change between batches. Earlier visible pages must not revive
+    // obsolete totals or links after the last response reports fewer results.
+    totalPages: lastPage?.pagination.totalPages ?? 1,
+    totalItems: lastPage?.pagination.totalItems ?? 0,
     pageSize,
   };
+  const tailPage = lastPage?.pagination.currentPage ?? currentPage;
   const pagerRef = useListingsPrefetch({
-    page: currentPage, pageSize, filters: apiFilters, totalPages: pagination.totalPages,
-    ready: hydrated && !loadingResults && !isFetching && !isError && warehouses.length > 0,
+    page: tailPage, activePage: isFetchingNextPage ? tailPage + 1 : tailPage,
+    pageSize, filters: apiFilters, totalPages: pagination.totalPages,
+    ready: hydrated && !loadingResults && !isFetching && !isPaused && !isError && warehouses.length > 0,
     resultsRef,
   });
+  const focusNextPage = useRef<number | null>(null);
+  const loadMore = (manual = false) => {
+    if (!hasNextPage || isFetching || isPaused || loadingResults) return;
+    if (manual) focusNextPage.current = tailPage + 1;
+    trackEvent('listings_paginate', { list_id: listId, page_size: pageSize,
+      from_page: tailPage, to_page: tailPage + 1, direction: 'next', trigger: manual ? 'load_more' : 'scroll' });
+    void fetchNextPage({ cancelRefetch: false });
+  };
+  useAutoLoadListings({ sentinelRef: pagerRef, page: tailPage,
+    enabled: hydrated && !loadingResults && !isFetching && !isPaused && !isError && !!hasNextPage && !showFilters,
+    load: () => loadMore() });
+  useListingScroll({ resultsRef, ready: hydrated && !loadingResults && !isLoadingError,
+    onVisiblePage: page => {
+      if (page === currentPage) return;
+      const next = writeListingSearch(searchParams, { ...state, page });
+      action.current = { search: next.toString(), trigger: 'scroll' };
+      setSearchParams(next, { replace: true, state: { listingStartPage: startPage } });
+    } });
+  useEffect(() => {
+    if (isFetchingNextPage || !focusNextPage.current) return;
+    const link = resultsRef.current?.querySelector<HTMLElement>(`[data-listing-page="${focusNextPage.current}"] a`);
+    if (link) {
+      focusNextPage.current = null;
+      link.focus({ preventScroll: true });
+      link.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+    }
+  }, [isFetchingNextPage, data]);
 
   // Normalize malformed/default parameters without adding a history entry.
   // Clamp only against this query's response, never a previous filter's totals.
   const normalizedSearch = writeListingSearch(searchParams, {
-    ...state, page: outOfRange ? Math.max(1, data.pagination.totalPages) : currentPage,
+    ...state, page: outOfRange ? Math.max(1, lastPage.pagination.totalPages) : currentPage,
   }).toString();
   useEffect(() => {
     if (!hydrated || hrefFor(new URLSearchParams(normalizedSearch)) === `${location.pathname}${location.search}${location.hash}`) return;
@@ -153,12 +182,12 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
   };
 
   useListingResults({ list_id: listId, placement: listId === 'all_warehouses' ? 'listings_grid' : 'location_grid', page: currentPage, page_size: pageSize,
-    result_count: isLoadingError ? 0 : warehouses.length, total_count: isLoadingError ? undefined : pagination.totalItems,
+    result_count: isLoadingError ? 0 : visiblePage?.warehouses.length ?? 0, total_count: isLoadingError ? undefined : pagination.totalItems,
     result_status: isLoadingError ? 'error' : warehouses.length ? 'success' : 'empty',
     trigger: resultTrigger, ...analyticsFilters(appliedFilters) }, hydrated && !loadingResults);
 
   const applyFilters = () => {
-    scrollAfterPaging.current = null;
+    scrollAfterPaging.current = { page: 1, pageSize };
     const next = writeListingSearch(searchParams, { filters, page: 1, pageSize });
     const normalizedFilters = filtersFromSearchParams(next, preset);
     setDraft({ key: JSON.stringify(normalizedFilters), filters: normalizedFilters });
@@ -168,7 +197,7 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
   };
 
   const clearFilters = () => {
-    scrollAfterPaging.current = null;
+    scrollAfterPaging.current = { page: 1, pageSize };
     trackEvent('filter_clear', { list_id: listId, trigger: 'clear', ...analyticsFilters(appliedFilters) });
     setDraft({ key: JSON.stringify(DEFAULT_FILTERS), filters: DEFAULT_FILTERS });
     changeSearch(writeListingSearch(searchParams, { filters: DEFAULT_FILTERS, page: 1, pageSize }), 'clear');
@@ -188,7 +217,7 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
 
   const removeFilter = (reset: Partial<WarehouseFilters>) => {
     const nextFilters = { ...appliedFilters, ...reset };
-    scrollAfterPaging.current = null;
+    scrollAfterPaging.current = { page: 1, pageSize };
     setDraft({ key: JSON.stringify(nextFilters), filters: nextFilters });
     trackEvent('filter_apply', { list_id: listId, trigger: 'apply', ...analyticsFilters(nextFilters) });
     changeSearch(writeListingSearch(searchParams, { filters: nextFilters, page: 1, pageSize }), 'apply');
@@ -209,7 +238,7 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
         {firstSource && <link rel="preconnect" href={new URL(firstSource).origin} />}
         {firstPhoto && <link rel="preload" as="image" href={firstPhoto} fetchPriority="high" />}
       </Head>
-      {(typeof head === 'function' ? head({ warehouses: loadingResults || isLoadingError ? [] : warehouses,
+      {(typeof head === 'function' ? head({ warehouses: loadingResults || isLoadingError ? [] : visiblePage?.warehouses ?? [],
         pagination, search: searchParams.toString() }) : head) ?? <PageHead
         title="Warehouse & Godown for Rent in India | Verified Listings | WareOnGo"
         description={`Find warehouse & godown space for rent across India, ${verifiedWarehousesLabel} verified listings with transparent pricing. Get custom options, expert guidance & site visit within 48 hours.`}
@@ -238,12 +267,12 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
           <ListingFilterChips filters={appliedFilters} onRemove={removeFilter} onClear={clearFilters} />
 
           <p role="status" className="sr-only">
-            {loadingResults
+            {isPaused ? 'Waiting for a connection. Loading will resume automatically.' : loadingResults
               ? `Loading page ${currentPage} of warehouses…`
               : isLoadingError ? 'Warehouse results could not be loaded.'
-                : `${warehouses.length} warehouses shown on page ${pagination.currentPage}.`}
+                : `${visiblePage?.warehouses.length ?? 0} warehouses shown on page ${pagination.currentPage}.`}
           </p>
-          <section ref={resultsRef} aria-label="Warehouse results" aria-busy={loadingResults} tabIndex={-1} className="scroll-mt-[calc(var(--wog-nav-height)+68px)] focus:outline-none">
+          <section ref={resultsRef} aria-label="Warehouse results" aria-busy={loadingResults || isFetchingNextPage} tabIndex={-1} className="scroll-mt-[calc(var(--wog-nav-height)+68px)] focus:outline-none">
             {/* Match the page size and card proportions to avoid a collapsing grid. */}
             {loadingResults && (
               <div className="mb-12">
@@ -253,7 +282,7 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
 
             {/* A failed refresh still has valid data for this exact query.
                 A failed new search has no data and must never show old cards. */}
-            {isRefetchError && !loadingResults && (
+            {isRefetchError && !isFetchNextPageError && !loadingResults && (
               <div role="status" className="flex flex-wrap items-center justify-between gap-3 mb-6 px-4 py-3 border border-ui-line rounded-xl text-sm text-wareongo-slate">
                 <p>Could not refresh listings. Showing the last loaded results.</p>
                 <button
@@ -277,32 +306,38 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
 
             {/* Warehouse Grid */}
             {!loadingResults && !isLoadingError && warehouses.length > 0 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                {warehouses.map((warehouse, idx) => (
-                  <WarehouseCard
-                    key={warehouse.id}
-                    id={warehouse.id}
-                    index={idx}
-                    analyticsContext={{ list_id: listId, placement: listId === 'all_warehouses' ? 'listings_grid' : 'location_grid', page: currentPage, page_size: pageSize, list_position: (currentPage - 1) * pageSize + idx + 1 }}
-                    image={warehouse.image}
-                    images={warehouse.images}
-                    imageFallbacks={warehouse.imageFallbacks}
-                    coverImage={coverImage && coverImage.source === (warehouse.images[0] ?? warehouse.image)
-                      ? coverImage.src : undefined}
-                    address={warehouse.address}
-                    location={warehouse.location}
-                    size={warehouse.size}
-                    ceilingHeight={warehouse.ceilingHeight}
-                    price={warehouse.price}
-                    fireCompliance={warehouse.fireCompliance}
-                    numberOfDocks={warehouse.numberOfDocks}
-                    warehouseType={warehouse.warehouseType}
-                    micromarket={warehouse.micromarket}
-                    postalCode={warehouse.postalCode}
-                    updatedAt={warehouse.updatedAt}
-                    features={warehouse.features}
-                    href={warehousePath({ id: warehouse.id, size: warehouse.size, warehouseType: warehouse.warehouseType, city: warehouse.location.city })}
-                  />
+              <div className="space-y-6 mb-8">
+                {chunks.map(chunk => (
+                  <div key={chunk.pagination.currentPage} data-listing-page={chunk.pagination.currentPage}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {chunk.warehouses.map((warehouse, idx) => (
+                      <WarehouseCard
+                        key={warehouse.id}
+                        id={warehouse.id}
+                        index={idx}
+                        priority={chunk.pagination.currentPage === startPage && idx === 0}
+                        analyticsContext={{ list_id: listId, placement: listId === 'all_warehouses' ? 'listings_grid' : 'location_grid', page: chunk.pagination.currentPage, page_size: pageSize, list_position: (chunk.pagination.currentPage - 1) * pageSize + idx + 1 }}
+                        image={warehouse.image}
+                        images={warehouse.images}
+                        imageFallbacks={warehouse.imageFallbacks}
+                        coverImage={coverImage && coverImage.source === (warehouse.images[0] ?? warehouse.image)
+                          ? coverImage.src : undefined}
+                        address={warehouse.address}
+                        location={warehouse.location}
+                        size={warehouse.size}
+                        ceilingHeight={warehouse.ceilingHeight}
+                        price={warehouse.price}
+                        fireCompliance={warehouse.fireCompliance}
+                        numberOfDocks={warehouse.numberOfDocks}
+                        warehouseType={warehouse.warehouseType}
+                        micromarket={warehouse.micromarket}
+                        postalCode={warehouse.postalCode}
+                        updatedAt={warehouse.updatedAt}
+                        features={warehouse.features}
+                        href={warehousePath({ id: warehouse.id, size: warehouse.size, warehouseType: warehouse.warehouseType, city: warehouse.location.city })}
+                      />
+                    ))}
+                  </div>
                 ))}
               </div>
             )}
@@ -325,56 +360,78 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
               </div>
             )}
 
-            {/* Pagination Info and Controls */}
+            {/* This marker also warms the next row before automatic loading. */}
             {!isLoadingError && warehouses.length > 0 && (
-              <div ref={pagerRef} className="text-center space-y-5">
-                <p className="text-wareongo-slate text-sm">
-                  {loadingResults ? `Loading page ${currentPage}…` : <>
-                    Showing {warehouses.length} of {pagination.totalItems} warehouses
-                    {pagination.totalPages > 1 && ` · Page ${pagination.currentPage} of ${pagination.totalPages}`}
-                  </>}
-                </p>
+              <div className="space-y-6">
+                <div ref={pagerRef} data-testid="listings-load-more" className="min-h-20 text-center space-y-3">
+                  <p role="status" aria-live="polite" aria-atomic="true" className="flex items-center justify-center gap-2 text-sm text-wareongo-slate">
+                    {isPaused ? 'Waiting for a connection. Loading will resume automatically.'
+                      : isFetchingNextPage ? <><Loader2 aria-hidden="true" className="h-4 w-4 text-wareongo-blue animate-spin motion-reduce:animate-none" />Loading more warehouses…</>
+                      : loadingResults ? 'Loading warehouses…'
+                        : isFetchNextPageError ? 'Could not load more warehouses. Your results are still here.'
+                          : !hasNextPage ? 'You’ve reached the end of these results.' : 'Scroll to explore more warehouses'}
+                  </p>
+                  {!loadingResults && <p className="text-xs text-wareongo-slate">Showing {warehouses.length} of {pagination.totalItems} warehouses</p>}
+                  {hasNextPage && !isFetchingNextPage && !isPaused && !loadingResults && (
+                    <Link to={hrefFor(writeListingSearch(searchParams, { ...state, page: tailPage + 1 }))}
+                      data-analytics-ignore className="ui-button ui-button--secondary ui-button--compact"
+                      onClick={event => {
+                        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                        event.preventDefault();
+                        loadMore(true);
+                      }}>
+                      {isFetchNextPageError ? 'Retry loading warehouses' : 'Load more warehouses'}
+                    </Link>
+                  )}
+                </div>
+                {isFetchingNextPage && <WarehouseGridSkeleton count={Math.min(pageSize, Math.max(1, pagination.totalItems - tailPage * pageSize))} />}
 
-                {pagination.totalItems > 10 && (
-                  <div className="flex justify-center items-center gap-3">
-                    <label htmlFor="pageSize" className="ui-label ui-eyebrow text-wareongo-slate">
-                      Per page
-                    </label>
-                    <select
-                      id="pageSize"
-                      value={pageSize}
+                <details className="group border-t border-ui-line pt-5 text-center">
+                  <summary className="mx-auto w-fit min-h-11 cursor-pointer text-sm text-wareongo-slate hover:text-wareongo-blue">Browse by page</summary>
+                  <div className="space-y-5 pt-3">
+                    {pagination.totalItems > 10 && (
+                      <div className="flex justify-center items-center gap-3">
+                        <label htmlFor="pageSize" className="ui-label ui-eyebrow text-wareongo-slate">
+                          Per page
+                        </label>
+                        <select
+                          id="pageSize"
+                          value={pageSize}
+                          disabled={loadingResults}
+                          onChange={(e) => handlePageSizeChange(Number(e.target.value))}
+                          className="px-3 h-9 bg-transparent border border-ui-outline rounded-lg text-sm text-wareongo-blue focus:outline-none focus:ring-2 focus:ring-wareongo-blue/30"
+                        >
+                          <option value={10}>10</option>
+                          <option value={21}>21</option>
+                          <option value={30}>30</option>
+                          <option value={50}>50</option>
+                        </select>
+                      </div>
+                    )}
+
+                    <Pagination
+                      currentPage={currentPage}
+                      hrefForPage={(page) => hrefFor(writeListingSearch(searchParams, { ...state, page }))}
+                      totalPages={pagination.totalPages}
                       disabled={loadingResults}
-                      onChange={(e) => handlePageSizeChange(Number(e.target.value))}
-                      className="px-3 h-9 bg-transparent border border-ui-outline rounded-lg text-sm text-wareongo-blue focus:outline-none focus:ring-2 focus:ring-wareongo-blue/30"
-                    >
-                      <option value={10}>10</option>
-                      <option value={21}>21</option>
-                      <option value={30}>30</option>
-                      <option value={50}>50</option>
-                    </select>
+                      onChange={(page, direction) => {
+                        if (loadingResults || page === currentPage) return;
+                        trackEvent('listings_paginate', {
+                          list_id: listId, page_size: pageSize,
+                          from_page: pagination.currentPage,
+                          to_page: page,
+                          direction,
+                        });
+                        scrollAfterPaging.current = { page, pageSize };
+                        changeSearch(writeListingSearch(searchParams, { ...state, page }), 'paginate');
+                      }}
+                    />
                   </div>
-                )}
-
-                <Pagination
-                  currentPage={currentPage}
-                  hrefForPage={(page) => hrefFor(writeListingSearch(searchParams, { ...state, page }))}
-                  totalPages={pagination.totalPages}
-                  disabled={loadingResults}
-                  onChange={(page, direction) => {
-                    if (loadingResults || page === currentPage) return;
-                    trackEvent('listings_paginate', {
-                      list_id: listId, page_size: pageSize,
-                      from_page: pagination.currentPage,
-                      to_page: page,
-                      direction,
-                    });
-                    scrollAfterPaging.current = { page, pageSize };
-                    changeSearch(writeListingSearch(searchParams, { ...state, page }), 'paginate');
-                  }}
-                />
+                </details>
               </div>
             )}
           </section>
+          {content}
         </div>
       </main>
 

@@ -41,6 +41,8 @@ test('micromarket grid counts and size summary stay inside its city; overview me
   assert.equal(grid.pagination.totalItems, 5);
   assert.equal(grid.summary.maxSize, 10000);
   assert.deepEqual(grid.typeCounts, { PEB: 3, RCC: 2 });
+  assert.ok(grid.overviewFaqs.length > 0);
+  assert.deepEqual(grid.overviewFaqs, overview.content.faqs);
   assert.deepEqual(await loader.micromarketOverviewLoader({ params: { state: 'karnataka', city: 'bengaluru', micromarket: 'nelamangala' } }), overview);
 });
 

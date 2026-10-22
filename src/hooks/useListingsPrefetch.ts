@@ -85,8 +85,9 @@ function createPhotoBatch(key: string) {
 }
 
 /** One next-page query; one row of photos only when the pager approaches. */
-export function useListingsPrefetch({ page, pageSize, filters, totalPages, ready, resultsRef }: {
+export function useListingsPrefetch({ page, activePage = page, pageSize, filters, totalPages, ready, resultsRef }: {
   page: number;
+  activePage?: number;
   pageSize: number;
   filters: ListingsFilters;
   totalPages: number;
@@ -100,7 +101,7 @@ export function useListingsPrefetch({ page, pageSize, filters, totalPages, ready
   const options = useMemo(() => listingsQueryOptions(page + 1, pageSize, filters), [page, pageSize, filters]);
   const targetKey = hashKey(options.queryKey);
   const currentKey = useRef('');
-  currentKey.current = hashKey(listingsQueryOptions(page, pageSize, filters).queryKey);
+  currentKey.current = hashKey(listingsQueryOptions(activePage, pageSize, filters).queryKey);
   const enabled = ready && page < totalPages && policy.allowed && navigation.state === 'idle';
   const [prefetched, setPrefetched] = useState<{ key: string; data: ListingsQueryData } | null>(null);
   const [near, setNear] = useState<{ key: string; value: boolean } | null>(null);

@@ -1,5 +1,6 @@
 import { LocationListingsSkeleton, OverviewSkeleton } from '@/components/LocationPageSkeletons';
-import { Outlet, useLocation, useNavigation } from "react-router-dom";
+import { Outlet, useLocation, useNavigation, useNavigationType } from "react-router-dom";
+import { listingScrollPosition } from '@/lib/listingScroll';
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/context/AuthContext";
@@ -27,7 +28,10 @@ const ClientToaster = () => {
 const queryClient = new QueryClient();
 
 const ScrollToTop = () => {
-  const { pathname, hash } = useLocation();
+  const { pathname, hash, key } = useLocation();
+  const navigationType = useNavigationType();
+  const scrollContext = useRef({ key, navigationType });
+  scrollContext.current = { key, navigationType };
   const previous = useRef({ pathname, hash });
   useEffect(() => {
     // The browser owns the initial document position. A reader may already be
@@ -35,6 +39,9 @@ const ScrollToTop = () => {
     const unchanged = previous.current.pathname === pathname && previous.current.hash === hash;
     previous.current = { pathname, hash };
     if (unchanged && !hash) return;
+    // The listing restores its cached chunks before returning to this position.
+    if (scrollContext.current.navigationType === 'POP' && /^\/listings(?:\/|$)/.test(pathname)
+      && listingScrollPosition(scrollContext.current.key) !== undefined) return;
     // Run after the destination has mounted, including its own mount effects.
     const frame = requestAnimationFrame(() => {
       const target = hash ? document.getElementById(hash.slice(1)) : null;

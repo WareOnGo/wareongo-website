@@ -124,8 +124,9 @@ export interface LocationListingsLoaderData {
   parentState?: { canonical: string; slug: string };
   /** Verified listing-grid ancestors; absent in loader data from older builds. */
   breadcrumbAncestors?: BreadcrumbItem[];
-  /** Link to published editorial content; listing routes never carry that copy. */
+  /** Corresponding published overview and its FAQs for the listing's footer. */
   overviewPath?: string;
+  overviewFaqs?: EditorialContent['faqs'];
 }
 
 /**
@@ -283,6 +284,8 @@ async function loaderFor(
     if (scoped.length === 0) return null;
   }
 
+  const overviewPath = await publishedLocationPath(type === 'city' ? 'CITY' : 'STATE', match.slug) ?? undefined;
+  const overview = overviewPath ? getLocationPageContent(type === 'city' ? 'CITY' : 'STATE', match.slug) : undefined;
   return seedLocationListings({
     type,
     canonical: match.canonical,
@@ -290,7 +293,8 @@ async function loaderFor(
     warehouseType,
     warehouses: scoped.map(transformWarehouseData),
     breadcrumbAncestors: type === 'city' ? (await getListingBreadcrumbs()).city(match.slug) : [],
-    ...(!warehouseType ? { overviewPath: await publishedLocationPath(type === 'city' ? 'CITY' : 'STATE', match.slug) ?? undefined } : {}),
+    overviewPath,
+    overviewFaqs: overview?.faqs,
   });
 }
 
@@ -541,7 +545,7 @@ async function micromarketLoader(
 
   const content = getMicromarketContent(citySlug, match.slug);
   const overviewPath = content ? micromarketOverviewPath(match) : null;
-  return overviewPath ? { ...base, overviewPath } : base;
+  return overviewPath ? { ...base, overviewPath, overviewFaqs: content.faqs } : base;
 }
 
 /** A wrong state/city or an unpublished overview must not resolve as a grid. */

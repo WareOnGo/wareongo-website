@@ -1,6 +1,7 @@
 import { useLoaderData, Navigate, Link } from 'react-router-dom';
 import PageHead from '@/components/PageHead';
 import Breadcrumbs, { type BreadcrumbItem } from '@/components/Breadcrumbs';
+import FAQAccordion from '@/components/FAQAccordion';
 import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
 import { CITY_HUBS } from '@/data/cityHubs';
 import { STATE_HUBS } from '@/data/stateHubs';
@@ -123,6 +124,16 @@ export default function LocationListings() {
 
   return <ListingsView key={path} initialData={data} preset={data.filters}
     listId={`location:${type}:${slug}:${warehouseType || 'all'}`}
+    content={data.overviewFaqs?.length ? (
+      <section aria-labelledby="listing-faq-title" className="mt-16 sm:mt-20 border-t border-ui-line pt-10 sm:pt-12">
+        <div className="max-w-4xl mx-auto">
+          <p className="ui-eyebrow text-wareongo-slate mb-3">About warehousing in {titlePlace}</p>
+          <h2 id="listing-faq-title" className="ui-section-title text-wareongo-blue mb-6">Frequently Asked Questions</h2>
+          <FAQAccordion items={data.overviewFaqs} defaultOpenIndex={null} />
+          {data.overviewPath && <Link to={data.overviewPath} className="inline-flex min-h-11 items-center mt-4 text-sm text-wareongo-blue hover:underline">Read the {canonical} overview →</Link>}
+        </div>
+      </section>
+    ) : undefined}
     head={results => <PageHead title={seoTitle} description={seoDescription} path={path}>
       <script type="application/ld+json">{JSON.stringify(collectionLd(results))}</script>
     </PageHead>}

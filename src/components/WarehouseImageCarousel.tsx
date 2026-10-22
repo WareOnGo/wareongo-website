@@ -36,6 +36,7 @@ const WarehouseImageCarousel: React.FC<WarehouseImageCarouselProps> = ({
   useEffect(() => {
     const node = carouselRef.current;
     if (!node) return;
+    if (typeof IntersectionObserver !== 'function') { setVisible(true); return; }
     const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.1 });
     observer.observe(node);
     return () => observer.disconnect();

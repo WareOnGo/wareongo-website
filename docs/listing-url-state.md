@@ -6,7 +6,8 @@ the draft. Apply commits the search and closes the modal. Dismissing without App
 keeps the current results; reopening restores the applied filters. Clear all on
 the page clears the applied search immediately. Apply, Clear all, page selection,
 and page-size selection add browser history entries. Invalid/default parameter
-cleanup replaces the current entry.
+cleanup replaces the current entry. Scrolling between loaded listing batches
+also replaces the current entry, so Back does not step through every scroll.
 
 ## Main listings
 
@@ -28,6 +29,38 @@ query parameters (including repeated campaign parameters) and fragments survive
 navigation. An out-of-range page is corrected only after the matching API response
 supplies its totals, never using placeholder totals from a previous query.
 
+### Continuous listing results
+
+Main, city, state, locality and construction-type listing routes append the next
+batch as the reader approaches the end. Existing cards remain visible during
+loading and errors. The shared card skeletons, a live loading status, an explicit
+retry and an end-of-results message cover each state. Offline requests show a
+waiting-for-connection message and resume automatically. Counts and available
+page links use the latest batch's totals when inventory changes. A native **Load more** link
+supports keyboard users and browsers without IntersectionObserver. **Browse by
+page** retains the numbered links and page-size control as secondary navigation.
+
+One next batch is prefetched after visible photos finish; only its first row of
+photos is warmed near the boundary. Save Data, slow connections, offline/hidden
+tabs and outgoing route navigation retain the existing prefetch restrictions.
+Automatic loading adopts the same request/cache entry without fetching twice.
+
+The URL follows the visible batch. Browser state records the feed's starting
+page; React Query keeps the appended pages for up to 30 minutes after departure,
+and a bounded in-memory position map restores a return from a detail page.
+Refresh and shared URLs start at their own batch when no cached feed exists.
+Scroll callbacks use committed renders and check the browser's history entry,
+so an outgoing grid cannot overwrite Back/Forward navigation during a transition.
+
+Location loaders include only the FAQs from the corresponding published overview
+(including its geographic FAQs on PEB/RCC routes). They appear after the grid,
+using the existing accordion; all answers are in prerendered HTML even while
+collapsed. Locations without overview FAQs omit the section. Overview pages
+retain their existing six-item pagination.
+
+Validate the scrolling behavior from `../wareongo-evals` with
+`npx playwright test --config=playwright.infinite-scroll.config.ts`.
+
 ## Overview grids
 
 Example: `/overview/karnataka/bengaluru?page=2&pageSize=6`.
@@ -46,11 +79,9 @@ parameters.
 
 - React Query owns main-listing requests, cache identity, freshness, and
   cancellation. Visible results and prefetches share query options; image warming
-  policy is unchanged. Ordinary filters use server pagination. Micromarket or
-  area searches read the full matching city/type/NOC scope, cache it for 60 seconds,
-  then filter before slicing into pages. Micromarket membership uses backend IDs,
-  with an exact city check to exclude similarly named cities. Abandoning the last
-  consumer aborts the shared read; one consumer cannot cancel another's request.
+  policy is unchanged. Filtered requests use bounded server pagination, including
+  micromarket and area searches. The backend owns matching, membership and totals.
+  Abandoning a feed cancels its otherwise unobserved page request.
 - Listing route loaders do not revalidate for changes to their owned search
   parameters. Path changes, unrelated search changes, actions/submissions, and
   explicit same-URL revalidation retain the router's normal behavior.
@@ -58,7 +89,7 @@ parameters.
   state update priority. Automatic normalization uses ordinary replacement
   navigation. Missing location data retains its existing redirect without a
   competing pagination cleanup.
-- The first hydration render matches the prebuilt default page. URL state then
+- The first hydration render matches the page baked into the current document. URL state then
   activates without seeding a filtered/later-page cache with default-page data or
   starting a default-page preload. Ordinary client navigation reads URL state
   immediately. Fresh main-listing deep links still need their own API request.
@@ -78,21 +109,44 @@ npx tsc --noEmit -p tsconfig.app.json
 From `../wareongo-evals`:
 
 ```sh
-npx playwright test --config=playwright.url-state.config.ts
-npm run test:prefetch
+npx playwright test --config=playwright.infinite-scroll.config.ts --workers=1
+node tests/support/check-infinite-scroll-build.mjs
 ```
 
-The URL suite checks direct links, refresh, history, draft filters, invalid
-parameters, native new tabs, responsive position translation, and hydration
-errors. The visual suite compares 21 full-page screenshots against the unchanged
-application across desktop, tablet, and mobile. The existing prefetch suite covers
-cache reuse, adoption of in-flight requests, cancellation, image warming policy,
-loading placeholders, scrolling, and a controlled HTTP latency benchmark.
+The continuous-listing suite checks appending, error recovery, preloading,
+keyboard fallback, offline recovery, inventory changes, filter cancellation,
+page size, history, refresh, route coverage and matching overview FAQs on desktop
+and mobile. The production helper creates an isolated copy in `/tmp`, generates
+eight listing categories and their additional static pages against a GET-only
+fixture API, then verifies initial HTML, hydration, appending and refresh. It does
+not run asset publication, IndexNow or deployment hooks.
 
-For a fixture-backed production build, set `WEBSITE_DIR` to its isolated directory
-and `URL_STATE_BUILT=true` for the URL suite or `PREFETCH_BUILT=true` for the
-prefetch suite. Fixture builds must use the existing local fixture API and omit
-the IndexNow notification step; do not replace the working tree's generated data.
+Older pagination, URL-visual and prefetch browser suites still describe the
+previous exposed numbered controls and page-replacement behavior. The historical
+results below do not establish those suites' compatibility with continuous
+listing results; use the commands above for this implementation.
+
+## Adversarial review — 22 October 2026
+
+The review reproduced and fixed four problems:
+
+- Back immediately after changing page size could let an outgoing scroll callback
+  overwrite the destination URL and load the wrong feed. Callback updates now
+  follow committed renders, automatic navigation checks the current browser URL,
+  and every history entry receives a saved position even without another click.
+- An append paused offline gave no explanation. It now announces the pause and
+  resumes after reconnection without replacing already loaded cards.
+- An older visible batch could restore obsolete totals and page links after a
+  newer response reported less inventory. Totals now come from the latest batch.
+- The manual fallback still crashed through lazy photos when IntersectionObserver
+  was unavailable. Photo visibility and the detail gallery now degrade safely.
+
+All 46 desktop/mobile scenarios passed, including Pune, city/state PEB and RCC
+variants, and micromarket FAQs. One screenshot write failed because the host disk
+filled; its focused rerun passed with artifacts in `/tmp`. The isolated production
+build generated 8 categories and 14 additional pages; all 22 production browser
+checks passed. Listing URL and crawling tests, application TypeScript and
+changed-file ESLint also passed. Validation used local fixtures, not live inventory.
 
 ## Validation results — 14 September 2026
 

@@ -71,6 +71,21 @@ export default function WarehousePhoto({ primary, initialSrc, preview, fallback,
 
   useEffect(() => {
     if (visible || !image.current) return;
+    if (typeof IntersectionObserver !== 'function') {
+      // Keep native lazy loading and start its timeout only once the photo is
+      // visible, even in browsers using the listing's manual-loading fallback.
+      const measure = () => {
+        const rect = image.current?.getBoundingClientRect();
+        if (rect && rect.bottom > 0 && rect.top < window.innerHeight) setVisible(true);
+      };
+      measure();
+      window.addEventListener('scroll', measure, { passive: true });
+      window.addEventListener('resize', measure);
+      return () => {
+        window.removeEventListener('scroll', measure);
+        window.removeEventListener('resize', measure);
+      };
+    }
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) { setVisible(true); observer.disconnect(); }
     });
