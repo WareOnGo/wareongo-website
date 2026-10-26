@@ -179,6 +179,7 @@ const EditorialLocationPage = ({ data }: { data: EditorialPageData }) => {
         description={content.metaDescription}
         path={path}
         image={content.heroImage?.url}
+        noindex
       >
         {content.heroImage && (
           <link

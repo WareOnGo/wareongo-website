@@ -12,6 +12,7 @@ const { outputFiles } = await build({
     import { AuthProvider } from './src/context/AuthContext';
     import { ListingsView } from './src/pages/Listings';
     import LocationListings from './src/pages/LocationListings';
+    import EditorialLocationPage from './src/pages/EditorialLocationPage';
     import PageHead from './src/components/PageHead';
     import { transformWarehouseData } from './src/services/warehouseAPI';
     const warehouses = Array.from({ length: 21 }, (_, i) => transformWarehouseData({
@@ -44,6 +45,18 @@ const { outputFiles } = await build({
       const context = await handler.query(new Request('https://wareongo.com/listings/city/bengaluru'));
       return renderToString(<HelmetProvider><StaticRouterProvider router={createStaticRouter(handler.dataRoutes, context)} context={context} /></HelmetProvider>);
     }
+    export async function renderOverview(path, scope, search) {
+      const data = { warehouses, seedSearch: search,
+        content: { seoTitle: 'Overview', metaDescription: 'Market overview', h1: 'Overview', heroProse: '', faqs: [], relatedBlogs: [] },
+        stats: { listings: warehouses.length, measured: 0, construction: [], flooring: [], fireNoc: 0, commercialClu: 0 },
+        editorial: { path, scope, name: 'Market', place: 'Market', listingPath: '/listings', ancestors: [], up: null } };
+      const handler = createStaticHandler([{ path: '*', element: <AuthProvider><EditorialLocationPage data={data}/></AuthProvider> }]);
+      const context = await handler.query(new Request('https://wareongo.com' + path + (search ? '?' + search : '')));
+      const helmet = {};
+      const html = renderToString(<HelmetProvider context={helmet}><StaticRouterProvider
+        router={createStaticRouter(handler.dataRoutes, context)} context={context} /></HelmetProvider>);
+      return { html, head: helmet.helmet.link.toString() + helmet.helmet.meta.toString() };
+    }
   `, resolveDir: process.cwd(), loader: 'tsx' },
   bundle: true, write: false, platform: 'node', format: 'cjs', jsx: 'automatic', loader: { '.css': 'empty' },
   alias: { 'react-helmet-async': './node_modules/react-helmet-async/lib/index.esm.js' },
@@ -70,6 +83,21 @@ test('filter permutations have an explicit noindex and clean category canonical'
   const { head } = await compiled.exports.renderGrid('/listings?city=Bengaluru&type=PEB&fire=yes&page=2');
   assert.match(head, /name="robots" content="noindex,follow"/);
   assert.match(head, /rel="canonical" href="https:\/\/wareongo.com\/listings"/);
+});
+
+test('state, city and micromarket overviews render noindex metadata on every page', async () => {
+  for (const [scope, path] of [
+    ['state', '/overview/karnataka'],
+    ['city', '/overview/karnataka/bengaluru'],
+    ['micromarket', '/overview/karnataka/bengaluru/nelamangala'],
+  ]) {
+    for (const search of ['', 'page=2']) {
+      const { html, head } = await compiled.exports.renderOverview(path, scope, search);
+      assert.match(html, /id="editorial-title"/);
+      assert.match(head, /name="robots" content="noindex,follow"/);
+      assert.ok(head.includes(`rel="canonical" href="https://wareongo.com${path}${search ? '?' + search : ''}"`));
+    }
+  }
 });
 
 test('overview FAQ answers and crawlable page links are in the initial HTML below listings', async () => {

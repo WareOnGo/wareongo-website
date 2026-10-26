@@ -34,15 +34,7 @@
     {"source":"/listings/:path*","has":[{"type":"query","key":"minSqft"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
     {"source":"/listings/:path*","has":[{"type":"query","key":"maxSqft"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
     {"source":"/listings/:path*","has":[{"type":"query","key":"pageSize"}],"missing":[{"type":"query","key":"pageSize","value":"21"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
-    {"source":"/overview/:path*","has":[{"type":"query","key":"city"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
-    {"source":"/overview/:path*","has":[{"type":"query","key":"state"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
-    {"source":"/overview/:path*","has":[{"type":"query","key":"micromarket"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
-    {"source":"/overview/:path*","has":[{"type":"query","key":"fire"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
-    {"source":"/overview/:path*","has":[{"type":"query","key":"type"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
-    {"source":"/overview/:path*","has":[{"type":"query","key":"area"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
-    {"source":"/overview/:path*","has":[{"type":"query","key":"minSqft"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
-    {"source":"/overview/:path*","has":[{"type":"query","key":"maxSqft"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
-    {"source":"/overview/:path*","has":[{"type":"query","key":"pageSize"}],"missing":[{"type":"query","key":"pageSize","value":"6"}],"headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
+    {"source":"/overview/:path*","headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
     {"source":"/__catalogue/:path*","headers":[{"key":"X-Robots-Tag","value":"noindex, follow"}]},
     {"source":"/static-loader-data/catalogue/:file","headers":[{"key":"Cache-Control","value":"public, max-age=31536000, immutable"}]}
   ]

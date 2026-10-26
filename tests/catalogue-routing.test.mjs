@@ -14,10 +14,19 @@ test('Vercel-compiled rules select static pagination at root and nested paths, w
     for (const query of ['page=2', `page=2&pageSize=${path.startsWith('/overview') ? 6 : 21}&utm_source=share`]) {
       const result = await get(`${path}?${query}`);
       assert.equal(result.file, `/__catalogue${path}/2`);
-      assert.equal(result.headers['x-robots-tag'], undefined, 'an internal rewrite cannot noindex the public URL');
+      assert.equal(result.headers['x-robots-tag'], path.startsWith('/overview/') ? 'noindex, follow' : undefined,
+        'public overview URLs are noindex; public listing pagination remains indexable');
     }
     assert.equal((await get(path)).file, `/__catalogue${path}/1`);
     assert.equal((await get(`${path}?page=999`)).file, `/__catalogue${path}/1`, 'missing static pages recover through the normal client flow');
+  }
+});
+
+test('all overview scopes and query variants are noindex before static rewrites', async () => {
+  for (const path of ['/overview/karnataka', '/overview/karnataka/bengaluru', '/overview/karnataka/bengaluru/nelamangala']) {
+    for (const query of ['', '?page=2', '?page=2&pageSize=6&utm_source=share', '?fire=yes', '?pageSize=10', '?page=invalid']) {
+      assert.equal((await get(`${path}${query}`)).headers['x-robots-tag'], 'noindex, follow', `${path}${query}`);
+    }
   }
 });
 

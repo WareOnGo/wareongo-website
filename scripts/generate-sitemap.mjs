@@ -130,9 +130,9 @@ async function main() {
   // Micromarkets are unaffected: PARENT_CITY_MIN_LISTINGS (6) already exceeds
   // the city threshold, so every parent city here is a listed one.
   const micromarkets = await summarizeMicromarkets();
-  // Read emitted pages rather than re-fetching CMS content: the sitemap must
-  // describe this build even if publication changes while the build is running.
-  const overviewPaths = [];
+  // Overview pages are noindex and excluded from the sitemap. Still validate
+  // their emitted HTML so a loader error cannot silently reach production.
+  let overviewCount = 0;
   async function walkOverviews(segments = []) {
     const directory = path.join('dist', 'overview', ...segments);
     let entries;
@@ -148,7 +148,7 @@ async function main() {
           throw new Error(`Overview failed to render: ${overviewPath}. Refusing to publish an error page.`);
         }
       }
-      overviewPaths.push(overviewPath);
+      overviewCount++;
     }
     if (segments.length < 3) {
       for (const entry of entries) if (entry.isDirectory()) await walkOverviews([...segments, entry.name]);
@@ -177,7 +177,6 @@ async function main() {
     ...servicePaths.sort().map(service => urlEntry(service, 'monthly', '0.7')),
     ...cities.map((c) => urlEntry(`/listings/city/${c.slug}`, 'weekly', '0.8')),
     ...micromarkets.map((m) => urlEntry(micromarketPath(m), 'weekly', '0.8')),
-    ...overviewPaths.sort().map((overview) => urlEntry(overview, 'weekly', '0.8')),
     ...states.map((s) => urlEntry(`/listings/state/${s.slug}`, 'weekly', '0.7')),
     ...cityTypeCombos.map((c) =>
       urlEntry(`/listings/city/${c.location.slug}/${c.warehouseType.toLowerCase()}`, 'weekly', '0.7'),
@@ -195,7 +194,7 @@ ${entries.join('\n')}
   const outPath = path.join('dist', 'sitemap.xml');
   await fs.writeFile(outPath, xml, 'utf8');
   console.log(
-    `[sitemap] wrote ${outPath} — ${entries.length} URLs (${warehouseEntries.length} warehouses w/ ${totalImages} images, ${cities.length} cities, ${states.length} states, ${cityTypeCombos.length} city×type, ${stateTypeCombos.length} state×type, ${micromarkets.length} micromarkets, ${overviewPaths.length} overviews)`,
+    `[sitemap] wrote ${outPath} — ${entries.length} URLs (${warehouseEntries.length} warehouses w/ ${totalImages} images, ${cities.length} cities, ${states.length} states, ${cityTypeCombos.length} city×type, ${stateTypeCombos.length} state×type, ${micromarkets.length} micromarkets); excluded ${overviewCount} noindex overviews`,
   );
   console.log(
     `[sitemap] delisted ${allCities.length - cities.length} of ${allCities.length} cities with <${CITY_MIN_LISTINGS} listings (pages still build and return 200): ${allCities
