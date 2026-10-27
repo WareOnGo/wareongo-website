@@ -124,8 +124,10 @@ export interface LocationListingsLoaderData {
   parentState?: { canonical: string; slug: string };
   /** Verified listing-grid ancestors; absent in loader data from older builds. */
   breadcrumbAncestors?: BreadcrumbItem[];
-  /** Corresponding published overview and its FAQs for the listing's footer. */
+  /** Published editorial content for the listing footer, without a second inventory. */
+  overview?: EditorialLocationContentData;
   overviewPath?: string;
+  /** Kept for older page bundles and construction-type listing FAQs. */
   overviewFaqs?: EditorialContent['faqs'];
 }
 
@@ -160,17 +162,14 @@ export interface StateOverviewData {
   marketImage: PagePhoto | null;
 }
 
-/** Only overview loaders return editorial content. */
-export type EditorialPageData = LocationListingsLoaderData & {
-  seedSearch?: string;
+/** Shared copy and figures; no warehouse rows or page-level indexing metadata. */
+export interface EditorialLocationContentData {
   imageVariants?: Record<string, EditorialImageVariant[]>;
-  coverImages?: Record<string, string>;
   content: EditorialContent & CityOverviewContent;
   cityOverview?: CityOverviewStats;
   stateOverview?: StateOverviewData;
   stats: DerivedStats;
   peers: PeerRent[];
-  overviewPath: string;
   editorial: {
     scope: LocationScope;
     name: string;
@@ -180,6 +179,12 @@ export type EditorialPageData = LocationListingsLoaderData & {
     ancestors: { label: string; path: string }[];
     up: { label: string; linkLabel: string; path: string } | null;
   };
+}
+
+export type EditorialPageData = LocationListingsLoaderData & EditorialLocationContentData & {
+  seedSearch?: string;
+  coverImages?: Record<string, string>;
+  overviewPath: string;
 };
 export type MicromarketPageData = EditorialPageData;
 
@@ -192,15 +197,30 @@ export type LocationListingSeed = LocationListingsLoaderData & ListingsLoaderDat
 async function seedLocationListings(data: LocationListingsLoaderData): Promise<LocationListingSeed> {
   const filters = locationListingPreset(data);
   // Use the same matching, ordering and totals as every later browser request.
-  const response = await warehouseAPI.getWarehouses(1, DEFAULT_PAGE_SIZE, toApiFilters(filters));
+  const [response, overview] = await Promise.all([
+    warehouseAPI.getWarehouses(1, DEFAULT_PAGE_SIZE, toApiFilters(filters)),
+    listingOverviewContent(data),
+  ]);
   const warehouses = response.data.map(transformWarehouseData);
   const coverImage = import.meta.env.SSR
     ? await (await import('@/lib/listingCover.server.mjs')).prepareListingCover(warehouses[0]?.images[0])
     : undefined;
-  return createLocationListingSeed(data, {
+  return createLocationListingSeed({ ...data, overview }, {
     pagination: response.pagination, fetchedAt: Date.now(),
     warehouses, coverImage,
   });
+}
+
+/** Reuse the published overview's copy, overrides and figures in the initial listing HTML. */
+async function listingOverviewContent(data: LocationListingsLoaderData): Promise<EditorialLocationContentData | undefined> {
+  if (!data.overviewPath || data.warehouseType) return undefined;
+  const [, , state, city, micromarket] = data.overviewPath.split('/');
+  const page = data.type === 'micromarket'
+    ? await micromarketOverviewFor({ state, city, micromarket })
+    : await locationOverviewFor(data.type === 'state' ? 'STATE' : 'CITY', state, city);
+  if (!page) throw new Error(`Published listing overview missing: ${data.overviewPath}`);
+  const { content, stats, peers, editorial, cityOverview, stateOverview, imageVariants } = page;
+  return { content, stats, peers, editorial, cityOverview, stateOverview, imageVariants };
 }
 
 const countTypes = (scoped: Warehouse[]) =>
@@ -550,6 +570,10 @@ async function micromarketLoader(
 
 /** A wrong state/city or an unpublished overview must not resolve as a grid. */
 export async function micromarketOverviewLoader({ params }: LoaderFunctionArgs, draft?: MicromarketContent): Promise<MicromarketPageData | null> {
+  return micromarketOverviewFor(params, draft);
+}
+
+async function micromarketOverviewFor(params: LoaderFunctionArgs['params'], draft?: MicromarketContent): Promise<MicromarketPageData | null> {
   const match = (await buildableMicromarkets()).find((m) =>
     m.stateSlug === params.state && m.citySlug === params.city && m.slug === params.micromarket,
   );

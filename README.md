@@ -196,19 +196,24 @@ Run `npm run test:ad-pages` and
 
 ### Editorial overview pages
 
-Published CMS content renders at `/overview/{state}/{city}/{micromarket}`.
-Existing `/listings/city/{city}/{micromarket}` URLs always render the paginated
-listing grid, with a link to the overview when one is published. State comes
-from the backend's `parentState` / `stateSlug` fields; saved CMS content keeps
-its existing city/micromarket key. Shorter state/city overview routes are
-reserved for future work.
+Published CMS content renders at `/overview/{state}`, `/overview/{state}/{city}`,
+and `/overview/{state}/{city}/{micromarket}`. Matching base location listing
+pages render the same editorial content below their infinite-scroll grid,
+including FAQs, in the initial HTML. Overview pages are noindexed and excluded
+from the sitemap; listing pages retain their own canonical and indexing rules.
+State comes from the backend's `parentState` / `stateSlug` fields; saved CMS
+content keeps its existing city/micromarket key.
+
+Dev uses the generated local CMS snapshot. Run `npm run content:overviews` to
+refresh published overview content; a running Vite server reloads the changed
+modules. Dev startup does not require a successful CMS refresh. Production
+builds always refresh these snapshots before rendering HTML.
 
 Deploy the backend with these geography fields before rebuilding this website.
 No migration or new required environment variable is needed. For local builds
 against a different backend, set both `VITE_API_BASE_URL` (route loaders) and
-`WAREONGO_API_BASE` (build generators). A failed CMS content fetch stops the
-build so existing overview pages cannot be silently removed. The sitemap reads
-overview pages actually emitted by the build.
+`WAREONGO_API_BASE` (content generators). A failed CMS content fetch stops the
+refresh or build so published content cannot be silently removed.
 
 Validation: `node --test tests/overview-content-fetch.test.mjs`, plus the sibling
 `wareongo-evals` behaviour suite and `test:overview` static-build suite.

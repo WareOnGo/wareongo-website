@@ -22,6 +22,9 @@ const MicromarketHero = ({
   place,
   onBrowse,
   listings,
+  headingAs: Heading = 'h1',
+  headingId = 'editorial-title',
+  imagePriority = true,
   loading = false,
 }: {
   content: EditorialHeroContent;
@@ -31,6 +34,10 @@ const MicromarketHero = ({
   onBrowse?: string;
   /** States: the secondary action leaves for the full listing page instead. */
   listings?: { path: string; name: string };
+  headingAs?: 'h1' | 'h2';
+  headingId?: string;
+  /** Below the listing grid, the editorial photo should load lazily. */
+  imagePriority?: boolean;
 } & ({ loading: true; stats?: never } | { loading?: false; stats: DerivedStats })) => {
   // Built from live inventory, and each one is dropped when the data behind it
   // isn't there — a rent tile reading "₹0" would be worse than three tiles.
@@ -52,12 +59,12 @@ const MicromarketHero = ({
         <span className={`mb-3 block ${EYEBROW} text-wareongo-slate`}>
           {content.heroEyebrow ?? `Warehouses and godowns · ${place}`}
         </span>
-        <h1
-          id={loading ? undefined : "editorial-title"}
-          className="ui-page-title mb-4 text-wareongo-blue"
+        <Heading
+          id={loading ? undefined : headingId}
+          className={`${Heading === 'h1' ? 'ui-page-title' : 'ui-section-title'} mb-4 text-wareongo-blue`}
         >
           {content.h1}
-        </h1>
+        </Heading>
         <p className={`max-w-2xl ${LEAD}`}><InlineText text={content.heroProse} /></p>
 
         {/*
@@ -126,7 +133,7 @@ const MicromarketHero = ({
       {content.heroImage && (
         <EditorialImage image={content.heroImage} variants={imageVariants}
           sizes={EDITORIAL_HERO_SIZES}
-          ratio="aspect-[4/3]" priority className="lg:mt-1" />
+          ratio="aspect-[4/3]" priority={imagePriority} className="lg:mt-1" />
       )}
     </header>
   );

@@ -3,7 +3,6 @@ import { Link, useLoaderData, useLocation, useNavigationType } from 'react-route
 import { Loader2 } from 'lucide-react';
 import { Head } from 'vite-react-ssg';
 import PageHead from '@/components/PageHead';
-import Pagination from '@/components/Pagination';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WarehouseCard from '@/components/WarehouseCard';
@@ -24,7 +23,7 @@ import { warehouseImages } from '@/lib/warehouseImages';
 
 import { useListingSearch } from '@/hooks/useListingSearch';
 import {
-  DEFAULT_FILTERS, DEFAULT_PAGE_SIZE, PAGE_SIZES, readListingSearch, toApiFilters,
+  DEFAULT_FILTERS, DEFAULT_PAGE_SIZE, readListingSearch, toApiFilters,
   writeListingSearch as serializeListingSearch, filtersFromSearchParams, changeListingFilter, type WarehouseFilters,
 } from '@/lib/listingSearch';
 
@@ -223,14 +222,6 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
     changeSearch(writeListingSearch(searchParams, { filters: nextFilters, page: 1, pageSize }), 'apply');
   };
 
-  const handlePageSizeChange = (newPageSize: number) => {
-    const validSize = PAGE_SIZES.find(size => size === newPageSize);
-    if (loadingResults || !validSize || validSize === pageSize) return;
-    scrollAfterPaging.current = { page: 1, pageSize: validSize };
-    trackEvent('listing_page_size_change', { list_id: listId, from_page_size: pageSize, page_size: newPageSize });
-    changeSearch(writeListingSearch(searchParams, { ...state, pageSize: validSize, page: 1 }), 'page_size');
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-wareongo-ivory">
       <Head>
@@ -372,6 +363,7 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
                           : !hasNextPage ? 'You’ve reached the end of these results.' : 'Scroll to explore more warehouses'}
                   </p>
                   {!loadingResults && <p className="text-xs text-wareongo-slate">Showing {warehouses.length} of {pagination.totalItems} warehouses</p>}
+                  {/* A real next-page URL also works without JavaScript and lets crawlers follow the catalogue. */}
                   {hasNextPage && !isFetchingNextPage && !isPaused && !loadingResults && (
                     <Link to={hrefFor(writeListingSearch(searchParams, { ...state, page: tailPage + 1 }))}
                       data-analytics-ignore className="ui-button ui-button--secondary ui-button--compact"
@@ -385,49 +377,6 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
                   )}
                 </div>
                 {isFetchingNextPage && <WarehouseGridSkeleton count={Math.min(pageSize, Math.max(1, pagination.totalItems - tailPage * pageSize))} />}
-
-                <details className="group border-t border-ui-line pt-5 text-center">
-                  <summary className="mx-auto w-fit min-h-11 cursor-pointer text-sm text-wareongo-slate hover:text-wareongo-blue">Browse by page</summary>
-                  <div className="space-y-5 pt-3">
-                    {pagination.totalItems > 10 && (
-                      <div className="flex justify-center items-center gap-3">
-                        <label htmlFor="pageSize" className="ui-label ui-eyebrow text-wareongo-slate">
-                          Per page
-                        </label>
-                        <select
-                          id="pageSize"
-                          value={pageSize}
-                          disabled={loadingResults}
-                          onChange={(e) => handlePageSizeChange(Number(e.target.value))}
-                          className="px-3 h-9 bg-transparent border border-ui-outline rounded-lg text-sm text-wareongo-blue focus:outline-none focus:ring-2 focus:ring-wareongo-blue/30"
-                        >
-                          <option value={10}>10</option>
-                          <option value={21}>21</option>
-                          <option value={30}>30</option>
-                          <option value={50}>50</option>
-                        </select>
-                      </div>
-                    )}
-
-                    <Pagination
-                      currentPage={currentPage}
-                      hrefForPage={(page) => hrefFor(writeListingSearch(searchParams, { ...state, page }))}
-                      totalPages={pagination.totalPages}
-                      disabled={loadingResults}
-                      onChange={(page, direction) => {
-                        if (loadingResults || page === currentPage) return;
-                        trackEvent('listings_paginate', {
-                          list_id: listId, page_size: pageSize,
-                          from_page: pagination.currentPage,
-                          to_page: page,
-                          direction,
-                        });
-                        scrollAfterPaging.current = { page, pageSize };
-                        changeSearch(writeListingSearch(searchParams, { ...state, page }), 'paginate');
-                      }}
-                    />
-                  </div>
-                </details>
               </div>
             )}
           </section>

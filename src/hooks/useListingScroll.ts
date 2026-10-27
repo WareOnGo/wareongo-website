@@ -84,7 +84,10 @@ export function useAutoLoadListings({ sentinelRef, enabled, load, page }: {
     if (!enabled || navigation.state !== 'idle' || !node || typeof IntersectionObserver !== 'function') return;
     let requested = false;
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !requested && document.visibilityState === 'visible' && isCurrentEntry(location.key)) {
+      // Load while approaching the marker from the grid. Jumping past it to
+      // editorial content must not append rows above the reader's destination.
+      if (entry.isIntersecting && entry.boundingClientRect.top >= 0 && !requested
+        && document.visibilityState === 'visible' && isCurrentEntry(location.key)) {
         requested = true;
         callback.current();
       }

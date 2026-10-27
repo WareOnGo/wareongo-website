@@ -3,38 +3,2622 @@
 // (CMS-managed). Types live in ./micromarkets.ts, which re-exports this data.
 //
 // Only these published records produce /overview pages. Existing micromarket
-// listing URLs always render their plain grid independently of this content.
+// listing URLs render their own grid, followed by this content when published.
 import type { MicromarketContent } from './micromarkets';
 
 export const micromarkets: MicromarketContent[] = [
   {
-    "citySlug": "hyderabad",
-    "slug": "kompally",
-    "seoTitle": "50+ Warehouses for Rent in Kompally, Hyderabad",
-    "metaDescription": "50 verified warehouses and godowns for rent in Kompally on NH-44 north of Hyderabad. ₹13 to ₹41/sq ft, median ₹20. Units 500 to 2 lakh sq ft.",
-    "h1": "Warehouses for Rent in Kompally, Hyderabad",
-    "heroProse": "Kompally is the start of Hyderabad's northern warehousing belt, on NH-44 where the road leaves the city for Nagpur. It sits just beyond the Outer Ring Road, which is what makes it work: trucks reach it without entering the city, and city vans reach it without a long run out. The belt continues north through Devaryamjal to Medchal, and most of what is available carries more than one of those names.",
+    "citySlug": "ahmedabad",
+    "slug": "aslali",
+    "seoTitle": "Aslali Warehousing, Ahmedabad: Rents and Specification",
+    "metaDescription": "Warehousing in Aslali on NH-48 south of Ahmedabad, where the bypass meets the highway. See live rents and specs from verified listings.",
+    "h1": "Aslali Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Aslali is the first industrial stop south of Ahmedabad on NH-48, the highway to Vadodara and Mumbai, and it sits at the point where the city bypass meets it. That junction is why the belt exists. Occupiers here are staging goods for the Gujarat corridor rather than serving Ahmedabad retail, and rates are among the lowest of the cities we cover.",
     "heroImage": {
-      "alt": "Warehouse in Kompally, Hyderabad",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/blogs/whatsapp-image-2026-05-21-at-11-22-30-1e79b9a8d025fb1f.webp",
-      "width": 1600,
-      "height": 1200
-    },
-    "marketProse": "This is a belt rather than an estate, and the rate barely moves across it. Kompally proper, the pocket nearest the city, is the priciest at ₹23. Kandlakoya, a little further out, holds ₹20, and so does the long Devaryamjal stretch that carries most of the inventory. Gosaiguda and Muneerabad on the Medchal side sit at ₹25. Dulapally, back towards the city, is the outlier at ₹41, and it is small RCC godown space rather than shed. Medchal and Devaryamjal hold their own pages.",
-    "marketImage": {
-      "alt": "Warehouse interior in Kompally, Hyderabad",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/blogs/warehouse-1373-image-11-c968a40240860959.webp",
+      "alt": "Warehouse exterior in Aslali, Ahmedabad",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/26b16e303c64efcdf9bca276c48f1938.webp",
       "width": 1280,
       "height": 960
     },
-    "rentsProse": "The median asking rent on our Kompally listings is ₹20/sq ft per month, with the spread running ₹13 at the floor to ₹41 at the ceiling. Hyderabad's northern belt is the cheapest of the large warehousing markets we cover in any city, and Kompally sits at the bottom of it alongside Medchal and Devaryamjal.\r\nThe band is tight in the middle. Almost every quote on this page falls between ₹17 and ₹25, and the two ends are single sites: a small RCC godown at Dulapally at the top and one plot at the bottom. Nearly all of the stock is pre-engineered, so there is little grade difference to price against.",
-    "specProse": "Seven docks per site with a 30 ft median clear height is a genuine distribution specification, and it is what separates this belt from Hyderabad's in-city godown stock. The median unit is 36,250 sq ft and two thirds of the units are above 20,000. Finished flooring is the gap: only a small share has VDF or FM2 down, so budget for the floor if you are racking high.",
+    "marketHeading": "Warehouse Space in Aslali: Where the Stock Sits",
+    "marketProse": "The belt runs along the highway and the bypass behind it. **Jetalpur**, off the Vadodara side, is the top of the local market. The **Aslali bypass** frontage has the best highway access. **Paldi Kankaj**, in Daskroi taluka behind the highway, is the lower end. Pirana, on the city side, has its own page. The RCC godowns in the belt sit on the Aslali frontage itself.",
+    "marketImage": {
+      "alt": "Map of Aslali, Ahmedabad, showing where WareOnGo's warehouse listings sit around Jetalpur and Paldi Kankaj",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/ahmedabad/aslali.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Aslali",
+    "rentsProse": "Ahmedabad prices lower than the other cities we cover, and Aslali sits at the low end of it, close to Kheda and Pirana. The spread is wider than you might expect, and it maps to build type: the RCC godowns on the Aslali frontage quote above the pre-engineered stock on the Pirana side, and Jetalpur's large pre-engineered box sets the top. Compare like with like before comparing rates.",
+    "specHeading": "Typical Specification in Aslali",
+    "specProse": "Good clear heights at this rate are unusual value, and they are the reason to look at this belt. The catch is the range: clear heights vary widely because the stock mixes RCC godowns with modern sheds, so the specification has to be checked building by building. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "inventoryHeading": "Featured Listings in Aslali",
     "faqs": [
       {
-        "a": "Asking rents on our Kompally listings run from ₹13 to ₹41/sq ft per month with a median of ₹20. Almost everything falls between ₹17 and ₹25. Kompally proper is the priciest pocket at ₹23 and the Devaryamjal stretch holds ₹20.",
-        "q": "What is the rent for a warehouse in Kompally?"
+        "a": "Current asking rents in Aslali are shown in the rent section of this page, taken from our live listings. Jetalpur is the top of the local market and Paldi Kankaj the lower end. RCC godowns on the frontage quote above the pre-engineered sheds.",
+        "q": "What is the rent for a warehouse in Aslali?"
+      },
+      {
+        "a": "The Aslali bypass frontage for the best highway access. Jetalpur for the newer buildings on the Vadodara side. Paldi Kankaj if rent is the constraint. Pirana on the city side has its own page and a wide choice.",
+        "q": "Which parts of Aslali are best for a warehouse?"
+      },
+      {
+        "a": "Aslali serves both ends of the market, from small godowns to mid-size sheds. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Aslali?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Confirm the permitted use of the plot with the local planning authority. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. For highway frontage land outside a GIDC estate, ask what the plot is permitted for as well as what the building holds. Fire NOC is on record for close to half the listings here, well above the pattern we see nationally.",
+        "q": "Do Aslali warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Distributors serving Ahmedabad and the NH-48 route towards Mumbai who want good clear heights at a low rate. Aslali's units are mostly mid-size and the stock mixes RCC godowns with modern pre-engineered sheds, so it suits regional distribution and trade storage for occupiers who compare buildings one by one.",
+        "q": "Who should consider a warehouse in Aslali?"
       }
     ],
-    "relatedBlogs": []
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "ahmedabad",
+    "slug": "kheda",
+    "seoTitle": "Kheda Warehousing, Ahmedabad: Rents and Specification",
+    "metaDescription": "Warehousing in Kheda on the Kheda Dholka highway near Ahmedabad, built for regional distribution. See live rents and specs from verified listings.",
+    "h1": "Kheda Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Kheda sits south east of Ahmedabad where the Dholka highway meets the road towards Nadiad, far enough out that land is cheap and close enough that a truck reaches the city inside an hour. It is a large-format belt: the buildings here are new, pre-engineered and big, and they were put up for regional distribution rather than for local trade.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Kheda, Ahmedabad",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1760361106963.webp",
+      "width": 1280,
+      "height": 725
+    },
+    "marketHeading": "Warehouse Space in Kheda: Where the Stock Sits",
+    "marketProse": "Nearly all of it lines one road. The **Kheda to Dholka highway** frontage carries the largest share of the inventory. **Kanera**, on the Nadiad side, is the top of the local market. **Wadala Patiya Road** and **Vavdi** sit in the middle. **Kajipura** and the **Kheda junction** itself are the lower end. The spread is narrow, and the stock is predominantly pre-engineered, so the pocket you pick changes the rate more than the specification.",
+    "marketImage": {
+      "alt": "Map of Kheda, Ahmedabad, showing where WareOnGo's warehouse listings sit around Kanera",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/ahmedabad/kheda.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Kheda",
+    "rentsProse": "For the size of building on offer, Kheda is strong value, and it is the reason to look this far out of Ahmedabad. The band is narrow, which leaves little to negotiate on location. The stock is predominantly large pre-engineered boxes, so what varies is footprint rather than grade. The lowest quotes sit at Kajipura and the Kheda end of the highway rather than on the biggest boxes.",
+    "specHeading": "Typical Specification in Kheda",
+    "specProse": "Clear heights here are consistently good on large units, a combination that is hard to find at this rate. Docking is the weak point for buildings this size, so confirm the dock and apron provision early. Ask what flooring is down. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "inventoryHeading": "Featured Listings in Kheda",
+    "faqs": [
+      {
+        "a": "Current asking rents in Kheda are shown in the rent section of this page, taken from our live listings. Kanera on the Nadiad side is the top of the local market and Kajipura the lower end. The lowest quotes are at the Kheda end, not on the biggest boxes.",
+        "q": "What is the rent for a warehouse in Kheda?"
+      },
+      {
+        "a": "The Kheda to Dholka highway frontage for the widest choice. Kanera if you want to be nearer Nadiad. Kajipura and the Kheda junction for the lower rates. The stock is predominantly pre-engineered, so the real choice is size and dock count.",
+        "q": "Which parts of Kheda are best for a warehouse?"
+      },
+      {
+        "a": "Kheda is a large-format belt with little small space. For a smaller requirement near Ahmedabad, Aslali or Pirana hold it. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Kheda?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Confirm the permitted use of the plot with the local planning authority. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. Fire NOC and land use do not always travel together, so confirm them separately. Fire NOC is on record for most listings here, well above the pattern we see nationally.",
+        "q": "Do Kheda warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Occupiers that want large pre-engineered buildings at a low rate and can accept more distance from Ahmedabad. Kheda's units are large, with consistently good clear heights and Fire NOC commonly on record, so it suits regional distribution, bulk storage and manufacturing support on the eastern side of the city. Confirm the docks early.",
+        "q": "Who should consider a warehouse in Kheda?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "ahmedabad",
+    "slug": "pirana",
+    "seoTitle": "Pirana Warehousing, Ahmedabad: Rents and Specification",
+    "metaDescription": "Warehousing in Pirana, south Ahmedabad: low rents on recent pre-engineered stock. See live rents and specifications from verified listings.",
+    "h1": "Pirana Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Pirana sits on the southern edge of Ahmedabad between the city and the Aslali junction, on land that was industrial long before the ring road reached it. It is some of the most affordable storage we list anywhere in India, and the buildings are better than that suggests: mostly recent, pre-engineered, and often with finished floors already down.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Pirana, Ahmedabad",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/dbeac27ebfddf4c554c3d27b20ac5ae5.webp",
+      "width": 1280,
+      "height": 960
+    },
+    "marketHeading": "Warehouse Space in Pirana: Where the Stock Sits",
+    "marketProse": "This is one pocket rather than a belt, and the quotes sit close together. Most of the stock is addressed simply to **Pirana**. **Hari Om Industrial Park**, on the **Paldi Kankaj** side in Daskroi taluka, is the top of the local market. With this little variation, compare buildings rather than locations. The stock is predominantly pre-engineered, and VDF flooring is common, which is unusual at this rate.",
+    "marketImage": {
+      "alt": "Map of Pirana, Ahmedabad, showing where WareOnGo's warehouse listings sit around Pirana and Paldi Kankaj",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/ahmedabad/pirana.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Pirana",
+    "rentsProse": "Pirana has one of the lowest rents of any micromarket we cover, below Aslali and Kheda and well below Sarkhej and Sanathal across the city. The band is narrow enough that there is effectively one rate here. What makes it worth attention is the specification behind it: the buildings are predominantly pre-engineered, clear heights are good, and many sites already have VDF flooring down.",
+    "specHeading": "Typical Specification in Pirana",
+    "specProse": "Clear heights and flooring here are better than the rate implies. Docking is the constraint, so this suits a distributor running small vehicles rather than an operation moving trailers. Units are mid-size, with little very large stock. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "inventoryHeading": "Featured Listings in Pirana",
+    "faqs": [
+      {
+        "a": "Current asking rents in Pirana are shown in the rent section of this page, taken from our live listings. The Hari Om Industrial Park side is the top of the local market. With such a narrow band, compare on specification rather than on price.",
+        "q": "What is the rent for a warehouse in Pirana?"
+      },
+      {
+        "a": "Hari Om Industrial Park and the Paldi Kankaj side for the better buildings. The main Pirana stretch for the widest choice. If you need more docks or a larger floorplate, Aslali is close by and Kheda holds far bigger boxes.",
+        "q": "Which parts of Pirana are best for a warehouse?"
+      },
+      {
+        "a": "Pirana is a mid-size market with no very large stock. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Pirana?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Confirm the permitted use of the plot with the local planning authority. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. On land this close to the city with a long industrial history, establish the building sanction as well.",
+        "q": "Do Pirana warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Small-vehicle distributors and traders serving Ahmedabad at one of the lowest rents we see. Pirana's buildings are mid-size and pre-engineered, with good clear heights and VDF flooring often already down, so it suits city distribution and storage that runs vans and light trucks rather than trailers, given the modest docking.",
+        "q": "Who should consider a warehouse in Pirana?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "attibele",
+    "seoTitle": "Attibele Warehousing, Bangalore: Rents and Specification",
+    "metaDescription": "Warehousing in Attibele on NH-44 at the Karnataka and Tamil Nadu border, near Hosur. See live rents and specs from verified listings.",
+    "h1": "Attibele Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Attibele sits on NH-44 at the point where Karnataka ends and Tamil Nadu begins, just short of Hosur. That border position is the whole proposition: goods staged here can be moved into either state without a second leg, which is why it draws distributors serving both Bangalore and the Hosur industrial belt. It is the cheaper end of the Hosur Road corridor and the last stop before Tamil Nadu.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Attibele, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1762324790736.webp",
+      "width": 1280,
+      "height": 720
+    },
+    "marketHeading": "Warehouse Space in Attibele: Where the Stock Sits",
+    "marketProse": "The split here runs the opposite way to most estates. **Attibele Industrial Area**, the allotted KIADB block along the highway, is the cheaper half, while independent stock in and around **Attibele** town quotes more. **Krishnasagara**, off the Anekal side, is at the top of the local range, and **Naganaikanahalli** sits between the two. The Anekal road running west is the quieter edge of the same market.",
+    "marketImage": {
+      "alt": "Map of Attibele, Bengaluru, showing where WareOnGo's warehouse listings sit around Attibele Industrial Area, Attibele and Krishnasagara",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/attibele.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Attibele",
+    "rentsProse": "Attibele is the cheaper point on the Hosur Road corridor, under Jigani and Bommasandra. The allotted KIADB block is the value end, which is unusual: on most Bangalore estates the allotted land carries the premium. Here the highway frontage and the town stock price higher because they are easier to reach. Build-to-suit land is listed here, usually without a quoted rate.",
+    "specHeading": "Typical Specification in Attibele",
+    "specProse": "Loading is the thing to check first. Many sites here load at grade rather than from a dock, which is workable for a distributor running small vehicles and a problem for anyone running trailers. Units are small, so this is basic space priced accordingly; ask what flooring is down.",
+    "inventoryHeading": "Featured Listings in Attibele",
+    "faqs": [
+      {
+        "a": "Current asking rents in Attibele are shown in the rent section of this page, taken from our live listings. The KIADB Attibele Industrial Area is the cheaper half. Independent stock in and around the town quotes more, and the top of the range is a single site at Krishnasagara.",
+        "q": "What is the rent for a warehouse in Attibele?"
+      },
+      {
+        "a": "The KIADB Attibele Industrial Area for a lower rate on allotted industrial land. Attibele town and the highway frontage if access matters more than rent. The Anekal road if you want to be closer to Jigani and Bommasandra rather than to the border.",
+        "q": "Which parts of Attibele are best for a warehouse?"
+      },
+      {
+        "a": "Attibele is mostly a small and mid-size market. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Attibele?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. For a border location where goods move between two states, this is worth taking seriously.",
+        "q": "Do Attibele warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Small distributors and suppliers serving the Hosur Road corridor and the Tamil Nadu border, at the cheaper end of the corridor. Attibele's units are mostly small and many load at grade rather than from a dock, so it suits operators running small vehicles and businesses that want lower-cost space close to Hosur and Electronic City.",
+        "q": "Who should consider a warehouse in Attibele?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "bannerghatta",
+    "seoTitle": "Bannerghatta Warehousing, Bangalore: Rents and Specification",
+    "metaDescription": "Warehousing on Bannerghatta Road, south Bangalore, close to the city. See live rents, unit sizes and specifications from verified listings.",
+    "h1": "Bannerghatta Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Bannerghatta Road runs south from the city towards Jigani and Anekal, and warehousing on it starts where the residential belt stops. This is city-edge space rather than a distribution corridor: the buildings are smaller than the outer belts offer, the occupiers are serving south Bangalore rather than the state, and the value on offer is drive time into the city rather than throughput.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Bannerghatta, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1763032863884.webp",
+      "width": 720,
+      "height": 1280
+    },
+    "marketHeading": "Warehouse Space in Bannerghatta: Where the Stock Sits",
+    "marketProse": "The road holds two quite different things. At the city end, **Electronic City** carries commercial RCC floorspace, and that is what sets this page's ceiling: it is office-grade product with a warehouse use, not a shed. Everything south of it is ordinary warehousing. **Mantapa**, on the Bannerghatta to Jigani stretch, is the lower end, with **Begur Road** and **Koppa Road** above it. The Jigani end of the road holds its own page.",
+    "marketImage": {
+      "alt": "Map of Bannerghatta, Bengaluru, showing where WareOnGo's warehouse listings sit around Electronic City and Mantapa",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/bannerghatta.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Bannerghatta",
+    "rentsProse": "The median is the number to plan against on Bannerghatta Road. The ceiling is Electronic City commercial RCC and describes a handful of small units rather than the road as a whole. Set those aside and Bannerghatta prices close to Jigani next door. A good share of the stock is RCC, more than on most of the south Bangalore estates, which is what you would expect on a road that was residential before it was industrial.",
+    "specHeading": "Typical Specification in Bannerghatta",
+    "specProse": "Clear heights and docking put this road below the outer belts on throughput, and the unit sizes confirm what it is for. Much of the stock is RCC, so floor loading and column spacing vary site to site. If you need docks, Jigani is further down the same road and better equipped.",
+    "inventoryHeading": "Featured Listings in Bannerghatta",
+    "faqs": [
+      {
+        "a": "Current asking rents in Bannerghatta are shown in the rent section of this page, taken from our live listings. The top of the band is commercial RCC floorspace in Electronic City and is a different product at a different rate.",
+        "q": "What is the rent for a warehouse in Bannerghatta?"
+      },
+      {
+        "a": "Mantapa for a lower rate on the road. Begur Road for mid-size space closer to the city. Electronic City only if you need commercial floorspace inside the tech belt. Push south to Jigani if you want an allotted industrial plot with docks and height.",
+        "q": "Which parts of Bannerghatta are best for a warehouse?"
+      },
+      {
+        "a": "Bannerghatta is a small and mid-size market. For a large single box, Hoskote and Dobbaspet are the nearest options. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Bannerghatta?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. On a road with converted and part-residential land behind it, check land use first.",
+        "q": "Do Bannerghatta warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Occupiers that want south Bangalore access close to Electronic City and the residential south: city distribution, service stores and storage for businesses selling into the area. Bannerghatta's units are mostly small to mid-size, with a sizeable RCC share, so it suits moderate volumes, while Jigani further down the road handles trailer-scale throughput better.",
+        "q": "Who should consider a warehouse in Bannerghatta?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "begur",
+    "seoTitle": "Begur, Bommanahalli, HSR, Kudlu Gate Warehousing, Bangalore",
+    "metaDescription": "Warehousing in Begur, Bommanahalli, HSR and Kudlu Gate, south Bangalore off Hosur Road. See live rents, sizes and specs from verified listings.",
+    "h1": "Begur, Bommanahalli, HSR and Kudlu Gate Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "This page covers four neighbouring pockets of south Bangalore on the city side of Hosur Road: Begur, Bommanahalli, HSR Layout and Kudlu Gate. It is in-city space rather than a warehousing belt. Most of it is RCC ground-floor and multi-floor space inside residential and commercial neighbourhoods, and it suits last-mile delivery, quick commerce and trade storage that has to sit within reach of Koramangala, Electronic City and the Outer Ring Road.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Begur, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1762845030328.webp",
+      "width": 720,
+      "height": 1280
+    },
+    "marketHeading": "Warehouse Space in Begur, Bommanahalli, HSR and Kudlu Gate: Where the Stock Sits",
+    "marketProse": "The four pockets sit close together but offer different kinds of space. **Bommanahalli** fronts Hosur Road between Silk Board and Electronic City, and its older industrial area of garment and printing units gives it some of the larger floorplates on this page. **Kudlu Gate**, further along the same road, is a Hosur Road junction with its own station on the Yellow Line metro, linked inland to Hosapalaya and Parappana Agrahara. **Begur**, off Hosur Road around Begur Road and Hongasandra, is a fast-growing residential suburb where the space is mostly ground-floor RCC. **HSR** Layout, on the Outer Ring Road, is a planned residential and startup district, so what it offers is small commercial floorspace at the top of the local market. **Singasandra** and AECS Layout, between Begur and Kudlu Gate, carry a mix of RCC and pre-engineered units.",
+    "marketImage": {
+      "alt": "Map of Begur, Bengaluru, showing where WareOnGo's warehouse listings sit around Bommanahalli, Kudlu Gate, Begur, HSR and Singasandra",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/begur.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Begur, Bommanahalli, HSR and Kudlu Gate",
+    "rentsProse": "Rents here sit well above the peripheral belts, because the space is inside the city and is priced like commercial floorspace rather than warehousing. HSR Layout holds the top of the range with small RCC units, Begur and Bommanahalli sit in the middle, and the larger units around Bommanahalli and Singasandra quote less per square foot than the small floors. Treat the premium as the price of being close to customers rather than a price for specification.",
+    "specHeading": "Typical Specification in Begur, Bommanahalli, HSR and Kudlu Gate",
+    "specProse": "Units are small, most are RCC, and clear heights suit shelving and pallet trucks rather than high racking. Docking is limited, so check vehicle access, lane width and loading hours as closely as the building itself. A good share of the space runs across ground and upper floors, so confirm floor loading and lift or ramp access for anything above ground.",
+    "inventoryHeading": "Featured Listings in Begur, Bommanahalli, HSR and Kudlu Gate",
+    "faqs": [
+      {
+        "a": "Current asking rents in Begur, Bommanahalli, HSR and Kudlu Gate are shown in the rent section of this page, taken from our live listings. Small RCC floors in HSR Layout set the top of the range, Begur and Bommanahalli sit in the middle, and larger units around Bommanahalli and Singasandra quote less per square foot.",
+        "q": "What is the rent for a warehouse in Begur, Bommanahalli, HSR and Kudlu Gate?"
+      },
+      {
+        "a": "Bommanahalli for Hosur Road frontage and some of the larger floorplates. Kudlu Gate for a Hosur Road junction with metro access, closer to Electronic City. Begur for ground-floor space in a growing residential suburb, close to its customers. HSR Layout if you need small space on the Outer Ring Road and can carry the premium.",
+        "q": "Which parts of Begur, Bommanahalli, HSR and Kudlu Gate are best for a warehouse?"
+      },
+      {
+        "a": "This is a small-unit market: most space suits a last-mile or storage requirement rather than a distribution centre. For a large box, Jigani, Bommasandra and the estates further down Hosur Road hold more of it. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Begur, Bommanahalli, HSR and Kudlu Gate?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. In a mixed residential and commercial area, also confirm that the building is sanctioned for storage use.",
+        "q": "Do Begur, Bommanahalli, HSR and Kudlu Gate warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Businesses that need space inside south Bangalore, close to HSR Layout and the residential south: last-mile delivery, quick commerce, service stores and small trade stock. Begur's units are small, mostly RCC, with low clear heights and some upper-floor space, so it suits shelving and pallet trucks rather than high racking or trailers.",
+        "q": "Who should consider a warehouse in Begur?"
+      }
+    ],
+    "relatedBlogs": [
+      "peb-vs-rcc-warehouse"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "bidadi",
+    "seoTitle": "Bidadi Warehousing, Bangalore: Rents and Specification",
+    "metaDescription": "Warehousing in Bidadi on Mysore Road (NH-275), the KIADB and automotive town past Kumbalgodu. See live rents and specifications from verified listings.",
+    "h1": "Bidadi Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Bidadi is the industrial town on NH-275 between Bangalore and Ramanagara, built around the KIADB estate and the automotive plants that anchor it. It is the far end of the western arc, past Kumbalgodu, and the trade here is manufacturing supply rather than city distribution. Space is scarce and rarely cheap, because most of the land is held by occupiers who use it rather than by landlords who let it.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Bidadi, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1777287872799.webp",
+      "width": 1280,
+      "height": 576
+    },
+    "marketHeading": "Warehouse Space in Bidadi: Where the Stock Sits",
+    "marketProse": "This is a small market and the stock reads as individual sites rather than as pockets. **Abhanakuppe**, off the highway on the Bangalore side, is the top of the local range, with **Shyanumangala** just below it. The **Bidadi Industrial Area** frontage on Mysore Road is the entry point. The stock is predominantly pre-engineered space on or beside allotted industrial land, and the narrow spread across the town tells you how thin the choice is.",
+    "marketImage": {
+      "alt": "Map of Bidadi, Bengaluru, showing where WareOnGo's warehouse listings sit around Shyanumangala and Bidadi Industrial Area",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/bidadi.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Bidadi",
+    "rentsProse": "Bidadi's rent band is one of the narrowest we cover anywhere, and it is a supply signal rather than a pricing one: with this little available, there is nothing to bargain against. Bidadi carries a premium over Kumbalgodu, the next pocket back towards the city on the same highway. What you are paying for is the industrial estate and the manufacturing cluster around it.",
+    "specHeading": "Typical Specification in Bidadi",
+    "specProse": "Docking here is strong for a market this small and reflects what the estate was built to serve. Bidadi holds genuinely large boxes despite the short list. Clear heights vary, so confirm the height on the specific building rather than assuming the top of the range.",
+    "inventoryHeading": "Featured Listings in Bidadi",
+    "faqs": [
+      {
+        "a": "Current asking rents in Bidadi are shown in the rent section of this page, taken from our live listings. The band is unusually narrow. Abhanakuppe is the top of the local range and the Bidadi Industrial Area frontage on Mysore Road the entry point.",
+        "q": "What is the rent for a warehouse in Bidadi?"
+      },
+      {
+        "a": "Abhanakuppe and Shyanumangala for the better specified buildings. The Bidadi Industrial Area frontage on Mysore Road for a lower rate. If nothing here fits, Kumbalgodu back towards the city is cheaper and Harohalli is the nearest alternative estate.",
+        "q": "Which parts of Bidadi are best for a warehouse?"
+      },
+      {
+        "a": "Bidadi holds large boxes for a market this small. For a smaller unit, Kumbalgodu holds the smaller stock. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Bidadi?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Bidadi warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Occupiers that want large, well-docked buildings on Mysore Road, near the Bidadi industrial estate and its manufacturing cluster. Bidadi's stock is pre-engineered and genuinely large, with good docking, so it suits automotive and manufacturing suppliers and regional distribution towards Mysuru, for occupiers ready to move when a building comes up, since supply here is short.",
+        "q": "Who should consider a warehouse in Bidadi?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "bidrahalli",
+    "seoTitle": "Bidrahalli, Budigere, Cheemasandra, Rampura Warehousing",
+    "metaDescription": "Warehousing in Bidrahalli, Budigere, Cheemasandra and Rampura, north-east Bangalore off Old Madras Road. See live rents and specs from verified listings.",
+    "h1": "Bidrahalli, Budigere, Cheemasandra and Rampura Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "This page covers the villages of Bidarahalli hobli in Bangalore East taluk, on the north-east edge of the city: Bidrahalli, Budigere, Cheemasandra and Rampura. It is a belt of converted farmland and village roads rather than a planned estate, and its advantage is position. Old Madras Road and the Hoskote side lie to the south, the roads to the airport lie to the north, and the belt sits between the two.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Bidrahalli, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1759990076870.webp",
+      "width": 1077,
+      "height": 1078
+    },
+    "marketHeading": "Warehouse Space in Bidrahalli, Budigere, Cheemasandra and Rampura: Where the Stock Sits",
+    "marketProse": "Most of the stock is pre-engineered sheds on converted land spread through the villages, and the pockets differ in size and price. **Rampura**, on Avalahalli Main Road and the Kada Agrahara road towards Doddagubbi, holds the largest share and is the value end, with mid-sized sheds at lower rents. **Cheemasandra**, near Virgonagar and reached from Old Madras Road and Budigere Road, carries larger pre-engineered buildings a step up in price. **Bidrahalli**, the hobli town itself, with **Aduru** and **Kithiganur** around it, sits in the middle of the market. **Budigere**, where the Whitefield to Budigere road meets Old Madras Road at Budigere Cross, is the way north to the KIADB Aerospace Park, and the park and the **Bagalur** side hold the dearest and most industrial units. Whitefield and Devanahalli hold their own pages.",
+    "marketImage": {
+      "alt": "Map of Bidrahalli, Bengaluru, showing where WareOnGo's warehouse listings sit around Rampura, Cheemasandra, Bidrahalli, Aduru, Budigere and Bagalur",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/bidrahalli.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Bidrahalli, Budigere, Cheemasandra and Rampura",
+    "rentsProse": "The belt prices in line with Hoskote and a little below Whitefield on the median, with a wide range above it. Village sheds around Rampura and the Kada Agrahara road set the floor, and pre-engineered buildings around Cheemasandra and Bidrahalli form the middle. The top of the range comes from units inside the KIADB Aerospace and Hardware parks and on the Bagalur side, which price with Devanahalli rather than with this belt.",
+    "specHeading": "Typical Specification in Bidrahalli, Budigere, Cheemasandra and Rampura",
+    "specProse": "Clear heights and docking are moderate: better than the in-city stock, below the large Hoskote parks. Units are mid-sized, suited to regional storage and to city distribution towards the north and east. Check the approach road for full-length trucks, since several pockets sit on village roads.",
+    "inventoryHeading": "Featured Listings in Bidrahalli, Budigere, Cheemasandra and Rampura",
+    "faqs": [
+      {
+        "a": "Current asking rents in Bidrahalli, Budigere, Cheemasandra and Rampura are shown in the rent section of this page, taken from our live listings. Village sheds around Rampura set the floor, Cheemasandra and Bidrahalli sit in the middle, and the Aerospace Park and Bagalur side hold the top of the range.",
+        "q": "What is the rent for a warehouse in Bidrahalli, Budigere, Cheemasandra and Rampura?"
+      },
+      {
+        "a": "Rampura for the widest choice of mid-sized sheds at the lower end of the band. Cheemasandra for larger pre-engineered buildings. Bidrahalli for the middle of the market around the hobli town. Budigere, on the road north towards the Aerospace Park, if you want the park's industrial units or to sit nearer the airport.",
+        "q": "Which parts of Bidrahalli, Budigere, Cheemasandra and Rampura are best for a warehouse?"
+      },
+      {
+        "a": "This is a mid-size market. Most units suit regional storage or city distribution, with a few large buildings towards the Aerospace Park. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Bidrahalli, Budigere, Cheemasandra and Rampura?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Bidrahalli, Budigere, Cheemasandra and Rampura warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Occupiers that want mid-size space in north-east Bangalore, between the city and the airport belts. Bidrahalli's units are mostly mid-size and pre-engineered, with a share of village sheds, so it suits regional storage and city distribution towards the north and east, for operators who check the approach road for full-length trucks.",
+        "q": "Who should consider a warehouse in Bidrahalli?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "bommasandra",
+    "seoTitle": "Bommasandra Warehousing, Bangalore: Rents and Specification",
+    "metaDescription": "Warehousing in Bommasandra KIADB Industrial Area on Hosur Road, Bangalore. See live rents, sizes and specifications from verified listings.",
+    "h1": "Bommasandra Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Bommasandra is the KIADB estate on Hosur Road where south Bangalore's pharmaceutical and electronics manufacturing concentrates, and it connects to Jigani by the link road that carries both names. The estate is fully built out, which is why so much of what becomes available here is either a small unit inside an existing compound or a build-to-suit parcel rather than a ready large box.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Bommasandra, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1762319876595.webp",
+      "width": 1280,
+      "height": 960
+    },
+    "marketHeading": "Warehouse Space in Bommasandra: Where the Stock Sits",
+    "marketProse": "The estate divides into three. **Bommasandra Industrial Area**, the allotted KIADB core, is the top of the local market. The **Bommasandra-Jigani Link Road** that connects the two estates carries much of the available space. **Haragadde** and **Jigani main road**, on the Jigani side, are the lower end. Build-to-suit parcels are a real part of what is offered here, often more so than a ready building of the size you want.",
+    "marketImage": {
+      "alt": "Map of Bommasandra, Bengaluru, showing where WareOnGo's warehouse listings sit around Bommasandra Industrial Area and Haragadde",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/bommasandra.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Bommasandra",
+    "rentsProse": "Bommasandra prices close to Jigani next door and above Attibele, with little by way of a cheap entry point. Build type varies more here than anywhere else on this corridor: the stock mixes pre-engineered buildings, RCC and sheds, which is what a fully built-out estate leaves behind. Compare like with like before comparing rates. Build-to-suit land is listed here, usually without a quoted rate.",
+    "specHeading": "Typical Specification in Bommasandra",
+    "specProse": "Units are small, because so much of this space was carved out of existing manufacturing compounds. A large share of the stock is RCC or shed rather than pre-engineered, so clear height and floor loading vary widely site to site and neither can be assumed from the estate name.",
+    "inventoryHeading": "Featured Listings in Bommasandra",
+    "faqs": [
+      {
+        "a": "Current asking rents in Bommasandra are shown in the rent section of this page, taken from our live listings. The allotted KIADB core is the top of the local market, the Bommasandra-Jigani link road sits in the middle, and Haragadde is the lower end.",
+        "q": "What is the rent for a warehouse in Bommasandra?"
+      },
+      {
+        "a": "The KIADB Bommasandra Industrial Area if you need allotted industrial land. The Bommasandra-Jigani link road, which carries much of the available space. Haragadde for a lower rate. Consider a build-to-suit parcel if nothing ready fits your spec.",
+        "q": "Which parts of Bommasandra are best for a warehouse?"
+      },
+      {
+        "a": "Bommasandra is a small-unit estate. Larger single requirements are better served at Hoskote or Dobbaspet. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Bommasandra?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Bommasandra warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Suppliers and service operations that need to sit inside the Bommasandra industrial estate, next to the factories they serve. Units are mostly small to mid-size, carved out of existing compounds, and the stock mixes pre-engineered buildings, RCC and sheds, so Bommasandra suits component storage, kitting and small-scale distribution near Electronic City rather than a regional hub.",
+        "q": "Who should consider a warehouse in Bommasandra?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "budihal",
+    "seoTitle": "Budihal Warehousing, Bangalore: Rents and Specification",
+    "metaDescription": "Warehousing in Budihal on Tumkur Road near the Nelamangala toll, northwest Bangalore. See live rents, sizes and specs from verified listings.",
+    "h1": "Budihal Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Budihal is a village in Nelamangala taluk on Tumkur Road, near the Nelamangala toll plaza, at the city end of the stretch that runs out towards T Begur and Dobbaspet. It is among the closest points on Tumkur Road where large modern distribution buildings sit on open land, which is what occupiers come here for.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Budihal, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1759215878977.webp",
+      "width": 540,
+      "height": 301
+    },
+    "marketHeading": "Warehouse Space in Budihal: Where the Stock Sits",
+    "marketProse": "The stock clusters around the village and the highway frontage rather than an estate. **Budihal** itself, on Tumkur Road near the Nelamangala toll, carries most of it. **Thonachinakuppe** and **Mylanahalli** nearby hold more pre-engineered space on the same pattern. T Begur, further out, and Nelamangala hold their own pages.",
+    "marketImage": {
+      "alt": "Map of Budihal, Bengaluru, showing where WareOnGo's warehouse listings sit around Budihal and Mylanahalli",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/budihal.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Budihal",
+    "rentsProse": "Budihal prices with T Begur and a touch below Nelamangala. Almost the whole market is recent pre-engineered buildings, so quotes sit close together, and handover condition and yard space move the rate more than location. For the specification on offer, that makes Budihal strong value: large, recent buildings at one of the lower rates among Bangalore's big belts.",
+    "specHeading": "Typical Specification in Budihal",
+    "specProse": "Clear heights and docking here are distribution grade, and the floorplates are large. Ask what flooring is down and whether the yard takes full-length trucks if you plan high racking and heavy throughput. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "inventoryHeading": "Featured Listings in Budihal",
+    "faqs": [
+      {
+        "a": "Current asking rents in Budihal are shown in the rent section of this page, taken from our live listings. Quotes sit close together because the buildings are recent and similar. Handover condition and yard space move the rate more than location.",
+        "q": "What is the rent for a warehouse in Budihal?"
+      },
+      {
+        "a": "Budihal itself for highway frontage at the city end of the belt. Thonachinakuppe and Mylanahalli for more of the same buildings nearby. T Begur if you want the widest choice of large sheds a little further out.",
+        "q": "Which parts of Budihal are best for a warehouse?"
+      },
+      {
+        "a": "Budihal is a large-format market; smaller units exist but are a minor part of the stock. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Budihal?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. Fire NOC is on record for a majority of listings here, well above the pattern we see nationally.",
+        "q": "Do Budihal warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Large-format occupiers that want recent, distribution-grade buildings on the Nelamangala side at one of the lower rates in Bangalore. Budihal's stock is pre-engineered with large floorplates, high clear heights and generous docking, and Fire NOC is on record for a majority of listings, so it suits regional hubs and high racking.",
+        "q": "Who should consider a warehouse in Budihal?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "chokkahalli",
+    "seoTitle": "Chokkahalli Warehousing, Bangalore: Rents and Specification",
+    "metaDescription": "Warehousing in Chokkahalli, home of the KIADB Hoskote Industrial Area on the Chintamani road. See live rents and specs from verified listings.",
+    "h1": "Chokkahalli Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Chokkahalli is the village outside Hoskote where the KIADB laid out the Hoskote Industrial Area, on the road that leaves the town for Chintamani. The estate holds food, pharma and wind-energy units alongside warehousing, and it sits a short run from Old Madras Road and the Satellite Town Ring Road junction that has made Hoskote one of Bangalore's main warehousing nodes.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Chokkahalli, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1761822754091.webp",
+      "width": 1280,
+      "height": 960
+    },
+    "marketHeading": "Warehouse Space in Chokkahalli: Where the Stock Sits",
+    "marketProse": "The stock splits between the estate and the highway beyond it. The **KIADB Hoskote Industrial Area**, on allotted plots at Chokkahalli, carries large pre-engineered sheds on industrial land. **Dasara Thimmanahalli** and **Bheemakkanahalli**, further out along the Chintamani road, hold more large buildings on converted land. **Ekarajapura**, towards the Sidlaghatta road, adds some of the biggest boxes, and it and Hoskote hold their own pages.",
+    "marketImage": {
+      "alt": "Map of Chokkahalli, Bengaluru, showing where WareOnGo's warehouse listings sit around Ekarajapura",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/chokkahalli.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Chokkahalli",
+    "rentsProse": "Rent sits in a tight band, in line with the Hoskote belt. Allotted estate plots and the newer highway buildings price close together, so size, handover condition and dock count move the rate more than location. Given the size and specification of the buildings, that rate makes Chokkahalli strong value in east Bangalore.",
+    "specHeading": "Typical Specification in Chokkahalli",
+    "specProse": "Specification here is among the strongest in east Bangalore: large floorplates, high clear heights and heavy docking, suited to regional distribution and high racking. Clear height and docks are on record for most listings here, so you can compare buildings before a visit. VDF is the floor recorded across the stock, which suits high racking and powered equipment.",
+    "inventoryHeading": "Featured Listings in Chokkahalli",
+    "faqs": [
+      {
+        "a": "Current asking rents in Chokkahalli are shown in the rent section of this page, taken from our live listings. Estate plots and the newer highway buildings price close together. Size, handover condition and dock count move the rate more than location.",
+        "q": "What is the rent for a warehouse in Chokkahalli?"
+      },
+      {
+        "a": "The KIADB estate at Chokkahalli for allotted industrial land. Dasara Thimmanahalli and Bheemakkanahalli on the Chintamani road for large buildings further out. Ekarajapura for the biggest boxes, towards the Sidlaghatta road.",
+        "q": "Which parts of Chokkahalli are best for a warehouse?"
+      },
+      {
+        "a": "Chokkahalli is a large-format market built for distribution; smaller units are a minor part of the stock. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Chokkahalli?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. Fire NOC is on record for most listings here, well above the pattern we see nationally.",
+        "q": "Do Chokkahalli warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Regional distributors and logistics operators that need very large, high-specification buildings in east Bangalore. Chokkahalli's buildings are predominantly pre-engineered, with large floorplates, high clear heights and heavy docking, and Fire NOC is on record for most, so it suits regional distribution centres, high racking and full truckload throughput.",
+        "q": "Who should consider a warehouse in Chokkahalli?"
+      }
+    ],
+    "relatedBlogs": [
+      "grade-a-warehouse-india"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "dasanapura",
+    "seoTitle": "Dasanapura and Doddaballapura Warehousing, Bangalore",
+    "metaDescription": "Warehousing in Dasanapura and the KIADB Doddaballapura estates, north Bangalore. See live rents, sizes and specs from verified listings.",
+    "h1": "Dasanapura and Doddaballapura Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "This page covers Dasanapura and Doddaballapura in Bangalore's north. Dasanapura is a hobli of Bangalore North taluk along Tumkur Road, taking in Madavara, where the Bangalore International Exhibition Centre stands, and the Machohalli industrial area. Doddaballapura, further north, is the headquarters of Bengaluru North district, a silk-weaving town where the KIADB has built one of the region's larger industrial estates, with an apparel park and several later phases.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Dasanapura, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1769771621210.webp",
+      "width": 1280,
+      "height": 960
+    },
+    "marketHeading": "Warehouse Space in Dasanapura and Doddaballapura: Where the Stock Sits",
+    "marketProse": "The stock on this page sits in the KIADB estates at **Doddaballapura**: the original industrial area, the **Apparel Park**, and the later phases at **Obadenahalli** and **Adinarayana Hosahalli**. **Doddagollahalli**, on the airport side, is close to the Foxconn plant in the ITIR industrial area. **Dasanapura**, on Tumkur Road to the south-west, takes in Madavara and Machohalli, and Makali and Nelamangala beside it hold their own pages.",
+    "marketImage": {
+      "alt": "Map of Dasanapura, Bengaluru, showing where WareOnGo's warehouse listings sit around Doddaballapura, Obadenahalli, Adinarayana Hosahalli and Doddagollahalli",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/dasanapura.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Dasanapura and Doddaballapura",
+    "rentsProse": "Doddaballapura prices with the rest of Bangalore's outer industrial estates, a little above Nelamangala. Pre-engineered sheds on allotted KIADB plots make up most of the market and set its level, and the few older sheds quote less. Compare quotes against the median shown on this page rather than the top of the range, which reflects individual buildings.",
+    "specHeading": "Typical Specification in Dasanapura and Doddaballapura",
+    "specProse": "Units are mid-sized, suited to manufacturing support and regional storage rather than large distribution. Clear heights suit racking, but docking is thinner than on the highway belts, so check dock provision or ground-level loading per building. Clear height is on record for nearly every listing here, so you can shortlist on it before a visit.",
+    "inventoryHeading": "Featured Listings in Dasanapura and Doddaballapura",
+    "faqs": [
+      {
+        "a": "Current asking rents in Dasanapura and Doddaballapura are shown in the rent section of this page, taken from our live listings. Pre-engineered sheds on allotted KIADB plots at Doddaballapura set the level, and the few older sheds quote less.",
+        "q": "What is the rent for a warehouse in Dasanapura and Doddaballapura?"
+      },
+      {
+        "a": "The main KIADB Doddaballapura estate and the Apparel Park for allotted industrial land close to the town. Obadenahalli and Adinarayana Hosahalli, in the later phases, for newer buildings. Doddagollahalli if you want to sit near the Foxconn plant and the airport side. Dasanapura's Tumkur Road side if you need to be closer to the city on the north-west.",
+        "q": "Which parts of Dasanapura and Doddaballapura are best for a warehouse?"
+      },
+      {
+        "a": "Doddaballapura is a mid-size market: most units suit manufacturing support or regional storage, and very large boxes are uncommon. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Dasanapura and Doddaballapura?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Dasanapura and Doddaballapura warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Manufacturing support and regional storage operations that want mid-size space on KIADB land in the Doddaballapura direction. Dasanapura's units are mid-size and mostly pre-engineered, with clear heights that suit racking and lighter docking, so it suits suppliers and storage operations more than high-volume distribution.",
+        "q": "Who should consider a warehouse in Dasanapura?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "devanahalli",
+    "seoTitle": "Devanahalli Warehousing, Bangalore: Rents and Specification",
+    "metaDescription": "Warehousing in Devanahalli near Bangalore airport, in the KIADB aerospace and hardware parks. See live rents, sizes and specs from verified listings.",
+    "h1": "Devanahalli Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Devanahalli is the airport belt. Kempegowda International Airport sits inside it, NH-44 runs through it towards Hyderabad, and the KIADB has laid out aerospace, hardware and defence parks on the land around both. That mix makes it one of Bangalore's most expensive warehousing markets and its most specialised one. Occupiers here are paying for air cargo access and for industrial parks, not for cheap storage.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Devanahalli, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1759230369388.webp",
+      "width": 1024,
+      "height": 768
+    },
+    "marketHeading": "Warehouse Space in Devanahalli: Where the Stock Sits",
+    "marketProse": "Stock here sits inside named KIADB parks far more than along roads. **KIADB Aerospace Park** is the largest concentration and the top of the market, including RCC units in the defence and hi-tech plots. **KIADB Hardware Park** is a step cheaper. **Bagaluru**, on the city side of the airport, prices with the Aerospace Park, and **Arebannimangala** is at the top of the local range. The later KIADB phases further from the airport are the affordable end.",
+    "marketImage": {
+      "alt": "Map of Devanahalli, Bengaluru, showing where WareOnGo's warehouse listings sit around KIADB Aerospace Park, KIADB Hardware Park, Bagaluru and Arebannimangala",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/devanahalli.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Devanahalli",
+    "rentsProse": "Devanahalli is among the most expensive warehousing micromarkets we cover in Bangalore, well above Nelamangala and Hoskote. What you are paying for is the park rather than the box. KIADB land inside the aerospace and defence plots sits at the top, and the later phases further from the airport are where the more affordable stock is. A sizeable share of the stock is RCC, which is unusual for a peripheral belt and reflects how much of it was built for manufacturing rather than storage.",
+    "specHeading": "Typical Specification in Devanahalli",
+    "specProse": "Clear heights and unit sizes here are among the best in Bangalore. Docks are the weak point, because much of this space was built as manufacturing floor rather than as a distribution centre. Check dock provision before you commit. Most of the stock is pre-engineered, with VDF the most common floor, which suits high racking wherever the dock count works for the operation.",
+    "inventoryHeading": "Featured Listings in Devanahalli",
+    "faqs": [
+      {
+        "a": "Current asking rents in Devanahalli are shown in the rent section of this page, taken from our live listings. KIADB Aerospace Park stock is the top of the market, and the later KIADB phases away from the airport are the more affordable end.",
+        "q": "What is the rent for a warehouse in Devanahalli?"
+      },
+      {
+        "a": "KIADB Aerospace Park for large space with air cargo access. KIADB Hardware Park for a slightly lower entry point. Bagaluru if you want to stay on the city side of the airport. The later KIADB phases if rent matters more than the address.",
+        "q": "Which parts of Devanahalli are best for a warehouse?"
+      },
+      {
+        "a": "Devanahalli space is large, with little small stock. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Devanahalli?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Devanahalli warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Occupiers that value the airport and the KIADB parks around it: air-freight-linked distribution, aerospace and electronics suppliers, and operators that need large, tall buildings in north Bangalore. Devanahalli's stock is mostly large pre-engineered space with good clear heights. Docking is thinner than on the distribution belts, so it suits storage and manufacturing support more than high-frequency despatch.",
+        "q": "Who should consider a warehouse in Devanahalli?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ],
+    "statOverrides": {
+      "rent": {
+        "max": 60
+      }
+    }
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "dobbaspet",
+    "seoTitle": "Dobbaspet Warehousing, Bangalore: Rents and Specification",
+    "metaDescription": "Warehousing in Dobbaspet KIADB on NH-48 past Nelamangala, near the planned logistics park. See live rents and specs from verified listings.",
+    "h1": "Dobbaspet Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Dobbaspet is the far end of the NH-48 corridor, past Nelamangala on the road to Tumakuru and Mumbai. It is a large block of allotted KIADB industrial land on Bangalore's northwest side, laid out in numbered phases, and it is where the big-box stock sits. A multi modal logistics park is planned on this stretch, which is a big part of why occupiers take long leases here rather than closer in.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Dobbaspet, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1759739744197.webp",
+      "width": 1280,
+      "height": 576
+    },
+    "marketHeading": "Warehouse Space in Dobbaspet: Where the Stock Sits",
+    "marketProse": "Almost everything here is inside or beside the KIADB layout. **Dobbaspet Industrial Area**, across its numbered phases, is where the newest large boxes are. **Averahalli** on its edge prices alongside it. **Billanakote** and **Thyamagondlu**, on the Nelamangala side, are a step down. **Kalalghatta** and **Mahimapura** are the cheaper pockets. The Sompura phases towards Nelamangala are covered on the Nelamangala page.",
+    "marketImage": {
+      "alt": "Map of Dobbaspet, Bengaluru, showing where WareOnGo's warehouse listings sit around Dobbaspet Industrial Area, Averahalli, Billanakote, Thyamagondlu and Mahimapura",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/dobbaspet.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Dobbaspet",
+    "rentsProse": "Dobbaspet's rent band is narrow for a market this size, which is what an allotted industrial estate looks like when almost every building was put up for the same purpose. There is little by way of a cheap corner here, or a premium one. What moves the rate is phase and age: the newer KIADB phases sit at the top, while older stock on the Nelamangala side sits at the bottom. The stock is predominantly pre-engineered, so specification is less of a variable than it is elsewhere.",
+    "specHeading": "Typical Specification in Dobbaspet",
+    "specProse": "Clear heights and unit sizes put Dobbaspet among the best specified big-box markets in Bangalore. This is a market for regional distribution hubs. If your requirement is small, look at Nelamangala or Makali instead. Clear height is on record for nearly every listing here, so you can shortlist on it before a visit.",
+    "inventoryHeading": "Featured Listings in Dobbaspet",
+    "faqs": [
+      {
+        "a": "Current asking rents in Dobbaspet are shown in the rent section of this page, taken from our live listings. Newer KIADB phases sit at the top of the band and older stock towards Nelamangala at the bottom. The band is tight because most of it is purpose-built pre-engineered space on allotted industrial land.",
+        "q": "What is the rent for a warehouse in Dobbaspet?"
+      },
+      {
+        "a": "The KIADB Dobbaspet phases for the newest large boxes. Averahalli on the estate edge at a similar level. Billanakote and Thyamagondlu for a lower rate. Kalalghatta and Mahimapura if rent is the whole decision.",
+        "q": "Which parts of Dobbaspet are best for a warehouse?"
+      },
+      {
+        "a": "Dobbaspet holds some of the largest units in Bangalore and very little small space. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Dobbaspet?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Dobbaspet warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Regional distribution hubs and large-format occupiers serving Tumkur Road and the Mumbai and Pune line. Dobbaspet's buildings are large, almost entirely pre-engineered and well docked, with high clear heights, so it suits a third-party logistics operator or a national distributor that wants a modern box on an industrial estate more than a city address.",
+        "q": "Who should consider a warehouse in Dobbaspet?"
+      }
+    ],
+    "relatedBlogs": [
+      "dabaspet-multimodal-logistics-park"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "ekarajapura",
+    "seoTitle": "Ekarajapura and Sidlaghatta Road Warehousing, Bangalore",
+    "metaDescription": "Warehousing in Ekarajapura and on Sidlaghatta Road, north of Hoskote in east Bangalore: large modern boxes. See live rents and specs from verified listings.",
+    "h1": "Ekarajapura and Sidlaghatta Road Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "This page covers Ekarajapura and the Sidlaghatta Road, north of Hoskote, where the state highway to Sidlaghatta runs out from Old Madras Road. Hoskote has grown into one of Bangalore's main warehousing nodes where Old Madras Road meets the Satellite Town Ring Road, and the roads running north out of the town, to Sidlaghatta and to Chintamani, are where much of its newer large-format stock sits.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Ekarajapura, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1769074726218.webp",
+      "width": 1280,
+      "height": 720
+    },
+    "marketHeading": "Warehouse Space in Ekarajapura and Sidlaghatta Road: Where the Stock Sits",
+    "marketProse": "**Ekarajapura**, a village in Hoskote taluk off the Sidlaghatta road, holds the largest buildings on this page: big pre-engineered boxes on open land. **Sidlaghatta Road** itself is the state highway running north from Hoskote towards Sidlaghatta, and the stock sits along it and on the village roads off it. The KIADB industrial area at **Chokkahalli**, where the Chintamani road leaves the town, adds allotted estate plots with mid-sized to large sheds. Hoskote and Chokkahalli hold their own pages.",
+    "marketImage": {
+      "alt": "Map of Ekarajapura, Bengaluru, showing where WareOnGo's warehouse listings sit around Ekarajapura and Chokkahalli",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/ekarajapura.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Ekarajapura and Sidlaghatta Road",
+    "rentsProse": "Rent sits in a tight band that tracks the rest of the Hoskote belt. The buildings are recent pre-engineered boxes put up to a similar pattern, so size, handover condition and yard space move the rate more than the exact village. That makes Ekarajapura one of the better-value places to find large, compliance-ready buildings in east Bangalore.",
+    "specHeading": "Typical Specification in Ekarajapura and Sidlaghatta Road",
+    "specProse": "This is a distribution specification: large floorplates, generous clear heights and multiple docks, suited to full truckload throughput and high racking. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit. VDF is the floor on most buildings where flooring is recorded, which suits high racking and powered equipment.",
+    "inventoryHeading": "Featured Listings in Ekarajapura and Sidlaghatta Road",
+    "faqs": [
+      {
+        "a": "Current asking rents in Ekarajapura and Sidlaghatta Road are shown in the rent section of this page, taken from our live listings. Quotes sit in a tight band because the buildings are recent and similar. Size, handover condition and yard space move the rate more than location.",
+        "q": "What is the rent for a warehouse in Ekarajapura and Sidlaghatta Road?"
+      },
+      {
+        "a": "Ekarajapura for the largest boxes on open land. The Sidlaghatta Road frontage for the widest choice north of Hoskote. Chokkahalli if you want an allotted KIADB plot on the Chintamani road side.",
+        "q": "Which parts of Ekarajapura and Sidlaghatta Road are best for a warehouse?"
+      },
+      {
+        "a": "Ekarajapura and Sidlaghatta Road are a large-format market; small units are a minor part of the stock. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Ekarajapura and Sidlaghatta Road?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. Fire NOC is on record for most listings here, well above the pattern we see nationally.",
+        "q": "Do Ekarajapura and Sidlaghatta Road warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Distributors and logistics operators that need large, compliance-ready buildings on the Hoskote side of east Bangalore. Ekarajapura's buildings are predominantly pre-engineered with large floorplates, high clear heights and generous docking, and Fire NOC is on record for most of them, so it suits regional distribution centres and full truckload operations.",
+        "q": "Who should consider a warehouse in Ekarajapura?"
+      }
+    ],
+    "relatedBlogs": [
+      "grade-a-warehouse-india"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "harohalli",
+    "seoTitle": "Harohalli and Kanakapura Road Warehousing, Bangalore",
+    "metaDescription": "Warehousing at Harohalli KIADB Industrial Area on Kanakapura Road, Bangalore: recent large boxes. See live rents and specs from verified listings.",
+    "h1": "Harohalli and Kanakapura Road Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Harohalli is the KIADB industrial area on Kanakapura Road, south west of the city, and it is one of the newest of Bangalore's peripheral industrial belts. It has been laid out in phases and is still filling in, which is why so much of what is available here is either a recent large box or land waiting for a build-to-suit occupier. Rates reflect the distance rather than the specification.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Harohalli, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1775024229397.webp",
+      "width": 1280,
+      "height": 725
+    },
+    "marketHeading": "Warehouse Space in Harohalli: Where the Stock Sits",
+    "marketProse": "The estate is the market here. **Harohalli Industrial Area Phase 3** carries most of the ready buildings, and **Bannikupe**, the village the phase sits on, prices at the same level. **Venkappanadoddi**, off the estate, is at the top of the local range. The **Kanakapura Road** frontage towards **Maralagere** and **Kaggalahalli** is where the build-to-suit parcels are, and those are a meaningful part of what is offered here.",
+    "marketImage": {
+      "alt": "Map of Harohalli, Bengaluru, showing where WareOnGo's warehouse listings sit around Harohalli Industrial Area Phase 3, Bannikupe and Kaggalahalli",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/harohalli.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Harohalli",
+    "rentsProse": "Harohalli prices under Jigani, the nearest south Bangalore estate with comparable stock, and the discount is a straight function of distance. There is very little spread to negotiate inside. The buildings are predominantly pre-engineered and large, so what you are choosing between is one modern box and another. Build-to-suit land is listed here, usually without a quoted rate.",
+    "specHeading": "Typical Specification in Harohalli",
+    "specProse": "Clear heights here are consistently high, and that is simply a function of age: the stock was built recently and to modern standards. Docks are the gap. For a multi-level racking layout this is some of the best specified space around Bangalore at the price.",
+    "inventoryHeading": "Featured Listings in Harohalli",
+    "faqs": [
+      {
+        "a": "Current asking rents in Harohalli are shown in the rent section of this page, taken from our live listings. Phase 3 of the industrial area and Bannikupe sit together, and the top of the range is a single site at Venkappanadoddi. Build-to-suit land is listed here, usually without a quoted rate.",
+        "q": "What is the rent for a warehouse in Harohalli?"
+      },
+      {
+        "a": "Harohalli Industrial Area Phase 3 for ready large boxes on allotted industrial land. Bannikupe at a similar rate. The Kanakapura Road frontage towards Maralagere and Kaggalahalli if a build-to-suit parcel suits you better than a standing building.",
+        "q": "Which parts of Harohalli are best for a warehouse?"
+      },
+      {
+        "a": "Harohalli is a large-format estate. For a small requirement, Kumbalgodu and Bannerghatta are the nearest markets that hold it. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Harohalli?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Harohalli warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Occupiers that want large, modern buildings at a lower rate than the south Bangalore estates closer in. Harohalli's stock is almost entirely recent pre-engineered space with high clear heights, so it suits multi-level racked storage, manufacturing support and regional distribution on the Kanakapura Road side, as long as the dock count on the specific building fits the operation.",
+        "q": "Who should consider a warehouse in Harohalli?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "hoskote",
+    "seoTitle": "Hoskote Warehousing, Bangalore: Rents and Specification",
+    "metaDescription": "Warehousing in Hoskote on NH-75 (Old Madras Road), Bangalore's main eastern belt of large boxes. See live rents, sizes and specs from verified listings.",
+    "h1": "Hoskote Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Hoskote sits on NH-75 where the Old Madras Road leaves Bangalore for Kolar and Chennai, and where the road to Malur branches off it. It is the city's principal eastern warehousing belt, built out in large pre-engineered boxes on land that was agricultural a decade ago. Occupiers here run regional distribution into Andhra Pradesh and Tamil Nadu, and increasingly automotive supply into the plants further east at Narsapura and Malur.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Hoskote, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1757936800297.webp",
+      "width": 1280,
+      "height": 853
+    },
+    "marketHeading": "Warehouse Space in Hoskote: Where the Stock Sits",
+    "marketProse": "The belt spreads along two roads rather than clustering in one estate. **Ekarajapura**, on the Hoskote side, carries large pre-engineered space. **Koralur** and **Malur**, further out towards Kolar, are the pricier end, and Malur is where the large modern parks sit. **Nidaghatta**, off the Hoskote bypass, is the lower end of the belt and where the older independent sheds are. Soukya Road and Narsapura are on the same corridor and hold their own pages, and the Jakkasandra and Mindahalli estates further east are covered on the Narsapura page.",
+    "marketImage": {
+      "alt": "Map of Hoskote, Bengaluru, showing where WareOnGo's warehouse listings sit around Ekarajapura, Koralur, Malur and Nidaghatta",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/hoskote.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Hoskote",
+    "rentsProse": "Hoskote prices in the middle of Bangalore's large peripheral belts, above Nelamangala and well below Devanahalli. Rent here tracks grade and age rather than distance from the city. Modern Grade-A parks towards Malur and Koralur sit at the top of the warehousing band, while older independent sheds nearer Hoskote town make up the floor. A few quotes at the very top are small RCC units, one of them a floor-wise quote for ground-floor space, and are not representative of the belt.",
+    "specHeading": "Typical Specification in Hoskote",
+    "specProse": "Generous docking is the clearest sign of what Hoskote is built for: full truckload throughput rather than storage. Clear heights suit several racking levels, which matters if you are bringing in reach trucks rather than pallet jacks. Confirm both per building. Clear height and docks are on record for most listings here, so you can compare buildings before a visit.",
+    "inventoryHeading": "Featured Listings in Hoskote",
+    "faqs": [
+      {
+        "a": "Current asking rents in Hoskote are shown in the rent section of this page, taken from our live listings. Modern Grade-A parks towards Malur and Koralur sit at the top of the warehousing band. Older sheds nearer Hoskote town and around Nidaghatta set the floor.",
+        "q": "What is the rent for a warehouse in Hoskote?"
+      },
+      {
+        "a": "Malur for large modern boxes with docks, and Koralur for smaller units. Ekarajapura for large pre-engineered space. Nidaghatta if rent matters more than specification and an older shed will do. Soukya Road if you need to stay closer to Whitefield.",
+        "q": "Which parts of Hoskote are best for a warehouse?"
+      },
+      {
+        "a": "Hoskote is a large-format belt; small units exist but are a minor part of the stock. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Hoskote?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. Fire NOC is on record for close to half the listings here, well above the pattern we see nationally.",
+        "q": "Do Hoskote warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Distributors and logistics operators running full truckload volumes into east Bangalore and out along Old Madras Road. Hoskote's large pre-engineered buildings come with generous docking and clear heights that suit high racking, which makes it a natural base for a regional distribution centre, an e-commerce fulfilment hub or a third-party logistics operation.",
+        "q": "Who should consider a warehouse in Hoskote?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ],
+    "statOverrides": {
+      "size": {
+        "min": 1825
+      }
+    }
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "hosur-road",
+    "seoTitle": "Hosur Road Warehousing, Bangalore: Rents and Specification",
+    "metaDescription": "Warehousing on Hosur Road (NH-44), Bangalore, from Electronic City to Attibele. See live rents, sizes and specs from verified listings.",
+    "h1": "Hosur Road Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Hosur Road is NH-44 running south out of Bangalore towards Hosur, Salem and Chennai, and it is the one corridor that carries the city's manufacturing belt from end to end. The run starts at Electronic City, passes the KIADB estates at Bommasandra and Jigani, and finishes at Attibele on the Tamil Nadu border. Space along it serves electronics, pharma and auto supply chains far more than it serves retail distribution.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Hosur Road, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/9edd62ece7bb713c1b1a8b90f440cdfa.webp",
+      "width": 1280,
+      "height": 576
+    },
+    "marketHeading": "Warehouse Space on Hosur Road: Where the Stock Sits",
+    "marketProse": "Price on this corridor falls as you move south, and the drop is steep. **Electronic City** is the expensive end by a distance, but that stock is small RCC commercial floorspace inside a built-up tech hub rather than warehousing, and it is what sets the ceiling. **Hebbagodi** beside it is the next step down. The KIADB estates in the middle, **Bommasandra** and **Jigani**, sit together, with **Anekal** and **CK Palya** on the same level. **Attibele** at the state border is the cheaper end.",
+    "marketImage": {
+      "alt": "Map of Hosur Road, Bengaluru, showing where WareOnGo's warehouse listings sit around Electronic City, Hebbagodi, Bommasandra, Jigani, Anekal, CK Palya and Attibele",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/hosur-road.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent on Hosur Road",
+    "rentsProse": "Hosur Road has one of the widest rent bands of any Bangalore micromarket we cover, and it is not a data error: the corridor genuinely runs from border-town sheds to commercial RCC floors inside Electronic City. Set Electronic City aside and the warehousing market is much narrower. Grade-A KIADB boxes at Bommasandra and Jigani hold the top of that band and Attibele sets the floor. Build-to-suit land is listed here, usually without a quoted rate.",
+    "specHeading": "Typical Specification on Hosur Road",
+    "specProse": "Units on this corridor are small by Bangalore standards, and that tells you what it is for: an ancillary unit or a city-facing distribution point rather than a regional hub. Docking is limited. A good share of the stock is RCC, so confirm floor loading and clear height before you plan racking.",
+    "inventoryHeading": "Featured Listings on Hosur Road",
+    "faqs": [
+      {
+        "a": "Current asking rents on Hosur Road are shown in the rent section of this page, taken from our live listings. The top of the range is commercial RCC space in Electronic City rather than warehousing. Industrial stock in the Bommasandra and Jigani estates sits in the middle, and Attibele near the border is the cheaper end.",
+        "q": "What is the rent for a warehouse on Hosur Road?"
+      },
+      {
+        "a": "The KIADB estates at Bommasandra and Jigani if you want an industrial box on allotted land. Attibele if you are moving goods across the Karnataka and Tamil Nadu border and rent matters more than specification. Electronic City only if you need small commercial floorspace inside the tech belt and can carry the premium.",
+        "q": "Which parts of Hosur Road are best for a warehouse?"
+      },
+      {
+        "a": "Hosur Road is a small-unit corridor by Bangalore standards. If you need a single large box, the northwest and east belts hold more of it. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available on Hosur Road?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Hosur Road warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Occupiers that need to be close to the Electronic City and Hosur Road manufacturing base: ancillary suppliers, kitting and assembly operations, and city-facing distribution points. Units on Hosur Road are mostly small to mid-size, with good clear heights on the pre-engineered stock, so it suits a supplier or a distributor serving south Bangalore better than a regional hub.",
+        "q": "Who should consider a warehouse on Hosur Road?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "jakkur",
+    "seoTitle": "Jakkur and Yelahanka Warehousing, Bangalore",
+    "metaDescription": "Warehousing in Jakkur and Yelahanka, north Bangalore, on Bellary Road towards the airport. See live rents, sizes and specs from verified listings.",
+    "h1": "Jakkur and Yelahanka Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "This page covers Jakkur and Yelahanka on Bangalore's north side, along Bellary Road between Hebbal and the airport. Jakkur is a residential suburb around its lake and the city's general-aviation aerodrome. Yelahanka, beyond it, is an old town with a planned new town, the Air Force Station that hosts Aero India and the Rail Wheel Factory. Space here serves the north of the city and the run to the airport, with the Thanisandra and Hennur roads linking it east towards Bagalur.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Jakkur, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1772680881878.webp",
+      "width": 1280,
+      "height": 576
+    },
+    "marketHeading": "Warehouse Space in Jakkur and Yelahanka: Where the Stock Sits",
+    "marketProse": "Stock falls into a close-in half and an outer half. **Jakkur**, around Jakkur Layout and **Sampigehalli** on the east side of Bellary Road, is small RCC space inside residential layouts and prices at the top of the page. **Yelahanka**, with **Kattigenahalli** and the KSSIDC estate in Yelahanka New Town, carries small industrial and RCC units a step lower. **Thanisandra** and **Hennur**, on the roads towards Bagalur, and the **Bagalur** side itself hold some larger sheds at in-city rates. The village roads around **Doddagubbi**, further east, carry older sheds and pre-engineered buildings at the lower end, and Bidrahalli and its neighbours hold their own page.",
+    "marketImage": {
+      "alt": "Map of Jakkur, Bengaluru, showing where WareOnGo's warehouse listings sit around Jakkur, Sampigehalli, Yelahanka, Kattigenahalli, Thanisandra, Hennur, Bagalur and Doddagubbi",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/jakkur.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Jakkur and Yelahanka",
+    "rentsProse": "Rent follows distance from the city more than building type. Small RCC floors inside the Jakkur layouts set the top of the range, Yelahanka sits a little below, and village sheds towards Doddagubbi are the lower end. The median sits well above the outer belts, because much of this is in-city space.",
+    "specHeading": "Typical Specification in Jakkur and Yelahanka",
+    "specProse": "Specification is mixed. The RCC stock has low clear heights and little docking, while the pre-engineered sheds on the outer side offer more of both. Check which kind a listing is before you visit, and confirm vehicle access on the layout roads. Units are mostly small, so Jakkur suits storage and distribution at a modest scale close to the city.",
+    "inventoryHeading": "Featured Listings in Jakkur and Yelahanka",
+    "faqs": [
+      {
+        "a": "Current asking rents in Jakkur and Yelahanka are shown in the rent section of this page, taken from our live listings. Small RCC floors in the Jakkur layouts set the top of the range, Yelahanka sits a little below, and village sheds towards Doddagubbi are the lower end.",
+        "q": "What is the rent for a warehouse in Jakkur and Yelahanka?"
+      },
+      {
+        "a": "Jakkur if you need small space close to Hebbal and the north of the city. Yelahanka for small industrial units a step lower in price. Thanisandra, Hennur and Bagalur for larger sheds on the airport side. Doddagubbi if rent matters more than being close in.",
+        "q": "Which parts of Jakkur and Yelahanka are best for a warehouse?"
+      },
+      {
+        "a": "Jakkur and Yelahanka are a small to mid-size market. For a large box on the airport side, Devanahalli holds more of it. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Jakkur and Yelahanka?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Jakkur and Yelahanka warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Occupiers that need to reach north Bangalore and Yelahanka quickly: city distribution, service stores and small trade storage. Jakkur's units are mostly small and the stock mixes RCC floors with pre-engineered sheds, so it suits moderate volumes, with the outer sheds towards Doddagubbi offering more height and docking.",
+        "q": "Who should consider a warehouse in Jakkur?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "jigani",
+    "seoTitle": "Jigani Warehousing, Bangalore: Rents and Specification",
+    "metaDescription": "Warehousing in Jigani KIADB Industrial Area, south Bangalore, near Hosur Road. See live rents, sizes and specs from verified listings.",
+    "h1": "Jigani Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Jigani is a KIADB industrial estate on the south side of Bangalore, connected to Hosur Road by the Bommasandra link road and to Anekal on the other side. It grew up around pharmaceutical, engineering and electronics manufacturing rather than around distribution, and the warehousing here is mostly ancillary to that: raw material stores, finished goods holding and third-party space taken by the firms already operating in the estate.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Jigani, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/e3a2562ae99a55492ca2f9a3bb3253b1.webp",
+      "width": 1280,
+      "height": 960
+    },
+    "marketHeading": "Warehouse Space in Jigani: Where the Stock Sits",
+    "marketProse": "Rents here move in a narrow band and the pockets are close together. **Jigani Industrial Area**, the allotted KIADB core, is the top of the local market. **Anekal** and **Koppa Road**, on the far side of the estate, are a step down. **APC Circle**, the junction the estate is organised around, is cheaper and is where the older independent sheds sit. **Haragadde** is the lower end. Stock on the Bommasandra link road is covered on the Bommasandra page.",
+    "marketImage": {
+      "alt": "Map of Jigani, Bengaluru, showing where WareOnGo's warehouse listings sit around Jigani Industrial Area, Anekal, APC Circle and Haragadde",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/jigani.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Jigani",
+    "rentsProse": "Jigani prices with the rest of the south Bangalore industrial cluster, close to Bommasandra and above Attibele. The band is narrow because the stock is uniform: the buildings are predominantly pre-engineered and most sit on allotted KIADB land. What separates the top of the range from the bottom is position inside the estate rather than build quality. Build-to-suit land is listed here, usually without a quoted rate.",
+    "specHeading": "Typical Specification in Jigani",
+    "specProse": "Clear heights and unit sizes make Jigani workable for a mid-size operation. Docks are the constraint, because most of this space was built to serve a factory next door rather than a fleet. The stock is predominantly pre-engineered and VDF is the most common floor, so racking works well here once dock access is settled.",
+    "inventoryHeading": "Featured Listings in Jigani",
+    "faqs": [
+      {
+        "a": "Current asking rents in Jigani are shown in the rent section of this page, taken from our live listings. The allotted KIADB core is the top of the local market. Older independent sheds around APC Circle are cheaper, and Haragadde is the lower end.",
+        "q": "What is the rent for a warehouse in Jigani?"
+      },
+      {
+        "a": "The KIADB Jigani Industrial Area if you need allotted industrial land. Anekal and Koppa Road for similar specification a little further out. APC Circle and Haragadde if rent matters more than the address.",
+        "q": "Which parts of Jigani are best for a warehouse?"
+      },
+      {
+        "a": "Jigani is a mid-size market, with few very large boxes and little very small space. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Jigani?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Jigani warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Suppliers to the Jigani and Hosur Road manufacturing cluster, and mid-size operations that want an organised KIADB estate in south Bangalore. Jigani's buildings are mostly mid-size to large and pre-engineered with good clear heights, while docking is modest, so it suits component storage and manufacturing support better than a high-throughput distribution centre.",
+        "q": "Who should consider a warehouse in Jigani?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "kumbalgodu",
+    "seoTitle": "Kumbalgodu Warehousing, Bangalore: Rents and Specification",
+    "metaDescription": "Warehousing in Kumbalgodu on Mysore Road (NH-275), past the NICE Road junction. See live rents, sizes and specs from verified listings.",
+    "h1": "Kumbalgodu Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Kumbalgodu is the first industrial pocket on Mysore Road once you clear the NICE Road junction, and it is the western arc's answer to the Tumkur Road belt. The KIADB laid out an industrial area here and the rest grew around it. Units are small, the buildings are plain, and the trade is city distribution towards Kengeri and Rajarajeshwari Nagar rather than long-haul movement towards Mysuru.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Kumbalgodu, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1765956991261.webp",
+      "width": 1280,
+      "height": 720
+    },
+    "marketHeading": "Warehouse Space in Kumbalgodu: Where the Stock Sits",
+    "marketProse": "Everything here sits within a few kilometres of the highway. **Venkatapura**, behind the estate, is the top of the local market, with **Chikkellur** beside it. The **Kumbalgodu Industrial Area** itself, across its numbered phases, is the cheaper option, which makes the allotted land the value choice rather than the premium one. **Gudimavu**, **Ramapura** and **Gerupalya** village fill in the rest of the belt. Sheds are a larger part of this belt than of most Bangalore pockets, and with small RCC units in the estate they set the floor.",
+    "marketImage": {
+      "alt": "Map of Kumbalgodu, Bengaluru, showing where WareOnGo's warehouse listings sit around Venkatapura, Chikkellur, Kumbalgodu Industrial Area, Gudimavu and Gerupalya",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/kumbalgodu.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Kumbalgodu",
+    "rentsProse": "Kumbalgodu is one of the more affordable Bangalore micromarkets we cover, level with Nelamangala and below Bidadi further out on the same highway. The floor is set by older sheds, which are a larger share of the stock here than in most Bangalore pockets. Against that, VDF flooring is commonly already down, so the lower rate does not mean an unfinished floor. Build-to-suit land is listed here, usually without a quoted rate.",
+    "specHeading": "Typical Specification in Kumbalgodu",
+    "specProse": "Units here are small and docking is limited, which tells the same story. This is a market for a regional distributor, a small manufacturer or a city-facing store, not for anyone running trailers or needing a single large floorplate. Pre-engineered buildings make up most of the stock, and clear heights vary widely between the newer buildings and the older sheds, so confirm the height on the unit you are shown.",
+    "inventoryHeading": "Featured Listings in Kumbalgodu",
+    "faqs": [
+      {
+        "a": "Current asking rents in Kumbalgodu are shown in the rent section of this page, taken from our live listings. Venkatapura is the top of the local market, the Kumbalgodu Industrial Area phases are cheaper, and the floor is set by older sheds and small RCC units.",
+        "q": "What is the rent for a warehouse in Kumbalgodu?"
+      },
+      {
+        "a": "Venkatapura and Chikkellur for the better buildings. The Kumbalgodu Industrial Area phases if you want allotted industrial land at a lower rate. Gudimavu and Ramapura if you want to be slightly further off the highway. For a larger unit, look at Bidadi.",
+        "q": "Which parts of Kumbalgodu are best for a warehouse?"
+      },
+      {
+        "a": "Kumbalgodu is a small-unit market with few large buildings. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Kumbalgodu?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Kumbalgodu warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Regional distributors, small manufacturers and city-facing stores on the Mysore Road side, at one of the more affordable rates we see in Bangalore. Kumbalgodu's units are small, with limited docking, and VDF flooring is common, so it suits small-vehicle distribution and storage rather than trailer operations or large single floorplates.",
+        "q": "Who should consider a warehouse in Kumbalgodu?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "makali",
+    "seoTitle": "Makali Warehousing, Bangalore: Rents and Specification",
+    "metaDescription": "Warehousing in Makali on Tumkur Road (NH-48), between Peenya and Nelamangala. See live rents, sizes and specs from verified listings.",
+    "h1": "Makali Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Makali is the inner end of the Tumkur Road corridor, the stretch of NH-48 between Peenya and Nelamangala. It is where the northwest belt stops being peripheral and starts being city. Units are smaller than they are further out, the buildings are older and more of them are RCC, and the trade is city distribution rather than regional hubbing. For an occupier who needs Peenya access without Peenya rent, this is the compromise.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Makali, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1756289029933.webp",
+      "width": 1280,
+      "height": 960
+    },
+    "marketHeading": "Warehouse Space in Makali: Where the Stock Sits",
+    "marketProse": "Stock here strings along one road and a handful of villages behind it. **Huskur Road**, which runs off the highway, carries much of the inventory. **Dasanapura**, at the inner end, is the top of the local market, with **Harokyathanahalli** and **Heggadadevanapura** next. **Adakamaranahalli** and **Nagarur Colony**, nearer Nelamangala Town, are the lower end. The Nelamangala page covers the outer end of the corridor.",
+    "marketImage": {
+      "alt": "Map of Makali, Bengaluru, showing where WareOnGo's warehouse listings sit around Dasanapura, Heggadadevanapura, Adakamaranahalli and Nagarur Colony",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/makali.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Makali",
+    "rentsProse": "Makali carries a small premium over Nelamangala for sitting closer to the city on the same highway, which is the whole economic case for this pocket. The band is tight, with little by way of a cheap corner. What varies is building type rather than location: more of the stock here is RCC than further out on the same highway, and those are older multi-level godowns near the highway rather than modern sheds.",
+    "specHeading": "Typical Specification in Makali",
+    "specProse": "Clear height is the number to watch here. It supports fewer racking levels than the outer belts allow, a direct consequence of how much RCC stock this pocket holds. Units are small to mid-size, so small requirements are genuinely served. Pre-engineered buildings are still the larger share of the stock, and VDF is the most common floor where flooring is recorded.",
+    "inventoryHeading": "Featured Listings in Makali",
+    "faqs": [
+      {
+        "a": "Current asking rents in Makali are shown in the rent section of this page, taken from our live listings. Dasanapura is the top of the local market and Nagarur Colony the lower end. The band is narrow, so expect to compete on specification rather than on price.",
+        "q": "What is the rent for a warehouse in Makali?"
+      },
+      {
+        "a": "Huskur Road for the largest choice, since much of the inventory sits along it. Harokyathanahalli and Heggadadevanapura for the better buildings. Adakamaranahalli and Nagarur Colony if rent is the constraint and you can work with an older shed.",
+        "q": "Which parts of Makali are best for a warehouse?"
+      },
+      {
+        "a": "Makali is the small end of the northwest corridor. For a large single box, move out to Nelamangala or Dobbaspet. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Makali?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Makali warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Small and mid-size occupiers that want Tumkur Road access a little closer to the city than Nelamangala. Makali's units are mostly small to mid-size, and the stock mixes pre-engineered buildings with older RCC godowns, so it suits regional distributors, traders and small manufacturers whose loads do not need high racking.",
+        "q": "Who should consider a warehouse in Makali?"
+      }
+    ],
+    "relatedBlogs": [
+      "dabaspet-multimodal-logistics-park"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "marathalli",
+    "seoTitle": "Marathalli, Sarjapura and Varthur Warehousing, Bangalore",
+    "metaDescription": "Warehousing in Marathalli, Sarjapura and Varthur, east Bangalore, off the Outer Ring Road and Sarjapur Road. See live rents and specs from verified listings.",
+    "h1": "Marathalli, Sarjapura and Varthur Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "This page covers the east Bangalore stretch from Marathalli on the Outer Ring Road, out along Varthur Road to Varthur and down the state highway to Sarjapura. It is a built-up residential and IT district, with the Whitefield tech parks to the north and the Sarjapur Road IT corridor to the south. Warehousing here means small in-city space for last-mile delivery, service stock and trade storage rather than distribution boxes.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Marathalli, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1778756590850.webp",
+      "width": 1280,
+      "height": 725
+    },
+    "marketHeading": "Warehouse Space in Marathalli, Sarjapura and Varthur: Where the Stock Sits",
+    "marketProse": "Price falls as you move out from the Outer Ring Road. **Marathalli** (often spelt Marathahalli), at the junction of the Outer Ring Road and Varthur Road, is small RCC floorspace in a retail and housing belt, and it is the top of the market. The older industrial pockets nearby, the **EPIP** zone, the KSSIDC estate at **Mahadevapura** and **Doddanekundi** around **Hoodi**, hold small RCC and pre-engineered units a step down. **Varthur**, further out where Varthur Road meets the state highway, has mixed sheds and RCC space at mid rents, with **Gunjur** beside it. **Sarjapura**, a hobli of Anekal taluk at the southern end of the same highway, and **Dommasandra** on the way to it, are the value end, with some larger sheds. Whitefield holds its own page.",
+    "marketImage": {
+      "alt": "Map of Marathalli, Bengaluru, showing where WareOnGo's warehouse listings sit around Marathalli, EPIP, Mahadevapura, Doddanekundi, Hoodi, Varthur, Gunjur, Sarjapura and Dommasandra",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/marathalli.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Marathalli, Sarjapura and Varthur",
+    "rentsProse": "This is one of the dearer micromarkets we cover in Bangalore, because much of the space is priced as commercial floorspace inside the city. Small RCC units around Marathalli and Brookfield set the top of the range. Varthur and the older industrial pockets around Hoodi sit in the middle, and sheds towards Sarjapura and Dommasandra are the lower end. Plan against the median and the pocket rather than the headline range.",
+    "specHeading": "Typical Specification in Marathalli, Sarjapura and Varthur",
+    "specProse": "Units are small and mostly RCC, with low clear heights and limited docking, so this is storage and last-mile space rather than racking-height distribution. Check vehicle access and loading hours, which on these roads matter as much as the building. The pre-engineered sheds towards Varthur and Sarjapura offer more height where you need it.",
+    "inventoryHeading": "Featured Listings in Marathalli, Sarjapura and Varthur",
+    "faqs": [
+      {
+        "a": "Current asking rents in Marathalli, Sarjapura and Varthur are shown in the rent section of this page, taken from our live listings. Small RCC units around Marathalli set the top of the range, Varthur and Hoodi sit in the middle, and sheds towards Sarjapura and Dommasandra are the lower end.",
+        "q": "What is the rent for a warehouse in Marathalli, Sarjapura and Varthur?"
+      },
+      {
+        "a": "Marathalli if you need small space on the Outer Ring Road close to the tech parks and can carry the premium. The EPIP and Hoodi pockets for small industrial units nearer Whitefield. Varthur for mid-priced mixed stock. Sarjapura and Dommasandra for the lower end of the band and some larger sheds.",
+        "q": "Which parts of Marathalli, Sarjapura and Varthur are best for a warehouse?"
+      },
+      {
+        "a": "This is a small-unit market inside the city. For a large box in the east, Hoskote and Soukya Road hold more of it. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Marathalli, Sarjapura and Varthur?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. In a mixed residential and commercial area, also confirm that the building is sanctioned for storage use.",
+        "q": "Do Marathalli, Sarjapura and Varthur warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Businesses that need storage inside east Bangalore, close to their customers: last-mile delivery, e-commerce, service spares and trade stock. Marathalli's units are small and mostly RCC with low clear heights, so it suits shelving and floor storage rather than racked distribution, and the pre-engineered sheds towards Varthur offer more height where it is needed.",
+        "q": "Who should consider a warehouse in Marathalli?"
+      }
+    ],
+    "relatedBlogs": [
+      "peb-vs-rcc-warehouse"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "nelamangala",
+    "seoTitle": "Nelamangala Warehousing, Bangalore: Rents and Specification",
+    "metaDescription": "Warehousing in Nelamangala on NH-48 (Tumkur Road), Bangalore's northwest belt. See live rents, sizes and specs from verified listings.",
+    "h1": "Nelamangala Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Nelamangala sits where NH-48 leaves Bangalore for Tumakuru and Mumbai, and where NH-75 branches west towards Hassan and Mangaluru. That junction is the whole reason the belt exists. It is the city's established northwest warehousing corridor, built out in large pre-engineered boxes on cheap peripheral land rather than in converted godowns, and it serves outbound distribution for Karnataka and the west coast rather than last-mile delivery into Bangalore.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Nelamangala, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/0039ff653e9ce14848bd0b3ad28268da.webp",
+      "width": 910,
+      "height": 458
+    },
+    "marketHeading": "Warehouse Space in Nelamangala: Where the Stock Sits",
+    "marketProse": "Stock inside the belt clusters by estate and by road. **Sompura KIADB Industrial Area**, spread over four numbered phases towards Dabaspet, is allotted industrial land, priced alongside **Srinivasapura** beside it. **Budihal**, nearer the Nelamangala toll, carries mid-size pre-engineered space. **T. Begur** is the cheaper end, and with Budihal it is where compliance paperwork appears most often on our listings. **Makali** and **Dasanapura** are the inner end of the same corridor, nearer Peenya, where units get smaller.",
+    "marketImage": {
+      "alt": "Map of Nelamangala, Bengaluru, showing where WareOnGo's warehouse listings sit around Srinivasapura, Budihal, T. Begur, Makali and Dasanapura",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/nelamangala.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Nelamangala",
+    "rentsProse": "Nelamangala is one of the most affordable of Bangalore's large warehousing micromarkets, below Hoskote and Dobbaspet and well below Devanahalli. Rent here tracks specification more than location. Grade-A boxes in the Sompura KIADB phases sit at the top of the band, while older C-grade sheds around T. Begur and Nelamangala Town set the floor. Build-to-suit land is listed here, usually without a quoted rate.",
+    "specHeading": "Typical Specification in Nelamangala",
+    "specProse": "Clear heights here are the number that separates this belt from in-city stock. They support several racking levels, which is what makes Nelamangala usable for a 3PL running full pallet volumes rather than for local storage. Units are mostly large, so this is not a market for a small requirement. Clear height and docks are on record for most listings here, so you can compare buildings before a visit.",
+    "inventoryHeading": "Featured Listings in Nelamangala",
+    "faqs": [
+      {
+        "a": "Current asking rents in Nelamangala are shown in the rent section of this page, taken from our live listings. Grade-A boxes in the Sompura KIADB phases sit at the top of the band. C-grade sheds around T. Begur and Nelamangala Town set the floor. Build-to-suit land is listed, usually without a quoted rate.",
+        "q": "What is the rent for a warehouse in Nelamangala?"
+      },
+      {
+        "a": "Sompura KIADB, in its four phases towards Dabaspet, for allotted industrial land. Budihal for mid-size space nearer the toll, with paperwork more often on record. T. Begur and Nelamangala Town if rent matters more than specification. Makali and Dasanapura if you need to be closer to Peenya.",
+        "q": "Which parts of Nelamangala are best for a warehouse?"
+      },
+      {
+        "a": "Nelamangala is weighted towards large space; small units are scarce. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Nelamangala?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Nelamangala warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Third-party logistics operators, national distributors and e-commerce networks that need large, modern buildings on Bangalore's northwest side. Nelamangala's stock is predominantly pre-engineered and mostly large, with clear heights that support several racking levels, at one of the more affordable rates among Bangalore's big belts, so it suits regional hubs serving Karnataka and the Mumbai line.",
+        "q": "Who should consider a warehouse in Nelamangala?"
+      }
+    ],
+    "relatedBlogs": [
+      "dabaspet-multimodal-logistics-park"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "peenya",
+    "seoTitle": "Peenya Warehousing, Bangalore: Rents and Specification",
+    "metaDescription": "Warehousing in Peenya Industrial Area on Tumkur Road, northwest Bangalore, and the belt beyond it. See live rents, sizes and specs from verified listings.",
+    "h1": "Peenya Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Peenya is Bangalore's original industrial estate, on Tumkur Road in the city's northwest, and one of the largest industrial areas in the country. It is home to engineering, machine tool, electrical, packaging and garment units, and is served by Tumkur Road and the Green Line metro. Warehousing here is less about big boxes than about sitting next to that supplier base, with the larger modern stock further out along the same road.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Peenya, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1756289033973.webp",
+      "width": 1280,
+      "height": 960
+    },
+    "marketHeading": "Warehouse Space in Peenya: Where the Stock Sits",
+    "marketProse": "Stock around Peenya falls into distinct groups. **Peenya Industrial Area** itself, across its KIADB phases and the older KSSIDC estate stages, is dense RCC and shed space among engineering workshops, and it is the dearer end because it is inside the city. **Huskur Road**, off Tumkur Road towards Makali, carries more modern pre-engineered space at lower rents. **Kachohalli** and **Machohalli**, off Magadi Road near Kadabagere Cross, are older shed estates that suit storage on a budget. Further out, Makali and Nelamangala hold their own pages.",
+    "marketImage": {
+      "alt": "Map of Peenya, Bengaluru, showing where WareOnGo's warehouse listings sit around Peenya Industrial Area, Kachohalli and Machohalli",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/peenya.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Peenya",
+    "rentsProse": "Rent falls as you leave the estate. RCC units inside Peenya Industrial Area carry the in-city premium and set the top of the band, while pre-engineered space along Huskur Road and out towards Nelamangala prices with the rest of the northwest belt. The older sheds off Magadi Road are the lower end.",
+    "specHeading": "Typical Specification in Peenya",
+    "specProse": "Specification splits the same way. The pre-engineered buildings out along Tumkur Road offer the clear height and docks for distribution, while the RCC stock inside the estate is lower and suits storage, kitting and light assembly next to the supplier base. Confirm floor loading on the older buildings before you plan racking.",
+    "inventoryHeading": "Featured Listings in Peenya",
+    "faqs": [
+      {
+        "a": "Current asking rents in Peenya are shown in the rent section of this page, taken from our live listings. RCC units inside the industrial area carry the in-city premium. Pre-engineered space along Huskur Road and towards Nelamangala quotes less, and the older sheds off Magadi Road are the lower end.",
+        "q": "What is the rent for a warehouse in Peenya?"
+      },
+      {
+        "a": "Peenya Industrial Area if you need to be inside the supplier base and the city, and a smaller RCC unit will do. Huskur Road for modern pre-engineered space at a lower rent. Kachohalli and Machohalli if an older shed on a budget suits your use. Makali and Nelamangala, which have their own pages, for large distribution boxes.",
+        "q": "Which parts of Peenya are best for a warehouse?"
+      },
+      {
+        "a": "Peenya runs from small RCC units inside the estate to large pre-engineered boxes out along Tumkur Road, so the spread is wide. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Peenya?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Peenya warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Suppliers, manufacturers and service businesses that need to be inside or next to Peenya Industrial Area, and distributors heading out on Tumkur Road. Peenya's stock splits between RCC units inside the estate, suited to storage, kitting and light assembly, and pre-engineered buildings along Tumkur Road with the height and docks for distribution.",
+        "q": "Who should consider a warehouse in Peenya?"
+      }
+    ],
+    "relatedBlogs": [
+      "peb-vs-rcc-warehouse"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "soukya-road",
+    "seoTitle": "Soukya Road Warehousing, Bangalore: Rents and Specification",
+    "metaDescription": "Warehousing on Soukya Road between Whitefield and Hoskote, east Bangalore: modern pre-engineered stock. See live rents and specs from verified listings.",
+    "h1": "Soukya Road Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Soukya Road is the link between Whitefield and Hoskote, and it has become the compromise address for occupiers who need to serve east Bangalore without paying Whitefield rates or accepting Hoskote's distance. The stock on it is predominantly modern pre-engineered space built in the last decade, and Fire NOC is on record here more often than on most Bangalore pages.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Soukya Road, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1757936799357.webp",
+      "width": 1280,
+      "height": 853
+    },
+    "marketHeading": "Warehouse Space on Soukya Road: Where the Stock Sits",
+    "marketProse": "This is a road rather than an estate, so the stock reads as a line rather than a cluster. **Koralur**, at the Hoskote end, is the top of the local market. **IOCL Road**, which runs off it, is the lower end. **Medahalli** and the **Anugondanahalli** hobli villages fill the stretch between them. Beyond either end the road becomes Whitefield on one side and Hoskote on the other, and both hold their own pages.",
+    "marketImage": {
+      "alt": "Map of Soukya Road, Bengaluru, showing where WareOnGo's warehouse listings sit around Koralur, Medahalli and Anugondanahalli",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/soukya-road.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent on Soukya Road",
+    "rentsProse": "Soukya Road prices between Hoskote and Whitefield, which is exactly what its position suggests. There is very little variation to negotiate against: the stock is predominantly pre-engineered, so what you are choosing between is size and dock count rather than grade. The top of the rent range is a single RCC unit and is not what the road generally offers, so plan against the working band rather than the ceiling.",
+    "specHeading": "Typical Specification on Soukya Road",
+    "specProse": "Clear heights on this predominantly pre-engineered stock are a genuinely modern specification, and they are why this short road prices close to Whitefield. Docking is modest compared with Hoskote, so if you are running full truckload volumes, check the apron and the dock count before the rate. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "inventoryHeading": "Featured Listings on Soukya Road",
+    "faqs": [
+      {
+        "a": "Current asking rents on Soukya Road are shown in the rent section of this page, taken from our live listings. The top of the band is a single RCC unit and is not what the road generally offers.",
+        "q": "What is the rent for a warehouse on Soukya Road?"
+      },
+      {
+        "a": "Koralur at the Hoskote end for smaller units. IOCL Road for a lower rate on the stretch. The Medahalli and Anugondanahalli side if you want to stay closer to Whitefield. The road is predominantly pre-engineered, so the choice is mostly size rather than grade.",
+        "q": "Which parts of Soukya Road are best for a warehouse?"
+      },
+      {
+        "a": "Soukya Road serves both mid-size requirements and some large single boxes. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available on Soukya Road?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Soukya Road warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Mid-size and large occupiers that want modern pre-engineered space in east Bangalore without going as far out as Hoskote. Soukya Road's buildings have good clear heights and a modern specification, with modest docking, so it suits distributors serving Whitefield and the eastern suburbs, and storage operations that rack high but move moderate volumes.",
+        "q": "Who should consider a warehouse on Soukya Road?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ],
+    "statOverrides": {
+      "size": {
+        "min": 6000
+      }
+    }
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "t-begur",
+    "seoTitle": "T Begur Warehousing, Bangalore: Rents and Specification",
+    "metaDescription": "Warehousing in T Begur on Tumkur Road past Nelamangala, towards Dobbaspet: large pre-engineered sheds. See live rents and specs from verified listings.",
+    "h1": "T Begur Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "T Begur is a village on Tumkur Road beyond Nelamangala, in the stretch where Bangalore's northwest warehousing belt runs on towards Dobbaspet. Nelamangala sits where Tumkur Road meets the road to Mangalore, and the highway beyond it has filled with large pre-engineered distribution buildings. T Begur is where that stretch is at its most uniform: modern boxes on open land, a short run from the city's edge.",
+    "heroImage": {
+      "alt": "Warehouse exterior in T Begur, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/3a570dd09789064235a0fb28dccd4156.webp",
+      "width": 1280,
+      "height": 542
+    },
+    "marketHeading": "Warehouse Space in T Begur: Where the Stock Sits",
+    "marketProse": "The stock sits in villages strung along the highway rather than in one estate. **T Begur** itself and **Minnapura** beside it carry much of it. **Thyamagondlu** and **Talekere** nearby hold more of the same large pre-engineered space. **Billanakote**, towards Dobbaspet, and **Mahimapura** on Tumkur Road add more buildings on the same pattern. Budihal, towards Nelamangala, and Dobbaspet, further out, hold their own pages, and the planned multimodal logistics park near Dobbaspet is covered in our guide to it.",
+    "marketImage": {
+      "alt": "Map of T Begur, Bengaluru, showing where WareOnGo's warehouse listings sit around T Begur, Minnapura, Thyamagondlu, Talekere, Billanakote and Mahimapura",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/t-begur.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in T Begur",
+    "rentsProse": "Rents on this stretch sit in a tight band, because most buildings are recent pre-engineered sheds put up to a similar pattern. T Begur prices at or just below Nelamangala and Dobbaspet, and what moves the rate is handover condition, dock count and how far a site sits from the highway rather than the village name.",
+    "specHeading": "Typical Specification in T Begur",
+    "specProse": "This is a distribution specification: large floorplates, generous clear heights and multiple docks are the norm here. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit. The stock is predominantly pre-engineered, and clear heights are consistently good across it, so most buildings here suit multi-level racking.",
+    "inventoryHeading": "Featured Listings in T Begur",
+    "faqs": [
+      {
+        "a": "Current asking rents in T Begur are shown in the rent section of this page, taken from our live listings. Quotes sit in a tight band because the buildings are recent and similar. Handover condition, docks and distance from the highway move the rate.",
+        "q": "What is the rent for a warehouse in T Begur?"
+      },
+      {
+        "a": "T Begur and Minnapura for the widest choice close to Nelamangala. Thyamagondlu and Talekere for more of the same large sheds. Billanakote if you want to sit nearer Dobbaspet and the planned logistics park.",
+        "q": "Which parts of T Begur are best for a warehouse?"
+      },
+      {
+        "a": "T Begur is a large-format market built for regional distribution; smaller units are a minor part of the stock. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in T Begur?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. Fire NOC is on record for close to half the listings here, well above the pattern we see nationally.",
+        "q": "Do T Begur warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Regional distributors and logistics operators that want large, modern buildings on Tumkur Road at a rate at or just below Nelamangala. T Begur's buildings are predominantly pre-engineered, large and well docked, with high clear heights, so it suits racked storage and full truckload distribution serving Bangalore and the Mumbai and Pune line.",
+        "q": "Who should consider a warehouse in T Begur?"
+      }
+    ],
+    "relatedBlogs": [
+      "dabaspet-multimodal-logistics-park"
+    ]
+  },
+  {
+    "citySlug": "bengaluru",
+    "slug": "whitefield",
+    "seoTitle": "Whitefield Warehousing, Bangalore: Rents and Specification",
+    "metaDescription": "Warehousing in Whitefield, east Bangalore, close to the tech belt. See live rents, unit sizes and specifications from verified listings.",
+    "h1": "Whitefield Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Whitefield is east Bangalore's technology district, and warehousing here is a fringe business rather than the main event. The usable stock sits outside the built-up tech belt, on the roads running towards Hoskote and Soukya Road, where the land is still industrial. What Whitefield offers that the outer belts cannot is proximity: it is the closest storage to a dense employment and consumption catchment, which is why last-mile and e-commerce occupiers pay for it.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Whitefield, Bengaluru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1770635865771.webp",
+      "width": 1200,
+      "height": 1600
+    },
+    "marketHeading": "Warehouse Space in Whitefield: Where the Stock Sits",
+    "marketProse": "This name covers two very different markets. **Brookfield**, inside the built-up belt, is commercial RCC floorspace and behaves like retail rather than warehousing. Everything else is peripheral and priced normally. **Cheemasandra**, **Anugondanahalli** and **Rampura** hold pre-engineered space on the Hoskote side. **Gundur** is the cheaper end. Hoskote and Soukya Road, further out, hold their own pages.",
+    "marketImage": {
+      "alt": "Map of Whitefield, Bengaluru, showing where WareOnGo's warehouse listings sit around Brookfield, Cheemasandra, Anugondanahalli, Rampura and Gundur",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/whitefield.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Whitefield",
+    "rentsProse": "Read Whitefield's two halves separately. Peripheral pre-engineered stock towards Hoskote is what most occupiers actually take, and it prices like the rest of east Bangalore. In-belt RCC floorspace at Brookfield and on the ITPL Road side quotes at commercial rates and sets the top of the range for a handful of small units. The gap between them is a land-use gap rather than a negotiating position, so plan against the median rather than the ceiling.",
+    "specHeading": "Typical Specification in Whitefield",
+    "specProse": "Whitefield sits below the outer belts on throughput specification: lower clear heights and fewer docks. Units are mostly small, so this is a market for city-facing distribution and smaller requirements. The RCC stock is where the low clear heights come from. Pre-engineered buildings still make up most of the stock, and VDF is the most common floor where flooring is recorded.",
+    "inventoryHeading": "Featured Listings in Whitefield",
+    "faqs": [
+      {
+        "a": "Current asking rents in Whitefield are shown in the rent section of this page, taken from our live listings. Peripheral pre-engineered space towards Hoskote is the warehousing market. The top of the range is commercial RCC floorspace in Brookfield and is a different product.",
+        "q": "What is the rent for a warehouse in Whitefield?"
+      },
+      {
+        "a": "Cheemasandra and Anugondanahalli for pre-engineered space. Rampura and Gundur if rent is the constraint. Move one step further east to Soukya Road or Hoskote if you need docks, height and a larger floorplate.",
+        "q": "Which parts of Whitefield are best for a warehouse?"
+      },
+      {
+        "a": "Whitefield is weighted towards smaller space, and large single boxes are scarce. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Whitefield?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Whitefield warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Occupiers that need to be inside east Bangalore more than they need a big box: last-mile delivery, service and spares stores, and distributors serving the IT corridor. Whitefield's units are mostly small to mid-size, and the pre-engineered stock towards Hoskote gives more height than the RCC space inside the belt, so choose the building to match the load.",
+        "q": "Who should consider a warehouse in Whitefield?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ],
+    "statOverrides": {
+      "size": {
+        "min": 1500
+      }
+    }
+  },
+  {
+    "citySlug": "dadri",
+    "slug": "dadri",
+    "seoTitle": "Dadri Warehousing, Greater Noida: Rents and Specification",
+    "metaDescription": "Warehousing in Dadri, Greater Noida, at the Dedicated Freight Corridor junction. Recent stock. See live rents and specifications from verified listings.",
+    "h1": "Dadri Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Dadri is where the Eastern and Western Dedicated Freight Corridors meet, in Gautam Buddha Nagar east of Noida. That junction is the reason the location matters: rail-linked freight terminating here can reach both the Mumbai and the Kolkata routes without a road leg. Warehousing around it is still thin and mostly recent, built in anticipation of the corridor rather than in response to existing demand.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Dadri, Dadri",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1762870922265.webp",
+      "width": 1003,
+      "height": 518
+    },
+    "marketHeading": "Warehouse Space in Dadri: Where the Stock Sits",
+    "marketProse": "The stock sits in villages around the town rather than in an estate. **Dhoom Kheda** and **Bairanagpur** hold recently built pre-engineered space at the top of the local market. **Dhoom Manikpur**, on the Ghaziabad side, has RCC stock. **Dadri** town itself sits in the middle. **Bisnuli**, on NH-91, is the lower end and is shed space. The spread across the market reflects how little is available rather than how uniform it is.",
+    "marketImage": {
+      "alt": "Map of Dadri, Dadri, showing where WareOnGo's warehouse listings sit around Dhoom Manikpur and Dadri",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/dadri/dadri.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Dadri",
+    "rentsProse": "With only a handful of buildings on the market, read Dadri's rent range as a reflection of scarce supply rather than a settled rate. What you are paying for is the freight corridor junction. If rail access is not part of your requirement, similar money buys considerably more building on the Gurugram side.",
+    "specHeading": "Typical Specification in Dadri",
+    "specProse": "Clear heights here are strong, which reflects how recently this stock was built. Docking is the weak point, which is what you would expect where the buildings went up ahead of the demand. Units are mid-size, and large single boxes are scarce so far. Clear height is on record for nearly every listing here, so you can shortlist on it before a visit.",
+    "inventoryHeading": "Featured Listings in Dadri",
+    "faqs": [
+      {
+        "a": "Current asking rents in Dadri are shown in the rent section of this page, taken from our live listings. Dhoom Kheda and Bairanagpur hold the newer pre-engineered stock at the top and a shed at Bisnuli on NH-91 sits at the lower end. With this little supply, treat the range as indicative.",
+        "q": "What is the rent for a warehouse in Dadri?"
+      },
+      {
+        "a": "Dhoom Kheda and Bairanagpur for recently built pre-engineered space. Dadri town in the middle of the market. Dhoom Manikpur on the Ghaziabad side if an RCC building suits your use. All of them are within a short run of the freight corridor junction.",
+        "q": "Which parts of Dadri are best for a warehouse?"
+      },
+      {
+        "a": "Dadri is mid-size space. For a large single box in this direction, the market is not yet built out and a build-to-suit conversation is often the faster route. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Dadri?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Confirm the permitted use with the development authority that covers the plot. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. Fire NOC is on record for a majority of listings here, well above the pattern we see nationally.",
+        "q": "Do Dadri warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Occupiers whose freight uses the rail corridors, since Dadri sits where the Eastern and Western Dedicated Freight Corridors meet. Its buildings are recent, mostly mid-size and pre-engineered with high clear heights, so it suits rail-linked distribution and storage on the eastern side of NCR. Docking is lighter, and the supply is still small.",
+        "q": "Who should consider a warehouse in Dadri?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "delhi",
+    "slug": "bamnoli",
+    "seoTitle": "Bamnoli and Bharthal Warehousing, Delhi",
+    "metaDescription": "Warehousing in Bamnoli and Bharthal near Dwarka, Delhi, close to the airport. See live rents and specifications from verified listings.",
+    "h1": "Bamnoli and Bharthal Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Bamnoli and Bharthal are the village pockets on the edge of Dwarka, in south west Delhi, and they hold the closest usable storage to the airport and the Gurugram border on the Delhi side. This is urban godown space rather than warehousing: buildings are small, plots are tight, and the price reflects an address inside Delhi rather than a specification. Occupiers here are serving the city, not stocking for the region.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Bamnoli, Delhi",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1758103375110.webp",
+      "width": 1280,
+      "height": 960
+    },
+    "marketHeading": "Warehouse Space in Bamnoli: Where the Stock Sits",
+    "marketProse": "Almost all of the inventory sits at Bamnoli itself. **Firni Road**, running through it, and the **Sector 28** side towards Dwarka are the top of the local market. The **Dwarka** frontage is the cheaper end. Bharthal, next door, is covered on this page too.",
+    "marketImage": {
+      "alt": "Map of Bamnoli, Delhi, showing where WareOnGo's warehouse listings sit around Sector 28 and Dwarka",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/delhi/bamnoli.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Bamnoli",
+    "rentsProse": "Bamnoli is among the most expensive storage we list in Delhi, well above the Alipur belt in the north of the city. What you are paying for is the Dwarka and airport catchment, not the building. The stock is a mix of pre-engineered, RCC and shed, clear heights are inconsistent, and the units are small. Bamnoli is also congested, with very few large boxes on offer, so a requirement that needs a big floorplate is better served elsewhere.",
+    "specHeading": "Typical Specification in Bamnoli",
+    "specProse": "Nothing about the specification can be assumed from the address here. Clear heights range widely because the stock mixes pre-engineered, RCC and shed buildings, and the units are small. Plan for a small footprint and check each building in person. Clear height and docks are on record for most listings here, so you can compare buildings before a visit.",
+    "inventoryHeading": "Featured Listings in Bamnoli",
+    "faqs": [
+      {
+        "a": "Current asking rents in Bamnoli are shown in the rent section of this page, taken from our live listings. Firni Road and the Sector 28 side are the top of the local market and the Dwarka frontage the cheaper end.",
+        "q": "What is the rent for a warehouse in Bamnoli?"
+      },
+      {
+        "a": "The Dwarka frontage for the best rate with the same access. Firni Road and Sector 28 if you need to be closest to the Dwarka sectors. For a larger floorplate, look at Alipur in north Delhi, which holds bigger buildings.",
+        "q": "Which parts of Bamnoli are best for a warehouse?"
+      },
+      {
+        "a": "This is a small-unit market. For anything larger inside Delhi, the Alipur belt in the north holds it. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Bamnoli?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. On village and unplanned land inside Delhi, confirm what the plot is permitted for under the master plan and what the building was sanctioned as. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Bamnoli warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Occupiers that need to serve Dwarka, the airport area and south-west Delhi from inside the city. Bamnoli's units are mid-size and the stock mixes pre-engineered, RCC and shed buildings, so it suits last-mile delivery, trade storage and service stores that value position over specification, rather than requirements that need a large floorplate.",
+        "q": "Who should consider a warehouse in Bamnoli?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "ernakulam",
+    "slug": "vazhakkulam",
+    "seoTitle": "Vazhakkulam Warehousing, Kochi: Rents and Specification",
+    "metaDescription": "Warehousing in Vazhakkulam on the Aluva Perumbavoor road near Kochi airport. See live rents, sizes and specifications from verified listings.",
+    "h1": "Vazhakkulam Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Vazhakkulam sits on the Aluva to Perumbavoor road north east of Kochi, in the belt that serves the plywood and food processing industries of central Ernakulam. It is one of the closest concentrations of usable warehouse space to the airport and to the industrial estates along that corridor. Land here is tight and held in small parcels, which is why the buildings are modest and the rates are not.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Vazhakkulam, Ernakulam",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/78a2440958c54c044b70294a4d756187.webp",
+      "width": 1280,
+      "height": 725
+    },
+    "marketHeading": "Warehouse Space in Vazhakkulam: Where the Stock Sits",
+    "marketProse": "The stock runs along one road and a few turnings off it. **Nalam Mile**, on the Aluva to Perumbavoor stretch, carries the newer pre-engineered buildings. **Nadakkavu**, off the Vazhakkulam school road, is shed space at a similar rate. **Chembarakky** is the cheaper end. **Thadiyittaparambu**, on SH-16, is the fourth pocket. With only a handful of buildings, compare individually. Much of the belt is pre-engineered and VDF flooring is common.",
+    "marketImage": {
+      "alt": "Map of Vazhakkulam, Ernakulam, showing where WareOnGo's warehouse listings sit around Nalam Mile, Chembarakky and Thadiyittaparambu",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/ernakulam/vazhakkulam.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Vazhakkulam",
+    "rentsProse": "For a market this far from any metro, Vazhakkulam's rents are high, and they reflect how little industrial land is available in central Ernakulam rather than any premium in the buildings. Cheap options are scarce here: the band is narrow, and the lower quotes are on the older buildings rather than in a cheaper location. Expect to compete on terms rather than on price.",
+    "specHeading": "Typical Specification in Vazhakkulam",
+    "specProse": "VDF flooring is common here, which is a good sign in a market this size. Confirm clear height, docks and flooring on the building you are shown. Units are mostly mid-size, with the occasional larger building. The stock is mostly pre-engineered, and docking is generous for a market this size, which suits regular truck movements.",
+    "inventoryHeading": "Featured Listings in Vazhakkulam",
+    "faqs": [
+      {
+        "a": "Current asking rents in Vazhakkulam are shown in the rent section of this page, taken from our live listings. The band is narrow. The lower quotes are on the older buildings rather than in a cheaper part of the belt.",
+        "q": "What is the rent for a warehouse in Vazhakkulam?"
+      },
+      {
+        "a": "Nalam Mile on the Aluva to Perumbavoor stretch for the newer pre-engineered space and the best road access. Chembarakky for a lower rate. Nadakkavu if shed space suits your use. Thadiyittaparambu on SH-16 for the Perumbavoor side.",
+        "q": "Which parts of Vazhakkulam are best for a warehouse?"
+      },
+      {
+        "a": "Vazhakkulam is a mid-size market with the occasional larger building. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Vazhakkulam?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Confirm the permitted use and the building permit with the local body. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Vazhakkulam warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Occupiers that need modern warehouse space in central Ernakulam, where industrial land is short. Vazhakkulam's units are mostly mid-size and pre-engineered, with heavy docking for a market this size, so it suits distributors serving the Kochi region and central Kerala who are prepared to compete on terms in a small market.",
+        "q": "Who should consider a warehouse in Vazhakkulam?"
+      }
+    ],
+    "relatedBlogs": [
+      "warehouse-compliance-checklist-india"
+    ]
+  },
+  {
+    "citySlug": "gurugram",
+    "slug": "farukh-nagar",
+    "seoTitle": "Farukh Nagar Warehousing, Gurugram: Rents and Specification",
+    "metaDescription": "Warehousing in Farukh Nagar between Gurugram and Jhajjar, where Fire NOC is often on record. See live rents, sizes and specifications from verified listings.",
+    "h1": "Farukh Nagar Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Farukh Nagar sits between Gurugram and Jhajjar, on the road network that connects the Pataudi belt to the Delhi border. It is a working warehousing town rather than a planned estate, and what distinguishes it is paperwork: Fire NOC is recorded here far more often than on most of the micromarkets we cover. For an occupier who has been burned on compliance, that is the reason to start here.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Farukh Nagar, Gurugram",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1763723090416.webp",
+      "width": 1280,
+      "height": 720
+    },
+    "marketHeading": "Warehouse Space in Farukh Nagar: Where the Stock Sits",
+    "marketProse": "Everything sits within a few kilometres of the town. The **Jhajjar Road** and **Haily Mandi Road** frontages are the top of the local market and have the easiest truck access. **Sector Farukhnagar**, the planned block, sits in the middle. **Daboda**, out towards the Jhajjar boundary, is the lower end and holds one of the larger buildings. The spread between pockets is small, so the choice here is between buildings rather than between areas.",
+    "marketImage": {
+      "alt": "Map of Farukh Nagar, Gurugram, showing where WareOnGo's warehouse listings sit around Sector Farukhnagar",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/gurugram/farukh-nagar.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Farukh Nagar",
+    "rentsProse": "Farukh Nagar prices in line with Pataudi Road and Tauru Road, below Manesar and well below Sohna Road. The band is narrow: there is little by way of a cheap corner or a premium one, and with Fire NOC commonly on record there is little compliance discount either. What varies is size, and that is what should drive the shortlist. The frontage roads quote a little more for access, and Daboda a little less for distance.",
+    "specHeading": "Typical Specification in Farukh Nagar",
+    "specProse": "Docks and clear heights here are consistent enough to plan against, which is unusual for a town market, but confirm both on the building you take. There is little small space. Ask what flooring is down and whether it will take your racking loads before you shortlist. Clear height and docks are on record for most listings here, so you can compare buildings before a visit.",
+    "inventoryHeading": "Featured Listings in Farukh Nagar",
+    "faqs": [
+      {
+        "a": "Current asking rents in Farukh Nagar are shown in the rent section of this page, taken from our live listings. The Jhajjar Road and Haily Mandi Road frontages are the top of the local market and Daboda the lower end. The band is narrow enough that specification should decide, not price.",
+        "q": "What is the rent for a warehouse in Farukh Nagar?"
+      },
+      {
+        "a": "The Jhajjar Road and Haily Mandi Road frontages for the easiest truck access. Sector Farukhnagar in the middle of the market. Daboda if rent is the constraint and the extra distance to the Jhajjar boundary works for you.",
+        "q": "Which parts of Farukh Nagar are best for a warehouse?"
+      },
+      {
+        "a": "Farukh Nagar is mid-size to large space with very little small stock. For a smaller requirement, Manesar is the nearest market that holds it. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Farukh Nagar?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. In Haryana, change of land use outside the planned sectors is granted by the Town and Country Planning Department, so ask for the CLU on the plot itself. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. Fire NOC is on record here more often than on most of our pages, so expect the certificate to exist, but still see it.",
+        "q": "Do Farukh Nagar warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Distributors and logistics operators that want large, consistent, compliance-ready buildings on Gurugram's western belt. Farukh Nagar's stock is predominantly pre-engineered and large, with generous docking and good clear heights, and Fire NOC is commonly on record, so it suits regional distribution and racked storage for occupiers who want a building they can plan against.",
+        "q": "Who should consider a warehouse in Farukh Nagar?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "gurugram",
+    "slug": "manesar",
+    "seoTitle": "Manesar Warehousing, Gurugram: Rents and Specification",
+    "metaDescription": "Warehousing in Manesar IMT on NH-48, Gurugram. Mid-size pre-engineered space. See live rents, sizes and specifications from verified listings.",
+    "h1": "Manesar Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Manesar is the industrial half of Gurugram, laid out as an IMT on NH-48 where the highway runs south west towards Jaipur. Automotive manufacturing anchors it and everything else has grown around that: component suppliers, contract logistics operators and the third-party space that serves both. It is the closest genuine industrial address to Delhi that still prices like a peripheral market.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Manesar, Gurugram",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1760001311754.webp",
+      "width": 739,
+      "height": 543
+    },
+    "marketHeading": "Warehouse Space in Manesar: Where the Stock Sits",
+    "marketProse": "The stock sits in the villages the IMT was built over rather than inside sector plots. **Bhangrola** and **Kankrola** beside it hold most of what is available. **Hayatpur**, on the Pataudi Road side, is the cheaper edge of the belt. Space in Gurugram's built-up sectors quotes at commercial rates, so a quote at the top of the range is likely city space rather than the IMT.",
+    "marketImage": {
+      "alt": "Map of Manesar, Gurugram, showing where WareOnGo's warehouse listings sit around Bhangrola, Kankrola and Hayatpur",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/gurugram/manesar.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Manesar",
+    "rentsProse": "What you are paying for in Manesar is the IMT address and the run to the Delhi border. The warehouse stock is predominantly pre-engineered, so grade is a smaller variable than position, and quotes inside the belt sit in a narrow working band. Manesar carries a premium over the Pataudi Road, Farukh Nagar and Tauru Road belts further out, and sits below Sohna Road on the city side. Treat the top of the range as the commercial sector space it is, not as the going rate for a shed.",
+    "specHeading": "Typical Specification in Manesar",
+    "specProse": "The typical building here is a working distribution specification, but a construction label does not guarantee dimensions: clear height and dock count vary from shed to shed, so confirm both on the building you are shown. Manesar is a mid-size market. For a large single box on this side of Gurugram, Pataudi Road and Tauru Road are where to look. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "inventoryHeading": "Featured Listings in Manesar",
+    "faqs": [
+      {
+        "a": "Current asking rents in Manesar are shown in the rent section of this page, taken from our live listings. Quotes inside the IMT belt sit in a narrow band. A quote at the top of the range is likely city-sector space rather than the IMT.",
+        "q": "What is the rent for a warehouse in Manesar?"
+      },
+      {
+        "a": "Bhangrola and Kankrola for the widest choice inside the IMT belt. Hayatpur on the Pataudi Road side for a lower rate. Push further out to Pataudi Road or Tauru Road if you need a large box, and towards Sohna Road if you need to be nearer the city.",
+        "q": "Which parts of Manesar are best for a warehouse?"
+      },
+      {
+        "a": "Manesar is a mid-size market, with most units sized for component and contract logistics rather than regional hubs. Larger requirements are better served on Pataudi Road. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Manesar?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. In Haryana, change of land use outside the planned sectors is granted by the Town and Country Planning Department, so ask for the CLU on the plot itself. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Manesar warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Mid-size occupiers that want an IMT address and a short run to the Delhi border on the NH-48 side. Manesar's buildings are pre-engineered and mostly mid-size with good clear heights, so it suits automotive suppliers, component storage and city-facing distribution in Gurugram, while Pataudi Road and Tauru Road offer the very large regional boxes.",
+        "q": "Who should consider a warehouse in Manesar?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "gurugram",
+    "slug": "pataudi-road",
+    "seoTitle": "Pataudi Road Warehousing, Gurugram: Rents and Specification",
+    "metaDescription": "Warehousing on Pataudi Road, Gurugram: large grade-A boxes with high dock counts. See live rents, unit sizes and specifications from verified listings.",
+    "h1": "Pataudi Road Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Pataudi Road runs south west out of Gurugram towards Pataudi and Hailey Mandi, and it is where NCR's genuinely large warehouses are. Land is cheap enough here to build at scale and the highway network is close enough to make it work, which is why the grade-A developers came. If your requirement is a single box above one lakh square feet with docks to match, this is the first place to look in the region.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Pataudi Road, Gurugram",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1761889638009.webp",
+      "width": 1280,
+      "height": 960
+    },
+    "marketHeading": "Warehouse Space on Pataudi Road: Where the Stock Sits",
+    "marketProse": "The road is the market, and the pockets along it are villages rather than estates. **Luhari**, out towards the Jhajjar boundary, and **Khwaspur** sit at the top of the local range. The **Bilaspur to Pataudi** stretch carries the largest buildings. **Hailey Mandi**, **Tajnagar** and **Inchhapuri**, near the Hailey Mandi road, are the lower end for pre-engineered stock. **Hayatpur**, the pocket closest to Gurugram, holds mid-size units. **Fazilpur Baldi** and the side roads hold small sheds rather than warehouses.",
+    "marketImage": {
+      "alt": "Map of Pataudi Road, Gurugram, showing where WareOnGo's warehouse listings sit around Tajnagar, Inchhapuri and Hayatpur",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/gurugram/pataudi-road.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent on Pataudi Road",
+    "rentsProse": "For the specification on offer, Pataudi Road is strong value in NCR: it prices in line with Farukh Nagar and Tauru Road while carrying some of the largest, best-docked buildings in the region. The grade question is simple. Most buildings here are pre-engineered boxes, and the rest are small sheds on the side roads, which sit at the bottom of the range and should be read separately. Across the pre-engineered stock the spread is narrow, so position along the road moves the rate more than build quality does.",
+    "specHeading": "Typical Specification on Pataudi Road",
+    "specProse": "Pataudi Road is grade-A regional hub territory: large units, high dock counts and clear heights that suit racked storage. The exceptions are a small cluster of mid-size units at Hayatpur nearest Gurugram and a few sheds on the side roads. Check clear height and docks per building rather than assuming them from the road. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "inventoryHeading": "Featured Listings on Pataudi Road",
+    "faqs": [
+      {
+        "a": "Current asking rents on Pataudi Road are shown in the rent section of this page, taken from our live listings. Across the pre-engineered stock the band is narrow because the buildings are uniform. The small sheds on the side roads sit at the bottom of the range.",
+        "q": "What is the rent for a warehouse on Pataudi Road?"
+      },
+      {
+        "a": "The Bilaspur to Pataudi stretch for the largest buildings. Luhari if you want to be nearer the Jhajjar side. Hailey Mandi, Tajnagar and Inchhapuri for the lower rates on pre-engineered stock. Hayatpur is the closest pocket to Gurugram, and Khwaspur and Fazilpur Baldi hold the small sheds.",
+        "q": "Which parts of Pataudi Road are best for a warehouse?"
+      },
+      {
+        "a": "Pataudi Road holds some of the largest single boxes in NCR. The smaller stock is at Hayatpur and in the sheds on the side roads; for a mid-size requirement elsewhere, look at Manesar or Farukh Nagar. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available on Pataudi Road?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. In Haryana, change of land use outside the planned sectors is granted by the Town and Country Planning Department, so ask for the CLU on the plot itself. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. Institutionally developed stock like this usually has its paperwork in order, but still ask for the certificate. Fire NOC is on record for most listings here, well above the pattern we see nationally.",
+        "q": "Do Pataudi Road warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "National distributors, e-commerce networks and third-party logistics operators that need large, well-docked boxes serving Delhi and north India. Pataudi Road carries some of the largest buildings in NCR, mostly pre-engineered, with high clear heights and heavy docking at rates close to the most affordable in Gurugram, so it suits regional hubs and racked storage at scale.",
+        "q": "Who should consider a warehouse on Pataudi Road?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "gurugram",
+    "slug": "sohna-road",
+    "seoTitle": "Sohna Road Warehousing, Gurugram: Rents and Specification",
+    "metaDescription": "Warehousing on Sohna Road, Gurugram, from Badshahpur to the city sectors. See live rents, unit sizes and specifications from verified listings.",
+    "h1": "Sohna Road Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Sohna Road runs south from Gurugram towards Sohna and Alwar, and unlike the belts west of the city it has stayed urban. Warehousing here shares the road with offices, showrooms and residential towers, which is why it is among the priciest storage in Gurugram and why so much of it is RCC rather than shed. Occupiers take it for the drive time, not for the building.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Sohna Road, Gurugram",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1761646472439.webp",
+      "width": 1280,
+      "height": 720
+    },
+    "marketHeading": "Warehouse Space on Sohna Road: Where the Stock Sits",
+    "marketProse": "The road splits into a city end and a village end. **Hero Honda Chowk** and the **Sector 71** side are the city end: RCC floorspace at commercial rates, and they set the top of this page's range. **Badshahpur** and the **Dhumaspur Road** running off it are the real warehousing market, and that is where most of the available space sits. **Sector 70A** is the lower end of the road.",
+    "marketImage": {
+      "alt": "Map of Sohna Road, Gurugram, showing where WareOnGo's warehouse listings sit around Sector 71, Badshahpur and Sector 70A",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/gurugram/sohna-road.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent on Sohna Road",
+    "rentsProse": "Sohna Road is among the most expensive warehousing addresses in Gurugram, above the Pataudi Road and Tauru Road belts and above Manesar. The working number is what Badshahpur and Dhumaspur Road quote, and it is consistent. Above that you are buying commercial RCC floorspace near Hero Honda Chowk and the numbered sectors, which is a different product and should not be compared with a shed. A sizeable share of the stock here is RCC.",
+    "specHeading": "Typical Specification on Sohna Road",
+    "specProse": "Clear heights here are low for a market at this rate, a direct consequence of how much RCC stock the road carries. Against that, the units themselves are not small and docking is reasonable. Check clear height and floor loading on the specific unit rather than assuming them from the road.",
+    "inventoryHeading": "Featured Listings on Sohna Road",
+    "faqs": [
+      {
+        "a": "Current asking rents on Sohna Road are shown in the rent section of this page, taken from our live listings. Badshahpur and Dhumaspur Road, which hold most of the warehouse space, quote consistently. The top of the range is commercial RCC floorspace at the city end.",
+        "q": "What is the rent for a warehouse on Sohna Road?"
+      },
+      {
+        "a": "Badshahpur and Dhumaspur Road for actual warehouse space with docks. Sector 70A for the lower rates on the road. Hero Honda Chowk and the numbered sectors only if you need commercial floorspace inside the city and can carry commercial rents.",
+        "q": "Which parts of Sohna Road are best for a warehouse?"
+      },
+      {
+        "a": "Sohna Road is mid-size to large space with little small stock, since most of it sits in buildings rather than godown units. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available on Sohna Road?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. In Haryana, change of land use outside the planned sectors is granted by the Town and Country Planning Department, so ask for the CLU on the plot itself. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. Land use matters especially here: this road carries a mix of commercial and industrial permissions, so confirm your use is allowed.",
+        "q": "Do Sohna Road warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Occupiers that need to be close to Gurugram city and the southern sectors more than they need a modern high-bay box. Sohna Road's units are large with generous docking, but a sizeable share is RCC with lower clear heights, so it suits city-facing distribution and storage that does not rack high.",
+        "q": "Who should consider a warehouse on Sohna Road?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "gurugram",
+    "slug": "tauru-road",
+    "seoTitle": "Tauru Road Warehousing, Gurugram: Rents and Specification",
+    "metaDescription": "Warehousing on Tauru Road from Bilaspur Chowk, Gurugram. Large floorplates for storage-led occupiers. See live rents and specs from verified listings.",
+    "h1": "Tauru Road Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Tauru Road leaves NH-48 at Bilaspur Chowk and runs south into Nuh district, and the warehousing on it is some of the most affordable large-format space within reach of Gurugram. This is a corridor built for storage rather than for manufacturing: big floorplates, generous docking and very little else. Occupiers take it when the requirement is volume and the run into the city is a secondary concern.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Tauru Road, Gurugram",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1767772046808.webp",
+      "width": 1280,
+      "height": 720
+    },
+    "marketHeading": "Warehouse Space on Tauru Road: Where the Stock Sits",
+    "marketProse": "The corridor reads as a line running out from the highway. The stretch nearest **Bilaspur Khurd** carries most of the inventory. **Fatehpur**, further along, is mostly shed stock. **Sector Panchgaon**, back towards the highway, sits at the lower end of the local range, and so does the **Tauru Road** frontage itself.",
+    "marketImage": {
+      "alt": "Map of Tauru Road, Gurugram, showing where WareOnGo's warehouse listings sit around Bilaspur Khurd and Fatehpur",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/gurugram/tauru-road.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent on Tauru Road",
+    "rentsProse": "Tauru Road prices in line with Pataudi Road and Farukh Nagar, which is the comparison that matters: for similar rent you get a large building here and a short run to the highway, in exchange for a less institutional standard of build. Build type is the variable. A meaningful share of the buildings here are sheds rather than pre-engineered structures, more than on the neighbouring belts, so check which one you are being shown before you compare rates.",
+    "specHeading": "Typical Specification on Tauru Road",
+    "specProse": "Large units and generous docking put this corridor in regional hub territory. The catch is consistency: clear heights vary widely and part of the stock is shed, so the specification has to be checked building by building rather than assumed from the road. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "inventoryHeading": "Featured Listings on Tauru Road",
+    "faqs": [
+      {
+        "a": "Current asking rents on Tauru Road are shown in the rent section of this page, taken from our live listings. The Bilaspur Khurd stretch carries most of the stock. Sector Panchgaon and the Tauru Road frontage sit at the lower end, and shed stock prices differently from pre-engineered buildings.",
+        "q": "What is the rent for a warehouse on Tauru Road?"
+      },
+      {
+        "a": "The Bilaspur Khurd stretch nearest the highway for the widest choice. Sector Panchgaon if you want to stay closest to NH-48. Fatehpur if a shed suits your use. For an institutionally built box at a similar rate, compare against Pataudi Road.",
+        "q": "Which parts of Tauru Road are best for a warehouse?"
+      },
+      {
+        "a": "Tauru Road is large-format space and small units are rare. For a smaller requirement, Manesar is the nearest option and the Hayatpur end of Pataudi Road the next. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available on Tauru Road?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. In Haryana, change of land use outside the planned sectors is granted by the Town and Country Planning Department, so ask for the CLU on the plot itself. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. On a corridor with this much shed stock, check that the certificate covers the building you are taking rather than the wider compound. Fire NOC is on record for most listings here, well above the pattern we see nationally.",
+        "q": "Do Tauru Road warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Large-format occupiers that want a big building and a short run to the highway for a similar rent to Pataudi Road. Tauru Road's units are very large and well docked, while part of the stock is shed rather than pre-engineered, so it suits regional distribution and bulk storage for occupiers who check each building's height and build before comparing rates.",
+        "q": "Who should consider a warehouse on Tauru Road?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "hosur",
+    "slug": "kelamangalam",
+    "seoTitle": "Kelamangalam and Uddanapalli Warehousing, Hosur",
+    "metaDescription": "Warehousing in Kelamangalam and Uddanapalli, south of Hosur in Tamil Nadu: large pre-engineered buildings. See live rents and specs from verified listings.",
+    "h1": "Kelamangalam and Uddanapalli Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Kelamangalam and Uddanapalli lie south of Hosur in Krishnagiri district, Tamil Nadu, on the roads that run out of Hosur towards Denkanikottai and Rayakottai. Both sit inside the planning area of the Hosur New Town Development Authority. The pull here is Hosur's industrial base: the SIPCOT estates nearer the town, and the Tata Electronics campus on the Rayakottai road side at Uddanapalli.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Kelamangalam, Hosur",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1757319903167.webp",
+      "width": 1280,
+      "height": 960
+    },
+    "marketHeading": "Warehouse Space in Kelamangalam and Uddanapalli: Where the Stock Sits",
+    "marketProse": "**Kelamangalam**, a block headquarters town on the Hosur to Denkanikottai road with its own station on the Hosur to Dharmapuri line, carries most of the large pre-engineered buildings on this page. **Uddanapalli**, on the Rayakottai road side, is where Tata Electronics has its Hosur campus, and the stock here includes some of the largest boxes and build-to-suit land. **Bairamangalam** and **Kundumaranapalli**, villages in Kelamangalam block, hold more land and buildings further out.",
+    "marketImage": {
+      "alt": "Map of Kelamangalam, Hosur, showing where WareOnGo's warehouse listings sit around Kelamangalam, Uddanapalli, Bairamangalam and Kundumaranapalli",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/hosur/kelamangalam.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Kelamangalam and Uddanapalli",
+    "rentsProse": "Rents here sit in a tight band, below the Bangalore side of the border, because the buildings are recent and similar and the land is open. Build-to-suit land is listed here too, at land rates rather than building rates, so read it apart from the sheds.",
+    "specHeading": "Typical Specification in Kelamangalam and Uddanapalli",
+    "specProse": "These are large distribution and manufacturing-support buildings with generous clear heights and heavy docking, suited to high racking and full truckload throughput. Confirm floor loading and power per building. Clear heights are consistently high across the stock, which keeps the shortlist simple: compare on floor area, docks and position.",
+    "inventoryHeading": "Featured Listings in Kelamangalam and Uddanapalli",
+    "faqs": [
+      {
+        "a": "Current asking rents in Kelamangalam and Uddanapalli are shown in the rent section of this page, taken from our live listings. Finished buildings sit in a tight band. Build-to-suit land is quoted at land rates, so compare it separately.",
+        "q": "What is the rent for a warehouse in Kelamangalam and Uddanapalli?"
+      },
+      {
+        "a": "Kelamangalam for the widest choice of large pre-engineered buildings on the Denkanikottai road. Uddanapalli if you want to sit near the electronics campus on the Rayakottai road side, or need build-to-suit land. Bairamangalam and Kundumaranapalli for land and buildings further out.",
+        "q": "Which parts of Kelamangalam and Uddanapalli are best for a warehouse?"
+      },
+      {
+        "a": "This is a large-format market: most units are sized for distribution or manufacturing support rather than local storage. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Kelamangalam and Uddanapalli?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Around Hosur, land use is planned by the Hosur New Town Development Authority, and change of land use is sanctioned by the Directorate of Town and Country Planning. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. Fire NOC is on record for a majority of listings here, well above the pattern we see nationally.",
+        "q": "Do Kelamangalam and Uddanapalli warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Manufacturers, their suppliers and large distribution operations that need very large buildings near Hosur and the Karnataka border. Kelamangalam's buildings are pre-engineered and very large, with high clear heights and heavy docking, so it suits high racking and full truckload throughput, and build-to-suit land is available for occupiers planning ahead.",
+        "q": "Who should consider a warehouse in Kelamangalam?"
+      }
+    ],
+    "relatedBlogs": [
+      "grade-a-warehouse-india"
+    ]
+  },
+  {
+    "citySlug": "hyderabad",
+    "slug": "devaryamjal",
+    "seoTitle": "Devaryamjal Warehousing, Hyderabad: Rents and Specification",
+    "metaDescription": "Warehousing in Devaryamjal on Hyderabad's northern belt, between Kompally and Medchal. See live rents and specifications from verified listings.",
+    "h1": "Devaryamjal Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Devaryamjal is the middle of Hyderabad's northern belt, on the road running between Kompally and Medchal just outside the Outer Ring Road. There is no industrial estate here and no planned layout. What there is instead is a run of independently developed pre-engineered warehouses put up on agricultural land over the last decade, built to one broad pattern and let to third-party logistics operators serving the city.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Devaryamjal, Hyderabad",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1770895895288.webp",
+      "width": 1200,
+      "height": 1600
+    },
+    "marketHeading": "Warehouse Space in Devaryamjal: Where the Stock Sits",
+    "marketProse": "The most useful thing to know about this belt is how little the rate moves inside it. The buildings on the Devaryamjal stretch were put up to one broad pattern, and the named pockets along it, **Pudur** and **Kandlakoya**, price in line with the stretch. **Sai Geetha Ashram Road** holds some of the better-placed stock. The **Shamirpet** side, where the belt runs out towards the Medchal mandal boundary, is further from the city. Medchal and Kompally at either end hold their own pages.",
+    "marketImage": {
+      "alt": "Map of Devaryamjal, Hyderabad, showing where WareOnGo's warehouse listings sit around Pudur, Kandlakoya and Shamirpet",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/hyderabad/devaryamjal.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Devaryamjal",
+    "rentsProse": "There is very little to price against on this belt. The buildings are pre-engineered, the clear heights and dock counts are similar, and the quotes sit in a narrow band. What you are negotiating on is unit size, handover condition and lease term rather than grade. Distance matters at the margin: space on the Shamirpet side trades a longer run into the city for a lower rate. The current rent range for Devaryamjal, drawn from our live listings, is shown on this page.",
+    "specHeading": "Typical Specification in Devaryamjal",
+    "specProse": "Clear heights on this belt are generally generous, so the height question is usually settled before you start looking, but confirm it building by building. Multiple docks per site and large median units make this workable as a city distribution centre. Ask which buildings have VDF down before you shortlist. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "inventoryHeading": "Featured Listings in Devaryamjal",
+    "faqs": [
+      {
+        "a": "Current asking rents for Devaryamjal are shown in the rent section of this page, from our live listings. The rate barely varies along the belt, so compare buildings on specification, handover condition and lease terms rather than on price.",
+        "q": "What is the rent for a warehouse in Devaryamjal?"
+      },
+      {
+        "a": "The main Devaryamjal stretch for the widest choice. Pudur and Kandlakoya if you want to be nearer Kompally and the ORR. The Shamirpet side if a lower rate matters more than the run into the city.",
+        "q": "Which parts of Devaryamjal are best for a warehouse?"
+      },
+      {
+        "a": "This belt genuinely holds large single boxes, and most units are sized for distribution. Small space is rare. The size range and median unit for this page are shown in the specification section of this page.",
+        "q": "What sizes are available in Devaryamjal?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use in and around Hyderabad is governed by HMDA, which runs its own change-of-land-use approval. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Devaryamjal warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Occupiers that want a large, modern distribution building on Hyderabad's northern belt at a steady rate. Devaryamjal's stock is pre-engineered, mostly large, with generous docking and good clear heights, so it suits city distribution centres, third-party logistics operators and consumer goods distributors serving north and central Hyderabad.",
+        "q": "Who should consider a warehouse in Devaryamjal?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "hyderabad",
+    "slug": "kompally",
+    "seoTitle": "Kompally Warehousing, Hyderabad: Rents and Specification",
+    "metaDescription": "Warehousing in Kompally on NH-44, just north of the Hyderabad ORR. Compare live rents, unit sizes and specifications from verified listings.",
+    "h1": "Kompally Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Kompally is the start of Hyderabad's northern warehousing belt, on NH-44 where the road leaves the city for Nagpur. It sits just beyond the Outer Ring Road, which is what makes it work: trucks reach it without entering the city, and city vans reach it without a long run out. The belt continues north through Devaryamjal to Medchal, and most of what is available carries more than one of those names.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Kompally, Hyderabad",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/4e67cf5027a12996a80d9dbb2eb28f17.webp",
+      "width": 1280,
+      "height": 960
+    },
+    "marketHeading": "Warehouse Space in Kompally: Where the Stock Sits",
+    "marketProse": "This is a belt rather than an estate, and the rate moves very little across it. **Kompally** proper is the pocket nearest the city and the ORR. **Kandlakoya**, a little further out, and the long **Devaryamjal** stretch carry most of the inventory. **Gosaiguda** and **Muneerabad** sit on the Medchal side, with some of the newer buildings. **Dulapally**, back towards the city on the Jeedimetla industrial side, is closer-in godown space rather than belt warehousing. Medchal and Devaryamjal hold their own pages.",
+    "marketImage": {
+      "alt": "Map of Kompally, Hyderabad, showing where WareOnGo's warehouse listings sit around Kompally, Kandlakoya, Devaryamjal, Gosaiguda and Dulapally",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/hyderabad/kompally.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Kompally",
+    "rentsProse": "Rent on the northern belt is set more by position than by building. Almost all of the stock is pre-engineered and put up to a similar pattern, so there is little grade difference to price against, and quotes cluster tightly. What moves the number is how close a site sits to the ORR, whether it is a large shed or a small godown, and handover condition. The current rent range for this page is shown on this page.",
+    "specHeading": "Typical Specification in Kompally",
+    "specProse": "Multiple docks and generous clear heights are typical here, which is a genuine distribution specification and what separates this belt from Hyderabad's in-city godown stock. Most units are large-format. Ask what flooring is down and budget for the floor if you plan to rack high. Clear height and docks are on record for most listings here, so you can compare buildings before a visit.",
+    "inventoryHeading": "Featured Listings in Kompally",
+    "faqs": [
+      {
+        "a": "Current asking rents for Kompally are shown in the rent section of this page, taken from our live listings. Quotes on the belt sit in a tight band because the buildings are similar. Position relative to the ORR, unit size and handover condition move the rate more than the building type does.",
+        "q": "What is the rent for a warehouse in Kompally?"
+      },
+      {
+        "a": "Kompally proper if you want to be closest to the city and the ORR. Kandlakoya and the Devaryamjal stretch for the widest choice. Gosaiguda and Muneerabad on the Medchal side for some of the newer buildings. Dulapally only if you need closer-in godown space rather than a belt shed.",
+        "q": "Which parts of Kompally are best for a warehouse?"
+      },
+      {
+        "a": "Kompally is a large-format belt, and most units are sized for distribution rather than local storage. Smaller space exists but is incidental. The size range and median unit for this page are shown in the specification section of this page.",
+        "q": "What sizes are available in Kompally?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use in and around Hyderabad is governed by HMDA, which runs its own change-of-land-use approval. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Kompally warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Distributors and logistics operators serving Hyderabad from the north, and anyone moving freight up the highway towards Nagpur. Kompally's buildings are almost entirely pre-engineered, mostly large, with generous docking and good clear heights, so it suits city distribution centres, e-commerce operations and regional hubs.",
+        "q": "Who should consider a warehouse in Kompally?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "hyderabad",
+    "slug": "medchal",
+    "seoTitle": "Medchal Warehousing, Hyderabad: Rents and Specification",
+    "metaDescription": "Warehousing in Medchal on NH-44, the far end of Hyderabad's northern belt. Large boxes for regional hubs. See live rents and specs from verified listings.",
+    "h1": "Medchal Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Medchal is the far end of Hyderabad's northern belt, where NH-44 has left the city behind and the land is cheap enough to build big. It is the point on this corridor where warehouses stop being city godowns and start being regional hubs. The trade off is straightforward: large boxes with generous docking, in exchange for a longer run back into Hyderabad.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Medchal, Hyderabad",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1772300995516.webp",
+      "width": 1280,
+      "height": 963
+    },
+    "marketHeading": "Warehouse Space in Medchal: Where the Stock Sits",
+    "marketProse": "Stock here sits in villages spread across the mandal rather than along one road. **Kistapur**, nearest the highway junction, holds the newer buildings. **Pudur**, **Yellampet** and **Banda Mailaram** carry the middle of the market. **Jeedipally**, furthest out towards Kucharam, is where the lower quotes are. Kompally and Devaryamjal, back towards the city on the same belt, hold their own pages.",
+    "marketImage": {
+      "alt": "Map of Medchal, Hyderabad, showing where WareOnGo's warehouse listings sit around Kistapur, Pudur, Yellampet and Banda Mailaram",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/hyderabad/medchal.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Medchal",
+    "rentsProse": "Medchal prices close to the rest of the northern belt while offering considerably more space for the money, which is the reason to look this far out. Inside the mandal, rate maps to distance and building age: Kistapur, nearest the highway junction and with the newer stock, quotes at the top, and Jeedipally and the Kucharam side sit at the bottom. The buildings are predominantly pre-engineered, so grade is less of a factor than position. The current rent range is shown on this page.",
+    "specHeading": "Typical Specification in Medchal",
+    "specProse": "This is regional hub space: large units, generous docking and heights that suit racked storage. Very little here is small-format, so a requirement under a few thousand square feet is better served closer to the city. Confirm clear height and dock count per building, because a median describes the belt rather than any single shed.",
+    "inventoryHeading": "Featured Listings in Medchal",
+    "faqs": [
+      {
+        "a": "Current asking rents for Medchal are shown in the rent section of this page, from our live listings. Kistapur near the highway junction is the top of the local market, and Jeedipally and the Kucharam side are the lower end.",
+        "q": "What is the rent for a warehouse in Medchal?"
+      },
+      {
+        "a": "Kistapur for the newest buildings. Pudur, Yellampet or Banda Mailaram for a balance of rate and specification. Jeedipally if rent is the whole decision and the extra distance works for your operation.",
+        "q": "Which parts of Medchal are best for a warehouse?"
+      },
+      {
+        "a": "Medchal holds large units, and most stock is sized for regional distribution. For a smaller requirement, look at Kompally. The size range and median unit for this page are shown in the specification section of this page.",
+        "q": "What sizes are available in Medchal?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use in and around Hyderabad is governed by HMDA, which runs its own change-of-land-use approval. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. For buildings of this size the fire question is not a formality, so confirm the hydrant and sprinkler provision as well.",
+        "q": "Do Medchal warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Regional hubs and large-format occupiers that want more space for the money on Hyderabad's northern edge. Medchal's units are very large, heavily docked and pre-engineered, with heights that suit racked storage, so it suits third-party logistics operators and distributors serving Telangana and the north, while small requirements are better served closer to the city.",
+        "q": "Who should consider a warehouse in Medchal?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "hyderabad",
+    "slug": "shamshabad",
+    "seoTitle": "Shamshabad Warehousing, Hyderabad: Rents and Specification",
+    "metaDescription": "Warehousing in Shamshabad, the airport belt south of Hyderabad on NH-44. See live rents, unit sizes and specifications from verified listings.",
+    "h1": "Shamshabad Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Shamshabad is the airport belt on the south side of Hyderabad, built around Rajiv Gandhi International Airport and the NH-44 run towards Bangalore. It is the mirror image of the northern belt: a similar rate, the opposite side of the city and different traffic. Occupiers here are moving air cargo, pharmaceutical consignments and southbound freight rather than serving city retail, and the specification reflects that.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Shamshabad, Hyderabad",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1761738795508.webp",
+      "width": 1280,
+      "height": 961
+    },
+    "marketHeading": "Warehouse Space in Shamshabad: Where the Stock Sits",
+    "marketProse": "The stock sits in a ring of villages around the airport rather than in one estate. **Rasheedguda** carries the largest share of it. **Kishanguda** and **Gandiguda** on the far side are closest to the terminal approaches. **Tondupally** and the **Shankarapur** road sit in between. **Maheshwaram**, furthest out on the Bangalore highway side, is where the lower quotes are found.",
+    "marketImage": {
+      "alt": "Map of Shamshabad, Hyderabad, showing where WareOnGo's warehouse listings sit around Rasheedguda, Kishanguda, Gandiguda, Tondupally and Maheshwaram",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/hyderabad/shamshabad.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Shamshabad",
+    "rentsProse": "The airport commands a smaller premium than you might expect. Shamshabad prices close to the northern belt, which for an air cargo location is a narrow margin. Inside the belt, rate tracks distance from the terminal more than building grade: the villages nearest the airport quote higher, and the stretch out towards Maheshwaram and the Bangalore highway is where the lower quotes sit. Build quality is broadly consistent, so position is what you are paying for. The current rent range is shown on this page.",
+    "specHeading": "Typical Specification in Shamshabad",
+    "specProse": "Dock counts here are strong, which is the clearest signal of what this location is used for: high-frequency movement rather than long-dwell storage. Clear heights are broadly consistent across the belt. Ask what flooring is down and whether it will take your equipment before you shortlist. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "inventoryHeading": "Featured Listings in Shamshabad",
+    "faqs": [
+      {
+        "a": "Current asking rents for Shamshabad are shown in the rent section of this page, from our live listings. The villages closest to the airport quote higher, and the Maheshwaram side towards the Bangalore highway is where the lower rates are.",
+        "q": "What is the rent for a warehouse in Shamshabad?"
+      },
+      {
+        "a": "Rasheedguda for the widest choice, since most of the inventory sits there. Kishanguda and Gandiguda if terminal access is the priority. Tondupally and the Shankarapur road in between. Maheshwaram if rent matters more than the run to the airport.",
+        "q": "Which parts of Shamshabad are best for a warehouse?"
+      },
+      {
+        "a": "Shamshabad is mid-size to large space, sized for cargo handling rather than small godowns, so small units generally have to be found closer to the city. The size range and median unit for this page are shown in the specification section of this page.",
+        "q": "What sizes are available in Shamshabad?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use in and around Hyderabad is governed by HMDA, which runs its own change-of-land-use approval. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. For airport-adjacent space handling pharmaceutical or air cargo consignments, fire compliance is worth confirming early.",
+        "q": "Do Shamshabad warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Air cargo, express and high-frequency distribution operators that need to sit near Hyderabad's airport and the Bangalore highway. Shamshabad's buildings are pre-engineered, mostly large and strongly docked, so it suits operations that move goods quickly rather than store them for long, including courier networks and airport-linked logistics.",
+        "q": "Who should consider a warehouse in Shamshabad?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "kolar",
+    "slug": "narsapura",
+    "seoTitle": "Narsapura Warehousing, Bangalore: Rents and Specification",
+    "metaDescription": "Warehousing at Narsapura KIADB Industrial Area on NH-75 near Kolar, built for automotive supply. See live rents and specs from verified listings.",
+    "h1": "Narsapura Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Narsapura is the KIADB industrial area on NH-75 beyond Hoskote, in Kolar district but firmly inside Bangalore's eastern manufacturing orbit. Automotive and heavy engineering plants anchor it, and the warehousing that has followed is built to serve them: tall, large and dock-heavy. This is the furthest point east where Bangalore rates still apply, and the specification on offer is better than the distance suggests.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Narsapura, Kolar",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/bb1fc4fdcea28e061f1a0685405aec7d.webp",
+      "width": 496,
+      "height": 229
+    },
+    "marketHeading": "Warehouse Space in Narsapura: Where the Stock Sits",
+    "marketProse": "The stock sits inside three named estates rather than along a road. **Narsapura Industrial Area**, the main KIADB block, is the core. **Jakkasandra Industrial Area** next to it, where the largest boxes sit, prices slightly higher. **Mindahalli Industrial Area**, its second phase, is the value end. **Jodikrishnapura**, off the Narsapura industrial road, holds the top of the local range. The Malur and Hoskote stretch back towards the city is covered on the Hoskote page.",
+    "marketImage": {
+      "alt": "Map of Narsapura, Kolar, showing where WareOnGo's warehouse listings sit around Narsapura Industrial Area and Jakkasandra and Mindahalli Industrial Areas",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/kolar/narsapura.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Narsapura",
+    "rentsProse": "Narsapura prices a little above Hoskote despite being considerably further from the city, and that premium is a specification premium rather than a location one. This is some of the tallest and largest stock we list in Bangalore, and it prices as such. Both ends of the rent range are single sites, so plan against the working band across the estates. Older independent buildings around Kolar make up the floor.",
+    "specHeading": "Typical Specification in Narsapura",
+    "specProse": "Narsapura combines generous docking, high clear heights and large units, which makes it regional hub space built for automotive supply chains. It is not a market for a small requirement. Clear height is on record for nearly every listing here, so you can shortlist on it before a visit.",
+    "inventoryHeading": "Featured Listings in Narsapura",
+    "faqs": [
+      {
+        "a": "Current asking rents in Narsapura are shown in the rent section of this page, taken from our live listings. Both ends of the range are single sites. The main KIADB block is the core of the market and Mindahalli the value end.",
+        "q": "What is the rent for a warehouse in Narsapura?"
+      },
+      {
+        "a": "Jakkasandra Industrial Area for the largest and best specified boxes. Narsapura Industrial Area for similar product a little cheaper. Mindahalli Industrial Area if rent is the constraint. Move back towards Malur and Hoskote if you need to be closer to the city.",
+        "q": "Which parts of Narsapura are best for a warehouse?"
+      },
+      {
+        "a": "Narsapura is large-format regional hub space; small units exist but are incidental. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Narsapura?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Land use is the other question: confirm whether the plot is converted or allotted for industrial use, which on estate land means the KIADB allotment and elsewhere the conversion order. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. Fire NOC is on record for close to half the listings here, well above the pattern we see nationally.",
+        "q": "Do Narsapura warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Automotive suppliers, manufacturers and regional distribution hubs that need large, tall, well-docked buildings east of Bangalore. Narsapura's estates carry some of the largest and best-specified pre-engineered stock we list, so it suits operations that rack high and run heavy truck volumes, more than a small requirement.",
+        "q": "Who should consider a warehouse in Narsapura?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "kolkata",
+    "slug": "dankuni",
+    "seoTitle": "Dankuni Warehousing, Kolkata: Rents and Specification",
+    "metaDescription": "Warehousing in Dankuni, Hooghly, where the Durgapur Expressway and Old Delhi Road meet, north-west of Kolkata. See live rents and specs from verified listings.",
+    "h1": "Dankuni Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Dankuni, in Hooghly district across the river north-west of Kolkata, is where the city's main freight routes meet. The Durgapur Expressway and the national highway south to Chennai both begin here, Old Delhi Road runs up through it, and it is the planned eastern end of the Eastern Dedicated Freight Corridor. That has made it the warehousing gateway for goods moving between Kolkata and north India, with steel, coal, cement and manufacturing stock lining the roads out of it.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Dankuni, Kolkata",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1757735847308.webp",
+      "width": 1280,
+      "height": 720
+    },
+    "marketHeading": "Warehouse Space in Dankuni: Where the Stock Sits",
+    "marketProse": "The stock follows the roads out of Dankuni. The **Durgapur Expressway** corridor carries large pre-engineered warehouses and industrial parks. **Old Delhi Road**, running north towards **Serampore** and **Konnagar**, holds some of the largest buildings on this page, with **Bhadua** and **Mollaber** along it. **Dankuni** itself, around the town, the railway junction and the coal complex, carries most of the mid-sized units. The Howrah belt on the Mumbai road is covered on the Sankrail, Ranihati and Dhulagori pages.",
+    "marketImage": {
+      "alt": "Map of Dankuni, Kolkata, showing where WareOnGo's warehouse listings sit around Serampore, Konnagar, Bhadua and Dankuni",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/kolkata/dankuni.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Dankuni",
+    "rentsProse": "Dankuni prices in a tight band and sets the level for Kolkata's warehousing belts, a touch above the Howrah side. The buildings are mostly recent pre-engineered stock, so size and road frontage move the rate more than build type, and the largest boxes on Old Delhi Road and the expressway quote close to the smaller units in the town.",
+    "specHeading": "Typical Specification in Dankuni",
+    "specProse": "Specification here is built for trunk distribution: large floorplates, good clear heights and multiple docks. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit. The stock is predominantly pre-engineered and VDF is the floor on most buildings where it is recorded, which suits racking and powered equipment.",
+    "inventoryHeading": "Featured Listings in Dankuni",
+    "faqs": [
+      {
+        "a": "Current asking rents in Dankuni are shown in the rent section of this page, taken from our live listings. Quotes sit in a tight band, a touch above the Howrah belt. Size and road frontage move the rate more than build type.",
+        "q": "What is the rent for a warehouse in Dankuni?"
+      },
+      {
+        "a": "The Durgapur Expressway corridor for large modern warehouses facing north India traffic. Old Delhi Road towards Serampore and Konnagar for the largest buildings. Dankuni town for mid-sized units close to the rail junction.",
+        "q": "Which parts of Dankuni are best for a warehouse?"
+      },
+      {
+        "a": "Dankuni runs from mid-sized units in the town to very large boxes on the highway corridors. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Dankuni?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. In West Bengal, converting the recorded use of the land is handled by the Land and Land Reforms Department through its block and district land offices. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. Fire NOC is on record for most listings here, well above the pattern we see nationally.",
+        "q": "Do Dankuni warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "National and regional distributors that use Kolkata as their eastern hub, on Old Delhi Road and the expressway. Dankuni's buildings are predominantly pre-engineered and mostly large, with good clear heights and generous docking, and Fire NOC is on record for most, so it suits trunk distribution into eastern India and racked storage.",
+        "q": "Who should consider a warehouse in Dankuni?"
+      }
+    ],
+    "relatedBlogs": [
+      "grade-a-warehouse-india"
+    ]
+  },
+  {
+    "citySlug": "kolkata",
+    "slug": "dhulagori",
+    "seoTitle": "Dhulagori Warehousing, Kolkata: Rents and Specification",
+    "metaDescription": "Warehousing in Dhulagori (Dhulagarh), Howrah, by the truck terminal on the Mumbai road, south-west of Kolkata. See live rents and specs from verified listings.",
+    "h1": "Dhulagori Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Dhulagori, also written Dhulagarh, sits on the Mumbai road in Howrah district, south-west of Kolkata, beside the Sankrail food parks. Its truck terminal was the first of a chain the state planned on the city's outskirts to keep freight traffic out of Kolkata, and the area around it has grown into a warehousing, transport and cold-store belt serving traffic towards Kharagpur and Odisha.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Dhulagori, Kolkata",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/scout_5f26deb58ee020ee82efa7757772a5ac.webp",
+      "width": 1280,
+      "height": 568
+    },
+    "marketHeading": "Warehouse Space in Dhulagori: Where the Stock Sits",
+    "marketProse": "**Dhulagarh**, around the truck terminal and the toll plaza on the highway, carries most of the stock. The **Jurjursha Road**, off the highway, holds more of the same mid-sized sheds. **Mallik Bagan**, on the Amta road to the west, adds some modern buildings. Sankrail and Ranihati hold their own pages.",
+    "marketImage": {
+      "alt": "Map of Dhulagori, Kolkata, showing where WareOnGo's warehouse listings sit around Dhulagarh",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/kolkata/dhulagori.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Dhulagori",
+    "rentsProse": "Dhulagori prices in a narrow band with the rest of the Howrah belt, below Dankuni. Most of the stock is recent pre-engineered buildings, so size and highway frontage move the rate. With only a few buildings on the market, read the band as a guide rather than a settled rate.",
+    "specHeading": "Typical Specification in Dhulagori",
+    "specProse": "Units are mid-sized with moderate clear heights and several docks, suited to regional distribution and truck-based transfer rather than high-bay storage. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit. The stock is pre-engineered, so the buildings are broadly similar and the shortlist comes down to size, docks and highway access.",
+    "inventoryHeading": "Featured Listings in Dhulagori",
+    "faqs": [
+      {
+        "a": "Current asking rents in Dhulagori are shown in the rent section of this page, taken from our live listings. Quotes sit in a narrow band with the rest of the Howrah belt. Size and highway frontage move the rate.",
+        "q": "What is the rent for a warehouse in Dhulagori?"
+      },
+      {
+        "a": "Dhulagarh for highway frontage by the truck terminal. The Jurjursha Road for sheds just off the highway. Mallik Bagan on the Amta road if you can sit a little further west.",
+        "q": "Which parts of Dhulagori are best for a warehouse?"
+      },
+      {
+        "a": "Dhulagori is a mid-size market; for very large boxes, Dankuni holds more of them. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Dhulagori?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. In West Bengal, converting the recorded use of the land is handled by the Land and Land Reforms Department through its block and district land offices. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Dhulagori warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Regional distributors and truck-based transfer operations on the Howrah side of Kolkata. Dhulagori's units are mid-size and pre-engineered, with several docks and moderate clear heights, so it suits cross-docking, regional distribution and storage that does not need high-bay racking.",
+        "q": "Who should consider a warehouse in Dhulagori?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "kolkata",
+    "slug": "ranihati",
+    "seoTitle": "Ranihati Warehousing, Kolkata: Rents and Specification",
+    "metaDescription": "Warehousing in Ranihati, Howrah, on the Amta road where it leaves the Mumbai road, west of Kolkata. See live rents and specs from verified listings.",
+    "h1": "Ranihati Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Ranihati is a village in Panchla block, Howrah district, where the Amta road leaves the Mumbai road west of Kolkata. The Amta road has grown into a warehousing street of its own, with fulfilment centres and warehouse complexes around Mallik Bagan, and the state-backed Foundry Park sits further along it.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Ranihati, Kolkata",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/scout_e30c3c8e67a1817c771bafbcaa79ff92.webp",
+      "width": 961,
+      "height": 1280
+    },
+    "marketHeading": "Warehouse Space in Ranihati: Where the Stock Sits",
+    "marketProse": "The stock sits along the **Amta Road** rather than on the highway. **Ranihati** itself, at the junction with the Mumbai road, carries buildings with direct highway access. **Mallik Bagan**, just north-west of it, is where most of the warehouse complexes are. **Islampur**, further along the Amta road, adds more modern sheds. Dhulagori and Sankrail, back towards the city, hold their own pages.",
+    "marketImage": {
+      "alt": "Map of Ranihati, Kolkata, showing where WareOnGo's warehouse listings sit around Ranihati",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/kolkata/ranihati.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Ranihati",
+    "rentsProse": "Ranihati prices in a narrow band, among the lower rents on Kolkata's belts, because it sits a little further from the city than Dankuni. The buildings are recent pre-engineered stock, so size and road frontage move the rate more than build type. With only a handful of buildings listed, read the band as a guide and confirm the quote on the specific unit.",
+    "specHeading": "Typical Specification in Ranihati",
+    "specProse": "Mid-sized pre-engineered buildings with good clear heights and docks make this a distribution specification on a smaller scale than Dankuni. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit. The stock is pre-engineered throughout the listed buildings, so the shortlist comes down to size, docks and road frontage.",
+    "inventoryHeading": "Featured Listings in Ranihati",
+    "faqs": [
+      {
+        "a": "Current asking rents in Ranihati are shown in the rent section of this page, taken from our live listings. Quotes sit in a narrow band among the lower rents on Kolkata's belts. Size and road frontage move the rate.",
+        "q": "What is the rent for a warehouse in Ranihati?"
+      },
+      {
+        "a": "Ranihati junction for direct access to the Mumbai road. Mallik Bagan for the widest choice of warehouse complexes. Islampur for newer sheds further along the Amta road.",
+        "q": "Which parts of Ranihati are best for a warehouse?"
+      },
+      {
+        "a": "Ranihati is a mid-size market; for very large boxes, Dankuni holds more of them. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Ranihati?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. In West Bengal, converting the recorded use of the land is handled by the Land and Land Reforms Department through its block and district land offices. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. Fire NOC is on record for most listings here, well above the pattern we see nationally.",
+        "q": "Do Ranihati warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Distributors that want mid-size, modern buildings on the Howrah side at one of the lower rents on Kolkata's belts. Ranihati's buildings are mid-size to large and pre-engineered, with good clear heights and docks, so it suits regional distribution on a smaller scale than Dankuni, for occupiers comfortable a little further from the city.",
+        "q": "Who should consider a warehouse in Ranihati?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "kolkata",
+    "slug": "sankrail",
+    "seoTitle": "Sankrail Warehousing, Kolkata: Rents and Specification",
+    "metaDescription": "Warehousing in Sankrail, Howrah, on the Mumbai road beside the state's food parks, south-west of Kolkata. See live rents and specs from verified listings.",
+    "h1": "Sankrail Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Sankrail, in Howrah district south-west of the city, is one of Kolkata's main industrial and warehousing belts on the Mumbai road. The state's industrial development corporation has built a cluster of parks here, including the Sudha Ras and Kandua food parks and a polymer park, and the warehousing around them serves food processing, consumer goods and the traffic heading west towards Odisha and Mumbai.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Sankrail, Kolkata",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/00cc7a21bb618f5d8bdcc86fce0e72a1.webp",
+      "width": 1280,
+      "height": 562
+    },
+    "marketHeading": "Warehouse Space in Sankrail: Where the Stock Sits",
+    "marketProse": "The stock sits along the Mumbai road and the roads off it rather than inside the parks. **Dhulagarh**, around the truck terminal on the highway, carries much of it. **Ankurhati**, where the Makardaha road meets the highway in Domjur block, and **Domjur** beyond it hold more mid-sized sheds. The food parks at **Kandua** anchor the belt. Dhulagori and Ranihati hold their own pages.",
+    "marketImage": {
+      "alt": "Map of Sankrail, Kolkata, showing where WareOnGo's warehouse listings sit around Dhulagarh, Domjur and Kandua",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/kolkata/sankrail.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Sankrail",
+    "rentsProse": "Sankrail prices below Dankuni and in line with the rest of the Howrah belt. Pre-engineered buildings near the highway set the top of a narrow band, and older sheds off it quote less. With a short list of buildings, treat the band as a guide and ask for current quotes on specific units.",
+    "specHeading": "Typical Specification in Sankrail",
+    "specProse": "Units are mid-sized, suited to regional distribution and storage for the food and consumer goods trade. Docking is typical of a distribution belt, and clear heights are moderate, so confirm them per building if you plan to rack high. The stock is mostly pre-engineered, with a share of sheds, and VDF is the floor where flooring is recorded.",
+    "inventoryHeading": "Featured Listings in Sankrail",
+    "faqs": [
+      {
+        "a": "Current asking rents in Sankrail are shown in the rent section of this page, taken from our live listings. Pre-engineered buildings near the highway set the top of a narrow band, and older sheds off it quote less.",
+        "q": "What is the rent for a warehouse in Sankrail?"
+      },
+      {
+        "a": "Dhulagarh for highway frontage near the truck terminal. Ankurhati and Domjur for more mid-sized sheds off the highway. The food parks at Kandua if you need to sit next to processing units.",
+        "q": "Which parts of Sankrail are best for a warehouse?"
+      },
+      {
+        "a": "Sankrail is a mid-size market; very large boxes are more common at Dankuni. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Sankrail?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. In West Bengal, converting the recorded use of the land is handled by the Land and Land Reforms Department through its block and district land offices. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Sankrail warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Regional distributors and food and consumer goods traders serving Kolkata from the Howrah side. Sankrail's units are mid-size and mostly pre-engineered, with distribution-style docking and moderate clear heights, so it suits regional storage and distribution at a rate below Dankuni, for occupiers who confirm the height on each building.",
+        "q": "Who should consider a warehouse in Sankrail?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "lucknow",
+    "slug": "transport-nagar",
+    "seoTitle": "Transport Nagar Warehousing, Lucknow",
+    "metaDescription": "Warehousing in Transport Nagar on Kanpur Road, south Lucknow, the city's goods-transport district. See live rents and specs from verified listings.",
+    "h1": "Transport Nagar Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Transport Nagar is Lucknow's goods-transport district, on Kanpur Road in the south of the city near Amausi airport. It is where the city's transporters and truck operators concentrate, and it has its own station on the Red Line metro. Warehousing here is in-city space for trade storage and onward dispatch rather than a distribution belt.",
+    "marketHeading": "Warehouse Space in Transport Nagar: Where the Stock Sits",
+    "marketProse": "The stock is small RCC space in and around the transport district. **Transport Nagar** itself, around the transporters' offices on Kanpur Road, carries most of it. **Hind Nagar** Colony beside it adds more godown space. **Ashiyana**, towards Bangla Bazaar, holds a few more units.",
+    "marketImage": {
+      "alt": "Map of Transport Nagar, Lucknow, showing where WareOnGo's warehouse listings sit around Transport Nagar, Hind Nagar and Ashiyana",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/lucknow/transport-nagar.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Transport Nagar",
+    "rentsProse": "Rents here are in-city rates for small RCC space, and most quotes sit in a narrow band, with a few small units above it. What you pay for is position next to the transporters and Kanpur Road rather than specification. With only a few listings, treat the range as a guide and confirm the quote for the specific unit.",
+    "specHeading": "Typical Specification in Transport Nagar",
+    "specProse": "Units are small RCC godowns with low clear heights and little docking, suited to trade storage, parcel handling and dispatch by smaller vehicles. Clear height is on record for nearly every listing here, so you can shortlist on it before a visit. The buildings are RCC with RCC floors, which take heavy loads at ground level but do not suit tall racking.",
+    "inventoryHeading": "Featured Listings in Transport Nagar",
+    "faqs": [
+      {
+        "a": "Current asking rents in Transport Nagar are shown in the rent section of this page, taken from our live listings. Most quotes sit in a narrow band for small RCC space, with a few small units above it.",
+        "q": "What is the rent for a warehouse in Transport Nagar?"
+      },
+      {
+        "a": "Transport Nagar itself if you need to sit among the transporters on Kanpur Road. Hind Nagar beside it for more godown space. Ashiyana if a location towards Bangla Bazaar suits your customers.",
+        "q": "Which parts of Transport Nagar are best for a warehouse?"
+      },
+      {
+        "a": "Transport Nagar is a small-unit market suited to godown storage rather than a distribution centre. The Lucknow city page covers the wider market if you need larger modern space. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Transport Nagar?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Confirm the permitted use with the development authority that covers the plot. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Transport Nagar warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Traders, parcel and transport operators that need to sit next to Lucknow's transporters on the Kanpur Road side. Transport Nagar's units are small RCC godowns with low clear heights and limited docking, so it suits trade storage, parcel handling and despatch by smaller vehicles rather than racked distribution or trailer operations.",
+        "q": "Who should consider a warehouse in Transport Nagar?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "pune",
+    "slug": "chakan",
+    "seoTitle": "Chakan Warehousing, Pune: Rents and Specification",
+    "metaDescription": "Warehousing in Chakan MIDC on the Pune Nashik highway, inside the auto cluster. See live rents, sizes and specifications from verified listings.",
+    "h1": "Chakan Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Chakan is Pune's automotive belt, laid out as an MIDC estate in phases on the Pune to Nashik highway north of the city. Vehicle assembly and component manufacturing built it and still drive it, so the warehousing here is largely ancillary: inbound parts stores, finished goods holding and contract logistics space taken by suppliers who need to be inside the cluster rather than near it.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Chakan, Pune",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1765004953234.webp",
+      "width": 1280,
+      "height": 720
+    },
+    "marketHeading": "Warehouse Space in Chakan: Where the Stock Sits",
+    "marketProse": "The belt spreads across the villages the MIDC phases were built over. **Bhamboli** and **Nighoje**, on the newer side of the estate, are the top of the local market. **Mahalunge**, near the HK chowk, also quotes high and holds one of the larger buildings. **Vasuli** and **Chimbli Phata**, the junction the belt is organised around, carry the middle of the market. **Kharabwadi** in Khed taluka is the older end. Lonikand, towards Wagholi, is a different belt and is covered on the Wagholi page.",
+    "marketImage": {
+      "alt": "Map of Chakan, Pune, showing where WareOnGo's warehouse listings sit around Bhamboli, Mahalunge, Vasuli, Chimbli Phata and Kharabwadi",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/pune/chakan.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Chakan",
+    "rentsProse": "Rate in Chakan tracks age and build type more than location. The newer pre-engineered space around Nighoje and Bhamboli sits at the top of the range, while older sheds make up the middle. Chakan is the dearest of the three Pune belts we cover, though only narrowly ahead of Kuruli and Wagholi.",
+    "specHeading": "Typical Specification in Chakan",
+    "specProse": "Clear height is the thing to watch. It varies widely across the belt, and that spread is the difference between an old shed and a modern building; nothing about the address predicts which one you are being shown. Units are mostly small, so this is a small-unit market despite the size of the industrial cluster around it. Clear height and docks are on record for most listings here, so you can compare buildings before a visit.",
+    "inventoryHeading": "Featured Listings in Chakan",
+    "faqs": [
+      {
+        "a": "Current asking rents in Chakan are shown in the rent section of this page, taken from our live listings. Newer pre-engineered space around Nighoje and Bhamboli sits at the top of the range, and older sheds through the middle of the belt quote less.",
+        "q": "What is the rent for a warehouse in Chakan?"
+      },
+      {
+        "a": "Bhamboli and Nighoje for the newer buildings. Vasuli and Chimbli Phata for the widest choice, since the junction carries much of the inventory. Kharabwadi if an older building at a lower rate suits your use.",
+        "q": "Which parts of Chakan are best for a warehouse?"
+      },
+      {
+        "a": "Chakan is a small-unit market with only a few large buildings. For a large single box in Pune, this is not the belt. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Chakan?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Inside an MIDC estate, check the allotment and the approved use; outside it, check the permitted use with the local planning authority. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. Fire compliance is worth confirming even inside the estate, and check that the certificate covers your intended use.",
+        "q": "Do Chakan warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Suppliers and service operations that need to be close to Chakan's automotive and engineering factories. Chakan's units are mostly small to mid-size, and the stock ranges from older sheds to newer pre-engineered buildings around Nighoje and Bhamboli, so it suits component storage, kitting and supplier warehousing better than a single large distribution box.",
+        "q": "Who should consider a warehouse in Chakan?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "pune",
+    "slug": "kuruli",
+    "seoTitle": "Kuruli Warehousing, Pune: Rents and Specification",
+    "metaDescription": "Warehousing at Kuruli, the northern edge of the Chakan belt on the Pune Nashik highway. See live rents, unit sizes and specs from verified listings.",
+    "h1": "Kuruli Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Kuruli is a village on the Pune to Nashik highway inside the Chakan industrial belt, north of the main MIDC phases. It is where the estate runs out and agricultural land begins, which is why the buildings here are newer and the plots larger than they are closer in. Occupiers take it when they want to be in the Chakan cluster without paying for a position inside it.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Kuruli, Pune",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/scout_57a89ec399f5e03dfa70997c06acf9f7.webp",
+      "width": 1280,
+      "height": 720
+    },
+    "marketHeading": "Warehouse Space in Kuruli: Where the Stock Sits",
+    "marketProse": "This is the northern edge of the Chakan belt rather than a market of its own, and the stock reads that way. **Kuruli** village itself is the top of the local market, apart from a unit at the **Pimpri-Chinchwad** end that quotes city rates. **Chimbli Phata**, the junction back towards the MIDC phases, sits in the middle. The Chakan page covers the main estate, and many listings appear on both.",
+    "marketImage": {
+      "alt": "Map of Kuruli, Pune, showing where WareOnGo's warehouse listings sit around Pimpri-Chinchwad and Chimbli Phata",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/pune/kuruli.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Kuruli",
+    "rentsProse": "With this little stock, read Kuruli's rent range as a guide rather than a market rate. It prices a little under Chakan proper and close to Wagholi on the other side of the city. The useful observation is that the floor here tends to sit higher than in Chakan or Wagholi, because there is little old shed space in this pocket to drag it down. The stock is predominantly pre-engineered.",
+    "specHeading": "Typical Specification in Kuruli",
+    "specProse": "Clear heights and docking put this pocket at the light end of the Chakan belt. Units are mostly small, so this works for a supplier holding parts rather than for a distribution operation. Check clear height per building, because the range is wide. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "inventoryHeading": "Featured Listings in Kuruli",
+    "faqs": [
+      {
+        "a": "Current asking rents in Kuruli are shown in the rent section of this page, taken from our live listings. Kuruli village itself is the top of the local market and Chimbli Phata back towards the MIDC phases sits in the middle.",
+        "q": "What is the rent for a warehouse in Kuruli?"
+      },
+      {
+        "a": "Kuruli village for the newer buildings on larger plots. Chimbli Phata if you want to be nearer the MIDC phases. Look at the Chakan page as well, since the two markets overlap and many buildings appear on both.",
+        "q": "Which parts of Kuruli are best for a warehouse?"
+      },
+      {
+        "a": "Kuruli is mostly small units. For a larger requirement in the Chakan belt, the main MIDC phases hold more. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Kuruli?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Inside an MIDC estate, check the allotment and the approved use; outside it, check the permitted use with the local planning authority. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign.",
+        "q": "Do Kuruli warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Suppliers holding parts for the Chakan factories that want a newer building in a smaller pocket. Kuruli's units are mostly small to mid-size and predominantly pre-engineered, with lighter docking, so it suits supplier stores and small manufacturing support rather than distribution operations moving large volumes.",
+        "q": "Who should consider a warehouse in Kuruli?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
+  },
+  {
+    "citySlug": "pune",
+    "slug": "wagholi",
+    "seoTitle": "Wagholi Warehousing, Pune: Rents and Specification",
+    "metaDescription": "Warehousing in Wagholi and Lonikand on Nagar Road, Pune's eastern godown belt. See live rents, sizes and specs from verified listings.",
+    "h1": "Wagholi Warehousing: Rents, Unit Sizes and Specification",
+    "heroProse": "Wagholi is on Nagar Road, the eastern exit from Pune towards Ahmednagar, and it is the city's traditional godown belt. This is not planned industrial land: it is shed space put up on the highway frontage over decades and let to distributors serving eastern Pune. What it offers is a short run into the city, at a rate that reflects the age of the buildings.",
+    "heroImage": {
+      "alt": "Warehouse exterior in Wagholi, Pune",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1774242930309.webp",
+      "width": 1280,
+      "height": 960
+    },
+    "marketHeading": "Warehouse Space in Wagholi: Where the Stock Sits",
+    "marketProse": "Two pockets carry almost all of it. **Wagholi** itself, along the Nagar Road frontage, and **Lonikand**, a few kilometres further out, price close to each other. **Kesan village** on the Jogeshwari Road, in Haveli taluka, is the top of the local market. The rate barely moves between them, so the choice is between individual buildings rather than between areas. Most of the buildings across both pockets are sheds rather than pre-engineered structures.",
+    "marketImage": {
+      "alt": "Map of Wagholi, Pune, showing where WareOnGo's warehouse listings sit around Wagholi and Lonikand",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/pune/wagholi.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Rent in Wagholi",
+    "rentsProse": "Wagholi prices a little under Chakan and close to Kuruli, which is a narrow gap given how different the buildings are. That difference is the point. Most of the stock here is shed rather than pre-engineered, and clear heights are modest. You are paying a Chakan-adjacent rate for older stock, and what you get in return is the drive time into eastern Pune. Compare on building condition and height, not on the headline rate.",
+    "specHeading": "Typical Specification in Wagholi",
+    "specProse": "Modest clear height is the defining constraint here. It limits racking to a few levels and rules out anything taller, which is the trade for the location. Units are mostly small to mid-size. Ask what flooring is down, and budget for the floor if you are bringing in powered equipment. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "inventoryHeading": "Featured Listings in Wagholi",
+    "faqs": [
+      {
+        "a": "Current asking rents in Wagholi are shown in the rent section of this page, taken from our live listings. Wagholi and Lonikand quote close to each other and Kesan village on the Jogeshwari Road is the top of the local market. Most of what you are being quoted is shed space.",
+        "q": "What is the rent for a warehouse in Wagholi?"
+      },
+      {
+        "a": "The Wagholi frontage on Nagar Road for the shortest run into the city. Lonikand at a similar rate if you want to be further from the traffic. Kesan village for the better buildings. For modern pre-engineered space, Chakan is the alternative at a little more.",
+        "q": "Which parts of Wagholi are best for a warehouse?"
+      },
+      {
+        "a": "Wagholi is mostly small to mid-size space, with the occasional larger building. The size range and median unit for this page are shown in the specification section, updated from our live listings.",
+        "q": "What sizes are available in Wagholi?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts in the inventory section of this page are the approvals owners have recorded on our listings. Inside an MIDC estate, check the allotment and the approved use; outside it, check the permitted use with the local planning authority. Ask to see the Fire NOC and the land-use approval for the specific building, and get both in writing before you sign. On highway frontage land outside an industrial estate, the permitted use is especially worth confirming. Fire NOC is on record for close to half the listings here, well above the pattern we see nationally.",
+        "q": "Do Wagholi warehouses have Fire NOC and CLU?"
+      },
+      {
+        "a": "Occupiers that value a short drive into eastern Pune over building specification. Wagholi's units are small to mid-size and mostly sheds with modest clear heights, so it suits city distribution, trade storage and operations that store goods at floor level or on low racking rather than in tall racked systems.",
+        "q": "Who should consider a warehouse in Wagholi?"
+      }
+    ],
+    "relatedBlogs": [
+      "carpet-area-vs-built-up-area-warehouse"
+    ]
   }
 ];

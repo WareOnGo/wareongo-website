@@ -7,9 +7,9 @@ export const navigationGuide: NavigationGuide | null = {
   "parentLabel": "Hyderabad",
   "href": "/overview/telangana/hyderabad/kompally",
   "image": {
-    "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/blogs/whatsapp-image-2026-05-21-at-11-22-30-1e79b9a8d025fb1f.webp",
-    "alt": "Warehouse in Kompally, Hyderabad",
-    "width": 1600,
-    "height": 1200
+    "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/4e67cf5027a12996a80d9dbb2eb28f17.webp",
+    "alt": "Warehouse exterior in Kompally, Hyderabad",
+    "width": 1280,
+    "height": 960
   }
 };

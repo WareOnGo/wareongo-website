@@ -2,6 +2,8 @@ import { useLoaderData, Navigate, Link } from 'react-router-dom';
 import PageHead from '@/components/PageHead';
 import Breadcrumbs, { type BreadcrumbItem } from '@/components/Breadcrumbs';
 import FAQAccordion from '@/components/FAQAccordion';
+import EditorialLocationContent from '@/components/EditorialLocationContent';
+import { editorialFaqLd, serializeEditorialLd } from '@/lib/editorialSeo';
 import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
 import { CITY_HUBS } from '@/data/cityHubs';
 import { STATE_HUBS } from '@/data/stateHubs';
@@ -122,9 +124,15 @@ export default function LocationListings() {
     },
   });
 
+  const faqs = data.overview?.content.faqs ?? data.overviewFaqs;
+
   return <ListingsView key={path} initialData={data} preset={data.filters}
     listId={`location:${type}:${slug}:${warehouseType || 'all'}`}
-    content={data.overviewFaqs?.length ? (
+    content={data.overview ? (
+      <section id="listing-overview" aria-labelledby="listing-overview-title" className="mt-16 sm:mt-20 border-t border-ui-line pt-10 sm:pt-12 scroll-mt-24">
+        <EditorialLocationContent data={data.overview} embedded />
+      </section>
+    ) : data.overviewFaqs?.length ? (
       <section aria-labelledby="listing-faq-title" className="mt-16 sm:mt-20 border-t border-ui-line pt-10 sm:pt-12">
         <div className="max-w-4xl mx-auto">
           <p className="ui-eyebrow text-wareongo-slate mb-3">About warehousing in {titlePlace}</p>
@@ -135,7 +143,8 @@ export default function LocationListings() {
       </section>
     ) : undefined}
     head={results => <PageHead title={seoTitle} description={seoDescription} path={path}>
-      <script type="application/ld+json">{JSON.stringify(collectionLd(results))}</script>
+      <script type="application/ld+json">{serializeEditorialLd(collectionLd(results))}</script>
+      {faqs && faqs.length > 0 && <script type="application/ld+json">{serializeEditorialLd(editorialFaqLd(faqs))}</script>}
     </PageHead>}
     header={<>
           <Breadcrumbs
@@ -184,7 +193,11 @@ export default function LocationListings() {
               )}
             </p>
 
-            {data.overviewPath && (
+            {data.overview ? (
+              <a href="#listing-overview" className="mt-4 inline-block text-sm text-wareongo-blue hover:underline">
+                Read about warehousing in {canonical} ↓
+              </a>
+            ) : data.overviewPath && (
               <Link to={data.overviewPath} className="mt-4 inline-block text-sm text-wareongo-blue hover:underline">
                 Read the {canonical} overview →
               </Link>

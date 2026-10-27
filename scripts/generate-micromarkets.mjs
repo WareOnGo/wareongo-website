@@ -26,7 +26,7 @@ async function main() {
 // (CMS-managed). Types live in ./micromarkets.ts, which re-exports this data.
 //
 // Only these published records produce /overview pages. Existing micromarket
-// listing URLs always render their plain grid independently of this content.
+// listing URLs render their own grid, followed by this content when published.
 import type { MicromarketContent } from './micromarkets';
 
 export const micromarkets: MicromarketContent[] = ${JSON.stringify(pages, null, 2)};

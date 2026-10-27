@@ -6,4 +6,3338 @@
 // city/state overview is emitted only after an editor publishes content for it.
 import type { LocationPageContent } from './locationPages';
 
-export const locationPages: LocationPageContent[] = [];
+export const locationPages: LocationPageContent[] = [
+  {
+    "kind": "CITY",
+    "slug": "ahmedabad",
+    "seoTitle": "Ahmedabad Warehousing: Corridors, Costs, Specification",
+    "metaDescription": "Where warehouse stock sits in Ahmedabad and what it costs by size. The Aslali, Changodar, Sanand and Kheda belts compared, plus GIDC and NA rules.",
+    "h1": "Ahmedabad Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Ahmedabad is one of the most affordable major warehousing markets in India, and the reason is competition between belts rather than weak demand. Several distinct corridors ring the city, all pricing close to one another. That makes road direction and build type the real decision here. This page sets out what each belt carries.",
+    "heroImage": {
+      "alt": "Aerial view of Ahmedabad along the Sabarmati River",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/ahmedabad.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Ahmedabad",
+    "marketProse": "Ahmedabad sits at the junction of NH-48 running to Mumbai and the arm running west to **Sanand** and the Kutch ports. Warehousing developed on both: south on NH-48 through **Aslali** and **Narol**, west through **Sarkhej**, **Changodar** and Sanand, and on the eastern road towards **Kheda** and Nadiad as well. Because industrial land around Ahmedabad is plentiful and GIDC estates are numerous, no single belt has ever been able to corner supply. The result is a mid-format market with an unusually even distribution and very little of the small-unit premium that distorts other cities. Occupiers here are staging goods for the Gujarat corridor, serving the Sanand manufacturing cluster or feeding the ports.",
+    "marketImage": {
+      "alt": "Map of Ahmedabad marking its warehousing micromarkets: Sanand, Aslali, Narol, Sarkhej, Changodar, Kheda and Pirana",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/ahmedabad.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Ahmedabad",
+    "rentsProse": "Ahmedabad has one of the flattest cost curves in the country. Little separates the cheapest size band from the dearest, and unusually the smallest units carry almost no premium. Most of the market sits in the mid-size range, and large-format inventory is genuinely scarce, so an occupier with a very large requirement should expect a short shortlist and consider build-to-suit. Between belts, the ring-road pockets closest to the city command the clearest premium.",
+    "specHeading": "Typical Specification in Ahmedabad",
+    "specProse": "Clear heights here are good even on smaller units, which is unusual for small stock, and grade-A flooring is common on the large units. The stock mixes pre-engineered buildings with sheds and some RCC, so docking and height vary; confirm both on each shortlisted building.",
+    "corridorHeading": "Where Warehouse Stock Sits in Ahmedabad",
+    "corridorProse": "Kheda and Nadiad is the belt most often overlooked: much larger units than Aslali's, at a similar or lower rate, on the eastern road, in exchange for more distance from the city and the Mumbai highway. Aslali and Narol give the widest choice on the Mumbai road. Changodar and Sanand carry some of the newest, predominantly pre-engineered stock close to the manufacturing cluster. Sarkhej and Sanathal on the ring road trade a premium for a short run into the city.",
+    "complianceHeading": "Compliance and Approvals in Ahmedabad",
+    "complianceProse": "The distinction that matters in Ahmedabad is GIDC against private land. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Inside a GIDC estate the plot is held on a long lease from the corporation, and transferring that lease to a new occupier needs GIDC's transfer NOC and fee, which is the step that most often delays a deal. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. On private land, particularly across the Changodar, Bavla and Sanand belt, confirm the land's non-agricultural (NA) status and that it is in the current owner's name. Fire safety is governed by the Gujarat Fire Prevention and Life Safety Measures Act, 2013, so ask for the fire NOC from the local chief fire officer. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Aslali and Narol for depth of choice and the Mumbai road. Changodar and Sanand for newer pre-engineered stock close to the manufacturing cluster. Kheda and Nadiad for larger units at lower rates, if the extra distance works. The rate gap between them is small, so decide on road direction and build type.",
+        "q": "Which is the best area for a warehouse in Ahmedabad?"
+      },
+      {
+        "a": "Abundant industrial land, several competing belts around one city, and a stock mix that includes shed and RCC space alongside purpose-built pre-engineered buildings. On a like-for-like comparison of new large pre-engineered stock the gap narrows, but the headline medians are genuinely lower.",
+        "q": "Why is warehousing in Ahmedabad cheaper than in Pune or Bangalore?"
+      },
+      {
+        "a": "GIDC land gives an allotment with defined terms, at the cost of a slower transfer that needs the corporation's NOC. Private land can transact faster but depends on its NA status and building permission being in order. For a short lease, the practical answer is usually a GIDC unit or a private plot whose NA status is in the current owner's name.",
+        "q": "Is it better to take a GIDC plot or private land in Ahmedabad?"
+      },
+      {
+        "a": "Ahmedabad's stock is mostly pre-engineered, with conventional sheds and some RCC making up the rest. Clear heights are good even on smaller units, which is unusual, and grade-A flooring is common on the large ones. Because the stock mixes build types, docking varies, so confirm both height and docks on each shortlisted Ahmedabad building.",
+        "q": "What clear height and build type are typical in Ahmedabad?"
+      },
+      {
+        "a": "The western arm through Sarkhej, Changodar and Sanand, which runs towards the Kutch ports and carries some of Ahmedabad's newest pre-engineered stock. It also serves the Sanand manufacturing cluster. For freight heading to Mumbai and the south, Aslali and Narol on NH-48 are the better fit.",
+        "q": "Which Ahmedabad belt suits freight heading to the Kutch ports?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "aurangabad",
+    "seoTitle": "Aurangabad, or Chhatrapati Sambhajinagar, Warehousing: Corridors, Costs",
+    "metaDescription": "Where warehouse stock sits around Aurangabad, or Chhatrapati Sambhajinagar, and what it costs. Waluj, Shendra and AURIC compared, plus Maharashtra land rules.",
+    "h1": "Aurangabad, or Chhatrapati Sambhajinagar, Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Aurangabad, or Chhatrapati Sambhajinagar, is Marathwada's industrial centre, and its warehousing sits around the MIDC estates that serve its automotive and manufacturing industries. The stock we list is entirely pre-engineered, from small units to large boxes. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Bibi Ka Maqbara in Aurangabad under a blue sky",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/aurangabad.webp",
+      "width": 1328,
+      "height": 1300
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Aurangabad",
+    "marketProse": "Aurangabad's warehousing follows its industry, which is built around automotive and engineering plants in two large MIDC estates. **Waluj** MIDC, on the Pune and Ahmednagar road west of the city, is the older and larger hub, with **Patoda** and **Dahegaon Bangla** beyond it. **Shendra** MIDC, on the Jalna road east of the city, holds newer plants, and next to it **AURIC**, the industrial city on the Delhi to Mumbai Industrial Corridor, is being built out towards **Bidkin**. Demand is industrial supply plus distribution for the Marathwada region.",
+    "marketImage": {
+      "alt": "Map of Aurangabad marking its warehousing micromarkets: Waluj, Patoda, Dahegaon Bangla, Shendra, AURIC and Bidkin",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/aurangabad.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Aurangabad",
+    "rentsProse": "Aurangabad's stock is uniformly pre-engineered, so quotes separate on size, height, docks and whether a unit sits inside an MIDC estate. Compare like with like, and read the size, height and docks alongside each rate.",
+    "specHeading": "Typical Specification in Aurangabad",
+    "specProse": "Every listing is pre-engineered, with heights suited to racking on most units and several docks on the larger ones. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Aurangabad",
+    "corridorProse": "Waluj and the belt beyond it towards Patoda and Dahegaon Bangla are the place to start, with the widest choice and some large units. Shendra suits occupiers serving the newer plants and the Jalna side. AURIC is worth a look for build-to-suit and long-term requirements.",
+    "complianceHeading": "Compliance and Approvals in Aurangabad",
+    "complianceProse": "The split that matters in Aurangabad is MIDC against private land. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Inside Waluj, Shendra or AURIC, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Outside the estates: Since the Maharashtra Land Revenue Code amendment notified in December 2025, a separate non-agricultural permission from the Collector is no longer needed where the use is permissible under the development or regional plan; the planning authority collects a one-time conversion premium instead. Fire approval runs under the Maharashtra Fire Prevention and Life Safety Measures Act, 2006, with a provisional approval at the building-permission stage and a final NOC before occupation. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Waluj MIDC and the belt beyond it towards Patoda and Dahegaon Bangla for the widest choice and some large units, on the Pune road west of Aurangabad. Shendra MIDC on the Jalna road for the newer plants. AURIC for build-to-suit and long-term requirements.",
+        "q": "Which is the best area for a warehouse in Aurangabad?"
+      },
+      {
+        "a": "Yes. Chhatrapati Sambhajinagar is the city's official name since its renaming; Aurangabad is the earlier name and is still widely used, including in addresses and searches. Both refer to the same warehouse market in Marathwada.",
+        "q": "Is Aurangabad the same as Chhatrapati Sambhajinagar?"
+      },
+      {
+        "a": "Automotive and engineering industry in the Waluj and Shendra MIDC estates, and the suppliers that serve those plants, plus distribution for the Marathwada region. AURIC, the industrial city on the Delhi to Mumbai Industrial Corridor, adds new demand as it is built out.",
+        "q": "What drives warehouse demand in Aurangabad?"
+      },
+      {
+        "a": "Pre-engineered buildings throughout, with heights suited to racking and several docks on the larger units. Clear height and docks are on record for nearly every Aurangabad listing, so you can shortlist on specification before a visit.",
+        "q": "What build type is typical in Aurangabad?"
+      },
+      {
+        "a": "AURIC, the Aurangabad Industrial City, is a planned industrial township on the Delhi to Mumbai Industrial Corridor, next to Shendra MIDC and extending towards Bidkin. It offers serviced industrial plots, which makes it a candidate for build-to-suit warehousing.",
+        "q": "What is AURIC in Aurangabad?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "ballari",
+    "seoTitle": "Ballari / Bellary / Bellari / Ballary Warehousing: Corridors, Costs, Specification",
+    "metaDescription": "Where warehouse stock sits in Ballari, or Bellary, and what it costs by size. Mundargi Industrial Area and the city's trade roads compared.",
+    "h1": "Ballari / Bellary / Bellari / Ballary Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Ballari, also written Bellary, Bellari or Ballary, is a mining, steel and cotton trading city in eastern Karnataka, and its warehousing serves that trade from the city's industrial area and older roads. The stock we list is mostly conventional sheds, with some pre-engineered space. This page sets out where the stock sits and what to check.",
+    "marketHeading": "Why Warehousing Works the Way It Does in Ballari",
+    "marketProse": "Ballari's warehousing follows its industries: iron ore and steel to the west, and cotton and agricultural trade in the city. The main organised stock is in the **Mundargi Industrial Area**, a KIADB estate developed in phases on the city's south side. Older sheds sit along **Bangalore Road** near **Cowl Bazaar** and on the **Kanekal Road** and **Andral Road** side, often in former mill and trading compounds. Demand is local trade, mining and steel supply rather than long-haul distribution.",
+    "marketImage": {
+      "alt": "Map of Ballari marking its warehousing micromarkets: Mundargi Industrial Area and Bangalore Road / Cowl Bazaar / Kanekal Road / Andral Road",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/ballari.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Ballari",
+    "rentsProse": "Quotes here follow the building more than the address. A pre-engineered unit in Mundargi and a conventional shed in an older compound are different products, so compare like building types, and read the size, height and loading alongside each rate.",
+    "specHeading": "Typical Specification in Ballari",
+    "specProse": "Most of the stock we list is conventional sheds, so clear heights are often modest and loading is usually ground-level. The pre-engineered units in Mundargi's newer phase are taller. Verify height and floor on site for any racked layout or truck-loaded operation.",
+    "corridorHeading": "Where Warehouse Stock Sits in Ballari",
+    "corridorProse": "Mundargi Industrial Area is the place to start for organised industrial-estate stock, including its newer second phase. Bangalore Road and the Cowl Bazaar side suit trade storage close to the city's markets. The Kanekal and Andral Road compounds offer conventional sheds, often in older buildings, so inspect them carefully.",
+    "complianceHeading": "Compliance and Approvals in Ballari",
+    "complianceProse": "Ballari's stock splits between the KIADB estate at Mundargi and older private compounds, so check which one a building sits in first. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Agricultural land in Karnataka is converted under section 95 of the Land Revenue Act; since September 2025, land already zoned for the use in an approved master plan is certified by the planning authority rather than the Deputy Commissioner. KIADB land is allotted for industrial use, so warehousing has to be allowed under the allotment, and subletting needs KIADB's written NOC. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Outside the estate, building permission comes from the Ballari urban development authority or the city corporation. Fire clearance is issued by the Karnataka State Fire and Emergency Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Mundargi Industrial Area, the KIADB estate on Ballari's south side, for organised industrial stock and the newer pre-engineered units. Bangalore Road and the Cowl Bazaar side for trade storage near the markets. The Kanekal and Andral Road compounds for conventional sheds in older buildings.",
+        "q": "Which is the best area for a warehouse in Ballari?"
+      },
+      {
+        "a": "Yes. Ballari is the official name of the city and district in eastern Karnataka; Bellary is the older spelling and is still widely used, and Bellari and Ballary also appear in searches. All of them refer to the same warehouse market.",
+        "q": "Is Ballari the same as Bellary?"
+      },
+      {
+        "a": "Whether the building sits inside the KIADB estate at Mundargi or on private land. Inside the estate, the allotment must permit warehousing and a sublease needs KIADB's NOC. On private land, ask for the section 95 conversion order and building permission. Then check height and roof condition, because much of the stock is older sheds.",
+        "q": "What should I check before leasing in Ballari?"
+      },
+      {
+        "a": "Mostly conventional sheds, often in older mill and trading compounds, with some pre-engineered space in Mundargi Industrial Area. Clear heights are often modest and loading usually ground-level, so verify both on site before planning racking or truck loading.",
+        "q": "What build type is typical in Ballari?"
+      },
+      {
+        "a": "Mining, steel and agricultural trade. Ballari district holds major iron ore and steel operations to the west of the city, and the city itself is a cotton and agricultural trading centre. Warehouse demand is mostly local storage for that trade and supply to industry.",
+        "q": "What drives warehouse demand in Ballari?"
+      }
+    ],
+    "relatedBlogs": [],
+    "statOverrides": {
+      "clearHeight": {
+        "min": 17
+      }
+    }
+  },
+  {
+    "kind": "CITY",
+    "slug": "bengaluru",
+    "seoTitle": "Bangalore Warehousing: Corridors, Costs, Specification",
+    "metaDescription": "Where warehouse stock sits across Bangalore (Bengaluru) and what it costs by size. The city's named corridors compared on rent, unit size and build type.",
+    "h1": "Bangalore Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Bangalore (Bengaluru) is one of the deepest warehousing markets in south India and one of the most spread out. Stock sits on several distinct belts, each with its own rate, its own typical unit size and its own reason for existing. A rate quoted without a belt attached to it means very little here. This page sets out where the stock actually is and what shapes its price.",
+    "heroImage": {
+      "alt": "Bengaluru city skyline lit up at dusk",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/bengaluru.webp",
+      "width": 1600,
+      "height": 1204
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Bangalore",
+    "marketProse": "Bangalore has no single warehousing corridor because it has no single direction of demand. The northwest along Tumkur Road, through **Nelamangala** and out to **Dobbaspet**, serves the Mumbai and Pune line and holds some of the largest units. The south along Hosur Road, through **Bommasandra** and **Jigani**, runs into the Tamil Nadu manufacturing belt. The east along Old Madras Road, through **Hoskote**, heads for Chennai. The north around **Devanahalli** follows the airport. Each belt developed for a different reason and prices differently as a result. The other thing to understand is the split between industrial stock and city stock. Most spaces sit on a named belt; the remainder is inner-city godown and commercial space, which is much smaller, much more expensive per square foot and does a completely different job.",
+    "marketImage": {
+      "alt": "Map of Bengaluru marking its warehousing micromarkets: Nelamangala, Dobbaspet, Bommasandra, Jigani, Hoskote, Devanahalli, Whitefield, Hosur Road, Peenya, Bidrahalli, Budigere, Cheemasandra, Rampura, Marathalli, Sarjapura, Varthur, Jakkur, Yelahanka, Begur, Bommanahalli, HSR, Kudlu Gate, Makali, T Begur, Budihal, Kumbalgodu, Soukya Road, Attibele, Bannerghatta, Ekarajapura, Sidlaghatta Road, Dasanapura, Harohalli, Kanakapura Road, Chokkahalli and Bidadi",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/bengaluru.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Bangalore",
+    "rentsProse": "Rent in Bangalore falls steeply with unit size and then flattens. Small units are not really warehousing at all: they are commercial and shop-cum-godown space, and the rate reflects retail land value rather than storage economics. Once units reach warehouse scale, rates settle into a narrow band, so an occupier choosing between a mid-size unit and a very large one is choosing on layout and location more than on rate. Belt matters next: the airport belt and the inner east quote at the top, and the northwest at the bottom.",
+    "specHeading": "Typical Specification in Bangalore",
+    "specProse": "The specification gap by size is the thing worth knowing. Large units on the outer belts are predominantly pre-engineered, with high clear heights and grade-A flooring common. Small city units are often RCC, with much lower heights. The citywide averages hide that split, so judge a building by its belt and its size, not by the city figure.",
+    "corridorHeading": "Where Warehouse Stock Sits in Bangalore",
+    "corridorProse": "Read unit size alongside rent and the market explains itself. Nelamangala is affordable because it is large and far out. Whitefield is expensive because it is small and inside the city. The belts in between trade one against the other: Hoskote and Devanahalli for large modern boxes on the east and north, the Hosur Road estates for manufacturing-linked space, and Peenya and Mysore Road for smaller units closer in. Any comparison of Bangalore rates that does not hold unit size constant is comparing two different products.",
+    "complianceHeading": "Compliance and Approvals in Bangalore",
+    "complianceProse": "Many Bangalore landlords can produce paperwork, which is not the same as the paperwork being the right paperwork. The two questions that matter are whether the land use permits storage, and whether the building has a fire NOC where its size requires one. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Agricultural land in Karnataka is converted under section 95 of the Land Revenue Act; since September 2025, land already zoned for the use in an approved master plan is certified by the planning authority rather than the Deputy Commissioner. On KIADB land the rules are stricter than many assume: the allotment is for industrial use, warehousing has to be allowed under it, and subletting needs KIADB's written NOC. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "There is no single best area, only a best area for a given requirement. For large-format distribution, Nelamangala and Tumkur Road. For manufacturing-linked storage, the Hosur Road belt through Bommasandra, Jigani and Attibele. For Chennai-facing despatch, Hoskote. For last-mile inside the city, Whitefield or the central areas, at a much higher rate.",
+        "q": "Which is the best area for a warehouse in Bangalore?"
+      },
+      {
+        "a": "Because the range covers two different products. Inner-city godown space and highway distribution boxes both appear in the same city, and they are not substitutes. Once unit size is held constant the spread narrows sharply, which is why the size-band view on this page is the one to plan against.",
+        "q": "Why do Bangalore warehouse rates vary so much?"
+      },
+      {
+        "a": "The industrial belts are predominantly pre-engineered. The inner-city and Whitefield stock is much more often RCC, because much of it was built as something else and converted. If clear height and racking matter, the build type on a specific belt matters more than the citywide mix shown on this page.",
+        "q": "Is warehouse stock in Bengaluru mostly PEB or RCC?"
+      },
+      {
+        "a": "Yes, but it is a different product from the outer belts. Whitefield, Peenya, Mysore Road and the central areas carry small godowns and converted commercial units, often RCC with lower clear heights, at much higher rates per square foot. They suit last-mile and quick-commerce storage. For anything larger, Bangalore's outer belts give far more floor area for the money.",
+        "q": "Is there warehouse space inside Bangalore city for last-mile delivery?"
+      },
+      {
+        "a": "On private land, the conversion order under section 95 of the Karnataka Land Revenue Act, or the planning authority's certificate for master-plan-zoned land, in the current owner's name. On KIADB land, the allotment terms and KIADB's written NOC for the sublease. Then the building plan approval and, where the building's size requires one, a fire NOC from the Karnataka State Fire and Emergency Services.",
+        "q": "What documents should I ask a Bangalore warehouse landlord for?"
+      }
+    ],
+    "relatedBlogs": [
+      "peb-vs-rcc-warehouse"
+    ],
+    "statOverrides": {
+      "rent": {
+        "min": 12
+      },
+      "size": {
+        "min": 947
+      }
+    }
+  },
+  {
+    "kind": "CITY",
+    "slug": "bhiwadi",
+    "seoTitle": "Bhiwadi Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Bhiwadi and what it costs by size. Bhiwadi's RIICO estates and Ghiloth near Neemrana compared, plus Rajasthan land rules.",
+    "h1": "Bhiwadi Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Bhiwadi is the Rajasthan edge of the Delhi NCR market, on the Delhi to Jaipur corridor just beyond Dharuhera, and its warehousing serves NCR distribution and the industry in its RIICO estates. The stock we list is entirely pre-engineered, in large units with Fire NOC on record. This page sets out where the stock sits and what to check.",
+    "marketHeading": "Why Warehousing Works the Way It Does in Bhiwadi",
+    "marketProse": "Bhiwadi sits on the Haryana and Rajasthan border, next to **Dharuhera**, and its warehousing serves both NCR distribution and the factories in its RIICO industrial areas. The **Bhiwadi** estates hold most of the stock. Further south-west on the Delhi to Jaipur highway, **Ghiloth**, a large RIICO industrial area near **Neemrana**, carries newer large units. Demand is NCR distribution at a distance from Gurugram, plus supply for the auto, electronics and manufacturing plants along the corridor.",
+    "marketImage": {
+      "alt": "Map of Bhiwadi marking its warehousing micromarkets: Dharuhera, Bhiwadi, Ghiloth and Neemrana",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/bhiwadi.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Bhiwadi",
+    "rentsProse": "Bhiwadi's stock is uniformly large and pre-engineered, so quotes separate on height, docks and distance from Gurugram rather than build type. Compare buildings at a similar distance up the corridor, and read the size, height and docks alongside each rate.",
+    "specHeading": "Typical Specification in Bhiwadi",
+    "specProse": "Every listing is a large pre-engineered unit, with heights suited to racking and several docks. Industrial approval is on record for nearly every unit. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Bhiwadi",
+    "corridorProse": "The Bhiwadi estates are the place to start for large units closest to Gurugram and Dharuhera. Ghiloth, near Neemrana, suits occupiers who want newer buildings further down the Jaipur highway and can accept a longer run into NCR. Both hold large pre-engineered stock.",
+    "complianceHeading": "Compliance and Approvals in Bhiwadi",
+    "complianceProse": "Fire NOC is on record for most listings here, well above the pattern we see nationally. Most of the stock sits in RIICO industrial areas, so the allotment terms are the first document to ask for. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Outside the estates: In Rajasthan, agricultural land is converted for industrial or commercial use under section 90A of the Land Revenue Act, with the District Collector as the principal authority. Building permission in the Bhiwadi area comes from the Bhiwadi Integrated Development Authority. Bhiwadi is in Rajasthan, so the approval route and stamp duty are Rajasthan's even for a network run from Gurugram. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "The Bhiwadi RIICO estates for large units closest to Gurugram and Dharuhera. Ghiloth, the RIICO industrial area near Neemrana further down the Delhi to Jaipur highway, for newer buildings at a longer run into NCR. Both hold large pre-engineered stock with Fire NOC on record.",
+        "q": "Which is the best area for a warehouse in Bhiwadi?"
+      },
+      {
+        "a": "Yes. Bhiwadi sits in Rajasthan but inside the National Capital Region, on the Delhi to Jaipur corridor next to Dharuhera, and its warehousing serves NCR distribution. Approvals and stamp duty follow Rajasthan's rules, not Haryana's.",
+        "q": "Is Bhiwadi part of the Delhi NCR warehouse market?"
+      },
+      {
+        "a": "That warehousing is a permitted activity under the plot's RIICO allotment and that RIICO has consented to the lease. Then the building permission from the Bhiwadi Integrated Development Authority and the Fire NOC, which is on record for most Bhiwadi listings.",
+        "q": "What should I check on a RIICO warehouse in Bhiwadi?"
+      },
+      {
+        "a": "Large pre-engineered buildings, with heights suited to racking and several docks. Clear height and docks are on record for nearly every Bhiwadi listing, and Fire NOC for most, well above the pattern we see nationally.",
+        "q": "What build type is typical in Bhiwadi?"
+      },
+      {
+        "a": "They sit next to each other on the Delhi to Jaipur corridor. Dharuhera is in Haryana, under Haryana's CLU and fire rules; Bhiwadi is in Rajasthan, mostly in RIICO estates. Compare the specific buildings, and the approval route each state requires.",
+        "q": "Should I choose Bhiwadi or Dharuhera?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "bhiwandi",
+    "seoTitle": "Bhiwandi Warehousing: Corridors, Costs, Specification",
+    "metaDescription": "Where warehouse stock sits in Bhiwandi and what it costs by size. The Mankoli, Kasheli and Mumbai-Nashik highway belts compared, plus land-use rules.",
+    "h1": "Bhiwandi Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Bhiwandi is one of India's oldest and densest warehousing clusters, and a rare city where the whole town is the corridor. Much of its stock is large-format, and the rate is remarkably stable across it. For an occupier serving Mumbai, that makes Bhiwandi the default starting point for anything that is not port-driven. This page sets out the sub-belts within it.",
+    "marketHeading": "Why Warehousing Works the Way It Does in Bhiwandi",
+    "marketProse": "Bhiwandi exists as a warehousing market for one reason: it is the closest place to Mumbai where large-format storage on cheap land was ever possible. Everything else follows from that. The stock is large, it is dense, and it grew organically on private agricultural land over decades rather than being planned into industrial estates. The internal geography runs along the **Mumbai-Nashik highway**, the Kalyan road through **Mankoli**, the **Kasheli** and **Sonale** pocket, and **Yewai** and **Sape Road** further out. These are not separate markets in the way Bangalore's belts are; they are neighbourhoods of one market, and their rates sit close together.",
+    "marketImage": {
+      "alt": "Map of Bhiwandi marking its warehousing micromarkets: Mumbai-Nashik highway, Mankoli, Kasheli, Sonale, Yewai and Sape Road",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/bhiwandi.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Bhiwandi",
+    "rentsProse": "Bhiwandi's stock is weighted towards mid-size and very large units, with comparatively little in between. Rates are stable across sizes, and the largest, newest grade-A buildings can price slightly above the middle, which reflects new stock entering at the top of the market rather than a scarcity premium. Within the town, proximity to Mumbai is what moves the rate: Mankoli quotes at the top, and the belts further out sit lower.",
+    "specHeading": "Typical Specification in Bhiwandi",
+    "specProse": "Docking in Bhiwandi is modest for the unit sizes, the signature of an older cluster built when storage volume mattered more than vehicle turnaround. Newer buildings on the Yewai belt are better provisioned. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Bhiwandi",
+    "corridorProse": "Yewai and Sape Road is the belt large-format occupiers should read first: very large units, priced at or below the town median, and predominantly purpose-built. Mankoli is the opposite trade: closest to Mumbai, the highest rate, and a much higher share of RCC buildings. The town name covers a wide area, so ask for the exact location of any building you shortlist.",
+    "complianceHeading": "Compliance and Approvals in Bhiwandi",
+    "complianceProse": "Fire NOC is on record for close to half the listings here, well above the pattern we see nationally. Bhiwandi is a clear case of a market that grew on private agricultural land ahead of the paperwork, and very little of it sits inside an MIDC estate. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Since the Maharashtra Land Revenue Code amendment notified in December 2025, a separate non-agricultural permission from the Collector is no longer needed where the use is permissible under the development or regional plan; the planning authority collects a one-time conversion premium instead. For an existing building, what matters is that the land's non-agricultural status and the building permission are in order and in the current owner's name rather than a predecessor's. Fire approval runs under the Maharashtra Fire Prevention and Life Safety Measures Act, 2006, with a provisional approval at the building-permission stage and a final NOC before occupation. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "For very large units, Yewai and Sape Road. For the widest mid-size choice, the Mumbai-Nashik highway belt. For the shortest run into Mumbai, Mankoli, accepting a higher rate and a much higher chance of an RCC building rather than a purpose-built shed.",
+        "q": "Which part of Bhiwandi should I look at?"
+      },
+      {
+        "a": "Generally, yes. Navi Mumbai's stock competes with port and industrial users for land on the JNPT approach, while Bhiwandi serves the same Mumbai demand from further out and with far more inventory. For anything that is not port-driven, Bhiwandi usually does the same job for less. Current rates for both are on their overview pages.",
+        "q": "Is Bhiwandi cheaper than Navi Mumbai?"
+      },
+      {
+        "a": "The land's non-agricultural status and building permission, and whose name they are in, because most of Bhiwandi grew on private agricultural land. Then clear height and dock count, which are on record for nearly every listing but vary widely between the older and newer parts of the cluster, so confirm both on site.",
+        "q": "What should I check before leasing in Bhiwandi?"
+      },
+      {
+        "a": "Mostly pre-engineered, with RCC and conventional sheds in the older parts of the cluster, especially around Mankoli. Floors are well specified, with VDF and FM2 both common. Docking is modest for the unit sizes in older buildings and better on the newer Yewai belt. Clear height and docks are on record for nearly every Bhiwandi listing.",
+        "q": "What build type is typical in Bhiwandi?"
+      },
+      {
+        "a": "Close to half of Bhiwandi's listings have a fire NOC on record, well above the pattern we see nationally. In Maharashtra, fire approval runs in two stages: a provisional approval when the building is permitted, and a final NOC before occupation. Ask for the final NOC on the specific building you are taking.",
+        "q": "Do Bhiwandi warehouses have a fire NOC?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "bhopal",
+    "seoTitle": "Bhopal Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Bhopal and what it costs by size. Mandideep, the Vidisha and Raisen roads and the north-west compared, plus land rules.",
+    "h1": "Bhopal Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Bhopal is Madhya Pradesh's capital and a central distribution point for the state, and its warehousing sits on the highways around the city and towards the Mandideep industrial area. Most of the stock is pre-engineered, with mid-size to large units. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Boats on the Upper Lake in Bhopal with the city behind",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/bhopal.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Bhopal",
+    "marketProse": "Bhopal's warehousing sits on the roads out of the city. South-east, **Mandideep**, one of Madhya Pradesh's largest industrial areas, and **Nanakhedi** beyond it hold industrial and distribution stock. To the east, **Sukhi Sewaniya** on the Vidisha road and **Bhikiriya Kalan** on the Raisen side carry newer pre-engineered units. On the north-west side, **Kurana** and **Parewa Kheda** serve the roads towards Berasia and Indore. Demand is state-wide distribution from the capital, plus supply to Mandideep's industry.",
+    "marketImage": {
+      "alt": "Map of Bhopal marking its warehousing micromarkets: Mandideep, Nanakhedi, Sukhi Sewaniya, Bhikiriya Kalan, Kurana and Parewa Kheda",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/bhopal.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Bhopal",
+    "rentsProse": "Quotes in Bhopal follow the building more than the address. A pre-engineered unit near Mandideep and a small RCC godown are different products, so compare like building types, and read the size, height and docks alongside each rate.",
+    "specHeading": "Typical Specification in Bhopal",
+    "specProse": "Most of the stock is pre-engineered, with heights suited to racking and several docks on the larger units. Clear height is on record for nearly every listing and docks for most, so you can shortlist on specification before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Bhopal",
+    "corridorProse": "Mandideep and the belt towards Nanakhedi are the place to start for large units and industrial supply. The eastern roads, around Sukhi Sewaniya and Bhikiriya Kalan, suit distribution with easy highway access. The north-west side suits freight heading towards Indore and Berasia.",
+    "complianceHeading": "Compliance and Approvals in Bhopal",
+    "complianceProse": "Much of Bhopal's newer stock sits on private land around the city, so the land's diversion status is the first document to ask for. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. In Madhya Pradesh, agricultural land is diverted to another use under section 172 of the Land Revenue Code; since the 2024 amendment, diversion to industrial use outside a development-plan area needs only a written intimation to the Sub-Divisional Officer. Inside Mandideep or another MPIDC industrial area, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Building permission comes from the town and country planning department and the local body for the area. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Mandideep and the belt towards Nanakhedi, south-east of Bhopal, for large units and industrial supply. Sukhi Sewaniya on the Vidisha road and Bhikiriya Kalan on the Raisen side for distribution with highway access. The north-west side for freight towards Indore.",
+        "q": "Which is the best area for a warehouse in Bhopal?"
+      },
+      {
+        "a": "Indore is the larger commercial and distribution market, with more stock. Bhopal suits networks serving the state capital and central and eastern Madhya Pradesh, with Mandideep's industry close by. Many occupiers run one base in each.",
+        "q": "Should I choose Bhopal or Indore for a Madhya Pradesh warehouse?"
+      },
+      {
+        "a": "On private land, the diversion order or intimation under section 172 of the MP Land Revenue Code, and the building permission, both in the current owner's name. Inside Mandideep or another MPIDC area, the allotment terms, which must permit warehousing.",
+        "q": "What land documents matter for a Bhopal warehouse?"
+      },
+      {
+        "a": "Mostly pre-engineered buildings, with heights suited to racking and several docks on the larger units. Clear height is on record for nearly every Bhopal listing and docks for most, so you can shortlist on specification before a visit.",
+        "q": "What build type is typical in Bhopal?"
+      },
+      {
+        "a": "Mandideep lies south-east of Bhopal, in Raisen district, on the highway towards Hoshangabad. It is one of Madhya Pradesh's largest industrial areas, and the belt around it holds much of Bhopal's larger warehouse and industrial stock.",
+        "q": "Where is Mandideep industrial area?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "bhubaneswar",
+    "seoTitle": "Bhubaneswar Warehousing: Corridors, Costs, Specification",
+    "metaDescription": "Where warehouse stock sits around Bhubaneswar and what it costs by size. Janla, Khordha, Tangi and the Cuttack highway compared, plus Odisha land rules.",
+    "h1": "Bhubaneswar Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Bhubaneswar is Odisha's distribution centre, with its twin city Cuttack, and its warehousing sits on the highway belts around the capital. Units are mostly mid-size, and the stock mixes conventional sheds with pre-engineered buildings and RCC, so specification varies building by building. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Aerial view of Bhubaneswar with buildings and green cover",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/bhubaneswar.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Bhubaneswar",
+    "marketProse": "Bhubaneswar's warehousing follows the national highway that runs through the capital towards Cuttack and Kolkata to the north and Chennai to the south. **Janla** and its industrial area, on the southern side towards **Khordha**, carry a large share. **Tangi** and the stretch towards the **Manguli** toll on the Cuttack side serve the northern arm. **Pitapalli** and **Rudrapur** fill in around the city's edge. Demand is state-wide consumer and trade distribution rather than port or heavy industry, and the stock is a mix of sheds, pre-engineered buildings and some RCC.",
+    "marketImage": {
+      "alt": "Map of Bhubaneswar marking its warehousing micromarkets: Janla, Khordha, Tangi, Manguli, Pitapalli and Rudrapur",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/bhubaneswar.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Bhubaneswar",
+    "rentsProse": "Bhubaneswar's rates sit in a fairly narrow band for warehouse-scale space, and most of the market is mid-size. The top of the range is small city-facing space rather than distribution stock. Build type is what separates quotes: a conventional shed and a pre-engineered building on the same highway can price differently, so compare the building before the rate.",
+    "specHeading": "Typical Specification in Bhubaneswar",
+    "specProse": "Conventional sheds make up a large share of the stock, so clear heights are often modest. Docking is reasonable. Verify height and floor on site for any racked layout. Clear height is on record for nearly every listing here, so you can shortlist on it before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Bhubaneswar",
+    "corridorProse": "Janla and Khordha on the southern arm give the widest choice, including organised industrial-area stock. Tangi and the Cuttack highway suit freight heading north. The pockets around Pitapalli sit closer to the city. Read the localities above as the guide to where Bhubaneswar's stock sits.",
+    "complianceHeading": "Compliance and Approvals in Bhubaneswar",
+    "complianceProse": "Much of the highway stock sits on private land, so the land's conversion status is the first document to ask for. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. In Odisha, agricultural land has to be converted for non-agricultural use under section 8A of the Odisha Land Reforms Act before any development, on payment of a conversion premium; land allotted by IDCO follows IDCO's own regulations instead. Building permission inside the capital region comes from the Bhubaneswar Development Authority. Inside an IDCO industrial estate, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Fire clearance is issued by the Odisha Fire and Emergency Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Janla and the Khordha side for the widest choice and organised industrial-area stock. Tangi and the Cuttack highway for freight heading north. Pitapalli for smaller units closer to the city.",
+        "q": "Which is the best area for a warehouse in Bhubaneswar?"
+      },
+      {
+        "a": "Some mid-size to large units exist in Bhubaneswar, but very large boxes are rarely listed, because demand is state-wide distribution rather than national hubs. A large requirement usually means build-to-suit on the Janla or Khordha side, where the organised industrial-area stock already sits.",
+        "q": "Does Bhubaneswar have large warehouse space?"
+      },
+      {
+        "a": "On private land, the section 8A conversion order and the building permission, both in the current owner's name. Inside an IDCO estate, the allotment terms and IDCO's consent for any sublease.",
+        "q": "What land documents matter for a Bhubaneswar warehouse?"
+      },
+      {
+        "a": "A mix. Conventional sheds and pre-engineered buildings make up most of the stock in equal measure, with some RCC, so clear heights are often modest. Docking is reasonable. For a racked layout, verify height and floor on site. Clear height is on record for nearly every Bhubaneswar listing.",
+        "q": "What build type is typical in Bhubaneswar?"
+      },
+      {
+        "a": "Yes. Bhubaneswar sits on the national highway towards Cuttack and Kolkata in the north and Chennai in the south, and its demand is state-wide consumer and trade distribution. Janla and Khordha on the southern arm give the widest choice, and Tangi serves the north.",
+        "q": "Is Bhubaneswar a good base for Odisha distribution?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "chennai",
+    "seoTitle": "Chennai Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits in Chennai and what it costs by size. The Red Hills north belt and the Sriperumbudur west arm compared, plus CMDA rules.",
+    "h1": "Chennai Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Chennai's warehousing runs along two arms out of the city: north on NH-16 through Red Hills towards Gummidipoondi, and west on NH-48 through Sriperumbudur and Oragadam. They carry similar rates and very different unit sizes, which makes the choice between them a question of road direction and floor area rather than price. This page sets out which one suits which requirement.",
+    "heroImage": {
+      "alt": "Aerial view of Chennai with the coastline behind",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/chennai.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Chennai",
+    "marketProse": "Chennai is a port and manufacturing city, and its warehousing followed both. The northern belt grew on the Kolkata highway, through **Red Hills** and **Sholavaram** and around the **Ennore** and **Manali** industrial area, and it carries the larger units. The western arm grew around the automotive cluster at **Sriperumbudur** and **Oragadam**, where SIPCOT parks anchor the stock. The inner-west pocket at **Ambattur** is older industrial estate land carrying small units. Construction is predominantly pre-engineered, with a larger share of conventional sheds than most large markets, which reflects how much of the older belt stock predates purpose-built distribution.",
+    "marketImage": {
+      "alt": "Map of Chennai marking its warehousing micromarkets: Red Hills, Sholavaram, Ennore, Manali, Sriperumbudur, Oragadam and Ambattur",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/chennai.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Chennai",
+    "rentsProse": "Chennai's cost curve is flat and turns slightly upward at the top, which is unusual. Large boxes are not discounted here, because the large-format stock sits on the northern belt where land is not cheap and demand from port and manufacturing users is steady. Much of the market sits in the mid-size range. What moves a quote is build type and age: older sheds price below modern pre-engineered buildings on the same road.",
+    "specHeading": "Typical Specification in Chennai",
+    "specProse": "Chennai's flooring profile is clean, with VDF dominant. Large units record good clear heights and grade-A flooring on most. Clear height and docks are on record for nearly every listing, so both can be compared before a visit. Conventional sheds make up a larger share than in most big markets, mainly in the older northern belt, so confirm the structure as well as the height.",
+    "corridorHeading": "Where Warehouse Stock Sits in Chennai",
+    "corridorProse": "The most useful single fact about Chennai is that its main belts trade at similar rates while their unit sizes differ widely. The northern belt gives far more floor area for similar money, the western arm serves the factories directly, and Ambattur offers small units close to the city. The choice between belts is a choice about road direction and unit size, not about price.",
+    "complianceHeading": "Compliance and Approvals in Chennai",
+    "complianceProse": "The approval route depends on where the site sits. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Inside the Chennai Metropolitan Area, planning permission runs through the CMDA; outside it, through the Directorate of Town and Country Planning, and both now take applications through Tamil Nadu's single-window planning permission portal. Either way, the approved land use has to permit storage. Inside a SIPCOT or SIDCO estate, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. The northern belt around Red Hills and Sholavaram contains a mix of approved and unapproved layouts, so verify the layout approval first there. Fire clearance is issued by the Tamil Nadu Fire and Rescue Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Red Hills and the NH-16 northern belt for larger requirements, because it offers much more floor area at similar rates. Sriperumbudur and Oragadam if the inbound is a factory or a SIPCOT park suits you. Ambattur only for small units close to the city.",
+        "q": "Which is the best area for a warehouse in Chennai?"
+      },
+      {
+        "a": "Hosur, in most cases, if the requirement is large and the demand is not Chennai-specific: its units are typically much bigger, the stock is newer and clear heights are higher. Chennai wins when the port or the city itself is the destination.",
+        "q": "Is Chennai or Hosur better for a large warehouse?"
+      },
+      {
+        "a": "If the site is inside the Chennai Metropolitan Area, planning permission comes from the CMDA and the approved land use must permit storage. Outside it, the Directorate of Town and Country Planning handles it. Inside a SIPCOT or SIDCO estate, confirm that the allotment permits warehousing.",
+        "q": "Do I need CMDA approval for a warehouse in Chennai?"
+      },
+      {
+        "a": "Mostly pre-engineered, with conventional sheds making up a larger share than in most big markets, mainly in the older northern belt. VDF is the dominant floor. Large Chennai units record good clear heights. Clear height and docks are on record for nearly every listing, so you can compare buildings before a visit.",
+        "q": "What specification is typical for a Chennai warehouse?"
+      },
+      {
+        "a": "The northern belt, around the Ennore and Manali industrial area and out through Red Hills and Sholavaram on the Kolkata highway. It sits closest to the northern port approaches and carries Chennai's larger units. Check layout approval first there, because approved and unapproved layouts sit side by side.",
+        "q": "Which Chennai belt suits a port-linked requirement?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "coimbatore",
+    "seoTitle": "Coimbatore Warehousing: Corridors, Costs, Specification",
+    "metaDescription": "Where warehouse stock sits in Coimbatore and what it costs by size. Neelambur, Sulur, Palladam and Chettipalayam compared, plus Tamil Nadu approvals.",
+    "h1": "Coimbatore Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Coimbatore is the manufacturing and textile centre of western Tamil Nadu, and its warehousing serves engineering, textile and consumer distribution across the western districts and into Kerala. The stock is mid-size and mostly pre-engineered, with a meaningful share of sheds, and rates are affordable by metro standards. This page sets out where it sits and what to check.",
+    "heroImage": {
+      "alt": "Cross Cut Road, a busy commercial street in Coimbatore",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/coimbatore.webp",
+      "width": 1600,
+      "height": 1068
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Coimbatore",
+    "marketProse": "Coimbatore's warehousing sits on the eastern and southern edges of the city, on the roads towards Tiruppur, Salem and the Kerala border. **Neelambur** and **Sulur**, on the eastern side along the Salem to Kochi highway, carry a large share. **Palladam** and the Palladam road serve the Tiruppur textile belt. **Chettipalayam Road**, **Malumichampatti** and **Panikkampatti** to the south carry mid-size stock. **Kalapatti** and **Peelamedu** sit closer to the city and the airport. Demand is manufacturing supply and regional distribution rather than port, which is why units are mid-size and the stock mostly pre-engineered.",
+    "marketImage": {
+      "alt": "Map of Coimbatore marking its warehousing micromarkets: Neelambur, Sulur, Palladam, Chettipalayam Road / Panikkampatti, Malumichampatti, Kalapatti and Peelamedu",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/coimbatore.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Coimbatore",
+    "rentsProse": "Coimbatore's rates are affordable by metro standards and fairly flat across sizes, with the mid-size and larger units pricing a little above the smaller ones, which reflects newer buildings at the top of the market. Very small units are rarely listed. Build type is what separates quotes: a conventional shed and a pre-engineered building on the same road can price differently.",
+    "specHeading": "Typical Specification in Coimbatore",
+    "specProse": "The stock is mostly pre-engineered, with a meaningful share of conventional sheds and some RCC. Clear heights suit racking on the newer buildings; sheds run lower. Confirm height and docks on each building. VDF is the most common floor, with concrete on many older units.",
+    "corridorHeading": "Where Warehouse Stock Sits in Coimbatore",
+    "corridorProse": "Neelambur and Sulur on the eastern highway give the widest choice and the best access towards Salem and Tiruppur. Palladam suits textile-linked freight. The southern pockets around Chettipalayam Road and Malumichampatti offer mid-size units at competitive rates, and Kalapatti and Peelamedu sit closest to the city. Read the localities above as the guide to where Coimbatore's stock sits.",
+    "complianceHeading": "Compliance and Approvals in Coimbatore",
+    "complianceProse": "Much of Coimbatore's stock sits on private land on the city's edges, so the layout and building approval is the first thing to check. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Planning permission outside the Chennai Metropolitan Area runs through the Directorate of Town and Country Planning, via Tamil Nadu's single-window planning portal, and the approved land use has to permit storage. Inside a SIPCOT or SIDCO estate, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Fire clearance is issued by the Tamil Nadu Fire and Rescue Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Neelambur and Sulur on the eastern highway for the widest choice and access towards Salem and Tiruppur. Palladam for textile-linked freight. Chettipalayam Road and Malumichampatti for mid-size units to the south.",
+        "q": "Which is the best area for a warehouse in Coimbatore?"
+      },
+      {
+        "a": "Often, yes. Coimbatore sits close to the Palakkad gap and the Kerala border, and its stock is deeper and generally more affordable than what is available in central Kerala. The trade-off is the run into Kochi.",
+        "q": "Is Coimbatore a good base for Kerala distribution?"
+      },
+      {
+        "a": "The layout and building approval from the Directorate of Town and Country Planning, and that the approved land use permits storage. Inside a SIPCOT or SIDCO estate, that the allotment permits warehousing. Then the fire NOC from the Tamil Nadu Fire and Rescue Services.",
+        "q": "What approvals should I check for a Coimbatore warehouse?"
+      },
+      {
+        "a": "Mostly pre-engineered, with a meaningful share of conventional sheds and some RCC. VDF is the most common floor, with concrete floors on many older units. Clear heights suit racking on the newer buildings around Neelambur and Sulur, while sheds run lower, so confirm height and docks on each Coimbatore building.",
+        "q": "What specification is typical for a Coimbatore warehouse?"
+      },
+      {
+        "a": "Yes. Coimbatore's stock sits on the roads towards Tiruppur, Salem and the Kerala border, so one warehouse here can serve the textile belt, the western districts and Kerala. Neelambur and Sulur on the Salem to Kochi highway give the widest choice.",
+        "q": "Is Coimbatore a good base for western Tamil Nadu distribution?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "cuttack",
+    "seoTitle": "Cuttack Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Cuttack and what it costs by size. Alarpur, Choudwar, Bainchua and Tangi compared, plus Odisha land rules.",
+    "h1": "Cuttack Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Cuttack is Odisha's commercial capital and Bhubaneswar's twin city, and its warehousing sits on the highway north of the Mahanadi towards Kolkata. The stock we list is entirely pre-engineered, from mid-size units to large boxes. This page sets out where the stock sits and what to check.\n\nPhoto: souravdas, BY 2.0, via https://www.flickr.com/photos/23531860@N00/2710356277",
+    "heroImage": {
+      "alt": "Cuttack Collectorate beside the Mahanadi river",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/cuttack.webp",
+      "width": 1024,
+      "height": 768
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Cuttack",
+    "marketProse": "Cuttack's warehousing sits north of the city, on the national highway towards Kolkata and Paradip port. **Alarpur**, near Nergundi railway station, holds a cluster of pre-engineered units. **Choudwar**, across the Mahanadi, has an industrial estate with large units. **Bainchua** and **Tangi** carry more stock on the highway. Demand is state-wide trade and distribution, shared with **Bhubaneswar**, plus port-linked freight towards Paradip.",
+    "marketImage": {
+      "alt": "Map of Cuttack marking its warehousing micromarkets: Alarpur, Choudwar, Bainchua, Tangi and Bhubaneswar",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/cuttack.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Cuttack",
+    "rentsProse": "Cuttack's stock is uniformly pre-engineered, so quotes separate on size, height, docks and access rather than build type. Compare buildings along the same stretch of highway, and read the size, height and docks alongside each rate.",
+    "specHeading": "Typical Specification in Cuttack",
+    "specProse": "Every listing is pre-engineered, with heights suited to racking and VDF floors where recorded. The largest units, in Choudwar, are the tallest. Clear height is on record for nearly every listing and docks for most, so you can shortlist on specification before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Cuttack",
+    "corridorProse": "Alarpur and the Nergundi side are the place to start for mid-size units with rail and highway access. Choudwar suits occupiers who want an industrial estate and larger units. Tangi and Bainchua suit freight on the highway towards Kolkata. For the southern side of the twin cities, see our Bhubaneswar page.",
+    "complianceHeading": "Compliance and Approvals in Cuttack",
+    "complianceProse": "Much of Cuttack's highway stock sits on private land, so the land's conversion status is the first document to ask for. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. In Odisha, agricultural land has to be converted for non-agricultural use under section 8A of the Odisha Land Reforms Act before any development, on payment of a conversion premium; land allotted by IDCO follows IDCO's own regulations instead. Building permission inside the Cuttack area comes from the Cuttack Development Authority. Inside an IDCO industrial estate such as Choudwar, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Fire clearance is issued by the Odisha Fire and Emergency Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Alarpur and the Nergundi side, north of Cuttack, for mid-size units with rail and highway access. Choudwar, across the Mahanadi, for an industrial estate and larger units. Tangi and Bainchua for freight on the highway towards Kolkata.",
+        "q": "Which is the best area for a warehouse in Cuttack?"
+      },
+      {
+        "a": "They work as one twin-city market. Cuttack's stock sits north, on the highway towards Kolkata and Paradip port. Bhubaneswar's sits south and around the capital, towards Janla and Khordha. Choose the side your freight leaves from.",
+        "q": "Should I choose Cuttack or Bhubaneswar for a warehouse?"
+      },
+      {
+        "a": "On private land, the section 8A conversion order under the Odisha Land Reforms Act and the building permission from the Cuttack Development Authority, both in the current owner's name. Inside an IDCO estate such as Choudwar, the allotment terms.",
+        "q": "What land documents matter for a Cuttack warehouse?"
+      },
+      {
+        "a": "Pre-engineered buildings throughout, with heights suited to racking and VDF floors where recorded. Clear height is on record for nearly every Cuttack listing and docks for most, so you can shortlist on specification before a visit.",
+        "q": "What build type is typical in Cuttack?"
+      },
+      {
+        "a": "It is one option. Cuttack's northern belt sits on the highway towards Paradip and Kolkata, so port-linked freight can use it, and its stock is pre-engineered. Occupiers handling large port volumes may also look closer to Paradip itself.",
+        "q": "Is Cuttack a good base for Paradip port freight?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "delhi",
+    "seoTitle": "Delhi Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse and godown stock sits inside Delhi, what it costs by size, and why city limits price differently from the NCR satellite ring.",
+    "h1": "Delhi Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Delhi inside its own city limits is a small-format market and should not be compared with the NCR ring around it. Most units are small, and the rate reflects city land rather than warehousing economics. What Delhi offers is proximity: the only storage actually inside the city, for last-mile and wholesale occupiers who need it. This page covers Delhi proper.",
+    "heroImage": {
+      "alt": "India Gate in New Delhi silhouetted at sunset",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/delhi.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Delhi",
+    "marketProse": "There is very little purpose-built warehousing inside Delhi, and that is unlikely to change. Land is expensive, the Master Plan limits where storage can go, and the large-format demand moved to Gurugram, Ghaziabad and Dadri long ago. What remains inside the city is last-mile space: godowns, converted units and a handful of larger buildings on the edges, at **Bamnoli** and **Bharthal** near Dwarka in the southwest, **Mundka** on Rohtak Road in the west, **Alipur** on GT Karnal Road in the north, and the villages of **south Delhi**. This is a converted market rather than a built one, with a mixed stock of pre-engineered buildings, sheds and RCC, and it prices as city space.",
+    "marketImage": {
+      "alt": "Map of Delhi marking its warehousing micromarkets: Bamnoli, Bharthal, Mundka and Alipur",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/delhi.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Delhi",
+    "rentsProse": "Two things to read carefully. First, Delhi's size bands are thin, and some have little or no stock at all, so a missing figure means no stock rather than free space. Second, the very largest buildings inside Delhi can price above the smaller bands, which is the opposite of the national pattern: that is a handful of big buildings on expensive city land, not a distribution market. Anyone sizing a large requirement should be looking at the NCR ring rather than inside the city.",
+    "specHeading": "Typical Specification in Delhi",
+    "specProse": "The stock is the most mixed of any city we cover, and clear heights are low, consistent with converted buildings. Building types vary so widely that the specific building matters more than any citywide expectation, so confirm height and floor on the one you shortlist.",
+    "corridorHeading": "Where Warehouse Stock Sits in Delhi",
+    "corridorProse": "The inner Delhi stock is not a warehousing corridor and should not be read as one: in built-up estates such as Okhla and Moti Bagh it is mostly RCC, small in size and retail-adjacent. Alipur at the other end carries much larger units at a much lower rate, which makes the northern belt the place inside Delhi where conventional distribution economics still work. Bamnoli and the Dwarka edge serve the airport and the southwest at a premium, and Mundka is the older wholesale godown belt.",
+    "complianceHeading": "Compliance and Approvals in Delhi",
+    "complianceProse": "The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Inside Delhi, storage is governed by the Master Plan rather than by a conversion process. Storage, godowns and warehousing are not permitted under the Master Plan's mixed-use policy, so the question to put to a Delhi landlord is what the Master Plan land use is for that specific plot and whether godown or storage use is permitted on it. Fire clearance, where the building requires it, comes from the Delhi Fire Service. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Mainly on the edges. The southwestern belt around Bamnoli and Bharthal near Dwarka, the western belt at Mundka for mid-size wholesale units, and Alipur on GT Karnal Road for the largest buildings. Inside the built-up city the stock is mostly RCC, small in size, expensive and retail-adjacent.",
+        "q": "Where can you actually rent a godown inside Delhi?"
+      },
+      {
+        "a": "Because it is a different product on much more expensive land. Delhi's units are typically a fraction of the size of Gurugram's, and small units generally carry a premium per square foot. For large requirements the NCR ring is both cheaper and deeper.",
+        "q": "Why is Delhi more expensive per sq ft than Gurugram or Ghaziabad?"
+      },
+      {
+        "a": "The Master Plan land use for that plot, first and before anything else, because storage is not permitted everywhere and godowns are not allowed under the mixed-use policy. Then the structure, since Delhi's stock mixes sheds, RCC and pre-engineered buildings and clear heights are often low.",
+        "q": "What should I check before leasing a godown in Delhi?"
+      },
+      {
+        "a": "Some, mainly at Alipur on GT Karnal Road in the north, where units are much larger and rates much lower than in the rest of Delhi. Elsewhere in the city, godowns are smaller converted buildings. For a genuinely large requirement, the NCR ring at Gurugram, Ghaziabad or Dadri gives far more depth.",
+        "q": "Is there large warehouse space inside Delhi?"
+      },
+      {
+        "a": "Delhi's godowns are a mix of pre-engineered buildings, conventional sheds and RCC, the most mixed stock of any city we cover. Clear heights run lower than in the NCR ring because so much of it is converted space. Check the height and floor of the specific Delhi building against your racking and loading plan before you sign.",
+        "q": "What type of building is a Delhi godown?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "dharuhera",
+    "seoTitle": "Dharuhera Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Dharuhera and what it costs by size. The Delhi to Jaipur highway belt between Manesar and Bhiwadi, plus Haryana land rules.",
+    "h1": "Dharuhera Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Dharuhera sits on the Delhi to Jaipur highway between Manesar and Bhiwadi, and its warehousing serves Delhi NCR distribution and the industry along the corridor. The stock we list is large and mostly pre-engineered, with Fire NOC and industrial approval on record. This page sets out where the stock sits and what to check.",
+    "marketHeading": "Why Warehousing Works the Way It Does in Dharuhera",
+    "marketProse": "Dharuhera, in Rewari district, is a stop on the Delhi to Jaipur corridor that runs south-west from **Gurugram** through **Manesar**. Its industrial area holds factories and warehouses, and the highway belt around it carries large distribution units. Across the Rajasthan border, **Bhiwadi** continues the same market. Demand is NCR distribution at a distance from Gurugram, plus supply for the auto and manufacturing plants along the corridor.",
+    "marketImage": {
+      "alt": "Map of Dharuhera marking its warehousing micromarkets: Gurugram, Manesar and Bhiwadi",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/dharuhera.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Dharuhera",
+    "rentsProse": "Dharuhera's stock is large and mostly pre-engineered, so quotes separate on height, docks and distance from Gurugram rather than build type. Compare buildings at a similar distance up the corridor, and read the size, height and docks alongside each rate.",
+    "specHeading": "Typical Specification in Dharuhera",
+    "specProse": "Most listings are large pre-engineered units with heights suited to racking and several docks; one is a conventional shed. Industrial approval is on record for every unit we list. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Dharuhera",
+    "corridorProse": "The highway belt and Dharuhera's industrial area are the place to start for large units on the Jaipur highway. For units closer to Gurugram, compare with the Manesar belt; for RIICO estate stock across the border, compare with Bhiwadi.",
+    "complianceHeading": "Compliance and Approvals in Dharuhera",
+    "complianceProse": "Fire NOC is on record for most listings here, well above the pattern we see nationally. Much of the highway stock sits on converted agricultural land, so the CLU is the first document to ask for. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. In Haryana's controlled areas, change of land use is granted by the Department of Town and Country Planning under the 1963 Scheduled Roads and Controlled Areas Act, so ask for the CLU order on the plot itself before the lease, not after. Inside an HSIIDC estate, check the allotment terms instead. Fire NOCs are issued under the Haryana Fire Service Act, 2009, through the urban local bodies. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "The Delhi to Jaipur highway belt and Dharuhera's industrial area, for large units between Manesar and Bhiwadi. For units closer to Gurugram, compare with Manesar; for RIICO estate stock across the Rajasthan border, compare with Bhiwadi.",
+        "q": "Which is the best area for a warehouse in Dharuhera?"
+      },
+      {
+        "a": "Yes. Dharuhera, in Haryana's Rewari district, sits inside the National Capital Region on the Delhi to Jaipur corridor, and its warehousing serves NCR distribution. Approvals follow Haryana's CLU and fire rules.",
+        "q": "Is Dharuhera part of the Delhi NCR warehouse market?"
+      },
+      {
+        "a": "The CLU order from Haryana's Department of Town and Country Planning on the plot itself, the building permission, and the Fire NOC, which is on record for most Dharuhera listings. Inside an HSIIDC estate, the allotment terms.",
+        "q": "What land documents matter for a Dharuhera warehouse?"
+      },
+      {
+        "a": "Large pre-engineered buildings with heights suited to racking and several docks, with the odd conventional shed. Clear height and docks are on record for nearly every Dharuhera listing, and Fire NOC for most, well above the pattern we see nationally.",
+        "q": "What build type is typical in Dharuhera?"
+      },
+      {
+        "a": "All three sit on the Delhi to Jaipur corridor. Manesar is closest to Gurugram. Dharuhera sits further down, in Haryana. Bhiwadi is next to it across the Rajasthan border, mostly in RIICO estates, under Rajasthan's rules. Compare the buildings and the run to your customers.",
+        "q": "Should I choose Dharuhera, Manesar or Bhiwadi?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "dharwad",
+    "seoTitle": "Dharwad Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits across Dharwad district and what it costs by size. Belur, Gamanagatti, Tarihal and the Pune to Bangalore highway compared.",
+    "h1": "Dharwad Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Dharwad district, with the twin cities of Dharwad and Hubli, or Hubballi, is north Karnataka's distribution centre, and our Dharwad listings sit in its industrial areas and along the Pune to Bangalore highway. Most of the stock is pre-engineered, with conventional sheds making up much of the rest. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Karnatak University clock tower in Dharwad",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/dharwad.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Dharwad",
+    "marketProse": "Dharwad district's warehousing follows the national highway between Pune and Bangalore, which runs past both Dharwad and Hubli. On the Dharwad side, **Belur Industrial Area** and **Kotur** hold larger pre-engineered units on the highway. Around Hubli, the KIADB estate at **Gamanagatti** and the **Tarihal Industrial Area** carry organised industrial stock. South of the city, **Kotgondhunsi** on the highway and the Kundgol road is where newer logistics parks have come up, with **Gabbur** and **Narayanapura** close by. Demand is regional distribution and trade across north Karnataka, and the stock is mostly pre-engineered, built for that.",
+    "marketImage": {
+      "alt": "Map of Dharwad marking its warehousing micromarkets: Belur Industrial Area, Kotur, Gamanagatti, Tarihal Industrial Area, Kotgondhunsi / Narayanapura and Gabbur",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/dharwad.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Dharwad",
+    "rentsProse": "Quotes here follow the building more than the address. A pre-engineered unit in a highway logistics park and a conventional shed in an older estate can be a short drive apart and price quite differently, so compare like building types, and read the size, height and docks alongside each rate.",
+    "specHeading": "Typical Specification in Dharwad",
+    "specProse": "Most of the stock is pre-engineered, so clear heights are generally workable for racking, and most units have ground-level or raised docks. Conventional sheds in the older estates are lower, so check height there. Floors split between VDF and RCC. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Dharwad",
+    "corridorProse": "The highway belt around Kotgondhunsi, with its logistics and industrial parks, gives the widest choice and the newest buildings. Gamanagatti and Tarihal suit occupiers who want an organised industrial estate close to Hubli. Belur and Kotur, on the Dharwad side of the highway, offer larger units with direct highway access. For stock inside Hubli itself, around Gokul Road, see our Hubli page.",
+    "complianceHeading": "Compliance and Approvals in Dharwad",
+    "complianceProse": "Much of the newer highway stock sits in private industrial and logistics parks, so the land's conversion status is the first document to ask for there. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Agricultural land in Karnataka is converted under section 95 of the Land Revenue Act; since September 2025, land already zoned for the use in an approved master plan is certified by the planning authority rather than the Deputy Commissioner. KIADB land is allotted for industrial use, so warehousing has to be allowed under the allotment, and subletting needs KIADB's written NOC. Inside the Gamanagatti or Belur estates, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Building permission comes from the Hubballi-Dharwad development authority or municipal corporation. Fire clearance is issued by the Karnataka State Fire and Emergency Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Kotgondhunsi, on the Pune to Bangalore highway south of Hubli, for the widest choice and the newest logistics-park buildings. Gamanagatti and Tarihal for organised industrial-estate stock close to Hubli. Belur and Kotur, on the Dharwad side of the highway, for larger units with direct highway access.",
+        "q": "Which is the best area for a warehouse in Dharwad district?"
+      },
+      {
+        "a": "They work as one twin-city market on the same highway, but we list them separately. Our Dharwad listings cover the district's industrial areas and highway parks, such as Belur, Gamanagatti and Kotgondhunsi. Stock inside Hubli city, around Gokul Road, is on our Hubli page.",
+        "q": "Are Dharwad and Hubli separate warehouse markets?"
+      },
+      {
+        "a": "On private land, the conversion order under section 95 of the Karnataka Land Revenue Act and the building permission, both in the current owner's name. Inside a KIADB estate such as Gamanagatti or Belur, the allotment terms, which must permit warehousing, and KIADB's written NOC for any sublease.",
+        "q": "What land documents matter for a Dharwad warehouse?"
+      },
+      {
+        "a": "Mostly pre-engineered buildings, with conventional sheds making up much of the rest, so clear heights are generally workable but lower in the older sheds. Floors split between VDF and RCC. Clear height and docks are on record for nearly every Dharwad listing, so you can shortlist on specification.",
+        "q": "What build type is typical in Dharwad?"
+      },
+      {
+        "a": "Yes. Dharwad district, with Hubli, is the commercial centre of north Karnataka, and its warehouse stock sits on the national highway between Pune and Bangalore. That puts Belgaum, Gadag and Haveri on short highway runs from one base.",
+        "q": "Is Dharwad a good base for north Karnataka distribution?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "ghaziabad",
+    "seoTitle": "Ghaziabad Warehousing: Corridors, Costs, Specification",
+    "metaDescription": "Where warehouse stock sits in Ghaziabad and what it costs by size. The Dadri and Meerut Road belts compared, plus UP land use rules.",
+    "h1": "Ghaziabad Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Ghaziabad is the eastern arm of NCR warehousing and one of the most affordable ways into the region from the Delhi side. Several belts ring the city, the rate spread across them is narrow, and the stock is predominantly pre-engineered. That makes it the value option in NCR for mid-size requirements. This page sets out which belt carries what.",
+    "heroImage": {
+      "alt": "Electric locomotive at a railway platform in Ghaziabad",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/ghaziabad.webp",
+      "width": 1024,
+      "height": 768
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Ghaziabad",
+    "marketProse": "Ghaziabad's warehousing runs along three roads out of the city and one industrial estate inside it. The eastern arm towards **Dadri** and **Jindal Nagar** carries the deepest inventory and connects to the Eastern Peripheral Expressway and the dedicated freight corridor. The northern arm on the **Meerut Road** serves the western UP trade. **Sahibabad** is the old industrial estate. **Loni** and **Bhopura** sit on the western edge against Delhi. Ghaziabad sits between Delhi and Gurugram on price and closer to Gurugram on stock quality, which is why so much mid-size NCR demand ends up here.",
+    "marketImage": {
+      "alt": "Map of Ghaziabad marking its warehousing micromarkets: Dadri, Jindal Nagar, Meerut Road, Sahibabad, Loni, Bhopura and Noida",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/ghaziabad.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Ghaziabad",
+    "rentsProse": "Ghaziabad is one of the few markets where the largest units are genuinely the cheapest per square foot, and by a clear margin. The mid-size band is where demand is tightest relative to supply, so it tends to carry the highest rate. An occupier who can flex upward into a larger unit can often pick up a better rate per square foot. Between belts, the spread is small, so road direction usually decides.",
+    "specHeading": "Typical Specification in Ghaziabad",
+    "specProse": "The stock is predominantly pre-engineered with reasonable docking. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit. Confirm the floor on the building you shortlist.",
+    "corridorHeading": "Where Warehouse Stock Sits in Ghaziabad",
+    "corridorProse": "Dadri and Jindal Nagar give the widest choice and freight corridor access. The Meerut Road holds smaller units for western UP despatch, and Loni is the Delhi-facing edge. Sahibabad is the old industrial estate inside the city, with older and smaller units on established estate land.",
+    "complianceHeading": "Compliance and Approvals in Ghaziabad",
+    "complianceProse": "Uttar Pradesh draws a sharp line between authority land and private land, and the eastern Dadri arm includes both, so check plot by plot rather than belt by belt. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. On private agricultural land, industrial or commercial use needs a declaration of non-agricultural use from the Sub-Divisional Officer under section 80 of the UP Revenue Code, and building permission from the Ghaziabad Development Authority. Inside a UPSIDA industrial area, or the Greater Noida and Yamuna Expressway authority areas on the Dadri side, check the allotment terms; UPSIDA requires written permission before a plot is sublet. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Fire clearance is issued by the UP Fire and Emergency Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Dadri and Jindal Nagar for the widest choice and freight corridor access. Meerut Road for smaller units and western UP despatch. The spread between them is small, so road direction usually decides.",
+        "q": "Which is the best area for a warehouse in Ghaziabad?"
+      },
+      {
+        "a": "Generally cheaper than Noida, and broadly similar to Gurugram on rate while offering more mid-size stock. Where Gurugram wins is depth in very large units; where Ghaziabad wins is the mid-size range, which is where most of its inventory sits. Current rates for each city are on their overview pages.",
+        "q": "Is Ghaziabad cheaper than Gurugram or Noida for warehousing?"
+      },
+      {
+        "a": "On private agricultural land, the section 80 declaration from the Sub-Divisional Officer and GDA building permission are the documents to ask for. Inside a UPSIDA or authority area, confirm that the allotment permits warehousing and that subletting is approved. Because the Dadri arm mixes both, check plot by plot.",
+        "q": "Does a Ghaziabad warehouse need land use conversion?"
+      },
+      {
+        "a": "Mostly pre-engineered, with clear heights on the higher side for NCR and reasonable docking, which is why Ghaziabad competes with Gurugram on stock quality. RCC and conventional sheds are a small share. Clear height and docks are on record for nearly every Ghaziabad listing, so you can shortlist on specification before a visit.",
+        "q": "What specification is typical for a Ghaziabad warehouse?"
+      },
+      {
+        "a": "Yes. The Meerut Road arm serves the western UP trade with smaller units, and the Dadri side adds freight corridor access and the Eastern Peripheral Expressway. Ghaziabad also reaches Delhi from its western edge at Loni, so one Ghaziabad warehouse can serve both Delhi and western Uttar Pradesh.",
+        "q": "Is Ghaziabad a good base for western Uttar Pradesh distribution?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "guntur",
+    "seoTitle": "Guntur Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Guntur and what it costs by size. Pericherla, Pulladigunta and the Chennai to Kolkata highway compared, plus land rules.",
+    "h1": "Guntur Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Guntur is one of India's largest chilli and agricultural trading centres, and its warehousing serves that trade from the national highway around the city, a short run from Vijayawada. Most of the stock is pre-engineered, with some conventional sheds. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Guntur is picturesque; and productive",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/blogs/guntur-10b646e8480f85f9.webp",
+      "width": 636,
+      "height": 358
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Guntur",
+    "marketProse": "Guntur's warehousing serves agricultural trade, with chilli, cotton and tobacco at its centre, and regional distribution in the capital region near **Vijayawada**. The national highway between Chennai and Kolkata runs past the city, and the stock sits around it. South-west of the city, **Pericherla** and **Pulladigunta** on the highway towards Chilakaluripet hold pre-engineered units, and more stock sits on the city's edges along the highway. Demand is agricultural storage and distribution for the Guntur and Krishna districts.",
+    "marketImage": {
+      "alt": "Map of Guntur marking its warehousing micromarkets: Vijayawada and Pericherla / Pulladigunta",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/guntur.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Guntur",
+    "rentsProse": "Quotes in Guntur follow the building more than the address. A pre-engineered unit on the highway and a conventional shed are different products, so compare like building types, and read the size, height and docks alongside each rate.",
+    "specHeading": "Typical Specification in Guntur",
+    "specProse": "Most of the stock is pre-engineered, with heights suited to stacking and racking; the conventional sheds are lower. Most units have docks. Clear height is on record for nearly every listing here, so you can shortlist on it before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Guntur",
+    "corridorProse": "The national highway belt around Guntur is the place to start, with Pericherla and Pulladigunta on the south-western side. Units on the city's edges suit trade storage close to the markets. For larger distribution requirements across the capital region, compare these with the Vijayawada belts.",
+    "complianceHeading": "Compliance and Approvals in Guntur",
+    "complianceProse": "Most of Guntur's stock sits on private land along the highway, so the land's permitted use is the first document to ask for. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Andhra Pradesh repealed its agricultural land conversion (NALA) Act in September 2025, so land development is now regulated through the urban development authorities and town planning rules; confirm the permitted use and building permission with the authority for the area. Fire clearance is issued by the Andhra Pradesh State Disaster Response and Fire Services Department. Inside an APIIC industrial park, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "The national highway belt around Guntur, with Pericherla and Pulladigunta on the south-western side towards Chilakaluripet, for pre-engineered units with highway access. The city's edges for trade storage close to the markets.",
+        "q": "Which is the best area for a warehouse in Guntur?"
+      },
+      {
+        "a": "Guntur suits agricultural storage and trade, especially chilli and cotton, close to its markets. Vijayawada, a short run north, is the larger distribution market for the capital region, with more stock. Many occupiers compare both, since they sit on the same highway.",
+        "q": "Should I choose Guntur or Vijayawada for a warehouse?"
+      },
+      {
+        "a": "Andhra Pradesh repealed its agricultural land conversion Act in September 2025, so confirm the permitted use and building permission with the development authority for the area. Inside an APIIC park, check the allotment terms, then the fire clearance for the unit's size.",
+        "q": "What approvals matter for a Guntur warehouse?"
+      },
+      {
+        "a": "Mostly pre-engineered buildings, with some conventional sheds. Heights suit stacking and racking on the pre-engineered units, and most have docks. Clear height is on record for nearly every Guntur listing, so you can shortlist on it before a visit.",
+        "q": "What build type is typical in Guntur?"
+      },
+      {
+        "a": "Agriculture first. Guntur is one of India's largest chilli markets and a major cotton and tobacco centre, so storage for produce is a large share of demand. Regional distribution for the Andhra Pradesh capital region adds to it.",
+        "q": "What drives warehouse demand in Guntur?"
+      }
+    ],
+    "relatedBlogs": [],
+    "statOverrides": {
+      "size": {
+        "max": 35000
+      }
+    }
+  },
+  {
+    "kind": "CITY",
+    "slug": "gurugram",
+    "seoTitle": "Gurugram Warehousing: Corridors, Costs, Specification",
+    "metaDescription": "Where warehouse stock sits in Gurugram (Gurgaon) and what it costs by size. Pataudi Road, Bilaspur, Sohna Road and Manesar compared, plus Haryana CLU rules.",
+    "h1": "Gurugram Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Gurugram holds some of the deepest large-format warehousing inventory in north India. Much of its stock is large, and the rate barely moves as units get bigger, which makes it one of the few markets where taking the larger box costs little extra per square foot. This page sets out which belt carries what, and what Haryana's land use rules mean for each.",
+    "heroImage": {
+      "alt": "Aerial view of Gurugram with a wide road through green cover",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/gurugram.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Gurugram",
+    "marketProse": "Gurugram's warehousing is not really in Gurugram. It sits on the arc of villages and industrial land west and south of the city, along **Pataudi Road**, around **Farukhnagar**, out towards **Bilaspur** and **Tauru**, and down the **Sohna Road** periphery, with **Manesar** as the planned industrial township. The city's own sectors carry very little storage stock, and what they do carry is small and expensive. That arc exists because it is where agricultural land could be converted and where the KMP Expressway and NH-48 meet. The result is a purpose-built market: predominantly pre-engineered, large-format stock serving distribution into Delhi, Haryana and the north.",
+    "marketImage": {
+      "alt": "Map of Gurugram marking its warehousing micromarkets: Pataudi Road, Farukh Nagar, Bilaspur, Tauru Road, Sohna Road, Manesar and Kherki Dhaula",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/gurugram.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Gurugram",
+    "rentsProse": "Gurugram has very little small-unit stock, which is why the usual small-unit premium hardly appears. Across the warehouse-scale range the rate moves very little, and the largest boxes price much like mid-size ones. That is unusual, and it is the strongest argument for taking a larger unit here than in most other markets. Belt matters more than size: Sohna Road carries a clear premium for being close to the city, while the western and southern belts sit together at the lower end.",
+    "specHeading": "Typical Specification in Gurugram",
+    "specProse": "Gurugram's specification story is about consistency rather than peaks. The stock is new, purpose-built and dock-heavy, with very little conversion outside the Sohna Road belt. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit. Confirm the floor on the building you shortlist.",
+    "corridorHeading": "Where Warehouse Stock Sits in Gurugram",
+    "corridorProse": "Pataudi Road and Tauru Road carry the large boxes, at rates close to the most affordable in the city. Farukhnagar gives wide choice at a similar rate. Manesar is the planned IMT, with smaller units. Sohna Road is the outlier: higher rates and a much larger share of RCC than the other belts, because it is doing a different, city-facing job.",
+    "complianceHeading": "Compliance and Approvals in Gurugram",
+    "complianceProse": "Fire NOC is on record for most listings here, well above the pattern we see nationally. Haryana is where the land use question bites hardest, because much of the Gurugram warehousing arc sits on converted agricultural land rather than inside an industrial estate. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. In Haryana's controlled areas, change of land use is granted by the Department of Town and Country Planning under the 1963 Scheduled Roads and Controlled Areas Act, so ask for the CLU order on the plot itself before the lease, not after. Inside an HSIIDC estate, including IMT Manesar, check the allotment terms instead. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Fire NOCs are issued under the Haryana Fire Service Act, 2009, through the urban local bodies. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Farukhnagar for depth of choice. Pataudi Road and Tauru Road for the largest units. Manesar if a planned industrial township matters more than rate. Sohna Road only if proximity to the city or the airport is worth a clear premium per square foot.",
+        "q": "Which is the best area for a warehouse in Gurugram?"
+      },
+      {
+        "a": "On private land in a controlled area, yes: the CLU from the Department of Town and Country Planning is the first document to ask for. Inside an HSIIDC estate or IMT Manesar, check that the allotment permits warehousing instead. Because much of the Gurugram arc developed on converted agricultural land, the question applies to a large part of the market.",
+        "q": "Does a Gurugram warehouse need a change of land use?"
+      },
+      {
+        "a": "Because the market developed around large-format distribution on peripheral land, not around city-centre storage. An occupier needing a small unit in this part of NCR will usually find more choice inside Delhi or in Ghaziabad.",
+        "q": "Why does Gurugram have so little small warehouse space?"
+      },
+      {
+        "a": "Gurugram's stock is predominantly pre-engineered, purpose-built and dock-heavy, with clear heights suited to racked storage. Floors are better specified than in most cities, split between FM2, VDF and trimix. The Sohna Road belt is the exception, with more RCC. Clear height and docks are on record for nearly every listing, so buildings can be compared before a visit.",
+        "q": "What specification is typical for a Gurugram warehouse?"
+      },
+      {
+        "a": "Most Gurugram listings have a fire NOC on record, well above the pattern we see nationally, which reflects how new and purpose-built the stock is. Fire NOCs in Haryana are issued under the Haryana Fire Service Act, 2009. Ask to see the NOC for the specific building you are taking, not for the wider compound or a neighbouring shed.",
+        "q": "Do Gurugram warehouses have a fire NOC?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "guwahati",
+    "seoTitle": "Guwahati Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Guwahati and what it costs by size. Changsari, Pamohi, Azara and Khanapara compared, plus Assam land rules.",
+    "h1": "Guwahati Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Guwahati is the distribution gateway to the whole of North-East India, and its warehousing sits on the highways that lead out of the city on both banks of the Brahmaputra. The stock we list is entirely pre-engineered, and units run up to large distribution boxes. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Guwahati at night with light trails on a city road",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/guwahati.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Guwahati",
+    "marketProse": "Guwahati is where freight for the North-East is broken down and sent on, so its warehousing follows the highways out of the city. On the north bank, **Changsari** and the **Amingaon** side, across the Brahmaputra on the highway towards Baihata, hold logistics parks and large distribution units. In the south-west, **Azara** near the airport and **Pamohi** on the city's edge carry pharmaceutical and parcel networks. To the east, **Khanapara** on the road to Meghalaya serves that state. Some larger units sit further out, towards **Madanpur** and Darrang district. Demand is regional distribution for the North-East, and the stock is modern and pre-engineered.",
+    "marketImage": {
+      "alt": "Map of Guwahati marking its warehousing micromarkets: Changsari, Amingaon, Azara, Pamohi, Khanapara and Madanpur",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/guwahati.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Guwahati",
+    "rentsProse": "Guwahati's stock is uniformly pre-engineered, so quotes separate on size, height and location rather than build type. Compare buildings on the same bank of the river, because crossing the Brahmaputra adds time to every trip, and read the size, height and docks alongside each rate.",
+    "specHeading": "Typical Specification in Guwahati",
+    "specProse": "Every listing is pre-engineered, and the larger units on the north bank and towards Madanpur offer heights suited to racking and many docks. Smaller units in the city pockets have fewer docks. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Guwahati",
+    "corridorProse": "Changsari and the north bank are the place to start for large distribution units and logistics parks, with the highway towards upper Assam. Azara and Pamohi suit occupiers who want the airport side and quick access into the city. Khanapara suits freight heading into Meghalaya. The outlying units towards Madanpur and Darrang offer the largest boxes, at a longer run into the city.",
+    "complianceHeading": "Compliance and Approvals in Guwahati",
+    "complianceProse": "Much of Guwahati's newer stock sits on private land on the city's edges, so the land's reclassification status is the first document to ask for. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. In Assam, agricultural land is reclassified for non-agricultural use under the Assam Agricultural Land (Regulation of Reclassification and Transfer for Non-Agricultural Purpose) Act, 2015, with the Deputy Commissioner's permission and a reclassification premium; the 2024 amendment set up committees to speed the approvals. Inside the Guwahati metropolitan area, building permission comes from the Guwahati Metropolitan Development Authority. Inside an AIIDC industrial area or park, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Fire clearance is issued by the Assam Fire and Emergency Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Changsari and the north bank of the Brahmaputra for large distribution units and logistics parks on the highway to upper Assam. Azara and Pamohi for the airport side and quick city access. Khanapara for freight heading into Meghalaya.",
+        "q": "Which is the best area for a warehouse in Guwahati?"
+      },
+      {
+        "a": "Guwahati is the main road and rail gateway into the North-East, so national networks bring freight here, break it down and send it on to Assam's other cities and the neighbouring states. Its warehouse stock is modern and pre-engineered, on the highways out of the city.",
+        "q": "Why do companies warehouse in Guwahati for the North-East?"
+      },
+      {
+        "a": "On private land, the reclassification permission under Assam's 2015 agricultural land Act, from the Deputy Commissioner, and the building permission from the Guwahati Metropolitan Development Authority, both in the current owner's name. Inside an AIIDC park, the allotment terms.",
+        "q": "What land documents matter for a Guwahati warehouse?"
+      },
+      {
+        "a": "Pre-engineered buildings throughout, with heights suited to racking and several docks on the larger units. Clear height and docks are on record for nearly every Guwahati listing, so you can shortlist on specification before a visit.",
+        "q": "What build type is typical in Guwahati?"
+      },
+      {
+        "a": "It depends on where your freight goes. The north bank, around Changsari and Amingaon, suits freight heading to upper Assam and Arunachal. The south side, around Azara, Pamohi and Khanapara, suits city delivery and routes into Meghalaya. Crossing the Brahmaputra adds time to every trip.",
+        "q": "Should I choose the north bank or the south bank in Guwahati?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "hosur",
+    "seoTitle": "Hosur Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits in Hosur, what it costs by size, and the clear heights large occupiers get here. Kelamangalam and Bagalur compared.",
+    "h1": "Hosur Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Hosur is a large-format market attached to Bangalore and administered by Tamil Nadu. Much of its stock is large, purpose-built and high-roofed, which is why it competes for requirements that would otherwise go to Bangalore or Chennai. The catch is the state border: approvals, fire clearance and stamp duty all follow Tamil Nadu's rules. This page sets out what that stock is.",
+    "heroImage": {
+      "alt": "Aerial view of fields and a river near Hosur at sunset",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/hosur.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Hosur",
+    "marketProse": "Hosur sits on NH-44 an hour south of Bangalore, on the Tamil Nadu side of the border. It grew as a manufacturing town around SIPCOT, and its warehousing grew to serve those factories and their suppliers. That origin explains the stock: large, purpose-built, high-roofed and predominantly pre-engineered. The main belts are **Kelamangalam** and **Uddanapalli** to the southeast, **Bagalur** towards the Bangalore side, the **Hosur-Malur Road** with some of the largest units, and **Thally Road** with the smaller stock. For an occupier whose network runs through Karnataka but who can accept a Tamil Nadu address and approval route, Hosur is often the better answer at scale.",
+    "marketImage": {
+      "alt": "Map of Hosur marking its warehousing micromarkets: Kelamangalam, Uddanapalli, Bagalur, Hosur-Malur Road and Thally Road",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/hosur.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Hosur",
+    "rentsProse": "Hosur is the mirror image of the small-unit markets. Much of the stock is large, and the mid-size band is thin. The rate is essentially flat across the whole range, which means a large occupier gets scale at no rate penalty, while a small occupier gets comparatively little choice. Rates sit close to the Bangalore industrial belts for much larger buildings, which is the core of Hosur's case.",
+    "specHeading": "Typical Specification in Hosur",
+    "specProse": "Hosur has one of the strongest specification profiles we cover: generous docking, high clear heights on the large units and predominantly grade-A flooring. Smaller units have noticeably lower heights, so confirm the building you are shown.",
+    "corridorHeading": "Where Warehouse Stock Sits in Hosur",
+    "corridorProse": "The Hosur-Malur Road and Kelamangalam carry some of the largest units we list anywhere, at rates comparable with the Bangalore industrial belts, which makes them hard to beat on floor area per rupee. Bagalur sits closest to the Bangalore side, and Thally Road holds the small-unit stock. Build-to-suit land is a meaningful part of what is offered here, for occupiers planning ahead.",
+    "complianceHeading": "Compliance and Approvals in Hosur",
+    "complianceProse": "The point occupiers most often miss is that Hosur is Tamil Nadu. A network run out of Bangalore still crosses a state border here, and the approval route, the fire NOC issuer and the stamp duty regime are all Tamil Nadu's. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Outside a SIPCOT estate, planning permission runs through the Directorate of Town and Country Planning, since Hosur sits outside the Chennai Metropolitan Area, and applications go through the state's single-window planning portal; the approved land use has to permit storage. Inside SIPCOT, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Fire clearance is issued by the Tamil Nadu Fire and Rescue Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Scale at a similar rate. Hosur's units are typically much larger than Bangalore's at a comparable rate per square foot, with high clear heights and generous docking. If the requirement is large and an hour south of Bangalore works operationally, Hosur is usually the stronger option.",
+        "q": "Why would I choose Hosur over Bangalore?"
+      },
+      {
+        "a": "High, especially on the large units, which is part of why Hosur competes for racked storage and manufacturing supply. Smaller Hosur units run noticeably lower, so confirm the height of the building you are shown. The current recorded median is in the specification section of this page.",
+        "q": "What clear height can I expect in Hosur?"
+      },
+      {
+        "a": "Less so. The small and mid-size bands are thin. Thally Road carries the small-unit stock, but choice is limited, and a small requirement is usually better served from the Bangalore Hosur Road belt just across the border.",
+        "q": "Is Hosur suitable for a small warehouse requirement?"
+      },
+      {
+        "a": "Yes. Build-to-suit land is a meaningful part of what is offered in Hosur, which suits occupiers planning ahead for a large, high-roofed building. Hosur's existing stock is already large and purpose-built for manufacturers, so build-to-suit here usually means a bigger or more specialised version of what the market already does well.",
+        "q": "Is build-to-suit available in Hosur?"
+      },
+      {
+        "a": "Tamil Nadu's, not Karnataka's, even for a network run from Bangalore. Outside SIPCOT, planning permission comes from the Directorate of Town and Country Planning through the state's single-window portal. Inside SIPCOT, check the allotment terms. Fire clearance comes from the Tamil Nadu Fire and Rescue Services, and Tamil Nadu stamp duty applies to the lease.",
+        "q": "What approvals apply to a Hosur warehouse?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "hubli",
+    "seoTitle": "Hubli Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits in Hubli-Dharwad and what it costs by size. Gokul Road and the city's industrial pockets compared, plus Karnataka land rules.",
+    "h1": "Hubli Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Hubli is north Karnataka's trading and distribution centre, on the Pune to Bangalore highway, and its warehousing serves that region rather than the Bangalore metro. Units are small to mid-size, and the stock mixes pre-engineered buildings with RCC and sheds, so specification varies building by building. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Vande Bharat train running through hills near Hubballi",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/hubli.webp",
+      "width": 1600,
+      "height": 895
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Hubli",
+    "marketProse": "Hubli, with Dharwad, is the commercial centre of north Karnataka, and it sits on the national highway between Pune and Bangalore. Its warehousing serves trade and distribution across the region. Stock sits around **Gokul Road** and the city's industrial pockets, with **Adargunchi** and **Narayanapura** on the city's edges. Demand is regional trade rather than port or metro consumption, and units are small to mid-size, in a mix of pre-engineered buildings, RCC and conventional sheds.",
+    "marketImage": {
+      "alt": "Map of Hubli marking its warehousing micromarkets: Gokul Road, Adargunchi and Narayanapura",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/hubli.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Hubli",
+    "rentsProse": "Hubli's rates are low and barely move with unit size, which is what a regional trading market looks like. The negotiation is about the building and its access rather than the rate. Build type matters more than location: an RCC godown and a pre-engineered shed can quote similarly and do very different jobs.",
+    "specHeading": "Typical Specification in Hubli",
+    "specProse": "The stock mixes pre-engineered buildings, RCC and sheds, so clear heights are often modest and docking limited. Verify both on site for any racked or truck-loaded operation. Clear height is on record for nearly every listing here, so you can shortlist on it before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Hubli",
+    "corridorProse": "Gokul Road and the industrial pockets around it are the place to start. Adargunchi and the city's edges offer smaller units and some older stock. Large single boxes are rarely listed. Read the localities above as the guide to where Hubli's stock sits.",
+    "complianceHeading": "Compliance and Approvals in Hubli",
+    "complianceProse": "Much of Hubli's stock sits on private land in the city's industrial pockets, so the land's conversion status is the first document to ask for. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Agricultural land in Karnataka is converted under section 95 of the Land Revenue Act; since September 2025, land already zoned for the use in an approved master plan is certified by the planning authority rather than the Deputy Commissioner. KIADB land is allotted for industrial use, so warehousing has to be allowed under the allotment, and subletting needs KIADB's written NOC. Building permission comes from the Hubballi-Dharwad development authority or municipal corporation. Fire clearance is issued by the Karnataka State Fire and Emergency Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Gokul Road and the industrial pockets around it for the widest choice in Hubli, on the Pune to Bangalore highway side of the city. The city's edges, such as Adargunchi and Narayanapura, for smaller and older units. Large single boxes are rarely listed, so a big requirement means build-to-suit.",
+        "q": "Which is the best area for a warehouse in Hubli?"
+      },
+      {
+        "a": "Rarely. Hubli is a small to mid-size market, serving regional trade across north Karnataka rather than large-format distribution. A large requirement usually means build-to-suit on the Pune to Bangalore highway, or looking at the Bangalore belts if the network allows.",
+        "q": "Does Hubli have large warehouse space?"
+      },
+      {
+        "a": "The land's conversion order and building permission in the current owner's name, then the structure and clear height, because much of the stock is RCC or shed rather than purpose-built.",
+        "q": "What should I check before leasing in Hubli?"
+      },
+      {
+        "a": "A three-way mix of pre-engineered buildings, RCC and conventional sheds, so clear heights are often modest and docking limited. Floors split between RCC and VDF. For racked storage or truck loading, verify both on site. Clear height is on record for nearly every Hubli listing.",
+        "q": "What build type is typical in Hubli?"
+      },
+      {
+        "a": "Yes. Hubli, with Dharwad, is the commercial centre of north Karnataka and sits on the national highway between Pune and Bangalore. Its stock serves regional trade, in small to mid-size units around Gokul Road and the industrial pockets.",
+        "q": "Is Hubli a good base for north Karnataka distribution?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "hyderabad",
+    "seoTitle": "Hyderabad Warehousing: Corridors, Costs, Specification",
+    "metaDescription": "Where warehouse stock sits in Hyderabad and what it costs by size. The Medchal, Shamshabad and Kompally belts compared on rent and unit size.",
+    "h1": "Hyderabad Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Hyderabad is one of the most consistent large warehousing markets in the country. Its industrial stock is predominantly purpose-built, the rates across its main belts sit close together, and units are large for a city market. For an occupier that makes the choice unusually simple: pick the belt that suits your road access and compare buildings. This page sets out where that stock is and what it costs.",
+    "heroImage": {
+      "alt": "Hyderabad skyline of glass towers beside a flyover",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/hyderabad.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Hyderabad",
+    "marketProse": "Hyderabad's warehousing grew along two axes: NH-44 running north towards Nagpur, and the airport corridor running south. The northern arm through **Medchal**, **Devaryamjal** and **Kompally** carries most of the inventory and many of the biggest units, just beyond the Outer Ring Road where trucks avoid the city. The southern arm through **Shamshabad** serves air freight and the pharmaceutical cluster. There is a third, much smaller belt west towards **Patancheru** on the Mumbai highway. What makes Hyderabad unusual is uniformity. The belts trade close to one another, and the stock is predominantly pre-engineered and built for the purpose, so an occupier here is choosing between belts on road access more than on price or grade.",
+    "marketImage": {
+      "alt": "Map of Hyderabad marking its warehousing micromarkets: Medchal, Devaryamjal / Kompally, Shamshabad and Patancheru",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/hyderabad.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Hyderabad",
+    "rentsProse": "Once you are past small city units, Hyderabad has one of the flattest cost curves of any city we cover. Rates barely move between mid-size and very large units, so scale buys almost nothing on rate here. It buys specification instead, and that is where the decision sits. Small inner-city units are the exception: they are priced as city space and carry a clear premium. Between the belts, the northern arm and the airport side price close together.",
+    "specHeading": "Typical Specification in Hyderabad",
+    "specProse": "Generous docking is the practical difference between Hyderabad and most of its peers: the typical unit here was designed for vehicle turnaround rather than adapted for it. Clear height and docks are on record for most listings, so both can be compared before a visit, and large units record good clear heights. Confirm the floor per building.",
+    "corridorHeading": "Where Warehouse Stock Sits in Hyderabad",
+    "corridorProse": "Build type tells the story better than rent. The named belts are essentially purpose-built pre-engineered stock, which is why their specification is so consistent. The RCC in Hyderabad sits inside the city, where it is converted space at a much higher rate and a fraction of the size. Choose Medchal and the northern arm for large distribution, Shamshabad for anything tied to the airport, and Kompally or Gundlapochampally for mid-size space closer in.",
+    "complianceHeading": "Compliance and Approvals in Hyderabad",
+    "complianceProse": "The northern belt along NH-44 developed quickly on private land, so the land-use position is the first thing to establish on anything outside an industrial park. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. In and around Hyderabad, land use is governed by HMDA, which runs its own change-of-land-use approval, and building permission comes from the planning authority for the area. Inside a park developed by TGIIC (formerly TSIIC), check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Fire clearance is issued by the Telangana State Disaster Response and Fire Services Department for buildings that need it. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Medchal and the NH-44 northern arm for large distribution, on depth of inventory and unit size. Shamshabad for anything air-freight or pharma linked. Kompally for mid-size units closer to the city. The rate difference between them is small enough that road access to your own demand should decide it.",
+        "q": "Which is the best area for a warehouse in Hyderabad?"
+      },
+      {
+        "a": "On the industrial belts it generally is, and the lower rate is not buying a lower specification: Hyderabad's belt stock is predominantly new, purpose-built pre-engineered space. The gap narrows on small inner-city units, which are expensive everywhere. Current rates for each city are on their overview pages.",
+        "q": "Is Hyderabad cheaper than Bangalore or Chennai for warehousing?"
+      },
+      {
+        "a": "Docking in Hyderabad is generous by Indian standards, and the largest units run well beyond the typical figure. That reflects how much of the stock was purpose-built rather than converted. The current median is shown in the specification section of this page.",
+        "q": "How many docks does a typical Hyderabad warehouse have?"
+      },
+      {
+        "a": "Overwhelmingly pre-engineered on the industrial belts, with VDF and FM2 floors and good clear heights, because most of Hyderabad's stock was purpose-built rather than converted. The RCC in Hyderabad sits inside the city as smaller converted space. That consistency is why Hyderabad occupiers usually choose between belts on road access rather than specification.",
+        "q": "Are Hyderabad warehouses mostly PEB or RCC?"
+      },
+      {
+        "a": "Outside an industrial park, the HMDA change-of-land-use approval and the building permission from the planning authority, both covering the plot you are taking. Inside a TGIIC park, the allotment terms and the corporation's written consent for any sublease. Fire clearance comes from the Telangana State Disaster Response and Fire Services Department, for buildings that need it.",
+        "q": "What approvals should I check for a Hyderabad warehouse?"
+      }
+    ],
+    "relatedBlogs": [],
+    "statOverrides": {
+      "size": {
+        "min": 500
+      },
+      "clearHeight": {
+        "max": 42
+      }
+    }
+  },
+  {
+    "kind": "CITY",
+    "slug": "indore",
+    "seoTitle": "Indore Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits in Indore and what it costs by size. Dewas Naka, the Dakachiya logistics parks and AB Road compared, plus MP land rules.",
+    "h1": "Indore Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Indore is central India's distribution hub, and its warehousing clusters where the Agra to Bombay Road leaves the city towards Dewas. Units are small to mid-size, the stock mixes pre-engineered buildings with a meaningful share of RCC, and rates are among the most affordable of the cities we cover. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Indore skyline at sunset",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/indore.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Indore",
+    "marketProse": "Indore sits at the centre of India's road network, which is why so much FMCG, pharma and e-commerce distribution for Madhya Pradesh runs through it. Warehousing concentrates on the northeastern exit along the **AB Road**, around **Dewas Naka**, **Lasudia Mori** and **Mangliya**, and further out at **Dakachiya**, where purpose-built logistics parks have come up. The **Loha Mandi** area carries older trade godowns closer to the city. Most stock is mid-size and built for regional distribution rather than for manufacturing, and the logistics parks are where the newer pre-engineered buildings sit.",
+    "marketImage": {
+      "alt": "Map of Indore marking its warehousing micromarkets: AB Road, Dewas Naka / Loha Mandi, Lasudia Mori, Mangliya and Dakachiya",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/indore.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Indore",
+    "rentsProse": "Indore's rates are among the most affordable we cover and barely move with unit size. Very large units are rarely listed, so the market sits in the small and mid-size range. What separates quotes is build type and location: newer pre-engineered space in the logistics parks sits at the upper end, and older RCC godowns closer to the city sit lower despite their position.",
+    "specHeading": "Typical Specification in Indore",
+    "specProse": "The stock is predominantly pre-engineered, with a meaningful share of RCC godowns. Clear heights vary with build type, and docking is reasonable in the logistics parks. Confirm height and loading on each building. Clear height is on record for nearly every listing here, so you can shortlist on it before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Indore",
+    "corridorProse": "The AB Road corridor is effectively the market. Dewas Naka and Lasudia Mori, closest to the city, are the established transport-godown hub. Dakachiya and Mangliya, further out, hold the logistics parks and the newer buildings. The older trade godowns nearer Loha Mandi are smaller and more often RCC. Read the localities above as the guide to where Indore's stock sits.",
+    "complianceHeading": "Compliance and Approvals in Indore",
+    "complianceProse": "Most of the AB Road stock sits on private land outside an industrial estate, so the land's diversion status is the first thing to establish. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. In Madhya Pradesh, agricultural land is diverted to another use under section 172 of the Land Revenue Code; since the 2024 amendment, diversion to industrial use outside a development-plan area needs only a written intimation to the Sub-Divisional Officer. Building permission inside the Indore planning area comes from the Indore Development Authority or the municipal corporation. Inside an MPIDC industrial area, the allotment defines the permitted use. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Fire clearance comes from the municipal fire service. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Dewas Naka and Lasudia Mori on the AB Road for transport-godown space closest to the city. Dakachiya and Mangliya for the newer logistics-park buildings further out. The Loha Mandi area only for small trade godowns.",
+        "q": "Which is the best area for a warehouse in Indore?"
+      },
+      {
+        "a": "Very large units are rarely listed in Indore, because the market is mostly small to mid-size stock built for regional distribution. A large requirement usually means build-to-suit in one of the logistics parks on the AB Road, around Dakachiya and Mangliya, where the newer pre-engineered buildings already sit.",
+        "q": "Does Indore have large warehouse space?"
+      },
+      {
+        "a": "Yes, under section 172 of the MP Land Revenue Code. Since 2024, diversion to industrial use outside a development-plan area needs only a written intimation to the Sub-Divisional Officer; inside a planning area, check the permitted use with the development authority. Ask for the diversion record in the current owner's name.",
+        "q": "Does a warehouse on agricultural land in Indore need diversion?"
+      },
+      {
+        "a": "Mostly pre-engineered, with a meaningful share of RCC godowns, mainly the older trade stock near Loha Mandi. The newer logistics-park buildings at Dakachiya and Mangliya carry the better clear heights and docking. Clear height is on record for nearly every Indore listing, so you can shortlist on it before a visit.",
+        "q": "What specification is typical for an Indore warehouse?"
+      },
+      {
+        "a": "Yes. Indore sits at the centre of India's road network, which is why so much FMCG, pharma and e-commerce distribution for Madhya Pradesh runs through it. The AB Road corridor, from Dewas Naka out to Dakachiya, is where that stock sits, mostly in mid-size units built for regional distribution.",
+        "q": "Is Indore a good base for central India distribution?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "jaipur",
+    "seoTitle": "Jaipur Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits in Jaipur and what it costs by size. Ajmer Road, the Ring Road, VKIA and Sitapur compared, plus Rajasthan land rules.",
+    "h1": "Jaipur Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Jaipur is a mid-size, predominantly pre-engineered warehousing market serving Rajasthan and the Delhi to Mumbai trade that passes through it. Most units are small to mid-size and rates sit in a narrow band, so the decision here is about which approach road suits your freight rather than about price. This page sets out where the stock sits and what to check before you sign.",
+    "heroImage": {
+      "alt": "Panorama of Jaipur at sunset",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/jaipur.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Jaipur",
+    "marketProse": "Jaipur's warehousing sits on the roads out of the city rather than in one cluster. **Ajmer Road** and the stretch of the **Ring Road** around **Bhankrota** carry the largest share, on the route west and south towards Ajmer and Gujarat. The older industrial areas, **Vishwakarma Industrial Area (VKIA)** on Sikar Road and the estates at **Sitapur** and **Sanganer** off Tonk Road, hold the established stock. **Delhi Road** and **Niwaru Road** serve the northern side. Demand is regional distribution and trade across Rajasthan rather than port or heavy manufacturing, and the stock reflects it: predominantly pre-engineered, mostly mid-size, and built for distribution.",
+    "marketImage": {
+      "alt": "Map of Jaipur marking its warehousing micromarkets: Ajmer Road, Bhankrota, Vishwakarma Industrial Area (VKIA), Sitapur, Sanganer, Delhi Road and Niwaru Road",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/jaipur.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Jaipur",
+    "rentsProse": "Jaipur's rates sit close together across the city and across sizes. Small units carry little of the premium seen in the big metros, and the few larger units price only slightly above the middle of the market. For an occupier, that means the negotiation is about the building, its access and its handover condition rather than about the headline rate. Newer pre-engineered buildings on Ajmer Road quote at the upper end; older estate stock sits lower.",
+    "specHeading": "Typical Specification in Jaipur",
+    "specProse": "The stock is predominantly pre-engineered, with reasonable docking and clear heights that suit racked storage on the newer buildings. Older estate units run lower. Ask what flooring is down before you shortlist. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Jaipur",
+    "corridorProse": "Ajmer Road and the Ring Road give the widest choice and the newer buildings, with good road access for western despatch. VKIA and the Sitapur and Sanganer estates carry older, established stock inside organised industrial areas. Delhi Road suits freight heading to NCR. Large single boxes are rare anywhere in the city, so a big requirement usually means a build-to-suit conversation. Read the localities above as the guide to where Jaipur's stock sits.",
+    "complianceHeading": "Compliance and Approvals in Jaipur",
+    "complianceProse": "Much of Jaipur's newer stock on Ajmer Road and the Ring Road sits on private land, so the land's conversion status is the first document to ask for. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. In Rajasthan, agricultural land is converted for industrial or commercial use under section 90A of the Land Revenue Act, with the District Collector as the principal authority. Building permission inside the city region comes from the Jaipur Development Authority. Inside a RIICO industrial area such as VKIA or Sitapur, the allotment defines the permitted use, and a resale or transfer involves RIICO as a third party. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Fire NOCs are issued by the chief fire officer of the local body, through the state's single-window portal. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Ajmer Road and the Ring Road around Bhankrota for the widest choice and the newer buildings. VKIA, Sitapur or Sanganer if an established RIICO estate matters more than the building's age. Delhi Road for freight heading to NCR.",
+        "q": "Which is the best area for a warehouse in Jaipur?"
+      },
+      {
+        "a": "Very little. Jaipur is a small to mid-size market, and large single boxes are rarely listed. A large requirement usually means build-to-suit on Ajmer Road or the Ring Road, or looking at Bhiwadi on the NCR side of Rajasthan.",
+        "q": "Does Jaipur have large warehouse space?"
+      },
+      {
+        "a": "On private land, the section 90A conversion order and the building permission, both in the current owner's name. Inside a RIICO industrial area, the allotment terms and RIICO's consent for any transfer or sublease.",
+        "q": "What land documents matter for a Jaipur warehouse?"
+      },
+      {
+        "a": "Overwhelmingly pre-engineered, with VDF floors, reasonable docking and clear heights that suit racked storage on the newer buildings along Ajmer Road and the Ring Road. Older estate units in VKIA and Sitapur run lower. Clear height and docks are on record for nearly every Jaipur listing.",
+        "q": "What specification is typical for a Jaipur warehouse?"
+      },
+      {
+        "a": "Often, yes. Jaipur's stock sits on the roads out of the city: Ajmer Road and the Ring Road for despatch west and south towards Ajmer and Gujarat, and Delhi Road for freight heading to NCR. Its demand is regional trade across Rajasthan, so the stock is mostly mid-size.",
+        "q": "Is Jaipur a good base for Rajasthan distribution?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "jamshedpur",
+    "seoTitle": "Jamshedpur Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Jamshedpur and what it costs by size. Adityapur, Bhilai Pahari, Palashbani and Chandil compared, plus Jharkhand land rules.",
+    "h1": "Jamshedpur Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Jamshedpur is eastern India's steel and automotive city, and its warehousing serves that industry and the consumer market around it. The stock we list is entirely pre-engineered, in mid-size to large units. This page sets out where the stock sits and what to check.",
+    "marketHeading": "Why Warehousing Works the Way It Does in Jamshedpur",
+    "marketProse": "Jamshedpur's warehousing grew around Tata Steel and Tata Motors and the suppliers that serve them. **Adityapur**, the large industrial area across the Kharkai river, holds the established industrial stock. On the eastern side, **Bhilai Pahari** and **Palashbani** carry newer pre-engineered units on the roads out of the city. To the north-west, **Chandil** on the highway towards Ranchi holds larger units. Demand is industrial supply for the steel and auto belt, plus distribution for the Kolhan region.",
+    "marketImage": {
+      "alt": "Map of Jamshedpur marking its warehousing micromarkets: Adityapur, Bhilai Pahari, Palashbani and Chandil",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/jamshedpur.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Jamshedpur",
+    "rentsProse": "Jamshedpur's stock is uniformly pre-engineered, so quotes separate on size, height, docks and access rather than build type. Compare buildings on the same side of the city, and read the size, height and docks alongside each rate.",
+    "specHeading": "Typical Specification in Jamshedpur",
+    "specProse": "Every listing is pre-engineered, with heights suited to racking and VDF floors where recorded. Most units have several docks. Clear height is on record for nearly every listing here, so you can shortlist on it before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Jamshedpur",
+    "corridorProse": "Adityapur is the place to start for industrial supply, close to the auto and steel ancillaries. Bhilai Pahari and Palashbani on the eastern side suit distribution units with easier truck access. Chandil suits occupiers who also serve Ranchi, on the highway between the two cities.",
+    "complianceHeading": "Compliance and Approvals in Jamshedpur",
+    "complianceProse": "Fire NOC is on record for close to half the listings here, well above the pattern we see nationally. Land title is the first question outside the industrial areas, because tenancy law restricts how land in the region changes hands. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Much of the land in the Ranchi and Jamshedpur regions falls under the Chotanagpur Tenancy Act, which restricts transfer; section 49 allows a transfer for industrial purposes only with the Deputy Commissioner's sanction, and the land may then be used only for that purpose. Inside a JIADA industrial area, the allotment terms apply instead. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Building permission comes from the Jamshedpur or Adityapur civic body, or the regional development authority, for the area. Fire clearance is issued by the Jharkhand Fire Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Adityapur Industrial Area for industrial supply close to Jamshedpur's auto and steel ancillaries. Bhilai Pahari and Palashbani on the eastern side for distribution units with easier truck access. Chandil, on the highway towards Ranchi, for occupiers serving both cities.",
+        "q": "Which is the best area for a warehouse in Jamshedpur?"
+      },
+      {
+        "a": "Industry first. Tata Steel and Tata Motors, and the suppliers clustered in Adityapur, need storage for components, materials and finished goods. Consumer distribution for the Kolhan region adds to that, in pre-engineered units on the roads out of Jamshedpur.",
+        "q": "What drives warehouse demand in Jamshedpur?"
+      },
+      {
+        "a": "Inside Adityapur, the JIADA allotment terms, which must permit warehousing, and the authority's consent for any sublease. Outside it, the owner's title and the land's status under the Chotanagpur Tenancy Act, then the building permission, all in the current owner's name.",
+        "q": "What land documents matter for a Jamshedpur warehouse?"
+      },
+      {
+        "a": "Pre-engineered buildings throughout, with heights suited to racking, VDF floors and several docks on most units. Clear height is on record for nearly every Jamshedpur listing, and Fire NOC for close to half, well above the pattern we see nationally.",
+        "q": "What build type is typical in Jamshedpur?"
+      },
+      {
+        "a": "Adityapur sits across the Kharkai river from Jamshedpur, in Seraikela Kharsawan district. It is one of eastern India's largest industrial areas, home to many of the auto and steel ancillaries that supply Tata Motors and Tata Steel, and it holds much of Jamshedpur's industrial warehouse stock.",
+        "q": "Where is Adityapur Industrial Area?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "jodhpur",
+    "seoTitle": "Jodhpur Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Jodhpur and what it costs by size. Boranada, Basni and Tanawada compared, plus Rajasthan land rules.",
+    "h1": "Jodhpur Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Jodhpur is western Rajasthan's trading and industrial centre, known for handicrafts, furniture and guar exports, and its warehousing sits in the RIICO industrial areas on the city's southern side. The stock we list is entirely pre-engineered, in mid-size units. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Mehrangarh Fort above the blue city of Jodhpur",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/jodhpur.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Jodhpur",
+    "marketProse": "Jodhpur's warehousing sits in its RIICO industrial areas, which run along the city's southern edge. **Basni**, the older industrial area, holds established stock close to the city, with **Tanawada** beside it. Further south, **Boranada** is the larger and newer RIICO estate, on the road towards Pali and Gujarat. Demand is export storage for handicrafts, furniture and guar, plus distribution across western Rajasthan.",
+    "marketImage": {
+      "alt": "Map of Jodhpur marking its warehousing micromarkets: Basni, Tanawada and Boranada",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/jodhpur.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Jodhpur",
+    "rentsProse": "Jodhpur's stock is uniformly pre-engineered, so quotes separate on size, height, docks and estate rather than build type. Compare like with like, and read the size, height and docks alongside each rate.",
+    "specHeading": "Typical Specification in Jodhpur",
+    "specProse": "Every listing is pre-engineered, with heights suited to racking on most units and a few docks each. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Jodhpur",
+    "corridorProse": "Basni and Tanawada are the place to start for established stock close to the city. Boranada suits occupiers who want a newer estate and the road towards Pali and the Gujarat ports. Units are mostly mid-size across both.",
+    "complianceHeading": "Compliance and Approvals in Jodhpur",
+    "complianceProse": "Most of Jodhpur's stock sits inside RIICO industrial areas, so the allotment terms are the first document to ask for. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Outside the estates: In Rajasthan, agricultural land is converted for industrial or commercial use under section 90A of the Land Revenue Act, with the District Collector as the principal authority. Building permission comes from the Jodhpur Development Authority or the municipal corporation. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Basni and Tanawada for established stock close to Jodhpur city. Boranada, the newer RIICO estate further south, for occupiers who want the road towards Pali and the Gujarat ports. Units are mostly mid-size and pre-engineered across both.",
+        "q": "Which is the best area for a warehouse in Jodhpur?"
+      },
+      {
+        "a": "Exports and regional trade. Jodhpur is a major centre for handicrafts, furniture and guar gum, much of it exported through the Gujarat ports, and it serves as the distribution base for western Rajasthan.",
+        "q": "What drives warehouse demand in Jodhpur?"
+      },
+      {
+        "a": "That warehousing is a permitted activity under the plot's RIICO allotment, and that RIICO has consented to the lease or sublease. Then check the building permission and the fire position for the unit you shortlist.",
+        "q": "What should I check on a RIICO warehouse in Jodhpur?"
+      },
+      {
+        "a": "Pre-engineered buildings throughout, with heights suited to racking on most units and a few docks each. Clear height and docks are on record for nearly every Jodhpur listing, so you can shortlist on specification before a visit.",
+        "q": "What build type is typical in Jodhpur?"
+      },
+      {
+        "a": "Boranada is a RIICO industrial area on Jodhpur's southern side, on the road towards Pali. It is newer and larger than Basni, the older estate closer to the city, and holds pre-engineered industrial and warehouse stock.",
+        "q": "Where is Boranada industrial area?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "kanpur",
+    "seoTitle": "Kanpur Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Kanpur and what it costs by size. Panki, Bhauti, Rania and Jajmau compared, plus Uttar Pradesh land rules.",
+    "h1": "Kanpur Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Kanpur is central Uttar Pradesh's industrial city, known for leather, textiles and engineering, and its warehousing sits around the industrial areas on the highway west of the city. The stock we list mixes pre-engineered buildings with RCC godowns. This page sets out where the stock sits and what to check.",
+    "marketHeading": "Why Warehousing Works the Way It Does in Kanpur",
+    "marketProse": "Kanpur's warehousing follows its industry. The **Panki** industrial area on the city's western side is the largest estate, and the highway west through **Bhauti** to **Rania**, in Kanpur Dehat, carries newer pre-engineered units. On the eastern side, **Jajmau** is the leather and tanning hub, with older godowns. Smaller units sit in the city's industrial pockets, such as **Ispat Nagar**. Demand is industrial supply plus distribution across central Uttar Pradesh.",
+    "marketImage": {
+      "alt": "Map of Kanpur marking its warehousing micromarkets: Panki, Bhauti, Rania, Jajmau and Ispat Nagar",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/kanpur.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Kanpur",
+    "rentsProse": "Quotes in Kanpur follow the building more than the address. A pre-engineered unit on the western highway and an RCC godown in the city are different products, so compare like building types, and read the size, height and docks alongside each rate.",
+    "specHeading": "Typical Specification in Kanpur",
+    "specProse": "The stock mixes pre-engineered buildings, with heights suited to racking, and lower RCC godowns. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Kanpur",
+    "corridorProse": "The western belt, from Panki through Bhauti to Rania, is the place to start for pre-engineered units with highway access. Jajmau suits leather and tannery supply on the eastern side. The city pockets suit small storage close to markets.",
+    "complianceHeading": "Compliance and Approvals in Kanpur",
+    "complianceProse": "Kanpur's stock splits between UPSIDA industrial areas and private land, so check which one a building sits in first. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. In Uttar Pradesh, agricultural land used for industrial or commercial purposes needs a declaration of non-agricultural use from the Sub-Divisional Officer under section 80 of the UP Revenue Code. Inside a UPSIDA industrial area, check the allotment terms; UPSIDA requires written permission before a plot is sublet. Fire clearance is issued by the UP Fire and Emergency Services. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Building permission inside the city comes from the Kanpur Development Authority. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "The western belt from Panki through Bhauti to Rania for pre-engineered units with highway access. Jajmau on the eastern side for leather and tannery supply. Kanpur's city industrial pockets for small storage close to markets.",
+        "q": "Which is the best area for a warehouse in Kanpur?"
+      },
+      {
+        "a": "Industry. Kanpur is a major centre for leather and tanning, textiles and engineering, so storage for materials and finished goods is a large share of demand. Distribution across central Uttar Pradesh adds to it.",
+        "q": "What drives warehouse demand in Kanpur?"
+      },
+      {
+        "a": "On private land, the declaration of non-agricultural use under section 80 of the UP Revenue Code and the building permission, both in the current owner's name. Inside a UPSIDA area such as Panki or Rania, the allotment terms and written permission for any sublease.",
+        "q": "What land documents matter for a Kanpur warehouse?"
+      },
+      {
+        "a": "A mix of pre-engineered buildings, with heights suited to racking, and lower RCC godowns. Clear height and docks are on record for nearly every Kanpur listing, so you can shortlist on specification before a visit.",
+        "q": "What build type is typical in Kanpur?"
+      },
+      {
+        "a": "Lucknow is the larger distribution market, with more stock, serving the state capital and eastern Uttar Pradesh. Kanpur suits industrial supply and central and western routes. The two cities are close, and some networks run one base for both.",
+        "q": "Should I choose Kanpur or Lucknow for a warehouse?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "karnal",
+    "seoTitle": "Karnal Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Karnal and what it costs by size. The GT Road belt, the Sector 3 industrial area and Madhuban compared, plus land rules.",
+    "h1": "Karnal Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Karnal sits on the GT Road between Delhi and Ambala, in Haryana's rice belt, and its warehousing serves agricultural trade and distribution along the highway. The stock we list mixes pre-engineered buildings with RCC godowns. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "AI Image of the streets of Karnal",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/blogs/karnal-haryana-9ef29bb274852e43.webp",
+      "width": 1024,
+      "height": 1024
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Karnal",
+    "marketProse": "Karnal's warehousing follows the GT Road, the national highway from Delhi to Ambala and Punjab. The city's industrial area at **Sector 3** and the highway belt around Kambopura hold the established stock. To the south, **Madhuban** on the GT Road towards Panipat carries larger units. Demand is rice and agricultural storage, with Karnal a major basmati centre, plus distribution along the highway.",
+    "marketImage": {
+      "alt": "Map of Karnal marking its warehousing micromarkets: Sector 3 and Madhuban",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/karnal.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Karnal",
+    "rentsProse": "Quotes in Karnal follow the building more than the address. A pre-engineered unit on the highway and an RCC godown in the city are different products, and godowns are often quoted floor by floor. Compare like building types, and read the size, height and docks alongside each rate.",
+    "specHeading": "Typical Specification in Karnal",
+    "specProse": "The stock mixes pre-engineered buildings with RCC godowns. Heights are moderate on most units, and the taller pre-engineered buildings sit on the GT Road. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Karnal",
+    "corridorProse": "The GT Road belt is the place to start for highway access in both directions. Sector 3 suits occupiers who want an industrial area inside the city. Madhuban suits larger units on the southern side towards Panipat.",
+    "complianceHeading": "Compliance and Approvals in Karnal",
+    "complianceProse": "Much of the highway stock sits on converted agricultural land, so the CLU is the first document to ask for. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. In Haryana's controlled areas, change of land use is granted by the Department of Town and Country Planning under the 1963 Scheduled Roads and Controlled Areas Act, so ask for the CLU order on the plot itself before the lease, not after. Inside an HSIIDC estate, check the allotment terms instead. Fire NOCs are issued under the Haryana Fire Service Act, 2009, through the urban local bodies. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "The GT Road belt for highway access towards Delhi and Ambala. The Sector 3 industrial area for an established location inside Karnal city. Madhuban, on the GT Road towards Panipat, for larger units on the southern side.",
+        "q": "Which is the best area for a warehouse in Karnal?"
+      },
+      {
+        "a": "Agriculture and the highway. Karnal is a major basmati rice centre, so storage for rice and grain is a large share of demand, and its position on the GT Road between Delhi and Ambala adds distribution for Haryana and Punjab.",
+        "q": "What drives warehouse demand in Karnal?"
+      },
+      {
+        "a": "The CLU order from Haryana's Department of Town and Country Planning on the plot itself, the building permission, and the Fire NOC under the Haryana Fire Service Act. Inside an HSIIDC estate, the allotment terms instead.",
+        "q": "What land documents matter for a Karnal warehouse?"
+      },
+      {
+        "a": "A mix of pre-engineered buildings and RCC godowns, with moderate heights on most units. Clear height and docks are on record for nearly every Karnal listing, so you can shortlist on specification before a visit.",
+        "q": "What build type is typical in Karnal?"
+      },
+      {
+        "a": "For some networks, yes. Karnal sits on the GT Road roughly midway between Delhi and Ambala, so it can serve Haryana and the routes into Punjab from one base. For Delhi city delivery, the NCR belts closer in are faster.",
+        "q": "Is Karnal a good base between Delhi and Punjab?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "kochi",
+    "seoTitle": "Kochi, or Cochin, Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Kochi, or Cochin, and what it costs by size. Aluva, Perumbavoor, Vazhakkulam and North Paravur compared.",
+    "h1": "Kochi, or Cochin, Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Kochi, or Cochin, is Kerala's port city and its main distribution base, and its warehousing sits inland, on the belt from Aluva towards Perumbavoor. The stock we list is entirely pre-engineered, from mid-size units to large boxes. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Kochi skyline of high-rise apartments above the backwaters",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/kochi.webp",
+      "width": 1600,
+      "height": 900
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Kochi",
+    "marketProse": "Kochi's port and the Vallarpadam container terminal bring freight in, but land near the coast is scarce, so warehousing has moved inland. The main belt runs east from **Aluva**, on the national highway north of the city, through **Kaipoorikkara** and **Vazhakkulam** towards **Perumbavoor**, with units further out around **Rayamangalam**. To the north-west, **North Paravur** holds smaller stock. Demand is state-wide consumer distribution, with Kerala's dense population spread along the highway, and the stock is modern and pre-engineered.",
+    "marketImage": {
+      "alt": "Map of Kochi marking its warehousing micromarkets: Aluva, Kaipoorikkara, Vazhakkulam, Perumbavoor, Rayamangalam and North Paravur",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/kochi.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Kochi",
+    "rentsProse": "Kochi's stock is uniformly pre-engineered, so quotes separate on size, fire systems and distance from the highway rather than build type. Compare buildings with similar fire fit-outs, because hydrants and sprinklers are a real difference here, and read the size and docks alongside each rate.",
+    "specHeading": "Typical Specification in Kochi",
+    "specProse": "Every listing is pre-engineered. The larger units around Aluva and Rayamangalam have heights suited to racking, many docks and FM2 floors, and several carry hydrants and sprinklers. Clear height is not on record for some of the smaller units, so verify it on site.",
+    "corridorHeading": "Where Warehouse Stock Sits in Kochi",
+    "corridorProse": "Aluva is the place to start for large units close to the highway and the city, including buildings with hydrants and sprinklers. The Vazhakkulam and Perumbavoor side offers mid-size units at a longer run from the port. Rayamangalam holds some of the largest boxes. North Paravur suits smaller requirements on the northern side.",
+    "complianceHeading": "Compliance and Approvals in Kochi",
+    "complianceProse": "Fire NOC is on record for close to half the listings here, well above the pattern we see nationally. Land classification is the first question in Kerala, because paddy and wetland are protected. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. In Kerala, land recorded as paddy or wetland in the local data bank is protected under the Conservation of Paddy Land and Wetland Act, 2008, and other unnotified agricultural land needs the Revenue Divisional Officer's permission under section 27A before it is built on, so check the data bank entry first. Building permits come from the panchayat or municipality. Inside a KINFRA or KSIDC park, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Fire clearance is issued by the Kerala Fire and Rescue Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Aluva, on the national highway north of Kochi, for large units close to the city and the highway, several with hydrants and sprinklers. The Vazhakkulam and Perumbavoor side for mid-size units. Rayamangalam for some of the largest boxes, at a longer run from the port.",
+        "q": "Which is the best area for a warehouse in Kochi?"
+      },
+      {
+        "a": "Land near Kochi's coast and the Vallarpadam container terminal is scarce and expensive, and much of it is protected wetland. Warehousing has therefore moved inland to the Aluva and Perumbavoor belt, which sits on the main highway and reaches the port by road.",
+        "q": "Why is Kochi's warehousing inland and not near the port?"
+      },
+      {
+        "a": "Whether the plot is recorded as paddy or wetland in the local data bank, because Kerala's 2008 conservation Act protects that land. For other agricultural land, the Revenue Divisional Officer's permission under section 27A, then the building permit from the panchayat or municipality.",
+        "q": "What land check matters most for a Kochi warehouse?"
+      },
+      {
+        "a": "Pre-engineered buildings throughout, with heights suited to racking, FM2 floors and many docks on the larger units around Aluva. Several have hydrants and sprinklers, and Fire NOC is on record for close to half of Kochi listings, well above the pattern we see nationally.",
+        "q": "What build type is typical in Kochi?"
+      },
+      {
+        "a": "They overlap. Kochi is the city, and Ernakulam is both the district and the city's commercial centre; locally they are treated as separate places, and we list them separately. Our Kochi listings sit on the Aluva and Perumbavoor belt east and north of the city.",
+        "q": "Are Kochi and Ernakulam the same warehouse market?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "kolar",
+    "seoTitle": "Kolar Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Kolar and what it costs by size. Narsapura, Jakkasandra, Mindahalli and Malur compared, plus KIADB and land rules.",
+    "h1": "Kolar Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Kolar is the automotive and heavy-engineering belt on NH-75 beyond Hoskote, and its warehousing is built to serve the plants there: large, tall and dock-heavy. It functions as the far end of Bangalore's eastern corridor while sitting in its own district. This page sets out where the stock sits and what the KIADB estates mean for an occupier.",
+    "marketHeading": "Why Warehousing Works the Way It Does in Kolar",
+    "marketProse": "Kolar's warehousing is anchored by the KIADB industrial areas on NH-75 and the automotive and engineering plants in them. **Narsapura Industrial Area** is the core, with **Jakkasandra Industrial Area** beside it holding some of the largest boxes and **Mindahalli Industrial Area** as a further phase. **Malur**, towards Hoskote, carries more stock on the Bangalore side, and **Kolar** town itself sits further along. Demand is manufacturing supply and regional distribution into Andhra Pradesh and Tamil Nadu, and the stock is predominantly pre-engineered.",
+    "marketImage": {
+      "alt": "Map of Kolar marking its warehousing micromarkets: Narsapura / Jakkasandra / Mindahalli, Malur and Kolar",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/kolar.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Kolar",
+    "rentsProse": "Kolar prices close to Bangalore's eastern belt for much larger and taller buildings, which is its core case. The largest boxes in the estates sit at the top of the range, reflecting their specification rather than scarcity, while older independent buildings around Kolar town set the floor. Small units are rarely listed.",
+    "specHeading": "Typical Specification in Kolar",
+    "specProse": "Kolar combines generous docking, high clear heights and large units, which makes it regional hub space built for automotive supply chains. It is not a market for a small requirement. Most of the stock is pre-engineered on VDF floors, and the largest boxes sit at Jakkasandra and Narsapura.",
+    "corridorHeading": "Where Warehouse Stock Sits in Kolar",
+    "corridorProse": "Narsapura and Jakkasandra are the core, with the largest and best-specified boxes. Mindahalli offers similar product a little further along. Malur sits closest to Hoskote and Bangalore. The Narsapura micromarket page covers the estates in more detail, and Hoskote covers the Bangalore end of the same corridor.",
+    "complianceHeading": "Compliance and Approvals in Kolar",
+    "complianceProse": "Most of Kolar's organised stock sits on KIADB land, so the allotment terms matter as much as land conversion. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Agricultural land in Karnataka is converted under section 95 of the Land Revenue Act; since September 2025, land already zoned for the use in an approved master plan is certified by the planning authority rather than the Deputy Commissioner. KIADB land is allotted for industrial use, so warehousing has to be allowed under the allotment, and subletting needs KIADB's written NOC. Fire clearance is issued by the Karnataka State Fire and Emergency Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Jakkasandra and Narsapura industrial areas for the largest and best-specified boxes, on KIADB land beside the automotive plants. Mindahalli for similar product a little cheaper, as a further phase. Malur if you need to be closer to Hoskote and Bangalore.",
+        "q": "Which is the best area for a warehouse in Kolar?"
+      },
+      {
+        "a": "Kolar for larger, taller, automotive-grade boxes on KIADB land. Hoskote for a shorter run into Bangalore and a wider choice of mid-size stock. They are two ends of the same NH-75 corridor.",
+        "q": "Kolar or Hoskote?"
+      },
+      {
+        "a": "That warehousing is permitted under the KIADB allotment, and that KIADB has given its written NOC for the sublease to you, particularly while the plot is still on a lease-cum-sale basis. Then the fire NOC from the Karnataka State Fire and Emergency Services for the specific building.",
+        "q": "What should I check on KIADB land in Kolar?"
+      },
+      {
+        "a": "Kolar combines generous docking, high clear heights and large units, mostly pre-engineered and built for automotive supply chains in the KIADB industrial areas on NH-75. The largest and best-specified boxes sit at Narsapura and Jakkasandra, beside the plants they serve.",
+        "q": "What specification is typical for a Kolar warehouse?"
+      },
+      {
+        "a": "Rarely. Kolar's stock is built as regional hub space for manufacturers, so small units are thin. A small requirement on this corridor is usually better served at Malur or Hoskote, closer to Bangalore, where mid-size choice is wider.",
+        "q": "Is Kolar suitable for a small warehouse?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "kolhapur",
+    "seoTitle": "Kolhapur Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Kolhapur and what it costs by size. Shiroli, Gokul Shirgaon, Kagal and the Pune to Bangalore highway compared.",
+    "h1": "Kolhapur Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Kolhapur is south Maharashtra's industrial and trading centre, known for foundries, engineering, sugar and jaggery, and its warehousing sits in the MIDC estates on the Pune to Bangalore highway. The stock we list mixes conventional sheds, RCC godowns and some pre-engineered space, mostly in small units. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "New Palace in Kolhapur, in black and white",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/kolhapur.webp",
+      "width": 1600,
+      "height": 1094
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Kolhapur",
+    "marketProse": "Kolhapur's warehousing follows its MIDC estates, which sit on or near the national highway between Pune and Bangalore. **Shiroli** MIDC, north of the city on the highway, is the main foundry and engineering hub, with **Gokul Shirgaon** MIDC to the south and the newer **Kagal** estate further south towards the Karnataka border. East of the city, **Jainapur** near Jaysingpur holds larger units, and **Gandhinagar** carries wholesale trade. Demand is industrial supply plus trade storage for sugar, jaggery and textiles.",
+    "marketImage": {
+      "alt": "Map of Kolhapur marking its warehousing micromarkets: Shiroli, Gokul Shirgaon, Kagal, Jainapur and Gandhinagar",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/kolhapur.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Kolhapur",
+    "rentsProse": "Quotes in Kolhapur follow the building more than the address. A small shed in an MIDC estate, an RCC godown in the city and a pre-engineered unit are different products, so compare like building types, and read the size, height and loading alongside each rate.",
+    "specHeading": "Typical Specification in Kolhapur",
+    "specProse": "Most of the stock is small conventional sheds and RCC godowns, so loading is often at ground level and docks are limited. Heights vary widely, so verify height and floor on site for any racked layout.",
+    "corridorHeading": "Where Warehouse Stock Sits in Kolhapur",
+    "corridorProse": "Shiroli is the place to start for industrial supply, close to the foundries and on the highway. Gokul Shirgaon and Kagal suit occupiers on the southern side towards Karnataka. Jainapur offers larger units on the eastern side. City godowns suit small trade storage.",
+    "complianceHeading": "Compliance and Approvals in Kolhapur",
+    "complianceProse": "The split that matters in Kolhapur is MIDC against private land. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Inside Shiroli, Gokul Shirgaon or Kagal, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Outside the estates: Since the Maharashtra Land Revenue Code amendment notified in December 2025, a separate non-agricultural permission from the Collector is no longer needed where the use is permissible under the development or regional plan; the planning authority collects a one-time conversion premium instead. Fire approval runs under the Maharashtra Fire Prevention and Life Safety Measures Act, 2006, with a provisional approval at the building-permission stage and a final NOC before occupation. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Shiroli MIDC, north of Kolhapur on the Pune to Bangalore highway, for industrial supply close to the foundries. Gokul Shirgaon and Kagal on the southern side towards Karnataka. Jainapur, near Jaysingpur, for larger units on the eastern side.",
+        "q": "Which is the best area for a warehouse in Kolhapur?"
+      },
+      {
+        "a": "Mostly small units, in conventional sheds and RCC godowns, serving industrial supply and trade. Some larger pre-engineered space sits on the eastern side around Jainapur. A large distribution requirement usually means build-to-suit in one of Kolhapur's MIDC estates.",
+        "q": "What kind of warehouse space is available in Kolhapur?"
+      },
+      {
+        "a": "Whether the unit sits inside an MIDC estate, where the allotment must permit warehousing, or on private land, where the land's non-agricultural status matters. Then the building: much of the stock is small sheds and godowns with ground-level loading.",
+        "q": "What should I check before leasing in Kolhapur?"
+      },
+      {
+        "a": "A mix of conventional sheds and RCC godowns, with some pre-engineered space. Loading is often at ground level and heights vary, so verify both on site before planning racking or truck loading in Kolhapur.",
+        "q": "What build type is typical in Kolhapur?"
+      },
+      {
+        "a": "Industry and agriculture. Kolhapur's foundry and engineering cluster at Shiroli supplies the auto industry, and the district is a major sugar and jaggery producer. Textile trade from nearby Ichalkaranji adds to storage demand.",
+        "q": "What drives warehouse demand in Kolhapur?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "kolkata",
+    "seoTitle": "Kolkata Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Kolkata and what it costs by size. The Dankuni and Sankrail belts compared on rent, unit size and build type.",
+    "h1": "Kolkata Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Kolkata's warehousing sits almost entirely across the river in Howrah and Hooghly districts, on two highway belts: Dankuni on the Durgapur Expressway and Sankrail on the Mumbai road. Much of the stock falls in a single mid-size band, built for regional distribution across eastern India. This page sets out what each belt carries and what it costs.",
+    "heroImage": {
+      "alt": "Howrah Bridge in Kolkata lit up in the evening",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/kolkata.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Kolkata",
+    "marketProse": "Kolkata's storage moved out of the city and across the Hooghly decades ago, to where the national highways meet. **Dankuni** sits at the junction of the Durgapur Expressway and the Delhi road, and it has become one of the largest warehousing nodes in eastern India. **Sankrail** and **Dhulagori** sit on the NH-16 arm running southwest towards Kharagpur and Odisha, with **Ranihati** close by. Howrah's own inner stock is older and smaller. The market is more purpose-built than its reputation suggests: the belts are predominantly pre-engineered, and the standard unit is sized for regional distribution rather than city storage.",
+    "marketImage": {
+      "alt": "Map of Kolkata marking its warehousing micromarkets: Dankuni, Sankrail, Dhulagori and Ranihati",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/kolkata.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Kolkata",
+    "rentsProse": "Kolkata is a concentrated market. Much of the stock sits in one mid-size band, and that band is also among the cheapest, so an occupier whose requirement fits that window has more choice and a better rate than anywhere else in the city's range. Outside it, particularly for small units, the market thins out fast and prices accordingly. Between the belts, Dankuni carries a premium over Sankrail for its highway junction.",
+    "specHeading": "Typical Specification in Kolkata",
+    "specProse": "VDF is the dominant floor, consistent with stock built for distribution rather than adapted from something else. Docking is reasonable. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Kolkata",
+    "corridorProse": "The Dankuni and Sankrail comparison is the decision most Kolkata occupiers actually face. Unit sizes are similar and both belts are predominantly pre-engineered. Dankuni buys the Delhi and Durgapur highway junction and the deeper inventory. Sankrail buys the Odisha direction and a lower rate. Dhulagori and Ranihati extend the southwestern arm. Very little storage of any scale remains inside the municipal corporation area.",
+    "complianceHeading": "Compliance and Approvals in Kolkata",
+    "complianceProse": "Fire NOC is on record for a majority of listings here, well above the pattern we see nationally. Most of the warehousing that serves Kolkata sits in Howrah and Hooghly districts rather than inside the municipal corporation area, so the relevant approvals are district-level. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. In West Bengal, agricultural land has to be converted for non-agricultural use under section 4C of the Land Reforms Act, through the block land and land reforms office, and building permission comes from the local planning authority. Inside a WBIIDC or other state industrial estate, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Warehouses need a fire licence under the West Bengal Fire Services Act, issued by the West Bengal Fire and Emergency Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Mostly outside the city, across the Hooghly in Howrah and Hooghly districts. Dankuni on the Durgapur Expressway carries the largest concentration. Sankrail and Dhulagori sit on the NH-16 arm to the southwest. Very little storage stock of any scale remains inside the municipal corporation area.",
+        "q": "Where is Kolkata's warehousing actually located?"
+      },
+      {
+        "a": "Dankuni for depth of choice and access to the Delhi and Durgapur highways. Sankrail for a lower rate on a comparable unit and for despatch towards Odisha and the south. Both belts are predominantly pre-engineered, so the build quality question is similar.",
+        "q": "Dankuni or Sankrail?"
+      },
+      {
+        "a": "Because the market was built for regional distribution serving eastern India, and the standard unit for that job is mid-size. Requirements much smaller or much larger than that have genuinely limited choice here. The current size mix is shown in the rent section of this page.",
+        "q": "Why is so much of Kolkata's stock in one size band?"
+      },
+      {
+        "a": "Kolkata's belts are predominantly pre-engineered, and VDF is the floor on almost every listing, the mark of stock built for distribution rather than converted. Docking is reasonable, and clear heights suit racked storage on most buildings. Clear height and docks are on record for nearly every listing, so Dankuni and Sankrail units can be compared before a visit.",
+        "q": "What specification is typical for a Kolkata warehouse?"
+      },
+      {
+        "a": "A majority of Kolkata listings have a fire NOC on record, well above the pattern we see nationally. In West Bengal, warehouses need a fire licence under the West Bengal Fire Services Act, issued by the West Bengal Fire and Emergency Services. Ask for the licence on the specific building you are taking.",
+        "q": "Do Kolkata warehouses have a fire licence?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "lucknow",
+    "seoTitle": "Lucknow Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits in Lucknow and what it costs by size. Nadarganj, Bijnor Road, Transport Nagar and Kanpur Road compared on rent and size.",
+    "h1": "Lucknow Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Lucknow is a mid-sized market with an unusually even spread. Several named belts ring the city, none of them dominant, and rates across most of them sit close together. The real variation in Lucknow is unit size, not price, so the useful question is which road your freight arrives on and how much space it needs. This page sets out which belt carries what.",
+    "heroImage": {
+      "alt": "Husainabad Clock Tower in Lucknow against a clear sky",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/lucknow.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Lucknow",
+    "marketProse": "Lucknow's warehousing sits on the approach roads rather than in one cluster, because the city is a distribution node for eastern Uttar Pradesh rather than a manufacturing centre. **Nadarganj** and **Amausi** form the old industrial estate near the airport. **Bijnor Road** and **Transport Nagar** carry the transport-linked stock to the south. **Kanpur Road**, running southwest past Banthra, carries the largest units by a wide margin. **Mohanlalganj** to the south holds a few large units of its own. The result is two markets in one city: a broad mid-size market spread across the approach roads, and a small, concentrated large-format market on the Kanpur Road arm.",
+    "marketImage": {
+      "alt": "Map of Lucknow marking its warehousing micromarkets: Nadarganj, Amausi, Bijnor Road, Transport Nagar / Kanpur Road and Mohanlalganj",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/lucknow.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Lucknow",
+    "rentsProse": "Lucknow has one of the narrowest rate spreads of any city we cover, from small units to the largest boxes, and much of the market sits in the mid-size range. For an occupier this means the rate negotiation is not where the value is: specification and belt are. Because no belt has a structural cost advantage over another, differences in quotes mostly reflect building age, build type and handover condition rather than location.",
+    "specHeading": "Typical Specification in Lucknow",
+    "specProse": "Docking is recorded on most listings here and is generous for the unit size, which reflects how much of Lucknow's stock was built for transport operators rather than for storage alone. Clear height is on record for nearly every listing and docks for most, so you can shortlist on specification before a visit. Confirm the floor on site.",
+    "corridorHeading": "Where Warehouse Stock Sits in Lucknow",
+    "corridorProse": "The Kanpur Road arm is the one to read twice. Very large units there quote much the same rate as belts carrying units a fraction of the size, so large-format space in Lucknow carries neither a discount nor a premium; it simply exists in one place. Bijnor Road and Transport Nagar give the widest mid-size choice, and Nadarganj offers an established estate.",
+    "complianceHeading": "Compliance and Approvals in Lucknow",
+    "complianceProse": "Lucknow's newer belts to the south developed on private agricultural land, so the land-use position is the first document to ask for outside the old estate. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. In Uttar Pradesh, agricultural land used for industrial or commercial purposes needs a declaration of non-agricultural use from the Sub-Divisional Officer under section 80 of the UP Revenue Code, and building permission inside the Lucknow Development Authority area comes from the LDA. Inside a UPSIDA industrial area, check the allotment terms; UPSIDA requires written permission before a plot is sublet. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Fire clearance is issued by the UP Fire and Emergency Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Kanpur Road for very large requirements, which is where most of the large-format stock sits. Bijnor Road and Transport Nagar for mid-size space with the widest choice. Nadarganj if an established estate matters most. The rate difference across these is small, so the decision is usually about size and road direction.",
+        "q": "Which is the best area for a warehouse in Lucknow?"
+      },
+      {
+        "a": "Yes, but concentrated. Most of the city's large-format stock is on the Kanpur Road arm southwest of the city; elsewhere Lucknow is mid-size. An occupier with a large requirement has a short but real shortlist.",
+        "q": "Does Lucknow have large warehouse space?"
+      },
+      {
+        "a": "Because the city is a distribution node rather than a manufacturing or port market, so no belt has a structural cost advantage over another. Land values on the approach roads are similar, the stock is similar in age, and the demand is the same regardless of which road it arrives on.",
+        "q": "Why is warehouse rent so uniform across Lucknow?"
+      },
+      {
+        "a": "Mostly pre-engineered, with a meaningful share of RCC, and many units built for transport operators, so docking is generous for the unit size. Floors vary more than in most cities: VDF leads, but RCC and tiled floors are common. Clear height is on record for nearly every Lucknow listing, so you can shortlist on it before a visit.",
+        "q": "What kind of warehouse building is typical in Lucknow?"
+      },
+      {
+        "a": "On private land, the section 80 declaration of non-agricultural use from the Sub-Divisional Officer and the building permission from the Lucknow Development Authority. Inside a UPSIDA industrial area, the allotment terms and UPSIDA's written permission for the sublease. Then the fire clearance from the UP Fire and Emergency Services, for the specific building.",
+        "q": "What documents should I check for a Lucknow warehouse?"
+      }
+    ],
+    "relatedBlogs": [],
+    "statOverrides": {
+      "rent": {
+        "min": 14
+      },
+      "size": {
+        "max": 600000
+      },
+      "clearHeight": {
+        "min": 10
+      }
+    }
+  },
+  {
+    "kind": "CITY",
+    "slug": "ludhiana",
+    "seoTitle": "Ludhiana Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Ludhiana and what it costs by size. Dhandari Kalan, Sahnewal, Jugiana and Ramgarh compared, plus Punjab land rules.",
+    "h1": "Ludhiana Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Ludhiana is Punjab's industrial capital, and its warehousing sits on the GT Road around the city's inland container depots. The stock we list is entirely pre-engineered, mostly with Fire NOC on record. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Busy commercial street in Ludhiana",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/ludhiana.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Ludhiana",
+    "marketProse": "Ludhiana's industry, from hosiery and textiles to bicycles, hand tools and machinery, ships through inland container depots on the GT Road. The main depot sits at **Dhandari Kalan**, by the Focal Point industrial area, and warehousing follows the highway east through **Jugiana** to **Sahnewal**. **Ramgarh**, on the eastern side, holds a cluster of large units. To the north, **Kadian** serves the Jalandhar side. Demand is industrial and export freight plus distribution across Punjab.",
+    "marketImage": {
+      "alt": "Map of Ludhiana marking its warehousing micromarkets: Dhandari Kalan, Jugiana, Sahnewal, Ramgarh and Kadian",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/ludhiana.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Ludhiana",
+    "rentsProse": "Ludhiana's stock is uniformly pre-engineered, so quotes separate on size, height, docks and distance from the container depots rather than build type. Compare like with like, and read the size, height and docks alongside each rate.",
+    "specHeading": "Typical Specification in Ludhiana",
+    "specProse": "Every listing is pre-engineered. Most have heights suited to high racking and several docks; a few older units are lower. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Ludhiana",
+    "corridorProse": "Dhandari Kalan, Jugiana and Sahnewal are the place to start for container-linked freight on the GT Road. Ramgarh holds some of the largest and tallest units. The northern side towards Jalandhar suits smaller requirements.",
+    "complianceHeading": "Compliance and Approvals in Ludhiana",
+    "complianceProse": "Fire NOC is on record for most listings here, well above the pattern we see nationally. Much of Ludhiana's newer stock sits on private land around the city, so the CLU is the first document to ask for. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. In Punjab, a change of land use from agricultural to industrial or commercial use is granted under the Punjab Regional and Town Planning and Development Act, 1995, through the Department of Housing and Urban Development and its development authorities, and it cannot be granted after the fact, so the CLU has to predate the building. Around Ludhiana, the Greater Ludhiana Area Development Authority handles CLU and building approvals. Inside a PSIEC industrial estate or focal point, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Dhandari Kalan, Jugiana and Sahnewal on the GT Road for container-linked freight near Ludhiana's inland container depots. Ramgarh, on the eastern side, for some of the largest and tallest units. The northern side towards Jalandhar for smaller requirements.",
+        "q": "Which is the best area for a warehouse in Ludhiana?"
+      },
+      {
+        "a": "Industry and exports. Ludhiana makes hosiery, textiles, bicycles, hand tools and machinery, and ships much of it through the inland container depots at Dhandari Kalan. Distribution across Punjab and to Himachal and Jammu adds to demand.",
+        "q": "What drives warehouse demand in Ludhiana?"
+      },
+      {
+        "a": "The CLU under Punjab's 1995 town planning Act, which has to predate the building because it cannot be granted after the fact, and the building permission. Inside a PSIEC estate or focal point, the allotment terms instead.",
+        "q": "What land documents matter for a Ludhiana warehouse?"
+      },
+      {
+        "a": "Pre-engineered buildings throughout, with heights suited to high racking and several docks on most units. Clear height and docks are on record for nearly every Ludhiana listing, and Fire NOC for most, well above the pattern we see nationally.",
+        "q": "What build type is typical in Ludhiana?"
+      },
+      {
+        "a": "Dhandari Kalan is on the GT Road between Ludhiana city and Sahnewal, by the Focal Point industrial area. Container Corporation of India runs an inland container depot there, and other depots sit nearby, which makes it the centre of Ludhiana's export-linked warehousing.",
+        "q": "Where is ICD Dhandari Kalan?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "madurai",
+    "seoTitle": "Madurai Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Madurai and what it costs by size. Vairavanatham, Kappalur and the southern highway compared, plus Tamil Nadu land rules.",
+    "h1": "Madurai Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Madurai is the distribution centre for southern Tamil Nadu, and its warehousing sits on the highways that leave the city in every direction. Most of the stock is pre-engineered, with RCC godowns and conventional sheds making up the rest. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Busy Madurai street leading to a temple gopuram",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/madurai.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Madurai",
+    "marketProse": "Madurai sits on the national highway between Bangalore and Kanyakumari, with roads fanning out to Tuticorin port, Rameswaram and Dindigul, so its warehousing is spread around the city rather than in one cluster. To the north, **Vairavanatham** and **Kumaram** hold newer pre-engineered units. To the south-west, the **Kappalur** SIDCO estate sits on the main highway. South of the city, **Soorakkulam** and **Valayapatti**, with **Palayampatti** further out, serve the roads towards Virudhunagar and Tuticorin. Smaller godowns sit in the eastern pockets around **Masthanpatti** and **Kadachanendal**. Demand is regional distribution across southern Tamil Nadu.",
+    "marketImage": {
+      "alt": "Map of Madurai marking its warehousing micromarkets: Vairavanatham / Kumaram, Kappalur, Soorakkulam / Valayapatti, Palayampatti, Masthanpatti and Kadachanendal",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/madurai.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Madurai",
+    "rentsProse": "Quotes in Madurai follow the building more than the address. A pre-engineered unit on the highway, a conventional shed and a small RCC godown in the city are different products, and small units carry a premium everywhere. Compare like building types, and read the size, height and docks alongside each rate.",
+    "specHeading": "Typical Specification in Madurai",
+    "specProse": "Most of the stock is pre-engineered, with heights suited to racking on the newer northern units. RCC godowns and sheds are lower, with ground-level loading. Floors split between RCC and VDF. Clear height is on record for nearly every listing here, so you can shortlist on it before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Madurai",
+    "corridorProse": "Vairavanatham and the northern side are the place to start for newer pre-engineered units. Kappalur suits occupiers who want an established estate on the main highway. The southern belt suits freight heading towards Tuticorin and Virudhunagar. The eastern pockets offer smaller godowns closer to the city.",
+    "complianceHeading": "Compliance and Approvals in Madurai",
+    "complianceProse": "Much of Madurai's newer stock sits on private land around the city, so the land's approved use is the first document to ask for. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Outside a SIPCOT or SIDCO estate, planning permission runs through the Directorate of Town and Country Planning, and applications go through the state's single-window planning portal; the approved land use has to permit storage. Fire clearance is issued by the Tamil Nadu Fire and Rescue Services. Inside the Kappalur estate, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Vairavanatham and the northern side of Madurai for newer pre-engineered units. Kappalur, the SIDCO estate on the main highway, for an established industrial location. The southern belt around Soorakkulam for freight heading towards Tuticorin and Virudhunagar.",
+        "q": "Which is the best area for a warehouse in Madurai?"
+      },
+      {
+        "a": "Yes. Madurai sits on the national highway between Bangalore and Kanyakumari, with roads to Tuticorin port, Rameswaram and Dindigul, so one base covers the southern districts. Its stock is mostly pre-engineered, spread around the city.",
+        "q": "Is Madurai a good base for southern Tamil Nadu distribution?"
+      },
+      {
+        "a": "That the land's approved use permits storage, with the planning permission in the current owner's name, or the allotment terms inside the Kappalur estate. Then the building: much of the newer stock is pre-engineered, but godowns and sheds are lower and loaded at ground level.",
+        "q": "What should I check before leasing in Madurai?"
+      },
+      {
+        "a": "Mostly pre-engineered buildings, with RCC godowns and conventional sheds making up the rest. Floors split between RCC and VDF. Clear height is on record for nearly every Madurai listing, so you can shortlist on it before a visit.",
+        "q": "What build type is typical in Madurai?"
+      },
+      {
+        "a": "Kappalur is a SIDCO industrial estate south-west of Madurai, near Thirumangalam, on the national highway towards Kanyakumari. It holds manufacturing units, factory sheds and warehousing, and is one of Madurai's established industrial locations.",
+        "q": "Where is Kappalur industrial estate?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "mangaluru",
+    "seoTitle": "Mangaluru Warehousing: Corridors, Costs, Specification",
+    "metaDescription": "Where warehouse stock sits in Mangaluru and what it costs by size. Baikampady industrial area and the port belt compared, plus Karnataka land rules.",
+    "h1": "Mangaluru Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Mangaluru is Karnataka's port city, and its warehousing serves the port, the coastal trade and the industries around it. Units are small to mid-size, the stock mixes pre-engineered buildings with sheds and RCC, and large boxes are rarely listed. This page sets out where the stock sits and what to check before you sign.",
+    "heroImage": {
+      "alt": "Mangaluru cityscape with palms and high-rise buildings",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/mangaluru.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Mangaluru",
+    "marketProse": "Mangaluru's warehousing follows the port and the industrial land north of the city. **Baikampady**, the KIADB industrial area near the New Mangalore Port, carries the largest concentration. **Katipalla** and **Bondathila** sit on the same northern side, towards the port and the refinery belt. City pockets such as **Kottara** and **Kadri** hold smaller godowns serving local trade. Demand is port-linked and coastal distribution rather than metro consumption, and the stock is a mix of pre-engineered buildings, older sheds and RCC.",
+    "marketImage": {
+      "alt": "Map of Mangaluru marking its warehousing micromarkets: Baikampady, Katipalla, Bondathila, Kottara and Kadri",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/mangaluru.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Mangaluru",
+    "rentsProse": "Mangaluru prices as a regional market rather than as an extension of Bangalore. Small city godowns carry a premium for their location, while mid-size units in the industrial area quote somewhat lower. Large units are rarely listed at all. Build type moves quotes as much as location, so compare a pre-engineered building with a shed only after checking height and floor.",
+    "specHeading": "Typical Specification in Mangaluru",
+    "specProse": "The stock is split between pre-engineered buildings, older sheds and RCC, so clear height and docking vary widely. Treat specification as something to verify on site rather than assume from the locality. Clear height is on record for nearly every listing here, so you can shortlist on it before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Mangaluru",
+    "corridorProse": "Baikampady is the place to start: it holds the most stock, sits closest to the port and is organised KIADB land. The Katipalla and Bondathila side offers alternatives on the same northern arm. City godowns at Kottara and Kadri suit small last-mile requirements. Read the localities above as the guide to where Mangaluru's stock sits.",
+    "complianceHeading": "Compliance and Approvals in Mangaluru",
+    "complianceProse": "The approvals question in Mangaluru depends on whether the building sits on KIADB land at Baikampady or on private land elsewhere. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Agricultural land in Karnataka is converted under section 95 of the Land Revenue Act; since September 2025, land already zoned for the use in an approved master plan is certified by the planning authority rather than the Deputy Commissioner. KIADB land is allotted for industrial use, so warehousing has to be allowed under the allotment, and subletting needs KIADB's written NOC. Building permission comes from the local planning authority. Fire clearance is issued by the Karnataka State Fire and Emergency Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Baikampady industrial area for the most choice and the shortest run to the port. Katipalla and Bondathila on the same northern side as alternatives. City pockets such as Kottara only for small godown requirements.",
+        "q": "Which is the best area for a warehouse in Mangaluru?"
+      },
+      {
+        "a": "Rarely. Mangaluru is a small to mid-size market, built around port-linked and coastal distribution rather than large-format hubs. A large requirement usually means build-to-suit near the Baikampady industrial area and the New Mangalore Port, or looking at the Bangalore belts for inland distribution.",
+        "q": "Does Mangaluru have large warehouse space?"
+      },
+      {
+        "a": "That warehousing is permitted under the KIADB allotment and that KIADB has given its NOC for the sublease to you. Then the building's height and loading, which vary widely between the older and newer units.",
+        "q": "What should I check before leasing at Baikampady?"
+      },
+      {
+        "a": "A mix. Pre-engineered buildings make up about half of Mangaluru's stock, with older sheds and RCC making up the rest, and floors vary between RCC and VDF. Clear height and docking therefore vary widely between buildings. Clear height is on record for nearly every Mangaluru listing, so you can shortlist on it before a visit.",
+        "q": "What build type is typical in Mangaluru?"
+      },
+      {
+        "a": "Yes, for port-linked and coastal freight. Mangaluru's stock sits beside the New Mangalore Port, mostly in the Baikampady KIADB industrial area, with Katipalla and Bondathila on the same northern side. It serves the coast rather than metro consumption, so units are small to mid-size.",
+        "q": "Is Mangaluru a good base for coastal Karnataka distribution?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "mohali",
+    "seoTitle": "Mohali, or SAS Nagar, Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Mohali, or SAS Nagar, and what it costs by size. The Banur to Tepla road belt towards Rajpura, plus Punjab land rules.",
+    "h1": "Mohali, or SAS Nagar, Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Mohali, or SAS Nagar, is Chandigarh's Punjab neighbour, and the warehousing that serves the Chandigarh region sits south of the city, on the Banur to Tepla road towards Rajpura. The stock we list is entirely pre-engineered, in large units with Fire NOC on record. This page sets out where the stock sits and what to check.",
+    "marketHeading": "Why Warehousing Works the Way It Does in Mohali",
+    "marketProse": "The Chandigarh tricity has little land for large warehouses, so its distribution has moved south. The **Banur** to **Tepla** road, which links Banur in Mohali district to the GT Road near **Rajpura**, has become the region's main warehousing belt, with logistics parks from national operators and dozens of active warehouses. It reaches Chandigarh to the north and the GT Road to Delhi and Amritsar to the south. Demand is distribution for the tricity, Punjab, Himachal Pradesh and Jammu and Kashmir.",
+    "marketImage": {
+      "alt": "Map of Mohali marking its warehousing micromarkets: Banur / Tepla and Rajpura",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/mohali.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Mohali",
+    "rentsProse": "The Banur to Tepla stock is uniformly large and pre-engineered, so quotes separate on height, docks and position along the road rather than build type. Compare like with like, and read the size, height and docks alongside each rate.",
+    "specHeading": "Typical Specification in Mohali",
+    "specProse": "Every listing is a large pre-engineered unit with heights suited to racking and several docks, much of it in purpose-built logistics parks. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Mohali",
+    "corridorProse": "The Banur to Tepla road is the place to start, with large pre-engineered units in logistics parks along its length. Units nearer Banur are closer to Chandigarh; units nearer Tepla and Rajpura are closer to the GT Road.",
+    "complianceHeading": "Compliance and Approvals in Mohali",
+    "complianceProse": "Fire NOC is on record for most listings here, well above the pattern we see nationally. Most of the belt sits on converted private land, so the CLU is the first document to ask for. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. In Punjab, a change of land use from agricultural to industrial or commercial use is granted under the Punjab Regional and Town Planning and Development Act, 1995, through the Department of Housing and Urban Development and its development authorities, and it cannot be granted after the fact, so the CLU has to predate the building. In Mohali district, the Greater Mohali Area Development Authority handles approvals; towards Rajpura, the approvals sit in Patiala district. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "The Banur to Tepla road, south of Mohali, which is the Chandigarh region's main warehousing belt. Units nearer Banur are closer to Chandigarh; units nearer Tepla and Rajpura are closer to the GT Road towards Delhi and Amritsar.",
+        "q": "Which is the best area for a warehouse near Mohali?"
+      },
+      {
+        "a": "Yes. Mohali's official name is Sahibzada Ajit Singh Nagar, shortened to SAS Nagar, which is also the name of the district. Mohali is the name in everyday use, and both refer to the same place.",
+        "q": "Is Mohali the same as SAS Nagar?"
+      },
+      {
+        "a": "It runs south from Banur, in Mohali district, to Tepla near Rajpura, linking the Chandigarh tricity to the GT Road. Logistics parks and dozens of active warehouses line it, making it the main warehousing belt for Chandigarh, Mohali and Panchkula.",
+        "q": "Where is the Banur to Tepla road?"
+      },
+      {
+        "a": "Large pre-engineered buildings in logistics parks, with heights suited to racking and several docks. Clear height and docks are on record for nearly every Mohali listing, and Fire NOC for most, well above the pattern we see nationally.",
+        "q": "What build type is typical around Mohali?"
+      },
+      {
+        "a": "The CLU under Punjab's 1995 town planning Act, which has to predate the building because it cannot be granted after the fact, and the building permission from the development authority for the area, both in the current owner's name.",
+        "q": "What land documents matter for a Mohali warehouse?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "mumbai",
+    "seoTitle": "Mumbai, or Bombay, Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits for Mumbai, or Bombay, and what it costs by size. City godowns, Vasai, Panvel and the JNPT belt compared, plus land rules.",
+    "h1": "Mumbai, or Bombay, Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Mumbai, or Bombay, has very little warehouse land inside the city, so its storage splits between small godowns in the suburbs and large distribution stock on the mainland around Bhiwandi, Panvel and the JNPT port. The stock we list under Mumbai mixes RCC godowns with pre-engineered warehouses. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Mumbai skyline across the sea in daylight",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/mumbai.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Mumbai",
+    "marketProse": "Land in Mumbai is too expensive and too scarce for large warehousing, so the city's distribution has moved to the mainland. Inside the city, small RCC godowns sit in suburban industrial pockets such as **Saki Naka**, **Chembur** and **Goregaon**, close to customers. North of the city, **Vasai** holds godowns on the Gujarat side. The large distribution stock sits east and south, around **Bhiwandi**, and in **Navi Mumbai**, from **Kalamboli** and **Panvel** to the **JNPT** port at Nhava Sheva. Demand is consumer distribution for one of India's largest cities, plus port-linked storage.",
+    "marketImage": {
+      "alt": "Map of Mumbai marking its warehousing micromarkets: Saki Naka, Chembur, Goregaon, Vasai, Bhiwandi, Navi Mumbai / Panvel, Kalamboli and JNPT",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/mumbai.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Mumbai",
+    "rentsProse": "Mumbai has two different products under one name. A small RCC godown in the city prices as urban space, and a pre-engineered warehouse on the mainland prices as distribution space; the two are not comparable. Decide first whether you need last-mile space or a distribution box, then compare like with like, and read the size, height and docks alongside each rate.",
+    "specHeading": "Typical Specification in Mumbai",
+    "specProse": "The city godowns are RCC, with low ceilings and limited or no docks, suited to stacked storage and last-mile delivery. The mainland pre-engineered units near Panvel, JNPT and Bhiwandi have heights suited to racking and many docks. Clear height is on record for nearly every listing here, so you can shortlist on it before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Mumbai",
+    "corridorProse": "For last-mile storage inside the city, Saki Naka, Chembur and Goregaon are the place to start, in small RCC godowns. For distribution at warehouse scale, look to the mainland: Bhiwandi for the largest choice, and Panvel and the JNPT belt for port-linked freight. Vasai suits the northern suburbs and the Gujarat side. Our Bhiwandi and Navi Mumbai pages cover those markets in detail.",
+    "complianceHeading": "Compliance and Approvals in Mumbai",
+    "complianceProse": "The approvals differ between a city godown and a mainland warehouse, so check which one you are looking at. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Inside the city, the building's approved use under the municipal corporation's development plan is the first document to ask for. On the mainland: Since the Maharashtra Land Revenue Code amendment notified in December 2025, a separate non-agricultural permission from the Collector is no longer needed where the use is permissible under the development or regional plan; the planning authority collects a one-time conversion premium instead. Inside an MIDC estate, such as Taloja, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Fire approval runs under the Maharashtra Fire Prevention and Life Safety Measures Act, 2006, with a provisional approval at the building-permission stage and a final NOC before occupation. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "For last-mile storage inside Mumbai, the suburban pockets such as Saki Naka, Chembur and Goregaon, in small RCC godowns. For distribution at warehouse scale, the mainland: Bhiwandi for the widest choice, and Panvel and the JNPT belt for port-linked freight.",
+        "q": "Where should I look for a warehouse for Mumbai?"
+      },
+      {
+        "a": "Land inside Mumbai is scarce and among India's most expensive, so large warehouses do not pay there. Distribution networks serving Mumbai base themselves on the mainland, in Bhiwandi, Navi Mumbai and around the JNPT port, and use small city godowns for the last mile.",
+        "q": "Why is there so little large warehouse space in Mumbai city?"
+      },
+      {
+        "a": "Yes. Mumbai is the city's official name; Bombay is the older name and is still widely used, including in business. Both refer to the same market, which for warehousing extends to Bhiwandi and Navi Mumbai on the mainland.",
+        "q": "Is Mumbai the same as Bombay?"
+      },
+      {
+        "a": "Two types. Inside the city, small RCC godowns with low ceilings and few or no docks. On the mainland, pre-engineered warehouses with heights suited to racking and many docks. Clear height is on record for nearly every Mumbai listing.",
+        "q": "What build type is typical for Mumbai warehousing?"
+      },
+      {
+        "a": "For a city godown, the building's approved use under the municipal development plan. On the mainland, the land's non-agricultural status, or the MIDC allotment inside an estate, and the fire approval under Maharashtra's 2006 fire safety Act, with a final NOC before occupation.",
+        "q": "Which approvals matter for a Mumbai warehouse?"
+      }
+    ],
+    "relatedBlogs": [],
+    "statOverrides": {
+      "size": {
+        "min": 620
+      }
+    }
+  },
+  {
+    "kind": "CITY",
+    "slug": "mysore",
+    "seoTitle": "Mysore, or Mysuru, Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Mysore, or Mysuru, and what it costs by size. Hebbal, Metagalli, Nanjangud and Bogadi Road compared, plus land rules.",
+    "h1": "Mysore, or Mysuru, Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Mysore, or Mysuru, is south Karnataka's second distribution base after Bangalore, and its warehousing sits in the industrial areas around the city and towards Nanjangud. The stock mixes pre-engineered buildings with conventional sheds and some RCC godowns in the old city, so specification varies building by building. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Mysore Palace and its gardens on a clear day",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/mysore.webp",
+      "width": 1600,
+      "height": 1067
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Mysore",
+    "marketProse": "Mysore's warehousing sits in its industrial areas rather than along one highway. On the north side, the **Hebbal** and **Metagalli** industrial areas, with **Belagola** beyond them, hold the established stock on the road towards the KRS dam. To the west, **Bogadi Road** and Kumarabeedu carry newer pre-engineered units. South of the city, **Nanjangud** and the KIADB estate at **Thandya**, with **Adakanahalli** between them, form the industrial belt on the road towards Kerala and Tamil Nadu. Small RCC godowns in the old city serve trade. Demand is regional distribution and manufacturing supply for southern Karnataka.",
+    "marketImage": {
+      "alt": "Map of Mysore marking its warehousing micromarkets: Hebbal / Metagalli, Belagola, Bogadi Road, Nanjangud, Thandya and Adakanahalli",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/mysore.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Mysore",
+    "rentsProse": "Quotes in Mysore follow the building more than the address. A pre-engineered unit in an industrial area, a conventional shed and an RCC godown in the old city are different products, and floor-wise rates on multi-storey godowns differ again. Compare like building types, and read the size, height and loading alongside each rate.",
+    "specHeading": "Typical Specification in Mysore",
+    "specProse": "The stock splits between pre-engineered buildings and conventional sheds, with a few RCC godowns, so clear heights are often moderate and docking is limited on the older sheds. Verify height and loading on site for any racked or truck-loaded operation. Clear height is on record for nearly every listing here, so you can shortlist on it before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Mysore",
+    "corridorProse": "Hebbal and Metagalli are the place to start for established industrial-area stock close to the city. Nanjangud, Thandya and Adakanahalli to the south suit larger units and occupiers serving the routes towards Kerala and Tamil Nadu. Bogadi Road on the west side has some newer pre-engineered buildings. The old city's godowns suit small trade storage only.",
+    "complianceHeading": "Compliance and Approvals in Mysore",
+    "complianceProse": "Much of Mysore's stock sits inside KIADB or state industrial areas, so the allotment terms are the first document to ask for there. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Agricultural land in Karnataka is converted under section 95 of the Land Revenue Act; since September 2025, land already zoned for the use in an approved master plan is certified by the planning authority rather than the Deputy Commissioner. KIADB land is allotted for industrial use, so warehousing has to be allowed under the allotment, and subletting needs KIADB's written NOC. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Outside the estates, building permission comes from the Mysore urban development authority or the local body. Fire clearance is issued by the Karnataka State Fire and Emergency Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Hebbal and Metagalli for established industrial-area stock close to Mysore city. Nanjangud, Thandya and Adakanahalli to the south for larger units on the routes towards Kerala and Tamil Nadu. Bogadi Road on the west side for some newer pre-engineered buildings.",
+        "q": "Which is the best area for a warehouse in Mysore?"
+      },
+      {
+        "a": "For southern Karnataka and the routes into Kerala and Tamil Nadu, yes: Mysore sits closer to those markets and its industrial areas hold pre-engineered and shed stock. For Bangalore city delivery, the belts around Bangalore remain the practical base.",
+        "q": "Is Mysore a good alternative to Bangalore for warehousing?"
+      },
+      {
+        "a": "Inside a KIADB estate such as Hebbal, Metagalli or Thandya, the allotment terms, which must permit warehousing, and KIADB's written NOC for any sublease. On private land, the section 95 conversion order and the building permission, both in the current owner's name.",
+        "q": "What land documents matter for a Mysore warehouse?"
+      },
+      {
+        "a": "A split between pre-engineered buildings and conventional sheds, with some RCC godowns in the old city. Clear heights are often moderate and docking limited on older sheds, so verify both on site. Clear height is on record for nearly every Mysore listing.",
+        "q": "What build type is typical in Mysore?"
+      },
+      {
+        "a": "Nanjangud lies south of Mysore on the highway towards Kerala and Tamil Nadu. Its industrial area and the nearby KIADB estate at Thandya form Mysore's southern industrial belt, with manufacturing and warehouse stock serving southern Karnataka and the routes across the state borders.",
+        "q": "Where is Nanjangud industrial area?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "nagpur",
+    "seoTitle": "Nagpur Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Nagpur and what it costs by size. Bhandara Road, Kalmeshwar, Wardha Road and Katol compared, plus Maharashtra land rules.",
+    "h1": "Nagpur Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Nagpur sits at the geographic centre of India, and its warehousing is built for national distribution: well-docked, high-roofed pre-engineered buildings on the highways out of the city. Rates are affordable. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Ambazari Lake in Nagpur at twilight",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/nagpur.webp",
+      "width": 1600,
+      "height": 1073
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Nagpur",
+    "marketProse": "Nagpur is where India's north to south and east to west highways cross, which makes it a natural hub for national distribution. Warehousing follows the roads out of the city. **Bhandara Road** and the outer ring road on the east carry a large share. **Kalmeshwar** and **Gondkhairi** on the western side, with the **Katol** MIDC area, serve the Amravati direction. **Chinchbhuwan** and **Lava** sit on the southern and western edges, and **Nimji** further out. The stock is predominantly pre-engineered, with a share of conventional sheds, and it is built for trucks.",
+    "marketImage": {
+      "alt": "Map of Nagpur marking its warehousing micromarkets: Bhandara Road, Kalmeshwar, Gondkhairi / Chinchbhuwan, Katol, Lava and Nimji",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/nagpur.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Nagpur",
+    "rentsProse": "Nagpur's rates are affordable. Small units are rarely listed. For a national distribution requirement, the rate is competitive against any metro belt, and the specification is often better.",
+    "specHeading": "Typical Specification in Nagpur",
+    "specProse": "Nagpur's stock is well specified: generous docking and high clear heights on the pre-engineered buildings. Conventional sheds run lower, so confirm the building type and height before shortlisting. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Nagpur",
+    "corridorProse": "Bhandara Road and the outer ring road suit eastern and national despatch. Kalmeshwar, Gondkhairi and Katol offer larger plots on the western side. Chinchbhuwan and Lava sit closer to the city on the south and west. Read the localities above as the guide to where Nagpur's stock sits.",
+    "complianceHeading": "Compliance and Approvals in Nagpur",
+    "complianceProse": "Fire NOC is on record for close to half the listings here, well above the pattern we see nationally. Nagpur's stock splits between MIDC land, such as the Katol area, and private land on the highway belts. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Inside an MIDC estate, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. On private land: Since the Maharashtra Land Revenue Code amendment notified in December 2025, a separate non-agricultural permission from the Collector is no longer needed where the use is permissible under the development or regional plan; the planning authority collects a one-time conversion premium instead. For an existing building, confirm the land's non-agricultural status and building permission, in the current owner's name. Fire approval runs under the Maharashtra Fire Prevention and Life Safety Measures Act, 2006, with a provisional approval at the building-permission stage and a final NOC before occupation. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Bhandara Road and the outer ring road for eastern and national despatch. Kalmeshwar, Gondkhairi and Katol for larger plots to the west. Chinchbhuwan and Lava for space closer to the city.",
+        "q": "Which is the best area for a warehouse in Nagpur?"
+      },
+      {
+        "a": "Often, yes. It sits where India's main north to south and east to west highways cross, its stock is well docked and high-roofed, and rates are affordable. The trade-off is distance from the big consumption centres.",
+        "q": "Is Nagpur a good base for national distribution?"
+      },
+      {
+        "a": "Since December 2025, not separately, where the use is permissible under the development or regional plan; the planning authority collects a conversion premium instead. For an existing building, confirm the land's non-agricultural status and building permission. Inside MIDC, check the allotment terms.",
+        "q": "Does a Nagpur warehouse need non-agricultural permission?"
+      },
+      {
+        "a": "Bhandara Road and the outer ring road on the east for eastern and national despatch. Kalmeshwar, Gondkhairi and the Katol MIDC area on the west for larger plots towards Amravati. Both sides carry well-docked pre-engineered stock, so the choice in Nagpur is about road direction and plot size.",
+        "q": "Bhandara Road or Kalmeshwar for a Nagpur warehouse?"
+      },
+      {
+        "a": "Close to half of Nagpur's listings have a fire NOC on record, well above the pattern we see nationally. Fire approval in Maharashtra runs in two stages, a provisional approval at building permission and a final NOC before occupation. Ask for the final NOC on the specific building.",
+        "q": "Do Nagpur warehouses have a fire NOC?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "navi-mumbai",
+    "seoTitle": "Navi Mumbai Warehousing: Corridors and Costs",
+    "metaDescription": "Where warehouse stock sits in Navi Mumbai, what it costs by size and how it is built. Panvel, Taloja MIDC and the Uran JNPT belt compared on rent and size.",
+    "h1": "Navi Mumbai Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Navi Mumbai is a port market and it prices like one. Rates are among the highest we cover, the stock is concentrated on the JNPT approach, and very large units are rarely listed. For anything that is genuinely port-driven, that premium buys proximity to the terminals. This page sets out the three belts and what each is for.",
+    "heroImage": {
+      "alt": "Aerial view of high-rise buildings in Navi Mumbai",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/navi-mumbai.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Navi Mumbai",
+    "marketProse": "Everything here is shaped by JNPT. Storage sits on the roads feeding the port: **Panvel** and **Kalamboli** at the road junction, **Uran** on the port approach itself, and **Taloja** in the MIDC estate inland. Warehousing competes for that land with container yards, CFS operations and industry, which is why the rate is high and the units are modest. The stock is predominantly pre-engineered with a meaningful share of conventional sheds. For any requirement that is not genuinely port-driven, Bhiwandi does a comparable job for noticeably less, and that comparison is the most useful thing an occupier can hold in mind here.",
+    "marketImage": {
+      "alt": "Map of Navi Mumbai marking its warehousing micromarkets: Panvel, Kalamboli, Uran and Taloja",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/navi-mumbai.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Navi Mumbai",
+    "rentsProse": "Navi Mumbai inverts the usual pattern: the smallest units can be the cheapest per square foot, and rates from mid-size upward sit close together. That happens because the small-unit stock here is peripheral industrial space rather than city-centre retail, while the mid-size and large units carry the port premium. Very large units are rarely listed, so a big requirement should look inland.",
+    "specHeading": "Typical Specification in Navi Mumbai",
+    "specProse": "Flooring is predominantly VDF, and docking is reasonable. Clear height is on record for most listings, but part of the stock is shed or RCC, so check structure on site. Floors include some FM2 and trimix alongside VDF, and clear heights hold up reasonably well across the stock.",
+    "corridorHeading": "Where Warehouse Stock Sits in Navi Mumbai",
+    "corridorProse": "Taloja is the trade-off worth understanding. It is cheaper than Panvel and sits inside an MIDC estate, but a sizeable share of its buildings are RCC rather than purpose-built, and units are smaller. Panvel and Kalamboli give the widest choice at the road junction. Uran has the narrowest rate band in the city, which is what a single-purpose port belt looks like.",
+    "complianceHeading": "Compliance and Approvals in Navi Mumbai",
+    "complianceProse": "In a market this expensive, the compliance paperwork is worth reading carefully. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. The Taloja stock sits inside an MIDC estate, so check the allotment terms there. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Outside MIDC, across much of the Panvel and Uran spread, parts of the belt sit inside CIDCO's planning jurisdiction. Since the Maharashtra Land Revenue Code amendment notified in December 2025, a separate non-agricultural permission from the Collector is no longer needed where the use is permissible under the development or regional plan; the planning authority collects a one-time conversion premium instead. For an existing building, confirm that the land's non-agricultural status and the building permission are in order. Fire approval runs under the Maharashtra Fire Prevention and Life Safety Measures Act, 2006, with a provisional approval at the building-permission stage and a final NOC before occupation. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Panvel and Kalamboli for the widest choice at the road junction. Uran for genuine port-side adjacency with a very narrow rate band. Taloja for a lower rate inside the MIDC estate, accepting that a substantial share of that stock is RCC.",
+        "q": "Which is the best area for a warehouse in Navi Mumbai?"
+      },
+      {
+        "a": "Bhiwandi, unless the requirement is genuinely port-driven. Bhiwandi has far more inventory, much larger units and generally lower rates. Navi Mumbai earns its premium on JNPT proximity, and an occupier who is not moving containers is paying for something they do not use.",
+        "q": "Is Navi Mumbai or Bhiwandi better for a Mumbai distribution requirement?"
+      },
+      {
+        "a": "Some mid-size to large choice exists, but very large units are rarely listed. Land on the JNPT approach is contested by port and industrial users, so large-format warehousing has largely gone inland to Bhiwandi and the Nashik highway.",
+        "q": "Are there large warehouses in Navi Mumbai?"
+      },
+      {
+        "a": "Mostly pre-engineered, with a meaningful share of conventional sheds and some RCC, much of it around Taloja. Floors are predominantly VDF, with some FM2 and trimix, and clear heights hold up reasonably well across the stock. Clear height is on record for most Navi Mumbai listings, but check the structure on site.",
+        "q": "What build type is typical in Navi Mumbai?"
+      },
+      {
+        "a": "At Taloja, the MIDC allotment terms and consent for the sublease. Across Panvel and Uran, check whether the plot sits inside CIDCO's planning area, then confirm the non-agricultural status and building permission. The final fire NOC follows a provisional approval at building permission under Maharashtra's 2006 fire safety Act.",
+        "q": "What documents should I check for a Navi Mumbai warehouse?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "noida",
+    "seoTitle": "Noida Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits in Noida and Greater Noida and what it costs by size. Surajpur, Dadri and Sikandrabad compared, plus UP authority land rules.",
+    "h1": "Noida Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Noida is the dearest of the NCR satellite markets, and the reason is authority land and proximity to Delhi. Its warehousing runs from the Noida sectors out through Greater Noida towards Dadri and Sikandrabad, where the freight corridors meet. Most units are mid-size and pre-engineered. This page sets out where the stock sits and what the authority land rules mean.",
+    "heroImage": {
+      "alt": "Noida skyline at sunrise",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/noida.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Noida",
+    "marketProse": "Noida's warehousing is shaped by its planned authority areas. The **Noida** sectors carry smaller, city-facing units close to Delhi. **Greater Noida**, around **Surajpur** and the industrial sectors, carries the larger buildings. Further out, **Dadri** and **Sikandrabad** on the Bulandshahr side sit near the junction of the Eastern and Western Dedicated Freight Corridors, where newer stock is coming up. Demand is Delhi and NCR consumption plus the electronics and manufacturing cluster around Greater Noida, and the stock is predominantly pre-engineered.",
+    "marketImage": {
+      "alt": "Map of Noida marking its warehousing micromarkets: Noida, Greater Noida, Surajpur, Dadri and Sikandrabad",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/noida.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Noida",
+    "rentsProse": "Noida carries a clear premium over the other NCR satellite cities, because its stock sits on authority land close to Delhi. Across most sizes the rate is similar, but the largest units price well below the rest, since they sit further out towards Dadri and Sikandrabad. For an occupier who can accept the extra distance, moving out along the freight corridor arm is the main way to lower the rate.",
+    "specHeading": "Typical Specification in Noida",
+    "specProse": "The stock is predominantly pre-engineered, with some sheds, and docking is moderate. Clear heights vary with the building's age, so confirm height and floor loading on each shortlisted unit. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Noida",
+    "corridorProse": "The Noida sectors suit small last-mile units closest to Delhi, at the highest rates. Greater Noida and Surajpur offer the widest mid-size and large choice. Dadri and Sikandrabad give more room and freight corridor access for a lower rate. Read the areas above as the guide to where Noida's stock sits.",
+    "complianceHeading": "Compliance and Approvals in Noida",
+    "complianceProse": "Most of Noida's stock sits inside the Noida, Greater Noida or Yamuna Expressway authority areas, where the allotment sets what the plot may be used for. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. On private agricultural land outside the authority areas, such as parts of the Sikandrabad side, industrial or commercial use needs a declaration of non-agricultural use from the Sub-Divisional Officer under section 80 of the UP Revenue Code. Fire clearance is issued by the UP Fire and Emergency Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "The Noida sectors for small last-mile units closest to Delhi. Greater Noida and Surajpur for the widest mid-size and large choice. Dadri and Sikandrabad for more room, freight corridor access and a lower rate.",
+        "q": "Which is the best area for a warehouse in Noida?"
+      },
+      {
+        "a": "Authority land, planned sectors and proximity to Delhi. Ghaziabad's stock sits more often on private and older industrial land, and it prices accordingly. For large requirements, the Dadri side narrows the gap.",
+        "q": "Why does Noida cost more than Ghaziabad?"
+      },
+      {
+        "a": "That the authority allotment permits warehousing on the plot, and that the Noida, Greater Noida or Yamuna Expressway authority has approved any sublease or transfer to you. Then check the building permission and the fire NOC for the specific Noida building, issued by the UP Fire and Emergency Services.",
+        "q": "What should I check on Noida authority land?"
+      },
+      {
+        "a": "Mostly pre-engineered, with some conventional sheds, VDF floors and moderate docking. Clear heights vary with the building's age, with the newer stock around Greater Noida and the Dadri side generally taller. Clear height and docks are on record for nearly every Noida listing, so you can shortlist before a visit.",
+        "q": "What specification is typical for a Noida warehouse?"
+      },
+      {
+        "a": "Noida's sectors for small last-mile units closest to Delhi, at the highest rates. Greater Noida, around Surajpur and the industrial sectors, for the widest mid-size and large choice. Further out, Dadri and Sikandrabad give more room and freight corridor access for a lower rate.",
+        "q": "Noida or Greater Noida for a warehouse?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "north-goa",
+    "seoTitle": "North Goa Warehousing: Locations, Costs and Specification",
+    "metaDescription": "Where godown and warehouse space sits in North Goa and what it costs by size. Mapusa, Calangute, Siolim and the Tivim and Colvale estates compared.",
+    "h1": "North Goa Warehousing: Locations, Costs and Specification",
+    "heroProse": "North Goa's warehousing is mostly small godown space serving the tourism, hospitality and retail economy of the coast and its towns. The stock we list is RCC, in small units close to the markets. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Painted shopfronts on a street in Panaji, North Goa",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/north-goa.webp",
+      "width": 1600,
+      "height": 1186
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in North Goa",
+    "marketProse": "North Goa's storage demand comes from hotels, restaurants, retail and the distributors who supply them, so space sits close to the towns rather than on a highway belt. **Mapusa**, the district's market town, and **Karaswada** next to it, hold the most stock. The coastal belt around **Calangute** and **Siolim** serves the tourism trade, with **Moira** inland between them. Towards Panaji, **Marcel** and **Panelim** serve the capital and the Ponda side. Larger industrial sheds sit in the Goa IDC estates at **Tivim** and **Colvale**.",
+    "marketImage": {
+      "alt": "Map of North Goa marking its warehousing micromarkets: Mapusa, Karaswada, Calangute, Siolim, Moira, Marcel, Panelim, Tivim and Colvale",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/north-goa.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in North Goa",
+    "rentsProse": "North Goa's godowns are small, so quotes depend heavily on location and frontage: a unit on a coastal road prices as retail-adjacent space, while one behind Mapusa prices as storage. Compare units in similar locations and of similar size, and read the height and access alongside each rate.",
+    "specHeading": "Typical Specification in North Goa",
+    "specProse": "The stock is RCC godown space, so loading is at ground level and the buildings suit stacked storage rather than racking or truck docks. Check road access for the vehicles you use, because many units sit on narrow roads. Clear height is on record for most listings here, so you can compare buildings before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in North Goa",
+    "corridorProse": "Mapusa and Karaswada are the place to start for distributors serving the whole of North Goa. Calangute and Siolim suit suppliers to the coastal hotels and restaurants. Marcel and Panelim suit the Panaji side. For larger industrial units, look at the Goa IDC estates at Tivim and Colvale.",
+    "complianceHeading": "Compliance and Approvals in North Goa",
+    "complianceProse": "Most North Goa godowns sit on private land in or near the towns, so the land's conversion status is the first document to ask for. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. In Goa, agricultural land cannot be used for any other purpose without a conversion sanad under section 32 of the Land Revenue Code, issued through the Collector, and the land then pays non-agricultural assessment. Inside a Goa IDC industrial estate, the allotment terms apply instead. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Building permission comes from the town and country planning department and the local municipality or panchayat. Fire clearance is issued by the Directorate of Fire and Emergency Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Mapusa and Karaswada for distributors serving the whole of North Goa from its market town. Calangute and Siolim for suppliers to the coastal hotels and restaurants. Marcel and Panelim for the Panaji side. The Goa IDC estates at Tivim and Colvale for larger industrial units.",
+        "q": "Which is the best area for a warehouse in North Goa?"
+      },
+      {
+        "a": "Mostly small RCC godowns close to the towns, serving tourism, hospitality and retail supply. Large warehouse boxes are rarely listed in North Goa; for larger industrial space, look at the Goa IDC estates such as Tivim and Colvale.",
+        "q": "What kind of warehouse space is available in North Goa?"
+      },
+      {
+        "a": "The conversion sanad under section 32 of the Goa Land Revenue Code, if the land was agricultural, and the building permission from the planning department and the local body, all in the current owner's name. Inside a Goa IDC estate, the allotment terms.",
+        "q": "What land documents matter for a North Goa godown?"
+      },
+      {
+        "a": "RCC godowns with ground-level loading, suited to stacked storage rather than racking or truck docks. Check road access, because many North Goa units sit on narrow roads. Clear height is on record for most listings, so you can compare buildings before a visit.",
+        "q": "What build type is typical in North Goa?"
+      },
+      {
+        "a": "Mostly distributors and suppliers to North Goa's hotels, restaurants and shops, along with retailers and e-commerce delivery. Demand follows the tourism economy of the coast and the market towns such as Mapusa, rather than long-haul freight.",
+        "q": "Who uses warehouse space in North Goa?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "patna",
+    "seoTitle": "Patna Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Patna and what it costs by size. The Sampatchak, Gaya Road and Phulwari Sharif belts compared on rent and size.",
+    "h1": "Patna Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Patna is one of the most uniform warehousing markets we cover. Rates barely move with unit size, the stock is concentrated in one southern belt, and most of it sits in the mid-size range. That makes the building, not the rate, the thing to negotiate on. This page sets out where the stock is and what it is.",
+    "heroImage": {
+      "alt": "Aerial view of Patna beside the Ganga",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/patna.webp",
+      "width": 1600,
+      "height": 1204
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Patna",
+    "marketProse": "Patna is a consumption market rather than a manufacturing or port one. Goods arrive for distribution across Bihar, and the storage that serves that demand sits on the southern approaches to the city, along the Gaya road through **Sampatchak** and around **Phulwari Sharif**. Smaller pockets sit east at **Fatuha** on NH-30 and west towards **Danapur** and **Bihta**. The stock is predominantly pre-engineered, mid-format and built for distribution into the state, with very little at either extreme of size.",
+    "marketImage": {
+      "alt": "Map of Patna marking its warehousing micromarkets: Sampatchak, Phulwari Sharif, Fatuha, Danapur and Bihta",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/patna.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Patna",
+    "rentsProse": "Patna's rate barely moves across the size range, and the stock is confined to the middle of it. Very small and very large units are rarely listed. For an occupier, that means the negotiation is about the building rather than the rate, and a requirement outside the mid-size window will usually need a build-to-suit conversation. Higher quotes tend to be city-centre space rather than distribution stock.",
+    "specHeading": "Typical Specification in Patna",
+    "specProse": "Patna's stock is mostly pre-engineered and built for distribution into Bihar, with VDF floors and reasonable docking. Conventional sheds and some RCC make up the rest. Clear height is on record for nearly every listing and docking for most, so you can shortlist before a visit and judge the condition of the building on site.",
+    "corridorHeading": "Where Warehouse Stock Sits in Patna",
+    "corridorProse": "Patna's belts trade close to one another, and the two main southern belts trade at much the same rate. This is a market where the rate carries almost no information and the choice is about road direction and building condition. Sampatchak and the Gaya road give the widest choice, Phulwari Sharif the southwestern side, and Fatuha eastern despatch on NH-30.",
+    "complianceHeading": "Compliance and Approvals in Patna",
+    "complianceProse": "Most of the southern belt around Sampatchak and Phulwari Sharif developed on private land, so the land's conversion status, and whose name it is in, is the first question there. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Planning and building permission in the Patna metropolitan area now sit with the Patna Metropolitan Area Authority, which took over the planning functions of the former Patna Regional Development Authority. Check the land's conversion status with the district revenue office. Fatuha and Bihta both have BIADA industrial areas; inside one, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Fire clearance is issued by the Bihar Fire Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Sampatchak and the Gaya road for the widest choice, since much of the city's stock sits there. Phulwari Sharif for the southwestern side at comparable rates. Fatuha for eastern despatch on NH-30. Because the rate is similar almost everywhere, decide on road direction and the condition of the specific building.",
+        "q": "Which is the best area for a warehouse in Patna?"
+      },
+      {
+        "a": "Current asking rents for Patna are shown in the rent section of this page, from our live listings. The rate barely changes with unit size, which is unusual, and the higher quotes are city-centre space rather than distribution stock.",
+        "q": "How much does a warehouse cost in Patna?"
+      },
+      {
+        "a": "Mid-size units have reasonable choice in Patna, but very large units are rarely listed, because the market was built for distribution into Bihar rather than for national hubs. A large requirement in Bihar usually means a build-to-suit conversation on the southern belts rather than a shortlist of existing buildings.",
+        "q": "Are there large warehouses available in Patna?"
+      },
+      {
+        "a": "Mostly pre-engineered and mid-size, built for distribution into Bihar, with VDF floors and reasonable docking. Conventional sheds and some RCC make up the rest. Clear height is on record for nearly every Patna listing, so you can shortlist on it, then check the condition of the specific building on a visit.",
+        "q": "What kind of warehouse building is typical in Patna?"
+      },
+      {
+        "a": "On private land around Sampatchak and Phulwari Sharif, the land's conversion status from the district revenue office and the building permission from the Patna Metropolitan Area Authority, in the current owner's name. Inside a BIADA area at Fatuha or Bihta, the allotment terms. Fire clearance comes from Bihar Fire Services.",
+        "q": "What documents should I check for a Patna warehouse?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "puducherry",
+    "seoTitle": "Puducherry, or Pondicherry, Warehousing: Locations, Costs, Specification",
+    "metaDescription": "Where godown space sits in Puducherry, or Pondicherry, and what it costs by size. Reddiyarpalayam, Oulgaret and the industrial estates compared.",
+    "h1": "Puducherry, or Pondicherry, Warehousing: Locations, Costs and Specification",
+    "heroProse": "Puducherry, or Pondicherry, is a compact coastal city, and the storage we list there is small RCC godown space in the city's residential and trading neighbourhoods. It serves local retail and distribution rather than regional freight. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Colonial buildings on a street in Puducherry",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/puducherry.webp",
+      "width": 1600,
+      "height": 1204
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Puducherry",
+    "marketProse": "Puducherry is a small territory with dense neighbourhoods, so most storage is godown space inside the city. Our listings sit on its western side, in **Reddiyarpalayam**, **Oulgaret** and **Sithananda Nagar**, and around **Navarkulam**. Larger industrial sheds sit in the government industrial estates, such as **Mettupalayam** and **Thattanchavady**, and towards **Sedarapet**. Demand is local retail, trade and e-commerce delivery, and the city sits on the East Coast Road between Chennai and Cuddalore.",
+    "marketImage": {
+      "alt": "Map of Puducherry marking its warehousing micromarkets: Reddiyarpalayam, Oulgaret, Sithananda Nagar, Navarkulam, Mettupalayam, Thattanchavady and Sedarapet",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/puducherry.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Puducherry",
+    "rentsProse": "Puducherry's godowns are small, so quotes depend on location and access more than build type. Compare units of similar size in similar neighbourhoods, and read the access and height alongside each rate.",
+    "specHeading": "Typical Specification in Puducherry",
+    "specProse": "The stock is small RCC godown space with low ceilings and ground-level loading, suited to stacked storage and last-mile delivery rather than racking or truck docks. Check road access for the vehicles you use.",
+    "corridorHeading": "Where Warehouse Stock Sits in Puducherry",
+    "corridorProse": "Reddiyarpalayam, Oulgaret and Sithananda Nagar are the place to start for small godowns close to the city's shops and homes. For larger industrial space, look at the Mettupalayam and Thattanchavady estates or towards Sedarapet. Regional distribution for this part of Tamil Nadu usually runs from larger belts elsewhere.",
+    "complianceHeading": "Compliance and Approvals in Puducherry",
+    "complianceProse": "Puducherry's godowns sit inside a planned city, so the building's approved use is the first thing to confirm. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. In Puducherry, development and any change of use need permission under the Puducherry Town and Country Planning Act, 1969, from the Puducherry Planning Authority, and the use has to match the development plan for the area. Inside a PIPDIC or government industrial estate, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Fire clearance is issued by the Puducherry Fire Service. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Reddiyarpalayam, Oulgaret and Sithananda Nagar on Puducherry's western side for small godowns close to the city's shops and homes. For larger industrial space, the government industrial estates at Mettupalayam and Thattanchavady, or towards Sedarapet.",
+        "q": "Which is the best area for a godown in Puducherry?"
+      },
+      {
+        "a": "Mostly small RCC godowns inside the city, suited to local retail, trade and e-commerce delivery. Warehouse-scale space is rarely listed in Puducherry; for larger units, look at the industrial estates on the city's edge.",
+        "q": "What kind of storage space is available in Puducherry?"
+      },
+      {
+        "a": "Yes. Puducherry is the official name of the city and union territory; Pondicherry is the older name and is still widely used. Both refer to the same market.",
+        "q": "Is Puducherry the same as Pondicherry?"
+      },
+      {
+        "a": "The building's approved use under the Puducherry Town and Country Planning Act, from the Puducherry Planning Authority, which has to match the development plan for the area. Inside an industrial estate, the allotment terms. Then the Fire Service's requirements for the unit's size.",
+        "q": "What approvals matter for a Puducherry godown?"
+      },
+      {
+        "a": "Small RCC godowns with low ceilings and ground-level loading, suited to stacked storage and last-mile delivery rather than racking or truck docks. Check road access for your vehicles, because many Puducherry units sit on residential streets.",
+        "q": "What build type is typical in Puducherry?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "pune",
+    "seoTitle": "Pune Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Pune and what it costs by size. Chakan on the Nashik highway and Wagholi on the Nagar road compared on rent and size.",
+    "h1": "Pune Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Pune's warehousing is concentrated in two belts and almost nowhere else. Chakan to the north and Wagholi to the east account for nearly all of it, and they trade a little apart on rate and a long way apart on building type. This page sets out what each one carries and which requirement each suits.",
+    "heroImage": {
+      "alt": "Aerial view of Pune under monsoon clouds",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/pune.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Pune",
+    "marketProse": "Pune is a manufacturing city and its warehousing followed its factories. **Chakan**, on the arm towards Nashik, grew up around the automotive and engineering cluster and is the newer of the two belts, with **Kuruli**, **Mahalunge** and **Nighoje** around it. **Wagholi**, on the Nagar road heading east towards Ahmednagar, with **Lonikand** beyond it, serves both the eastern industrial spread and city distribution. Most of the stock is small to mid-size, and the construction mix includes an unusually high share of conventional sheds, the mark of older industrial-service stock sitting alongside newer purpose-built buildings.",
+    "marketImage": {
+      "alt": "Map of Pune marking its warehousing micromarkets: Chakan, Kuruli, Mahalunge, Nighoje, Wagholi and Lonikand",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/pune.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Pune",
+    "rentsProse": "Pune's market is bimodal: a large cluster of small to mid-size units, then a second cluster of larger ones, with comparatively little in between. An occupier needing space in that middle range is looking at the thinnest part of the market and may pay the highest rate for it. Very large units are rarely listed at all. Rate alone will not separate a shed from a pre-engineered building here, so compare the build before the quote.",
+    "specHeading": "Typical Specification in Pune",
+    "specProse": "The high share of conventional sheds is the thing to weigh. Clear heights are low, consistent with that shed share, and both height and structure need checking on site rather than assuming from the rate. Clear height is on record for nearly every listing here, so you can shortlist on it before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Pune",
+    "corridorProse": "Chakan and Wagholi is the whole decision. Chakan gives newer stock and the automotive cluster for a little more per square foot, at similar unit sizes. Wagholi gives a lower rate, an eastern road position and a short run into the city, on older buildings. Both belts have narrow rate bands, which makes comparison unusually straightforward. Kuruli has its own micromarket page on the Chakan side.",
+    "complianceHeading": "Compliance and Approvals in Pune",
+    "complianceProse": "The split that matters in Pune is MIDC against private land. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Inside an MIDC estate, a good part of the Chakan stock among it, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Outside MIDC, across much of the Wagholi and Lonikand spread: Since the Maharashtra Land Revenue Code amendment notified in December 2025, a separate non-agricultural permission from the Collector is no longer needed where the use is permissible under the development or regional plan; the planning authority collects a one-time conversion premium instead. For an existing building, confirm that the land's non-agricultural status and the building permission are in order and in the current owner's name. Fire approval runs under the Maharashtra Fire Prevention and Life Safety Measures Act, 2006, with a provisional approval at the building-permission stage and a final NOC before occupation. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Chakan for newer stock and proximity to the automotive and engineering cluster, at a little more per square foot. Wagholi for a lower rate and for eastern road access. Both are well-defined belts with narrow rate bands, so the comparison is unusually clean.",
+        "q": "Chakan or Wagholi?"
+      },
+      {
+        "a": "Some, but very large units are rarely listed in Pune because most of the stock is small to mid-size. A larger requirement usually means build-to-suit at Chakan, near the automotive cluster, or looking at Bhiwandi, which has far more depth at that scale and serves Mumbai as well.",
+        "q": "Does Pune have large warehouse space?"
+      },
+      {
+        "a": "Most are pre-engineered, but a high share are conventional sheds for a market of this size. Clear height is on record for nearly every listing and it runs low, so check structure and height on site rather than assuming from the rate.",
+        "q": "Is a Pune warehouse likely to be PEB or a conventional shed?"
+      },
+      {
+        "a": "Yes, at Chakan. The belt grew up around Pune's automotive and engineering cluster on the Nashik road, and its stock is newer than the rest of the city. Kuruli, Mahalunge and Nighoje sit around it. For distribution into Pune city or eastwards, Wagholi on the Nagar road is the better fit.",
+        "q": "Is Pune a good base for automotive supply?"
+      },
+      {
+        "a": "Inside an MIDC estate, including much of Chakan, the allotment terms and MIDC's consent for the sublease. On private land around Wagholi and Lonikand, the land's non-agricultural status and building permission, in the current owner's name. Then the final fire NOC, which in Maharashtra comes after a provisional approval at building permission.",
+        "q": "What documents should I check for a Pune warehouse?"
+      }
+    ],
+    "relatedBlogs": [
+      "peb-vs-rcc-warehouse"
+    ]
+  },
+  {
+    "kind": "CITY",
+    "slug": "raipur",
+    "seoTitle": "Raipur Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Raipur and what it costs by size. Siltara, Tatibandh, Girod and the Bilaspur road compared, plus Chhattisgarh land rules.",
+    "h1": "Raipur Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Raipur is one of the most affordable warehousing markets we cover, and its stock is predominantly modern pre-engineered space. It serves Chhattisgarh's distribution and its steel and cement industries from the highway belts around the city. Rates barely move with size, so the decision is about location and building. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Rickshaws and traffic on a Raipur street in the rain",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/raipur.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Raipur",
+    "marketProse": "Raipur sits on the Mumbai to Kolkata highway, and its warehousing follows that road and the ring road around the city. **Tatibandh** and the **Ring Road** carry city-facing stock. **Girod** and **Dhaneli** on the outskirts hold newer pre-engineered buildings. **Siltara**, the industrial area on the **Bilaspur Road**, serves the steel and manufacturing belt, and **Rawabhata** and **Borjhara** fill in around it. Demand is state-wide distribution and industrial supply, and the stock is overwhelmingly pre-engineered.",
+    "marketImage": {
+      "alt": "Map of Raipur marking its warehousing micromarkets: Tatibandh, Girod / Dhaneli, Siltara, Bilaspur Road, Rawabhata and Borjhara",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/raipur.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Raipur",
+    "rentsProse": "Raipur's rates are among the lowest we cover and barely move with unit size, from small units to the larger boxes. For an occupier, that means the negotiation is about location and the specific building rather than the rate. Newer pre-engineered buildings on the outskirts and the industrial belt price much like older stock nearer the city.",
+    "specHeading": "Typical Specification in Raipur",
+    "specProse": "The stock is overwhelmingly pre-engineered, with clear heights that suit racked storage and reasonable docking. Ask what flooring is down. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Raipur",
+    "corridorProse": "Tatibandh and the Ring Road suit city-facing distribution. Girod and Dhaneli give newer pre-engineered buildings on the outskirts. Siltara and the Bilaspur Road serve the industrial belt. Read the localities above as the guide to where Raipur's stock sits.",
+    "complianceHeading": "Compliance and Approvals in Raipur",
+    "complianceProse": "Much of Raipur's newer stock sits on private land on the outskirts, so the land's diversion status is the first document to ask for. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. In Chhattisgarh, agricultural land is diverted under section 172 of the Land Revenue Code; diversion to industrial use outside a development-plan area needs only a written intimation to the competent authority. Building permission comes from the development authority or municipal body for the area. Inside a CSIDC industrial area such as Siltara, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Fire clearance comes from the state fire services through the local body. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Tatibandh and the Ring Road for city-facing distribution. Girod and Dhaneli on the outskirts for newer pre-engineered buildings. Siltara and the Bilaspur Road for industrial supply to the steel and manufacturing belt. Rates in Raipur barely change with unit size, so road direction decides.",
+        "q": "Which is the best area for a warehouse in Raipur?"
+      },
+      {
+        "a": "Plenty of land on the highway belts, a stock of modern pre-engineered buildings, and demand that is regional rather than metro. Rates barely change with unit size, so larger space costs little extra per square foot.",
+        "q": "Why is Raipur so affordable?"
+      },
+      {
+        "a": "Yes, under section 172 of the Chhattisgarh Land Revenue Code. For industrial use outside a development-plan area, a written intimation to the competent authority is sufficient; inside a planning area, check the permitted use. Ask for the diversion record in the current owner's name.",
+        "q": "Does a warehouse on agricultural land in Raipur need diversion?"
+      },
+      {
+        "a": "Overwhelmingly pre-engineered, with VDF floors, reasonable docking and clear heights that suit racked storage, which is unusual for a market of Raipur's size. The newer buildings sit at Girod and Dhaneli on the outskirts. Clear height and docks are on record for nearly every Raipur listing.",
+        "q": "What specification is typical for a Raipur warehouse?"
+      },
+      {
+        "a": "Yes. Raipur sits on the Mumbai to Kolkata highway, and its stock serves state-wide distribution and industrial supply. Tatibandh and the Ring Road suit city-facing distribution, and Siltara on the Bilaspur Road serves the steel and manufacturing belt.",
+        "q": "Is Raipur a good base for Chhattisgarh distribution?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "rajkot",
+    "seoTitle": "Rajkot Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse and godown stock sits in Rajkot and what it costs by size. Shapar, Navagam, Kotharia and the Gondal road compared, plus Gujarat rules.",
+    "h1": "Rajkot Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Rajkot is a small-unit godown market serving Saurashtra's engineering and trading economy. Much of its stock is small, and RCC is as common as pre-engineered construction, so the rate range is wide and specification varies building by building. This page sets out where the stock sits and what that mix means for an occupier.",
+    "heroImage": {
+      "alt": "Modern building in Rajkot under a cloudy sky",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/rajkot.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Rajkot",
+    "marketProse": "Rajkot is the trading and engineering centre of Saurashtra, and its warehousing serves that economy rather than long-haul distribution. The industrial belt south of the city, at **Shapar** and **Veraval** on the Gondal road, and **Kotharia** closer in, holds the engineering-linked stock. **Navagam** and **Sokhada** on the eastern side, and the **RUDA Transport Nagar**, carry trade and transport godowns. **Gondal** further south adds a little more. Much of the stock is small RCC godown space rather than purpose-built sheds, which is why unit sizes are small and quotes vary widely.",
+    "marketImage": {
+      "alt": "Map of Rajkot marking its warehousing micromarkets: Shapar, Veraval, Kotharia, Navagam / RUDA Transport Nagar, Sokhada and Gondal",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/rajkot.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Rajkot",
+    "rentsProse": "Rajkot's rates are low, but the range is wide, because the stock runs from small commercial godowns to industrial sheds. Small units make up most of the market and quote a little above the mid-size units, and larger buildings are rare. Build type moves the quote more than location: an RCC godown in the city and a pre-engineered shed at Shapar are different products at different rates.",
+    "specHeading": "Typical Specification in Rajkot",
+    "specProse": "RCC is as common as pre-engineered construction here, so clear heights are often low and docking limited. If racking or truck loading matters, verify both on site; the locality tells you little.",
+    "corridorHeading": "Where Warehouse Stock Sits in Rajkot",
+    "corridorProse": "The Shapar and Kotharia belt on the Gondal road is where the engineering-linked and larger buildings are. Navagam, Sokhada and the Transport Nagar suit trade and transport godowns. City pockets carry small units. Read the localities above as the guide to where Rajkot's stock sits.",
+    "complianceHeading": "Compliance and Approvals in Rajkot",
+    "complianceProse": "The distinction that matters in Rajkot is GIDC or organised estate land against private land. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Inside a GIDC estate, transferring the lease to a new occupier needs GIDC's transfer NOC and fee. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. On private land, confirm the land's non-agricultural (NA) status and building permission from the Rajkot Urban Development Authority or the municipal corporation, in the current owner's name. Fire safety is governed by the Gujarat Fire Prevention and Life Safety Measures Act, 2013, so ask for the fire NOC from the local chief fire officer. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Shapar and Kotharia on the Gondal road for engineering-linked and larger buildings. Navagam, Sokhada and the Transport Nagar for trade and transport godowns. City pockets for small units close to the market.",
+        "q": "Which is the best area for a warehouse in Rajkot?"
+      },
+      {
+        "a": "RCC godowns make up a large share, alongside pre-engineered sheds. That follows from the small unit sizes and means clear height varies far more than in a pre-engineered market, so check it on site.",
+        "q": "Is warehouse space in Rajkot mostly RCC?"
+      },
+      {
+        "a": "Rarely. Rajkot is a small-unit market, much of it RCC godown space serving local trade and engineering. A large requirement usually means build-to-suit in the Shapar belt on the Gondal road, or looking at the Ahmedabad belts, which carry far more large pre-engineered stock.",
+        "q": "Can I find a large warehouse in Rajkot?"
+      },
+      {
+        "a": "Yes, for trade and engineering supply. Rajkot is the trading and engineering centre of Saurashtra, and its stock serves that regional economy rather than long-haul distribution. The Shapar and Kotharia belt on the Gondal road suits engineering-linked freight, and Navagam, Sokhada and the Transport Nagar suit trade godowns.",
+        "q": "Is Rajkot a good base for Saurashtra distribution?"
+      },
+      {
+        "a": "Inside a GIDC estate, the allotment terms and GIDC's transfer NOC. On private land, the land's non-agricultural status and the building permission from the Rajkot Urban Development Authority or the municipal corporation, in the current owner's name. Then the fire NOC from the local chief fire officer.",
+        "q": "What documents should I check for a Rajkot warehouse?"
+      }
+    ],
+    "relatedBlogs": [
+      "peb-vs-rcc-warehouse"
+    ]
+  },
+  {
+    "kind": "CITY",
+    "slug": "ranchi",
+    "seoTitle": "Ranchi Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Ranchi and what it costs by size. Tatisilwai, Namkum, Ratu and the ring road compared, plus Jharkhand land rules.",
+    "h1": "Ranchi Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Ranchi is Jharkhand's capital and its main distribution base, and its warehousing sits on the highways and ring road around the city. The stock we list is entirely pre-engineered, from mid-size units to large boxes. This page sets out where the stock sits and what to check.\n\nPhoto: Biswarup Ganguly, BY 3.0, via https://commons.wikimedia.org/w/index.php?curid=12220544",
+    "heroImage": {
+      "alt": "Kanke Dam reservoir on the edge of Ranchi",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/ranchi.webp",
+      "width": 1600,
+      "height": 1063
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Ranchi",
+    "marketProse": "Ranchi's warehousing sits on the roads out of the city rather than in one cluster. To the east, **Tatisilwai** and its industrial area, with **Namkum** and **Daldali Chowk** nearer the city, carry established stock on the Jamshedpur and Tata road side. To the north and west, **Ratu** and **Piska Nagri** serve the roads towards Daltonganj and Lohardaga. Newer large units sit south-east of the city around **Malti** and **Nawadih**, off the ring road. Demand is state-wide distribution and consumer supply, and the stock is modern and pre-engineered.",
+    "marketImage": {
+      "alt": "Map of Ranchi marking its warehousing micromarkets: Tatisilwai, Namkum, Daldali Chowk, Ratu, Piska Nagri, Malti and Nawadih",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/ranchi.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Ranchi",
+    "rentsProse": "Ranchi's stock is uniformly pre-engineered, so quotes separate on size, height, docks and access rather than build type. Compare buildings on the same side of the city, and read the size, height and docks alongside each rate.",
+    "specHeading": "Typical Specification in Ranchi",
+    "specProse": "Every listing is pre-engineered, with heights suited to racking across most of the stock and the tallest units in the newer south-eastern belt. Floors are VDF or FM2 where recorded. Clear height is on record for nearly every listing here, so you can shortlist on it before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Ranchi",
+    "corridorProse": "Tatisilwai and Namkum are the place to start for established stock close to the city on the eastern side. The south-eastern belt off the ring road holds the newest and largest units. Ratu and Piska Nagri suit freight heading north and west, with smaller units.",
+    "complianceHeading": "Compliance and Approvals in Ranchi",
+    "complianceProse": "Land title is the first question in Ranchi, because tenancy law restricts how much of the land around the city can change hands. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Much of the land in the Ranchi and Jamshedpur regions falls under the Chotanagpur Tenancy Act, which restricts transfer; section 49 allows a transfer for industrial purposes only with the Deputy Commissioner's sanction, and the land may then be used only for that purpose. Inside a JIADA industrial area, the allotment terms apply instead. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Building permission comes from the Ranchi Regional Development Authority or the municipal corporation for the area. Fire clearance is issued by the Jharkhand Fire Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Tatisilwai and Namkum on the eastern side for established stock close to Ranchi city. The south-eastern belt off the ring road, around Malti and Nawadih, for the newest and largest units. Ratu and Piska Nagri for freight heading north and west.",
+        "q": "Which is the best area for a warehouse in Ranchi?"
+      },
+      {
+        "a": "Title. Much of the land around Ranchi falls under the Chotanagpur Tenancy Act, which restricts transfer, and land transferred for industrial use under section 49 may be used only for that purpose. Confirm the land's status and the owner's title before anything else.",
+        "q": "What land issue matters most for a Ranchi warehouse?"
+      },
+      {
+        "a": "Some. Most units are mid-size, but the newer belt south-east of Ranchi, off the ring road, holds large pre-engineered boxes with tall clear heights and Fire NOC on record. A very large requirement may still mean build-to-suit.",
+        "q": "Does Ranchi have large warehouse space?"
+      },
+      {
+        "a": "Pre-engineered buildings throughout, with heights suited to racking on most units and floors in VDF or FM2 where recorded. Clear height is on record for nearly every Ranchi listing, so you can shortlist on it before a visit.",
+        "q": "What build type is typical in Ranchi?"
+      },
+      {
+        "a": "Ranchi suits state-wide consumer distribution from the capital, with stock on the ring road and the highways out of the city. Jamshedpur suits industrial supply around its steel and auto belt. Many networks keep one base in each.",
+        "q": "Should I base in Ranchi or Jamshedpur for Jharkhand?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "salem",
+    "seoTitle": "Salem Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Salem and what it costs by size. Kandhampatty, Uthamasolapuram and Mallur compared, plus Tamil Nadu land rules.",
+    "h1": "Salem Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Salem sits where the Bangalore to Madurai highway meets the road to Coimbatore and Kerala, and its warehousing serves that junction and the region's textile, steel and agricultural trade. The stock we list splits between pre-engineered buildings and conventional sheds. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Temple gopuram against a blue sky in Salem",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/salem.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Salem",
+    "marketProse": "Salem is a highway junction city: the national highway from Bangalore to Madurai passes it, and the road west to Coimbatore and Kochi starts here. Its warehousing follows those roads. On the western side, **Kandhampatty** and **Konerikarai** sit near the bypass. **Uthamasolapuram** holds sheds on the city's south-eastern edge, and **Mallur** to the south sits on the highway towards Namakkal. Demand is regional distribution and supply for textiles, steel and agricultural produce.",
+    "marketImage": {
+      "alt": "Map of Salem marking its warehousing micromarkets: Kandhampatty / Konerikarai, Uthamasolapuram and Mallur",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/salem.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Salem",
+    "rentsProse": "Quotes in Salem follow the building more than the address. A pre-engineered unit near the bypass and a conventional shed on the city's edge are different products, so compare like building types, and read the size, height and docks alongside each rate.",
+    "specHeading": "Typical Specification in Salem",
+    "specProse": "The stock splits between pre-engineered buildings and conventional sheds. Clear height is not on record for some units, so verify it on site for any racked layout. Docks are on record for nearly every listing here, so you can compare loading before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Salem",
+    "corridorProse": "Kandhampatty and the bypass side are the place to start for larger units close to the highway junction. Mallur suits freight on the highway towards Namakkal and Madurai. Uthamasolapuram offers conventional sheds on the city's edge.",
+    "complianceHeading": "Compliance and Approvals in Salem",
+    "complianceProse": "Much of Salem's stock sits on private land around the city, so the land's approved use is the first document to ask for. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Outside a SIPCOT or SIDCO estate, planning permission runs through the Directorate of Town and Country Planning, and applications go through the state's single-window planning portal; the approved land use has to permit storage. Fire clearance is issued by the Tamil Nadu Fire and Rescue Services. Inside a SIPCOT or SIDCO estate, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Kandhampatty and the bypass side for larger units close to Salem's highway junction. Mallur, on the highway towards Namakkal, for freight heading south. Uthamasolapuram for conventional sheds on the city's edge.",
+        "q": "Which is the best area for a warehouse in Salem?"
+      },
+      {
+        "a": "For western and central Tamil Nadu, yes. Salem sits on the Bangalore to Madurai highway where the road to Coimbatore and Kerala begins, so one base reaches several regional markets. Its stock splits between pre-engineered buildings and sheds.",
+        "q": "Is Salem a good base for distribution in Tamil Nadu?"
+      },
+      {
+        "a": "That the land's approved use permits storage, with the planning permission in the current owner's name, or the allotment terms inside an estate. Then the clear height, which is not on record for some Salem units, and the docks, which are on record for nearly every listing.",
+        "q": "What should I check before leasing in Salem?"
+      },
+      {
+        "a": "A split between pre-engineered buildings and conventional sheds, with docks on record for nearly every Salem listing. Verify clear height on site for any racked layout, because it is not recorded for every unit.",
+        "q": "What build type is typical in Salem?"
+      },
+      {
+        "a": "Salem's position on the highway junction, plus local industry: textiles and handlooms, the steel plant, and agricultural trade such as sago and mangoes. Distributors serving western and central Tamil Nadu also use it as a base.",
+        "q": "What drives warehouse demand in Salem?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "shivamogga",
+    "seoTitle": "Shivamogga, or Shimoga, Warehousing: Corridors, Costs, Specification",
+    "metaDescription": "Where warehouse stock sits in Shivamogga, or Shimoga, and what it costs by size. Mandli-Kallur, Machenahalli and the city's trade areas compared.",
+    "h1": "Shivamogga, or Shimoga, Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Shivamogga, or Shimoga, is the trading centre of the Malnad region of central Karnataka, and its warehousing serves areca, rice and agricultural trade from the city's industrial areas and market roads. The stock we list is small and mid-size, in conventional sheds and RCC godowns. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Shivamogga Town railway station entrance",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/shivamogga.webp",
+      "width": 1200,
+      "height": 675
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Shivamogga",
+    "marketProse": "Shivamogga's warehousing serves agricultural trade, and areca above all, rather than long-haul distribution. The organised stock sits in the KIADB industrial areas at **Mandli-Kallur** and **Machenahalli**, with the older state estate and auto complex on **Sagar Road**. Inside the city, sheds and godowns sit around **Vinoba Nagara**, **Tunga Nagar** and the **Savi Palya** side of the Old Thirthahalli Road, close to the markets. Units are small to mid-size.",
+    "marketImage": {
+      "alt": "Map of Shivamogga marking its warehousing micromarkets: Mandli-Kallur, Machenahalli, Sagar Road / Vinoba Nagara and Tunga Nagar / Savi Palya",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/shivamogga.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Shivamogga",
+    "rentsProse": "Quotes here depend on the building. An industrial-estate shed and a multi-storey RCC godown in the city are different products, and godowns are often quoted floor by floor, with the ground floor at a premium. Compare like building types and floors, and read the size and height alongside each rate.",
+    "specHeading": "Typical Specification in Shivamogga",
+    "specProse": "The stock splits between conventional sheds and RCC godowns. Sheds in the industrial areas offer workable heights for stacking; the city godowns are low and suit bagged trade storage rather than racking. Loading is usually at ground level, so check truck access on site. Clear height is on record for nearly every listing here, so you can shortlist on it before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Shivamogga",
+    "corridorProse": "Mandli-Kallur and Machenahalli are the place to start for industrial-estate sheds with room for trucks. The city pockets around Vinoba Nagara and Tunga Nagar suit trade storage close to the markets, often in RCC godowns let floor by floor. Sagar Road suits occupiers who want an established estate on the western side.",
+    "complianceHeading": "Compliance and Approvals in Shivamogga",
+    "complianceProse": "Shivamogga's stock splits between KIADB estates and private city buildings, so check which one a building sits in first. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Agricultural land in Karnataka is converted under section 95 of the Land Revenue Act; since September 2025, land already zoned for the use in an approved master plan is certified by the planning authority rather than the Deputy Commissioner. KIADB land is allotted for industrial use, so warehousing has to be allowed under the allotment, and subletting needs KIADB's written NOC. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. In the city, building permission comes from the Shivamogga urban development authority or the city corporation. Fire clearance is issued by the Karnataka State Fire and Emergency Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "The KIADB industrial areas at Mandli-Kallur and Machenahalli for sheds with room for trucks. Vinoba Nagara and Tunga Nagar in the city for trade storage close to the markets, often in RCC godowns. Sagar Road for an established estate on the western side of Shivamogga.",
+        "q": "Which is the best area for a warehouse in Shivamogga?"
+      },
+      {
+        "a": "Yes. Shivamogga is the official name of the city and district in central Karnataka; Shimoga is the older spelling and is still widely used. Both refer to the same warehouse market.",
+        "q": "Is Shivamogga the same as Shimoga?"
+      },
+      {
+        "a": "Mostly small to mid-size space in conventional sheds and RCC godowns, serving areca, rice and agricultural trade. Larger industrial units are found in the KIADB areas at Mandli-Kallur and Machenahalli. A large distribution requirement usually means build-to-suit.",
+        "q": "What kind of warehouse space is available in Shivamogga?"
+      },
+      {
+        "a": "A split between conventional sheds in the industrial areas and RCC godowns in the city, which are often let floor by floor. The godowns are low and suit bagged storage; the sheds offer more height. Clear height is on record for nearly every Shivamogga listing.",
+        "q": "What build type is typical in Shivamogga?"
+      },
+      {
+        "a": "Agricultural trade, with areca at the centre of it, along with rice and other Malnad produce. Shivamogga is the market town for central Karnataka's plantation belt, so demand is for trade storage near the markets and small industrial units in the KIADB areas.",
+        "q": "What drives warehouse demand in Shivamogga?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "sonipat",
+    "seoTitle": "Sonipat, or Sonepat, Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Sonipat, or Sonepat, and what it costs by size. Kundli, Akbarpur Barota and Hassangarh compared, plus Haryana land rules.",
+    "h1": "Sonipat, or Sonepat, Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Sonipat, or Sonepat, is the northern arm of the Delhi NCR market, on the GT Road and the KMP Expressway just beyond the Delhi border at Kundli. The stock we list is entirely pre-engineered, in large units with Fire NOC on record. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Khwaja Khizr Tomb, a historic monument in Sonipat",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/sonipat.webp",
+      "width": 1600,
+      "height": 1202
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Sonipat",
+    "marketProse": "Sonipat's warehousing sits where the GT Road out of Delhi meets the Kundli Manesar Palwal (KMP) Expressway. **Kundli**, on the Delhi border, is the gateway, and **Akbarpur Barota**, a short drive from both the GT Road and the KMP, holds large modern units. To the south-west, **Hassangarh** on the Sonipat to Sampla road is a warehousing hub of its own, close to the KMP. Demand is NCR distribution for north Delhi and the routes to Punjab and Himachal, plus industrial supply.",
+    "marketImage": {
+      "alt": "Map of Sonipat marking its warehousing micromarkets: Kundli, Akbarpur Barota and Hassangarh",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/sonipat.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Sonipat",
+    "rentsProse": "Sonipat's stock is uniformly large and pre-engineered, so quotes separate on height, docks and distance from the Delhi border rather than build type. Compare like with like, and read the size, height and docks alongside each rate.",
+    "specHeading": "Typical Specification in Sonipat",
+    "specProse": "Every listing is a large pre-engineered unit with heights suited to racking and many docks. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Sonipat",
+    "corridorProse": "Akbarpur Barota and the Kundli side are the place to start for large units closest to Delhi and the GT Road. Hassangarh suits occupiers who want the KMP and the road towards Rohtak and Jhajjar. Both hold large pre-engineered stock.",
+    "complianceHeading": "Compliance and Approvals in Sonipat",
+    "complianceProse": "Fire NOC is on record for most listings here, well above the pattern we see nationally. Much of Sonipat's warehousing sits on converted agricultural land, so the CLU is the first document to ask for. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. In Haryana's controlled areas, change of land use is granted by the Department of Town and Country Planning under the 1963 Scheduled Roads and Controlled Areas Act, so ask for the CLU order on the plot itself before the lease, not after. Inside an HSIIDC estate, check the allotment terms instead. Fire NOCs are issued under the Haryana Fire Service Act, 2009, through the urban local bodies. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Akbarpur Barota and the Kundli side for large units closest to Delhi, the GT Road and the KMP Expressway. Hassangarh, on the Sonipat to Sampla road, for occupiers who want the KMP and the road towards Rohtak and Jhajjar.",
+        "q": "Which is the best area for a warehouse in Sonipat?"
+      },
+      {
+        "a": "Yes. Sonipat is the northern arm of the National Capital Region, on the GT Road just beyond the Delhi border at Kundli, and its warehousing serves north Delhi and the routes towards Punjab and Himachal Pradesh. Approvals follow Haryana's rules.",
+        "q": "Is Sonipat part of the Delhi NCR warehouse market?"
+      },
+      {
+        "a": "Yes. Sonipat and Sonepat are two spellings of the same city and district in Haryana, and both are in common use in addresses and searches.",
+        "q": "Is Sonipat the same as Sonepat?"
+      },
+      {
+        "a": "Large pre-engineered buildings with heights suited to racking and many docks. Clear height and docks are on record for nearly every Sonipat listing, and Fire NOC for most, well above the pattern we see nationally.",
+        "q": "What build type is typical in Sonipat?"
+      },
+      {
+        "a": "The CLU order from Haryana's Department of Town and Country Planning on the plot itself, the building permission, and the Fire NOC under the Haryana Fire Service Act. Inside an HSIIDC estate, the allotment terms instead.",
+        "q": "What land documents matter for a Sonipat warehouse?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "surat",
+    "seoTitle": "Surat Warehousing: Corridors, Costs and Specification",
+    "metaDescription": "Where warehouse stock sits around Surat and what it costs by size. Sachin, Ichhapore, Palsana and Hojiwala compared, plus GIDC and Gujarat land rules.",
+    "h1": "Surat Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Surat's warehousing serves its textile and diamond trade and the industrial estates around the city, rather than long-haul distribution. The stock is a mix of RCC, pre-engineered buildings and sheds, and units are mostly mid-size. This page sets out where it sits and what the GIDC estates mean for an occupier.",
+    "heroImage": {
+      "alt": "Urban highway in Surat on a clear day",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/surat.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Surat",
+    "marketProse": "Surat is a textile and diamond city first, and its warehousing grew around the industrial estates that serve those trades. **Sachin** and its GIDC estate, with the **Hojiwala** industrial estate nearby, sit to the south on the Magdalla side. **Ichhapore** GIDC and the textile park lie to the west towards Hazira. **Palsana** and **Baleshwar** on the Bardoli side, with **Jolva**, carry newer stock on the highway. City pockets such as **Saroli** and **Althan** hold smaller trade godowns. Demand is trade and manufacturing supply, and the stock mixes RCC, pre-engineered buildings and sheds.",
+    "marketImage": {
+      "alt": "Map of Surat marking its warehousing micromarkets: Sachin, Hojiwala, Ichhapore, Palsana, Baleshwar, Jolva, Saroli and Althan",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/surat.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Surat",
+    "rentsProse": "Surat prices higher than most of Gujarat on trade demand rather than distribution. Rates are fairly flat across the mid-size and larger units, while small city godowns carry a clear premium for their location. Build type moves quotes too: RCC godowns, sheds and pre-engineered buildings sit side by side, so compare height and floor before the rate.",
+    "specHeading": "Typical Specification in Surat",
+    "specProse": "RCC makes up a large share of the stock, so clear heights and docking vary widely. For racked storage or trailer loading, verify both on the building you are shown.",
+    "corridorHeading": "Where Warehouse Stock Sits in Surat",
+    "corridorProse": "Sachin, Hojiwala and Ichhapore are the organised GIDC and industrial-estate stock. Palsana and the Bardoli side offer newer buildings on the highway, with more room. City pockets suit small trade godowns. Read the localities above as the guide to where Surat's stock sits.",
+    "complianceHeading": "Compliance and Approvals in Surat",
+    "complianceProse": "The distinction that matters in Surat is GIDC land against private land. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Inside a GIDC estate such as Sachin or Ichhapore, transferring the lease to a new occupier needs GIDC's transfer NOC and fee. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. On private land, confirm the land's non-agricultural (NA) status and building permission from the Surat Urban Development Authority or the municipal corporation, in the current owner's name. Fire safety is governed by the Gujarat Fire Prevention and Life Safety Measures Act, 2013, so ask for the fire NOC from the local chief fire officer. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Sachin, Hojiwala and Ichhapore for organised GIDC and industrial-estate stock serving Surat's textile and diamond trades. Palsana and the Bardoli side for newer buildings on the highway with more room. City pockets such as Saroli and Althan for small trade godowns close to the markets.",
+        "q": "Which is the best area for a warehouse in Surat?"
+      },
+      {
+        "a": "Trade demand from Surat's textile and diamond industries, and less competing supply around the city. Ahmedabad has several competing belts around one city, which keeps its rates lower, while Surat's stock is concentrated in a few GIDC estates and highway pockets.",
+        "q": "Why is Surat more expensive than Ahmedabad?"
+      },
+      {
+        "a": "A GIDC unit gives defined allotment terms but needs GIDC's transfer NOC, which takes time. Private land can transact faster but depends on its NA status and building permission being in order.",
+        "q": "Is a GIDC unit or private land better in Surat?"
+      },
+      {
+        "a": "A mix. RCC leads, with pre-engineered buildings and conventional sheds making up the rest, which reflects how much of Surat's stock serves the textile and diamond trades. Clear heights and docking vary widely, so verify both on the specific Surat building before you shortlist it.",
+        "q": "What build type is typical in Surat?"
+      },
+      {
+        "a": "Ichhapore, with its GIDC estate and the textile park towards Hazira, and Sachin with the Hojiwala estate to the south. City pockets such as Saroli and Althan hold smaller trade godowns close to the markets. For newer buildings with more room, Palsana on the Bardoli side.",
+        "q": "Which Surat area suits textile trade storage?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "tumakuru",
+    "seoTitle": "Tumakuru, or Tumkur, Warehousing: Corridors, Costs, Specification",
+    "metaDescription": "Where warehouse stock sits around Tumakuru, or Tumkur, and what it costs by size. Vasanthanarasapura, Antharasanahalli and the highway compared.",
+    "h1": "Tumakuru, or Tumkur, Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Tumakuru, or Tumkur, sits on the Bangalore to Pune highway beyond Nelamangala, and its warehousing is built around large KIADB industrial areas rather than the city itself. Most of the stock is pre-engineered, with conventional sheds making up much of the rest, and it serves occupiers who want Bangalore access at a distance from the metro. This page sets out where the stock sits and what to check.",
+    "marketHeading": "Why Warehousing Works the Way It Does in Tumakuru",
+    "marketProse": "Tumakuru's warehousing follows the national highway north-west from Bangalore. The largest cluster is **Vasanthanarasapura**, the KIADB industrial area on the highway towards **Kora**, which includes the Tumkur Machine Tool Park and the planned Japanese industrial township. Closer to the city, the KIADB estates at **Antharasanahalli** and **Satyamangala** hold older and smaller industrial stock. Some listings sit further out, towards Tiptur. Demand comes from manufacturing and from Bangalore-facing distribution that wants larger land at a distance from the metro, so units run from small sheds to large pre-engineered buildings.",
+    "marketImage": {
+      "alt": "Map of Tumakuru marking its warehousing micromarkets: Vasanthanarasapura / Kora, Antharasanahalli and Satyamangala",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/tumakuru.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Tumakuru",
+    "rentsProse": "Quotes here follow the building more than the address. A pre-engineered unit in Vasanthanarasapura and a conventional shed in an older estate can price quite differently, so compare like building types, and read the size, height and docks alongside each rate.",
+    "specHeading": "Typical Specification in Tumakuru",
+    "specProse": "Most of the stock is pre-engineered, and the newer Vasanthanarasapura buildings have heights suited to racking and several docks, some with ramps. Conventional sheds in the older estates are lower and often have ground-level loading. Floors are mostly VDF. Clear height is on record for nearly every listing here, so you can shortlist on it before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Tumakuru",
+    "corridorProse": "Vasanthanarasapura is the place to start for larger, newer pre-engineered buildings with highway access, across its second and third phases. Antharasanahalli and Satyamangala, closer to the city, suit smaller units and established industrial estates. For Bangalore-facing distribution, compare these with the Nelamangala and Dobbaspet belts closer to the city.",
+    "complianceHeading": "Compliance and Approvals in Tumakuru",
+    "complianceProse": "Most of Tumakuru's warehousing sits inside KIADB industrial areas, so the allotment terms are the first document to ask for. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Agricultural land in Karnataka is converted under section 95 of the Land Revenue Act; since September 2025, land already zoned for the use in an approved master plan is certified by the planning authority rather than the Deputy Commissioner. KIADB land is allotted for industrial use, so warehousing has to be allowed under the allotment, and subletting needs KIADB's written NOC. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Outside the estates, building permission comes from the Tumakuru urban development authority or the local body. Fire clearance is issued by the Karnataka State Fire and Emergency Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Vasanthanarasapura, the KIADB industrial area on the Bangalore to Pune highway, for larger and newer pre-engineered buildings. Antharasanahalli and Satyamangala, closer to Tumakuru city, for smaller units in established estates. Tiptur and the outlying towns suit only local storage.",
+        "q": "Which is the best area for a warehouse in Tumakuru?"
+      },
+      {
+        "a": "For some networks, yes. Tumakuru sits on the same highway as the Nelamangala and Dobbaspet belts, further from Bangalore, with large KIADB industrial areas. It suits occupiers who want bigger land or units and can accept a longer run into the city; city-facing delivery still works better from the belts closer in.",
+        "q": "Is Tumakuru an alternative to Bangalore for warehousing?"
+      },
+      {
+        "a": "That warehousing is a permitted activity under the plot's KIADB allotment, and that KIADB has given its written NOC for the lease, because subletting KIADB land needs it. Then check the building permission and the Fire NOC position for the unit you shortlist.",
+        "q": "What should I check on a KIADB warehouse in Tumakuru?"
+      },
+      {
+        "a": "Mostly pre-engineered buildings, with conventional sheds making up much of the rest. The newer units in Vasanthanarasapura have heights suited to racking and several docks; the older sheds are lower with ground-level loading. Clear height is on record for nearly every Tumakuru listing.",
+        "q": "What build type is typical in Tumakuru?"
+      },
+      {
+        "a": "Vasanthanarasapura is the KIADB industrial area on the Bangalore to Pune highway just north-west of Tumakuru city, developed in phases towards Kora. It includes the Tumkur Machine Tool Park and is the main cluster of newer warehouse and industrial buildings around Tumakuru.",
+        "q": "Where is Vasanthanarasapura industrial area?"
+      }
+    ],
+    "relatedBlogs": []
+  },
+  {
+    "kind": "CITY",
+    "slug": "vijayawada",
+    "seoTitle": "Vijayawada Warehousing: Corridors and Costs",
+    "metaDescription": "Where warehouse stock sits in Vijayawada and what it costs by size. The Gannavaram airport belt and the Gollapudi NH-65 arm compared on rent.",
+    "h1": "Vijayawada Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Vijayawada is a small-unit market at a major highway junction. Much of its stock is small, and a large share of the buildings are RCC rather than purpose-built sheds, which makes it a different market from the pre-engineered distribution belts of the big cities. This page sets out where the stock is and what that mix means for an occupier.",
+    "heroImage": {
+      "alt": "Prakasam Barrage in Vijayawada lit at night",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/vijayawada.webp",
+      "width": 1024,
+      "height": 683
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Vijayawada",
+    "marketProse": "Vijayawada sits where NH-16 running up the east coast meets NH-65 running west to Hyderabad, which makes it the natural distribution point for coastal Andhra Pradesh. What it does not have is a manufacturing cluster of the kind that produces large purpose-built sheds. The demand is trade and regional distribution, and the stock reflects that: small, often RCC, and close to the city. The main belts run northeast through **Gannavaram** towards the airport, west through **Gollapudi** on the NH-65 arm, and south through **Kankipadu** on NH-16, with older stock in the city **industrial area**. An occupier used to pre-engineered distribution boxes will find Vijayawada a different market.",
+    "marketImage": {
+      "alt": "Map of Vijayawada marking its warehousing micromarkets: Gannavaram, Gollapudi and Kankipadu",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/vijayawada.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Vijayawada",
+    "rentsProse": "Rates in Vijayawada barely move across the size range; the size mix tells the real story. Much of the stock is small and very little is large, so large-format inventory is scarce. An occupier with a large requirement should expect a very short shortlist and should consider build-to-suit or the Hyderabad belts instead. Within the city, build type moves the quote more than location does, so compare an RCC godown with a pre-engineered shed only after checking both heights.",
+    "specHeading": "Typical Specification in Vijayawada",
+    "specProse": "RCC leads the construction mix here, the reverse of most cities we cover, and it is the defining fact about the market. If pallet racking is planned, verify height on site: an RCC godown and a pre-engineered shed do different jobs, and in Vijayawada the two can trade at similar rates. Clear height is on record for nearly every listing here, so you can shortlist on it before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Vijayawada",
+    "corridorProse": "Read build type before rent. Most belts in Vijayawada carry a substantial RCC share. Two buildings at the same rate and the same floor area can be very different products here, and the difference is usually clear height. Gannavaram offers larger units, Gollapudi serves the Hyderabad direction, and Kankipadu the coast. Much of the rest is city-centre colony stock.",
+    "complianceHeading": "Compliance and Approvals in Vijayawada",
+    "complianceProse": "Much of Vijayawada's stock is small godown space, and units below the size thresholds may not need a fire NOC at all, so confirm what applies to the building you shortlist. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Andhra Pradesh repealed its agricultural land conversion (NALA) Act in September 2025, so land development is now regulated through the urban development authorities and town planning rules; confirm the permitted use and building permission with the authority for the area. Inside an APIIC industrial park, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Fire clearance is issued by the Andhra Pradesh State Disaster Response and Fire Services Department. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Gannavaram and the northeastern airport belt for larger units. Gollapudi on the NH-65 arm for the Hyderabad direction, accepting smaller units and more RCC. Kankipadu on NH-16 towards the coast. Rates across them sit close together, so the decision is about direction and build type.",
+        "q": "Which is the best area for a warehouse in Vijayawada?"
+      },
+      {
+        "a": "RCC leads, with pre-engineered buildings and conventional sheds making up the rest. That is unusual among Indian warehousing markets and follows from the small unit sizes. It also means clear height varies far more here than in a pre-engineered market, so check it on site every time.",
+        "q": "Is warehouse space in Vijayawada mostly PEB or RCC?"
+      },
+      {
+        "a": "Rarely. Vijayawada is a small-unit market, so a genuinely large requirement is usually met by build-to-suit on the Gannavaram or Kankipadu arms. The other route is the Hyderabad belts a few hours west, which are far deeper in large pre-engineered stock.",
+        "q": "Can I find a large warehouse in Vijayawada?"
+      },
+      {
+        "a": "Often, yes. Vijayawada sits where NH-16 running up the east coast meets NH-65 running west to Hyderabad, which makes it the natural distribution point for coastal Andhra Pradesh. Its stock is small and often RCC, so it suits regional trade and distribution better than large-format storage.",
+        "q": "Is Vijayawada a good base for coastal Andhra distribution?"
+      },
+      {
+        "a": "Since Andhra Pradesh repealed its NALA Act in September 2025, confirm the permitted use and building permission with the development authority for the area. Inside an APIIC park, check the allotment terms and the consent for any sublease. Many small Vijayawada godowns fall below fire NOC thresholds, so confirm what applies to your building.",
+        "q": "What documents should I check for a Vijayawada warehouse?"
+      }
+    ],
+    "relatedBlogs": [
+      "peb-vs-rcc-warehouse"
+    ]
+  },
+  {
+    "kind": "CITY",
+    "slug": "visakhapatnam",
+    "seoTitle": "Visakhapatnam Warehousing: Corridors and Costs",
+    "metaDescription": "Where warehouse stock sits in Visakhapatnam and what it costs by size. Gajuwaka, Autonagar and Pendurthi compared, plus Andhra Pradesh land rules.",
+    "h1": "Visakhapatnam Warehousing: Corridors, Costs and Specification",
+    "heroProse": "Visakhapatnam is Andhra Pradesh's port and heavy-industry city, and its warehousing competes with port logistics and industry for land. Units are small to mid-size, the stock is split between sheds and pre-engineered buildings, and rates run above Vijayawada. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Aerial view of the Visakhapatnam coastline and hills",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/visakhapatnam.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Warehousing Works the Way It Does in Visakhapatnam",
+    "marketProse": "Visakhapatnam's warehousing follows the port and the industrial belt to its southwest. **Gajuwaka** and **Autonagar**, close to the port and the steel plant, carry the largest share. **Kancharapalem** sits nearer the city, while **Pendurthi** and **Gurrampalem** on the northwestern side offer more room on the Vijayawada side of the city. Demand is port, steel and industrial supply, which is why the stock includes so many conventional sheds, and why land near the port prices above the rest of the state.",
+    "marketImage": {
+      "alt": "Map of Visakhapatnam marking its warehousing micromarkets: Gajuwaka, Autonagar, Kancharapalem, Pendurthi and Gurrampalem",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/visakhapatnam.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "Warehouse Costs in Visakhapatnam",
+    "rentsProse": "Visakhapatnam prices above Vijayawada on port-linked demand and a tighter supply of industrial land near the city. Mid-size units quote at the upper end, while small units sit a little lower, and very large units are rarely listed. Build type matters: sheds and pre-engineered buildings share the market, so compare height and floor before comparing quotes.",
+    "specHeading": "Typical Specification in Visakhapatnam",
+    "specProse": "Conventional sheds make up a large share of the stock, so clear heights and docking vary widely. For racked storage or trailer loading, verify both on the building you are shown. Clear height is on record for nearly every listing here, so you can shortlist on it before a visit.",
+    "corridorHeading": "Where Warehouse Stock Sits in Visakhapatnam",
+    "corridorProse": "Gajuwaka and Autonagar are the port-side belt and the place to start for anything port or industry linked. Pendurthi and Gurrampalem offer more room and newer plots further out. Kancharapalem suits smaller city-facing units. Read the localities above as the guide to where Visakhapatnam's stock sits.",
+    "complianceHeading": "Compliance and Approvals in Visakhapatnam",
+    "complianceProse": "Land near the port and the industrial belt is contested, so confirm what the plot is permitted for before anything else. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Andhra Pradesh repealed its agricultural land conversion (NALA) Act in September 2025, so land development is now regulated through the urban development authority and town planning rules; confirm the permitted use and building permission with the Visakhapatnam Metropolitan Region Development Authority or the municipal corporation. Inside an APIIC industrial park, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Fire clearance is issued by the Andhra Pradesh State Disaster Response and Fire Services Department. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+    "faqs": [
+      {
+        "a": "Gajuwaka and Autonagar, close to the port and the steel plant, for port and industry-linked freight; they carry the largest share of Visakhapatnam's stock. Pendurthi and Gurrampalem on the northwestern side for more room and newer plots. Kancharapalem for smaller city-facing units.",
+        "q": "Which is the best area for a warehouse in Visakhapatnam?"
+      },
+      {
+        "a": "Port-linked demand and a tighter supply of industrial land near the city. Visakhapatnam's warehousing competes with port logistics and heavy industry for the same plots, while Vijayawada's belts have more room.",
+        "q": "What drives warehouse rents in Visakhapatnam?"
+      },
+      {
+        "a": "Rarely. Most of Visakhapatnam's stock is small to mid-size, because land near the port is contested by port logistics and heavy industry. A large requirement usually means build-to-suit on the Pendurthi side or inside an APIIC industrial park.",
+        "q": "Can I find a large warehouse in Visakhapatnam?"
+      },
+      {
+        "a": "Conventional sheds and pre-engineered buildings in roughly equal measure, with some RCC, which follows from the port, steel and industrial demand around Gajuwaka and Autonagar. Floors split between RCC and VDF. Clear height and docking vary widely, so verify both on the building. Clear height is on record for nearly every listing.",
+        "q": "What build type is typical in Visakhapatnam?"
+      },
+      {
+        "a": "The permitted use and building permission from the Visakhapatnam Metropolitan Region Development Authority or the municipal corporation, since Andhra Pradesh repealed its NALA Act in September 2025. Inside an APIIC park, the allotment terms and the consent for any sublease. Fire clearance comes from the state fire services department.",
+        "q": "What documents should I check for a Visakhapatnam warehouse?"
+      }
+    ],
+    "relatedBlogs": [],
+    "statOverrides": {
+      "rent": {
+        "min": 15
+      }
+    }
+  },
+  {
+    "kind": "STATE",
+    "slug": "andhra-pradesh",
+    "seoTitle": "Warehousing in Andhra Pradesh: Corridors and Costs",
+    "metaDescription": "How warehousing works in Andhra Pradesh: Vijayawada, Visakhapatnam and Guntur compared on stock and cost by size, plus APIIC and land-use rules.",
+    "h1": "Warehousing in Andhra Pradesh",
+    "heroProse": "Andhra Pradesh is a small-unit warehousing market. Much of the state's stock is small, and RCC is almost as common as pre-engineered construction. That shapes everything: the stock mix, the rates and the kind of occupier the market actually serves. This page sets out where the stock sits, what it costs and what changed on land conversion in 2025.",
+    "heroImage": {
+      "alt": "Andhra's Coromandel Coastline",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/blogs/hero-1-614305357e6d754f.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Andhra Pradesh for Warehousing",
+    "marketProse": "Andhra Pradesh has one of the longest coastlines in India and sits between the Chennai, Hyderabad and Bangalore markets, and its warehousing serves that position. **Vijayawada**, where NH-16 meets the highway to Hyderabad, is the state's distribution junction and its deepest market, with **Guntur** trading alongside it. **Visakhapatnam** brings a major port and a heavy industrial base on the northern coast. In the south, **Tirupati** and **Nellore** look towards Chennai. The 2025 repeal of the agricultural land conversion Act removed one step from new development, which helps owners building fresh stock. For an occupier, the state suits regional distribution and city-edge storage today, and build-to-suit for anyone planning a larger hub on the coast.",
+    "marketImage": {
+      "alt": "Map of Andhra Pradesh marking its main warehousing markets: Vijayawada, Visakhapatnam, Guntur, Tirupati and Nellore",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/state/andhra-pradesh.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "What Warehouse Space Costs in Andhra Pradesh",
+    "rentsProse": "Rates in Andhra Pradesh barely vary across size bands; the size mix is what tells the story. Much of the stock is small and very little is large, so an occupier with a large requirement should expect a short shortlist and consider build-to-suit, or the Hyderabad belts a few hours away. Between cities, Visakhapatnam's port demand carries a clear premium over Vijayawada.",
+    "specHeading": "What the Stock Is Like in Andhra Pradesh",
+    "specProse": "RCC is close to the leading construction type here, which follows from the small-unit mix and is the single most important thing to check on any shortlist. RCC and pre-engineered buildings can trade at similar rates, and clear height is what separates them, so verify it on site. Clear height is on record for nearly every listing here, so you can shortlist on it before a visit.",
+    "citiesHeading": "Where Warehouse Stock Sits in Andhra Pradesh",
+    "complianceHeading": "Approvals and Compliance for Warehouses in Andhra Pradesh",
+    "complianceProse": "Approvals in Andhra Pradesh changed in 2025, and a lease signed now should reflect the new route. With the agricultural land conversion Act repealed by ordinance that September, the permitted use of a plot is settled through the urban development authority and the town planning rules for the area, such as the Visakhapatnam Metropolitan Region Development Authority around the port city. For an existing godown, the practical check is a building permission that matches the structure on site and names the current owner. Inside an APIIC industrial park, the allotment governs use, and any sublease needs the corporation's consent. Fire safety sits with the State Disaster Response and Fire Services Department. Smaller godowns can fall below the size that needs a fire NOC, so ask which rule applies to the building before relying on the absence of one.",
+    "faqs": [
+      {
+        "a": "Not much, and most of it is around Vijayawada and Visakhapatnam. An occupier with a large requirement should plan for build-to-suit or look at the Hyderabad belts, which are a few hours away and much deeper.",
+        "q": "Is there large-format warehousing in Andhra Pradesh?"
+      },
+      {
+        "a": "Port-linked demand and a tighter supply of industrial land near the city. Visakhapatnam's warehousing competes with port logistics and heavy industry for the same plots, while Vijayawada's belts along NH-65 and towards Gannavaram have more room.",
+        "q": "Why is Visakhapatnam more expensive than Vijayawada?"
+      },
+      {
+        "a": "Andhra Pradesh repealed its agricultural land conversion (NALA) Act in September 2025, so separate conversion under that Act is no longer the route; land development is now regulated through the urban development authorities and town planning rules. Confirm the permitted use and building permission with the authority for the area. Inside an APIIC industrial park, check the allotment terms. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent.",
+        "q": "Does agricultural land still need conversion in Andhra Pradesh?"
+      },
+      {
+        "a": "Whether the building sits inside an approved layout with a building permission in the current owner's name, and whether the structure is RCC or a shed, because much of the state's stock is RCC with limited clear height. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Fire clearance is issued by the Andhra Pradesh State Disaster Response and Fire Services Department. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+        "q": "What should I check before leasing a small godown in Andhra Pradesh?"
+      },
+      {
+        "a": "A more even mix than most states. Pre-engineered buildings lead, but RCC godowns and conventional sheds together make up most of the rest, especially in Vijayawada and Visakhapatnam. RCC and sheds often have lower clear heights, so in Andhra Pradesh the height of the specific building matters more than its rate. Clear height is on record for nearly every listing.",
+        "q": "What kind of warehouse buildings does Andhra Pradesh have?"
+      }
+    ],
+    "relatedBlogs": [
+      "warehouse-compliance-checklist-india"
+    ],
+    "statOverrides": {
+      "rent": {
+        "min": 10
+      },
+      "size": {
+        "max": 214000
+      }
+    }
+  },
+  {
+    "kind": "STATE",
+    "slug": "gujarat",
+    "seoTitle": "Warehousing in Gujarat: Corridors, Costs and Compliance",
+    "metaDescription": "How warehousing works in Gujarat: the Ahmedabad belts at Aslali, Changodar and Sanand, what space costs by size, and GIDC versus private land.",
+    "h1": "Warehousing in Gujarat",
+    "heroProse": "Gujarat is one of the most affordable major warehousing states on a rate per square foot basis, and the reason is supply rather than weak demand. Industrial land is plentiful, GIDC estates are numerous, and the Ahmedabad ring has several competing belts rather than one dominant corridor. This page sets out where the stock sits, what it costs and what to check on land and fire approvals.",
+    "heroImage": {
+      "alt": "Gujarat has heavily invested infrastructure to facilitate commerce.",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/blogs/hero-3-31d982d89c4882a2.webp",
+      "width": 1600,
+      "height": 1290
+    },
+    "marketHeading": "Why Gujarat for Warehousing",
+    "marketProse": "Gujarat's case rests on land, ports and industry. The state has a long coastline with major ports at **Mundra** and on the Gulf of Khambhat, a chemical and industrial belt running through **Dahej** and **Vadodara**, and a dense network of GIDC estates that keeps industrial land in steady supply. That supply is why rates stay low even where demand is strong. **Ahmedabad** sits at the centre, on the highway between Delhi and Mumbai, and works as the state's distribution hub. **Surat** adds textile and diamond trade demand in the south, and **Rajkot** serves the engineering and small-industry base of Saurashtra. For an occupier, Gujarat offers room to grow at rates among the lowest of the states we cover, with a choice of estate or private land in most markets.",
+    "marketImage": {
+      "alt": "Map of Gujarat marking its main warehousing markets: Ahmedabad, Rajkot, Surat, Mundra, Dahej and Vadodara",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/state/gujarat.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "What Warehouse Space Costs in Gujarat",
+    "rentsProse": "Gujarat has one of the flattest cost curves of the states we cover, with low medians across the size bands. The practical consequence is that an occupier sizing a requirement here has little to gain on rate from taking a bigger unit, and a lot to gain from choosing the right belt and the right build type. RCC godowns and older sheds sit at the bottom of the range; new pre-engineered buildings near Ahmedabad sit at the top.",
+    "specHeading": "What the Stock Is Like in Gujarat",
+    "specProse": "The RCC share is the thing to understand about Gujarat. Much of the small and mid-size inventory is RCC godown space rather than purpose-built pre-engineered buildings, which is why the rate is low and why clear height needs checking on every shortlist. Larger units turn predominantly pre-engineered, with grade-A flooring common.",
+    "citiesHeading": "Where Warehouse Stock Sits in Gujarat",
+    "complianceHeading": "Approvals and Compliance for Warehouses in Gujarat",
+    "complianceProse": "In Gujarat the document trail depends on who holds the land. Much of the organised stock sits in GIDC estates, where the rights come from a long lease with the corporation. When a building changes hands or passes to a new user, GIDC's transfer NOC and fee become part of the timeline, so build them into the move-in date. Outside the estates, private land needs its non-agricultural status in order, along with building permission from the development authority or municipal corporation for the area, such as AUDA around Ahmedabad. Fire safety falls under the state's 2013 Fire Prevention and Life Safety Measures Act, and buildings are tracked on the GujFireSafetyCoP portal, so ask the owner for the building's current record there. For RCC godowns in older city pockets, confirm that the approved use is storage rather than shops or offices.",
+    "faqs": [
+      {
+        "a": "Aslali and Narol on the NH-48 side for anything moving towards Mumbai and the south; it is the deepest belt in the city. Changodar and Sanand on the western arm for manufacturing inbound and newer pre-engineered stock. Kheda and Nadiad, further east, for larger units at similar rates.",
+        "q": "Which Ahmedabad belt suits a distribution occupier?"
+      },
+      {
+        "a": "A GIDC plot is held on a long lease with defined terms, and transferring it to a new occupier needs GIDC's transfer NOC and fee, so the timeline is longer and the deal less flexible. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Private land can transact faster but depends on its non-agricultural (NA) status and building permission being in order and in the current owner's name.",
+        "q": "Is a GIDC plot better than private land?"
+      },
+      {
+        "a": "More supply of industrial land, more competing belts around the same city, and a stock mix that includes a large share of RCC and conventional sheds alongside purpose-built pre-engineered buildings. The like-for-like gap on new large pre-engineered stock is much narrower than the headline medians suggest.",
+        "q": "Why is Gujarat cheaper than Maharashtra?"
+      },
+      {
+        "a": "Fire safety is governed by the Gujarat Fire Prevention and Life Safety Measures Act, 2013, administered through the chief fire officers and regional fire offices, with compliance tracked on the state's GujFireSafetyCoP portal. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Ask to see the fire NOC for the building you are taking. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+        "q": "What fire approval does a Gujarat warehouse need?"
+      },
+      {
+        "a": "A mix that sets Gujarat apart. Pre-engineered buildings lead, especially on the larger units around Ahmedabad, but RCC godowns and conventional sheds together make up a large share, mostly in Rajkot, Surat and the smaller towns. That mix keeps the state's rates low, and it means clear height varies widely, so confirm it on every Gujarat shortlist.",
+        "q": "What kind of warehouse buildings does Gujarat have?"
+      }
+    ],
+    "relatedBlogs": [
+      "warehouse-compliance-checklist-india"
+    ],
+    "statOverrides": {
+      "rent": {
+        "min": 8
+      }
+    }
+  },
+  {
+    "kind": "STATE",
+    "slug": "haryana",
+    "seoTitle": "Warehousing in Haryana: Corridors, Costs and Compliance",
+    "metaDescription": "How warehousing works in Haryana: the Gurugram arc, Sonipat, Dharuhera and Karnal compared on stock and cost by size, plus DTCP CLU and fire rules.",
+    "h1": "Warehousing in Haryana",
+    "heroProse": "Haryana's warehousing is the large-format heart of Delhi NCR. The Gurugram arc carries most of it, with Sonipat, Dharuhera and Karnal extending it along the highways out of Delhi. It is also the state where the land-use question bites hardest, because so much of the stock sits on converted agricultural land rather than inside an industrial estate. This page sets out where the stock sits, what it costs and what to check.",
+    "heroImage": {
+      "alt": "Haryana has undergone rapid urbanization and infra buildup, especially in Gurgaon.",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/blogs/hero-5-f9106b614fd1f3aa.webp",
+      "width": 1600,
+      "height": 899
+    },
+    "marketHeading": "Why Haryana for Warehousing",
+    "marketProse": "Haryana wraps around Delhi on three sides, and that geography is its whole case. The main highways out of the capital cross the state: NH-48 through **Gurugram**, **Manesar** and **Dharuhera** towards Jaipur and Mumbai, NH-44 through **Sonipat** and **Karnal** towards Punjab, and the Agra road through **Faridabad** and **Palwal**. The KMP Expressway ties these arms together without entering Delhi, which is why so much of the region's large-format distribution sits in Haryana. New, purpose-built stock makes up most of what is available. For an occupier serving Delhi and north India, Haryana offers some of the largest and newest warehouses in the region, with an arm for each direction of freight.",
+    "marketImage": {
+      "alt": "Map of Haryana marking its main warehousing markets: Gurugram, Manesar, Sonipat, Dharuhera, Palwal, Karnal and Faridabad",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/state/haryana.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "What Warehouse Space Costs in Haryana",
+    "rentsProse": "Haryana is one of the few markets where taking a larger unit costs little extra per square foot: across the warehouse-scale range the rate moves very little, and the largest boxes price much like mid-size ones. Location matters more than size. Sohna Road carries a clear premium for being close to Gurugram city, while the western and southern belts and the towns beyond Delhi sit together at the lower end.",
+    "specHeading": "What the Stock Is Like in Haryana",
+    "specProse": "Haryana's stock is new, purpose-built and dock-heavy, predominantly pre-engineered with little conversion outside the Sohna Road belt. Clear height and docks are on record for nearly every listing here, so you can shortlist on specification before a visit. Confirm the floor on the building you shortlist.",
+    "citiesHeading": "Where Warehouse Stock Sits in Haryana",
+    "complianceHeading": "Approvals and Compliance for Warehouses in Haryana",
+    "complianceProse": "Haryana is where the land-use document matters most, because much of the Gurugram arc was built on converted agricultural land rather than inside an estate. In the controlled areas around the cities, a warehouse needs a change of land use from the Department of Town and Country Planning, and the order should cover the plot the building stands on, in the name of the present owner. Inside HSIIDC estates such as IMT Manesar, the allotment takes the place of the CLU as the key paper, and the corporation has to approve any sublease. Fire safety follows the Haryana Fire Service Act of 2009: a non-residential building's fire-fighting scheme is approved at design stage, and the NOC follows once the building is complete. Most Haryana listings already have one on record.",
+    "faqs": [
+      {
+        "a": "Mostly, but not entirely. Sonipat serves the northern side of Delhi on NH-44 and the KMP Expressway, Dharuhera and Palwal extend the southern highways, and Karnal serves the Punjab direction. For large-format distribution into NCR, the Gurugram arc is still where the depth is.",
+        "q": "Is Haryana warehousing only Gurugram?"
+      },
+      {
+        "a": "In a controlled area, yes. Change of land use is granted by the Department of Town and Country Planning under the Punjab Scheduled Roads and Controlled Areas Act, 1963, as applied in Haryana. Because much of the Gurugram arc developed on converted agricultural land, ask for the CLU order on the plot itself before the lease, not after.",
+        "q": "Does a Haryana warehouse need a change of land use?"
+      },
+      {
+        "a": "Inside an HSIIDC estate, including IMT Manesar, the allotment sets what the plot may be used for, so confirm that warehousing is permitted and that any sublease is approved by the corporation. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Fire NOC is on record for most listings here, well above the pattern we see nationally.",
+        "q": "What about HSIIDC estates and IMT Manesar?"
+      },
+      {
+        "a": "Fire NOCs are issued under the Haryana Fire Service Act, 2009, through the urban local bodies department, and non-residential buildings need their fire-fighting scheme approved before construction. Ask to see the NOC for the specific building. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+        "q": "Who issues the fire NOC for a warehouse in Haryana?"
+      },
+      {
+        "a": "New, purpose-built and predominantly pre-engineered, with generous docking and clear heights suited to racked storage. Haryana's floors are well specified, split between FM2, VDF and trimix, which is unusual among the states we cover. Most Haryana listings also have a fire NOC on record, well above the pattern we see nationally.",
+        "q": "What kind of warehouse buildings does Haryana have?"
+      }
+    ],
+    "relatedBlogs": [
+      "warehouse-compliance-checklist-india"
+    ],
+    "statOverrides": {
+      "size": {
+        "max": 500000
+      }
+    }
+  },
+  {
+    "kind": "STATE",
+    "slug": "karnataka",
+    "seoTitle": "Warehousing in Karnataka: Corridors, Costs, Compliance",
+    "metaDescription": "How warehousing works in Karnataka: Bangalore's belts, Mangaluru, Hubli and Kolar compared on stock and cost by size, plus KIADB and conversion rules.",
+    "h1": "Warehousing in Karnataka",
+    "heroProse": "Karnataka's warehousing is Bangalore first and everything else a long way second. The Bangalore belts hold most of the state's stock, while Mangaluru, Hubli, Mysuru and the Kolar industrial belt serve their own regions. Because so much sits on KIADB land, the approvals question in Karnataka is as much about allotment terms as about land conversion. This page sets out where the stock sits, what it costs and what to check.",
+    "heroImage": {
+      "alt": "Mysore Palace- A symbol of Karnataka's pride.",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/blogs/heroalt-2-2cd037dd1326df0c.webp",
+      "width": 1023,
+      "height": 685
+    },
+    "marketHeading": "Why Karnataka for Warehousing",
+    "marketProse": "Karnataka's warehousing is anchored by **Bangalore**, one of India's largest consumption and technology markets, and by a manufacturing base that runs from the electronics and automotive estates around the city out to **Kolar** beyond Hoskote. Bangalore sits where the highways to Pune and Mumbai, Chennai and Hyderabad converge, so stock here can serve much of south India as well as the city itself. KIADB estates add organised industrial land across the state. On the west coast, **Mangaluru** gives Karnataka its own port, **Hubli** links the north of the state to the Pune highway, and **Mysuru** and **Shivamogga** serve the south and the Malnad region. For an occupier, Karnataka offers one deep metro market and a set of regional markets that each do their own job.",
+    "marketImage": {
+      "alt": "Map of Karnataka marking its main warehousing markets: Bangalore, Kolar, Mangaluru, Hubli, Mysuru and Shivamogga",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/state/karnataka.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "What Warehouse Space Costs in Karnataka",
+    "rentsProse": "Karnataka's rents are set by Bangalore, and inside Bangalore by unit size and belt. Small city units price as commercial space, while warehouse-scale units on the outer belts sit in a narrow band. The airport belt and inner Bangalore quote at the top; the northwest belt and the Kolar estates offer large units for less. Outside the Bangalore region, Mangaluru and Hubli price as regional markets rather than as extensions of the metro.",
+    "specHeading": "What the Stock Is Like in Karnataka",
+    "specProse": "The outer belts around Bangalore and Kolar are predominantly pre-engineered, with high clear heights on the large units. City stock is often RCC with much lower heights. Specification varies sharply by size and belt, so judge a building on its own figures rather than a state average. Pre-engineered buildings make up most of Karnataka's stock, with RCC a solid second, and VDF is the most common floor. RCC and sheds cluster in inner Bangalore and the smaller towns, so confirm the structure as well as the height.",
+    "citiesHeading": "Where Warehouse Stock Sits in Karnataka",
+    "complianceHeading": "Approvals and Compliance for Warehouses in Karnataka",
+    "complianceProse": "Approvals in Karnataka run on two tracks. On private land, the plot has to be converted for non-agricultural use under the Land Revenue Act, and where an approved master plan already zones it for the purpose, the September 2025 rules let the planning authority certify that use, a shorter route on zoned land. Building plan approval then comes from the planning authority for the area, such as the BDA or the local planning authorities around Bangalore. On KIADB land, the allotment is the governing document: it sets the permitted activity, and a sublease to a warehouse occupier needs the board's written NOC. On either track, fire safety sits with the Karnataka State Fire and Emergency Services under the Fire Force Act of 1964. Ask for each document in the name of the current owner.",
+    "faqs": [
+      {
+        "a": "It is by far the largest, but not the only one. The Kolar industrial belt carries large automotive-linked boxes, Mangaluru serves the port and the coast, and Hubli serves north Karnataka on the Pune highway. For most distribution requirements the Bangalore belts are still the starting point.",
+        "q": "Is Bangalore the only real warehousing market in Karnataka?"
+      },
+      {
+        "a": "Yes. Agricultural land is converted for non-agricultural use under section 95 of the Karnataka Land Revenue Act. Since the rules were amended in September 2025, land already zoned for the use in an approved master plan is certified by the planning authority rather than the Deputy Commissioner. Ask for the conversion order or certificate, in the current owner's name.",
+        "q": "Does a warehouse on agricultural land in Karnataka need conversion?"
+      },
+      {
+        "a": "The allotment terms. KIADB land is allotted for industrial use, so confirm that warehousing is permitted under the specific allotment, and expect subletting to need KIADB's written NOC, particularly while the plot is still on a lease-cum-sale basis. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings.",
+        "q": "What should I check on KIADB land?"
+      },
+      {
+        "a": "The Karnataka State Fire and Emergency Services, for buildings that need one by size and use. Ask to see the NOC for the building you are taking rather than for the wider compound. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+        "q": "Who issues the fire NOC for a warehouse in Karnataka?"
+      },
+      {
+        "a": "Mostly pre-engineered buildings on the outer Bangalore belts and the Kolar estates, often with high clear heights and VDF floors. Inner Bangalore and the smaller regional towns lean towards RCC godowns and conventional sheds with lower heights. In Karnataka the building type follows the location, so check which belt a unit sits on before you compare rates.",
+        "q": "What kind of warehouse buildings does Karnataka have?"
+      }
+    ],
+    "relatedBlogs": [
+      "warehouse-compliance-checklist-india"
+    ],
+    "statOverrides": {
+      "rent": {
+        "min": 8
+      },
+      "size": {
+        "min": 550
+      },
+      "clearHeight": {
+        "min": 8
+      }
+    }
+  },
+  {
+    "kind": "STATE",
+    "slug": "maharashtra",
+    "seoTitle": "Warehousing in Maharashtra: Corridors, Costs, Compliance",
+    "metaDescription": "How warehousing works in Maharashtra: Bhiwandi, Pune and Navi Mumbai compared on stock and cost by size, plus MIDC and land-use rules.",
+    "h1": "Warehousing in Maharashtra",
+    "heroProse": "Maharashtra holds one of the country's oldest and densest warehousing clusters at Bhiwandi, a younger and fast-growing one at Chakan outside Pune, and a port-driven one across Navi Mumbai. The three behave differently enough that a single state average is close to useless. This page separates them, and sets out what to check on land use and fire approvals before you sign.",
+    "marketHeading": "Why Maharashtra for Warehousing",
+    "marketProse": "Maharashtra pairs one of the country's largest consumer markets with JNPT, one of its main container gateways, and its warehousing follows both. Mumbai's demand and the port's freight give **Bhiwandi** and **Navi Mumbai** a depth few markets can match. The expressway and the Nashik highway carry the same logic inland to **Pune**, where **Chakan** serves the automotive and engineering cluster and **Wagholi** the eastern road. Further out, **Nagpur** sits close to the geographic centre of India, where the national highways cross, which makes it a natural base for despatch to several states at once, and **Aurangabad** serves the industrial belt of Marathwada. For an occupier, Maharashtra has a market for almost every job: the port, the city, the factory or the nation.",
+    "marketImage": {
+      "alt": "Map of Maharashtra marking its main warehousing markets: Bhiwandi, Pune, Chakan, Wagholi, Navi Mumbai, Nagpur and Aurangabad",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/state/maharashtra.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "What Warehouse Space Costs in Maharashtra",
+    "rentsProse": "Maharashtra's cost curve is flat and, unusually, slightly inverted: large units do not get cheaper per square foot, because the deep clusters at Bhiwandi and Chakan are competitive at every size and the newest grade-A buildings enter at the top of the range. The premium sits on location rather than on unit size, which is the opposite of the NCR pattern. Proximity to Mumbai and to JNPT is what moves the rate most.",
+    "specHeading": "What the Stock Is Like in Maharashtra",
+    "specProse": "Large units in Maharashtra are a mature product: predominantly pre-engineered, with grade-A flooring common. Smaller units are mixed, with a substantial share of conventional sheds and RCC godowns, particularly in the older parts of Bhiwandi. Clear height is on record for nearly every listing and docks for most, so you can shortlist on specification before a visit.",
+    "citiesHeading": "Where Warehouse Stock Sits in Maharashtra",
+    "complianceHeading": "Approvals and Compliance for Warehouses in Maharashtra",
+    "complianceProse": "Approvals in Maharashtra follow the land, so the first question is whether a building sits inside an MIDC estate or on private land. On MIDC land, the allotment letter and lease deed govern what the plot may be used for, and the corporation's consent is the step to plan for when a plot is sublet. On private land, the Land Revenue Code amendment of December 2025 removed the separate Collector's permission wherever the development or regional plan already allows the use, so the zone of the plot now does most of the work: check it first. In both cases, the building permission should match the structure that actually stands on the site. For fire, ask for the final certificate issued before occupation, not the provisional one granted at plan stage. Keep copies of all three with the lease.",
+    "faqs": [
+      {
+        "a": "They serve different jobs. Bhiwandi is the distribution answer for Mumbai and western India, with the deepest inventory and the shortest run into the city. Chakan is the manufacturing-adjacent answer, close to the automotive and engineering cluster and better suited to occupiers whose inbound is a factory rather than a port. Chakan's stock is newer; Bhiwandi's is deeper and larger.",
+        "q": "Bhiwandi or Chakan?"
+      },
+      {
+        "a": "Since the Maharashtra Land Revenue Code amendment notified in December 2025, a separate non-agricultural permission from the Collector is no longer needed where the use is permissible under the development or regional plan; the planning authority collects a one-time conversion premium instead. Inside an MIDC estate, check the allotment terms instead. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. For an existing building, confirm the land's non-agricultural status and building permission against the current owner's title before a lease is signed.",
+        "q": "Does a warehouse in Maharashtra need non-agricultural permission?"
+      },
+      {
+        "a": "Proximity to JNPT and to the city, and a much smaller supply. Navi Mumbai's warehousing competes for land with port logistics, container yards and industrial users, and the Panvel and Uran belts price accordingly. For anything that is not port-driven, Bhiwandi usually does the same job for noticeably less.",
+        "q": "Why does Navi Mumbai cost more than Bhiwandi?"
+      },
+      {
+        "a": "Fire approval runs under the Maharashtra Fire Prevention and Life Safety Measures Act, 2006, with a provisional approval at the building-permission stage and a final NOC before occupation. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Ask to see the final NOC for the building you are taking. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+        "q": "What fire approval does a Maharashtra warehouse need?"
+      },
+      {
+        "a": "Mostly pre-engineered, especially on the large units at Bhiwandi, Chakan and Navi Mumbai, with VDF and FM2 floors common. Conventional sheds make up a real share of the smaller stock, particularly in the older parts of Bhiwandi and around Pune. Clear height is on record for nearly every Maharashtra listing and docks for most, so buildings can be compared before a visit.",
+        "q": "What kind of warehouse buildings does Maharashtra have?"
+      }
+    ],
+    "relatedBlogs": [
+      "warehouse-compliance-checklist-india"
+    ],
+    "statOverrides": {
+      "size": {
+        "min": 620
+      }
+    }
+  },
+  {
+    "kind": "STATE",
+    "slug": "tamil-nadu",
+    "seoTitle": "Warehousing in Tamil Nadu: Corridors, Costs, Compliance",
+    "metaDescription": "How warehousing works in Tamil Nadu: the Chennai belts and Hosur's large-format stock compared, costs by size, and SIPCOT versus private land.",
+    "h1": "Warehousing in Tamil Nadu",
+    "heroProse": "Tamil Nadu's warehousing splits three ways: the Chennai ring, which is a distribution market; Hosur, a large-format, manufacturing-adjacent market that functions as an extension of Bangalore; and Coimbatore, which serves the western districts. They share a state government and very little else. This page sets out where the stock sits, what it costs and how approvals work.",
+    "heroImage": {
+      "alt": "Vivekananda Rock Memorial, standing tall beyond India's and Tamil Nadu's most southern tip",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/blogs/heroalt-1-67e61f90e1aa3032.webp",
+      "width": 1024,
+      "height": 655
+    },
+    "marketHeading": "Why Tamil Nadu for Warehousing",
+    "marketProse": "Tamil Nadu is one of India's most industrialised states, and its warehousing is built around manufacturing as much as consumption. **Chennai** combines a major port with a large consumer market, and the automotive and electronics plants at **Sriperumbudur** and **Oragadam** pull suppliers and logistics operators onto the western arm. **Hosur**, on the Karnataka border, gives networks run out of Bangalore large purpose-built space within a short drive of the city. **Coimbatore** anchors the textile and engineering economy of the western districts, and **Salem** and **Madurai** serve the centre and south. SIPCOT and SIDCO estates add organised industrial land across the state. For an occupier, Tamil Nadu offers well-specified large-format stock and a choice of port-facing, factory-facing and Bangalore-facing locations under one approval system.",
+    "marketImage": {
+      "alt": "Map of Tamil Nadu marking its main warehousing markets: Chennai, Hosur, Sriperumbudur, Oragadam, Coimbatore, Salem and Madurai",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/state/tamil-nadu.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "What Warehouse Space Costs in Tamil Nadu",
+    "rentsProse": "Tamil Nadu's cost curve barely moves and turns slightly upward at the top, which tells you the large-format stock is priced competitively rather than at a discount. It is one of the few states where a very large box costs about the same per square foot as a small one, and a meaningful share of the inventory is large. Location, not size, is what separates quotes: Chennai's city-facing stock at the top, Hosur's large boxes close behind.",
+    "specHeading": "What the Stock Is Like in Tamil Nadu",
+    "specProse": "Tamil Nadu's large-format stock is among the best specified we cover: high clear heights, grade-A flooring common and generous docking. Smaller units revert to the national pattern, with more conventional sheds and fewer docks. Confirm clear height per building. Clear height and docks are on record for most listings, so you can compare buildings before a visit.",
+    "citiesHeading": "Where Warehouse Stock Sits in Tamil Nadu",
+    "complianceHeading": "Approvals and Compliance for Warehouses in Tamil Nadu",
+    "complianceProse": "Tamil Nadu's process starts with where the site falls on the planning map. A building inside the Chennai Metropolitan Area answers to the CMDA, and one outside it, including Hosur and Coimbatore, to the Directorate of Town and Country Planning. Both now handle applications through the state's single-window portal, which keeps the paperwork consistent from one district to the next. What to ask the owner for is the planning permission showing storage as the approved use, together with the approved layout. Inside SIPCOT and SIDCO estates, the allotment order sets the permitted activity and the corporation's consent covers any sublease. Fire safety is licensed by the Tamil Nadu Fire and Rescue Services under the Fire Service Act of 1985, and the licence for a godown is renewed periodically, so check its expiry date as well as the licence itself.",
+    "faqs": [
+      {
+        "a": "Hosur, in most cases, if the requirement is large and the demand is not Chennai-specific. Hosur has the large-format depth, newer stock and higher clear heights, and it sits right on the Karnataka border, which matters if the network runs through Bangalore. Chennai wins when the port or the city itself is the destination.",
+        "q": "Chennai or Hosur for a large requirement?"
+      },
+      {
+        "a": "The northern belt along NH-16, through Red Hills, Madhavaram, Sholavaram and up towards Gummidipoondi, carries the largest share and much larger units than the western arm at similar rates. The Sriperumbudur and Oragadam arm is the manufacturing-linked belt and includes the organised SIPCOT parks.",
+        "q": "Which Chennai belt has the most stock?"
+      },
+      {
+        "a": "Inside the Chennai Metropolitan Area, planning permission runs through the CMDA; elsewhere, including Hosur, through the Directorate of Town and Country Planning. Both take applications through the state's single-window planning permission portal, and the approved land use has to permit storage. Inside a SIPCOT or SIDCO estate, confirm that the allotment permits warehousing.",
+        "q": "Do I need CMDA or DTCP approval for a warehouse in Tamil Nadu?"
+      },
+      {
+        "a": "The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings. Check the layout and building approval first; in the northern Chennai belt around Red Hills and Sholavaram, approved and unapproved layouts sit side by side. On land inside a state industrial estate, the allotment sets what the plot may be used for, so confirm that warehousing is a permitted activity under that allotment, and expect subletting or transfer to need the authority's written consent. Fire clearance is issued by the Tamil Nadu Fire and Rescue Services. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+        "q": "What should I check on compliance before leasing in Tamil Nadu?"
+      },
+      {
+        "a": "Mostly pre-engineered, with VDF the most common floor and the large-format stock at Hosur and on the Chennai belts among the best specified we cover. Conventional sheds make up a meaningful share, mostly in the smaller units and the older parts of the northern Chennai belt. Clear height and docks are on record for most Tamil Nadu listings.",
+        "q": "What kind of warehouse buildings does Tamil Nadu have?"
+      }
+    ],
+    "relatedBlogs": [
+      "warehouse-compliance-checklist-india"
+    ]
+  },
+  {
+    "kind": "STATE",
+    "slug": "uttar-pradesh",
+    "seoTitle": "Warehousing in Uttar Pradesh: Corridors, Costs, Compliance",
+    "metaDescription": "How warehousing works in Uttar Pradesh: Lucknow, Ghaziabad, Noida, Dadri and Kanpur compared on stock and cost by size, plus UPSIDA and land-use rules.",
+    "h1": "Warehousing in Uttar Pradesh",
+    "heroProse": "Uttar Pradesh has two warehousing markets that share a state and very little else. The western end, around Ghaziabad, Noida and Dadri, is the eastern arm of Delhi NCR. The centre, around Lucknow and Kanpur, is a distribution node for the rest of the state. Approvals work the same way across both, and the line between authority land and private land is what matters most. This page sets out where the stock sits and what to check.",
+    "heroImage": {
+      "alt": "Logistics in Uttar Pradesh",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/blogs/hero-6-8dd28aee248a2412.webp",
+      "width": 1600,
+      "height": 1066
+    },
+    "marketHeading": "Why Uttar Pradesh for Warehousing",
+    "marketProse": "Uttar Pradesh is India's most populous state, and its warehousing serves both that home market and the Delhi region next door. At the western end, **Ghaziabad** and **Noida** sit on Delhi's eastern edge, and **Dadri** is where the Eastern and Western Dedicated Freight Corridors meet, giving the NCR end of the state rail freight links towards the western ports and the east. In the centre, **Lucknow** and **Kanpur** form a distribution node for the rest of the state, linked by expressways that have shortened journeys across it, and **Varanasi** serves the east. The Noida, Greater Noida and Yamuna Expressway authorities add a supply of planned industrial plots. For an occupier, Uttar Pradesh offers two distinct bases: one for NCR and one for the state itself.",
+    "marketImage": {
+      "alt": "Map of Uttar Pradesh marking its main warehousing markets: Lucknow, Ghaziabad, Dadri, Noida, Kanpur and Varanasi",
+      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/state/uttar-pradesh.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    "rentsHeading": "What Warehouse Space Costs in Uttar Pradesh",
+    "rentsProse": "Rents in Uttar Pradesh sit in a fairly narrow band across the state. The NCR end prices a little above Lucknow, with Noida generally the dearest of the satellite cities because of its authority land and proximity to Delhi. Lucknow's rates barely move with unit size, while Ghaziabad is one of the few markets where the largest units are genuinely cheaper per square foot. Dadri carries a premium for the freight corridor junction on very thin supply.",
+    "specHeading": "What the Stock Is Like in Uttar Pradesh",
+    "specProse": "The stock is predominantly pre-engineered across both ends of the state, with reasonable docking, especially in Lucknow's transport-linked stock. Clear height is on record for nearly every listing and docks for most, so you can shortlist on specification before a visit. Confirm the floor on site.",
+    "citiesHeading": "Where Warehouse Stock Sits in Uttar Pradesh",
+    "complianceHeading": "Approvals and Compliance for Warehouses in Uttar Pradesh",
+    "complianceProse": "Uttar Pradesh runs on a clear divide between authority land and private land, and the first check is which side of it a building sits on. In the Noida, Greater Noida and Yamuna Expressway authority areas, and in UPSIDA industrial areas, the plot is allotted rather than owned outright, so the allotment and the authority's written permission for any sublease are the documents that matter. On private land, the change from agricultural use is made by a declaration from the Sub-Divisional Officer under the Revenue Code, and the building needs a sanctioned plan from the local development authority, such as the LDA in Lucknow or the GDA in Ghaziabad. Fire NOCs are issued by the UP Fire and Emergency Services and applied for through the state's Nivesh Mitra single-window portal, which gives each application a trackable record.",
+    "faqs": [
+      {
+        "a": "It depends on where the demand sits. For Delhi and the NCR ring, and for anything using the freight corridors, Ghaziabad and Dadri. For distribution across central and eastern Uttar Pradesh, Lucknow, with Kanpur Road for the largest units. The two ends serve different freight and rarely substitute for one another.",
+        "q": "Lucknow or the NCR end for a warehouse in Uttar Pradesh?"
+      },
+      {
+        "a": "Yes. Where agricultural land is used for industrial or commercial purposes, the Sub-Divisional Officer makes a declaration of non-agricultural use under section 80 of the UP Revenue Code. Building permission then comes from the development authority for the area, such as the Lucknow or Ghaziabad Development Authority. Ask for both, in the current owner's name.",
+        "q": "Does agricultural land in Uttar Pradesh need a land-use declaration?"
+      },
+      {
+        "a": "Inside a UPSIDA industrial area, or the Noida, Greater Noida and Yamuna Expressway authority areas, the allotment sets what the plot may be used for, so confirm that warehousing is permitted. UPSIDA requires written permission before a plot is sublet, so check that any sublease to you is approved. The Fire NOC and CLU counts on this page are the approvals owners have recorded on our listings.",
+        "q": "What about UPSIDA and the Noida authority areas?"
+      },
+      {
+        "a": "The UP Fire and Emergency Services, for buildings that need one by size and use. Ask to see the NOC for the specific building. Longer leases have to be registered and stamped; confirm the current charges with the sub-registrar before budgeting.",
+        "q": "Who issues the fire NOC in Uttar Pradesh?"
+      },
+      {
+        "a": "Mostly pre-engineered, across both the NCR end and Lucknow, with good clear heights on the newer stock around Ghaziabad and Dadri. RCC makes up a meaningful share, mainly in Lucknow, where tiled and RCC floors also appear alongside VDF. Clear height is on record for nearly every Uttar Pradesh listing, so you can shortlist on it before a visit.",
+        "q": "What kind of warehouse buildings does Uttar Pradesh have?"
+      }
+    ],
+    "relatedBlogs": [
+      "warehouse-compliance-checklist-india"
+    ],
+    "statOverrides": {
+      "rent": {
+        "min": 8
+      },
+      "size": {
+        "max": 600000
+      },
+      "clearHeight": {
+        "min": 8
+      }
+    }
+  }
+];

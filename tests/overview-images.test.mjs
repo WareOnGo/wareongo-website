@@ -74,3 +74,21 @@ test('publishing verifies promised files and copies only variants used by this b
   await fs.writeFile(payload,JSON.stringify({route:{coverImages:{[source]:'/../../private.webp'}}}));
   await assert.rejects(publishOverviewImages(dist,root),/Invalid overview cover/);
 });
+
+test('listing footers publish their nested editorial photos without depending on an overview route', async t => {
+  const root = await temp(t);
+  const cacheDir = path.join(root, 'wareongo-overview-images-v1');
+  const prepare = createEditorialImagePreparer({ cacheDir, fetchImage: async () => new Response(original) });
+  const variants = await prepare(source);
+  const dist = path.join(root, 'dist');
+  await fs.mkdir(path.join(dist, 'static-loader-data'), { recursive: true });
+  await fs.writeFile(path.join(dist, 'static-loader-data-manifest-stable.json'), JSON.stringify({
+    '/listings/state/karnataka': 'static-loader-data/listing.json',
+  }));
+  const payload = path.join(dist, 'static-loader-data/listing.json');
+  await fs.writeFile(payload, JSON.stringify({ route: { overview: { imageVariants: { [source]: variants } } } }));
+  assert.equal(await publishOverviewImages(dist, root), variants.length);
+  for (const { src } of variants) assert.ok((await fs.stat(path.join(dist, src))).size > 0);
+  await fs.writeFile(payload, JSON.stringify({ route: { overview: { imageVariants: { [source]: [{ src: '/../../private.webp' }] } } } }));
+  await assert.rejects(publishOverviewImages(dist, root), /Invalid editorial image/);
+});

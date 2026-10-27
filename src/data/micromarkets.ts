@@ -5,7 +5,8 @@
 // touch the generated file directly.
 //
 // Published rows produce /overview/{state}/{city}/{micromarket}. The existing
-// /listings/city/{city}/{micromarket} route always renders the plain grid.
+// /listings/city/{city}/{micromarket} route renders its grid and the same copy
+// underneath when an overview is published.
 //
 // Nothing here carries a number. Counts, rent and size ranges, the construction
 // mix, compliance counts and the peer rent chart are all computed from live

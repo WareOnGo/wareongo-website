@@ -2,15 +2,15 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-/** Only publish files promised by the current build's overview loader data. */
+/** Publish editorial photos used by overview pages and location listing footers. */
 export async function publishOverviewImages(dist = 'dist', cacheRoot = path.resolve('node_modules/.cache')) {
   const manifest = JSON.parse(await fs.readFile(path.join(dist, 'static-loader-data-manifest-stable.json'), 'utf8'));
   const files = new Map();
   for (const [route, payload] of Object.entries(manifest)) {
-    if (!route.startsWith('/overview/')) continue;
+    if (!route.startsWith('/overview/') && !route.startsWith('/listings/')) continue;
     if (typeof payload !== 'string' || !payload.startsWith('static-loader-data/') || payload.includes('..')) throw new Error(`Invalid overview payload: ${route}`);
     const data = JSON.parse(await fs.readFile(path.join(dist, payload), 'utf8'));
-    for (const value of Object.values(data)) {
+    for (const value of Object.values(data).flatMap(value => [value, value?.overview])) {
       for (const src of Object.values(value?.coverImages ?? {})) {
         if (!/^\/listing-covers\/[a-f0-9]{24}\.webp$/.test(src)) throw new Error(`Invalid overview cover: ${route}`);
         files.set(src, 'wareongo-listing-covers-v1');

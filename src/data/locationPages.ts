@@ -1,5 +1,5 @@
 // CMS content for /overview/{state} and /overview/{state}/{city}.
-// Listing routes continue to render their own warehouse grids.
+// Matching listing routes render the same copy beneath their warehouse grids.
 
 import type { EditorialContent } from './editorial';
 import type { LocationKind } from '@/services/locationsAPI';
