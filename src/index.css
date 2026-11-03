@@ -1,6 +1,7 @@
 @import "./fonts.css";
 @import "./styles/ui.tokens.css";
 @import "./styles/ui.css";
+@import "./styles/listing-breaks.css";
 
 @tailwind base;
 @tailwind components;

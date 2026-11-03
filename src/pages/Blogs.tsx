@@ -76,7 +76,6 @@ const Blogs = ({ entries = blogSummaries }: { entries?: BlogSummary[] } = {}) =>
         <div className="section-container page-content blog-shell">
           <Breadcrumbs items={[{ label: 'Home', path: '/' }, { label: 'Blogs' }]} />
           <header className="blog-intro">
-            <p className="ui-label mb-4">WareOnGo Knowledge Base</p>
             <h1 id="blogs-title" className="ui-page-title">Everything to Know About a Warehouse</h1>
             <p>Practical guides to warehouse types, compliance and leasing costs in India.</p>
           </header>

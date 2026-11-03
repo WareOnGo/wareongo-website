@@ -10,6 +10,8 @@ import { WarehouseGridSkeleton } from '@/components/PageSkeletons';
 import ListingFilterChips from '@/components/ListingFilterChips';
 import ListingFilters from '@/components/ListingFilters';
 import ListingsHeader from '@/components/ListingsHeader';
+import ListingPageBreak, { ListingBreaksProvider } from '@/components/ListingPageBreak';
+import { listingBreakPositions, useListingColumns } from '@/lib/listingBreaks';
 import { useListingsPrefetch } from '@/hooks/useListingsPrefetch';
 import { useInfiniteListings } from '@/hooks/useInfiniteListings';
 import { useAutoLoadListings, useListingScroll } from '@/hooks/useListingScroll';
@@ -54,6 +56,7 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
   const action = useRef<{ search: string; trigger: string } | null>(null);
   const state = useMemo(() => readListingSearch(searchParams, preset), [searchParams, preset]);
   const { filters: appliedFilters, page: currentPage, pageSize } = state;
+  const columns = useListingColumns();
   const filterKey = JSON.stringify(appliedFilters);
   const [draft, setDraft] = useState({ key: filterKey, filters: appliedFilters });
   // Unsaved edits survive pagination, while a changed applied filter restores
@@ -105,12 +108,18 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
   // Inventory may change between requests; keep the first occurrence of a card.
   const chunks = useMemo(() => {
     const seen = new Set<number>();
-    return (data?.pages ?? []).map(chunk => ({ ...chunk, warehouses: chunk.warehouses.filter(w => {
-      if (seen.has(w.id)) return false;
-      seen.add(w.id);
-      return true;
-    }) }));
-  }, [data]);
+    let rowsBefore = 0;
+    return (data?.pages ?? []).map(chunk => {
+      const warehouses = chunk.warehouses.filter(w => {
+        if (seen.has(w.id) || !Number.isFinite(w.size) || w.size <= 0) return false;
+        seen.add(w.id);
+        return true;
+      });
+      const result = { ...chunk, warehouses, breaks: listingBreakPositions(warehouses.length, rowsBefore, columns) };
+      rowsBefore += Math.ceil(warehouses.length / columns);
+      return result;
+    });
+  }, [data, columns]);
   const warehouses = chunks.flatMap(chunk => chunk.warehouses);
   const visiblePage = data?.pages.find(chunk => chunk.pagination.currentPage === currentPage) ?? lastPage;
   const firstWarehouse = !loadingResults && !isLoadingError ? warehouses[0] : undefined;
@@ -297,40 +306,47 @@ export function ListingsView({ initialData, preset = DEFAULT_FILTERS, header, he
 
             {/* Warehouse Grid */}
             {!loadingResults && !isLoadingError && warehouses.length > 0 && (
-              <div className="space-y-6 mb-8">
-                {chunks.map(chunk => (
-                  <div key={chunk.pagination.currentPage} data-listing-page={chunk.pagination.currentPage}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {chunk.warehouses.map((warehouse, idx) => (
-                      <WarehouseCard
-                        key={warehouse.id}
-                        id={warehouse.id}
-                        index={idx}
-                        priority={chunk.pagination.currentPage === startPage && idx === 0}
-                        analyticsContext={{ list_id: listId, placement: listId === 'all_warehouses' ? 'listings_grid' : 'location_grid', page: chunk.pagination.currentPage, page_size: pageSize, list_position: (chunk.pagination.currentPage - 1) * pageSize + idx + 1 }}
-                        image={warehouse.image}
-                        images={warehouse.images}
-                        imageFallbacks={warehouse.imageFallbacks}
-                        coverImage={coverImage && coverImage.source === (warehouse.images[0] ?? warehouse.image)
-                          ? coverImage.src : undefined}
-                        address={warehouse.address}
-                        location={warehouse.location}
-                        size={warehouse.size}
-                        ceilingHeight={warehouse.ceilingHeight}
-                        price={warehouse.price}
-                        fireCompliance={warehouse.fireCompliance}
-                        numberOfDocks={warehouse.numberOfDocks}
-                        warehouseType={warehouse.warehouseType}
-                        micromarket={warehouse.micromarket}
-                        postalCode={warehouse.postalCode}
-                        updatedAt={warehouse.updatedAt}
-                        features={warehouse.features}
-                        href={warehousePath({ id: warehouse.id, size: warehouse.size, warehouseType: warehouse.warehouseType, city: warehouse.location.city })}
-                      />
-                    ))}
-                  </div>
-                ))}
-              </div>
+              <ListingBreaksProvider key={filterKey} filters={appliedFilters} listId={listId}>
+                <div className="space-y-6 mb-8">
+                  {chunks.map(chunk => (
+                    <div key={chunk.pagination.currentPage} data-listing-page={chunk.pagination.currentPage}
+                      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {chunk.warehouses.flatMap((warehouse, idx) => [
+                        <WarehouseCard
+                          key={warehouse.id}
+                          id={warehouse.id}
+                          index={idx}
+                          priority={chunk.pagination.currentPage === startPage && idx === 0}
+                          analyticsContext={{ list_id: listId, placement: listId === 'all_warehouses' ? 'listings_grid' : 'location_grid', page: chunk.pagination.currentPage, page_size: pageSize, list_position: (chunk.pagination.currentPage - 1) * pageSize + idx + 1 }}
+                          image={warehouse.image}
+                          images={warehouse.images}
+                          imageFallbacks={warehouse.imageFallbacks}
+                          coverImage={coverImage && coverImage.source === (warehouse.images[0] ?? warehouse.image)
+                            ? coverImage.src : undefined}
+                          address={warehouse.address}
+                          location={warehouse.location}
+                          size={warehouse.size}
+                          ceilingHeight={warehouse.ceilingHeight}
+                          price={warehouse.price}
+                          fireCompliance={warehouse.fireCompliance}
+                          numberOfDocks={warehouse.numberOfDocks}
+                          warehouseType={warehouse.warehouseType}
+                          micromarket={warehouse.micromarket}
+                          postalCode={warehouse.postalCode}
+                          updatedAt={warehouse.updatedAt}
+                          features={warehouse.features}
+                          href={warehousePath({ id: warehouse.id, size: warehouse.size, warehouseType: warehouse.warehouseType, city: warehouse.location.city })}
+                        />,
+                        ...chunk.breaks.flatMap(({ after, kind }) => after === idx + 1
+                          ? [<div key={`break-${kind}`} className="listing-break-slot" data-listing-break={kind}>
+                              <ListingPageBreak kind={kind} filters={appliedFilters}
+                                search={searchParams.toString()} pageSize={pageSize} />
+                            </div>] : []),
+                      ])}
+                    </div>
+                  ))}
+                </div>
+              </ListingBreaksProvider>
             )}
 
             {/* No Results Message */}
