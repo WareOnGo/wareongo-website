@@ -1,5 +1,5 @@
 import { LocationListingsSkeleton, OverviewSkeleton } from '@/components/LocationPageSkeletons';
-import { Outlet, useLocation, useNavigation, useNavigationType } from "react-router-dom";
+import { Outlet, useLocation, useMatches, useNavigation, useNavigationType } from "react-router-dom";
 import { listingScrollPosition } from '@/lib/listingScroll';
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -7,6 +7,9 @@ import { AuthProvider } from "@/context/AuthContext";
 import AnalyticsInteractions from "@/components/AnalyticsInteractions";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
+import { isMicromarketAdPath } from "@/data/micromarketAdRoutes";
+import { siteWhatsAppMessage } from "@/lib/whatsappMessage";
 import { useToast } from '@/hooks/use-toast';
 import {
   ListingsSkeleton,
@@ -108,6 +111,15 @@ const NavigationContent = () => {
   );
 };
 
+// Ad pages render their own button (campaign line and location message);
+// CMS/ad previews and the admin panel are internal.
+const SiteWhatsAppButton = () => {
+  const matches = useMatches();
+  const path = useLocation().pathname.replace(/\/+$/, '') || '/';
+  if (path === '/bangalore' || isMicromarketAdPath(path) || /^\/(preview|admin-panel)(\/|$)/.test(path)) return null;
+  return <WhatsAppButton message={siteWhatsAppMessage(path, matches[matches.length - 1]?.data)} />;
+};
+
 const RootLayout = () => (
   <AuthProvider>
     <QueryClientProvider client={queryClient}>
@@ -115,6 +127,7 @@ const RootLayout = () => (
       <ScrollToTop />
       <AnalyticsInteractions />
       <NavigationContent />
+      <SiteWhatsAppButton />
     </QueryClientProvider>
   </AuthProvider>
 );

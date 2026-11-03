@@ -84,7 +84,10 @@ interaction changes in those components and `BangaloreLanding.css`; new market
 pages should provide configuration and inventory, without copying JSX or styles.
 The local summary, callback note and area cards are the additional
 elements specified in the Peenya sample. All ad pages share the bottom-right
-WhatsApp button, with a message for the current location. The existing responsive grids, card
+WhatsApp button (`src/components/WhatsAppButton.tsx`), with the campaign number and a
+message for the current location; every other page gets the same button from
+`RootLayout` with the main sales number and a message for the page
+(`src/lib/whatsappMessage.ts`). The existing responsive grids, card
 sizes, controls, typography and section order remain shared.
 
 To add a Bangalore micromarket, open **CMS → Ad pages → Micromarket ad pages →

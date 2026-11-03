@@ -60,10 +60,6 @@
 .bangalore-landing__area-card > p { margin: 0; padding: 16px 20px 20px; text-wrap: pretty; }
 .bangalore-landing__area-card > p strong { font-weight: 600; }
 .bangalore-landing__area-card[data-single] { grid-column: 1 / -1; }
-.bangalore-landing__whatsapp { position: fixed; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 40; display: grid; place-items: center; width: 52px; height: 52px; border: var(--landing-interactive-border); border-radius: 50%; background: var(--landing-card); color: var(--landing-ink); }
-.bangalore-landing__whatsapp > svg { width: 28px; height: 28px; fill: currentColor; }
-.bangalore-landing__whatsapp:hover { background: var(--landing-tint); border-color: var(--landing-accent); }
-.bangalore-landing__whatsapp:focus-visible { outline: var(--landing-focus-width) solid var(--landing-accent); outline-offset: 3px; }
 
 .bangalore-landing__featured { grid-area: featured; min-width: 0; }
 .bangalore-landing__featured-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 12px; }

@@ -1,0 +1,13 @@
+/* Fixed on every page. A page with its own fixed bottom bar moves the button
+   above it by setting --whatsapp-button-bottom on :root. */
+.whatsapp-button { position: fixed; right: max(16px, env(safe-area-inset-right)); bottom: var(--whatsapp-button-bottom, max(16px, env(safe-area-inset-bottom))); z-index: 40; display: grid; place-items: center; width: 52px; height: 52px; border: 1px solid #25d366; border-radius: 50%; background: #25d366; color: #fff; }
+.whatsapp-button > svg { width: 28px; height: 28px; fill: currentColor; }
+.whatsapp-button:hover { background: #1da851; border-color: #1da851; }
+.whatsapp-button:focus-visible { outline: var(--ui-focus-width) solid var(--ui-accent); outline-offset: 3px; }
+.whatsapp-button__label { display: none; }
+/* Desktop: a pill with the icon and label side by side, centred vertically. */
+@media (min-width: 1024px) {
+  .whatsapp-button { grid-auto-flow: column; gap: 8px; width: auto; padding: 0 20px 0 16px; border-radius: 999px; }
+  .whatsapp-button > svg { width: 24px; height: 24px; }
+  .whatsapp-button__label { display: block; font-size: var(--ui-text-sm); font-weight: 600; line-height: 1; white-space: nowrap; }
+}
