@@ -102,15 +102,15 @@ const ImagesBlock = ({ images, caption }: { images: BlogImage[]; caption?: strin
 
 // Simple prose renderer for the structured blog blocks. Deliberately plain —
 // these pages exist to be read (by people and by AI engines), not to dazzle.
-export const ContentBlock = ({ block }: { block: BlogBlock }) => {
+export const ContentBlock = ({ block, headingId }: { block: BlogBlock; headingId?: string }) => {
   switch (block.kind) {
     case 'h2':
       return (
-        <h2 className="ui-panel-title text-wareongo-blue mt-10 mb-3"><InlineText text={block.text} /></h2>
+        <h2 id={headingId} tabIndex={headingId ? -1 : undefined} className="ui-panel-title text-wareongo-blue mt-10 mb-3"><InlineText text={block.text} /></h2>
       );
     case 'h3':
       return (
-        <h3 className="ui-card-title text-wareongo-charcoal mt-6 mb-2"><InlineText text={block.text} /></h3>
+        <h3 id={headingId} tabIndex={headingId ? -1 : undefined} className="ui-card-title text-wareongo-charcoal mt-6 mb-2"><InlineText text={block.text} /></h3>
       );
     case 'p':
       return <p className="text-base text-wareongo-slate leading-relaxed mb-4"><InlineText text={block.text} /></p>;

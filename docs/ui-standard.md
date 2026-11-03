@@ -107,8 +107,9 @@ locking. Shared tokens are at `:root`, so portaled controls inherit them.
 
 - General sections use 64px vertical spacing on desktop and 48px on phones;
   gutters are 32px/20px. `.section-container` allows 1400px of content plus its
-  gutters. The blog index and articles use this shared width without an inner
-  reading-column cap. Other narrow articles/forms keep their local widths.
+  gutters. The blog index uses this shared width; article prose keeps a 768px
+  reading column, with contents and sharing rails from 1280px. Other narrow
+  articles/forms keep their local widths.
   The navbar retains its independent 1600px cap and existing desktop breakpoint. Its restored 1px
   outline uses the lighter `--ui-line`; adjusted inner padding preserves header height.
 - Use 24px standard card padding and 16px/12px for compact cards. Keep title,
@@ -139,6 +140,44 @@ locking. Shared tokens are at `:root`, so portaled controls inherit them.
 - Use visible 2px focus rings and respect reduced motion. A mobile width change
   can move the browser's scroll anchor; interaction tests should scroll from
   the resulting position when checking scroll direction.
+
+## Blog layouts
+
+Blog composition lives in `src/styles/blog.css` and consumes the shared tokens.
+`components/blog/` owns the reusable article cards, contents navigation, sharing,
+and enquiry panel. Both blog pages retain the standard `Navbar` and `Footer`.
+The index uses one, two, and three card columns at phone, 640px, and 1024px widths;
+starter guides use the normal `BlogCard`, including its date and read link, with
+the starter label in the category position inside the card. This section uses
+black text and has no colored outer frame or padding around its cards.
+Blog section labels use `ui-label` in Title Case with normal letter spacing,
+including “Your Next Warehouse”, “On This Page”, “In Short” and starter labels.
+Keep prose, metadata and action text in sentence case; do not use all-caps styling.
+Social share buttons use solid brand-colored squares with centered white marks.
+Category tags and the Featured marker share the light-blue `blog-tag` chip;
+article author, date and reading time sit together in one chip that wraps on phones.
+Blog raster assets use WebP, including the share logo and social-preview images.
+The guides scroll within their own row on phones. Article contents collapse
+below 1280px. Long contents lists scroll inside their panel, leaving the title and
+CTA visible; desktop panels fit the viewport above the floating WhatsApp control.
+Below 700px viewport height the desktop sidebar follows normal page scrolling.
+Wide tables scroll locally, and the mobile enquiry bar reserves space after the
+footer. Opening article image blocks keep their original renderer
+and captions when placed in the cover area.
+
+`src/lib/blogPresentation.ts` holds explicit topic assignments and starter slugs.
+Unassigned posts appear under Guides, and starter links only render for existing
+posts. Featured selection and ordering use real update dates. Search and topic
+selection use URL state; the index continues to load summaries without article
+bodies. Article reading time is estimated from the visible word count.
+
+Keep the stylesheet `entry` on the parent blog route and the page entries on its
+children: the static generator does not traverse shared static imports, so the
+parent entry includes the blog CSS in the initial HTML. CMS previews use these
+same page components.
+The focused browser suite is `playwright.blogs.config.ts` in `wareongo-evals`.
+Set `PLAYWRIGHT_CHROMIUM_EXECUTABLE` when using an installed browser in place of
+Playwright's bundled Chromium.
 
 ## Coverage and verification
 

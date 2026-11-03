@@ -46,11 +46,20 @@ export const routes: RouteRecord[] = [
           },
           // Informational blogs — intentionally unlinked from nav/footer ("hidden"),
           // but in sitemap.xml + llms.txt so search engines and AI assistants find them.
-          { path: "blogs", lazy: lazyDefault(() => import("./pages/Blogs")) },
           {
-            path: "blogs/:slug",
-            lazy: lazyDefault(() => import("./pages/BlogDetail")),
-            getStaticPaths: async () => (await import("./data/blogs")).blogs.map((g) => `/blogs/${g.slug}`),
+            path: "blogs",
+            // SSG follows dynamic imports only. Register the shared stylesheet
+            // so both pages have their layout CSS before hydration.
+            entry: "src/styles/blog.css",
+            children: [
+              { index: true, entry: "src/pages/Blogs.tsx", lazy: lazyDefault(() => import("./pages/Blogs")) },
+              {
+                path: ":slug",
+                entry: "src/pages/BlogDetail.tsx",
+                lazy: lazyDefault(() => import("./pages/BlogDetail")),
+                getStaticPaths: async () => (await import("./data/blogs")).blogs.map((g) => `/blogs/${g.slug}`),
+              },
+            ],
           },
           {
             path: "listings",

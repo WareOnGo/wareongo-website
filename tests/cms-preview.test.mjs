@@ -7,6 +7,7 @@ import { build } from 'esbuild';
 import { JSDOM } from 'jsdom';
 import { parseAdPage } from '../scripts/lib/ad-page-content.mjs';
 import { buildBlogSummaries } from '../scripts/lib/blog-summaries.mjs';
+import replacements from '../src/data/blogImageReplacements.json' with { type: 'json' };
 
 process.env.NODE_ENV = 'production';
 globalThis.__wogPreviewSsr = true;
@@ -50,7 +51,7 @@ const { outputFiles } = await build({
     export const map = (content,scope) => wrap(<BangaloreMicromarkets content={content} scope={scope} locations={BANGALORE_MAP_AREAS.map(area=>({...area,count:null}))} onContact={()=>{}} onScopeChange={()=>{}}/>, '/bangalore');
   ` },
   bundle: true, write: false, platform: 'node', format: 'cjs', packages: 'external', jsx: 'automatic',
-  loader: { '.css': 'empty' },
+  loader: { '.css': 'empty', '.webp': 'dataurl' },
   alias: { '@': root + 'src', 'vite-react-ssg': root + 'node_modules/vite-react-ssg/dist/index.mjs',
     'react-helmet-async': createRequire(root + 'node_modules/vite-react-ssg/dist/index.mjs').resolve('react-helmet-async') },
   define: { __DEV_SERVER__: 'false', 'process.env.NODE_ENV': '"production"', 'import.meta.env': '{"PROD":true}', 'import.meta.env.SSR': 'globalThis.__wogPreviewSsr' },
@@ -185,6 +186,34 @@ test('the blog index preview uses production thumbnail selection, including body
   assert.equal(document(app.render(value, undefined, true)).querySelectorAll('[data-blog-slug]').length, 4);
   assert.throws(()=>app.readCmsPreview({type:'blog',content,indexEntries:{}},'index'), /Invalid blog index/);
   assert.throws(()=>app.readCmsPreview({type:'blog',content},'unknown'), /Unknown preview view/);
+});
+
+test('blog cover composition preserves opening images, captions and article content exactly once', () => {
+  const images = [1, 2].map(index => ({ url: `https://example.test/opening-${index}.webp`, alt: `Photo ${index}`, width: 1200, height: 900 }));
+  const content = { ...app.blogs[0], blocks: [
+    { kind: 'images', images, caption: '**Original** caption' },
+    { kind: 'h2', text: 'First heading' }, { kind: 'p', text: 'Original article text.' },
+  ], related: [], faqs: [] };
+  const doc = document(app.render({ type: 'blog', content }));
+  assert.equal(doc.querySelectorAll('.blog-article__cover img').length, 2);
+  assert.equal(doc.querySelectorAll('main img:not([aria-hidden="true"])').length, 2);
+  assert.equal(doc.querySelector('figcaption').textContent, 'Original caption');
+  assert.ok(doc.querySelector('.blog-article__body').textContent.includes('Original article text.'));
+  assert.equal(doc.querySelector('.blog-article__body h2').id, 'blog-section-first-heading');
+});
+
+test('CMS blog previews use the same current T1 replacements as published articles', () => {
+  const [legacyUrl, replacement] = Object.entries(replacements)[0];
+  const content = { ...app.blogs[0], dateModified: '2026-11-04', related: [], faqs: [], blocks: [
+    { kind: 'images', images: [{ url: legacyUrl, alt: 'Legacy warehouse', width: 320, height: 240 }], caption: 'Warehouse comparison' },
+  ] };
+  const value = app.readCmsPreview({ type: 'blog', content });
+  const doc = document(app.render(value, undefined, true));
+  const cover = doc.querySelector('.blog-article__cover img');
+  assert.equal(cover.getAttribute('src'), replacement.url);
+  assert.equal(cover.getAttribute('width'), String(replacement.width));
+  assert.equal(cover.getAttribute('alt'), replacement.alt);
+  assert.equal(doc.querySelector('figcaption').textContent, 'Warehouse comparison');
 });
 
 test('every Bangalore map area renders its independent CMS photo on desktop and mobile', () => {

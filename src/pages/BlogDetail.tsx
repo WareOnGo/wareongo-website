@@ -1,201 +1,139 @@
 import InlineText from '@/components/InlineText';
 import { plainInlineText } from '@/lib/inline-format';
 import { Link, Navigate, useParams } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import PageHead from '@/components/PageHead';
-import Breadcrumbs, { type BreadcrumbItem } from '@/components/Breadcrumbs';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FAQAccordion from '@/components/FAQAccordion';
-import { getBlogBySlug, blogs, type Blog, type BlogBlock, type BlogImage } from '@/data/blogs';
+import BlogCard from '@/components/blog/BlogCard';
+import BlogContents from '@/components/blog/BlogContents';
+import BlogEnquiry from '@/components/blog/BlogEnquiry';
+import BlogShare from '@/components/blog/BlogShare';
+import { getBlogBySlug, blogs, type Blog } from '@/data/blogs';
+import { blogSummaries } from '@/data/blogSummaries';
+import thumbnailFallbacks from '@/data/blogThumbnailFallbacks.json';
+import { blogDate, blogHeadings, blogTopic, blogWordCount } from '@/lib/blogPresentation';
 import { ContentBlock as Block } from '@/components/ContentBlock';
 import { SITE_URL, ORG_ID, WEBSITE_ID } from '@/config/config';
+import '@/styles/blog.css';
 
-// Plain-text length of a blog (summary + blocks) for the Article wordCount.
-const countWords = (blog: NonNullable<ReturnType<typeof getBlogBySlug>>): number => {
-  const texts: string[] = [blog.summary];
-  for (const b of blog.blocks) {
-    if (b.kind === 'p' || b.kind === 'h2' || b.kind === 'h3') texts.push(b.text);
-    else if (b.kind === 'ul' || b.kind === 'ol') texts.push(...b.items);
-    else if (b.kind === 'table') texts.push(...b.table.headers, ...b.table.rows.flat());
-    // Captions are visible prose; alt text is not, so it stays out of the count.
-    else if (b.kind === 'images' && b.caption) texts.push(b.caption);
-  }
-  for (const f of blog.faqs) texts.push(f.q, f.a);
-  return texts.map(plainInlineText).join(' ').split(/\s+/).filter(Boolean).length;
-};
-
-/**
- * The CMS byline is free text, so an editor can reasonably type "By the Editorial
- * Team" where only the name belongs. The page supplies the "By" itself, so strip
- * a leading one rather than render "By By …" — and strip it for the JSON-LD too,
- * where a Person's name should be the name alone.
- */
 const bylineName = (author: string) => author.replace(/^\s*by\s+/i, '').trim();
-
-/** Every blog image, in reading order — first one doubles as the page's og:image. */
-const imagesIn = (blocks: BlogBlock[]): BlogImage[] =>
-  blocks.flatMap((b) => (b.kind === 'images' ? b.images : []));
 
 const BlogDetail = ({ content }: { content?: Blog } = {}) => {
   const { slug } = useParams<{ slug: string }>();
   const blog = content ?? (slug ? getBlogBySlug(slug) : undefined);
-
-  if (!blog) {
-    return <Navigate to="/blogs" replace />;
-  }
+  if (!blog) return <Navigate to="/blogs" replace />;
 
   const path = `/blogs/${blog.slug}`;
-  const relatedBlogs = blog.related
-    .map((s) => blogs.find((g) => g.slug === s))
-    .filter((g): g is NonNullable<typeof g> => Boolean(g));
-
-  // A blog with images is better represented by its own first image than by the
-  // generic site card — in the Article LD and in the social preview alike.
-  const leadImage = imagesIn(blog.blocks)[0]?.url;
+  const url = `${SITE_URL}${path}`;
+  const relatedBlogs = [...new Set(blog.related)].filter(related => related !== blog.slug)
+    .map(related => blogs.find(entry => entry.slug === related)).filter((entry): entry is Blog => Boolean(entry));
+  const images = blog.blocks.flatMap(block => block.kind === 'images' ? block.images : []);
+  const cover = blog.thumbnail;
+  // An opening image/collage already belongs to the article. Move it into the
+  // cover slot with the same renderer, retaining every image and its caption.
+  const openingImages = !cover && blog.blocks[0]?.kind === 'images' && blog.blocks[0].images.length
+    ? blog.blocks[0] : undefined;
+  const leadImage = images[0]?.url ?? cover?.url
+    ?? blogSummaries.find(entry => entry.slug === blog.slug)?.thumbnail?.url
+    ?? thumbnailFallbacks[0].url;
+  const wordCount = blogWordCount(blog);
+  const date = blogDate(blog.updated);
+  const author = blog.author ? bylineName(blog.author) : 'WareOnGo';
+  const headings = blogHeadings(blog.blocks);
+  const headingIds = new Map(headings.map(heading => [heading.index, heading.id]));
 
   const articleLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: blog.title,
-    description: blog.description,
-    url: `${SITE_URL}${path}`,
-    mainEntityOfPage: `${SITE_URL}${path}`,
-    datePublished: blog.published ?? blog.updated,
-    dateModified: blog.updated,
-    articleSection: 'Blogs',
-    wordCount: countWords(blog),
-    image: leadImage ?? `${SITE_URL}/og-image.jpg`,
-    ...(blog.keywords && blog.keywords.length > 0 ? { keywords: blog.keywords.join(', ') } : {}),
-    // GEO marking: points answer engines at the direct-answer summary block.
-    speakable: {
-      '@type': 'SpeakableSpecification',
-      cssSelector: ['#blog-summary'],
-    },
+    '@context': 'https://schema.org', '@type': 'Article', headline: blog.title,
+    description: blog.description, url, mainEntityOfPage: url,
+    datePublished: blog.published ?? blog.updated, dateModified: blog.updated,
+    articleSection: 'Blogs', wordCount, image: leadImage,
+    ...(blog.keywords?.length ? { keywords: blog.keywords.join(', ') } : {}),
+    speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#blog-summary'] },
     isPartOf: { '@id': WEBSITE_ID },
-    // A named byline is a Person; the organisation stays the publisher either
-    // way. Without a byline this is the organisation, as every blog was before.
-    author: blog.author ? { '@type': 'Person', name: bylineName(blog.author) } : { '@id': ORG_ID },
-    publisher: { '@id': ORG_ID },
-    inLanguage: 'en',
-    isAccessibleForFree: true,
+    author: blog.author ? { '@type': 'Person', name: author } : { '@id': ORG_ID },
+    publisher: { '@id': ORG_ID }, inLanguage: 'en', isAccessibleForFree: true,
   };
-
-  // Answers are fully visible on the page (no accordion), satisfying Google's
-  // requirement that FAQPage schema text matches rendered content.
   const faqLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
+    '@context': 'https://schema.org', '@type': 'FAQPage',
     mainEntity: blog.faqs.map(({ q, a }) => ({
-      '@type': 'Question',
-      name: q,
-      acceptedAnswer: { '@type': 'Answer', text: plainInlineText(a) },
+      '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: plainInlineText(a) },
     })),
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-wareongo-ivory">
+    <div className="blog-page blog-page--article min-h-screen flex flex-col">
       <PageHead title={blog.seoTitle} description={blog.description} path={path} image={leadImage} ogType="article">
-        <script type="application/ld+json">{JSON.stringify(articleLd)}</script>
-        {blog.faqs.length > 0 && <script type="application/ld+json">{JSON.stringify(faqLd)}</script>}
+        <script type="application/ld+json">{JSON.stringify(articleLd).replace(/</g, '\\u003c')}</script>
+        {blog.faqs.length > 0 && <script type="application/ld+json">{JSON.stringify(faqLd).replace(/</g, '\\u003c')}</script>}
       </PageHead>
       <Navbar />
-
-      <main className="flex-grow" role="main" aria-labelledby="blog-title">
-        <div className="section-container page-content pb-6 sm:pb-10">
-          <article className="max-w-3xl mx-auto">
-            <Breadcrumbs
-              className="mb-4 sm:mb-6"
-              items={
-                [
-                  { label: 'Home', path: '/' },
-                  { label: 'Blogs', path: '/blogs' },
-                  { label: blog.title },
-                ] satisfies BreadcrumbItem[]
-              }
-            />
-
-            <header className="mb-6">
-              <span className="ui-eyebrow text-wareongo-slate block mb-3">
-                Blog
-              </span>
-              <h1 id="blog-title" className="ui-page-title text-wareongo-blue mb-3">
-                {blog.title}
-              </h1>
-              <p className="text-xs text-wareongo-slate">
-                {blog.author ? (
-                  <>
-                    By {bylineName(blog.author)} · Updated <time dateTime={blog.updated}>{blog.updated}</time>
-                  </>
-                ) : (
-                  <>
-                    Updated <time dateTime={blog.updated}>{blog.updated}</time> · WareOnGo
-                  </>
-                )}
-              </p>
+      <main className="flex-grow" aria-labelledby="blog-title">
+        <div className="section-container page-content blog-shell">
+          <Breadcrumbs items={[{ label: 'Home', path: '/' }, { label: 'Blogs', path: '/blogs' }, { label: blog.title }]} />
+          <article>
+            <header className="blog-article__header">
+              <span className="blog-tag">{blogTopic(blog.slug)}</span>
+              <h1 id="blog-title" className="ui-page-title" tabIndex={-1}>{blog.title}</h1>
+              <p className="blog-article__description">{blog.description}</p>
+              <div className="blog-article__meta blog-tag">
+                <span>By {author}</span>
+                {date && <span>Updated <time dateTime={blog.updated}>{date}</time></span>}
+                {wordCount > 0 && <span>{Math.max(1, Math.ceil(wordCount / 200))} min read</span>}
+              </div>
             </header>
 
-            {/* Direct-answer summary — the first thing answer engines extract.
-                The id is referenced by the Article LD's speakable cssSelector. */}
-            <div id="blog-summary" className="border-l-4 border-ui-outline bg-ui-tint rounded-r-xl px-4 py-3 mb-8">
-              <p className="text-sm font-semibold text-wareongo-charcoal mb-1">In short</p>
-              <p className="text-base sm:text-base text-wareongo-slate leading-relaxed"><InlineText text={blog.summary} /></p>
-            </div>
+            {cover && <figure key={cover.url} className="blog-article__cover">
+              <img src={cover.url} alt={cover.alt} width={cover.width} height={cover.height} decoding="async"
+                onError={event => { event.currentTarget.closest('figure')?.setAttribute('hidden', ''); }} />
+            </figure>}
+            {openingImages && <div className="blog-article__cover"><Block block={openingImages} /></div>}
 
-            {blog.blocks.map((block, i) => (
-              <Block key={i} block={block} />
-            ))}
-
-            {/* Accordion answers stay in the DOM when collapsed (see FAQAccordion),
-                so the SSG HTML always matches the FAQPage JSON-LD. */}
-            {blog.faqs.length > 0 && <section aria-labelledby="blog-faq" className="mt-10">
-              <h2 id="blog-faq" className="ui-section-title text-wareongo-blue mb-4">
-                Frequently Asked Questions
-              </h2>
-              <FAQAccordion items={blog.faqs.map(({ q, a }) => ({ q, a }))} />
-            </section>}
-
-            {relatedBlogs.length > 0 && (
-              <section aria-label="Related blogs" className="mt-10">
-                <h2 className="ui-section-title text-wareongo-charcoal mb-3">Related Blogs</h2>
-                <ul className="space-y-2">
-                  {relatedBlogs.map((g) => (
-                    <li key={g.slug}>
-                      <Link to={`/blogs/${g.slug}`} className="text-wareongo-blue underline underline-offset-2">
-                        {g.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
-
-            {/* CTA — blogs feed the transactional pages */}
-            <div className="mt-10 border border-ui-line rounded-xl p-6 text-center">
-              <p className="text-wareongo-charcoal font-semibold mb-1">Looking for warehouse space?</p>
-              <p className="text-sm text-wareongo-slate mb-4">
-                Browse verified, physically inspected warehouses across India, or tell us your requirement and get a
-                curated shortlist within 4 hours.
-              </p>
-              <div className="flex flex-wrap justify-center gap-3">
-                <Link
-                  to="/listings"
-                  className="ui-button"
-                >
-                  Browse listings
-                </Link>
-                <Link
-                  data-analytics-placement="blog_footer" to="/request-warehouse"
-                  className="ui-button ui-button--secondary"
-                >
-                  Request a warehouse
-                </Link>
+            <div className="blog-article__layout">
+              <div className="blog-article__share"><BlogShare key={url} url={url} title={blog.title} /></div>
+              <aside className="blog-article__sidebar">
+                <BlogContents key={blog.slug} headings={headings} hasFaq={blog.faqs.length > 0} />
+                <BlogEnquiry placement="blog_sidebar" compact />
+              </aside>
+              <div className="blog-article__body">
+                <div id="blog-summary" className="ui-panel blog-summary mb-8" tabIndex={-1}>
+                  <p className="ui-label">In Short</p>
+                  <p><InlineText text={blog.summary} /></p>
+                </div>
+                {blog.blocks.map((block, index) => index === 0 && openingImages ? null : <Block key={index} block={block} headingId={headingIds.get(index)} />)}
+                <div className="blog-article__end">
+                  <p>Written by {author}{date && <> · Updated <time dateTime={blog.updated}>{date}</time></>}</p>
+                  <a href="#blog-title" className="underline underline-offset-4">Back to top</a>
+                </div>
+                {blog.faqs.length > 0 && <section aria-labelledby="blog-faq" className="blog-section">
+                  <h2 id="blog-faq" className="ui-section-title mb-6" tabIndex={-1}>Frequently Asked Questions</h2>
+                  <FAQAccordion items={blog.faqs} />
+                </section>}
               </div>
             </div>
           </article>
+
+          {relatedBlogs.length > 0 && <section aria-label="Related blogs" className="blog-section">
+            <div className="blog-section__heading">
+              <h2 className="ui-section-title">More Blogs</h2>
+              <Link to="/blogs">View all blogs <ArrowRight size={16} aria-hidden="true" /></Link>
+            </div>
+            <ul className={`blog-grid${relatedBlogs.length === 4 ? ' blog-grid--four' : ''}`}>
+              {relatedBlogs.map(related => <li key={related.slug}>
+                <BlogCard blog={blogSummaries.find(entry => entry.slug === related.slug) ?? related} />
+              </li>)}
+            </ul>
+          </section>}
+          <div className="blog-section"><BlogEnquiry placement="blog_footer" /></div>
         </div>
       </main>
-
       <Footer />
+      <div className="blog-mobile-enquiry" aria-label="Warehouse enquiry">
+        <span>A verified shortlist in 4 hours</span>
+        <Link to="/request-warehouse" className="ui-button" data-analytics-placement="blog_mobile">Request a warehouse</Link>
+      </div>
     </div>
   );
 };

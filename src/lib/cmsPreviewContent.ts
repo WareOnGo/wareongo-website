@@ -8,6 +8,7 @@ import type { LegalContent } from '@/data/legalPages';
 import type { LocationPageContent } from '@/data/locationPages';
 import type { MicromarketContent } from '@/data/micromarkets';
 import { buildBlogSummaries } from '../../scripts/lib/blog-summaries.mjs';
+import { replaceBlogWarehousePhotos } from '../../scripts/lib/blog-images.mjs';
 
 export type CmsPreviewContent =
   | { type: 'blog'; content: Blog; indexEntries?: BlogSummary[] }
@@ -71,5 +72,6 @@ export function readCmsPreview(value: unknown, view = 'page'): CmsPreviewContent
     })));
     indexEntries = normalizeHeadingCase(normalizeContentPunctuation(trim(summaries))) as BlogSummary[];
   }
-  return { type, content: normalizeHeadingCase(normalizeContentPunctuation(content)), ...(indexEntries ? { indexEntries } : {}) } as unknown as CmsPreviewContent;
+  const displayContent = type === 'blog' ? replaceBlogWarehousePhotos(content) : content;
+  return { type, content: normalizeHeadingCase(normalizeContentPunctuation(displayContent)), ...(indexEntries ? { indexEntries } : {}) } as unknown as CmsPreviewContent;
 }
