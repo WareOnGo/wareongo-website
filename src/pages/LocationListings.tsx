@@ -193,16 +193,6 @@ export default function LocationListings() {
               )}
             </p>
 
-            {data.overview ? (
-              <a href="#listing-overview" className="mt-4 inline-block text-sm text-wareongo-blue hover:underline">
-                Read about warehousing in {canonical} ↓
-              </a>
-            ) : data.overviewPath && (
-              <Link to={data.overviewPath} className="mt-4 inline-block text-sm text-wareongo-blue hover:underline">
-                Read the {canonical} overview →
-              </Link>
-            )}
-
             {/* Micromarkets have no PEB/RCC variants — they link up to their city instead. */}
             {isMicromarket && parentCity && parentCity.canonical !== canonical && (
               <div className="mt-5 flex flex-wrap gap-2">
