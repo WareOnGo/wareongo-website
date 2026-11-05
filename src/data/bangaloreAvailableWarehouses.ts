@@ -30,8 +30,8 @@ export const BANGALORE_AVAILABLE_WAREHOUSES: BangaloreAvailableWarehouse[] = [
     "warehouseType": "Shed",
     "numberOfDocks": null,
     "fireCompliance": true,
-    "image": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/scout_27f2ba0b8902cff45ffb8f9fe0c43f35.webp",
-    "imageFallback": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/scout_27f2ba0b8902cff45ffb8f9fe0c43f35.png"
+    "image": "https://media.wareongo.com/webp/scout_27f2ba0b8902cff45ffb8f9fe0c43f35.webp",
+    "imageFallback": "https://media.wareongo.com/scout_27f2ba0b8902cff45ffb8f9fe0c43f35.png"
   },
   {
     "id": 614,
@@ -43,8 +43,8 @@ export const BANGALORE_AVAILABLE_WAREHOUSES: BangaloreAvailableWarehouse[] = [
     "warehouseType": "PEB",
     "numberOfDocks": 0,
     "fireCompliance": true,
-    "image": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1763252355177.webp",
-    "imageFallback": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/media_1763252355177.jpeg"
+    "image": "https://media.wareongo.com/webp/media_1763252355177.webp",
+    "imageFallback": "https://media.wareongo.com/media_1763252355177.jpeg"
   },
   {
     "id": 2910,
@@ -56,8 +56,8 @@ export const BANGALORE_AVAILABLE_WAREHOUSES: BangaloreAvailableWarehouse[] = [
     "warehouseType": "PEB",
     "numberOfDocks": 5,
     "fireCompliance": true,
-    "image": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/images/835fa7fdcba0f58dabdbd0e81c306b5eb181e3316208260c4a829e5f6a412016/sharp-w1280-q75-v1.webp",
-    "imageFallback": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/5100adbea85345b9375f007762bec3a2.jpg"
+    "image": "https://media.wareongo.com/webp/images/835fa7fdcba0f58dabdbd0e81c306b5eb181e3316208260c4a829e5f6a412016/sharp-w1280-q75-v1.webp",
+    "imageFallback": "https://media.wareongo.com/5100adbea85345b9375f007762bec3a2.jpg"
   },
   {
     "id": 983,
@@ -69,8 +69,8 @@ export const BANGALORE_AVAILABLE_WAREHOUSES: BangaloreAvailableWarehouse[] = [
     "warehouseType": "PEB",
     "numberOfDocks": 4,
     "fireCompliance": true,
-    "image": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1769783790546.webp",
-    "imageFallback": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/media_1769783790546.jpeg"
+    "image": "https://media.wareongo.com/webp/media_1769783790546.webp",
+    "imageFallback": "https://media.wareongo.com/media_1769783790546.jpeg"
   },
   {
     "id": 1468,
@@ -82,8 +82,8 @@ export const BANGALORE_AVAILABLE_WAREHOUSES: BangaloreAvailableWarehouse[] = [
     "warehouseType": "PEB",
     "numberOfDocks": 12,
     "fireCompliance": true,
-    "image": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1777287817633.webp",
-    "imageFallback": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/media_1777287817633.jpeg"
+    "image": "https://media.wareongo.com/webp/media_1777287817633.webp",
+    "imageFallback": "https://media.wareongo.com/media_1777287817633.jpeg"
   },
   {
     "id": 2216,
@@ -95,8 +95,8 @@ export const BANGALORE_AVAILABLE_WAREHOUSES: BangaloreAvailableWarehouse[] = [
     "warehouseType": "PEB",
     "numberOfDocks": 12,
     "fireCompliance": true,
-    "image": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/scout_ba3088769366704cdc0546b6d16a6db9.webp",
-    "imageFallback": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/scout_ba3088769366704cdc0546b6d16a6db9.jpg"
+    "image": "https://media.wareongo.com/webp/scout_ba3088769366704cdc0546b6d16a6db9.webp",
+    "imageFallback": "https://media.wareongo.com/scout_ba3088769366704cdc0546b6d16a6db9.jpg"
   },
   {
     "id": 2744,
@@ -108,8 +108,8 @@ export const BANGALORE_AVAILABLE_WAREHOUSES: BangaloreAvailableWarehouse[] = [
     "warehouseType": "PEB",
     "numberOfDocks": 4,
     "fireCompliance": true,
-    "image": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/images/3ff66644e01ac47d5f797c5ee696e7aab677c6a25fa63e8a14bccf19ada27aaf/sharp-w1280-q75-v1.webp",
-    "imageFallback": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/scout_c1e963919653f000641adae01ea67892.jpg",
+    "image": "https://media.wareongo.com/webp/images/3ff66644e01ac47d5f797c5ee696e7aab677c6a25fa63e8a14bccf19ada27aaf/sharp-w1280-q75-v1.webp",
+    "imageFallback": "https://media.wareongo.com/scout_c1e963919653f000641adae01ea67892.jpg",
     "coverImage": "/bangalore/available-2744.webp"
   },
   {
@@ -122,8 +122,8 @@ export const BANGALORE_AVAILABLE_WAREHOUSES: BangaloreAvailableWarehouse[] = [
     "warehouseType": "Shed",
     "numberOfDocks": 1,
     "fireCompliance": false,
-    "image": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/scout_3a68482740380013f6f0b3a604e23521.webp",
-    "imageFallback": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/scout_3a68482740380013f6f0b3a604e23521.jpg",
+    "image": "https://media.wareongo.com/webp/scout_3a68482740380013f6f0b3a604e23521.webp",
+    "imageFallback": "https://media.wareongo.com/scout_3a68482740380013f6f0b3a604e23521.jpg",
     "coverImage": "/bangalore/available-2142.webp"
   },
   {
@@ -136,8 +136,8 @@ export const BANGALORE_AVAILABLE_WAREHOUSES: BangaloreAvailableWarehouse[] = [
     "warehouseType": "PEB",
     "numberOfDocks": null,
     "fireCompliance": null,
-    "image": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1775117527561.webp",
-    "imageFallback": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/media_1775117527561.jpeg",
+    "image": "https://media.wareongo.com/webp/media_1775117527561.webp",
+    "imageFallback": "https://media.wareongo.com/media_1775117527561.jpeg",
     "coverImage": "/bangalore/available-1294.webp"
   },
   {
@@ -150,8 +150,8 @@ export const BANGALORE_AVAILABLE_WAREHOUSES: BangaloreAvailableWarehouse[] = [
     "warehouseType": "PEB",
     "numberOfDocks": 1,
     "fireCompliance": false,
-    "image": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1766550503042.webp",
-    "imageFallback": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/media_1766550503042.jpeg",
+    "image": "https://media.wareongo.com/webp/media_1766550503042.webp",
+    "imageFallback": "https://media.wareongo.com/media_1766550503042.jpeg",
     "coverImage": "/bangalore/available-832.webp"
   },
   {
@@ -164,8 +164,8 @@ export const BANGALORE_AVAILABLE_WAREHOUSES: BangaloreAvailableWarehouse[] = [
     "warehouseType": "Shed",
     "numberOfDocks": null,
     "fireCompliance": false,
-    "image": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/1960bdc031e77c3a8daa84dd4e26d838.webp",
-    "imageFallback": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/1960bdc031e77c3a8daa84dd4e26d838.jpg",
+    "image": "https://media.wareongo.com/webp/1960bdc031e77c3a8daa84dd4e26d838.webp",
+    "imageFallback": "https://media.wareongo.com/1960bdc031e77c3a8daa84dd4e26d838.jpg",
     "coverImage": "/bangalore/available-2686.webp"
   },
   {
@@ -178,8 +178,8 @@ export const BANGALORE_AVAILABLE_WAREHOUSES: BangaloreAvailableWarehouse[] = [
     "warehouseType": "PEB",
     "numberOfDocks": null,
     "fireCompliance": false,
-    "image": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/f601ec158a4169b486a95d8af9a4c9a3.webp",
-    "imageFallback": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/f601ec158a4169b486a95d8af9a4c9a3.jpg",
+    "image": "https://media.wareongo.com/webp/f601ec158a4169b486a95d8af9a4c9a3.webp",
+    "imageFallback": "https://media.wareongo.com/f601ec158a4169b486a95d8af9a4c9a3.jpg",
     "coverImage": "/bangalore/available-2255.webp"
   },
   {
@@ -192,8 +192,8 @@ export const BANGALORE_AVAILABLE_WAREHOUSES: BangaloreAvailableWarehouse[] = [
     "warehouseType": "PEB",
     "numberOfDocks": 8,
     "fireCompliance": true,
-    "image": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/6986d1720554225334c15c1810219b2f.webp",
-    "imageFallback": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/6986d1720554225334c15c1810219b2f.jpg",
+    "image": "https://media.wareongo.com/webp/6986d1720554225334c15c1810219b2f.webp",
+    "imageFallback": "https://media.wareongo.com/6986d1720554225334c15c1810219b2f.jpg",
     "coverImage": "/bangalore/available-2369.webp"
   },
   {
@@ -206,8 +206,8 @@ export const BANGALORE_AVAILABLE_WAREHOUSES: BangaloreAvailableWarehouse[] = [
     "warehouseType": "PEB",
     "numberOfDocks": 11,
     "fireCompliance": true,
-    "image": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/1d85b87b949c2908456e9e8480ec24db.webp",
-    "imageFallback": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/1d85b87b949c2908456e9e8480ec24db.jpg",
+    "image": "https://media.wareongo.com/webp/1d85b87b949c2908456e9e8480ec24db.webp",
+    "imageFallback": "https://media.wareongo.com/1d85b87b949c2908456e9e8480ec24db.jpg",
     "coverImage": "/bangalore/available-1121.webp"
   },
   {
@@ -220,8 +220,8 @@ export const BANGALORE_AVAILABLE_WAREHOUSES: BangaloreAvailableWarehouse[] = [
     "warehouseType": "PEB",
     "numberOfDocks": null,
     "fireCompliance": true,
-    "image": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1759230371973.webp",
-    "imageFallback": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/media_1759230371973.jpeg",
+    "image": "https://media.wareongo.com/webp/media_1759230371973.webp",
+    "imageFallback": "https://media.wareongo.com/media_1759230371973.jpeg",
     "coverImage": "/bangalore/available-408.webp"
   },
   {
@@ -234,8 +234,8 @@ export const BANGALORE_AVAILABLE_WAREHOUSES: BangaloreAvailableWarehouse[] = [
     "warehouseType": "PEB",
     "numberOfDocks": 8,
     "fireCompliance": true,
-    "image": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1770635881292.webp",
-    "imageFallback": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/media_1770635881292.jpeg",
+    "image": "https://media.wareongo.com/webp/media_1770635881292.webp",
+    "imageFallback": "https://media.wareongo.com/media_1770635881292.jpeg",
     "coverImage": "/bangalore/available-1037.webp"
   },
   {
@@ -248,8 +248,8 @@ export const BANGALORE_AVAILABLE_WAREHOUSES: BangaloreAvailableWarehouse[] = [
     "warehouseType": "PEB",
     "numberOfDocks": 5,
     "fireCompliance": false,
-    "image": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/scout_11f0dc8b37e8ac49ba97066756f14f67.webp",
-    "imageFallback": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/scout_11f0dc8b37e8ac49ba97066756f14f67.jpg",
+    "image": "https://media.wareongo.com/webp/scout_11f0dc8b37e8ac49ba97066756f14f67.webp",
+    "imageFallback": "https://media.wareongo.com/scout_11f0dc8b37e8ac49ba97066756f14f67.jpg",
     "coverImage": "/bangalore/available-2324.webp"
   },
   {
@@ -262,8 +262,8 @@ export const BANGALORE_AVAILABLE_WAREHOUSES: BangaloreAvailableWarehouse[] = [
     "warehouseType": "PEB",
     "numberOfDocks": 5,
     "fireCompliance": false,
-    "image": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/55e2d43430532efad873d91f8ec3acfe.webp",
-    "imageFallback": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/55e2d43430532efad873d91f8ec3acfe.jpg",
+    "image": "https://media.wareongo.com/webp/55e2d43430532efad873d91f8ec3acfe.webp",
+    "imageFallback": "https://media.wareongo.com/55e2d43430532efad873d91f8ec3acfe.jpg",
     "coverImage": "/bangalore/available-1884.webp"
   }
 ];
@@ -279,8 +279,8 @@ export const BANGALORE_FEATURED_LISTINGS: AdLandingWarehouse[] = [
   { id: 2744, locality: 'Hoskote', address: '4RW5+C6C Muthasandra, Karnataka', size: 10000, price: 26, ceilingHeight: 22, numberOfDocks: 4, fireCompliance: true,
     image: '/bangalore/available-2744.webp' },
   { id: 915, locality: 'Peenya', address: 'Hanchipura, Mangalore Highway, Nelamangala', size: 22700, price: 25, ceilingHeight: null, numberOfDocks: 27, fireCompliance: true,
-    image: 'https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/bdfdfb0c07d8e78c138935b6f276a512.webp',
-    imageFallback: 'https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/bdfdfb0c07d8e78c138935b6f276a512.jpg' },
+    image: 'https://media.wareongo.com/webp/bdfdfb0c07d8e78c138935b6f276a512.webp',
+    imageFallback: 'https://media.wareongo.com/bdfdfb0c07d8e78c138935b6f276a512.jpg' },
   { id: 1121, locality: 'Dobbaspet', address: 'Sompura KIADB Estate, Dobbaspet', size: 190000, price: 28, ceilingHeight: 50, numberOfDocks: 11, fireCompliance: true,
     image: '/bangalore/available-1121.webp' },
 ].map(listing => ({ ...listing, warehouseType: 'PEB' }));

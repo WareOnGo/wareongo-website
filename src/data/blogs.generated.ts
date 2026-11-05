@@ -27,13 +27,13 @@ export const blogs: Blog[] = [
         "kind": "images",
         "images": [
           {
-            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/images/913ddd819174e0b61f139d427e0abe9d2d629138197b09697da13fcdc159d208/sharp-w1280-q75-v1.webp",
+            "url": "https://media.wareongo.com/webp/images/913ddd819174e0b61f139d427e0abe9d2d629138197b09697da13fcdc159d208/sharp-w1280-q75-v1.webp",
             "alt": "RCC warehouse in Bhubaneswar: Empty industrial interior with concrete floor, white support columns, ceiling beams, and open bays extending into a darker area.",
             "width": 1280,
             "height": 720
           },
           {
-            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/images/823c5558ae5e6c5635420e1ca86900b49940e7e88aa1133df0a8a56f8a0817e1/sharp-w1280-q75-v1.webp",
+            "url": "https://media.wareongo.com/webp/images/823c5558ae5e6c5635420e1ca86900b49940e7e88aa1133df0a8a56f8a0817e1/sharp-w1280-q75-v1.webp",
             "alt": "PEB warehouse in Guwahati: Empty warehouse interior with concrete floor, blue steel columns and roof trusses, corrugated walls, and shuttered openings.",
             "width": 1280,
             "height": 960
@@ -374,7 +374,7 @@ export const blogs: Blog[] = [
         "images": [
           {
             "alt": "Bar chart of the share of Bangalore warehouse listings that are pre-engineered steel, by belt: Tumkur Road 94%, Hoskote 79%, Mysore Road 72%, Hosur Road 61%, Devanahalli 60%, Whitefield 30%.",
-            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/infographics/bangalore-peb-share-by-belt.webp",
+            "url": "https://media.wareongo.com/guides/infographics/bangalore-peb-share-by-belt.webp",
             "width": 1920,
             "height": 1788
           }
@@ -390,7 +390,7 @@ export const blogs: Blog[] = [
         "images": [
           {
             "alt": "Donut chart: the Hoskote to Narsapura belt took 54 percent of all Bangalore warehouse leasing in 2025, and the rest of the city 46 percent.",
-            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/infographics/bangalore-hoskote-narsapura-share.webp",
+            "url": "https://media.wareongo.com/guides/infographics/bangalore-hoskote-narsapura-share.webp",
             "width": 1920,
             "height": 1770
           }
@@ -402,7 +402,7 @@ export const blogs: Blog[] = [
         "images": [
           {
             "alt": "Pie chart of Bangalore Grade A warehousing demand in 2025: Hoskote and Soukya Road 27%, Hosur 24%, Nelamangala 21%, rest of Bangalore 28%.",
-            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/infographics/bangalore-grade-a-demand-2025.webp",
+            "url": "https://media.wareongo.com/guides/infographics/bangalore-grade-a-demand-2025.webp",
             "width": 1920,
             "height": 1770
           }
@@ -540,7 +540,7 @@ export const blogs: Blog[] = [
         "images": [
           {
             "alt": "Bar chart of median asking warehouse rent by Bangalore belt in September 2026, rupees per sq ft per month: Tumkur Road 22, Mysore Road 24, Hoskote 25, Hosur Road 30, Devanahalli 40, Whitefield 60.",
-            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/infographics/bangalore-rent-by-belt.webp",
+            "url": "https://media.wareongo.com/guides/infographics/bangalore-rent-by-belt.webp",
             "width": 1920,
             "height": 1846
           }
@@ -631,7 +631,7 @@ export const blogs: Blog[] = [
         "images": [
           {
             "alt": "Bar chart of Bangalore warehouse listings with a fire NOC recorded by the owner: Tumkur Road 42%, Hoskote 39%.",
-            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/infographics/bangalore-fire-noc-recorded.webp",
+            "url": "https://media.wareongo.com/guides/infographics/bangalore-fire-noc-recorded.webp",
             "width": 1920,
             "height": 1148
           }
@@ -751,7 +751,7 @@ export const blogs: Blog[] = [
         "images": [
           {
             "alt": "Six steps of a built-to-suit warehouse: requirement definition, site shortlisting, design and costing, agreement to lease, construction, and handover and fit-out. The agreement to lease is the point of no return. The steps before the build take about as long as construction, which runs 6 to 10 months, so the whole process takes roughly 12 to 20 months.",
-            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/infographics/bts-process-flow.webp",
+            "url": "https://media.wareongo.com/guides/infographics/bts-process-flow.webp",
             "width": 1920,
             "height": 2392
           }
@@ -771,7 +771,7 @@ export const blogs: Blog[] = [
         "images": [
           {
             "alt": "Range chart of built-to-suit warehouse timelines: pre-construction 6 to 10 months, construction 6 to 10 months, end to end 12 to 20 months.",
-            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/infographics/bts-timeline-months.webp",
+            "url": "https://media.wareongo.com/guides/infographics/bts-timeline-months.webp",
             "width": 1920,
             "height": 1454
           }
@@ -1443,7 +1443,7 @@ export const blogs: Blog[] = [
         "images": [
           {
             "alt": "Range chart of warehouse approval timelines in weeks: GST 1 to 2, shops and establishments 1 to 3, trade licence 2 to 6, FSSAI storage licence 4 to 8, drug licence 6 to 12, SPCB consent to operate 4 to 16.",
-            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/infographics/approval-timelines-weeks.webp",
+            "url": "https://media.wareongo.com/guides/infographics/approval-timelines-weeks.webp",
             "width": 1920,
             "height": 1898
           }
@@ -1657,7 +1657,7 @@ export const blogs: Blog[] = [
         "images": [
           {
             "alt": "Bar chart of average transacted warehouse rent in Q1 2026, rupees per sq ft per month: Pune 28.5, Mumbai MMR 26.0, Bengaluru 25.6, Chennai 25.6, Ahmedabad about 24.8, Delhi NCR 22.3, Hyderabad 21.9, Kolkata 19.3.",
-            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/infographics/rent-by-city-q1-2026.webp",
+            "url": "https://media.wareongo.com/guides/infographics/rent-by-city-q1-2026.webp",
             "width": 1920,
             "height": 2142
           }
@@ -1802,7 +1802,7 @@ export const blogs: Blog[] = [
         "images": [
           {
             "alt": "Column chart of Grade A warehouse vacancy at the end of 2025: Chennai 4.7%, Pune 5.2%, Mumbai 5.7%, Bengaluru 11.8%, Ahmedabad 11.9%.",
-            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/infographics/grade-a-vacancy-end-2025.webp",
+            "url": "https://media.wareongo.com/guides/infographics/grade-a-vacancy-end-2025.webp",
             "width": 1920,
             "height": 2024
           }
@@ -1900,7 +1900,7 @@ export const blogs: Blog[] = [
         "images": [
           {
             "alt": "Top-down plan of a warehouse. The open floor with pallet racks is the carpet area. Adding walls, columns, the office block and toilets gives the built-up area. Adding a share of the park's roads and truck apron gives the super built-up area. Below, two quotes compared: Warehouse A quoted 20 rupees on 50,000 sqft built-up has only 43,000 sqft of carpet, so it costs 23.3 rupees per usable sqft. Warehouse B quoted 22 rupees on 45,000 sqft carpet costs 22 rupees.",
-            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/infographics/three-areas-plan.webp",
+            "url": "https://media.wareongo.com/guides/infographics/three-areas-plan.webp",
             "width": 1920,
             "height": 3000
           }
@@ -1944,7 +1944,7 @@ export const blogs: Blog[] = [
         "images": [
           {
             "alt": "Column chart: Warehouse A is quoted at Rs 20 per sq ft on built-up area, which is Rs 23.3 on usable floor; Warehouse B is quoted at Rs 22 on carpet area, which stays Rs 22.",
-            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/infographics/headline-vs-effective-rate.webp",
+            "url": "https://media.wareongo.com/guides/infographics/headline-vs-effective-rate.webp",
             "width": 1920,
             "height": 1942
           }
@@ -2046,7 +2046,7 @@ export const blogs: Blog[] = [
         "images": [
           {
             "alt": "Image Credits: Deccan Herald",
-            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/deccanherald-import-sites-dh-files-articleimages-2022-06-24--33d26d9c577f0e43.webp",
+            "url": "https://media.wareongo.com/guides/deccanherald-import-sites-dh-files-articleimages-2022-06-24--33d26d9c577f0e43.webp",
             "width": 1200,
             "height": 738
           }
@@ -2070,7 +2070,7 @@ export const blogs: Blog[] = [
         "images": [
           {
             "alt": "Pie chart of Dabaspet multimodal logistics park ownership: NHLML 51.29%, KIADB 32.38%, RVNL 16.33%.",
-            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/infographics/dabaspet-mmlp-ownership.webp",
+            "url": "https://media.wareongo.com/guides/infographics/dabaspet-mmlp-ownership.webp",
             "width": 1920,
             "height": 1664
           }
@@ -2098,7 +2098,7 @@ export const blogs: Blog[] = [
         "images": [
           {
             "alt": "Timeline of the Dabaspet multimodal logistics park. Phase 1 is targeted for 2026, Phase 2 for 2034 and Phase 3 for 2039, so roughly 13 years separate the first phase from the last. Construction began in March 2024 and Phase 1 is targeted for the fourth quarter of 2026.",
-            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/infographics/dabaspet-phase-timeline.webp",
+            "url": "https://media.wareongo.com/guides/infographics/dabaspet-phase-timeline.webp",
             "width": 1920,
             "height": 1540
           }
@@ -2261,7 +2261,7 @@ export const blogs: Blog[] = [
         "images": [
           {
             "alt": "Donut chart of Vizhinjam port container volume: about 70 percent projected to be transshipment and 30 percent export-import cargo.",
-            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/infographics/vizhinjam-exim-share.webp",
+            "url": "https://media.wareongo.com/guides/infographics/vizhinjam-exim-share.webp",
             "width": 1920,
             "height": 1792
           }
@@ -2385,7 +2385,7 @@ export const blogs: Blog[] = [
         "images": [
           {
             "alt": "Bar chart of land near Vizhinjam port in acres: around 600 sought by investors, about 230 approved for acquisition by Kerala, 50 allotted to CWC at Amaravila and 25 to Concor at Kottukal.",
-            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/infographics/vizhinjam-land-on-the-table.webp",
+            "url": "https://media.wareongo.com/guides/infographics/vizhinjam-land-on-the-table.webp",
             "width": 1920,
             "height": 1794
           }
@@ -2401,7 +2401,7 @@ export const blogs: Blog[] = [
         "images": [
           {
             "alt": "Bar chart of land Tamil Nadu has acquired for industrial parks near Vizhinjam: about 2,260 acres at Nanguneri and a further 1,060 acres at Moolakaraipatti.",
-            "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/infographics/tamil-nadu-land-acquired.webp",
+            "url": "https://media.wareongo.com/guides/infographics/tamil-nadu-land-acquired.webp",
             "width": 1920,
             "height": 1254
           }

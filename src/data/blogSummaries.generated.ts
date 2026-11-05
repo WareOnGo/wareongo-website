@@ -9,7 +9,7 @@ export const blogSummaries: Pick<Blog, 'slug' | 'title' | 'description' | 'updat
     "description": "PEB (pre-engineered building) vs RCC warehouse compared: construction, clear height, cost, fire safety, and which suits 3PL, e-commerce, manufacturing or cold storage.",
     "updated": "2026-06-05",
     "thumbnail": {
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/images/823c5558ae5e6c5635420e1ca86900b49940e7e88aa1133df0a8a56f8a0817e1/sharp-w1280-q75-v1.webp",
+      "url": "https://media.wareongo.com/webp/images/823c5558ae5e6c5635420e1ca86900b49940e7e88aa1133df0a8a56f8a0817e1/sharp-w1280-q75-v1.webp",
       "alt": "PEB warehouse in Guwahati: Empty warehouse interior with concrete floor, blue steel columns and roof trusses, corrugated walls, and shuttered openings.",
       "width": 1280,
       "height": 960
@@ -21,7 +21,7 @@ export const blogSummaries: Pick<Blog, 'slug' | 'title' | 'description' | 'updat
     "description": "Bangalore warehousing in 2026: 57 million sq ft of Grade A stock, 11.8% vacancy, rents by belt from Rs 22 to Rs 60, and what the numbers mean for tenants.",
     "updated": "2026-10-08",
     "thumbnail": {
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/images/8adc5ddd2fc7958a9a3e1250e73c4a89801b62bf6081342e5c694807d23df76c/sharp-w1280-q75-v1.webp",
+      "url": "https://media.wareongo.com/webp/images/8adc5ddd2fc7958a9a3e1250e73c4a89801b62bf6081342e5c694807d23df76c/sharp-w1280-q75-v1.webp",
       "alt": "PEB warehouse in Bangalore: Empty warehouse interior with concrete floor, steel columns, corrugated metal roof, wall panels, and small rectangular windows.",
       "width": 1280,
       "height": 720
@@ -33,7 +33,7 @@ export const blogSummaries: Pick<Blog, 'slug' | 'title' | 'description' | 'updat
     "description": "Built-to-suit (BTS) warehouses explained: how the process works, how BTS compares to ready-built space, and when a custom-built facility is worth the wait.",
     "updated": "2026-10-08",
     "thumbnail": {
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/images/a1870a8a94309e5c3b8703e29b608a2f2697b38358430ff1696e1d1225adf1c9/sharp-w1280-q75-v1.webp",
+      "url": "https://media.wareongo.com/webp/images/a1870a8a94309e5c3b8703e29b608a2f2697b38358430ff1696e1d1225adf1c9/sharp-w1280-q75-v1.webp",
       "alt": "PEB warehouse in Nashik: View beneath a steel-framed warehouse structure with roof sheets, columns, dirt floor, puddles, and construction equipment.",
       "width": 1280,
       "height": 720
@@ -45,7 +45,7 @@ export const blogSummaries: Pick<Blog, 'slug' | 'title' | 'description' | 'updat
     "description": "What qualifies as a Grade A warehouse in India: clear height, FM2 flooring, docks, fire systems. Grade A vs Grade B vs Grade C compared, with typical rent impact.",
     "updated": "2026-06-05",
     "thumbnail": {
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/images/141744fd9e45723033f531d8ddf33cdd95a951b4a9bd69cb40b7a4a508967ef0/sharp-w1280-q75-v1.webp",
+      "url": "https://media.wareongo.com/webp/images/141744fd9e45723033f531d8ddf33cdd95a951b4a9bd69cb40b7a4a508967ef0/sharp-w1280-q75-v1.webp",
       "alt": "PEB warehouse in Sonipat: Concrete loading yard beside an industrial building with roller shutters, blue columns, ladders, pipes and raised dock platforms.",
       "width": 1280,
       "height": 960
@@ -57,7 +57,7 @@ export const blogSummaries: Pick<Blog, 'slug' | 'title' | 'description' | 'updat
     "description": "The documents to check before leasing a warehouse in India: title, land use, fire NOC, GST, FSSAI and other licences, lease registration, and state rules.",
     "updated": "2026-10-08",
     "thumbnail": {
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/images/4407adbc50808645ba134653324a722f6b758132ab5fd3393c9242ddd246c763/sharp-w1280-q75-v1.webp",
+      "url": "https://media.wareongo.com/webp/images/4407adbc50808645ba134653324a722f6b758132ab5fd3393c9242ddd246c763/sharp-w1280-q75-v1.webp",
       "alt": "PEB warehouse in Patna: Empty warehouse interior with concrete floor, corrugated metal walls and roof, steel columns, skylights, and fire equipment.",
       "width": 1280,
       "height": 720
@@ -69,7 +69,7 @@ export const blogSummaries: Pick<Blog, 'slug' | 'title' | 'description' | 'updat
     "description": "Warehouse rent in India by city for 2026, from Rs 19 in Kolkata to Rs 28.5 in Pune, plus what drives the rate, standard lease terms, GST and TDS on rent.",
     "updated": "2026-10-08",
     "thumbnail": {
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/images/7e53d971d3deb16fb3d780ba5f52c2ea33cb4a5524ea12d36580a3a49805f321/sharp-w1280-q75-v1.webp",
+      "url": "https://media.wareongo.com/webp/images/7e53d971d3deb16fb3d780ba5f52c2ea33cb4a5524ea12d36580a3a49805f321/sharp-w1280-q75-v1.webp",
       "alt": "PEB warehouse in Rajpura: Empty warehouse interior with concrete floor, steel columns, roof trusses, overhead lights, mezzanine office area and staircase.",
       "width": 1280,
       "height": 960
@@ -81,7 +81,7 @@ export const blogSummaries: Pick<Blog, 'slug' | 'title' | 'description' | 'updat
     "description": "Carpet, built-up and super built-up area in warehouse leases: what each includes, the loading factor, why RERA's carpet-area rule doesn't apply, and how to compare quotes on effective rate per usable sqft.",
     "updated": "2026-10-08",
     "thumbnail": {
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/images/c518a8fe10bf96c64d7e9ade976aa344fcdfa50ad88e0ee3f15f4da14d1b467a/sharp-w1280-q75-v1.webp",
+      "url": "https://media.wareongo.com/webp/images/c518a8fe10bf96c64d7e9ade976aa344fcdfa50ad88e0ee3f15f4da14d1b467a/sharp-w1280-q75-v1.webp",
       "alt": "RCC warehouse in Bangalore: Large empty interior hall with concrete floor, rows of painted support columns, low ceiling beams, windows, and one person walking.",
       "width": 1280,
       "height": 720
@@ -94,7 +94,7 @@ export const blogSummaries: Pick<Blog, 'slug' | 'title' | 'description' | 'updat
     "updated": "2026-10-08",
     "thumbnail": {
       "alt": "Image Credits: Deccan Herald",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/guides/deccanherald-import-sites-dh-files-articleimages-2022-06-24--33d26d9c577f0e43.webp",
+      "url": "https://media.wareongo.com/guides/deccanherald-import-sites-dh-files-articleimages-2022-06-24--33d26d9c577f0e43.webp",
       "width": 1200,
       "height": 738
     }
@@ -105,7 +105,7 @@ export const blogSummaries: Pick<Blog, 'slug' | 'title' | 'description' | 'updat
     "description": "Vizhinjam started EXIM cargo on 18 August 2026. No CFS means FCL-only and a 48-hour clock. Who should take warehouse space near the port, and who should wait.",
     "updated": "2026-10-08",
     "thumbnail": {
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/6809a40cf057d06e749accc6a1449903.webp",
+      "url": "https://media.wareongo.com/webp/6809a40cf057d06e749accc6a1449903.webp",
       "alt": "PEB warehouse in Kochi: Empty warehouse interior with polished concrete floor, steel columns, roof trusses, wall windows, and fire piping.",
       "width": 1280,
       "height": 725

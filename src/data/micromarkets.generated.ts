@@ -16,7 +16,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Aslali is the first industrial stop south of Ahmedabad on NH-48, the highway to Vadodara and Mumbai, and it sits at the point where the city bypass meets it. That junction is why the belt exists. Occupiers here are staging goods for the Gujarat corridor rather than serving Ahmedabad retail, and rates are among the lowest of the cities we cover.",
     "heroImage": {
       "alt": "Warehouse exterior in Aslali, Ahmedabad",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/26b16e303c64efcdf9bca276c48f1938.webp",
+      "url": "https://media.wareongo.com/webp/26b16e303c64efcdf9bca276c48f1938.webp",
       "width": 1280,
       "height": 960
     },
@@ -24,7 +24,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The belt runs along the highway and the bypass behind it. **Jetalpur**, off the Vadodara side, is the top of the local market. The **Aslali bypass** frontage has the best highway access. **Paldi Kankaj**, in Daskroi taluka behind the highway, is the lower end. Pirana, on the city side, has its own page. The RCC godowns in the belt sit on the Aslali frontage itself.",
     "marketImage": {
       "alt": "Map of Aslali, Ahmedabad, showing where WareOnGo's warehouse listings sit around Jetalpur and Paldi Kankaj",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/ahmedabad/aslali.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/ahmedabad/aslali.webp",
       "width": 1600,
       "height": 1200
     },
@@ -68,7 +68,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Kheda sits south east of Ahmedabad where the Dholka highway meets the road towards Nadiad, far enough out that land is cheap and close enough that a truck reaches the city inside an hour. It is a large-format belt: the buildings here are new, pre-engineered and big, and they were put up for regional distribution rather than for local trade.",
     "heroImage": {
       "alt": "Warehouse exterior in Kheda, Ahmedabad",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1760361106963.webp",
+      "url": "https://media.wareongo.com/webp/media_1760361106963.webp",
       "width": 1280,
       "height": 725
     },
@@ -76,7 +76,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "Nearly all of it lines one road. The **Kheda to Dholka highway** frontage carries the largest share of the inventory. **Kanera**, on the Nadiad side, is the top of the local market. **Wadala Patiya Road** and **Vavdi** sit in the middle. **Kajipura** and the **Kheda junction** itself are the lower end. The spread is narrow, and the stock is predominantly pre-engineered, so the pocket you pick changes the rate more than the specification.",
     "marketImage": {
       "alt": "Map of Kheda, Ahmedabad, showing where WareOnGo's warehouse listings sit around Kanera",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/ahmedabad/kheda.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/ahmedabad/kheda.webp",
       "width": 1600,
       "height": 1200
     },
@@ -120,7 +120,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Pirana sits on the southern edge of Ahmedabad between the city and the Aslali junction, on land that was industrial long before the ring road reached it. It is some of the most affordable storage we list anywhere in India, and the buildings are better than that suggests: mostly recent, pre-engineered, and often with finished floors already down.",
     "heroImage": {
       "alt": "Warehouse exterior in Pirana, Ahmedabad",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/dbeac27ebfddf4c554c3d27b20ac5ae5.webp",
+      "url": "https://media.wareongo.com/webp/dbeac27ebfddf4c554c3d27b20ac5ae5.webp",
       "width": 1280,
       "height": 960
     },
@@ -128,7 +128,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "This is one pocket rather than a belt, and the quotes sit close together. Most of the stock is addressed simply to **Pirana**. **Hari Om Industrial Park**, on the **Paldi Kankaj** side in Daskroi taluka, is the top of the local market. With this little variation, compare buildings rather than locations. The stock is predominantly pre-engineered, and VDF flooring is common, which is unusual at this rate.",
     "marketImage": {
       "alt": "Map of Pirana, Ahmedabad, showing where WareOnGo's warehouse listings sit around Pirana and Paldi Kankaj",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/ahmedabad/pirana.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/ahmedabad/pirana.webp",
       "width": 1600,
       "height": 1200
     },
@@ -172,7 +172,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Attibele sits on NH-44 at the point where Karnataka ends and Tamil Nadu begins, just short of Hosur. That border position is the whole proposition: goods staged here can be moved into either state without a second leg, which is why it draws distributors serving both Bangalore and the Hosur industrial belt. It is the cheaper end of the Hosur Road corridor and the last stop before Tamil Nadu.",
     "heroImage": {
       "alt": "Warehouse exterior in Attibele, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1762324790736.webp",
+      "url": "https://media.wareongo.com/webp/media_1762324790736.webp",
       "width": 1280,
       "height": 720
     },
@@ -180,7 +180,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The split here runs the opposite way to most estates. **Attibele Industrial Area**, the allotted KIADB block along the highway, is the cheaper half, while independent stock in and around **Attibele** town quotes more. **Krishnasagara**, off the Anekal side, is at the top of the local range, and **Naganaikanahalli** sits between the two. The Anekal road running west is the quieter edge of the same market.",
     "marketImage": {
       "alt": "Map of Attibele, Bengaluru, showing where WareOnGo's warehouse listings sit around Attibele Industrial Area, Attibele and Krishnasagara",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/attibele.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/attibele.webp",
       "width": 1600,
       "height": 1200
     },
@@ -224,7 +224,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Bannerghatta Road runs south from the city towards Jigani and Anekal, and warehousing on it starts where the residential belt stops. This is city-edge space rather than a distribution corridor: the buildings are smaller than the outer belts offer, the occupiers are serving south Bangalore rather than the state, and the value on offer is drive time into the city rather than throughput.",
     "heroImage": {
       "alt": "Warehouse exterior in Bannerghatta, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1763032863884.webp",
+      "url": "https://media.wareongo.com/webp/media_1763032863884.webp",
       "width": 720,
       "height": 1280
     },
@@ -232,7 +232,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The road holds two quite different things. At the city end, **Electronic City** carries commercial RCC floorspace, and that is what sets this page's ceiling: it is office-grade product with a warehouse use, not a shed. Everything south of it is ordinary warehousing. **Mantapa**, on the Bannerghatta to Jigani stretch, is the lower end, with **Begur Road** and **Koppa Road** above it. The Jigani end of the road holds its own page.",
     "marketImage": {
       "alt": "Map of Bannerghatta, Bengaluru, showing where WareOnGo's warehouse listings sit around Electronic City and Mantapa",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/bannerghatta.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/bannerghatta.webp",
       "width": 1600,
       "height": 1200
     },
@@ -276,7 +276,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "This page covers four neighbouring pockets of south Bangalore on the city side of Hosur Road: Begur, Bommanahalli, HSR Layout and Kudlu Gate. It is in-city space rather than a warehousing belt. Most of it is RCC ground-floor and multi-floor space inside residential and commercial neighbourhoods, and it suits last-mile delivery, quick commerce and trade storage that has to sit within reach of Koramangala, Electronic City and the Outer Ring Road.",
     "heroImage": {
       "alt": "Warehouse exterior in Begur, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1762845030328.webp",
+      "url": "https://media.wareongo.com/webp/media_1762845030328.webp",
       "width": 720,
       "height": 1280
     },
@@ -284,7 +284,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The four pockets sit close together but offer different kinds of space. **Bommanahalli** fronts Hosur Road between Silk Board and Electronic City, and its older industrial area of garment and printing units gives it some of the larger floorplates on this page. **Kudlu Gate**, further along the same road, is a Hosur Road junction with its own station on the Yellow Line metro, linked inland to Hosapalaya and Parappana Agrahara. **Begur**, off Hosur Road around Begur Road and Hongasandra, is a fast-growing residential suburb where the space is mostly ground-floor RCC. **HSR** Layout, on the Outer Ring Road, is a planned residential and startup district, so what it offers is small commercial floorspace at the top of the local market. **Singasandra** and AECS Layout, between Begur and Kudlu Gate, carry a mix of RCC and pre-engineered units.",
     "marketImage": {
       "alt": "Map of Begur, Bengaluru, showing where WareOnGo's warehouse listings sit around Bommanahalli, Kudlu Gate, Begur, HSR and Singasandra",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/begur.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/begur.webp",
       "width": 1600,
       "height": 1200
     },
@@ -328,7 +328,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Bidadi is the industrial town on NH-275 between Bangalore and Ramanagara, built around the KIADB estate and the automotive plants that anchor it. It is the far end of the western arc, past Kumbalgodu, and the trade here is manufacturing supply rather than city distribution. Space is scarce and rarely cheap, because most of the land is held by occupiers who use it rather than by landlords who let it.",
     "heroImage": {
       "alt": "Warehouse exterior in Bidadi, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1777287872799.webp",
+      "url": "https://media.wareongo.com/webp/media_1777287872799.webp",
       "width": 1280,
       "height": 576
     },
@@ -336,7 +336,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "This is a small market and the stock reads as individual sites rather than as pockets. **Abhanakuppe**, off the highway on the Bangalore side, is the top of the local range, with **Shyanumangala** just below it. The **Bidadi Industrial Area** frontage on Mysore Road is the entry point. The stock is predominantly pre-engineered space on or beside allotted industrial land, and the narrow spread across the town tells you how thin the choice is.",
     "marketImage": {
       "alt": "Map of Bidadi, Bengaluru, showing where WareOnGo's warehouse listings sit around Shyanumangala and Bidadi Industrial Area",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/bidadi.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/bidadi.webp",
       "width": 1600,
       "height": 1200
     },
@@ -380,7 +380,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "This page covers the villages of Bidarahalli hobli in Bangalore East taluk, on the north-east edge of the city: Bidrahalli, Budigere, Cheemasandra and Rampura. It is a belt of converted farmland and village roads rather than a planned estate, and its advantage is position. Old Madras Road and the Hoskote side lie to the south, the roads to the airport lie to the north, and the belt sits between the two.",
     "heroImage": {
       "alt": "Warehouse exterior in Bidrahalli, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1759990076870.webp",
+      "url": "https://media.wareongo.com/webp/media_1759990076870.webp",
       "width": 1077,
       "height": 1078
     },
@@ -388,7 +388,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "Most of the stock is pre-engineered sheds on converted land spread through the villages, and the pockets differ in size and price. **Rampura**, on Avalahalli Main Road and the Kada Agrahara road towards Doddagubbi, holds the largest share and is the value end, with mid-sized sheds at lower rents. **Cheemasandra**, near Virgonagar and reached from Old Madras Road and Budigere Road, carries larger pre-engineered buildings a step up in price. **Bidrahalli**, the hobli town itself, with **Aduru** and **Kithiganur** around it, sits in the middle of the market. **Budigere**, where the Whitefield to Budigere road meets Old Madras Road at Budigere Cross, is the way north to the KIADB Aerospace Park, and the park and the **Bagalur** side hold the dearest and most industrial units. Whitefield and Devanahalli hold their own pages.",
     "marketImage": {
       "alt": "Map of Bidrahalli, Bengaluru, showing where WareOnGo's warehouse listings sit around Rampura, Cheemasandra, Bidrahalli, Aduru, Budigere and Bagalur",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/bidrahalli.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/bidrahalli.webp",
       "width": 1600,
       "height": 1200
     },
@@ -432,7 +432,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Bommasandra is the KIADB estate on Hosur Road where south Bangalore's pharmaceutical and electronics manufacturing concentrates, and it connects to Jigani by the link road that carries both names. The estate is fully built out, which is why so much of what becomes available here is either a small unit inside an existing compound or a build-to-suit parcel rather than a ready large box.",
     "heroImage": {
       "alt": "Warehouse exterior in Bommasandra, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1762319876595.webp",
+      "url": "https://media.wareongo.com/webp/media_1762319876595.webp",
       "width": 1280,
       "height": 960
     },
@@ -440,7 +440,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The estate divides into three. **Bommasandra Industrial Area**, the allotted KIADB core, is the top of the local market. The **Bommasandra-Jigani Link Road** that connects the two estates carries much of the available space. **Haragadde** and **Jigani main road**, on the Jigani side, are the lower end. Build-to-suit parcels are a real part of what is offered here, often more so than a ready building of the size you want.",
     "marketImage": {
       "alt": "Map of Bommasandra, Bengaluru, showing where WareOnGo's warehouse listings sit around Bommasandra Industrial Area and Haragadde",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/bommasandra.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/bommasandra.webp",
       "width": 1600,
       "height": 1200
     },
@@ -484,7 +484,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Budihal is a village in Nelamangala taluk on Tumkur Road, near the Nelamangala toll plaza, at the city end of the stretch that runs out towards T Begur and Dobbaspet. It is among the closest points on Tumkur Road where large modern distribution buildings sit on open land, which is what occupiers come here for.",
     "heroImage": {
       "alt": "Warehouse exterior in Budihal, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1759215878977.webp",
+      "url": "https://media.wareongo.com/webp/media_1759215878977.webp",
       "width": 540,
       "height": 301
     },
@@ -492,7 +492,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The stock clusters around the village and the highway frontage rather than an estate. **Budihal** itself, on Tumkur Road near the Nelamangala toll, carries most of it. **Thonachinakuppe** and **Mylanahalli** nearby hold more pre-engineered space on the same pattern. T Begur, further out, and Nelamangala hold their own pages.",
     "marketImage": {
       "alt": "Map of Budihal, Bengaluru, showing where WareOnGo's warehouse listings sit around Budihal and Mylanahalli",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/budihal.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/budihal.webp",
       "width": 1600,
       "height": 1200
     },
@@ -536,7 +536,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Chokkahalli is the village outside Hoskote where the KIADB laid out the Hoskote Industrial Area, on the road that leaves the town for Chintamani. The estate holds food, pharma and wind-energy units alongside warehousing, and it sits a short run from Old Madras Road and the Satellite Town Ring Road junction that has made Hoskote one of Bangalore's main warehousing nodes.",
     "heroImage": {
       "alt": "Warehouse exterior in Chokkahalli, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1761822754091.webp",
+      "url": "https://media.wareongo.com/webp/media_1761822754091.webp",
       "width": 1280,
       "height": 960
     },
@@ -544,7 +544,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The stock splits between the estate and the highway beyond it. The **KIADB Hoskote Industrial Area**, on allotted plots at Chokkahalli, carries large pre-engineered sheds on industrial land. **Dasara Thimmanahalli** and **Bheemakkanahalli**, further out along the Chintamani road, hold more large buildings on converted land. **Ekarajapura**, towards the Sidlaghatta road, adds some of the biggest boxes, and it and Hoskote hold their own pages.",
     "marketImage": {
       "alt": "Map of Chokkahalli, Bengaluru, showing where WareOnGo's warehouse listings sit around Ekarajapura",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/chokkahalli.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/chokkahalli.webp",
       "width": 1600,
       "height": 1200
     },
@@ -588,7 +588,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "This page covers Dasanapura and Doddaballapura in Bangalore's north. Dasanapura is a hobli of Bangalore North taluk along Tumkur Road, taking in Madavara, where the Bangalore International Exhibition Centre stands, and the Machohalli industrial area. Doddaballapura, further north, is the headquarters of Bengaluru North district, a silk-weaving town where the KIADB has built one of the region's larger industrial estates, with an apparel park and several later phases.",
     "heroImage": {
       "alt": "Warehouse exterior in Dasanapura, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1769771621210.webp",
+      "url": "https://media.wareongo.com/webp/media_1769771621210.webp",
       "width": 1280,
       "height": 960
     },
@@ -596,7 +596,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The stock on this page sits in the KIADB estates at **Doddaballapura**: the original industrial area, the **Apparel Park**, and the later phases at **Obadenahalli** and **Adinarayana Hosahalli**. **Doddagollahalli**, on the airport side, is close to the Foxconn plant in the ITIR industrial area. **Dasanapura**, on Tumkur Road to the south-west, takes in Madavara and Machohalli, and Makali and Nelamangala beside it hold their own pages.",
     "marketImage": {
       "alt": "Map of Dasanapura, Bengaluru, showing where WareOnGo's warehouse listings sit around Doddaballapura, Obadenahalli, Adinarayana Hosahalli and Doddagollahalli",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/dasanapura.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/dasanapura.webp",
       "width": 1600,
       "height": 1200
     },
@@ -640,7 +640,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Devanahalli is the airport belt. Kempegowda International Airport sits inside it, NH-44 runs through it towards Hyderabad, and the KIADB has laid out aerospace, hardware and defence parks on the land around both. That mix makes it one of Bangalore's most expensive warehousing markets and its most specialised one. Occupiers here are paying for air cargo access and for industrial parks, not for cheap storage.",
     "heroImage": {
       "alt": "Warehouse exterior in Devanahalli, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1759230369388.webp",
+      "url": "https://media.wareongo.com/webp/media_1759230369388.webp",
       "width": 1024,
       "height": 768
     },
@@ -648,7 +648,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "Stock here sits inside named KIADB parks far more than along roads. **KIADB Aerospace Park** is the largest concentration and the top of the market, including RCC units in the defence and hi-tech plots. **KIADB Hardware Park** is a step cheaper. **Bagaluru**, on the city side of the airport, prices with the Aerospace Park, and **Arebannimangala** is at the top of the local range. The later KIADB phases further from the airport are the affordable end.",
     "marketImage": {
       "alt": "Map of Devanahalli, Bengaluru, showing where WareOnGo's warehouse listings sit around KIADB Aerospace Park, KIADB Hardware Park, Bagaluru and Arebannimangala",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/devanahalli.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/devanahalli.webp",
       "width": 1600,
       "height": 1200
     },
@@ -697,7 +697,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Dobbaspet is the far end of the NH-48 corridor, past Nelamangala on the road to Tumakuru and Mumbai. It is a large block of allotted KIADB industrial land on Bangalore's northwest side, laid out in numbered phases, and it is where the big-box stock sits. A multi modal logistics park is planned on this stretch, which is a big part of why occupiers take long leases here rather than closer in.",
     "heroImage": {
       "alt": "Warehouse exterior in Dobbaspet, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1759739744197.webp",
+      "url": "https://media.wareongo.com/webp/media_1759739744197.webp",
       "width": 1280,
       "height": 576
     },
@@ -705,7 +705,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "Almost everything here is inside or beside the KIADB layout. **Dobbaspet Industrial Area**, across its numbered phases, is where the newest large boxes are. **Averahalli** on its edge prices alongside it. **Billanakote** and **Thyamagondlu**, on the Nelamangala side, are a step down. **Kalalghatta** and **Mahimapura** are the cheaper pockets. The Sompura phases towards Nelamangala are covered on the Nelamangala page.",
     "marketImage": {
       "alt": "Map of Dobbaspet, Bengaluru, showing where WareOnGo's warehouse listings sit around Dobbaspet Industrial Area, Averahalli, Billanakote, Thyamagondlu and Mahimapura",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/dobbaspet.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/dobbaspet.webp",
       "width": 1600,
       "height": 1200
     },
@@ -749,7 +749,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "This page covers Ekarajapura and the Sidlaghatta Road, north of Hoskote, where the state highway to Sidlaghatta runs out from Old Madras Road. Hoskote has grown into one of Bangalore's main warehousing nodes where Old Madras Road meets the Satellite Town Ring Road, and the roads running north out of the town, to Sidlaghatta and to Chintamani, are where much of its newer large-format stock sits.",
     "heroImage": {
       "alt": "Warehouse exterior in Ekarajapura, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1769074726218.webp",
+      "url": "https://media.wareongo.com/webp/media_1769074726218.webp",
       "width": 1280,
       "height": 720
     },
@@ -757,7 +757,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "**Ekarajapura**, a village in Hoskote taluk off the Sidlaghatta road, holds the largest buildings on this page: big pre-engineered boxes on open land. **Sidlaghatta Road** itself is the state highway running north from Hoskote towards Sidlaghatta, and the stock sits along it and on the village roads off it. The KIADB industrial area at **Chokkahalli**, where the Chintamani road leaves the town, adds allotted estate plots with mid-sized to large sheds. Hoskote and Chokkahalli hold their own pages.",
     "marketImage": {
       "alt": "Map of Ekarajapura, Bengaluru, showing where WareOnGo's warehouse listings sit around Ekarajapura and Chokkahalli",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/ekarajapura.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/ekarajapura.webp",
       "width": 1600,
       "height": 1200
     },
@@ -801,7 +801,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Harohalli is the KIADB industrial area on Kanakapura Road, south west of the city, and it is one of the newest of Bangalore's peripheral industrial belts. It has been laid out in phases and is still filling in, which is why so much of what is available here is either a recent large box or land waiting for a build-to-suit occupier. Rates reflect the distance rather than the specification.",
     "heroImage": {
       "alt": "Warehouse exterior in Harohalli, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1775024229397.webp",
+      "url": "https://media.wareongo.com/webp/media_1775024229397.webp",
       "width": 1280,
       "height": 725
     },
@@ -809,7 +809,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The estate is the market here. **Harohalli Industrial Area Phase 3** carries most of the ready buildings, and **Bannikupe**, the village the phase sits on, prices at the same level. **Venkappanadoddi**, off the estate, is at the top of the local range. The **Kanakapura Road** frontage towards **Maralagere** and **Kaggalahalli** is where the build-to-suit parcels are, and those are a meaningful part of what is offered here.",
     "marketImage": {
       "alt": "Map of Harohalli, Bengaluru, showing where WareOnGo's warehouse listings sit around Harohalli Industrial Area Phase 3, Bannikupe and Kaggalahalli",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/harohalli.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/harohalli.webp",
       "width": 1600,
       "height": 1200
     },
@@ -853,7 +853,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Hoskote sits on NH-75 where the Old Madras Road leaves Bangalore for Kolar and Chennai, and where the road to Malur branches off it. It is the city's principal eastern warehousing belt, built out in large pre-engineered boxes on land that was agricultural a decade ago. Occupiers here run regional distribution into Andhra Pradesh and Tamil Nadu, and increasingly automotive supply into the plants further east at Narsapura and Malur.",
     "heroImage": {
       "alt": "Warehouse exterior in Hoskote, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1757936800297.webp",
+      "url": "https://media.wareongo.com/webp/media_1757936800297.webp",
       "width": 1280,
       "height": 853
     },
@@ -861,7 +861,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The belt spreads along two roads rather than clustering in one estate. **Ekarajapura**, on the Hoskote side, carries large pre-engineered space. **Koralur** and **Malur**, further out towards Kolar, are the pricier end, and Malur is where the large modern parks sit. **Nidaghatta**, off the Hoskote bypass, is the lower end of the belt and where the older independent sheds are. Soukya Road and Narsapura are on the same corridor and hold their own pages, and the Jakkasandra and Mindahalli estates further east are covered on the Narsapura page.",
     "marketImage": {
       "alt": "Map of Hoskote, Bengaluru, showing where WareOnGo's warehouse listings sit around Ekarajapura, Koralur, Malur and Nidaghatta",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/hoskote.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/hoskote.webp",
       "width": 1600,
       "height": 1200
     },
@@ -910,7 +910,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Hosur Road is NH-44 running south out of Bangalore towards Hosur, Salem and Chennai, and it is the one corridor that carries the city's manufacturing belt from end to end. The run starts at Electronic City, passes the KIADB estates at Bommasandra and Jigani, and finishes at Attibele on the Tamil Nadu border. Space along it serves electronics, pharma and auto supply chains far more than it serves retail distribution.",
     "heroImage": {
       "alt": "Warehouse exterior in Hosur Road, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/9edd62ece7bb713c1b1a8b90f440cdfa.webp",
+      "url": "https://media.wareongo.com/webp/9edd62ece7bb713c1b1a8b90f440cdfa.webp",
       "width": 1280,
       "height": 576
     },
@@ -918,7 +918,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "Price on this corridor falls as you move south, and the drop is steep. **Electronic City** is the expensive end by a distance, but that stock is small RCC commercial floorspace inside a built-up tech hub rather than warehousing, and it is what sets the ceiling. **Hebbagodi** beside it is the next step down. The KIADB estates in the middle, **Bommasandra** and **Jigani**, sit together, with **Anekal** and **CK Palya** on the same level. **Attibele** at the state border is the cheaper end.",
     "marketImage": {
       "alt": "Map of Hosur Road, Bengaluru, showing where WareOnGo's warehouse listings sit around Electronic City, Hebbagodi, Bommasandra, Jigani, Anekal, CK Palya and Attibele",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/hosur-road.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/hosur-road.webp",
       "width": 1600,
       "height": 1200
     },
@@ -962,7 +962,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "This page covers Jakkur and Yelahanka on Bangalore's north side, along Bellary Road between Hebbal and the airport. Jakkur is a residential suburb around its lake and the city's general-aviation aerodrome. Yelahanka, beyond it, is an old town with a planned new town, the Air Force Station that hosts Aero India and the Rail Wheel Factory. Space here serves the north of the city and the run to the airport, with the Thanisandra and Hennur roads linking it east towards Bagalur.",
     "heroImage": {
       "alt": "Warehouse exterior in Jakkur, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1772680881878.webp",
+      "url": "https://media.wareongo.com/webp/media_1772680881878.webp",
       "width": 1280,
       "height": 576
     },
@@ -970,7 +970,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "Stock falls into a close-in half and an outer half. **Jakkur**, around Jakkur Layout and **Sampigehalli** on the east side of Bellary Road, is small RCC space inside residential layouts and prices at the top of the page. **Yelahanka**, with **Kattigenahalli** and the KSSIDC estate in Yelahanka New Town, carries small industrial and RCC units a step lower. **Thanisandra** and **Hennur**, on the roads towards Bagalur, and the **Bagalur** side itself hold some larger sheds at in-city rates. The village roads around **Doddagubbi**, further east, carry older sheds and pre-engineered buildings at the lower end, and Bidrahalli and its neighbours hold their own page.",
     "marketImage": {
       "alt": "Map of Jakkur, Bengaluru, showing where WareOnGo's warehouse listings sit around Jakkur, Sampigehalli, Yelahanka, Kattigenahalli, Thanisandra, Hennur, Bagalur and Doddagubbi",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/jakkur.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/jakkur.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1014,7 +1014,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Jigani is a KIADB industrial estate on the south side of Bangalore, connected to Hosur Road by the Bommasandra link road and to Anekal on the other side. It grew up around pharmaceutical, engineering and electronics manufacturing rather than around distribution, and the warehousing here is mostly ancillary to that: raw material stores, finished goods holding and third-party space taken by the firms already operating in the estate.",
     "heroImage": {
       "alt": "Warehouse exterior in Jigani, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/e3a2562ae99a55492ca2f9a3bb3253b1.webp",
+      "url": "https://media.wareongo.com/webp/e3a2562ae99a55492ca2f9a3bb3253b1.webp",
       "width": 1280,
       "height": 960
     },
@@ -1022,7 +1022,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "Rents here move in a narrow band and the pockets are close together. **Jigani Industrial Area**, the allotted KIADB core, is the top of the local market. **Anekal** and **Koppa Road**, on the far side of the estate, are a step down. **APC Circle**, the junction the estate is organised around, is cheaper and is where the older independent sheds sit. **Haragadde** is the lower end. Stock on the Bommasandra link road is covered on the Bommasandra page.",
     "marketImage": {
       "alt": "Map of Jigani, Bengaluru, showing where WareOnGo's warehouse listings sit around Jigani Industrial Area, Anekal, APC Circle and Haragadde",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/jigani.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/jigani.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1066,7 +1066,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Kumbalgodu is the first industrial pocket on Mysore Road once you clear the NICE Road junction, and it is the western arc's answer to the Tumkur Road belt. The KIADB laid out an industrial area here and the rest grew around it. Units are small, the buildings are plain, and the trade is city distribution towards Kengeri and Rajarajeshwari Nagar rather than long-haul movement towards Mysuru.",
     "heroImage": {
       "alt": "Warehouse exterior in Kumbalgodu, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1765956991261.webp",
+      "url": "https://media.wareongo.com/webp/media_1765956991261.webp",
       "width": 1280,
       "height": 720
     },
@@ -1074,7 +1074,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "Everything here sits within a few kilometres of the highway. **Venkatapura**, behind the estate, is the top of the local market, with **Chikkellur** beside it. The **Kumbalgodu Industrial Area** itself, across its numbered phases, is the cheaper option, which makes the allotted land the value choice rather than the premium one. **Gudimavu**, **Ramapura** and **Gerupalya** village fill in the rest of the belt. Sheds are a larger part of this belt than of most Bangalore pockets, and with small RCC units in the estate they set the floor.",
     "marketImage": {
       "alt": "Map of Kumbalgodu, Bengaluru, showing where WareOnGo's warehouse listings sit around Venkatapura, Chikkellur, Kumbalgodu Industrial Area, Gudimavu and Gerupalya",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/kumbalgodu.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/kumbalgodu.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1118,7 +1118,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Makali is the inner end of the Tumkur Road corridor, the stretch of NH-48 between Peenya and Nelamangala. It is where the northwest belt stops being peripheral and starts being city. Units are smaller than they are further out, the buildings are older and more of them are RCC, and the trade is city distribution rather than regional hubbing. For an occupier who needs Peenya access without Peenya rent, this is the compromise.",
     "heroImage": {
       "alt": "Warehouse exterior in Makali, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1756289029933.webp",
+      "url": "https://media.wareongo.com/webp/media_1756289029933.webp",
       "width": 1280,
       "height": 960
     },
@@ -1126,7 +1126,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "Stock here strings along one road and a handful of villages behind it. **Huskur Road**, which runs off the highway, carries much of the inventory. **Dasanapura**, at the inner end, is the top of the local market, with **Harokyathanahalli** and **Heggadadevanapura** next. **Adakamaranahalli** and **Nagarur Colony**, nearer Nelamangala Town, are the lower end. The Nelamangala page covers the outer end of the corridor.",
     "marketImage": {
       "alt": "Map of Makali, Bengaluru, showing where WareOnGo's warehouse listings sit around Dasanapura, Heggadadevanapura, Adakamaranahalli and Nagarur Colony",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/makali.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/makali.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1170,7 +1170,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "This page covers the east Bangalore stretch from Marathalli on the Outer Ring Road, out along Varthur Road to Varthur and down the state highway to Sarjapura. It is a built-up residential and IT district, with the Whitefield tech parks to the north and the Sarjapur Road IT corridor to the south. Warehousing here means small in-city space for last-mile delivery, service stock and trade storage rather than distribution boxes.",
     "heroImage": {
       "alt": "Warehouse exterior in Marathalli, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1778756590850.webp",
+      "url": "https://media.wareongo.com/webp/media_1778756590850.webp",
       "width": 1280,
       "height": 725
     },
@@ -1178,7 +1178,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "Price falls as you move out from the Outer Ring Road. **Marathalli** (often spelt Marathahalli), at the junction of the Outer Ring Road and Varthur Road, is small RCC floorspace in a retail and housing belt, and it is the top of the market. The older industrial pockets nearby, the **EPIP** zone, the KSSIDC estate at **Mahadevapura** and **Doddanekundi** around **Hoodi**, hold small RCC and pre-engineered units a step down. **Varthur**, further out where Varthur Road meets the state highway, has mixed sheds and RCC space at mid rents, with **Gunjur** beside it. **Sarjapura**, a hobli of Anekal taluk at the southern end of the same highway, and **Dommasandra** on the way to it, are the value end, with some larger sheds. Whitefield holds its own page.",
     "marketImage": {
       "alt": "Map of Marathalli, Bengaluru, showing where WareOnGo's warehouse listings sit around Marathalli, EPIP, Mahadevapura, Doddanekundi, Hoodi, Varthur, Gunjur, Sarjapura and Dommasandra",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/marathalli.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/marathalli.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1222,7 +1222,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Nelamangala sits where NH-48 leaves Bangalore for Tumakuru and Mumbai, and where NH-75 branches west towards Hassan and Mangaluru. That junction is the whole reason the belt exists. It is the city's established northwest warehousing corridor, built out in large pre-engineered boxes on cheap peripheral land rather than in converted godowns, and it serves outbound distribution for Karnataka and the west coast rather than last-mile delivery into Bangalore.",
     "heroImage": {
       "alt": "Warehouse exterior in Nelamangala, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/0039ff653e9ce14848bd0b3ad28268da.webp",
+      "url": "https://media.wareongo.com/webp/0039ff653e9ce14848bd0b3ad28268da.webp",
       "width": 910,
       "height": 458
     },
@@ -1230,7 +1230,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "Stock inside the belt clusters by estate and by road. **Sompura KIADB Industrial Area**, spread over four numbered phases towards Dabaspet, is allotted industrial land, priced alongside **Srinivasapura** beside it. **Budihal**, nearer the Nelamangala toll, carries mid-size pre-engineered space. **T. Begur** is the cheaper end, and with Budihal it is where compliance paperwork appears most often on our listings. **Makali** and **Dasanapura** are the inner end of the same corridor, nearer Peenya, where units get smaller.",
     "marketImage": {
       "alt": "Map of Nelamangala, Bengaluru, showing where WareOnGo's warehouse listings sit around Srinivasapura, Budihal, T. Begur, Makali and Dasanapura",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/nelamangala.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/nelamangala.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1274,7 +1274,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Peenya is Bangalore's original industrial estate, on Tumkur Road in the city's northwest, and one of the largest industrial areas in the country. It is home to engineering, machine tool, electrical, packaging and garment units, and is served by Tumkur Road and the Green Line metro. Warehousing here is less about big boxes than about sitting next to that supplier base, with the larger modern stock further out along the same road.",
     "heroImage": {
       "alt": "Warehouse exterior in Peenya, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1756289033973.webp",
+      "url": "https://media.wareongo.com/webp/media_1756289033973.webp",
       "width": 1280,
       "height": 960
     },
@@ -1282,7 +1282,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "Stock around Peenya falls into distinct groups. **Peenya Industrial Area** itself, across its KIADB phases and the older KSSIDC estate stages, is dense RCC and shed space among engineering workshops, and it is the dearer end because it is inside the city. **Huskur Road**, off Tumkur Road towards Makali, carries more modern pre-engineered space at lower rents. **Kachohalli** and **Machohalli**, off Magadi Road near Kadabagere Cross, are older shed estates that suit storage on a budget. Further out, Makali and Nelamangala hold their own pages.",
     "marketImage": {
       "alt": "Map of Peenya, Bengaluru, showing where WareOnGo's warehouse listings sit around Peenya Industrial Area, Kachohalli and Machohalli",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/peenya.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/peenya.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1326,7 +1326,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Soukya Road is the link between Whitefield and Hoskote, and it has become the compromise address for occupiers who need to serve east Bangalore without paying Whitefield rates or accepting Hoskote's distance. The stock on it is predominantly modern pre-engineered space built in the last decade, and Fire NOC is on record here more often than on most Bangalore pages.",
     "heroImage": {
       "alt": "Warehouse exterior in Soukya Road, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1757936799357.webp",
+      "url": "https://media.wareongo.com/webp/media_1757936799357.webp",
       "width": 1280,
       "height": 853
     },
@@ -1334,7 +1334,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "This is a road rather than an estate, so the stock reads as a line rather than a cluster. **Koralur**, at the Hoskote end, is the top of the local market. **IOCL Road**, which runs off it, is the lower end. **Medahalli** and the **Anugondanahalli** hobli villages fill the stretch between them. Beyond either end the road becomes Whitefield on one side and Hoskote on the other, and both hold their own pages.",
     "marketImage": {
       "alt": "Map of Soukya Road, Bengaluru, showing where WareOnGo's warehouse listings sit around Koralur, Medahalli and Anugondanahalli",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/soukya-road.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/soukya-road.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1383,7 +1383,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "T Begur is a village on Tumkur Road beyond Nelamangala, in the stretch where Bangalore's northwest warehousing belt runs on towards Dobbaspet. Nelamangala sits where Tumkur Road meets the road to Mangalore, and the highway beyond it has filled with large pre-engineered distribution buildings. T Begur is where that stretch is at its most uniform: modern boxes on open land, a short run from the city's edge.",
     "heroImage": {
       "alt": "Warehouse exterior in T Begur, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/3a570dd09789064235a0fb28dccd4156.webp",
+      "url": "https://media.wareongo.com/webp/3a570dd09789064235a0fb28dccd4156.webp",
       "width": 1280,
       "height": 542
     },
@@ -1391,7 +1391,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The stock sits in villages strung along the highway rather than in one estate. **T Begur** itself and **Minnapura** beside it carry much of it. **Thyamagondlu** and **Talekere** nearby hold more of the same large pre-engineered space. **Billanakote**, towards Dobbaspet, and **Mahimapura** on Tumkur Road add more buildings on the same pattern. Budihal, towards Nelamangala, and Dobbaspet, further out, hold their own pages, and the planned multimodal logistics park near Dobbaspet is covered in our guide to it.",
     "marketImage": {
       "alt": "Map of T Begur, Bengaluru, showing where WareOnGo's warehouse listings sit around T Begur, Minnapura, Thyamagondlu, Talekere, Billanakote and Mahimapura",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/t-begur.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/t-begur.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1435,7 +1435,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Whitefield is east Bangalore's technology district, and warehousing here is a fringe business rather than the main event. The usable stock sits outside the built-up tech belt, on the roads running towards Hoskote and Soukya Road, where the land is still industrial. What Whitefield offers that the outer belts cannot is proximity: it is the closest storage to a dense employment and consumption catchment, which is why last-mile and e-commerce occupiers pay for it.",
     "heroImage": {
       "alt": "Warehouse exterior in Whitefield, Bengaluru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1770635865771.webp",
+      "url": "https://media.wareongo.com/webp/media_1770635865771.webp",
       "width": 1200,
       "height": 1600
     },
@@ -1443,7 +1443,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "This name covers two very different markets. **Brookfield**, inside the built-up belt, is commercial RCC floorspace and behaves like retail rather than warehousing. Everything else is peripheral and priced normally. **Cheemasandra**, **Anugondanahalli** and **Rampura** hold pre-engineered space on the Hoskote side. **Gundur** is the cheaper end. Hoskote and Soukya Road, further out, hold their own pages.",
     "marketImage": {
       "alt": "Map of Whitefield, Bengaluru, showing where WareOnGo's warehouse listings sit around Brookfield, Cheemasandra, Anugondanahalli, Rampura and Gundur",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/bengaluru/whitefield.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/bengaluru/whitefield.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1492,7 +1492,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Dadri is where the Eastern and Western Dedicated Freight Corridors meet, in Gautam Buddha Nagar east of Noida. That junction is the reason the location matters: rail-linked freight terminating here can reach both the Mumbai and the Kolkata routes without a road leg. Warehousing around it is still thin and mostly recent, built in anticipation of the corridor rather than in response to existing demand.",
     "heroImage": {
       "alt": "Warehouse exterior in Dadri, Dadri",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1762870922265.webp",
+      "url": "https://media.wareongo.com/webp/media_1762870922265.webp",
       "width": 1003,
       "height": 518
     },
@@ -1500,7 +1500,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The stock sits in villages around the town rather than in an estate. **Dhoom Kheda** and **Bairanagpur** hold recently built pre-engineered space at the top of the local market. **Dhoom Manikpur**, on the Ghaziabad side, has RCC stock. **Dadri** town itself sits in the middle. **Bisnuli**, on NH-91, is the lower end and is shed space. The spread across the market reflects how little is available rather than how uniform it is.",
     "marketImage": {
       "alt": "Map of Dadri, Dadri, showing where WareOnGo's warehouse listings sit around Dhoom Manikpur and Dadri",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/dadri/dadri.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/dadri/dadri.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1544,7 +1544,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Bamnoli and Bharthal are the village pockets on the edge of Dwarka, in south west Delhi, and they hold the closest usable storage to the airport and the Gurugram border on the Delhi side. This is urban godown space rather than warehousing: buildings are small, plots are tight, and the price reflects an address inside Delhi rather than a specification. Occupiers here are serving the city, not stocking for the region.",
     "heroImage": {
       "alt": "Warehouse exterior in Bamnoli, Delhi",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1758103375110.webp",
+      "url": "https://media.wareongo.com/webp/media_1758103375110.webp",
       "width": 1280,
       "height": 960
     },
@@ -1552,7 +1552,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "Almost all of the inventory sits at Bamnoli itself. **Firni Road**, running through it, and the **Sector 28** side towards Dwarka are the top of the local market. The **Dwarka** frontage is the cheaper end. Bharthal, next door, is covered on this page too.",
     "marketImage": {
       "alt": "Map of Bamnoli, Delhi, showing where WareOnGo's warehouse listings sit around Sector 28 and Dwarka",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/delhi/bamnoli.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/delhi/bamnoli.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1596,7 +1596,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Vazhakkulam sits on the Aluva to Perumbavoor road north east of Kochi, in the belt that serves the plywood and food processing industries of central Ernakulam. It is one of the closest concentrations of usable warehouse space to the airport and to the industrial estates along that corridor. Land here is tight and held in small parcels, which is why the buildings are modest and the rates are not.",
     "heroImage": {
       "alt": "Warehouse exterior in Vazhakkulam, Ernakulam",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/78a2440958c54c044b70294a4d756187.webp",
+      "url": "https://media.wareongo.com/webp/78a2440958c54c044b70294a4d756187.webp",
       "width": 1280,
       "height": 725
     },
@@ -1604,7 +1604,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The stock runs along one road and a few turnings off it. **Nalam Mile**, on the Aluva to Perumbavoor stretch, carries the newer pre-engineered buildings. **Nadakkavu**, off the Vazhakkulam school road, is shed space at a similar rate. **Chembarakky** is the cheaper end. **Thadiyittaparambu**, on SH-16, is the fourth pocket. With only a handful of buildings, compare individually. Much of the belt is pre-engineered and VDF flooring is common.",
     "marketImage": {
       "alt": "Map of Vazhakkulam, Ernakulam, showing where WareOnGo's warehouse listings sit around Nalam Mile, Chembarakky and Thadiyittaparambu",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/ernakulam/vazhakkulam.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/ernakulam/vazhakkulam.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1648,7 +1648,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Farukh Nagar sits between Gurugram and Jhajjar, on the road network that connects the Pataudi belt to the Delhi border. It is a working warehousing town rather than a planned estate, and what distinguishes it is paperwork: Fire NOC is recorded here far more often than on most of the micromarkets we cover. For an occupier who has been burned on compliance, that is the reason to start here.",
     "heroImage": {
       "alt": "Warehouse exterior in Farukh Nagar, Gurugram",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1763723090416.webp",
+      "url": "https://media.wareongo.com/webp/media_1763723090416.webp",
       "width": 1280,
       "height": 720
     },
@@ -1656,7 +1656,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "Everything sits within a few kilometres of the town. The **Jhajjar Road** and **Haily Mandi Road** frontages are the top of the local market and have the easiest truck access. **Sector Farukhnagar**, the planned block, sits in the middle. **Daboda**, out towards the Jhajjar boundary, is the lower end and holds one of the larger buildings. The spread between pockets is small, so the choice here is between buildings rather than between areas.",
     "marketImage": {
       "alt": "Map of Farukh Nagar, Gurugram, showing where WareOnGo's warehouse listings sit around Sector Farukhnagar",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/gurugram/farukh-nagar.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/gurugram/farukh-nagar.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1700,7 +1700,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Manesar is the industrial half of Gurugram, laid out as an IMT on NH-48 where the highway runs south west towards Jaipur. Automotive manufacturing anchors it and everything else has grown around that: component suppliers, contract logistics operators and the third-party space that serves both. It is the closest genuine industrial address to Delhi that still prices like a peripheral market.",
     "heroImage": {
       "alt": "Warehouse exterior in Manesar, Gurugram",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1760001311754.webp",
+      "url": "https://media.wareongo.com/webp/media_1760001311754.webp",
       "width": 739,
       "height": 543
     },
@@ -1708,7 +1708,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The stock sits in the villages the IMT was built over rather than inside sector plots. **Bhangrola** and **Kankrola** beside it hold most of what is available. **Hayatpur**, on the Pataudi Road side, is the cheaper edge of the belt. Space in Gurugram's built-up sectors quotes at commercial rates, so a quote at the top of the range is likely city space rather than the IMT.",
     "marketImage": {
       "alt": "Map of Manesar, Gurugram, showing where WareOnGo's warehouse listings sit around Bhangrola, Kankrola and Hayatpur",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/gurugram/manesar.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/gurugram/manesar.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1752,7 +1752,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Pataudi Road runs south west out of Gurugram towards Pataudi and Hailey Mandi, and it is where NCR's genuinely large warehouses are. Land is cheap enough here to build at scale and the highway network is close enough to make it work, which is why the grade-A developers came. If your requirement is a single box above one lakh square feet with docks to match, this is the first place to look in the region.",
     "heroImage": {
       "alt": "Warehouse exterior in Pataudi Road, Gurugram",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1761889638009.webp",
+      "url": "https://media.wareongo.com/webp/media_1761889638009.webp",
       "width": 1280,
       "height": 960
     },
@@ -1760,7 +1760,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The road is the market, and the pockets along it are villages rather than estates. **Luhari**, out towards the Jhajjar boundary, and **Khwaspur** sit at the top of the local range. The **Bilaspur to Pataudi** stretch carries the largest buildings. **Hailey Mandi**, **Tajnagar** and **Inchhapuri**, near the Hailey Mandi road, are the lower end for pre-engineered stock. **Hayatpur**, the pocket closest to Gurugram, holds mid-size units. **Fazilpur Baldi** and the side roads hold small sheds rather than warehouses.",
     "marketImage": {
       "alt": "Map of Pataudi Road, Gurugram, showing where WareOnGo's warehouse listings sit around Tajnagar, Inchhapuri and Hayatpur",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/gurugram/pataudi-road.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/gurugram/pataudi-road.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1804,7 +1804,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Sohna Road runs south from Gurugram towards Sohna and Alwar, and unlike the belts west of the city it has stayed urban. Warehousing here shares the road with offices, showrooms and residential towers, which is why it is among the priciest storage in Gurugram and why so much of it is RCC rather than shed. Occupiers take it for the drive time, not for the building.",
     "heroImage": {
       "alt": "Warehouse exterior in Sohna Road, Gurugram",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1761646472439.webp",
+      "url": "https://media.wareongo.com/webp/media_1761646472439.webp",
       "width": 1280,
       "height": 720
     },
@@ -1812,7 +1812,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The road splits into a city end and a village end. **Hero Honda Chowk** and the **Sector 71** side are the city end: RCC floorspace at commercial rates, and they set the top of this page's range. **Badshahpur** and the **Dhumaspur Road** running off it are the real warehousing market, and that is where most of the available space sits. **Sector 70A** is the lower end of the road.",
     "marketImage": {
       "alt": "Map of Sohna Road, Gurugram, showing where WareOnGo's warehouse listings sit around Sector 71, Badshahpur and Sector 70A",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/gurugram/sohna-road.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/gurugram/sohna-road.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1856,7 +1856,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Tauru Road leaves NH-48 at Bilaspur Chowk and runs south into Nuh district, and the warehousing on it is some of the most affordable large-format space within reach of Gurugram. This is a corridor built for storage rather than for manufacturing: big floorplates, generous docking and very little else. Occupiers take it when the requirement is volume and the run into the city is a secondary concern.",
     "heroImage": {
       "alt": "Warehouse exterior in Tauru Road, Gurugram",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1767772046808.webp",
+      "url": "https://media.wareongo.com/webp/media_1767772046808.webp",
       "width": 1280,
       "height": 720
     },
@@ -1864,7 +1864,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The corridor reads as a line running out from the highway. The stretch nearest **Bilaspur Khurd** carries most of the inventory. **Fatehpur**, further along, is mostly shed stock. **Sector Panchgaon**, back towards the highway, sits at the lower end of the local range, and so does the **Tauru Road** frontage itself.",
     "marketImage": {
       "alt": "Map of Tauru Road, Gurugram, showing where WareOnGo's warehouse listings sit around Bilaspur Khurd and Fatehpur",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/gurugram/tauru-road.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/gurugram/tauru-road.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1908,7 +1908,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Kelamangalam and Uddanapalli lie south of Hosur in Krishnagiri district, Tamil Nadu, on the roads that run out of Hosur towards Denkanikottai and Rayakottai. Both sit inside the planning area of the Hosur New Town Development Authority. The pull here is Hosur's industrial base: the SIPCOT estates nearer the town, and the Tata Electronics campus on the Rayakottai road side at Uddanapalli.",
     "heroImage": {
       "alt": "Warehouse exterior in Kelamangalam, Hosur",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1757319903167.webp",
+      "url": "https://media.wareongo.com/webp/media_1757319903167.webp",
       "width": 1280,
       "height": 960
     },
@@ -1916,7 +1916,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "**Kelamangalam**, a block headquarters town on the Hosur to Denkanikottai road with its own station on the Hosur to Dharmapuri line, carries most of the large pre-engineered buildings on this page. **Uddanapalli**, on the Rayakottai road side, is where Tata Electronics has its Hosur campus, and the stock here includes some of the largest boxes and build-to-suit land. **Bairamangalam** and **Kundumaranapalli**, villages in Kelamangalam block, hold more land and buildings further out.",
     "marketImage": {
       "alt": "Map of Kelamangalam, Hosur, showing where WareOnGo's warehouse listings sit around Kelamangalam, Uddanapalli, Bairamangalam and Kundumaranapalli",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/hosur/kelamangalam.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/hosur/kelamangalam.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1960,7 +1960,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Devaryamjal is the middle of Hyderabad's northern belt, on the road running between Kompally and Medchal just outside the Outer Ring Road. There is no industrial estate here and no planned layout. What there is instead is a run of independently developed pre-engineered warehouses put up on agricultural land over the last decade, built to one broad pattern and let to third-party logistics operators serving the city.",
     "heroImage": {
       "alt": "Warehouse exterior in Devaryamjal, Hyderabad",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1770895895288.webp",
+      "url": "https://media.wareongo.com/webp/media_1770895895288.webp",
       "width": 1200,
       "height": 1600
     },
@@ -1968,7 +1968,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The most useful thing to know about this belt is how little the rate moves inside it. The buildings on the Devaryamjal stretch were put up to one broad pattern, and the named pockets along it, **Pudur** and **Kandlakoya**, price in line with the stretch. **Sai Geetha Ashram Road** holds some of the better-placed stock. The **Shamirpet** side, where the belt runs out towards the Medchal mandal boundary, is further from the city. Medchal and Kompally at either end hold their own pages.",
     "marketImage": {
       "alt": "Map of Devaryamjal, Hyderabad, showing where WareOnGo's warehouse listings sit around Pudur, Kandlakoya and Shamirpet",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/hyderabad/devaryamjal.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/hyderabad/devaryamjal.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2012,7 +2012,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Kompally is the start of Hyderabad's northern warehousing belt, on NH-44 where the road leaves the city for Nagpur. It sits just beyond the Outer Ring Road, which is what makes it work: trucks reach it without entering the city, and city vans reach it without a long run out. The belt continues north through Devaryamjal to Medchal, and most of what is available carries more than one of those names.",
     "heroImage": {
       "alt": "Warehouse exterior in Kompally, Hyderabad",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/4e67cf5027a12996a80d9dbb2eb28f17.webp",
+      "url": "https://media.wareongo.com/webp/4e67cf5027a12996a80d9dbb2eb28f17.webp",
       "width": 1280,
       "height": 960
     },
@@ -2020,7 +2020,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "This is a belt rather than an estate, and the rate moves very little across it. **Kompally** proper is the pocket nearest the city and the ORR. **Kandlakoya**, a little further out, and the long **Devaryamjal** stretch carry most of the inventory. **Gosaiguda** and **Muneerabad** sit on the Medchal side, with some of the newer buildings. **Dulapally**, back towards the city on the Jeedimetla industrial side, is closer-in godown space rather than belt warehousing. Medchal and Devaryamjal hold their own pages.",
     "marketImage": {
       "alt": "Map of Kompally, Hyderabad, showing where WareOnGo's warehouse listings sit around Kompally, Kandlakoya, Devaryamjal, Gosaiguda and Dulapally",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/hyderabad/kompally.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/hyderabad/kompally.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2064,7 +2064,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Medchal is the far end of Hyderabad's northern belt, where NH-44 has left the city behind and the land is cheap enough to build big. It is the point on this corridor where warehouses stop being city godowns and start being regional hubs. The trade off is straightforward: large boxes with generous docking, in exchange for a longer run back into Hyderabad.",
     "heroImage": {
       "alt": "Warehouse exterior in Medchal, Hyderabad",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1772300995516.webp",
+      "url": "https://media.wareongo.com/webp/media_1772300995516.webp",
       "width": 1280,
       "height": 963
     },
@@ -2072,7 +2072,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "Stock here sits in villages spread across the mandal rather than along one road. **Kistapur**, nearest the highway junction, holds the newer buildings. **Pudur**, **Yellampet** and **Banda Mailaram** carry the middle of the market. **Jeedipally**, furthest out towards Kucharam, is where the lower quotes are. Kompally and Devaryamjal, back towards the city on the same belt, hold their own pages.",
     "marketImage": {
       "alt": "Map of Medchal, Hyderabad, showing where WareOnGo's warehouse listings sit around Kistapur, Pudur, Yellampet and Banda Mailaram",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/hyderabad/medchal.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/hyderabad/medchal.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2116,7 +2116,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Shamshabad is the airport belt on the south side of Hyderabad, built around Rajiv Gandhi International Airport and the NH-44 run towards Bangalore. It is the mirror image of the northern belt: a similar rate, the opposite side of the city and different traffic. Occupiers here are moving air cargo, pharmaceutical consignments and southbound freight rather than serving city retail, and the specification reflects that.",
     "heroImage": {
       "alt": "Warehouse exterior in Shamshabad, Hyderabad",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1761738795508.webp",
+      "url": "https://media.wareongo.com/webp/media_1761738795508.webp",
       "width": 1280,
       "height": 961
     },
@@ -2124,7 +2124,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The stock sits in a ring of villages around the airport rather than in one estate. **Rasheedguda** carries the largest share of it. **Kishanguda** and **Gandiguda** on the far side are closest to the terminal approaches. **Tondupally** and the **Shankarapur** road sit in between. **Maheshwaram**, furthest out on the Bangalore highway side, is where the lower quotes are found.",
     "marketImage": {
       "alt": "Map of Shamshabad, Hyderabad, showing where WareOnGo's warehouse listings sit around Rasheedguda, Kishanguda, Gandiguda, Tondupally and Maheshwaram",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/hyderabad/shamshabad.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/hyderabad/shamshabad.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2168,7 +2168,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Narsapura is the KIADB industrial area on NH-75 beyond Hoskote, in Kolar district but firmly inside Bangalore's eastern manufacturing orbit. Automotive and heavy engineering plants anchor it, and the warehousing that has followed is built to serve them: tall, large and dock-heavy. This is the furthest point east where Bangalore rates still apply, and the specification on offer is better than the distance suggests.",
     "heroImage": {
       "alt": "Warehouse exterior in Narsapura, Kolar",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/bb1fc4fdcea28e061f1a0685405aec7d.webp",
+      "url": "https://media.wareongo.com/webp/bb1fc4fdcea28e061f1a0685405aec7d.webp",
       "width": 496,
       "height": 229
     },
@@ -2176,7 +2176,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The stock sits inside three named estates rather than along a road. **Narsapura Industrial Area**, the main KIADB block, is the core. **Jakkasandra Industrial Area** next to it, where the largest boxes sit, prices slightly higher. **Mindahalli Industrial Area**, its second phase, is the value end. **Jodikrishnapura**, off the Narsapura industrial road, holds the top of the local range. The Malur and Hoskote stretch back towards the city is covered on the Hoskote page.",
     "marketImage": {
       "alt": "Map of Narsapura, Kolar, showing where WareOnGo's warehouse listings sit around Narsapura Industrial Area and Jakkasandra and Mindahalli Industrial Areas",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/kolar/narsapura.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/kolar/narsapura.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2220,7 +2220,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Dankuni, in Hooghly district across the river north-west of Kolkata, is where the city's main freight routes meet. The Durgapur Expressway and the national highway south to Chennai both begin here, Old Delhi Road runs up through it, and it is the planned eastern end of the Eastern Dedicated Freight Corridor. That has made it the warehousing gateway for goods moving between Kolkata and north India, with steel, coal, cement and manufacturing stock lining the roads out of it.",
     "heroImage": {
       "alt": "Warehouse exterior in Dankuni, Kolkata",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1757735847308.webp",
+      "url": "https://media.wareongo.com/webp/media_1757735847308.webp",
       "width": 1280,
       "height": 720
     },
@@ -2228,7 +2228,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The stock follows the roads out of Dankuni. The **Durgapur Expressway** corridor carries large pre-engineered warehouses and industrial parks. **Old Delhi Road**, running north towards **Serampore** and **Konnagar**, holds some of the largest buildings on this page, with **Bhadua** and **Mollaber** along it. **Dankuni** itself, around the town, the railway junction and the coal complex, carries most of the mid-sized units. The Howrah belt on the Mumbai road is covered on the Sankrail, Ranihati and Dhulagori pages.",
     "marketImage": {
       "alt": "Map of Dankuni, Kolkata, showing where WareOnGo's warehouse listings sit around Serampore, Konnagar, Bhadua and Dankuni",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/kolkata/dankuni.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/kolkata/dankuni.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2272,7 +2272,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Dhulagori, also written Dhulagarh, sits on the Mumbai road in Howrah district, south-west of Kolkata, beside the Sankrail food parks. Its truck terminal was the first of a chain the state planned on the city's outskirts to keep freight traffic out of Kolkata, and the area around it has grown into a warehousing, transport and cold-store belt serving traffic towards Kharagpur and Odisha.",
     "heroImage": {
       "alt": "Warehouse exterior in Dhulagori, Kolkata",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/scout_5f26deb58ee020ee82efa7757772a5ac.webp",
+      "url": "https://media.wareongo.com/webp/scout_5f26deb58ee020ee82efa7757772a5ac.webp",
       "width": 1280,
       "height": 568
     },
@@ -2280,7 +2280,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "**Dhulagarh**, around the truck terminal and the toll plaza on the highway, carries most of the stock. The **Jurjursha Road**, off the highway, holds more of the same mid-sized sheds. **Mallik Bagan**, on the Amta road to the west, adds some modern buildings. Sankrail and Ranihati hold their own pages.",
     "marketImage": {
       "alt": "Map of Dhulagori, Kolkata, showing where WareOnGo's warehouse listings sit around Dhulagarh",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/kolkata/dhulagori.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/kolkata/dhulagori.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2324,7 +2324,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Ranihati is a village in Panchla block, Howrah district, where the Amta road leaves the Mumbai road west of Kolkata. The Amta road has grown into a warehousing street of its own, with fulfilment centres and warehouse complexes around Mallik Bagan, and the state-backed Foundry Park sits further along it.",
     "heroImage": {
       "alt": "Warehouse exterior in Ranihati, Kolkata",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/scout_e30c3c8e67a1817c771bafbcaa79ff92.webp",
+      "url": "https://media.wareongo.com/webp/scout_e30c3c8e67a1817c771bafbcaa79ff92.webp",
       "width": 961,
       "height": 1280
     },
@@ -2332,7 +2332,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The stock sits along the **Amta Road** rather than on the highway. **Ranihati** itself, at the junction with the Mumbai road, carries buildings with direct highway access. **Mallik Bagan**, just north-west of it, is where most of the warehouse complexes are. **Islampur**, further along the Amta road, adds more modern sheds. Dhulagori and Sankrail, back towards the city, hold their own pages.",
     "marketImage": {
       "alt": "Map of Ranihati, Kolkata, showing where WareOnGo's warehouse listings sit around Ranihati",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/kolkata/ranihati.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/kolkata/ranihati.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2376,7 +2376,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Sankrail, in Howrah district south-west of the city, is one of Kolkata's main industrial and warehousing belts on the Mumbai road. The state's industrial development corporation has built a cluster of parks here, including the Sudha Ras and Kandua food parks and a polymer park, and the warehousing around them serves food processing, consumer goods and the traffic heading west towards Odisha and Mumbai.",
     "heroImage": {
       "alt": "Warehouse exterior in Sankrail, Kolkata",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/00cc7a21bb618f5d8bdcc86fce0e72a1.webp",
+      "url": "https://media.wareongo.com/webp/00cc7a21bb618f5d8bdcc86fce0e72a1.webp",
       "width": 1280,
       "height": 562
     },
@@ -2384,7 +2384,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The stock sits along the Mumbai road and the roads off it rather than inside the parks. **Dhulagarh**, around the truck terminal on the highway, carries much of it. **Ankurhati**, where the Makardaha road meets the highway in Domjur block, and **Domjur** beyond it hold more mid-sized sheds. The food parks at **Kandua** anchor the belt. Dhulagori and Ranihati hold their own pages.",
     "marketImage": {
       "alt": "Map of Sankrail, Kolkata, showing where WareOnGo's warehouse listings sit around Dhulagarh, Domjur and Kandua",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/kolkata/sankrail.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/kolkata/sankrail.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2430,7 +2430,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The stock is small RCC space in and around the transport district. **Transport Nagar** itself, around the transporters' offices on Kanpur Road, carries most of it. **Hind Nagar** Colony beside it adds more godown space. **Ashiyana**, towards Bangla Bazaar, holds a few more units.",
     "marketImage": {
       "alt": "Map of Transport Nagar, Lucknow, showing where WareOnGo's warehouse listings sit around Transport Nagar, Hind Nagar and Ashiyana",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/lucknow/transport-nagar.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/lucknow/transport-nagar.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2474,7 +2474,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Chakan is Pune's automotive belt, laid out as an MIDC estate in phases on the Pune to Nashik highway north of the city. Vehicle assembly and component manufacturing built it and still drive it, so the warehousing here is largely ancillary: inbound parts stores, finished goods holding and contract logistics space taken by suppliers who need to be inside the cluster rather than near it.",
     "heroImage": {
       "alt": "Warehouse exterior in Chakan, Pune",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1765004953234.webp",
+      "url": "https://media.wareongo.com/webp/media_1765004953234.webp",
       "width": 1280,
       "height": 720
     },
@@ -2482,7 +2482,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "The belt spreads across the villages the MIDC phases were built over. **Bhamboli** and **Nighoje**, on the newer side of the estate, are the top of the local market. **Mahalunge**, near the HK chowk, also quotes high and holds one of the larger buildings. **Vasuli** and **Chimbli Phata**, the junction the belt is organised around, carry the middle of the market. **Kharabwadi** in Khed taluka is the older end. Lonikand, towards Wagholi, is a different belt and is covered on the Wagholi page.",
     "marketImage": {
       "alt": "Map of Chakan, Pune, showing where WareOnGo's warehouse listings sit around Bhamboli, Mahalunge, Vasuli, Chimbli Phata and Kharabwadi",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/pune/chakan.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/pune/chakan.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2526,7 +2526,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Kuruli is a village on the Pune to Nashik highway inside the Chakan industrial belt, north of the main MIDC phases. It is where the estate runs out and agricultural land begins, which is why the buildings here are newer and the plots larger than they are closer in. Occupiers take it when they want to be in the Chakan cluster without paying for a position inside it.",
     "heroImage": {
       "alt": "Warehouse exterior in Kuruli, Pune",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/scout_57a89ec399f5e03dfa70997c06acf9f7.webp",
+      "url": "https://media.wareongo.com/webp/scout_57a89ec399f5e03dfa70997c06acf9f7.webp",
       "width": 1280,
       "height": 720
     },
@@ -2534,7 +2534,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "This is the northern edge of the Chakan belt rather than a market of its own, and the stock reads that way. **Kuruli** village itself is the top of the local market, apart from a unit at the **Pimpri-Chinchwad** end that quotes city rates. **Chimbli Phata**, the junction back towards the MIDC phases, sits in the middle. The Chakan page covers the main estate, and many listings appear on both.",
     "marketImage": {
       "alt": "Map of Kuruli, Pune, showing where WareOnGo's warehouse listings sit around Pimpri-Chinchwad and Chimbli Phata",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/pune/kuruli.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/pune/kuruli.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2578,7 +2578,7 @@ export const micromarkets: MicromarketContent[] = [
     "heroProse": "Wagholi is on Nagar Road, the eastern exit from Pune towards Ahmednagar, and it is the city's traditional godown belt. This is not planned industrial land: it is shed space put up on the highway frontage over decades and let to distributors serving eastern Pune. What it offers is a short run into the city, at a rate that reflects the age of the buildings.",
     "heroImage": {
       "alt": "Warehouse exterior in Wagholi, Pune",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1774242930309.webp",
+      "url": "https://media.wareongo.com/webp/media_1774242930309.webp",
       "width": 1280,
       "height": 960
     },
@@ -2586,7 +2586,7 @@ export const micromarkets: MicromarketContent[] = [
     "marketProse": "Two pockets carry almost all of it. **Wagholi** itself, along the Nagar Road frontage, and **Lonikand**, a few kilometres further out, price close to each other. **Kesan village** on the Jogeshwari Road, in Haveli taluka, is the top of the local market. The rate barely moves between them, so the choice is between individual buildings rather than between areas. Most of the buildings across both pockets are sheds rather than pre-engineered structures.",
     "marketImage": {
       "alt": "Map of Wagholi, Pune, showing where WareOnGo's warehouse listings sit around Wagholi and Lonikand",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/micromarket/pune/wagholi.webp",
+      "url": "https://media.wareongo.com/locations/maps/micromarket/pune/wagholi.webp",
       "width": 1600,
       "height": 1200
     },

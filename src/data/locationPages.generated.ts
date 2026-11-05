@@ -16,7 +16,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Ahmedabad is one of the most affordable major warehousing markets in India, and the reason is competition between belts rather than weak demand. Several distinct corridors ring the city, all pricing close to one another. That makes road direction and build type the real decision here. This page sets out what each belt carries.",
     "heroImage": {
       "alt": "Aerial view of Ahmedabad along the Sabarmati River",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/ahmedabad.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/ahmedabad.webp",
       "width": 1600,
       "height": 1200
     },
@@ -24,7 +24,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Ahmedabad sits at the junction of NH-48 running to Mumbai and the arm running west to **Sanand** and the Kutch ports. Warehousing developed on both: south on NH-48 through **Aslali** and **Narol**, west through **Sarkhej**, **Changodar** and Sanand, and on the eastern road towards **Kheda** and Nadiad as well. Because industrial land around Ahmedabad is plentiful and GIDC estates are numerous, no single belt has ever been able to corner supply. The result is a mid-format market with an unusually even distribution and very little of the small-unit premium that distorts other cities. Occupiers here are staging goods for the Gujarat corridor, serving the Sanand manufacturing cluster or feeding the ports.",
     "marketImage": {
       "alt": "Map of Ahmedabad marking its warehousing micromarkets: Sanand, Aslali, Narol, Sarkhej, Changodar, Kheda and Pirana",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/ahmedabad.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/ahmedabad.webp",
       "width": 1600,
       "height": 1200
     },
@@ -69,7 +69,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Aurangabad, or Chhatrapati Sambhajinagar, is Marathwada's industrial centre, and its warehousing sits around the MIDC estates that serve its automotive and manufacturing industries. The stock we list is entirely pre-engineered, from small units to large boxes. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Bibi Ka Maqbara in Aurangabad under a blue sky",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/aurangabad.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/aurangabad.webp",
       "width": 1328,
       "height": 1300
     },
@@ -77,7 +77,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Aurangabad's warehousing follows its industry, which is built around automotive and engineering plants in two large MIDC estates. **Waluj** MIDC, on the Pune and Ahmednagar road west of the city, is the older and larger hub, with **Patoda** and **Dahegaon Bangla** beyond it. **Shendra** MIDC, on the Jalna road east of the city, holds newer plants, and next to it **AURIC**, the industrial city on the Delhi to Mumbai Industrial Corridor, is being built out towards **Bidkin**. Demand is industrial supply plus distribution for the Marathwada region.",
     "marketImage": {
       "alt": "Map of Aurangabad marking its warehousing micromarkets: Waluj, Patoda, Dahegaon Bangla, Shendra, AURIC and Bidkin",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/aurangabad.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/aurangabad.webp",
       "width": 1600,
       "height": 1200
     },
@@ -124,7 +124,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Ballari's warehousing follows its industries: iron ore and steel to the west, and cotton and agricultural trade in the city. The main organised stock is in the **Mundargi Industrial Area**, a KIADB estate developed in phases on the city's south side. Older sheds sit along **Bangalore Road** near **Cowl Bazaar** and on the **Kanekal Road** and **Andral Road** side, often in former mill and trading compounds. Demand is local trade, mining and steel supply rather than long-haul distribution.",
     "marketImage": {
       "alt": "Map of Ballari marking its warehousing micromarkets: Mundargi Industrial Area and Bangalore Road / Cowl Bazaar / Kanekal Road / Andral Road",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/ballari.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/ballari.webp",
       "width": 1600,
       "height": 1200
     },
@@ -174,7 +174,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Bangalore (Bengaluru) is one of the deepest warehousing markets in south India and one of the most spread out. Stock sits on several distinct belts, each with its own rate, its own typical unit size and its own reason for existing. A rate quoted without a belt attached to it means very little here. This page sets out where the stock actually is and what shapes its price.",
     "heroImage": {
       "alt": "Bengaluru city skyline lit up at dusk",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/bengaluru.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/bengaluru.webp",
       "width": 1600,
       "height": 1204
     },
@@ -182,7 +182,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Bangalore has no single warehousing corridor because it has no single direction of demand. The northwest along Tumkur Road, through **Nelamangala** and out to **Dobbaspet**, serves the Mumbai and Pune line and holds some of the largest units. The south along Hosur Road, through **Bommasandra** and **Jigani**, runs into the Tamil Nadu manufacturing belt. The east along Old Madras Road, through **Hoskote**, heads for Chennai. The north around **Devanahalli** follows the airport. Each belt developed for a different reason and prices differently as a result. The other thing to understand is the split between industrial stock and city stock. Most spaces sit on a named belt; the remainder is inner-city godown and commercial space, which is much smaller, much more expensive per square foot and does a completely different job.",
     "marketImage": {
       "alt": "Map of Bengaluru marking its warehousing micromarkets: Nelamangala, Dobbaspet, Bommasandra, Jigani, Hoskote, Devanahalli, Whitefield, Hosur Road, Peenya, Bidrahalli, Budigere, Cheemasandra, Rampura, Marathalli, Sarjapura, Varthur, Jakkur, Yelahanka, Begur, Bommanahalli, HSR, Kudlu Gate, Makali, T Begur, Budihal, Kumbalgodu, Soukya Road, Attibele, Bannerghatta, Ekarajapura, Sidlaghatta Road, Dasanapura, Harohalli, Kanakapura Road, Chokkahalli and Bidadi",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/bengaluru.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/bengaluru.webp",
       "width": 1600,
       "height": 1200
     },
@@ -239,7 +239,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Bhiwadi sits on the Haryana and Rajasthan border, next to **Dharuhera**, and its warehousing serves both NCR distribution and the factories in its RIICO industrial areas. The **Bhiwadi** estates hold most of the stock. Further south-west on the Delhi to Jaipur highway, **Ghiloth**, a large RIICO industrial area near **Neemrana**, carries newer large units. Demand is NCR distribution at a distance from Gurugram, plus supply for the auto, electronics and manufacturing plants along the corridor.",
     "marketImage": {
       "alt": "Map of Bhiwadi marking its warehousing micromarkets: Dharuhera, Bhiwadi, Ghiloth and Neemrana",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/bhiwadi.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/bhiwadi.webp",
       "width": 1600,
       "height": 1200
     },
@@ -286,7 +286,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Bhiwandi exists as a warehousing market for one reason: it is the closest place to Mumbai where large-format storage on cheap land was ever possible. Everything else follows from that. The stock is large, it is dense, and it grew organically on private agricultural land over decades rather than being planned into industrial estates. The internal geography runs along the **Mumbai-Nashik highway**, the Kalyan road through **Mankoli**, the **Kasheli** and **Sonale** pocket, and **Yewai** and **Sape Road** further out. These are not separate markets in the way Bangalore's belts are; they are neighbourhoods of one market, and their rates sit close together.",
     "marketImage": {
       "alt": "Map of Bhiwandi marking its warehousing micromarkets: Mumbai-Nashik highway, Mankoli, Kasheli, Sonale, Yewai and Sape Road",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/bhiwandi.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/bhiwandi.webp",
       "width": 1600,
       "height": 1200
     },
@@ -331,7 +331,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Bhopal is Madhya Pradesh's capital and a central distribution point for the state, and its warehousing sits on the highways around the city and towards the Mandideep industrial area. Most of the stock is pre-engineered, with mid-size to large units. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Boats on the Upper Lake in Bhopal with the city behind",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/bhopal.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/bhopal.webp",
       "width": 1600,
       "height": 1066
     },
@@ -339,7 +339,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Bhopal's warehousing sits on the roads out of the city. South-east, **Mandideep**, one of Madhya Pradesh's largest industrial areas, and **Nanakhedi** beyond it hold industrial and distribution stock. To the east, **Sukhi Sewaniya** on the Vidisha road and **Bhikiriya Kalan** on the Raisen side carry newer pre-engineered units. On the north-west side, **Kurana** and **Parewa Kheda** serve the roads towards Berasia and Indore. Demand is state-wide distribution from the capital, plus supply to Mandideep's industry.",
     "marketImage": {
       "alt": "Map of Bhopal marking its warehousing micromarkets: Mandideep, Nanakhedi, Sukhi Sewaniya, Bhikiriya Kalan, Kurana and Parewa Kheda",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/bhopal.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/bhopal.webp",
       "width": 1600,
       "height": 1200
     },
@@ -384,7 +384,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Bhubaneswar is Odisha's distribution centre, with its twin city Cuttack, and its warehousing sits on the highway belts around the capital. Units are mostly mid-size, and the stock mixes conventional sheds with pre-engineered buildings and RCC, so specification varies building by building. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Aerial view of Bhubaneswar with buildings and green cover",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/bhubaneswar.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/bhubaneswar.webp",
       "width": 1600,
       "height": 1066
     },
@@ -392,7 +392,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Bhubaneswar's warehousing follows the national highway that runs through the capital towards Cuttack and Kolkata to the north and Chennai to the south. **Janla** and its industrial area, on the southern side towards **Khordha**, carry a large share. **Tangi** and the stretch towards the **Manguli** toll on the Cuttack side serve the northern arm. **Pitapalli** and **Rudrapur** fill in around the city's edge. Demand is state-wide consumer and trade distribution rather than port or heavy industry, and the stock is a mix of sheds, pre-engineered buildings and some RCC.",
     "marketImage": {
       "alt": "Map of Bhubaneswar marking its warehousing micromarkets: Janla, Khordha, Tangi, Manguli, Pitapalli and Rudrapur",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/bhubaneswar.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/bhubaneswar.webp",
       "width": 1600,
       "height": 1200
     },
@@ -437,7 +437,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Chennai's warehousing runs along two arms out of the city: north on NH-16 through Red Hills towards Gummidipoondi, and west on NH-48 through Sriperumbudur and Oragadam. They carry similar rates and very different unit sizes, which makes the choice between them a question of road direction and floor area rather than price. This page sets out which one suits which requirement.",
     "heroImage": {
       "alt": "Aerial view of Chennai with the coastline behind",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/chennai.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/chennai.webp",
       "width": 1600,
       "height": 1066
     },
@@ -445,7 +445,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Chennai is a port and manufacturing city, and its warehousing followed both. The northern belt grew on the Kolkata highway, through **Red Hills** and **Sholavaram** and around the **Ennore** and **Manali** industrial area, and it carries the larger units. The western arm grew around the automotive cluster at **Sriperumbudur** and **Oragadam**, where SIPCOT parks anchor the stock. The inner-west pocket at **Ambattur** is older industrial estate land carrying small units. Construction is predominantly pre-engineered, with a larger share of conventional sheds than most large markets, which reflects how much of the older belt stock predates purpose-built distribution.",
     "marketImage": {
       "alt": "Map of Chennai marking its warehousing micromarkets: Red Hills, Sholavaram, Ennore, Manali, Sriperumbudur, Oragadam and Ambattur",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/chennai.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/chennai.webp",
       "width": 1600,
       "height": 1200
     },
@@ -490,7 +490,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Coimbatore is the manufacturing and textile centre of western Tamil Nadu, and its warehousing serves engineering, textile and consumer distribution across the western districts and into Kerala. The stock is mid-size and mostly pre-engineered, with a meaningful share of sheds, and rates are affordable by metro standards. This page sets out where it sits and what to check.",
     "heroImage": {
       "alt": "Cross Cut Road, a busy commercial street in Coimbatore",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/coimbatore.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/coimbatore.webp",
       "width": 1600,
       "height": 1068
     },
@@ -498,7 +498,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Coimbatore's warehousing sits on the eastern and southern edges of the city, on the roads towards Tiruppur, Salem and the Kerala border. **Neelambur** and **Sulur**, on the eastern side along the Salem to Kochi highway, carry a large share. **Palladam** and the Palladam road serve the Tiruppur textile belt. **Chettipalayam Road**, **Malumichampatti** and **Panikkampatti** to the south carry mid-size stock. **Kalapatti** and **Peelamedu** sit closer to the city and the airport. Demand is manufacturing supply and regional distribution rather than port, which is why units are mid-size and the stock mostly pre-engineered.",
     "marketImage": {
       "alt": "Map of Coimbatore marking its warehousing micromarkets: Neelambur, Sulur, Palladam, Chettipalayam Road / Panikkampatti, Malumichampatti, Kalapatti and Peelamedu",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/coimbatore.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/coimbatore.webp",
       "width": 1600,
       "height": 1200
     },
@@ -543,7 +543,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Cuttack is Odisha's commercial capital and Bhubaneswar's twin city, and its warehousing sits on the highway north of the Mahanadi towards Kolkata. The stock we list is entirely pre-engineered, from mid-size units to large boxes. This page sets out where the stock sits and what to check.\n\nPhoto: souravdas, BY 2.0, via https://www.flickr.com/photos/23531860@N00/2710356277",
     "heroImage": {
       "alt": "Cuttack Collectorate beside the Mahanadi river",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/cuttack.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/cuttack.webp",
       "width": 1024,
       "height": 768
     },
@@ -551,7 +551,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Cuttack's warehousing sits north of the city, on the national highway towards Kolkata and Paradip port. **Alarpur**, near Nergundi railway station, holds a cluster of pre-engineered units. **Choudwar**, across the Mahanadi, has an industrial estate with large units. **Bainchua** and **Tangi** carry more stock on the highway. Demand is state-wide trade and distribution, shared with **Bhubaneswar**, plus port-linked freight towards Paradip.",
     "marketImage": {
       "alt": "Map of Cuttack marking its warehousing micromarkets: Alarpur, Choudwar, Bainchua, Tangi and Bhubaneswar",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/cuttack.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/cuttack.webp",
       "width": 1600,
       "height": 1200
     },
@@ -596,7 +596,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Delhi inside its own city limits is a small-format market and should not be compared with the NCR ring around it. Most units are small, and the rate reflects city land rather than warehousing economics. What Delhi offers is proximity: the only storage actually inside the city, for last-mile and wholesale occupiers who need it. This page covers Delhi proper.",
     "heroImage": {
       "alt": "India Gate in New Delhi silhouetted at sunset",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/delhi.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/delhi.webp",
       "width": 1600,
       "height": 1066
     },
@@ -604,7 +604,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "There is very little purpose-built warehousing inside Delhi, and that is unlikely to change. Land is expensive, the Master Plan limits where storage can go, and the large-format demand moved to Gurugram, Ghaziabad and Dadri long ago. What remains inside the city is last-mile space: godowns, converted units and a handful of larger buildings on the edges, at **Bamnoli** and **Bharthal** near Dwarka in the southwest, **Mundka** on Rohtak Road in the west, **Alipur** on GT Karnal Road in the north, and the villages of **south Delhi**. This is a converted market rather than a built one, with a mixed stock of pre-engineered buildings, sheds and RCC, and it prices as city space.",
     "marketImage": {
       "alt": "Map of Delhi marking its warehousing micromarkets: Bamnoli, Bharthal, Mundka and Alipur",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/delhi.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/delhi.webp",
       "width": 1600,
       "height": 1200
     },
@@ -651,7 +651,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Dharuhera, in Rewari district, is a stop on the Delhi to Jaipur corridor that runs south-west from **Gurugram** through **Manesar**. Its industrial area holds factories and warehouses, and the highway belt around it carries large distribution units. Across the Rajasthan border, **Bhiwadi** continues the same market. Demand is NCR distribution at a distance from Gurugram, plus supply for the auto and manufacturing plants along the corridor.",
     "marketImage": {
       "alt": "Map of Dharuhera marking its warehousing micromarkets: Gurugram, Manesar and Bhiwadi",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/dharuhera.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/dharuhera.webp",
       "width": 1600,
       "height": 1200
     },
@@ -696,7 +696,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Dharwad district, with the twin cities of Dharwad and Hubli, or Hubballi, is north Karnataka's distribution centre, and our Dharwad listings sit in its industrial areas and along the Pune to Bangalore highway. Most of the stock is pre-engineered, with conventional sheds making up much of the rest. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Karnatak University clock tower in Dharwad",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/dharwad.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/dharwad.webp",
       "width": 1600,
       "height": 1200
     },
@@ -704,7 +704,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Dharwad district's warehousing follows the national highway between Pune and Bangalore, which runs past both Dharwad and Hubli. On the Dharwad side, **Belur Industrial Area** and **Kotur** hold larger pre-engineered units on the highway. Around Hubli, the KIADB estate at **Gamanagatti** and the **Tarihal Industrial Area** carry organised industrial stock. South of the city, **Kotgondhunsi** on the highway and the Kundgol road is where newer logistics parks have come up, with **Gabbur** and **Narayanapura** close by. Demand is regional distribution and trade across north Karnataka, and the stock is mostly pre-engineered, built for that.",
     "marketImage": {
       "alt": "Map of Dharwad marking its warehousing micromarkets: Belur Industrial Area, Kotur, Gamanagatti, Tarihal Industrial Area, Kotgondhunsi / Narayanapura and Gabbur",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/dharwad.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/dharwad.webp",
       "width": 1600,
       "height": 1200
     },
@@ -749,7 +749,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Ghaziabad is the eastern arm of NCR warehousing and one of the most affordable ways into the region from the Delhi side. Several belts ring the city, the rate spread across them is narrow, and the stock is predominantly pre-engineered. That makes it the value option in NCR for mid-size requirements. This page sets out which belt carries what.",
     "heroImage": {
       "alt": "Electric locomotive at a railway platform in Ghaziabad",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/ghaziabad.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/ghaziabad.webp",
       "width": 1024,
       "height": 768
     },
@@ -757,7 +757,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Ghaziabad's warehousing runs along three roads out of the city and one industrial estate inside it. The eastern arm towards **Dadri** and **Jindal Nagar** carries the deepest inventory and connects to the Eastern Peripheral Expressway and the dedicated freight corridor. The northern arm on the **Meerut Road** serves the western UP trade. **Sahibabad** is the old industrial estate. **Loni** and **Bhopura** sit on the western edge against Delhi. Ghaziabad sits between Delhi and Gurugram on price and closer to Gurugram on stock quality, which is why so much mid-size NCR demand ends up here.",
     "marketImage": {
       "alt": "Map of Ghaziabad marking its warehousing micromarkets: Dadri, Jindal Nagar, Meerut Road, Sahibabad, Loni, Bhopura and Noida",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/ghaziabad.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/ghaziabad.webp",
       "width": 1600,
       "height": 1200
     },
@@ -802,7 +802,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Guntur is one of India's largest chilli and agricultural trading centres, and its warehousing serves that trade from the national highway around the city, a short run from Vijayawada. Most of the stock is pre-engineered, with some conventional sheds. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Guntur is picturesque; and productive",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/blogs/guntur-10b646e8480f85f9.webp",
+      "url": "https://media.wareongo.com/blogs/guntur-10b646e8480f85f9.webp",
       "width": 636,
       "height": 358
     },
@@ -810,7 +810,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Guntur's warehousing serves agricultural trade, with chilli, cotton and tobacco at its centre, and regional distribution in the capital region near **Vijayawada**. The national highway between Chennai and Kolkata runs past the city, and the stock sits around it. South-west of the city, **Pericherla** and **Pulladigunta** on the highway towards Chilakaluripet hold pre-engineered units, and more stock sits on the city's edges along the highway. Demand is agricultural storage and distribution for the Guntur and Krishna districts.",
     "marketImage": {
       "alt": "Map of Guntur marking its warehousing micromarkets: Vijayawada and Pericherla / Pulladigunta",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/guntur.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/guntur.webp",
       "width": 1600,
       "height": 1200
     },
@@ -860,7 +860,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Gurugram holds some of the deepest large-format warehousing inventory in north India. Much of its stock is large, and the rate barely moves as units get bigger, which makes it one of the few markets where taking the larger box costs little extra per square foot. This page sets out which belt carries what, and what Haryana's land use rules mean for each.",
     "heroImage": {
       "alt": "Aerial view of Gurugram with a wide road through green cover",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/gurugram.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/gurugram.webp",
       "width": 1600,
       "height": 1200
     },
@@ -868,7 +868,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Gurugram's warehousing is not really in Gurugram. It sits on the arc of villages and industrial land west and south of the city, along **Pataudi Road**, around **Farukhnagar**, out towards **Bilaspur** and **Tauru**, and down the **Sohna Road** periphery, with **Manesar** as the planned industrial township. The city's own sectors carry very little storage stock, and what they do carry is small and expensive. That arc exists because it is where agricultural land could be converted and where the KMP Expressway and NH-48 meet. The result is a purpose-built market: predominantly pre-engineered, large-format stock serving distribution into Delhi, Haryana and the north.",
     "marketImage": {
       "alt": "Map of Gurugram marking its warehousing micromarkets: Pataudi Road, Farukh Nagar, Bilaspur, Tauru Road, Sohna Road, Manesar and Kherki Dhaula",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/gurugram.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/gurugram.webp",
       "width": 1600,
       "height": 1200
     },
@@ -913,7 +913,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Guwahati is the distribution gateway to the whole of North-East India, and its warehousing sits on the highways that lead out of the city on both banks of the Brahmaputra. The stock we list is entirely pre-engineered, and units run up to large distribution boxes. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Guwahati at night with light trails on a city road",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/guwahati.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/guwahati.webp",
       "width": 1600,
       "height": 1066
     },
@@ -921,7 +921,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Guwahati is where freight for the North-East is broken down and sent on, so its warehousing follows the highways out of the city. On the north bank, **Changsari** and the **Amingaon** side, across the Brahmaputra on the highway towards Baihata, hold logistics parks and large distribution units. In the south-west, **Azara** near the airport and **Pamohi** on the city's edge carry pharmaceutical and parcel networks. To the east, **Khanapara** on the road to Meghalaya serves that state. Some larger units sit further out, towards **Madanpur** and Darrang district. Demand is regional distribution for the North-East, and the stock is modern and pre-engineered.",
     "marketImage": {
       "alt": "Map of Guwahati marking its warehousing micromarkets: Changsari, Amingaon, Azara, Pamohi, Khanapara and Madanpur",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/guwahati.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/guwahati.webp",
       "width": 1600,
       "height": 1200
     },
@@ -966,7 +966,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Hosur is a large-format market attached to Bangalore and administered by Tamil Nadu. Much of its stock is large, purpose-built and high-roofed, which is why it competes for requirements that would otherwise go to Bangalore or Chennai. The catch is the state border: approvals, fire clearance and stamp duty all follow Tamil Nadu's rules. This page sets out what that stock is.",
     "heroImage": {
       "alt": "Aerial view of fields and a river near Hosur at sunset",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/hosur.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/hosur.webp",
       "width": 1600,
       "height": 1066
     },
@@ -974,7 +974,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Hosur sits on NH-44 an hour south of Bangalore, on the Tamil Nadu side of the border. It grew as a manufacturing town around SIPCOT, and its warehousing grew to serve those factories and their suppliers. That origin explains the stock: large, purpose-built, high-roofed and predominantly pre-engineered. The main belts are **Kelamangalam** and **Uddanapalli** to the southeast, **Bagalur** towards the Bangalore side, the **Hosur-Malur Road** with some of the largest units, and **Thally Road** with the smaller stock. For an occupier whose network runs through Karnataka but who can accept a Tamil Nadu address and approval route, Hosur is often the better answer at scale.",
     "marketImage": {
       "alt": "Map of Hosur marking its warehousing micromarkets: Kelamangalam, Uddanapalli, Bagalur, Hosur-Malur Road and Thally Road",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/hosur.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/hosur.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1019,7 +1019,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Hubli is north Karnataka's trading and distribution centre, on the Pune to Bangalore highway, and its warehousing serves that region rather than the Bangalore metro. Units are small to mid-size, and the stock mixes pre-engineered buildings with RCC and sheds, so specification varies building by building. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Vande Bharat train running through hills near Hubballi",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/hubli.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/hubli.webp",
       "width": 1600,
       "height": 895
     },
@@ -1027,7 +1027,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Hubli, with Dharwad, is the commercial centre of north Karnataka, and it sits on the national highway between Pune and Bangalore. Its warehousing serves trade and distribution across the region. Stock sits around **Gokul Road** and the city's industrial pockets, with **Adargunchi** and **Narayanapura** on the city's edges. Demand is regional trade rather than port or metro consumption, and units are small to mid-size, in a mix of pre-engineered buildings, RCC and conventional sheds.",
     "marketImage": {
       "alt": "Map of Hubli marking its warehousing micromarkets: Gokul Road, Adargunchi and Narayanapura",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/hubli.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/hubli.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1072,7 +1072,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Hyderabad is one of the most consistent large warehousing markets in the country. Its industrial stock is predominantly purpose-built, the rates across its main belts sit close together, and units are large for a city market. For an occupier that makes the choice unusually simple: pick the belt that suits your road access and compare buildings. This page sets out where that stock is and what it costs.",
     "heroImage": {
       "alt": "Hyderabad skyline of glass towers beside a flyover",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/hyderabad.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/hyderabad.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1080,7 +1080,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Hyderabad's warehousing grew along two axes: NH-44 running north towards Nagpur, and the airport corridor running south. The northern arm through **Medchal**, **Devaryamjal** and **Kompally** carries most of the inventory and many of the biggest units, just beyond the Outer Ring Road where trucks avoid the city. The southern arm through **Shamshabad** serves air freight and the pharmaceutical cluster. There is a third, much smaller belt west towards **Patancheru** on the Mumbai highway. What makes Hyderabad unusual is uniformity. The belts trade close to one another, and the stock is predominantly pre-engineered and built for the purpose, so an occupier here is choosing between belts on road access more than on price or grade.",
     "marketImage": {
       "alt": "Map of Hyderabad marking its warehousing micromarkets: Medchal, Devaryamjal / Kompally, Shamshabad and Patancheru",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/hyderabad.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/hyderabad.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1133,7 +1133,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Indore is central India's distribution hub, and its warehousing clusters where the Agra to Bombay Road leaves the city towards Dewas. Units are small to mid-size, the stock mixes pre-engineered buildings with a meaningful share of RCC, and rates are among the most affordable of the cities we cover. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Indore skyline at sunset",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/indore.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/indore.webp",
       "width": 1600,
       "height": 1066
     },
@@ -1141,7 +1141,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Indore sits at the centre of India's road network, which is why so much FMCG, pharma and e-commerce distribution for Madhya Pradesh runs through it. Warehousing concentrates on the northeastern exit along the **AB Road**, around **Dewas Naka**, **Lasudia Mori** and **Mangliya**, and further out at **Dakachiya**, where purpose-built logistics parks have come up. The **Loha Mandi** area carries older trade godowns closer to the city. Most stock is mid-size and built for regional distribution rather than for manufacturing, and the logistics parks are where the newer pre-engineered buildings sit.",
     "marketImage": {
       "alt": "Map of Indore marking its warehousing micromarkets: AB Road, Dewas Naka / Loha Mandi, Lasudia Mori, Mangliya and Dakachiya",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/indore.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/indore.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1186,7 +1186,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Jaipur is a mid-size, predominantly pre-engineered warehousing market serving Rajasthan and the Delhi to Mumbai trade that passes through it. Most units are small to mid-size and rates sit in a narrow band, so the decision here is about which approach road suits your freight rather than about price. This page sets out where the stock sits and what to check before you sign.",
     "heroImage": {
       "alt": "Panorama of Jaipur at sunset",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/jaipur.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/jaipur.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1194,7 +1194,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Jaipur's warehousing sits on the roads out of the city rather than in one cluster. **Ajmer Road** and the stretch of the **Ring Road** around **Bhankrota** carry the largest share, on the route west and south towards Ajmer and Gujarat. The older industrial areas, **Vishwakarma Industrial Area (VKIA)** on Sikar Road and the estates at **Sitapur** and **Sanganer** off Tonk Road, hold the established stock. **Delhi Road** and **Niwaru Road** serve the northern side. Demand is regional distribution and trade across Rajasthan rather than port or heavy manufacturing, and the stock reflects it: predominantly pre-engineered, mostly mid-size, and built for distribution.",
     "marketImage": {
       "alt": "Map of Jaipur marking its warehousing micromarkets: Ajmer Road, Bhankrota, Vishwakarma Industrial Area (VKIA), Sitapur, Sanganer, Delhi Road and Niwaru Road",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/jaipur.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/jaipur.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1241,7 +1241,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Jamshedpur's warehousing grew around Tata Steel and Tata Motors and the suppliers that serve them. **Adityapur**, the large industrial area across the Kharkai river, holds the established industrial stock. On the eastern side, **Bhilai Pahari** and **Palashbani** carry newer pre-engineered units on the roads out of the city. To the north-west, **Chandil** on the highway towards Ranchi holds larger units. Demand is industrial supply for the steel and auto belt, plus distribution for the Kolhan region.",
     "marketImage": {
       "alt": "Map of Jamshedpur marking its warehousing micromarkets: Adityapur, Bhilai Pahari, Palashbani and Chandil",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/jamshedpur.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/jamshedpur.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1286,7 +1286,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Jodhpur is western Rajasthan's trading and industrial centre, known for handicrafts, furniture and guar exports, and its warehousing sits in the RIICO industrial areas on the city's southern side. The stock we list is entirely pre-engineered, in mid-size units. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Mehrangarh Fort above the blue city of Jodhpur",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/jodhpur.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/jodhpur.webp",
       "width": 1600,
       "height": 1066
     },
@@ -1294,7 +1294,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Jodhpur's warehousing sits in its RIICO industrial areas, which run along the city's southern edge. **Basni**, the older industrial area, holds established stock close to the city, with **Tanawada** beside it. Further south, **Boranada** is the larger and newer RIICO estate, on the road towards Pali and Gujarat. Demand is export storage for handicrafts, furniture and guar, plus distribution across western Rajasthan.",
     "marketImage": {
       "alt": "Map of Jodhpur marking its warehousing micromarkets: Basni, Tanawada and Boranada",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/jodhpur.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/jodhpur.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1341,7 +1341,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Kanpur's warehousing follows its industry. The **Panki** industrial area on the city's western side is the largest estate, and the highway west through **Bhauti** to **Rania**, in Kanpur Dehat, carries newer pre-engineered units. On the eastern side, **Jajmau** is the leather and tanning hub, with older godowns. Smaller units sit in the city's industrial pockets, such as **Ispat Nagar**. Demand is industrial supply plus distribution across central Uttar Pradesh.",
     "marketImage": {
       "alt": "Map of Kanpur marking its warehousing micromarkets: Panki, Bhauti, Rania, Jajmau and Ispat Nagar",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/kanpur.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/kanpur.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1386,7 +1386,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Karnal sits on the GT Road between Delhi and Ambala, in Haryana's rice belt, and its warehousing serves agricultural trade and distribution along the highway. The stock we list mixes pre-engineered buildings with RCC godowns. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "AI Image of the streets of Karnal",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/blogs/karnal-haryana-9ef29bb274852e43.webp",
+      "url": "https://media.wareongo.com/blogs/karnal-haryana-9ef29bb274852e43.webp",
       "width": 1024,
       "height": 1024
     },
@@ -1394,7 +1394,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Karnal's warehousing follows the GT Road, the national highway from Delhi to Ambala and Punjab. The city's industrial area at **Sector 3** and the highway belt around Kambopura hold the established stock. To the south, **Madhuban** on the GT Road towards Panipat carries larger units. Demand is rice and agricultural storage, with Karnal a major basmati centre, plus distribution along the highway.",
     "marketImage": {
       "alt": "Map of Karnal marking its warehousing micromarkets: Sector 3 and Madhuban",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/karnal.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/karnal.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1439,7 +1439,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Kochi, or Cochin, is Kerala's port city and its main distribution base, and its warehousing sits inland, on the belt from Aluva towards Perumbavoor. The stock we list is entirely pre-engineered, from mid-size units to large boxes. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Kochi skyline of high-rise apartments above the backwaters",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/kochi.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/kochi.webp",
       "width": 1600,
       "height": 900
     },
@@ -1447,7 +1447,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Kochi's port and the Vallarpadam container terminal bring freight in, but land near the coast is scarce, so warehousing has moved inland. The main belt runs east from **Aluva**, on the national highway north of the city, through **Kaipoorikkara** and **Vazhakkulam** towards **Perumbavoor**, with units further out around **Rayamangalam**. To the north-west, **North Paravur** holds smaller stock. Demand is state-wide consumer distribution, with Kerala's dense population spread along the highway, and the stock is modern and pre-engineered.",
     "marketImage": {
       "alt": "Map of Kochi marking its warehousing micromarkets: Aluva, Kaipoorikkara, Vazhakkulam, Perumbavoor, Rayamangalam and North Paravur",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/kochi.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/kochi.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1494,7 +1494,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Kolar's warehousing is anchored by the KIADB industrial areas on NH-75 and the automotive and engineering plants in them. **Narsapura Industrial Area** is the core, with **Jakkasandra Industrial Area** beside it holding some of the largest boxes and **Mindahalli Industrial Area** as a further phase. **Malur**, towards Hoskote, carries more stock on the Bangalore side, and **Kolar** town itself sits further along. Demand is manufacturing supply and regional distribution into Andhra Pradesh and Tamil Nadu, and the stock is predominantly pre-engineered.",
     "marketImage": {
       "alt": "Map of Kolar marking its warehousing micromarkets: Narsapura / Jakkasandra / Mindahalli, Malur and Kolar",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/kolar.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/kolar.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1539,7 +1539,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Kolhapur is south Maharashtra's industrial and trading centre, known for foundries, engineering, sugar and jaggery, and its warehousing sits in the MIDC estates on the Pune to Bangalore highway. The stock we list mixes conventional sheds, RCC godowns and some pre-engineered space, mostly in small units. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "New Palace in Kolhapur, in black and white",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/kolhapur.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/kolhapur.webp",
       "width": 1600,
       "height": 1094
     },
@@ -1547,7 +1547,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Kolhapur's warehousing follows its MIDC estates, which sit on or near the national highway between Pune and Bangalore. **Shiroli** MIDC, north of the city on the highway, is the main foundry and engineering hub, with **Gokul Shirgaon** MIDC to the south and the newer **Kagal** estate further south towards the Karnataka border. East of the city, **Jainapur** near Jaysingpur holds larger units, and **Gandhinagar** carries wholesale trade. Demand is industrial supply plus trade storage for sugar, jaggery and textiles.",
     "marketImage": {
       "alt": "Map of Kolhapur marking its warehousing micromarkets: Shiroli, Gokul Shirgaon, Kagal, Jainapur and Gandhinagar",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/kolhapur.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/kolhapur.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1592,7 +1592,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Kolkata's warehousing sits almost entirely across the river in Howrah and Hooghly districts, on two highway belts: Dankuni on the Durgapur Expressway and Sankrail on the Mumbai road. Much of the stock falls in a single mid-size band, built for regional distribution across eastern India. This page sets out what each belt carries and what it costs.",
     "heroImage": {
       "alt": "Howrah Bridge in Kolkata lit up in the evening",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/kolkata.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/kolkata.webp",
       "width": 1600,
       "height": 1066
     },
@@ -1600,7 +1600,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Kolkata's storage moved out of the city and across the Hooghly decades ago, to where the national highways meet. **Dankuni** sits at the junction of the Durgapur Expressway and the Delhi road, and it has become one of the largest warehousing nodes in eastern India. **Sankrail** and **Dhulagori** sit on the NH-16 arm running southwest towards Kharagpur and Odisha, with **Ranihati** close by. Howrah's own inner stock is older and smaller. The market is more purpose-built than its reputation suggests: the belts are predominantly pre-engineered, and the standard unit is sized for regional distribution rather than city storage.",
     "marketImage": {
       "alt": "Map of Kolkata marking its warehousing micromarkets: Dankuni, Sankrail, Dhulagori and Ranihati",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/kolkata.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/kolkata.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1645,7 +1645,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Lucknow is a mid-sized market with an unusually even spread. Several named belts ring the city, none of them dominant, and rates across most of them sit close together. The real variation in Lucknow is unit size, not price, so the useful question is which road your freight arrives on and how much space it needs. This page sets out which belt carries what.",
     "heroImage": {
       "alt": "Husainabad Clock Tower in Lucknow against a clear sky",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/lucknow.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/lucknow.webp",
       "width": 1600,
       "height": 1066
     },
@@ -1653,7 +1653,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Lucknow's warehousing sits on the approach roads rather than in one cluster, because the city is a distribution node for eastern Uttar Pradesh rather than a manufacturing centre. **Nadarganj** and **Amausi** form the old industrial estate near the airport. **Bijnor Road** and **Transport Nagar** carry the transport-linked stock to the south. **Kanpur Road**, running southwest past Banthra, carries the largest units by a wide margin. **Mohanlalganj** to the south holds a few large units of its own. The result is two markets in one city: a broad mid-size market spread across the approach roads, and a small, concentrated large-format market on the Kanpur Road arm.",
     "marketImage": {
       "alt": "Map of Lucknow marking its warehousing micromarkets: Nadarganj, Amausi, Bijnor Road, Transport Nagar / Kanpur Road and Mohanlalganj",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/lucknow.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/lucknow.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1709,7 +1709,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Ludhiana is Punjab's industrial capital, and its warehousing sits on the GT Road around the city's inland container depots. The stock we list is entirely pre-engineered, mostly with Fire NOC on record. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Busy commercial street in Ludhiana",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/ludhiana.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/ludhiana.webp",
       "width": 1600,
       "height": 1066
     },
@@ -1717,7 +1717,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Ludhiana's industry, from hosiery and textiles to bicycles, hand tools and machinery, ships through inland container depots on the GT Road. The main depot sits at **Dhandari Kalan**, by the Focal Point industrial area, and warehousing follows the highway east through **Jugiana** to **Sahnewal**. **Ramgarh**, on the eastern side, holds a cluster of large units. To the north, **Kadian** serves the Jalandhar side. Demand is industrial and export freight plus distribution across Punjab.",
     "marketImage": {
       "alt": "Map of Ludhiana marking its warehousing micromarkets: Dhandari Kalan, Jugiana, Sahnewal, Ramgarh and Kadian",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/ludhiana.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/ludhiana.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1762,7 +1762,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Madurai is the distribution centre for southern Tamil Nadu, and its warehousing sits on the highways that leave the city in every direction. Most of the stock is pre-engineered, with RCC godowns and conventional sheds making up the rest. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Busy Madurai street leading to a temple gopuram",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/madurai.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/madurai.webp",
       "width": 1600,
       "height": 1066
     },
@@ -1770,7 +1770,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Madurai sits on the national highway between Bangalore and Kanyakumari, with roads fanning out to Tuticorin port, Rameswaram and Dindigul, so its warehousing is spread around the city rather than in one cluster. To the north, **Vairavanatham** and **Kumaram** hold newer pre-engineered units. To the south-west, the **Kappalur** SIDCO estate sits on the main highway. South of the city, **Soorakkulam** and **Valayapatti**, with **Palayampatti** further out, serve the roads towards Virudhunagar and Tuticorin. Smaller godowns sit in the eastern pockets around **Masthanpatti** and **Kadachanendal**. Demand is regional distribution across southern Tamil Nadu.",
     "marketImage": {
       "alt": "Map of Madurai marking its warehousing micromarkets: Vairavanatham / Kumaram, Kappalur, Soorakkulam / Valayapatti, Palayampatti, Masthanpatti and Kadachanendal",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/madurai.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/madurai.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1815,7 +1815,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Mangaluru is Karnataka's port city, and its warehousing serves the port, the coastal trade and the industries around it. Units are small to mid-size, the stock mixes pre-engineered buildings with sheds and RCC, and large boxes are rarely listed. This page sets out where the stock sits and what to check before you sign.",
     "heroImage": {
       "alt": "Mangaluru cityscape with palms and high-rise buildings",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/mangaluru.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/mangaluru.webp",
       "width": 1600,
       "height": 1066
     },
@@ -1823,7 +1823,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Mangaluru's warehousing follows the port and the industrial land north of the city. **Baikampady**, the KIADB industrial area near the New Mangalore Port, carries the largest concentration. **Katipalla** and **Bondathila** sit on the same northern side, towards the port and the refinery belt. City pockets such as **Kottara** and **Kadri** hold smaller godowns serving local trade. Demand is port-linked and coastal distribution rather than metro consumption, and the stock is a mix of pre-engineered buildings, older sheds and RCC.",
     "marketImage": {
       "alt": "Map of Mangaluru marking its warehousing micromarkets: Baikampady, Katipalla, Bondathila, Kottara and Kadri",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/mangaluru.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/mangaluru.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1870,7 +1870,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "The Chandigarh tricity has little land for large warehouses, so its distribution has moved south. The **Banur** to **Tepla** road, which links Banur in Mohali district to the GT Road near **Rajpura**, has become the region's main warehousing belt, with logistics parks from national operators and dozens of active warehouses. It reaches Chandigarh to the north and the GT Road to Delhi and Amritsar to the south. Demand is distribution for the tricity, Punjab, Himachal Pradesh and Jammu and Kashmir.",
     "marketImage": {
       "alt": "Map of Mohali marking its warehousing micromarkets: Banur / Tepla and Rajpura",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/mohali.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/mohali.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1915,7 +1915,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Mumbai, or Bombay, has very little warehouse land inside the city, so its storage splits between small godowns in the suburbs and large distribution stock on the mainland around Bhiwandi, Panvel and the JNPT port. The stock we list under Mumbai mixes RCC godowns with pre-engineered warehouses. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Mumbai skyline across the sea in daylight",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/mumbai.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/mumbai.webp",
       "width": 1600,
       "height": 1066
     },
@@ -1923,7 +1923,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Land in Mumbai is too expensive and too scarce for large warehousing, so the city's distribution has moved to the mainland. Inside the city, small RCC godowns sit in suburban industrial pockets such as **Saki Naka**, **Chembur** and **Goregaon**, close to customers. North of the city, **Vasai** holds godowns on the Gujarat side. The large distribution stock sits east and south, around **Bhiwandi**, and in **Navi Mumbai**, from **Kalamboli** and **Panvel** to the **JNPT** port at Nhava Sheva. Demand is consumer distribution for one of India's largest cities, plus port-linked storage.",
     "marketImage": {
       "alt": "Map of Mumbai marking its warehousing micromarkets: Saki Naka, Chembur, Goregaon, Vasai, Bhiwandi, Navi Mumbai / Panvel, Kalamboli and JNPT",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/mumbai.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/mumbai.webp",
       "width": 1600,
       "height": 1200
     },
@@ -1973,7 +1973,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Mysore, or Mysuru, is south Karnataka's second distribution base after Bangalore, and its warehousing sits in the industrial areas around the city and towards Nanjangud. The stock mixes pre-engineered buildings with conventional sheds and some RCC godowns in the old city, so specification varies building by building. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Mysore Palace and its gardens on a clear day",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/mysore.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/mysore.webp",
       "width": 1600,
       "height": 1067
     },
@@ -1981,7 +1981,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Mysore's warehousing sits in its industrial areas rather than along one highway. On the north side, the **Hebbal** and **Metagalli** industrial areas, with **Belagola** beyond them, hold the established stock on the road towards the KRS dam. To the west, **Bogadi Road** and Kumarabeedu carry newer pre-engineered units. South of the city, **Nanjangud** and the KIADB estate at **Thandya**, with **Adakanahalli** between them, form the industrial belt on the road towards Kerala and Tamil Nadu. Small RCC godowns in the old city serve trade. Demand is regional distribution and manufacturing supply for southern Karnataka.",
     "marketImage": {
       "alt": "Map of Mysore marking its warehousing micromarkets: Hebbal / Metagalli, Belagola, Bogadi Road, Nanjangud, Thandya and Adakanahalli",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/mysore.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/mysore.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2026,7 +2026,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Nagpur sits at the geographic centre of India, and its warehousing is built for national distribution: well-docked, high-roofed pre-engineered buildings on the highways out of the city. Rates are affordable. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Ambazari Lake in Nagpur at twilight",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/nagpur.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/nagpur.webp",
       "width": 1600,
       "height": 1073
     },
@@ -2034,7 +2034,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Nagpur is where India's north to south and east to west highways cross, which makes it a natural hub for national distribution. Warehousing follows the roads out of the city. **Bhandara Road** and the outer ring road on the east carry a large share. **Kalmeshwar** and **Gondkhairi** on the western side, with the **Katol** MIDC area, serve the Amravati direction. **Chinchbhuwan** and **Lava** sit on the southern and western edges, and **Nimji** further out. The stock is predominantly pre-engineered, with a share of conventional sheds, and it is built for trucks.",
     "marketImage": {
       "alt": "Map of Nagpur marking its warehousing micromarkets: Bhandara Road, Kalmeshwar, Gondkhairi / Chinchbhuwan, Katol, Lava and Nimji",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/nagpur.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/nagpur.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2079,7 +2079,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Navi Mumbai is a port market and it prices like one. Rates are among the highest we cover, the stock is concentrated on the JNPT approach, and very large units are rarely listed. For anything that is genuinely port-driven, that premium buys proximity to the terminals. This page sets out the three belts and what each is for.",
     "heroImage": {
       "alt": "Aerial view of high-rise buildings in Navi Mumbai",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/navi-mumbai.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/navi-mumbai.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2087,7 +2087,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Everything here is shaped by JNPT. Storage sits on the roads feeding the port: **Panvel** and **Kalamboli** at the road junction, **Uran** on the port approach itself, and **Taloja** in the MIDC estate inland. Warehousing competes for that land with container yards, CFS operations and industry, which is why the rate is high and the units are modest. The stock is predominantly pre-engineered with a meaningful share of conventional sheds. For any requirement that is not genuinely port-driven, Bhiwandi does a comparable job for noticeably less, and that comparison is the most useful thing an occupier can hold in mind here.",
     "marketImage": {
       "alt": "Map of Navi Mumbai marking its warehousing micromarkets: Panvel, Kalamboli, Uran and Taloja",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/navi-mumbai.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/navi-mumbai.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2132,7 +2132,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Noida is the dearest of the NCR satellite markets, and the reason is authority land and proximity to Delhi. Its warehousing runs from the Noida sectors out through Greater Noida towards Dadri and Sikandrabad, where the freight corridors meet. Most units are mid-size and pre-engineered. This page sets out where the stock sits and what the authority land rules mean.",
     "heroImage": {
       "alt": "Noida skyline at sunrise",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/noida.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/noida.webp",
       "width": 1600,
       "height": 1066
     },
@@ -2140,7 +2140,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Noida's warehousing is shaped by its planned authority areas. The **Noida** sectors carry smaller, city-facing units close to Delhi. **Greater Noida**, around **Surajpur** and the industrial sectors, carries the larger buildings. Further out, **Dadri** and **Sikandrabad** on the Bulandshahr side sit near the junction of the Eastern and Western Dedicated Freight Corridors, where newer stock is coming up. Demand is Delhi and NCR consumption plus the electronics and manufacturing cluster around Greater Noida, and the stock is predominantly pre-engineered.",
     "marketImage": {
       "alt": "Map of Noida marking its warehousing micromarkets: Noida, Greater Noida, Surajpur, Dadri and Sikandrabad",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/noida.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/noida.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2185,7 +2185,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "North Goa's warehousing is mostly small godown space serving the tourism, hospitality and retail economy of the coast and its towns. The stock we list is RCC, in small units close to the markets. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Painted shopfronts on a street in Panaji, North Goa",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/north-goa.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/north-goa.webp",
       "width": 1600,
       "height": 1186
     },
@@ -2193,7 +2193,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "North Goa's storage demand comes from hotels, restaurants, retail and the distributors who supply them, so space sits close to the towns rather than on a highway belt. **Mapusa**, the district's market town, and **Karaswada** next to it, hold the most stock. The coastal belt around **Calangute** and **Siolim** serves the tourism trade, with **Moira** inland between them. Towards Panaji, **Marcel** and **Panelim** serve the capital and the Ponda side. Larger industrial sheds sit in the Goa IDC estates at **Tivim** and **Colvale**.",
     "marketImage": {
       "alt": "Map of North Goa marking its warehousing micromarkets: Mapusa, Karaswada, Calangute, Siolim, Moira, Marcel, Panelim, Tivim and Colvale",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/north-goa.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/north-goa.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2238,7 +2238,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Patna is one of the most uniform warehousing markets we cover. Rates barely move with unit size, the stock is concentrated in one southern belt, and most of it sits in the mid-size range. That makes the building, not the rate, the thing to negotiate on. This page sets out where the stock is and what it is.",
     "heroImage": {
       "alt": "Aerial view of Patna beside the Ganga",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/patna.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/patna.webp",
       "width": 1600,
       "height": 1204
     },
@@ -2246,7 +2246,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Patna is a consumption market rather than a manufacturing or port one. Goods arrive for distribution across Bihar, and the storage that serves that demand sits on the southern approaches to the city, along the Gaya road through **Sampatchak** and around **Phulwari Sharif**. Smaller pockets sit east at **Fatuha** on NH-30 and west towards **Danapur** and **Bihta**. The stock is predominantly pre-engineered, mid-format and built for distribution into the state, with very little at either extreme of size.",
     "marketImage": {
       "alt": "Map of Patna marking its warehousing micromarkets: Sampatchak, Phulwari Sharif, Fatuha, Danapur and Bihta",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/patna.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/patna.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2291,7 +2291,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Puducherry, or Pondicherry, is a compact coastal city, and the storage we list there is small RCC godown space in the city's residential and trading neighbourhoods. It serves local retail and distribution rather than regional freight. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Colonial buildings on a street in Puducherry",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/puducherry.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/puducherry.webp",
       "width": 1600,
       "height": 1204
     },
@@ -2299,7 +2299,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Puducherry is a small territory with dense neighbourhoods, so most storage is godown space inside the city. Our listings sit on its western side, in **Reddiyarpalayam**, **Oulgaret** and **Sithananda Nagar**, and around **Navarkulam**. Larger industrial sheds sit in the government industrial estates, such as **Mettupalayam** and **Thattanchavady**, and towards **Sedarapet**. Demand is local retail, trade and e-commerce delivery, and the city sits on the East Coast Road between Chennai and Cuddalore.",
     "marketImage": {
       "alt": "Map of Puducherry marking its warehousing micromarkets: Reddiyarpalayam, Oulgaret, Sithananda Nagar, Navarkulam, Mettupalayam, Thattanchavady and Sedarapet",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/puducherry.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/puducherry.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2344,7 +2344,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Pune's warehousing is concentrated in two belts and almost nowhere else. Chakan to the north and Wagholi to the east account for nearly all of it, and they trade a little apart on rate and a long way apart on building type. This page sets out what each one carries and which requirement each suits.",
     "heroImage": {
       "alt": "Aerial view of Pune under monsoon clouds",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/pune.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/pune.webp",
       "width": 1600,
       "height": 1066
     },
@@ -2352,7 +2352,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Pune is a manufacturing city and its warehousing followed its factories. **Chakan**, on the arm towards Nashik, grew up around the automotive and engineering cluster and is the newer of the two belts, with **Kuruli**, **Mahalunge** and **Nighoje** around it. **Wagholi**, on the Nagar road heading east towards Ahmednagar, with **Lonikand** beyond it, serves both the eastern industrial spread and city distribution. Most of the stock is small to mid-size, and the construction mix includes an unusually high share of conventional sheds, the mark of older industrial-service stock sitting alongside newer purpose-built buildings.",
     "marketImage": {
       "alt": "Map of Pune marking its warehousing micromarkets: Chakan, Kuruli, Mahalunge, Nighoje, Wagholi and Lonikand",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/pune.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/pune.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2399,7 +2399,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Raipur is one of the most affordable warehousing markets we cover, and its stock is predominantly modern pre-engineered space. It serves Chhattisgarh's distribution and its steel and cement industries from the highway belts around the city. Rates barely move with size, so the decision is about location and building. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Rickshaws and traffic on a Raipur street in the rain",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/raipur.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/raipur.webp",
       "width": 1600,
       "height": 1066
     },
@@ -2407,7 +2407,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Raipur sits on the Mumbai to Kolkata highway, and its warehousing follows that road and the ring road around the city. **Tatibandh** and the **Ring Road** carry city-facing stock. **Girod** and **Dhaneli** on the outskirts hold newer pre-engineered buildings. **Siltara**, the industrial area on the **Bilaspur Road**, serves the steel and manufacturing belt, and **Rawabhata** and **Borjhara** fill in around it. Demand is state-wide distribution and industrial supply, and the stock is overwhelmingly pre-engineered.",
     "marketImage": {
       "alt": "Map of Raipur marking its warehousing micromarkets: Tatibandh, Girod / Dhaneli, Siltara, Bilaspur Road, Rawabhata and Borjhara",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/raipur.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/raipur.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2452,7 +2452,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Rajkot is a small-unit godown market serving Saurashtra's engineering and trading economy. Much of its stock is small, and RCC is as common as pre-engineered construction, so the rate range is wide and specification varies building by building. This page sets out where the stock sits and what that mix means for an occupier.",
     "heroImage": {
       "alt": "Modern building in Rajkot under a cloudy sky",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/rajkot.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/rajkot.webp",
       "width": 1600,
       "height": 1066
     },
@@ -2460,7 +2460,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Rajkot is the trading and engineering centre of Saurashtra, and its warehousing serves that economy rather than long-haul distribution. The industrial belt south of the city, at **Shapar** and **Veraval** on the Gondal road, and **Kotharia** closer in, holds the engineering-linked stock. **Navagam** and **Sokhada** on the eastern side, and the **RUDA Transport Nagar**, carry trade and transport godowns. **Gondal** further south adds a little more. Much of the stock is small RCC godown space rather than purpose-built sheds, which is why unit sizes are small and quotes vary widely.",
     "marketImage": {
       "alt": "Map of Rajkot marking its warehousing micromarkets: Shapar, Veraval, Kotharia, Navagam / RUDA Transport Nagar, Sokhada and Gondal",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/rajkot.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/rajkot.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2507,7 +2507,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Ranchi is Jharkhand's capital and its main distribution base, and its warehousing sits on the highways and ring road around the city. The stock we list is entirely pre-engineered, from mid-size units to large boxes. This page sets out where the stock sits and what to check.\n\nPhoto: Biswarup Ganguly, BY 3.0, via https://commons.wikimedia.org/w/index.php?curid=12220544",
     "heroImage": {
       "alt": "Kanke Dam reservoir on the edge of Ranchi",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/ranchi.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/ranchi.webp",
       "width": 1600,
       "height": 1063
     },
@@ -2515,7 +2515,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Ranchi's warehousing sits on the roads out of the city rather than in one cluster. To the east, **Tatisilwai** and its industrial area, with **Namkum** and **Daldali Chowk** nearer the city, carry established stock on the Jamshedpur and Tata road side. To the north and west, **Ratu** and **Piska Nagri** serve the roads towards Daltonganj and Lohardaga. Newer large units sit south-east of the city around **Malti** and **Nawadih**, off the ring road. Demand is state-wide distribution and consumer supply, and the stock is modern and pre-engineered.",
     "marketImage": {
       "alt": "Map of Ranchi marking its warehousing micromarkets: Tatisilwai, Namkum, Daldali Chowk, Ratu, Piska Nagri, Malti and Nawadih",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/ranchi.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/ranchi.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2560,7 +2560,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Salem sits where the Bangalore to Madurai highway meets the road to Coimbatore and Kerala, and its warehousing serves that junction and the region's textile, steel and agricultural trade. The stock we list splits between pre-engineered buildings and conventional sheds. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Temple gopuram against a blue sky in Salem",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/salem.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/salem.webp",
       "width": 1600,
       "height": 1066
     },
@@ -2568,7 +2568,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Salem is a highway junction city: the national highway from Bangalore to Madurai passes it, and the road west to Coimbatore and Kochi starts here. Its warehousing follows those roads. On the western side, **Kandhampatty** and **Konerikarai** sit near the bypass. **Uthamasolapuram** holds sheds on the city's south-eastern edge, and **Mallur** to the south sits on the highway towards Namakkal. Demand is regional distribution and supply for textiles, steel and agricultural produce.",
     "marketImage": {
       "alt": "Map of Salem marking its warehousing micromarkets: Kandhampatty / Konerikarai, Uthamasolapuram and Mallur",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/salem.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/salem.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2613,7 +2613,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Shivamogga, or Shimoga, is the trading centre of the Malnad region of central Karnataka, and its warehousing serves areca, rice and agricultural trade from the city's industrial areas and market roads. The stock we list is small and mid-size, in conventional sheds and RCC godowns. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Shivamogga Town railway station entrance",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/shivamogga.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/shivamogga.webp",
       "width": 1200,
       "height": 675
     },
@@ -2621,7 +2621,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Shivamogga's warehousing serves agricultural trade, and areca above all, rather than long-haul distribution. The organised stock sits in the KIADB industrial areas at **Mandli-Kallur** and **Machenahalli**, with the older state estate and auto complex on **Sagar Road**. Inside the city, sheds and godowns sit around **Vinoba Nagara**, **Tunga Nagar** and the **Savi Palya** side of the Old Thirthahalli Road, close to the markets. Units are small to mid-size.",
     "marketImage": {
       "alt": "Map of Shivamogga marking its warehousing micromarkets: Mandli-Kallur, Machenahalli, Sagar Road / Vinoba Nagara and Tunga Nagar / Savi Palya",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/shivamogga.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/shivamogga.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2666,7 +2666,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Sonipat, or Sonepat, is the northern arm of the Delhi NCR market, on the GT Road and the KMP Expressway just beyond the Delhi border at Kundli. The stock we list is entirely pre-engineered, in large units with Fire NOC on record. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Khwaja Khizr Tomb, a historic monument in Sonipat",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/sonipat.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/sonipat.webp",
       "width": 1600,
       "height": 1202
     },
@@ -2674,7 +2674,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Sonipat's warehousing sits where the GT Road out of Delhi meets the Kundli Manesar Palwal (KMP) Expressway. **Kundli**, on the Delhi border, is the gateway, and **Akbarpur Barota**, a short drive from both the GT Road and the KMP, holds large modern units. To the south-west, **Hassangarh** on the Sonipat to Sampla road is a warehousing hub of its own, close to the KMP. Demand is NCR distribution for north Delhi and the routes to Punjab and Himachal, plus industrial supply.",
     "marketImage": {
       "alt": "Map of Sonipat marking its warehousing micromarkets: Kundli, Akbarpur Barota and Hassangarh",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/sonipat.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/sonipat.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2719,7 +2719,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Surat's warehousing serves its textile and diamond trade and the industrial estates around the city, rather than long-haul distribution. The stock is a mix of RCC, pre-engineered buildings and sheds, and units are mostly mid-size. This page sets out where it sits and what the GIDC estates mean for an occupier.",
     "heroImage": {
       "alt": "Urban highway in Surat on a clear day",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/surat.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/surat.webp",
       "width": 1600,
       "height": 1066
     },
@@ -2727,7 +2727,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Surat is a textile and diamond city first, and its warehousing grew around the industrial estates that serve those trades. **Sachin** and its GIDC estate, with the **Hojiwala** industrial estate nearby, sit to the south on the Magdalla side. **Ichhapore** GIDC and the textile park lie to the west towards Hazira. **Palsana** and **Baleshwar** on the Bardoli side, with **Jolva**, carry newer stock on the highway. City pockets such as **Saroli** and **Althan** hold smaller trade godowns. Demand is trade and manufacturing supply, and the stock mixes RCC, pre-engineered buildings and sheds.",
     "marketImage": {
       "alt": "Map of Surat marking its warehousing micromarkets: Sachin, Hojiwala, Ichhapore, Palsana, Baleshwar, Jolva, Saroli and Althan",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/surat.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/surat.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2774,7 +2774,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Tumakuru's warehousing follows the national highway north-west from Bangalore. The largest cluster is **Vasanthanarasapura**, the KIADB industrial area on the highway towards **Kora**, which includes the Tumkur Machine Tool Park and the planned Japanese industrial township. Closer to the city, the KIADB estates at **Antharasanahalli** and **Satyamangala** hold older and smaller industrial stock. Some listings sit further out, towards Tiptur. Demand comes from manufacturing and from Bangalore-facing distribution that wants larger land at a distance from the metro, so units run from small sheds to large pre-engineered buildings.",
     "marketImage": {
       "alt": "Map of Tumakuru marking its warehousing micromarkets: Vasanthanarasapura / Kora, Antharasanahalli and Satyamangala",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/tumakuru.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/tumakuru.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2819,7 +2819,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Vijayawada is a small-unit market at a major highway junction. Much of its stock is small, and a large share of the buildings are RCC rather than purpose-built sheds, which makes it a different market from the pre-engineered distribution belts of the big cities. This page sets out where the stock is and what that mix means for an occupier.",
     "heroImage": {
       "alt": "Prakasam Barrage in Vijayawada lit at night",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/vijayawada.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/vijayawada.webp",
       "width": 1024,
       "height": 683
     },
@@ -2827,7 +2827,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Vijayawada sits where NH-16 running up the east coast meets NH-65 running west to Hyderabad, which makes it the natural distribution point for coastal Andhra Pradesh. What it does not have is a manufacturing cluster of the kind that produces large purpose-built sheds. The demand is trade and regional distribution, and the stock reflects that: small, often RCC, and close to the city. The main belts run northeast through **Gannavaram** towards the airport, west through **Gollapudi** on the NH-65 arm, and south through **Kankipadu** on NH-16, with older stock in the city **industrial area**. An occupier used to pre-engineered distribution boxes will find Vijayawada a different market.",
     "marketImage": {
       "alt": "Map of Vijayawada marking its warehousing micromarkets: Gannavaram, Gollapudi and Kankipadu",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/vijayawada.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/vijayawada.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2874,7 +2874,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Visakhapatnam is Andhra Pradesh's port and heavy-industry city, and its warehousing competes with port logistics and industry for land. Units are small to mid-size, the stock is split between sheds and pre-engineered buildings, and rates run above Vijayawada. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Aerial view of the Visakhapatnam coastline and hills",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/hero/city/visakhapatnam.webp",
+      "url": "https://media.wareongo.com/locations/hero/city/visakhapatnam.webp",
       "width": 1600,
       "height": 1066
     },
@@ -2882,7 +2882,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Visakhapatnam's warehousing follows the port and the industrial belt to its southwest. **Gajuwaka** and **Autonagar**, close to the port and the steel plant, carry the largest share. **Kancharapalem** sits nearer the city, while **Pendurthi** and **Gurrampalem** on the northwestern side offer more room on the Vijayawada side of the city. Demand is port, steel and industrial supply, which is why the stock includes so many conventional sheds, and why land near the port prices above the rest of the state.",
     "marketImage": {
       "alt": "Map of Visakhapatnam marking its warehousing micromarkets: Gajuwaka, Autonagar, Kancharapalem, Pendurthi and Gurrampalem",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/city/visakhapatnam.webp",
+      "url": "https://media.wareongo.com/locations/maps/city/visakhapatnam.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2932,7 +2932,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Andhra Pradesh is a small-unit warehousing market. Much of the state's stock is small, and RCC is almost as common as pre-engineered construction. That shapes everything: the stock mix, the rates and the kind of occupier the market actually serves. This page sets out where the stock sits, what it costs and what changed on land conversion in 2025.",
     "heroImage": {
       "alt": "Andhra's Coromandel Coastline",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/blogs/hero-1-614305357e6d754f.webp",
+      "url": "https://media.wareongo.com/blogs/hero-1-614305357e6d754f.webp",
       "width": 1600,
       "height": 1066
     },
@@ -2940,7 +2940,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Andhra Pradesh has one of the longest coastlines in India and sits between the Chennai, Hyderabad and Bangalore markets, and its warehousing serves that position. **Vijayawada**, where NH-16 meets the highway to Hyderabad, is the state's distribution junction and its deepest market, with **Guntur** trading alongside it. **Visakhapatnam** brings a major port and a heavy industrial base on the northern coast. In the south, **Tirupati** and **Nellore** look towards Chennai. The 2025 repeal of the agricultural land conversion Act removed one step from new development, which helps owners building fresh stock. For an occupier, the state suits regional distribution and city-edge storage today, and build-to-suit for anyone planning a larger hub on the coast.",
     "marketImage": {
       "alt": "Map of Andhra Pradesh marking its main warehousing markets: Vijayawada, Visakhapatnam, Guntur, Tirupati and Nellore",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/state/andhra-pradesh.webp",
+      "url": "https://media.wareongo.com/locations/maps/state/andhra-pradesh.webp",
       "width": 1600,
       "height": 1200
     },
@@ -2994,7 +2994,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Gujarat is one of the most affordable major warehousing states on a rate per square foot basis, and the reason is supply rather than weak demand. Industrial land is plentiful, GIDC estates are numerous, and the Ahmedabad ring has several competing belts rather than one dominant corridor. This page sets out where the stock sits, what it costs and what to check on land and fire approvals.",
     "heroImage": {
       "alt": "Gujarat has heavily invested infrastructure to facilitate commerce.",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/blogs/hero-3-31d982d89c4882a2.webp",
+      "url": "https://media.wareongo.com/blogs/hero-3-31d982d89c4882a2.webp",
       "width": 1600,
       "height": 1290
     },
@@ -3002,7 +3002,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Gujarat's case rests on land, ports and industry. The state has a long coastline with major ports at **Mundra** and on the Gulf of Khambhat, a chemical and industrial belt running through **Dahej** and **Vadodara**, and a dense network of GIDC estates that keeps industrial land in steady supply. That supply is why rates stay low even where demand is strong. **Ahmedabad** sits at the centre, on the highway between Delhi and Mumbai, and works as the state's distribution hub. **Surat** adds textile and diamond trade demand in the south, and **Rajkot** serves the engineering and small-industry base of Saurashtra. For an occupier, Gujarat offers room to grow at rates among the lowest of the states we cover, with a choice of estate or private land in most markets.",
     "marketImage": {
       "alt": "Map of Gujarat marking its main warehousing markets: Ahmedabad, Rajkot, Surat, Mundra, Dahej and Vadodara",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/state/gujarat.webp",
+      "url": "https://media.wareongo.com/locations/maps/state/gujarat.webp",
       "width": 1600,
       "height": 1200
     },
@@ -3053,7 +3053,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Haryana's warehousing is the large-format heart of Delhi NCR. The Gurugram arc carries most of it, with Sonipat, Dharuhera and Karnal extending it along the highways out of Delhi. It is also the state where the land-use question bites hardest, because so much of the stock sits on converted agricultural land rather than inside an industrial estate. This page sets out where the stock sits, what it costs and what to check.",
     "heroImage": {
       "alt": "Haryana has undergone rapid urbanization and infra buildup, especially in Gurgaon.",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/blogs/hero-5-f9106b614fd1f3aa.webp",
+      "url": "https://media.wareongo.com/blogs/hero-5-f9106b614fd1f3aa.webp",
       "width": 1600,
       "height": 899
     },
@@ -3061,7 +3061,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Haryana wraps around Delhi on three sides, and that geography is its whole case. The main highways out of the capital cross the state: NH-48 through **Gurugram**, **Manesar** and **Dharuhera** towards Jaipur and Mumbai, NH-44 through **Sonipat** and **Karnal** towards Punjab, and the Agra road through **Faridabad** and **Palwal**. The KMP Expressway ties these arms together without entering Delhi, which is why so much of the region's large-format distribution sits in Haryana. New, purpose-built stock makes up most of what is available. For an occupier serving Delhi and north India, Haryana offers some of the largest and newest warehouses in the region, with an arm for each direction of freight.",
     "marketImage": {
       "alt": "Map of Haryana marking its main warehousing markets: Gurugram, Manesar, Sonipat, Dharuhera, Palwal, Karnal and Faridabad",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/state/haryana.webp",
+      "url": "https://media.wareongo.com/locations/maps/state/haryana.webp",
       "width": 1600,
       "height": 1200
     },
@@ -3112,7 +3112,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Karnataka's warehousing is Bangalore first and everything else a long way second. The Bangalore belts hold most of the state's stock, while Mangaluru, Hubli, Mysuru and the Kolar industrial belt serve their own regions. Because so much sits on KIADB land, the approvals question in Karnataka is as much about allotment terms as about land conversion. This page sets out where the stock sits, what it costs and what to check.",
     "heroImage": {
       "alt": "Mysore Palace- A symbol of Karnataka's pride.",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/blogs/heroalt-2-2cd037dd1326df0c.webp",
+      "url": "https://media.wareongo.com/blogs/heroalt-2-2cd037dd1326df0c.webp",
       "width": 1023,
       "height": 685
     },
@@ -3120,7 +3120,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Karnataka's warehousing is anchored by **Bangalore**, one of India's largest consumption and technology markets, and by a manufacturing base that runs from the electronics and automotive estates around the city out to **Kolar** beyond Hoskote. Bangalore sits where the highways to Pune and Mumbai, Chennai and Hyderabad converge, so stock here can serve much of south India as well as the city itself. KIADB estates add organised industrial land across the state. On the west coast, **Mangaluru** gives Karnataka its own port, **Hubli** links the north of the state to the Pune highway, and **Mysuru** and **Shivamogga** serve the south and the Malnad region. For an occupier, Karnataka offers one deep metro market and a set of regional markets that each do their own job.",
     "marketImage": {
       "alt": "Map of Karnataka marking its main warehousing markets: Bangalore, Kolar, Mangaluru, Hubli, Mysuru and Shivamogga",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/state/karnataka.webp",
+      "url": "https://media.wareongo.com/locations/maps/state/karnataka.webp",
       "width": 1600,
       "height": 1200
     },
@@ -3179,7 +3179,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Maharashtra pairs one of the country's largest consumer markets with JNPT, one of its main container gateways, and its warehousing follows both. Mumbai's demand and the port's freight give **Bhiwandi** and **Navi Mumbai** a depth few markets can match. The expressway and the Nashik highway carry the same logic inland to **Pune**, where **Chakan** serves the automotive and engineering cluster and **Wagholi** the eastern road. Further out, **Nagpur** sits close to the geographic centre of India, where the national highways cross, which makes it a natural base for despatch to several states at once, and **Aurangabad** serves the industrial belt of Marathwada. For an occupier, Maharashtra has a market for almost every job: the port, the city, the factory or the nation.",
     "marketImage": {
       "alt": "Map of Maharashtra marking its main warehousing markets: Bhiwandi, Pune, Chakan, Wagholi, Navi Mumbai, Nagpur and Aurangabad",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/state/maharashtra.webp",
+      "url": "https://media.wareongo.com/locations/maps/state/maharashtra.webp",
       "width": 1600,
       "height": 1200
     },
@@ -3230,7 +3230,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Tamil Nadu's warehousing splits three ways: the Chennai ring, which is a distribution market; Hosur, a large-format, manufacturing-adjacent market that functions as an extension of Bangalore; and Coimbatore, which serves the western districts. They share a state government and very little else. This page sets out where the stock sits, what it costs and how approvals work.",
     "heroImage": {
       "alt": "Vivekananda Rock Memorial, standing tall beyond India's and Tamil Nadu's most southern tip",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/blogs/heroalt-1-67e61f90e1aa3032.webp",
+      "url": "https://media.wareongo.com/blogs/heroalt-1-67e61f90e1aa3032.webp",
       "width": 1024,
       "height": 655
     },
@@ -3238,7 +3238,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Tamil Nadu is one of India's most industrialised states, and its warehousing is built around manufacturing as much as consumption. **Chennai** combines a major port with a large consumer market, and the automotive and electronics plants at **Sriperumbudur** and **Oragadam** pull suppliers and logistics operators onto the western arm. **Hosur**, on the Karnataka border, gives networks run out of Bangalore large purpose-built space within a short drive of the city. **Coimbatore** anchors the textile and engineering economy of the western districts, and **Salem** and **Madurai** serve the centre and south. SIPCOT and SIDCO estates add organised industrial land across the state. For an occupier, Tamil Nadu offers well-specified large-format stock and a choice of port-facing, factory-facing and Bangalore-facing locations under one approval system.",
     "marketImage": {
       "alt": "Map of Tamil Nadu marking its main warehousing markets: Chennai, Hosur, Sriperumbudur, Oragadam, Coimbatore, Salem and Madurai",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/state/tamil-nadu.webp",
+      "url": "https://media.wareongo.com/locations/maps/state/tamil-nadu.webp",
       "width": 1600,
       "height": 1200
     },
@@ -3284,7 +3284,7 @@ export const locationPages: LocationPageContent[] = [
     "heroProse": "Uttar Pradesh has two warehousing markets that share a state and very little else. The western end, around Ghaziabad, Noida and Dadri, is the eastern arm of Delhi NCR. The centre, around Lucknow and Kanpur, is a distribution node for the rest of the state. Approvals work the same way across both, and the line between authority land and private land is what matters most. This page sets out where the stock sits and what to check.",
     "heroImage": {
       "alt": "Logistics in Uttar Pradesh",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/blogs/hero-6-8dd28aee248a2412.webp",
+      "url": "https://media.wareongo.com/blogs/hero-6-8dd28aee248a2412.webp",
       "width": 1600,
       "height": 1066
     },
@@ -3292,7 +3292,7 @@ export const locationPages: LocationPageContent[] = [
     "marketProse": "Uttar Pradesh is India's most populous state, and its warehousing serves both that home market and the Delhi region next door. At the western end, **Ghaziabad** and **Noida** sit on Delhi's eastern edge, and **Dadri** is where the Eastern and Western Dedicated Freight Corridors meet, giving the NCR end of the state rail freight links towards the western ports and the east. In the centre, **Lucknow** and **Kanpur** form a distribution node for the rest of the state, linked by expressways that have shortened journeys across it, and **Varanasi** serves the east. The Noida, Greater Noida and Yamuna Expressway authorities add a supply of planned industrial plots. For an occupier, Uttar Pradesh offers two distinct bases: one for NCR and one for the state itself.",
     "marketImage": {
       "alt": "Map of Uttar Pradesh marking its main warehousing markets: Lucknow, Ghaziabad, Dadri, Noida, Kanpur and Varanasi",
-      "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/locations/maps/state/uttar-pradesh.webp",
+      "url": "https://media.wareongo.com/locations/maps/state/uttar-pradesh.webp",
       "width": 1600,
       "height": 1200
     },

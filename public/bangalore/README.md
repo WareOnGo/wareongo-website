@@ -4,15 +4,15 @@ Curated from WareOnGo’s public warehouse listings and galleries on 2026-09-25.
 
 | File | Warehouse ID | Gallery photo | Original image |
 | --- | --- | --- | --- |
-| whitefield.webp | 2743 | 1 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/images/9e8c16194f4e87d1b0883597b7b41734257ad28e288e58e99747eab65a4effd3/sharp-w1280-q75-v1.webp |
-| hoskote.webp | 967 | 1 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1769685006753.webp |
-| nelamangala.webp | 591 | 3 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1763000597956.webp |
-| devanahalli.webp | 2533 | 21 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/06e5eece83bda23520003a3dbb8a309a.webp |
-| bommasandra.webp | 410 | 26 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/33ece4ce61aa939ed06421c486c30ac9.webp |
-| jigani.webp | 1226 | 1 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/500b93fc8938832c08964dadf5f3ed55.webp |
-| featured-devanahalli.webp | 408 | 11 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1759230375901.webp |
-| peenya.webp | 332 | 1 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1757326397290.webp |
-| dobbaspet.webp | 1121 | 8 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/1d85b87b949c2908456e9e8480ec24db.webp |
+| whitefield.webp | 2743 | 1 | https://media.wareongo.com/webp/images/9e8c16194f4e87d1b0883597b7b41734257ad28e288e58e99747eab65a4effd3/sharp-w1280-q75-v1.webp |
+| hoskote.webp | 967 | 1 | https://media.wareongo.com/webp/media_1769685006753.webp |
+| nelamangala.webp | 591 | 3 | https://media.wareongo.com/webp/media_1763000597956.webp |
+| devanahalli.webp | 2533 | 21 | https://media.wareongo.com/webp/06e5eece83bda23520003a3dbb8a309a.webp |
+| bommasandra.webp | 410 | 26 | https://media.wareongo.com/webp/33ece4ce61aa939ed06421c486c30ac9.webp |
+| jigani.webp | 1226 | 1 | https://media.wareongo.com/webp/500b93fc8938832c08964dadf5f3ed55.webp |
+| featured-devanahalli.webp | 408 | 11 | https://media.wareongo.com/webp/media_1759230375901.webp |
+| peenya.webp | 332 | 1 | https://media.wareongo.com/webp/media_1757326397290.webp |
+| dobbaspet.webp | 1121 | 8 | https://media.wareongo.com/webp/1d85b87b949c2908456e9e8480ec24db.webp |
 
 The hero’s three featured listings use public detail data from IDs **967**, **408** and **1226** (Hoskote, Devanahalli and Jigani). Their size, rent, warehouse type and clear height were checked against `GET /warehouses/:id`. The cards are curated snapshots, following the homepage featured-listing pattern; update their figures in `src/components/city/BangaloreFeaturedListings.tsx` when re-curating them. Hoskote and Jigani reuse the matching location photo.
 
@@ -59,13 +59,13 @@ These images were selected from public listings whose addresses match the reques
 
 | File | Warehouse ID | Gallery photo | Address | Original image |
 | --- | --- | --- | --- | --- |
-| micromarket-sarjapur.webp | 2740 | 2 | Vemana Road Dommasandra Eya care Sarjapura road, taluk, Anekal | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/images/36a72fc2a81750b1b49c9fad55c410ce2cea7438a4ed475635b3992cf44c9cce/sharp-w1280-q75-v1.webp |
-| micromarket-bidadi.webp | 1247 | 2 | Bidadi Industrial Area, Mysore Road | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/c3fc31559db67db54222a0387c63adf3.webp |
-| micromarket-north-bangalore.webp | 2635 | 1 | Sri Venkateshwara Nagar, Jakkur | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/7641638c07714c53699d659beb12440f.webp |
-| micromarket-indiranagar.webp | 1279 | 2 | Chinmaya Mission Hosital Road , IndiraNagar | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1774869447902.webp |
-| micromarket-jp-nagar.webp | 2835 | 1 | JP Nagar 7th Phase, Konan Kunte | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/images/9da523be511cff2b2940e2e9779288b15053bfe4575c3aa48f6bb23f695693f8/sharp-w1280-q75-v1.webp |
-| micromarket-hsr.webp | 1357 | 2 | Muneswara Nagar HSR Layout | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/5288b6e6b72cb41214bfb77abb1da713.webp |
-| micromarket-marathalli.webp | 2368 | 2 | Lakshminarayan Layout ,Thubarahalli | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/scout_330fec7b9e4897d062290621f92ff390.webp |
+| micromarket-sarjapur.webp | 2740 | 2 | Vemana Road Dommasandra Eya care Sarjapura road, taluk, Anekal | https://media.wareongo.com/webp/images/36a72fc2a81750b1b49c9fad55c410ce2cea7438a4ed475635b3992cf44c9cce/sharp-w1280-q75-v1.webp |
+| micromarket-bidadi.webp | 1247 | 2 | Bidadi Industrial Area, Mysore Road | https://media.wareongo.com/webp/c3fc31559db67db54222a0387c63adf3.webp |
+| micromarket-north-bangalore.webp | 2635 | 1 | Sri Venkateshwara Nagar, Jakkur | https://media.wareongo.com/webp/7641638c07714c53699d659beb12440f.webp |
+| micromarket-indiranagar.webp | 1279 | 2 | Chinmaya Mission Hosital Road , IndiraNagar | https://media.wareongo.com/webp/media_1774869447902.webp |
+| micromarket-jp-nagar.webp | 2835 | 1 | JP Nagar 7th Phase, Konan Kunte | https://media.wareongo.com/webp/images/9da523be511cff2b2940e2e9779288b15053bfe4575c3aa48f6bb23f695693f8/sharp-w1280-q75-v1.webp |
+| micromarket-hsr.webp | 1357 | 2 | Muneswara Nagar HSR Layout | https://media.wareongo.com/webp/5288b6e6b72cb41214bfb77abb1da713.webp |
+| micromarket-marathalli.webp | 2368 | 2 | Lakshminarayan Layout ,Thubarahalli | https://media.wareongo.com/webp/scout_330fec7b9e4897d062290621f92ff390.webp |
 
 ## Available warehouse cards
 
@@ -75,21 +75,21 @@ The figures are curated snapshots from `GET /warehouses?city=Bangalore&locationM
 
 | File | Warehouse ID | Size band | Sq ft | Source image |
 | --- | --- | --- | --- | --- |
-| available-1398.webp | 1398 | small | 2,000 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1776331426848.webp |
-| available-612.webp | 612 | small | 4,450 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1763251050083.webp |
-| available-2429.webp | 2429 | small | 4,600 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/scout_3a3323e41b3287611285fa79ee7955ce.webp |
-| available-1196.webp | 1196 | small | 3,000 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/37520f1855b025c3a91b78aaafe03b73.webp |
-| available-1697.webp | 1697 | small | 4,300 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/scout_20dc049e278b01b75f4488463868247a.webp |
-| available-1222.webp | 1222 | small | 2,500 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1773659471790.webp |
-| available-2744.webp | 2744 | medium | 10,000 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/images/3ff66644e01ac47d5f797c5ee696e7aab677c6a25fa63e8a14bccf19ada27aaf/sharp-w1280-q75-v1.webp |
-| available-2142.webp | 2142 | medium | 12,800 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/scout_3a68482740380013f6f0b3a604e23521.webp |
-| available-1294.webp | 1294 | medium | 9,300 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1775117527561.webp |
-| available-832.webp | 832 | medium | 10,000 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1766550503042.webp |
-| available-2686.webp | 2686 | medium | 10,000 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/1960bdc031e77c3a8daa84dd4e26d838.webp |
-| available-2255.webp | 2255 | medium | 17,000 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/f601ec158a4169b486a95d8af9a4c9a3.webp |
-| available-2369.webp | 2369 | large | 1,20,000 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/6986d1720554225334c15c1810219b2f.webp |
-| available-1121.webp | 1121 | large | 1,90,000 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/1d85b87b949c2908456e9e8480ec24db.webp |
-| available-408.webp | 408 | large | 1,00,000 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1759230371973.webp |
-| available-1037.webp | 1037 | large | 80,000 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/media_1770635881292.webp |
-| available-2324.webp | 2324 | large | 50,000 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/scout_11f0dc8b37e8ac49ba97066756f14f67.webp |
-| available-1884.webp | 1884 | large | 55,000 | https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/55e2d43430532efad873d91f8ec3acfe.webp |
+| available-1398.webp | 1398 | small | 2,000 | https://media.wareongo.com/webp/media_1776331426848.webp |
+| available-612.webp | 612 | small | 4,450 | https://media.wareongo.com/webp/media_1763251050083.webp |
+| available-2429.webp | 2429 | small | 4,600 | https://media.wareongo.com/webp/scout_3a3323e41b3287611285fa79ee7955ce.webp |
+| available-1196.webp | 1196 | small | 3,000 | https://media.wareongo.com/webp/37520f1855b025c3a91b78aaafe03b73.webp |
+| available-1697.webp | 1697 | small | 4,300 | https://media.wareongo.com/webp/scout_20dc049e278b01b75f4488463868247a.webp |
+| available-1222.webp | 1222 | small | 2,500 | https://media.wareongo.com/webp/media_1773659471790.webp |
+| available-2744.webp | 2744 | medium | 10,000 | https://media.wareongo.com/webp/images/3ff66644e01ac47d5f797c5ee696e7aab677c6a25fa63e8a14bccf19ada27aaf/sharp-w1280-q75-v1.webp |
+| available-2142.webp | 2142 | medium | 12,800 | https://media.wareongo.com/webp/scout_3a68482740380013f6f0b3a604e23521.webp |
+| available-1294.webp | 1294 | medium | 9,300 | https://media.wareongo.com/webp/media_1775117527561.webp |
+| available-832.webp | 832 | medium | 10,000 | https://media.wareongo.com/webp/media_1766550503042.webp |
+| available-2686.webp | 2686 | medium | 10,000 | https://media.wareongo.com/webp/1960bdc031e77c3a8daa84dd4e26d838.webp |
+| available-2255.webp | 2255 | medium | 17,000 | https://media.wareongo.com/webp/f601ec158a4169b486a95d8af9a4c9a3.webp |
+| available-2369.webp | 2369 | large | 1,20,000 | https://media.wareongo.com/webp/6986d1720554225334c15c1810219b2f.webp |
+| available-1121.webp | 1121 | large | 1,90,000 | https://media.wareongo.com/webp/1d85b87b949c2908456e9e8480ec24db.webp |
+| available-408.webp | 408 | large | 1,00,000 | https://media.wareongo.com/webp/media_1759230371973.webp |
+| available-1037.webp | 1037 | large | 80,000 | https://media.wareongo.com/webp/media_1770635881292.webp |
+| available-2324.webp | 2324 | large | 50,000 | https://media.wareongo.com/webp/scout_11f0dc8b37e8ac49ba97066756f14f67.webp |
+| available-1884.webp | 1884 | large | 55,000 | https://media.wareongo.com/webp/55e2d43430532efad873d91f8ec3acfe.webp |

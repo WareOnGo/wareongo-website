@@ -1,7 +1,7 @@
 import type { PagePhoto } from '@/data/editorial';
 
 const IMAGE_EXTENSIONS = /\.(?:avif|bmp|gif|jpe?g|png|svg|webp)$/i;
-const IMAGE_HOSTS = ['r2.dev', 'cloudinary.com', 'imgur.com', 'amazonaws.com', 'googleusercontent.com', 'imagekit.io', 'picsum.photos', 'unsplash.com'];
+const IMAGE_HOSTS = ['media.wareongo.com', 'r2.dev', 'cloudinary.com', 'imgur.com', 'amazonaws.com', 'googleusercontent.com', 'imagekit.io', 'picsum.photos', 'unsplash.com'];
 
 /** Accept browser image formats, never videos/documents just because R2 hosts them. */
 export function isWarehouseImageUrl(value: unknown): value is string {

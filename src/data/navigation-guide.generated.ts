@@ -7,7 +7,7 @@ export const navigationGuide: NavigationGuide | null = {
   "parentLabel": "Hyderabad",
   "href": "/overview/telangana/hyderabad/kompally",
   "image": {
-    "url": "https://pub-94c0eb3cd2df4e71a1b6f5b73273bc71.r2.dev/webp/4e67cf5027a12996a80d9dbb2eb28f17.webp",
+    "url": "https://media.wareongo.com/webp/4e67cf5027a12996a80d9dbb2eb28f17.webp",
     "alt": "Warehouse exterior in Kompally, Hyderabad",
     "width": 1280,
     "height": 960

@@ -3,7 +3,7 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
-  "images": {"sizes":[384,640,960,1080,1600],"remotePatterns":[{"protocol":"https","hostname":"*.r2.dev"}],"formats":["image/avif","image/webp"],"minimumCacheTTL":2678400},
+  "images": {"sizes":[384,640,960,1080,1600],"remotePatterns":[{"protocol":"https","hostname":"media.wareongo.com"},{"protocol":"https","hostname":"*.r2.dev"}],"formats":["image/avif","image/webp"],"minimumCacheTTL":2678400},
   "redirects": [
     {"source":"/guides","destination":"/blogs","permanent":true},
     {"source":"/guides/:slug","destination":"/blogs/:slug","permanent":true}
