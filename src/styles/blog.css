@@ -6,7 +6,7 @@
 .blog-section__heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; }
 .blog-section__heading > a { display: inline-flex; align-items: center; gap: 8px; min-height: var(--ui-compact-height); font-size: var(--ui-text-sm); font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
 .blog-intro { max-width: 52rem; margin: 32px auto; text-align: center; }
-.blog-intro > p:last-child { max-width: 40rem; margin: 20px auto 0; }
+.blog-intro__description { max-width: 40rem; margin: 20px auto 0; text-wrap: balance; }
 .blog-tools { max-width: 60rem; margin: 0 auto 32px; }
 .blog-search { position: relative; max-width: 40rem; margin: 0 auto; }
 .blog-search > svg { position: absolute; top: 14px; left: 16px; pointer-events: none; }
@@ -123,8 +123,14 @@
 }
 @media (max-width: 767px) {
   :root:has(.blog-page--article) { --whatsapp-button-bottom: calc(108px + env(safe-area-inset-bottom)); }
+  .blog-intro > .blog-intro__description { max-width: 27em; font-size: clamp(var(--ui-text-xs), calc(4vw - 1.6px), var(--ui-text-base)); }
+  .blog-intro__break { display: none; }
   .blog-card__body { padding: 20px; }
+  .blog-card__description { display: none; }
   .blog-starters { display: flex; overflow-x: auto; scroll-snap-type: x proximity; scroll-padding: 4px; padding: 4px 4px 12px; margin: -4px; }
   .blog-starters > li { flex: 0 0 min(84%, 320px); scroll-snap-align: start; }
   .blog-summary { padding: 20px; }
+}
+@media (max-width: 359px) {
+  .blog-intro > .blog-intro__description { margin-inline: -8px; }
 }

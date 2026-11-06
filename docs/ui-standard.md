@@ -150,6 +150,9 @@ The index uses one, two, and three card columns at phone, 640px, and 1024px widt
 starter guides use the normal `BlogCard`, including its date and read link, with
 the starter label in the category position inside the card. This section uses
 black text and has no colored outer frame or padding around its cards.
+Regular index and search-result cards show description paragraphs at 768px and
+above; descriptions are hidden on phones. Featured and starter cards omit them
+at every width, matching the blog index reference HTML.
 Blog section labels use `ui-label` in Title Case with normal letter spacing,
 including “Your Next Warehouse”, “On This Page”, “In Short” and starter labels.
 Keep prose, metadata and action text in sentence case; do not use all-caps styling.

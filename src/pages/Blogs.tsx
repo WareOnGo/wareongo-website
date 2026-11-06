@@ -76,8 +76,9 @@ const Blogs = ({ entries = blogSummaries }: { entries?: BlogSummary[] } = {}) =>
         <div className="section-container page-content blog-shell">
           <Breadcrumbs items={[{ label: 'Home', path: '/' }, { label: 'Blogs' }]} />
           <header className="blog-intro">
+            <p className="ui-label mb-4">WareOnGo Knowledge Base</p>
             <h1 id="blogs-title" className="ui-page-title">Everything to Know About a Warehouse</h1>
-            <p>Practical guides to warehouse types, compliance and leasing costs in India.</p>
+            <p className="blog-intro__description">All we've learned from leasing warehouses across India,<br className="blog-intro__break" />{' '}so you can sign with your eyes open.</p>
           </header>
 
           <div className="blog-tools">
@@ -115,7 +116,7 @@ const Blogs = ({ entries = blogSummaries }: { entries?: BlogSummary[] } = {}) =>
               <p className="text-xs" role="status">{filtered.length} {filtered.length === 1 ? 'article' : 'articles'} · Most recently updated</p>
             </div>
             {filtered.length > 0 ? <ul className="blog-grid">
-              {filtered.map(blog => <li key={blog.slug} data-blog-slug={blog.slug}><BlogCard blog={blog} /></li>)}
+              {filtered.map(blog => <li key={blog.slug} data-blog-slug={blog.slug}><BlogCard blog={blog} showDescription /></li>)}
             </ul> : <div className="ui-panel blog-empty">
               <h3 className="ui-panel-title">{blogs.length ? 'No Matching Blogs' : 'More Guides Are on the Way'}</h3>
               <p className="my-4">{blogs.length ? 'Try another topic or a shorter search.' : 'Check back for practical guides to warehouse leasing.'}</p>
