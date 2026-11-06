@@ -14,7 +14,7 @@ import { submitContactForm } from '@/services/formSubmission';
 import { trackEvent } from '@/lib/analytics';
 import { useLeadAnalytics } from '@/hooks/useLeadAnalytics';
 
-interface EdgeContactFormDialogProps {
+export interface EdgeContactFormDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   source: string;

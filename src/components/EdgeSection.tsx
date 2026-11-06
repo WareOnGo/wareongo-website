@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowDown } from 'lucide-react';
-import EdgeContactFormDialog from '@/components/EdgeContactFormDialog';
+import EdgeContactFormDialog from '@/components/DeferredEdgeContactFormDialog';
 import SpotlightCard from '@/components/SpotlightCard';
 import { trackEvent } from '@/lib/analytics';
 
