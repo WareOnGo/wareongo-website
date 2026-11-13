@@ -1,0 +1,28 @@
+{
+  "slug": "careers",
+  "seoTitle": "Careers at WareOnGo | Build With Us",
+  "description": "Join WareOnGo as a Marketing Intern in Bangalore. A paid, three-month hybrid internship with the opportunity to become a Marketing Manager based on performance.",
+  "title": "Be Part of Our Mission",
+  "intro": "Help us make finding the right warehouse simpler. We’re looking for curious people who care about solving real problems, communicate openly, and take ownership of their work.",
+  "cultureTitle": "Great Work Starts With a Team That Gives You Space to Grow.",
+  "cultureDescription": "Bring your ideas, ask questions, and build with us. Together, we’re bringing clarity to warehousing and helping businesses across India take their next step.",
+  "applicationEmail": "",
+  "roles": [
+    {
+      "id": "marketing-intern",
+      "title": "Marketing Intern",
+      "department": "Marketing",
+      "summary": "Work with the founding team to shape WareOnGo’s brand and grow qualified inbound leads through content and performance marketing. This internship can convert to a full-time Marketing Manager role based on performance.",
+      "location": "Bangalore / Hybrid",
+      "employmentType": "Full-time internship",
+      "duration": "3 months",
+      "compensation": "₹25,000 / month",
+      "applyUrl": "https://docs.google.com/forms/d/e/1FAIpQLScULkZTYADr8_Qs93FnxSpErU5AkFoJxgzo4QuHS555CQTesg/viewform?usp=sharing&ouid=101714384672538010825",
+      "isOpen": true
+    }
+  ],
+  "interestTitle": "Think You Don’t Fit In?",
+  "interestDescription": "The right role isn’t always listed. Tell us a little about yourself and what you’d like to work on.",
+  "interestSubmitLabel": "Introduce yourself",
+  "interestSuccessMessage": "Thanks for introducing yourself. We’ve received your details and will get in touch if there’s a role that fits."
+}

@@ -194,6 +194,11 @@ export const routes: RouteRecord[] = [
             entry: "src/pages/BangaloreLanding.tsx",
             loader: async args => (await import('./loaders/micromarketLandingLoader')).micromarketLandingLoader({ ...args, params: { ...args.params, citySlug: 'hyderabad', micromarket: 'hyderabad' } }),
           } satisfies RouteRecord] : []),
+          {
+            path: "careers",
+            lazy: lazyDefault(() => import("./pages/Careers")),
+            entry: "src/pages/Careers.tsx",
+          },
         ],
       },
     ],

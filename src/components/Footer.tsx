@@ -170,6 +170,7 @@ const Footer = () => {
               {[
                 ['Home', '/'], ['How It Works', '/#how-it-works'], ['Listings', '/listings'],
                 ['Request a Warehouse', '/request-warehouse'], ['About Us', '/about-us'],
+                ['Careers', '/careers'],
               ].map(([label, href]) => <li key={href}>
                 <Link to={href} className="text-ui-line hover:text-ui-surface transition-colors"
                   onClick={event => {

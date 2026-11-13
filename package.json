@@ -9,8 +9,8 @@
     "test:formatting": "node tests/formatting.test.mjs",
     "content:overviews": "node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs",
     "dev": "vite",
-    "build": "node scripts/generate-locations.mjs && node scripts/generate-blogs.mjs && node scripts/generate-service-pages.mjs && node scripts/generate-ad-pages.mjs && node scripts/generate-micromarket-ad-pages.mjs && node scripts/generate-legal-pages.mjs && node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs && node scripts/generate-logo-variants.mjs && node scripts/generate-ad-image-variants.mjs && vite-react-ssg build && node scripts/stabilize-loader-data.mjs && node scripts/publish-listing-covers.mjs && node scripts/publish-overview-images.mjs && node scripts/generate-warehouse-route-map.mjs && node scripts/generate-sitemap.mjs && node scripts/finalize-catalogue.mjs && node scripts/indexnow-ping.mjs",
-    "build:dev": "node scripts/generate-locations.mjs && node scripts/generate-blogs.mjs && node scripts/generate-service-pages.mjs && node scripts/generate-ad-pages.mjs && node scripts/generate-micromarket-ad-pages.mjs && node scripts/generate-legal-pages.mjs && node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs && node scripts/generate-logo-variants.mjs && node scripts/generate-ad-image-variants.mjs && vite-react-ssg build --mode development && node scripts/stabilize-loader-data.mjs && node scripts/publish-listing-covers.mjs && node scripts/publish-overview-images.mjs && node scripts/generate-warehouse-route-map.mjs && node scripts/generate-sitemap.mjs && node scripts/finalize-catalogue.mjs",
+    "build": "node scripts/generate-locations.mjs && node scripts/generate-blogs.mjs && node scripts/generate-service-pages.mjs && node scripts/generate-careers.mjs && node scripts/generate-ad-pages.mjs && node scripts/generate-micromarket-ad-pages.mjs && node scripts/generate-legal-pages.mjs && node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs && node scripts/generate-logo-variants.mjs && node scripts/generate-ad-image-variants.mjs && vite-react-ssg build && node scripts/stabilize-loader-data.mjs && node scripts/publish-listing-covers.mjs && node scripts/publish-overview-images.mjs && node scripts/generate-warehouse-route-map.mjs && node scripts/generate-sitemap.mjs && node scripts/finalize-catalogue.mjs && node scripts/indexnow-ping.mjs",
+    "build:dev": "node scripts/generate-locations.mjs && node scripts/generate-blogs.mjs && node scripts/generate-service-pages.mjs && node scripts/generate-careers.mjs && node scripts/generate-ad-pages.mjs && node scripts/generate-micromarket-ad-pages.mjs && node scripts/generate-legal-pages.mjs && node scripts/generate-micromarkets.mjs && node scripts/generate-location-pages.mjs && node scripts/generate-logo-variants.mjs && node scripts/generate-ad-image-variants.mjs && vite-react-ssg build --mode development && node scripts/stabilize-loader-data.mjs && node scripts/publish-listing-covers.mjs && node scripts/publish-overview-images.mjs && node scripts/generate-warehouse-route-map.mjs && node scripts/generate-sitemap.mjs && node scripts/finalize-catalogue.mjs",
     "build:spa": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -31,7 +31,8 @@
     "test:crawling": "node tests/catalogue-rendering.test.mjs && node tests/catalogue-build.test.mjs && node tests/catalogue-hydration.test.mjs && node tests/catalogue-routing.test.mjs",
     "test:previews": "node tests/cms-preview.test.mjs && node tests/preview-runtime.test.mjs",
     "images:ad-pages": "node scripts/generate-ad-image-variants.mjs",
-    "maps:ad-pages": "node scripts/generate-micromarket-ad-maps.mjs"
+    "maps:ad-pages": "node scripts/generate-micromarket-ad-maps.mjs",
+    "test:careers": "node --test tests/careers-content.test.mjs tests/career-applications.test.mjs"
   },
   "dependencies": {
     "@radix-ui/react-aspect-ratio": "^1.1.0",

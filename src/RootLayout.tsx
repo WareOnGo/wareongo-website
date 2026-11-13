@@ -112,11 +112,12 @@ const NavigationContent = () => {
 };
 
 // Ad pages render their own button (campaign line and location message);
-// CMS/ad previews and the admin panel are internal.
+// CMS/ad previews and the admin panel are internal. Careers owns its application
+// destinations rather than sending candidates to the warehouse sales line.
 const SiteWhatsAppButton = () => {
   const matches = useMatches();
   const path = useLocation().pathname.replace(/\/+$/, '') || '/';
-  if (path === '/bangalore' || isMicromarketAdPath(path) || /^\/(preview|admin-panel)(\/|$)/.test(path)) return null;
+  if (path === '/careers' || path === '/bangalore' || isMicromarketAdPath(path) || /^\/(preview|admin-panel)(\/|$)/.test(path)) return null;
   return <WhatsAppButton message={siteWhatsAppMessage(path, matches[matches.length - 1]?.data)} />;
 };
 

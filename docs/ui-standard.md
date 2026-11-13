@@ -184,6 +184,27 @@ Playwright's bundled Chromium.
 
 ## Coverage and verification
 
+Careers uses the shared `Navbar`, `Footer`, `Button`, `Badge`, dialog and page
+metadata components. Its composition lives in `src/styles/careers.css`: a
+1280px outer reading width with shared gutters, plain ivory background, no
+intro or culture eyebrows, flat divided job rows and text-and-arrow Apply
+actions. Role headings use the panel scale on desktop and the card scale on
+phones. Department filters scroll in one row on phones. Metadata chips wrap
+below the description, with Apply on its own row on phones. Location, employment
+type, optional duration and compensation come from the CMS. CMS previews use
+this same renderer.
+The culture copy and compact navy applications panel share a two-column bottom
+section on desktop, with a 32px section heading and 24px panel heading. Below
+1024px they stack, and the CTA button fills its panel width on phones. A single
+section-spacing margin replaces the earlier stacked culture/CTA whitespace.
+The CTA opens the shared `Dialog` with `Input`/`Textarea`
+controls on an ivory surface. Fields stack on phones; dialog focus trapping,
+Escape dismissal and trigger focus restoration use the shared behavior.
+Widget copy is CMS-owned. It has a
+dedicated careers submission service and an accessible form landmark without
+an HTML form, keeping native GA4 form detection and sales conversions separate.
+CMS previews cannot submit it.
+
 Shared roles are applied to the homepage sections, listings and detail cards,
 city/state/micromarket templates, articles, case studies, services, About,
 request forms, legal pages, account/error shells, navbar/footer and dialogs.

@@ -5,6 +5,7 @@ import type { BlogSummary } from '@/data/blogSummaries';
 import type { ServicePage } from '@/data/servicePages';
 import { SERVICE_PAGES } from '@/data/serviceCatalog';
 import type { LegalContent } from '@/data/legalPages';
+import type { CareersContent } from '@/data/careers';
 import type { LocationPageContent } from '@/data/locationPages';
 import type { MicromarketContent } from '@/data/micromarkets';
 import { buildBlogSummaries } from '../../scripts/lib/blog-summaries.mjs';
@@ -14,6 +15,7 @@ export type CmsPreviewContent =
   | { type: 'blog'; content: Blog; indexEntries?: BlogSummary[] }
   | { type: 'service'; content: ServicePage }
   | { type: 'legal'; content: LegalContent }
+  | { type: 'careers'; content: CareersContent }
   | { type: 'city' | 'state'; content: LocationPageContent }
   | { type: 'micromarket'; content: MicromarketContent };
 
@@ -49,6 +51,20 @@ export function readCmsPreview(value: unknown, view = 'page'): CmsPreviewContent
       content.updated = content.dateModified;
       content.published = content.datePublished || undefined;
     } else if (!Object.prototype.hasOwnProperty.call(SERVICE_PAGES, String(content.slug))) throw new Error('Unknown service');
+  } else if (type === 'careers') {
+    strings('description', 'title', 'intro', 'cultureTitle', 'cultureDescription', 'applicationEmail');
+    for (const key of ['interestTitle', 'interestDescription', 'interestSubmitLabel', 'interestSuccessMessage']) {
+      if (content[key] !== undefined && typeof content[key] !== 'string') throw new Error('Invalid careers preview text');
+    }
+    arrays('roles');
+    if (content.slug !== 'careers' || (content.roles as unknown[]).length > 100) throw new Error('Invalid careers preview');
+    const ids = new Set<string>();
+    for (const role of content.roles as Record<string, unknown>[]) {
+      if (!role || ['id', 'title', 'department', 'summary', 'location', 'employmentType', 'applyUrl'].some(key => typeof role[key] !== 'string')
+        || ['duration', 'compensation'].some(key => role[key] !== undefined && typeof role[key] !== 'string')
+        || typeof role.isOpen !== 'boolean' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(String(role.id)) || ids.has(String(role.id))) throw new Error('Invalid role preview');
+      ids.add(String(role.id));
+    }
   } else if (type === 'legal') {
     strings('title', 'description', 'effectiveDate', 'updated', 'notice');
     arrays('blocks');

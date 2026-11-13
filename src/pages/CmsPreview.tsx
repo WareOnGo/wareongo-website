@@ -2,6 +2,7 @@ import { Component, useEffect, useState, type ReactNode } from 'react';
 import PageHead from '@/components/PageHead';
 import BlogDetail from './BlogDetail';
 import Blogs from './Blogs';
+import Careers from './Careers';
 import ServiceDetail from './ServiceDetail';
 import PrivacyPolicy from './PrivacyPolicy';
 import TermsOfService from './TermsOfService';
@@ -24,6 +25,7 @@ class PreviewBoundary extends Component<{ origin: string; children: ReactNode },
 export function PreviewPage({ value, editorial }: Pick<Draft, 'value' | 'editorial'>) {
   if (value.type === 'blog') return value.indexEntries ? <Blogs entries={value.indexEntries} /> : <BlogDetail content={value.content} />;
   if (value.type === 'service') return <ServiceDetail content={value.content} />;
+  if (value.type === 'careers') return <Careers content={value.content} />;
   if (value.type === 'legal') return value.content.slug === 'privacy-policy'
     ? <PrivacyPolicy content={value.content} /> : <TermsOfService content={value.content} />;
   return editorial ? <EditorialLocationPage data={editorial} /> : null;
